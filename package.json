@@ -1,6 +1,6 @@
 {
     "name": "eslint-config-lcy",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "LinCenYing's ESLint config",
     "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
     "license": "MIT",
