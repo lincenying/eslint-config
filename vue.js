@@ -1,6 +1,7 @@
 const { isPackageExists } = require('local-pkg')
 
 const TS = isPackageExists('typescript')
+const Prettier = isPackageExists('prettier')
 
 if (!TS)
   console.warn('[eslint-config-lcy] TypeScript is not installed, fallback to JS only.')
@@ -29,6 +30,7 @@ module.exports = {
       : './basic',
   ],
   rules: {
+    "vue/html-indent": 'off',
     'vue/max-attributes-per-line': 'off',
     'vue/no-v-html': 'off',
     'vue/require-prop-types': 'off',
@@ -41,7 +43,7 @@ module.exports = {
     'vue/no-setup-props-destructure': 'off',
 
     'vue/component-tags-order': ['error', {
-      order: ['script', 'template', 'style'],
+      order: ['template', 'script', 'style'],
     }],
     'vue/block-tag-newline': ['error', {
       singleline: 'always',
@@ -106,5 +108,10 @@ module.exports = {
     'vue/space-infix-ops': 'error',
     'vue/space-unary-ops': ['error', { words: true, nonwords: false }],
     'vue/template-curly-spacing': 'error',
+    "vue/singleline-html-element-content-newline": 'off',
+
+    ...(Prettier
+      ? { "prettier/prettier": "error" }
+      : null),
   },
 }
