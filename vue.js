@@ -30,12 +30,12 @@ module.exports = {
       : './basic',
     ...(Prettier
       ? ['prettier']
-      : null),
+      : []),
   ],
   plugins: [
     ...(Prettier
       ? ['prettier']
-      : null),
+      : []),
   ],
   rules: {
     "vue/html-indent": 'off',
