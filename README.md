@@ -7,7 +7,7 @@ A set of opinionated ESLint (http://eslint.org) rules (all rules included) tailo
 
 Usage
 
-- pnpm install -D eslint-config-lcy
+- pnpm install -D eslint eslint-config-lcy
 - create a file named .eslintrc in your project:
 ```
 {
