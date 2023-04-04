@@ -206,6 +206,7 @@ module.exports = {
         'import/no-mutable-exports': 'error',
         'import/no-unresolved': 'off',
         'import/no-absolute-path': 'off',
+        'import/newline-after-import': ['error', { count: 1 }],
 
         // Common
         'semi': ['error', 'never'],
@@ -216,7 +217,12 @@ module.exports = {
         'unused-imports/no-unused-imports': 'error',
         'unused-imports/no-unused-vars': [
             'warn',
-            { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
+            {
+                vars: 'all',
+                varsIgnorePattern: '^_',
+                args: 'after-used',
+                argsIgnorePattern: '^_',
+            },
         ],
 
         'no-param-reassign': 'off',
@@ -230,7 +236,7 @@ module.exports = {
         'no-constant-condition': 'warn',
         'no-debugger': 'error',
         // 'no-console': ['error', { allow: ['warn', 'error'] }],
-        'no-console': "off",
+        'no-console': 'off',
         'no-cond-assign': ['error', 'always'],
         'func-call-spacing': ['off', 'never'],
         'key-spacing': ['error', { beforeColon: false, afterColon: true }],
