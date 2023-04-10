@@ -33,7 +33,6 @@ module.exports = {
         ...(Prettier ? ['prettier'] : []),
     ],
     rules: {
-        'vue/html-indent': 'off',
         'vue/max-attributes-per-line': 'off',
         'vue/no-v-html': 'off',
         'vue/require-prop-types': 'off',
