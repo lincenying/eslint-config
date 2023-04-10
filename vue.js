@@ -33,6 +33,7 @@ module.exports = {
         ...(Prettier ? ['prettier'] : []),
     ],
     rules: {
+
         'vue/max-attributes-per-line': 'off',
         'vue/no-v-html': 'off',
         'vue/require-prop-types': 'off',
@@ -56,6 +57,13 @@ module.exports = {
         'vue/custom-event-name-casing': ['error', 'camelCase'],
         'vue/define-macros-order': ['error', {
             order: ['defineProps', 'defineEmits'],
+        }],
+        'vue/html-indent': ['error', 4, {
+            attribute: 1,
+            baseIndent: 1,
+            closeBracket: 0,
+            alignAttributesVertically: true,
+            ignores: [],
         }],
         'vue/html-comment-content-spacing': ['error', 'always', {
             exceptions: ['-'],
