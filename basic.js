@@ -46,6 +46,7 @@ module.exports = {
     plugins: [
         'html',
         'unicorn',
+        'antfu',
         'no-only-tests',
         'unused-imports',
     ],
@@ -153,9 +154,10 @@ module.exports = {
             },
         },
         {
-            files: ['*.js', '*.cjs'],
+            files: ['*.js', '*.cjs', '*.jsx'],
             rules: {
                 '@typescript-eslint/no-var-requires': 'off',
+                '@typescript-eslint/no-require-imports': 'off',
             },
         },
         {
@@ -367,5 +369,9 @@ module.exports = {
         // yml
         'yml/quotes': ['error', { prefer: 'single', avoidEscape: false }],
         'yml/no-empty-document': 'off',
+
+        'antfu/if-newline': 'error',
+        'antfu/import-dedupe': 'error',
+        'antfu/top-level-function': 'error',
     },
 }
