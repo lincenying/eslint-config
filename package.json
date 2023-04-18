@@ -4,7 +4,7 @@
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
   "license": "MIT",
-  "homepage": "https://github.com/lincenying/eslint-config-lcy",
+  "homepage": "https://github.com/lincenying/eslint-config",
   "keywords": [
     "eslint-config"
   ],
