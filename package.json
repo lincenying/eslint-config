@@ -1,5 +1,5 @@
 {
-  "name": "eslint-config-lcy",
+  "name": "@lincy/eslint-config",
   "version": "1.1.1",
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",

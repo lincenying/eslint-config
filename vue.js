@@ -5,7 +5,7 @@ const Prettier = isPackageExists('prettier')
 
 if (!TS) {
     console.warn(
-        '[eslint-config-lcy] TypeScript is not installed, fallback to JS only.',
+        '[@lincy/eslint-config] TypeScript is not installed, fallback to JS only.',
     )
 }
 

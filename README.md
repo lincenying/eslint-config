@@ -1,4 +1,4 @@
-# eslint-config-lcy
+# @lincy/eslint-config
 
 A set of opinionated ESLint (http://eslint.org) rules (all rules included) tailored for Vue.js projects
 
@@ -7,11 +7,11 @@ A set of opinionated ESLint (http://eslint.org) rules (all rules included) tailo
 
 Usage
 
-- pnpm install -D eslint eslint-config-lcy
+- pnpm install -D eslint @lincy/eslint-config
 - create a file named .eslintrc in your project:
 ```
 {
-  "extends": "lcy"
+  "extends": "@lincy"
   // Your overrides...
 }
 ```
