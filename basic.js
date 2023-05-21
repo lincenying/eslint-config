@@ -57,7 +57,7 @@ module.exports = {
     },
     overrides: [
         {
-            files: ['*.json', '*.json5'],
+            files: ['*.json', '*.json5', '*.jsonc'],
             parser: 'jsonc-eslint-parser',
             rules: {
                 'jsonc/array-bracket-spacing': ['error', 'never'],
@@ -198,6 +198,8 @@ module.exports = {
                 'no-undef': 'off',
                 'no-unused-expressions': 'off',
                 'no-unused-vars': 'off',
+                'antfu/no-cjs-exports': 'off',
+                'antfu/no-ts-export-equal': 'off',
             },
         },
     ],

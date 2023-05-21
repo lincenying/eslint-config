@@ -162,6 +162,8 @@ module.exports = {
         '@typescript-eslint/lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
 
         'antfu/generic-spacing': 'error',
+        'antfu/no-cjs-exports': 'error',
+        'antfu/no-ts-export-equal': 'error',
 
         // off
         '@typescript-eslint/consistent-indexed-object-style': 'off',
