@@ -1,13 +1,6 @@
 const { isPackageExists } = require('local-pkg')
 
-const TS = isPackageExists('typescript')
 const Prettier = isPackageExists('prettier')
-
-if (!TS) {
-    console.warn(
-        '[@lincy/eslint-config] TypeScript is not installed, fallback to JS only.',
-    )
-}
 
 module.exports = {
     overrides: [
@@ -15,25 +8,23 @@ module.exports = {
             files: ['*.vue'],
             parser: 'vue-eslint-parser',
             parserOptions: {
-                parser: '@typescript-eslint/parser',
+                parser: '@babel/eslint-parser',
             },
             rules: {
                 'no-unused-vars': 'off',
                 'no-undef': 'off',
-                ...(TS ? { '@typescript-eslint/no-unused-vars': 'off' } : null),
             },
         },
     ],
     extends: [
-        'plugin:vue/vue3-recommended',
-        TS ? './ts' : './basic',
+        'plugin:vue/recommended',
+        './basic',
         ...(Prettier ? ['prettier'] : []),
     ],
     plugins: [
         ...(Prettier ? ['prettier'] : []),
     ],
     rules: {
-
         'vue/max-attributes-per-line': 'off',
         'vue/no-v-html': 'off',
         'vue/require-prop-types': 'off',
@@ -41,7 +32,6 @@ module.exports = {
         'vue/multi-word-component-names': 'off',
         'vue/prefer-import-from-vue': 'off',
         'vue/no-v-text-v-html-on-component': 'off',
-        'vue/no-dupe-keys': 'off',
 
         // reactivity transform
         'vue/no-setup-props-destructure': 'off',
@@ -55,7 +45,7 @@ module.exports = {
         }],
         'vue/component-name-in-template-casing': ['error', 'PascalCase'],
         'vue/component-options-name-casing': ['error', 'PascalCase'],
-        'vue/custom-event-name-casing': ['error', 'camelCase'],
+        'vue/custom-event-name-casing': ['error', 'kebab-case'],
         'vue/define-macros-order': ['error', {
             order: ['defineProps', 'defineEmits'],
         }],
