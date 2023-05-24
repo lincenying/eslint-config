@@ -1,6 +1,6 @@
 {
   "name": "@lincy/eslint-config-basic",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "packageManager": "pnpm@8.4.0",
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
@@ -11,7 +11,7 @@
   ],
   "main": "index.js",
   "files": [
-    "index.js"
+    "*.js"
   ],
   "peerDependencies": {
     "eslint": ">=7.4.0"
