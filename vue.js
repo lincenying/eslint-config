@@ -1,7 +1,12 @@
-const { isPackageExists } = require('local-pkg')
+const { isPackageExists, getPackageInfoSync } = require('local-pkg')
 
 const TS = isPackageExists('typescript')
 const Prettier = isPackageExists('prettier')
+
+const pkg = getPackageInfoSync('vue')
+let vueVersion = pkg && pkg.version
+vueVersion = +(vueVersion && vueVersion[0])
+vueVersion = Number.isNaN(vueVersion) ? 3 : vueVersion
 
 if (!TS) {
     console.warn(
@@ -9,23 +14,39 @@ if (!TS) {
     )
 }
 
-module.exports = {
-    overrides: [
-        {
-            files: ['*.vue'],
-            parser: 'vue-eslint-parser',
-            parserOptions: {
-                parser: '@typescript-eslint/parser',
-            },
-            rules: {
-                'no-unused-vars': 'off',
-                'no-undef': 'off',
-                ...(TS ? { '@typescript-eslint/no-unused-vars': 'off' } : null),
-            },
+const tsEslintParser = {
+    parserOptions: {
+        parser: '@typescript-eslint/parser',
+        extraFileExtensions: ['.vue'],
+        ecmaFeatures: {
+            jsx: true,
         },
-    ],
+    },
+}
+
+module.exports = {
+    overrides: [{
+        files: ['*.vue'],
+        parser: 'vue-eslint-parser',
+        ...(TS ? tsEslintParser : null),
+        globals: {
+            $$: 'readonly',
+            $ref: 'readonly',
+            $computed: 'readonly',
+            $shallowRef: 'readonly',
+            $customRef: 'readonly',
+            $toRef: 'readonly',
+            defineOptions: 'readonly',
+            definePropsRefs: 'readonly',
+        },
+        rules: {
+            'no-unused-vars': 'off',
+            'no-undef': 'off',
+            ...(TS ? { '@typescript-eslint/no-unused-vars': 'off' } : null),
+        },
+    }],
     extends: [
-        'plugin:vue/vue3-recommended',
+        vueVersion === 3 ? 'plugin:vue/vue3-recommended' : 'plugin:vue/recommended',
         TS ? './ts' : './basic',
         ...(Prettier ? ['prettier'] : []),
     ],
@@ -55,7 +76,7 @@ module.exports = {
         }],
         'vue/component-name-in-template-casing': ['error', 'PascalCase'],
         'vue/component-options-name-casing': ['error', 'PascalCase'],
-        'vue/custom-event-name-casing': ['error', 'camelCase'],
+        'vue/custom-event-name-casing': vueVersion === 3 ? ['error', 'camelCase'] : ['error', 'kebab-case'],
         'vue/define-macros-order': ['error', {
             order: ['defineProps', 'defineEmits'],
         }],

@@ -1,6 +1,6 @@
 {
   "name": "@lincy/eslint-config",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "packageManager": "pnpm@8.4.0",
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
@@ -18,6 +18,9 @@
     "basic.js",
     "standard.js"
   ],
+  "scripts": {
+    "postpublish": "open https://npmmirror.com/sync/@lincy/eslint-config"
+  },
   "peerDependencies": {
     "eslint": ">=7.4.0"
   },
@@ -45,7 +48,6 @@
     "yaml-eslint-parser": "^1.2.2"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.21.8",
     "eslint": "^8.41.0",
     "typescript": "^5.0.4"
   },
