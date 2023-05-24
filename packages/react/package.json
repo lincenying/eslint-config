@@ -1,0 +1,29 @@
+{
+  "name": "@lincy/eslint-config-react",
+  "version": "2.0.0",
+  "packageManager": "pnpm@8.4.0",
+  "description": "LinCenYing's ESLint config",
+  "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
+  "license": "MIT",
+  "homepage": "https://github.com/lincenying/eslint-config",
+  "keywords": [
+    "eslint-config"
+  ],
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "peerDependencies": {
+    "eslint": ">=7.4.0"
+  },
+  "dependencies": {
+    "@lincy/eslint-config-ts": "workspace:*",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.41.0",
+    "react": "^18.2.0",
+    "typescript": "^5.0.4"
+  }
+}

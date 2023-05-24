@@ -1,0 +1,29 @@
+{
+  "name": "@lincy/eslint-config-ts",
+  "version": "2.0.0",
+  "packageManager": "pnpm@8.4.0",
+  "description": "LinCenYing's ESLint config",
+  "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
+  "license": "MIT",
+  "homepage": "https://github.com/lincenying/eslint-config",
+  "keywords": [
+    "eslint-config"
+  ],
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "peerDependencies": {
+    "eslint": ">=7.4.0",
+    "typescript": ">=3.9"
+  },
+  "dependencies": {
+    "@lincy/eslint-config-basic": "workspace:*",
+    "@typescript-eslint/eslint-plugin": "^5.59.7",
+    "@typescript-eslint/parser": "^5.59.7",
+    "eslint-plugin-jest": "^27.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.41.0"
+  }
+}

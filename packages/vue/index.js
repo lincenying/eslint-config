@@ -47,7 +47,9 @@ module.exports = {
     }],
     extends: [
         vueVersion === 3 ? 'plugin:vue/vue3-recommended' : 'plugin:vue/recommended',
-        TS ? './ts' : './basic',
+        TS
+            ? '@lincy/eslint-config-ts'
+            : '@lincy/eslint-config-basic',
         ...(Prettier ? ['prettier'] : []),
     ],
     plugins: [

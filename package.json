@@ -1,6 +1,6 @@
 {
-  "name": "@lincy/eslint-config",
-  "version": "1.1.8",
+  "name": "@lincy/eslint-config-monorepo",
+  "version": "2.0.0",
   "packageManager": "pnpm@8.4.0",
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
@@ -9,46 +9,14 @@
   "keywords": [
     "eslint-config"
   ],
-  "main": "index.js",
-  "files": [
-    "index.js",
-    "vue.js",
-    "vue2.js",
-    "ts.js",
-    "basic.js",
-    "standard.js"
-  ],
   "scripts": {
-    "postpublish": "open https://npmmirror.com/sync/@lincy/eslint-config"
-  },
-  "peerDependencies": {
-    "eslint": ">=7.4.0"
-  },
-  "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.59.7",
-    "@typescript-eslint/parser": "^5.59.7",
-    "eslint-config-prettier": "^8.6.0",
-    "eslint-plugin-antfu": "^0.39.3",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-html": "^7.1.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-jest": "^27.2.1",
-    "eslint-plugin-jsonc": "^2.8.0",
-    "eslint-plugin-markdown": "^3.0.0",
-    "eslint-plugin-n": "^16.0.0",
-    "eslint-plugin-no-only-tests": "^3.1.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-unicorn": "^47.0.0",
-    "eslint-plugin-unused-imports": "^2.0.0",
-    "eslint-plugin-vue": "^9.14.0",
-    "eslint-plugin-yml": "^1.7.0",
-    "jsonc-eslint-parser": "^2.3.0",
-    "local-pkg": "^0.4.3",
-    "yaml-eslint-parser": "^1.2.2"
+    "postpublish": "open https://npmmirror.com/sync/@lincy/eslint-config",
+    "release": "bumpp package.json packages/*/package.json && pnpm publish -r"
   },
   "devDependencies": {
-    "eslint": "^8.41.0",
+    "@lincy/eslint-config": "workspace:*",
+    "bumpp": "^9.1.0",
+    "eslint": "^8.40.0",
     "typescript": "^5.0.4"
   },
   "publishConfig": {
