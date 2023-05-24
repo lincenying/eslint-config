@@ -11,7 +11,8 @@
   ],
   "scripts": {
     "postpublish": "open https://npmmirror.com/sync/@lincy/eslint-config",
-    "release": "bumpp package.json packages/*/package.json && pnpm publish -r --access public"
+    "release": "bumpp package.json packages/*/package.json && pnpm publish -r --access public",
+    "lint": "eslint . --ext .js,.ts,.json,.json5,.vue,.md --fix"
   },
   "devDependencies": {
     "@lincy/eslint-config": "workspace:*",
