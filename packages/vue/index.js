@@ -1,7 +1,6 @@
 const { isPackageExists, getPackageInfoSync } = require('local-pkg')
 
 const TS = isPackageExists('typescript')
-const Prettier = isPackageExists('prettier')
 
 const pkg = getPackageInfoSync('vue')
 let vueVersion = pkg && pkg.version
@@ -50,10 +49,8 @@ module.exports = {
         TS
             ? '@lincy/eslint-config-ts'
             : '@lincy/eslint-config-basic',
-        ...(Prettier ? ['prettier'] : []),
     ],
     plugins: [
-        ...(Prettier ? ['prettier'] : []),
     ],
     rules: {
 
@@ -139,7 +136,5 @@ module.exports = {
         'vue/space-unary-ops': ['error', { words: true, nonwords: false }],
         'vue/template-curly-spacing': 'error',
         'vue/singleline-html-element-content-newline': 'off',
-
-        ...(Prettier ? { 'prettier/prettier': 'error' } : null),
     },
 }
