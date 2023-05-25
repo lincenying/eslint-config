@@ -25,5 +25,8 @@
     "eslint": "^8.41.0",
     "react": "^18.2.0",
     "typescript": "^5.0.4"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }

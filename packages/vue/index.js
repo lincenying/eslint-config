@@ -24,18 +24,24 @@ const tsEslintParser = {
 }
 
 module.exports = {
+    globals: {
+        // Reactivity Transform
+        $: 'readonly',
+        $$: 'readonly',
+        $ref: 'readonly',
+        $shallowRef: 'readonly',
+        $computed: 'readonly',
+        $customRef: 'readonly',
+        $toRef: 'readonly',
+    },
     overrides: [{
         files: ['*.vue'],
         parser: 'vue-eslint-parser',
         ...(TS ? tsEslintParser : null),
         globals: {
-            $$: 'readonly',
-            $ref: 'readonly',
-            $computed: 'readonly',
-            $shallowRef: 'readonly',
-            $customRef: 'readonly',
-            $toRef: 'readonly',
             defineOptions: 'readonly',
+            defineProps: 'readonly',
+            defineEmits: 'readonly',
             definePropsRefs: 'readonly',
         },
         rules: {
@@ -53,7 +59,6 @@ module.exports = {
     plugins: [
     ],
     rules: {
-
         'vue/max-attributes-per-line': 'off',
         'vue/no-v-html': 'off',
         'vue/require-prop-types': 'off',
