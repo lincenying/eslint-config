@@ -1,6 +1,6 @@
 {
   "name": "@lincy/eslint-config-vue",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "packageManager": "pnpm@8.4.0",
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
