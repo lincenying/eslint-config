@@ -122,7 +122,7 @@ module.exports = {
         'no-mixed-operators': ['error', {
             groups: [
                 ['==', '!=', '===', '!==', '>', '>=', '<', '<='],
-                ['&&', '||', '?:'],
+                ['&&', '||'],
                 ['in', 'instanceof'],
             ],
             allowSamePrecedence: true,
