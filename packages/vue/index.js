@@ -51,10 +51,8 @@ module.exports = {
         },
     }],
     extends: [
-        vueVersion === 3 ? 'plugin:vue/vue3-recommended' : 'plugin:vue/recommended',
-        TS
-            ? '@lincy/eslint-config-ts'
-            : '@lincy/eslint-config-basic',
+        ...(vueVersion === 3 ? ['plugin:vue/vue3-recommended'] : ['plugin:vue/recommended']),
+        ...(TS ? ['@lincy/eslint-config-ts'] : ['@lincy/eslint-config-basic']),
     ],
     plugins: [
     ],
@@ -81,6 +79,7 @@ module.exports = {
         'vue/component-name-in-template-casing': ['error', 'PascalCase'],
         'vue/component-options-name-casing': ['error', 'PascalCase'],
         'vue/custom-event-name-casing': vueVersion === 3 ? ['error', 'camelCase'] : ['error', 'kebab-case'],
+        ...(vueVersion === 2 ? { 'vue/require-explicit-emits': 'off' } : null),
         'vue/define-macros-order': ['error', {
             order: ['defineProps', 'defineEmits'],
         }],
