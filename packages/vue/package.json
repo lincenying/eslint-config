@@ -19,11 +19,11 @@
   "dependencies": {
     "@lincy/eslint-config-basic": "workspace:*",
     "@lincy/eslint-config-ts": "workspace:*",
-    "eslint-plugin-vue": "^9.14.0",
+    "eslint-plugin-vue": "^9.15.1",
     "local-pkg": "^0.4.3"
   },
   "devDependencies": {
-    "eslint": "^8.41.0"
+    "eslint": "^8.43.0"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"

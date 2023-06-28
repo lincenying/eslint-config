@@ -22,9 +22,9 @@
     "eslint-plugin-react-hooks": "^4.6.0"
   },
   "devDependencies": {
-    "eslint": "^8.41.0",
+    "eslint": "^8.43.0",
     "react": "^18.2.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.1.5"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
