@@ -140,8 +140,9 @@ module.exports = {
                         pathPattern: '^exports.*$',
                         order: [
                             'types',
-                            'require',
                             'import',
+                            'require',
+                            'default',
                         ],
                     },
                 ],
@@ -211,6 +212,7 @@ module.exports = {
         'import/no-unresolved': 'off',
         'import/no-absolute-path': 'off',
         'import/newline-after-import': ['error', { count: 1, considerComments: true }],
+        'import/no-self-import': 'error',
 
         // Common
         'semi': ['error', 'never'],
@@ -404,6 +406,7 @@ module.exports = {
         'yml/quotes': ['error', { prefer: 'single', avoidEscape: false }],
         'yml/no-empty-document': 'off',
 
+        'antfu/no-import-node-modules-by-path': 'error',
         'antfu/if-newline': 'error',
         'antfu/import-dedupe': 'error',
         'antfu/top-level-function': 'error',
