@@ -93,6 +93,15 @@ module.exports = {
         'vue/html-comment-content-spacing': ['error', 'always', {
             exceptions: ['-'],
         }],
+        'vue/html-self-closing': ['error', {
+            html: {
+                void: 'never',
+                normal: 'any',
+                component: 'any',
+            },
+            svg: 'always',
+            math: 'always',
+        }],
         'vue/no-restricted-v-bind': ['error', '/^v-/'],
         'vue/no-useless-v-bind': 'error',
         'vue/no-unused-refs': 'error',
