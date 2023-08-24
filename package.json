@@ -10,7 +10,7 @@
     "eslint-config"
   ],
   "scripts": {
-    "postpublish": "open https://npmmirror.com/sync/@lincy/eslint-config",
+    "postpublish": "open https://npmmirror.com/package/@lincy/eslint-config",
     "release": "bumpp package.json packages/*/package.json && pnpm publish -r --access public",
     "lint": "eslint . --ext .js,.ts,.json,.json5,.vue,.md --fix"
   },
