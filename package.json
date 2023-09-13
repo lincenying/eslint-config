@@ -17,8 +17,8 @@
   "devDependencies": {
     "@lincy/eslint-config": "workspace:*",
     "bumpp": "^9.2.0",
-    "eslint": "^8.47.0",
-    "typescript": "^5.1.6"
+    "eslint": "^8.49.0",
+    "typescript": "^5.2.2"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
