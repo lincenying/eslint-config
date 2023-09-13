@@ -180,6 +180,7 @@ module.exports = {
             files: ['*.ts', '*.tsx', '*.mts', '*.cts'],
             rules: {
                 'no-void': ['error', { allowAsStatement: true }],
+                'dot-notation': 'off',
             },
         },
         {
@@ -430,6 +431,8 @@ module.exports = {
         'jsdoc/check-values': 'off',
         'jsdoc/check-tag-names': 'off',
         'jsdoc/no-undefined-types': 'off',
+        'jsdoc/require-returns': 'off',
+        'jsdoc/require-returns-type': 'off',
 
         'antfu/no-import-node-modules-by-path': 'error',
         'antfu/if-newline': 'error',
