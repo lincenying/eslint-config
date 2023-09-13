@@ -15,6 +15,7 @@ module.exports = {
         'plugin:jsonc/recommended-with-jsonc',
         'plugin:yml/standard',
         'plugin:markdown/recommended',
+        'plugin:jsdoc/recommended',
     ],
     ignorePatterns: [
         '*.min.*',
@@ -54,6 +55,7 @@ module.exports = {
         'antfu',
         'no-only-tests',
         'unused-imports',
+        'jsdoc',
     ],
     settings: {
         'import/resolver': {
@@ -418,6 +420,13 @@ module.exports = {
         // yml
         'yml/quotes': ['error', { prefer: 'single', avoidEscape: false }],
         'yml/no-empty-document': 'off',
+
+        // jsdoc
+        'jsdoc/require-jsdoc': 'off',
+        'jsdoc/require-param-type': 'off',
+        'jsdoc/require-param-description': 'off',
+        'jsdoc/require-yields': 'off',
+        'jsdoc/tag-lines': 'off',
 
         'antfu/no-import-node-modules-by-path': 'error',
         'antfu/if-newline': 'error',
