@@ -1,3 +1,4 @@
+const process = require('node:process')
 const fs = require('node:fs')
 const { join } = require('node:path')
 const basic = require('@lincy/eslint-config-basic')
@@ -9,6 +10,9 @@ module.exports = {
         '@lincy/eslint-config-basic',
         'plugin:import/typescript',
         'plugin:@typescript-eslint/recommended',
+    ],
+    plugins: [
+        '@stylistic/ts',
     ],
     settings: {
         'import/resolver': {
@@ -193,17 +197,65 @@ module.exports = {
 
         // TS
         '@typescript-eslint/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
-        '@typescript-eslint/member-delimiter-style': ['error', { multiline: { delimiter: 'none' } }],
-        '@typescript-eslint/type-annotation-spacing': ['error', {}],
         '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports', disallowTypeAnnotations: false }],
         '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
         '@typescript-eslint/prefer-ts-expect-error': 'error',
         '@typescript-eslint/no-require-imports': 'error',
 
+        // TS Stylistic
+        '@stylistic/ts/member-delimiter-style': ['error', { multiline: { delimiter: 'none' } }],
+        '@stylistic/ts/type-annotation-spacing': ['error', {}],
+
         // Override JS
         'no-useless-constructor': 'off',
-        'indent': 'off',
-        '@typescript-eslint/indent': ['error', 4, {
+        'no-invalid-this': 'off',
+        '@typescript-eslint/no-invalid-this': 'error',
+        'no-redeclare': 'off',
+        '@typescript-eslint/no-redeclare': 'error',
+        'no-use-before-define': 'off',
+        '@typescript-eslint/no-use-before-define': ['error', { functions: false, classes: false, variables: true }],
+        'no-dupe-class-members': 'off',
+        '@typescript-eslint/no-dupe-class-members': 'error',
+        'no-loss-of-precision': 'off',
+        '@typescript-eslint/no-loss-of-precision': 'error',
+
+        'semi': 'off',
+        '@typescript-eslint/semi': ['error', 'never'],
+        'quotes': 'off',
+        '@typescript-eslint/quotes': ['error', 'single'],
+        'no-extra-parens': 'off',
+        '@typescript-eslint/no-extra-parens': ['error', 'functions'],
+
+        // Stylistic JS/TS Misalignments (should be fixed upstream)
+        'comma-dangle': 'off',
+        '@stylistic/ts/comma-dangle': ['error', 'always-multiline'],
+
+        // Stylistic JS/TS
+        '@stylistic/js/space-before-blocks': 'off',
+        '@stylistic/ts/space-before-blocks': ['error', 'always'],
+        '@stylistic/js/space-before-function-paren': 'off',
+        '@stylistic/ts/space-before-function-paren': [
+            'error',
+            {
+                anonymous: 'always',
+                named: 'never',
+                asyncArrow: 'always',
+            },
+        ],
+        '@stylistic/js/brace-style': 'off',
+        '@stylistic/ts/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
+        '@stylistic/js/object-curly-spacing': 'off',
+        '@stylistic/ts/object-curly-spacing': ['error', 'always'],
+        '@stylistic/js/space-infix-ops': 'off',
+        '@stylistic/ts/space-infix-ops': 'error',
+        '@stylistic/js/keyword-spacing': 'off',
+        '@stylistic/ts/keyword-spacing': ['error', { before: true, after: true }],
+        '@stylistic/js/comma-spacing': 'off',
+        '@stylistic/ts/comma-spacing': ['error', { before: false, after: true }],
+        '@stylistic/js/lines-between-class-members': 'off',
+        '@stylistic/ts/lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
+        '@stylistic/js/indent': 'off',
+        '@stylistic/ts/indent': ['error', 4, {
             SwitchCase: 1,
             VariableDeclarator: 1,
             outerIIFEBody: 1,
@@ -241,45 +293,6 @@ module.exports = {
             ],
             offsetTernaryExpressions: true,
         }],
-        'no-redeclare': 'off',
-        '@typescript-eslint/no-redeclare': 'error',
-        'no-use-before-define': 'off',
-        '@typescript-eslint/no-use-before-define': ['error', { functions: false, classes: false, variables: true }],
-        'brace-style': 'off',
-        '@typescript-eslint/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
-        'comma-dangle': 'off',
-        '@typescript-eslint/comma-dangle': ['error', 'always-multiline'],
-        'object-curly-spacing': 'off',
-        '@typescript-eslint/object-curly-spacing': ['error', 'always'],
-        'semi': 'off',
-        '@typescript-eslint/semi': ['error', 'never'],
-        'quotes': 'off',
-        '@typescript-eslint/quotes': ['error', 'single'],
-        'space-before-blocks': 'off',
-        '@typescript-eslint/space-before-blocks': ['error', 'always'],
-        'space-before-function-paren': 'off',
-        '@typescript-eslint/space-before-function-paren': [
-            'error',
-            {
-                anonymous: 'always',
-                named: 'never',
-                asyncArrow: 'always',
-            },
-        ],
-        'space-infix-ops': 'off',
-        '@typescript-eslint/space-infix-ops': 'error',
-        'keyword-spacing': 'off',
-        '@typescript-eslint/keyword-spacing': ['error', { before: true, after: true }],
-        'comma-spacing': 'off',
-        '@typescript-eslint/comma-spacing': ['error', { before: false, after: true }],
-        'no-extra-parens': 'off',
-        '@typescript-eslint/no-extra-parens': ['error', 'functions'],
-        'no-dupe-class-members': 'off',
-        '@typescript-eslint/no-dupe-class-members': 'error',
-        'no-loss-of-precision': 'off',
-        '@typescript-eslint/no-loss-of-precision': 'error',
-        'lines-between-class-members': 'off',
-        '@typescript-eslint/lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
 
         'antfu/generic-spacing': 'error',
         'antfu/no-cjs-exports': 'error',
