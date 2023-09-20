@@ -216,12 +216,20 @@ module.exports = {
                 '@typescript-eslint/no-use-before-define': 'off',
                 '@typescript-eslint/no-var-requires': 'off',
                 '@typescript-eslint/consistent-type-imports': 'off',
+                '@typescript-eslint/no-namespace': 'off',
+                '@typescript-eslint/no-require-imports': 'off',
+
                 '@stylistic/ts/comma-dangle': 'off',
+
                 'unused-imports/no-unused-imports': 'off',
                 'unused-imports/no-unused-vars': 'off',
+
                 'import/no-unresolved': 'off',
+
                 'antfu/no-cjs-exports': 'off',
                 'antfu/no-ts-export-equal': 'off',
+
+                'n/prefer-global/process': 'off',
             },
         },
     ],
