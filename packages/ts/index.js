@@ -228,7 +228,7 @@ module.exports = {
 
         // Stylistic JS/TS Misalignments (should be fixed upstream)
         'comma-dangle': 'off',
-        '@stylistic/ts/comma-dangle': ['error', 'always-multiline'],
+        '@typescript-eslint/comma-dangle': ['error', 'always-multiline'],
 
         // Stylistic JS/TS
         '@stylistic/js/space-before-blocks': 'off',
