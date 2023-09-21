@@ -204,7 +204,7 @@ module.exports = {
             line: { markers: ['*package', '!', '/', ',', '='] },
             block: { balanced: true, markers: ['*package', '!', ',', ':', '::', 'flow-include'], exceptions: ['*'] },
         }],
-        '@stylistic/js/indent': ['error', 2, {
+        '@stylistic/js/indent': ['error', 4, {
             SwitchCase: 1,
             VariableDeclarator: 1,
             outerIIFEBody: 1,
