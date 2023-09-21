@@ -1,6 +1,6 @@
 {
   "name": "@lincy/eslint-config-monorepo",
-  "version": "2.5.3",
+  "version": "2.5.4",
   "packageManager": "pnpm@8.4.0",
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
