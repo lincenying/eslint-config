@@ -1,9 +1,9 @@
 import type { FlatESLintConfigItem } from 'eslint-define-config'
+import { getPackageInfoSync, isPackageExists } from 'local-pkg'
 import { GLOB_VUE } from '../globs'
 import { parserTs, parserVue, pluginVue } from '../plugins'
 import { OFF } from '../flags'
 import type { OptionsHasTypeScript } from '../types'
-import { isPackageExists, getPackageInfoSync } from 'local-pkg'
 
 const pkg = getPackageInfoSync('vue')
 let vueVersion = pkg && pkg.version
@@ -31,15 +31,17 @@ export function vue(options: OptionsHasTypeScript = {}): FlatESLintConfigItem[] 
             processor: pluginVue.processors['.vue'],
             rules: {
                 ...pluginVue.configs.base.rules as any,
-                ...(vueVersion === '3' ? {
-                    ...pluginVue.configs['vue3-essential'].rules as any,
-                    ...pluginVue.configs['vue3-strongly-recommended'].rules as any,
-                    ...pluginVue.configs['vue3-recommended'].rules as any,
-                } : {
-                    ...pluginVue.configs['essential'].rules as any,
-                    ...pluginVue.configs['strongly-recommended'].rules as any,
-                    ...pluginVue.configs['recommended'].rules as any,
-                }),
+                ...(vueVersion === '3'
+                    ? {
+                            ...pluginVue.configs['vue3-essential'].rules as any,
+                            ...pluginVue.configs['vue3-strongly-recommended'].rules as any,
+                            ...pluginVue.configs['vue3-recommended'].rules as any,
+                        }
+                    : {
+                            ...pluginVue.configs.essential.rules as any,
+                            ...pluginVue.configs['strongly-recommended'].rules as any,
+                            ...pluginVue.configs.recommended.rules as any,
+                        }),
 
                 'vue/array-bracket-spacing': ['error', 'never'],
                 'vue/arrow-spacing': ['error', { after: true, before: true }],
@@ -58,13 +60,21 @@ export function vue(options: OptionsHasTypeScript = {}): FlatESLintConfigItem[] 
 
                 'vue/component-name-in-template-casing': ['error', 'PascalCase'],
                 'vue/component-options-name-casing': ['error', 'PascalCase'],
-                'vue/custom-event-name-casing': ['error', 'camelCase'],
+                'vue/custom-event-name-casing': vueVersion === '3' ? ['error', 'camelCase'] : ['error', 'kebab-case'],
+                ...(vueVersion === '2' ? { 'vue/require-explicit-emits': 'off' } : null),
                 'vue/define-macros-order': ['error', {
                     order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'],
                 }],
                 'vue/dot-location': ['error', 'property'],
                 'vue/dot-notation': ['error', { allowKeywords: true }],
                 'vue/eqeqeq': ['error', 'smart'],
+                'vue/html-indent': ['error', 4, {
+                    attribute: 1,
+                    baseIndent: 1,
+                    closeBracket: 0,
+                    alignAttributesVertically: true,
+                    ignores: [],
+                }],
                 'vue/html-comment-content-spacing': ['error', 'always', {
                     exceptions: ['-'],
                 }],
