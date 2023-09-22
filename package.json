@@ -1,7 +1,8 @@
 {
-  "name": "@lincy/eslint-config-monorepo",
-  "version": "2.5.4",
-  "packageManager": "pnpm@8.4.0",
+  "name": "@lincy/eslint-config",
+  "type": "module",
+  "version": "3.0.0",
+  "packageManager": "pnpm@8.7.6",
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
   "license": "MIT",
@@ -9,26 +10,65 @@
   "keywords": [
     "eslint-config"
   ],
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "postpublish": "open https://npmmirror.com/package/@lincy/eslint-config",
-    "release": "bumpp package.json packages/*/package.json && pnpm publish -r --access public",
-    "lint": "eslint . --ext .js,.ts,.json,.json5,.vue,.md --fix"
+    "build": "tsup src/index.ts --format esm --clean --dts",
+    "stub": "tsup src/index.ts --format esm --clean",
+    "lint": "pnpm run stub && eslint .",
+    "prepublishOnly": "nr build",
+    "release": "bumpp && npm publish -r --access public",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepare": "simple-git-hooks"
+  },
+  "peerDependencies": {
+    "eslint": ">=8.0.0"
+  },
+  "dependencies": {
+    "@eslint-stylistic/metadata": "0.0.4",
+    "@eslint/js": "^8.49.0",
+    "@stylistic/eslint-plugin-js": "0.0.4",
+    "@stylistic/eslint-plugin-ts": "0.0.4",
+    "@typescript-eslint/eslint-plugin": "^6.7.2",
+    "@typescript-eslint/parser": "^6.7.2",
+    "eslint-define-config": "^1.23.0",
+    "eslint-plugin-antfu": "^1.0.0-beta.2",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-i": "^2.28.1",
+    "eslint-plugin-jsdoc": "^46.8.2",
+    "eslint-plugin-jsonc": "^2.9.0",
+    "eslint-plugin-markdown": "^3.0.1",
+    "eslint-plugin-n": "^16.1.0",
+    "eslint-plugin-no-only-tests": "^3.1.0",
+    "eslint-plugin-unicorn": "^48.0.1",
+    "eslint-plugin-unused-imports": "^3.0.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "eslint-plugin-yml": "^1.9.0",
+    "globals": "^13.22.0",
+    "jsonc-eslint-parser": "^2.3.0",
+    "vue-eslint-parser": "^9.3.1",
+    "yaml-eslint-parser": "^1.2.2"
   },
   "devDependencies": {
+    "@antfu/ni": "^0.21.8",
     "@lincy/eslint-config": "workspace:*",
-    "@stylistic/eslint-plugin-migrate": "^0.0.4",
+    "@stylistic/eslint-plugin-migrate": "0.0.4",
+    "@types/node": "^20.6.3",
     "bumpp": "^9.2.0",
     "eslint": "^8.49.0",
-    "typescript": "^5.2.2"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
-  "pnpm": {
-    "peerDependencyRules": {
-      "ignoreMissing": [
-        "prettier"
-      ]
-    }
+    "eslint-plugin-sort-keys": "^2.3.5",
+    "esno": "^0.17.0",
+    "lint-staged": "^14.0.1",
+    "local-pkg": "^0.4.3",
+    "rimraf": "^5.0.1",
+    "simple-git-hooks": "^2.9.0",
+    "sucrase": "^3.34.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0",
+    "vitest": "^0.34.5"
   }
 }

@@ -1,3 +1,0 @@
-{
-  "extends": ["@lincy", "plugin:@stylistic/migrate/recommended"]
-}
