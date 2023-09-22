@@ -1,4 +1,4 @@
-import { factoryFunc } from './factory'
+import { lincy } from './factory'
 
 export * from './types'
 export * from './factory'
@@ -6,4 +6,4 @@ export * from './configs'
 export * from './plugins'
 export * from './utils'
 
-export default factoryFunc
+export default lincy

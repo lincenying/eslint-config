@@ -115,11 +115,11 @@ export default eslintConfig()
 import eslintConfig from '@lincy/eslint-config'
 
 export default eslintConfig({
-  stylistic: true, // enable stylistic formatting rules
-  typescript: true,
-  vue: true,
-  jsonc: false,
-  yml: false,
+    stylistic: true, // enable stylistic formatting rules
+    typescript: true,
+    vue: true,
+    jsonc: false,
+    yml: false,
 })
 ```
 
@@ -130,18 +130,18 @@ export default eslintConfig({
 import eslintConfig from '@lincy/eslint-config'
 
 export default eslintConfig(
-  {
+    {
     // Configures for config
-  },
+    },
 
-  // From the second arguments they are ESLint Flat Configs
-  // you can have multiple configs
-  {
-    rules: {},
-  },
-  {
-    rules: {},
-  },
+    // From the second arguments they are ESLint Flat Configs
+    // you can have multiple configs
+    {
+        rules: {},
+    },
+    {
+        rules: {},
+    },
 )
 ```
 
@@ -150,41 +150,41 @@ export default eslintConfig(
 ```js
 // eslint.config.js
 import {
-  comments,
-  ignores,
-  imports,
-  javascript,
-  javascriptStylistic,
-  jsdoc,
-  jsonc,
-  markdown,
-  node,
-  sortPackageJson,
-  sortTsconfig,
-  typescript,
-  typescriptStylistic,
-  unicorn,
-  vue,
-  yml,
+    comments,
+    ignores,
+    imports,
+    javascript,
+    javascriptStylistic,
+    jsdoc,
+    jsonc,
+    markdown,
+    node,
+    sortPackageJson,
+    sortTsconfig,
+    typescript,
+    typescriptStylistic,
+    unicorn,
+    vue,
+    yml,
 } from '@lincy/eslint-config'
 
 export default [
-  ...ignores,
-  ...javascript(),
-  ...comments,
-  ...node,
-  ...jsdoc,
-  ...imports,
-  ...unicorn,
-  ...javascriptStylistic,
+    ...ignores,
+    ...javascript(),
+    ...comments,
+    ...node,
+    ...jsdoc,
+    ...imports,
+    ...unicorn,
+    ...javascriptStylistic,
 
-  ...typescript(),
-  ...typescriptStylistic,
+    ...typescript(),
+    ...typescriptStylistic,
 
-  ...vue(),
-  ...jsonc,
-  ...yml,
-  ...markdown(),
+    ...vue(),
+    ...jsonc,
+    ...yml,
+    ...markdown(),
 ]
 ```
 
@@ -221,9 +221,9 @@ type foo = { bar: 2 }
 import eslintConfig from '@lincy/eslint-config'
 
 export default eslintConfig({
-  typescript: {
-    tsconfigPath: 'tsconfig.json',
-  },
+    typescript: {
+        tsconfigPath: 'tsconfig.json',
+    },
 })
 ```
 

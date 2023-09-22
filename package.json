@@ -20,6 +20,7 @@
     "build": "tsup src/index.ts --format esm,cjs --shims --clean --dts",
     "stub": "tsup src/index.ts --format esm,cjs --shims --clean",
     "lint": "pnpm run stub && eslint .",
+    "lint:fix": "eslint . --fix",
     "postpublish": "open https://npmmirror.com/package/@lincy/eslint-config",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish -r --access public",

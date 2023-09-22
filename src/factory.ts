@@ -27,7 +27,7 @@ import { combine } from './utils'
 /**
  * Construct an array of ESLint flat config items.
  */
-export function factoryFunc(options: OptionsConfig = {}, ...userConfigs: (FlatESLintConfigItem | FlatESLintConfigItem[])[]) {
+export function lincy(options: OptionsConfig = {}, ...userConfigs: (FlatESLintConfigItem | FlatESLintConfigItem[])[]) {
     const isInEditor = options.isInEditor ?? !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI)
     const enableVue = options.vue ?? (isPackageExists('vue') || isPackageExists('nuxt') || isPackageExists('vitepress') || isPackageExists('@slidev/cli'))
     const enableTypeScript = options.typescript ?? (isPackageExists('typescript'))

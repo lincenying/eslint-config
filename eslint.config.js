@@ -1,8 +1,8 @@
 import stylisticMigrate from '@stylistic/eslint-plugin-migrate'
 import sortKeys from 'eslint-plugin-sort-keys'
-import eslintConfig from '@lincy/eslint-config'
+import { lincy } from '@lincy/eslint-config'
 
-const config = eslintConfig(
+const config = lincy(
     undefined,
     {
         files: ['**/eslint-config/src/**/*.ts'],

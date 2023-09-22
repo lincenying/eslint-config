@@ -1,5 +1,5 @@
 import type { FlatESLintConfigItem } from 'eslint-define-config'
-import { getPackageInfoSync, isPackageExists } from 'local-pkg'
+import { getPackageInfoSync } from 'local-pkg'
 import { GLOB_VUE } from '../globs'
 import { parserTs, parserVue, pluginVue } from '../plugins'
 import { OFF } from '../flags'
