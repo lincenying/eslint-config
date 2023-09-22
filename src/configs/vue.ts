@@ -125,6 +125,7 @@ export function vue(options: OptionsHasTypeScript = {}): FlatESLintConfigItem[] 
                 'vue/space-infix-ops': 'error',
                 'vue/space-unary-ops': ['error', { nonwords: false, words: true }],
                 'vue/template-curly-spacing': 'error',
+                'vue/singleline-html-element-content-newline': 'off',
             },
         },
     ]
