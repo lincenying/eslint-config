@@ -72,14 +72,20 @@
     "unbuild": "^2.0.0",
     "vitest": "^0.34.5"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
   "pnpm": {
     "peerDependencyRules": {
       "ignoreMissing": [
         "prettier"
       ]
     }
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,vue}": "eslint --fix"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }
