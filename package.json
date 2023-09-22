@@ -18,6 +18,7 @@
     "build": "tsup src/index.ts --format esm --clean --dts",
     "stub": "tsup src/index.ts --format esm --clean",
     "lint": "pnpm run stub && eslint .",
+    "postpublish": "open https://npmmirror.com/package/@lincy/eslint-config",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish -r --access public",
     "test": "vitest",
