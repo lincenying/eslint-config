@@ -78,6 +78,15 @@ export function vue(options: OptionsHasTypeScript = {}): FlatESLintConfigItem[] 
                 'vue/html-comment-content-spacing': ['error', 'always', {
                     exceptions: ['-'],
                 }],
+                'vue/html-self-closing': ['error', {
+                    html: {
+                        void: 'never',
+                        normal: 'any',
+                        component: 'any',
+                    },
+                    svg: 'always',
+                    math: 'always',
+                }],
                 'vue/key-spacing': ['error', { afterColon: true, beforeColon: false }],
                 'vue/keyword-spacing': ['error', { after: true, before: true }],
                 'vue/max-attributes-per-line': OFF,
