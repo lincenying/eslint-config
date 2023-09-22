@@ -76,6 +76,7 @@ export function typescript(options?: OptionsComponentExts): FlatESLintConfigItem
                 'ts/no-non-null-assertion': OFF,
                 'ts/no-redeclare': 'error',
                 'ts/no-require-imports': 'error',
+                'ts/unified-signatures': OFF,
                 'ts/no-unused-vars': OFF,
                 'ts/no-use-before-define': ['error', { classes: false, functions: false, variables: true }],
                 'ts/parameter-properties': OFF,
