@@ -10,20 +10,22 @@
   "keywords": [
     "eslint-config"
   ],
-  "main": "dist/index.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "types": "index.d.ts",
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format esm --clean --dts",
-    "stub": "tsup src/index.ts --format esm --clean",
+    "build": "tsup src/index.ts --format esm,cjs --shims --clean --dts",
+    "stub": "tsup src/index.ts --format esm,cjs --shims --clean",
     "lint": "pnpm run stub && eslint .",
     "postpublish": "open https://npmmirror.com/package/@lincy/eslint-config",
     "prepublishOnly": "nr build",
     "release": "bumpp && npm publish -r --access public",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "prepare": "simple-git-hooks"
+    "prepare": "sh simple-git-hooks.sh"
   },
   "peerDependencies": {
     "eslint": ">=8.0.0"
