@@ -1,4 +1,5 @@
 import { FlatESLintConfigItem } from 'eslint-define-config';
+import { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 export { default as pluginAntfu } from 'eslint-plugin-antfu';
 export { default as pluginComments } from 'eslint-plugin-eslint-comments';
 export { default as pluginImport } from 'eslint-plugin-i';
@@ -39,6 +40,15 @@ interface OptionsIsInEditor {
     isInEditor?: boolean;
 }
 interface OptionsConfig {
+    /**
+     * Enable gitignore support.
+     *
+     * Passing an object to configure the options.
+     *
+     * @see https://github.com/antfu/eslint-config-flat-gitignore
+     * @default true
+     */
+    gitignore?: boolean | FlatGitignoreOptions;
     /**
      * Enable TypeScript support.
      *
@@ -93,7 +103,7 @@ interface OptionsConfig {
 /**
  * Construct an array of ESLint flat config items.
  */
-declare function lincy(options?: OptionsConfig, ...userConfigs: (FlatESLintConfigItem | FlatESLintConfigItem[])[]): FlatESLintConfigItem[];
+declare function lincy(options?: OptionsConfig & FlatESLintConfigItem, ...userConfigs: (FlatESLintConfigItem | FlatESLintConfigItem[])[]): FlatESLintConfigItem[];
 
 declare const comments: FlatESLintConfigItem[];
 

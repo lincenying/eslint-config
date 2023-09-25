@@ -80,6 +80,7 @@ var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
 
 // src/factory.ts
 var import_node_process2 = __toESM(require("process"), 1);
+var import_node_fs = __toESM(require("fs"), 1);
 
 // node_modules/.pnpm/local-pkg@0.4.3/node_modules/local-pkg/index.mjs
 var import_path = require("path");
@@ -136,6 +137,9 @@ function searchPackageJSON(dir) {
   }
   return packageJsonPath;
 }
+
+// src/factory.ts
+var import_eslint_config_flat_gitignore = __toESM(require("eslint-config-flat-gitignore"), 1);
 
 // src/flags.ts
 var OFF = 0;
@@ -276,9 +280,6 @@ function javascript(options = {}) {
         "array-callback-return": "error",
         "arrow-parens": ["error", "as-needed", { requireForBlockBody: true }],
         "block-scoped-var": "error",
-        "camelcase": OFF,
-        "complexity": OFF,
-        "consistent-return": OFF,
         "constructor-super": "error",
         "default-case-last": "error",
         "dot-notation": ["error", { allowKeywords: true }],
@@ -287,7 +288,7 @@ function javascript(options = {}) {
         "max-statements-per-line": ["error", { max: 1 }],
         "new-cap": ["error", { capIsNew: false, newIsCap: true, properties: true }],
         "new-parens": "error",
-        "no-alert": "warn",
+        "no-alert": "error",
         "no-array-constructor": "error",
         "no-async-promise-executor": "error",
         "no-caller": "error",
@@ -346,7 +347,6 @@ function javascript(options = {}) {
         "no-obj-calls": "error",
         "no-octal": "error",
         "no-octal-escape": "error",
-        "no-param-reassign": OFF,
         "no-proto": "error",
         "no-prototype-builtins": "error",
         "no-redeclare": ["error", { builtinGlobals: false }],
@@ -370,8 +370,6 @@ function javascript(options = {}) {
           "LabeledStatement",
           "WithStatement"
         ],
-        "no-return-assign": OFF,
-        "no-return-await": OFF,
         "no-self-assign": ["error", { props: true }],
         "no-self-compare": "error",
         "no-sequences": "error",
@@ -406,7 +404,6 @@ function javascript(options = {}) {
         "no-useless-catch": "error",
         "no-useless-computed-key": "error",
         "no-useless-constructor": "error",
-        "no-useless-escape": OFF,
         "no-useless-rename": "error",
         "no-useless-return": "error",
         "no-var": "error",
@@ -442,7 +439,6 @@ function javascript(options = {}) {
         "prefer-spread": "error",
         "prefer-template": "error",
         "quote-props": ["error", "consistent-as-needed"],
-        "require-await": OFF,
         "sort-imports": [
           "error",
           {
@@ -457,7 +453,7 @@ function javascript(options = {}) {
         "unicode-bom": ["error", "never"],
         "unused-imports/no-unused-imports": options.isInEditor ? OFF : "error",
         "unused-imports/no-unused-vars": [
-          "warn",
+          "error",
           { args: "after-used", argsIgnorePattern: "^_", vars: "all", varsIgnorePattern: "^_" }
         ],
         "use-isnan": ["error", { enforceForIndexOf: true, enforceForSwitchCase: true }],
@@ -468,7 +464,7 @@ function javascript(options = {}) {
       }
     },
     {
-      files: ["scripts/**/*.*", "cli.*"],
+      files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
       rules: {
         "no-console": OFF
       }
@@ -818,6 +814,7 @@ var javascriptStylistic = [
       style: import_eslint_plugin_js.default
     },
     rules: {
+      "antfu/consistent-list-newline": "error",
       "antfu/if-newline": "error",
       "comma-dangle": ["error", "always-multiline"],
       "curly": ["error", "multi-or-nest", "consistent"],
@@ -1017,7 +1014,6 @@ function typescript(options) {
         "no-redeclare": OFF,
         "no-use-before-define": OFF,
         "no-useless-constructor": OFF,
-        // TS
         "ts/ban-ts-comment": ["error", { "ts-ignore": "allow-with-description" }],
         "ts/ban-ts-ignore": OFF,
         "ts/consistent-indexed-object-style": OFF,
@@ -1028,22 +1024,23 @@ function typescript(options) {
         "ts/explicit-module-boundary-types": OFF,
         "ts/naming-convention": OFF,
         "ts/no-dupe-class-members": "error",
+        "ts/no-dynamic-delete": OFF,
         "ts/no-empty-function": OFF,
         "ts/no-empty-interface": OFF,
         "ts/no-explicit-any": OFF,
         "ts/no-extra-parens": ["error", "functions"],
         "ts/no-invalid-this": "error",
-        "ts/no-loss-of-precision": "error",
         "ts/no-invalid-void-type": OFF,
+        "ts/no-loss-of-precision": "error",
         "ts/no-non-null-assertion": OFF,
         "ts/no-redeclare": "error",
         "ts/no-require-imports": "error",
-        "ts/unified-signatures": OFF,
         "ts/no-unused-vars": OFF,
         "ts/no-use-before-define": ["error", { classes: false, functions: false, variables: true }],
         "ts/parameter-properties": OFF,
         "ts/prefer-ts-expect-error": "error",
-        "ts/triple-slash-reference": OFF
+        "ts/triple-slash-reference": OFF,
+        "ts/unified-signatures": OFF
       }
     },
     {
@@ -1097,7 +1094,6 @@ function typescriptWithLanguageServer(options) {
         "dot-notation": OFF,
         "no-implied-eval": OFF,
         "no-throw-literal": OFF,
-        "require-await": OFF,
         "ts/await-thenable": "error",
         "ts/dot-notation": ["error", { allowKeywords: true }],
         "ts/no-floating-promises": "error",
@@ -1111,7 +1107,6 @@ function typescriptWithLanguageServer(options) {
         "ts/no-unsafe-call": "error",
         "ts/no-unsafe-member-access": "error",
         "ts/no-unsafe-return": "error",
-        "ts/require-await": "error",
         "ts/restrict-plus-operands": "error",
         "ts/restrict-template-expressions": "error",
         "ts/unbound-method": "error"
@@ -1194,6 +1189,7 @@ function vue(options = {}) {
           ...import_eslint_plugin_vue.default.configs["strongly-recommended"].rules,
           ...import_eslint_plugin_vue.default.configs.recommended.rules
         },
+        "node/prefer-global/process": OFF,
         "vue/array-bracket-spacing": ["error", "never"],
         "vue/arrow-spacing": ["error", { after: true, before: true }],
         "vue/block-order": ["error", {
@@ -1218,24 +1214,24 @@ function vue(options = {}) {
         "vue/dot-location": ["error", "property"],
         "vue/dot-notation": ["error", { allowKeywords: true }],
         "vue/eqeqeq": ["error", "smart"],
-        "vue/html-indent": ["error", 4, {
-          attribute: 1,
-          baseIndent: 1,
-          closeBracket: 0,
-          alignAttributesVertically: true,
-          ignores: []
-        }],
         "vue/html-comment-content-spacing": ["error", "always", {
           exceptions: ["-"]
         }],
+        "vue/html-indent": ["error", 4, {
+          alignAttributesVertically: true,
+          attribute: 1,
+          baseIndent: 1,
+          closeBracket: 0,
+          ignores: []
+        }],
         "vue/html-self-closing": ["error", {
           html: {
-            void: "never",
+            component: "any",
             normal: "any",
-            component: "any"
+            void: "never"
           },
-          svg: "always",
-          math: "always"
+          math: "always",
+          svg: "always"
         }],
         "vue/key-spacing": ["error", { afterColon: true, beforeColon: false }],
         "vue/keyword-spacing": ["error", { after: true, before: true }],
@@ -1254,7 +1250,6 @@ function vue(options = {}) {
           "WithStatement"
         ],
         "vue/no-restricted-v-bind": ["error", "/^v-/"],
-        // reactivity transform
         "vue/no-setup-props-reactivity-loss": OFF,
         "vue/no-sparse-arrays": "error",
         "vue/no-unused-refs": "error",
@@ -1279,11 +1274,11 @@ function vue(options = {}) {
         "vue/quote-props": ["error", "consistent-as-needed"],
         "vue/require-default-prop": OFF,
         "vue/require-prop-types": OFF,
+        "vue/singleline-html-element-content-newline": "off",
         "vue/space-in-parens": ["error", "never"],
         "vue/space-infix-ops": "error",
         "vue/space-unary-ops": ["error", { nonwords: false, words: true }],
-        "vue/template-curly-spacing": "error",
-        "vue/singleline-html-element-content-newline": "off"
+        "vue/template-curly-spacing": "error"
       }
     }
   ];
@@ -1325,12 +1320,32 @@ function test(options = {}) {
 }
 
 // src/factory.ts
+var flatConfigProps = [
+  "files",
+  "ignores",
+  "languageOptions",
+  "linterOptions",
+  "processor",
+  "plugins",
+  "rules",
+  "settings"
+];
 function lincy(options = {}, ...userConfigs) {
   const isInEditor = options.isInEditor ?? !!((import_node_process2.default.env.VSCODE_PID || import_node_process2.default.env.JETBRAINS_IDE) && !import_node_process2.default.env.CI);
   const enableVue = options.vue ?? (isPackageExists("vue") || isPackageExists("nuxt") || isPackageExists("vitepress") || isPackageExists("@slidev/cli"));
   const enableTypeScript = options.typescript ?? isPackageExists("typescript");
   const enableStylistic = options.stylistic ?? true;
-  const configs = [
+  const enableGitignore = options.gitignore ?? true;
+  const configs = [];
+  if (enableGitignore) {
+    if (typeof enableGitignore !== "boolean") {
+      configs.push([(0, import_eslint_config_flat_gitignore.default)(enableGitignore)]);
+    } else {
+      if (import_node_fs.default.existsSync(".gitignore"))
+        configs.push([(0, import_eslint_config_flat_gitignore.default)()]);
+    }
+  }
+  configs.push(
     ignores,
     javascript({ isInEditor }),
     comments,
@@ -1338,7 +1353,7 @@ function lincy(options = {}, ...userConfigs) {
     jsdoc,
     imports,
     unicorn
-  ];
+  );
   const componentExts = [];
   if (enableVue)
     componentExts.push("vue");
@@ -1370,6 +1385,13 @@ function lincy(options = {}, ...userConfigs) {
     configs.push(yml);
   if (options.markdown ?? true)
     configs.push(markdown({ componentExts }));
+  const fusedConfig = flatConfigProps.reduce((acc, key) => {
+    if (key in options)
+      acc[key] = options[key];
+    return acc;
+  }, {});
+  if (Object.keys(fusedConfig).length)
+    configs.push([fusedConfig]);
   return combine(
     ...configs,
     ...userConfigs
