@@ -3,6 +3,7 @@ import globals from 'globals'
 import { pluginAntfu, pluginUnusedImports } from '../plugins'
 import { OFF } from '../flags'
 import type { OptionsIsInEditor } from '../types'
+import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
 
 export function javascript(options: OptionsIsInEditor = {}): FlatESLintConfigItem[] {
     return [
@@ -40,9 +41,6 @@ export function javascript(options: OptionsIsInEditor = {}): FlatESLintConfigIte
                 'array-callback-return': 'error',
                 'arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
                 'block-scoped-var': 'error',
-                'camelcase': OFF,
-                'complexity': OFF,
-                'consistent-return': OFF,
                 'constructor-super': 'error',
                 'default-case-last': 'error',
                 'dot-notation': ['error', { allowKeywords: true }],
@@ -51,7 +49,7 @@ export function javascript(options: OptionsIsInEditor = {}): FlatESLintConfigIte
                 'max-statements-per-line': ['error', { max: 1 }],
                 'new-cap': ['error', { capIsNew: false, newIsCap: true, properties: true }],
                 'new-parens': 'error',
-                'no-alert': 'warn',
+                'no-alert': 'error',
                 'no-array-constructor': 'error',
                 'no-async-promise-executor': 'error',
                 'no-caller': 'error',
@@ -110,7 +108,6 @@ export function javascript(options: OptionsIsInEditor = {}): FlatESLintConfigIte
                 'no-obj-calls': 'error',
                 'no-octal': 'error',
                 'no-octal-escape': 'error',
-                'no-param-reassign': OFF,
                 'no-proto': 'error',
                 'no-prototype-builtins': 'error',
                 'no-redeclare': ['error', { builtinGlobals: false }],
@@ -134,8 +131,6 @@ export function javascript(options: OptionsIsInEditor = {}): FlatESLintConfigIte
                     'LabeledStatement',
                     'WithStatement',
                 ],
-                'no-return-assign': OFF,
-                'no-return-await': OFF,
                 'no-self-assign': ['error', { props: true }],
                 'no-self-compare': 'error',
                 'no-sequences': 'error',
@@ -170,7 +165,6 @@ export function javascript(options: OptionsIsInEditor = {}): FlatESLintConfigIte
                 'no-useless-catch': 'error',
                 'no-useless-computed-key': 'error',
                 'no-useless-constructor': 'error',
-                'no-useless-escape': OFF,
                 'no-useless-rename': 'error',
                 'no-useless-return': 'error',
                 'no-var': 'error',
@@ -206,7 +200,6 @@ export function javascript(options: OptionsIsInEditor = {}): FlatESLintConfigIte
                 'prefer-spread': 'error',
                 'prefer-template': 'error',
                 'quote-props': ['error', 'consistent-as-needed'],
-                'require-await': OFF,
                 'sort-imports': [
                     'error',
                     {
@@ -222,7 +215,7 @@ export function javascript(options: OptionsIsInEditor = {}): FlatESLintConfigIte
 
                 'unused-imports/no-unused-imports': options.isInEditor ? OFF : 'error',
                 'unused-imports/no-unused-vars': [
-                    'warn',
+                    'error',
                     { args: 'after-used', argsIgnorePattern: '^_', vars: 'all', varsIgnorePattern: '^_' },
                 ],
 
@@ -234,7 +227,7 @@ export function javascript(options: OptionsIsInEditor = {}): FlatESLintConfigIte
             },
         },
         {
-            files: ['scripts/**/*.*', 'cli.*'],
+            files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
             rules: {
                 'no-console': OFF,
             },

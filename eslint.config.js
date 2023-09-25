@@ -5,7 +5,7 @@ import lincy from '@lincy/eslint-config'
 const config = lincy(
     undefined,
     {
-        files: ['**/eslint-config/src/**/*.ts'],
+        files: ['src/**/*.ts'],
         plugins: {
             '@stylistic/migrate': stylisticMigrate,
             'sort-keys': sortKeys,

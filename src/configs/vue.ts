@@ -43,6 +43,8 @@ export function vue(options: OptionsHasTypeScript = {}): FlatESLintConfigItem[] 
                             ...pluginVue.configs.recommended.rules as any,
                         }),
 
+                'node/prefer-global/process': OFF,
+
                 'vue/array-bracket-spacing': ['error', 'never'],
                 'vue/arrow-spacing': ['error', { after: true, before: true }],
                 'vue/block-order': ['error', {
@@ -68,24 +70,24 @@ export function vue(options: OptionsHasTypeScript = {}): FlatESLintConfigItem[] 
                 'vue/dot-location': ['error', 'property'],
                 'vue/dot-notation': ['error', { allowKeywords: true }],
                 'vue/eqeqeq': ['error', 'smart'],
-                'vue/html-indent': ['error', 4, {
-                    attribute: 1,
-                    baseIndent: 1,
-                    closeBracket: 0,
-                    alignAttributesVertically: true,
-                    ignores: [],
-                }],
                 'vue/html-comment-content-spacing': ['error', 'always', {
                     exceptions: ['-'],
                 }],
+                'vue/html-indent': ['error', 4, {
+                    alignAttributesVertically: true,
+                    attribute: 1,
+                    baseIndent: 1,
+                    closeBracket: 0,
+                    ignores: [],
+                }],
                 'vue/html-self-closing': ['error', {
                     html: {
-                        void: 'never',
-                        normal: 'any',
                         component: 'any',
+                        normal: 'any',
+                        void: 'never',
                     },
-                    svg: 'always',
                     math: 'always',
+                    svg: 'always',
                 }],
                 'vue/key-spacing': ['error', { afterColon: true, beforeColon: false }],
                 'vue/keyword-spacing': ['error', { after: true, before: true }],
@@ -105,7 +107,6 @@ export function vue(options: OptionsHasTypeScript = {}): FlatESLintConfigItem[] 
                 ],
                 'vue/no-restricted-v-bind': ['error', '/^v-/'],
 
-                // reactivity transform
                 'vue/no-setup-props-reactivity-loss': OFF,
                 'vue/no-sparse-arrays': 'error',
                 'vue/no-unused-refs': 'error',
@@ -130,11 +131,11 @@ export function vue(options: OptionsHasTypeScript = {}): FlatESLintConfigItem[] 
                 'vue/quote-props': ['error', 'consistent-as-needed'],
                 'vue/require-default-prop': OFF,
                 'vue/require-prop-types': OFF,
+                'vue/singleline-html-element-content-newline': 'off',
                 'vue/space-in-parens': ['error', 'never'],
                 'vue/space-infix-ops': 'error',
                 'vue/space-unary-ops': ['error', { nonwords: false, words: true }],
                 'vue/template-curly-spacing': 'error',
-                'vue/singleline-html-element-content-newline': 'off',
             },
         },
     ]

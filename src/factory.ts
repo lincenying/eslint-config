@@ -1,6 +1,8 @@
 import process from 'node:process'
+import fs from 'node:fs'
 import type { FlatESLintConfigItem } from 'eslint-define-config'
 import { isPackageExists } from 'local-pkg'
+import gitignore from 'eslint-config-flat-gitignore'
 import {
     comments,
     ignores,
@@ -24,16 +26,41 @@ import {
 import type { OptionsConfig } from './types'
 import { combine } from './utils'
 
+const flatConfigProps: (keyof FlatESLintConfigItem)[] = [
+    'files',
+    'ignores',
+    'languageOptions',
+    'linterOptions',
+    'processor',
+    'plugins',
+    'rules',
+    'settings',
+]
+
 /**
  * Construct an array of ESLint flat config items.
  */
-export function lincy(options: OptionsConfig = {}, ...userConfigs: (FlatESLintConfigItem | FlatESLintConfigItem[])[]) {
+export function lincy(options: OptionsConfig & FlatESLintConfigItem = {}, ...userConfigs: (FlatESLintConfigItem | FlatESLintConfigItem[])[]) {
     const isInEditor = options.isInEditor ?? !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI)
     const enableVue = options.vue ?? (isPackageExists('vue') || isPackageExists('nuxt') || isPackageExists('vitepress') || isPackageExists('@slidev/cli'))
     const enableTypeScript = options.typescript ?? (isPackageExists('typescript'))
     const enableStylistic = options.stylistic ?? true
+    const enableGitignore = options.gitignore ?? true
 
-    const configs = [
+    const configs: FlatESLintConfigItem[][] = []
+
+    if (enableGitignore) {
+        if (typeof enableGitignore !== 'boolean') {
+            configs.push([gitignore(enableGitignore)])
+        }
+        else {
+            if (fs.existsSync('.gitignore'))
+                configs.push([gitignore()])
+        }
+    }
+
+    // Base configs
+    configs.push(
         ignores,
         javascript({ isInEditor }),
         comments,
@@ -41,7 +68,7 @@ export function lincy(options: OptionsConfig = {}, ...userConfigs: (FlatESLintCo
         jsdoc,
         imports,
         unicorn,
-    ]
+    )
 
     // In the future we may support more component extensions like Svelte or so
     const componentExts: string[] = []
@@ -84,6 +111,17 @@ export function lincy(options: OptionsConfig = {}, ...userConfigs: (FlatESLintCo
 
     if (options.markdown ?? true)
         configs.push(markdown({ componentExts }))
+
+    // User can optionally pass a flat config item to the first argument
+    // We pick the known keys as ESLint would do schema validation
+    const fusedConfig = flatConfigProps.reduce((acc, key) => {
+        if (key in options)
+            acc[key] = options[key]
+        return acc
+    }, {} as FlatESLintConfigItem)
+
+    if (Object.keys(fusedConfig).length)
+        configs.push([fusedConfig])
 
     return combine(
         ...configs,
