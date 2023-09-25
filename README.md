@@ -24,9 +24,9 @@ pnpm add -D eslint @lincy/eslint-config
 
 ```js
 // eslint.config.js
-import eslintConfig from '@lincy/eslint-config'
+import lincy from '@lincy/eslint-config'
 
-export default eslintConfig()
+export default lincy()
 ```
 
 > 通常您不需要`.eslintignore`，因为它已由预设提供。
@@ -99,46 +99,96 @@ For example:
 
 ## 定制化
 
-通常你只需要导入 `eslintConfig` 预设：
+通常你只需要导入 `lincy` 预设：
 
+#### esm
 ```js
 // eslint.config.js
-import eslintConfig from '@lincy/eslint-config'
+import lincy from '@lincy/eslint-config'
 
-export default eslintConfig()
+// or
+// import { lincy } from '@lincy/eslint-config'
+
+export default lincy()
+```
+
+#### cjs
+```js
+// eslint.config.js
+const lincy = require('@lincy/eslint-config').lincy
+
+module.exports = lincy()
 ```
 
 您可以单独配置每个功能，例如：
 
 ```js
 // eslint.config.js
-import eslintConfig from '@lincy/eslint-config'
+import lincy from '@lincy/eslint-config'
 
-export default eslintConfig({
-    stylistic: true, // enable stylistic formatting rules
-    typescript: true,
-    vue: true,
-    jsonc: false,
-    yml: false,
+export default lincy({
+    // 是否启用 stylistic 格式化规则
+    stylistic: true, // 默认值: true
+    // 是否启用 typescript 规则
+    typescript: true, // 默认值: 检测是否安装typescript依赖
+    // 是否启用 vue 规则
+    vue: true, // 默认值: 检测是否安装vue依赖
+    // 是否启用 jsonc 规则
+    jsonc: false, // 默认值: 检测是否安装typescript依赖
+    // 是否启用 yml 规则
+    yml: false, // 默认值: true
+    // 是否启用 .gitignore 文件
+    gitignore: false, // 默认值: true
+    // 是否启用 test 规则
+    test: false, // 默认值: true
+    // 是否启用 markdown 规则
+    markdown: false, // 默认值: true
 })
 ```
 
-`eslintConfig` 工厂函数还接受任意数量的自定义配置覆盖：
+`lincy` 工厂函数还接受任意数量的自定义配置覆盖：
 
 ```js
 // eslint.config.js
-import eslintConfig from '@lincy/eslint-config'
+import { readFile } from 'node:fs/promises'
+import lincy from '@lincy/eslint-config'
+import plugin from '@unocss/eslint-plugin'
 
-export default eslintConfig(
+const autoImport = JSON.parse(
+    await readFile(new URL('./.eslintrc-auto-import.json', import.meta.url)),
+)
+
+export default lincy(
     {
     // Configures for config
     },
-
-    // From the second arguments they are ESLint Flat Configs
-    // you can have multiple configs
+    // 启用 unocss
     {
-        rules: {},
+        plugins: {
+            '@unocss': plugin,
+        },
+        rules: {
+            ...plugin.configs.recommended.rules,
+            '@unocss/order': 'off',
+        },
     },
+    // 启用 auto-import 生成的 .eslintrc-auto-import.json
+    {
+        languageOptions: {
+            globals: {
+                ...autoImport.globals,
+                // 其他 globals
+            },
+        },
+    },
+    // 自定义排除文件(夹)
+    {
+        ignores: [
+            '**/assets',
+            '**/static',
+        ],
+    },
+    // 你还可以继续配置多个 ESLint Flat Configs
     {
         rules: {},
     },
@@ -218,9 +268,9 @@ type foo = { bar: 2 }
 
 ```js
 // eslint.config.js
-import eslintConfig from '@lincy/eslint-config'
+import lincy from '@lincy/eslint-config'
 
-export default eslintConfig({
+export default lincy({
     typescript: {
         tsconfigPath: 'tsconfig.json',
     },
