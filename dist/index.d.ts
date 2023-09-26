@@ -7,8 +7,7 @@ export { default as pluginJsdoc } from 'eslint-plugin-jsdoc';
 export { default as pluginJsonc } from 'eslint-plugin-jsonc';
 export { default as pluginMarkdown } from 'eslint-plugin-markdown';
 export { default as pluginNode } from 'eslint-plugin-n';
-export { default as pluginStylisticJs } from '@stylistic/eslint-plugin-js';
-export { default as pluginStylisticTs } from '@stylistic/eslint-plugin-ts';
+export { default as pluginStylistic } from '@stylistic/eslint-plugin';
 export { default as pluginTs } from '@typescript-eslint/eslint-plugin';
 export { default as pluginUnicorn } from 'eslint-plugin-unicorn';
 export { default as pluginUnusedImports } from 'eslint-plugin-unused-imports';
@@ -134,8 +133,7 @@ declare const sortPackageJson: FlatESLintConfigItem[];
  */
 declare const sortTsconfig: FlatESLintConfigItem[];
 
-declare const javascriptStylistic: FlatESLintConfigItem[];
-declare const typescriptStylistic: FlatESLintConfigItem[];
+declare const stylistic: FlatESLintConfigItem[];
 
 declare function typescript(options?: OptionsComponentExts): FlatESLintConfigItem[];
 declare function typescriptWithLanguageServer(options: OptionsTypeScriptWithLanguageServer & OptionsComponentExts): FlatESLintConfigItem[];
@@ -155,5 +153,8 @@ declare function combine(...configs: (FlatESLintConfigItem | FlatESLintConfigIte
 declare function renameRules(rules: Record<string, any>, from: string, to: string): {
     [k: string]: any;
 };
+declare function recordRulesStateConfigs(configs: FlatESLintConfigItem[]): FlatESLintConfigItem[];
+declare function recordRulesState(rules: FlatESLintConfigItem['rules']): FlatESLintConfigItem['rules'];
+declare function warnUnnecessaryOffRules(): void;
 
-export { OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIsInEditor, OptionsTypeScriptWithLanguageServer, combine, comments, lincy as default, ignores, imports, javascript, javascriptStylistic, jsdoc, jsonc, lincy, markdown, node, renameRules, sortPackageJson, sortTsconfig, test, typescript, typescriptStylistic, typescriptWithLanguageServer, unicorn, vue, yml };
+export { OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIsInEditor, OptionsTypeScriptWithLanguageServer, combine, comments, lincy as default, ignores, imports, javascript, jsdoc, jsonc, lincy, markdown, node, recordRulesState, recordRulesStateConfigs, renameRules, sortPackageJson, sortTsconfig, stylistic, test, typescript, typescriptWithLanguageServer, unicorn, vue, warnUnnecessaryOffRules, yml };

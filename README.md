@@ -252,7 +252,6 @@ export default [
 | `n/*` | `node` | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n)
 | `@typescript-eslint/*` | `ts/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
 | `@stylistic/js` | `style/*` | [@stylistic/eslint-plugin-js](https://github.com/eslint-stylistic/eslint-stylistic) |
-| `@stylistic/ts` | `style-ts/` | [@stylistic/eslint-plugin-ts](https://github.com/eslint-stylistic/eslint-stylistic) |
 
 当您想要覆盖规则或内联禁用它们时，您需要更新到新的前缀：
 

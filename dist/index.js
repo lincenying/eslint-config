@@ -61,9 +61,6 @@ function searchPackageJSON(dir) {
 // src/factory.ts
 import gitignore from "eslint-config-flat-gitignore";
 
-// src/flags.ts
-var OFF = 0;
-
 // src/plugins.ts
 import { default as default2 } from "eslint-plugin-antfu";
 import { default as default3 } from "eslint-plugin-eslint-comments";
@@ -72,18 +69,17 @@ import { default as default5 } from "eslint-plugin-jsdoc";
 import { default as default6 } from "eslint-plugin-jsonc";
 import { default as default7 } from "eslint-plugin-markdown";
 import { default as default8 } from "eslint-plugin-n";
-import { default as default9 } from "@stylistic/eslint-plugin-js";
-import { default as default10 } from "@stylistic/eslint-plugin-ts";
-import { default as default11 } from "@typescript-eslint/eslint-plugin";
-import { default as default12 } from "eslint-plugin-unicorn";
-import { default as default13 } from "eslint-plugin-unused-imports";
-import { default as default14 } from "eslint-plugin-vue";
-import { default as default15 } from "eslint-plugin-yml";
-import { default as default16 } from "eslint-plugin-no-only-tests";
-import { default as default17 } from "@typescript-eslint/parser";
-import { default as default18 } from "vue-eslint-parser";
-import { default as default19 } from "yaml-eslint-parser";
-import { default as default20 } from "jsonc-eslint-parser";
+import { default as default9 } from "@stylistic/eslint-plugin";
+import { default as default10 } from "@typescript-eslint/eslint-plugin";
+import { default as default11 } from "eslint-plugin-unicorn";
+import { default as default12 } from "eslint-plugin-unused-imports";
+import { default as default13 } from "eslint-plugin-vue";
+import { default as default14 } from "eslint-plugin-yml";
+import { default as default15 } from "eslint-plugin-no-only-tests";
+import { default as default16 } from "@typescript-eslint/parser";
+import { default as default17 } from "vue-eslint-parser";
+import { default as default18 } from "yaml-eslint-parser";
+import { default as default19 } from "jsonc-eslint-parser";
 
 // src/configs/comments.ts
 var comments = [
@@ -92,8 +88,10 @@ var comments = [
       "eslint-comments": default3
     },
     rules: {
-      ...default3.configs.recommended.rules,
-      "eslint-comments/disable-enable-pair": OFF
+      "eslint-comments/no-aggregating-enable": "error",
+      "eslint-comments/no-duplicate-disable": "error",
+      "eslint-comments/no-unlimited-disable": "error",
+      "eslint-comments/no-unused-enable": "error"
     }
   }
 ];
@@ -166,6 +164,11 @@ var imports = [
 
 // src/configs/javascript.ts
 import globals from "globals";
+
+// src/flags.ts
+var OFF = 0;
+
+// src/configs/javascript.ts
 function javascript(options = {}) {
   return [
     {
@@ -190,7 +193,7 @@ function javascript(options = {}) {
       },
       plugins: {
         "antfu": default2,
-        "unused-imports": default13
+        "unused-imports": default12
       },
       rules: {
         "accessor-pairs": ["error", { enforceForClassMembers: true, setWithoutGet: true }],
@@ -399,19 +402,25 @@ var jsdoc = [
       jsdoc: default5
     },
     rules: {
-      ...default5.configs["flat/recommended-typescript"].rules,
-      "jsdoc/check-tag-names": OFF,
-      "jsdoc/check-values": OFF,
-      "jsdoc/no-undefined-types": OFF,
-      "jsdoc/require-jsdoc": OFF,
-      "jsdoc/require-param": OFF,
-      "jsdoc/require-param-description": OFF,
-      "jsdoc/require-param-type": OFF,
-      "jsdoc/require-returns": OFF,
-      "jsdoc/require-returns-type": OFF,
-      "jsdoc/require-throws": OFF,
-      "jsdoc/require-yields": OFF,
-      "jsdoc/tag-lines": OFF
+      "jsdoc/check-access": "warn",
+      "jsdoc/check-alignment": "warn",
+      "jsdoc/check-param-names": "warn",
+      "jsdoc/check-property-names": "warn",
+      "jsdoc/check-types": "warn",
+      "jsdoc/empty-tags": "warn",
+      "jsdoc/implements-on-classes": "warn",
+      "jsdoc/multiline-blocks": "warn",
+      "jsdoc/no-defaults": "warn",
+      "jsdoc/no-multi-asterisks": "warn",
+      "jsdoc/no-types": "warn",
+      "jsdoc/require-param-name": "warn",
+      "jsdoc/require-property": "warn",
+      "jsdoc/require-property-description": "warn",
+      "jsdoc/require-property-name": "warn",
+      "jsdoc/require-returns-check": "warn",
+      "jsdoc/require-returns-description": "warn",
+      "jsdoc/require-yields-check": "warn",
+      "jsdoc/valid-types": "warn"
     }
   }
 ];
@@ -421,22 +430,48 @@ var jsonc = [
   {
     files: [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
     languageOptions: {
-      parser: default20
+      parser: default19
     },
     plugins: {
       jsonc: default6
     },
     rules: {
-      ...default6.configs["recommended-with-jsonc"].rules,
       "jsonc/array-bracket-spacing": ["error", "never"],
       "jsonc/comma-dangle": ["error", "never"],
       "jsonc/comma-style": ["error", "last"],
       "jsonc/indent": ["error", 2],
       "jsonc/key-spacing": ["error", { afterColon: true, beforeColon: false }],
+      "jsonc/no-bigint-literals": "error",
+      "jsonc/no-binary-expression": "error",
+      "jsonc/no-binary-numeric-literals": "error",
+      "jsonc/no-dupe-keys": "error",
+      "jsonc/no-escape-sequence-in-identifier": "error",
+      "jsonc/no-floating-decimal": "error",
+      "jsonc/no-hexadecimal-numeric-literals": "error",
+      "jsonc/no-infinity": "error",
+      "jsonc/no-multi-str": "error",
+      "jsonc/no-nan": "error",
+      "jsonc/no-number-props": "error",
+      "jsonc/no-numeric-separators": "error",
+      "jsonc/no-octal": "error",
       "jsonc/no-octal-escape": "error",
+      "jsonc/no-octal-numeric-literals": "error",
+      "jsonc/no-parenthesized": "error",
+      "jsonc/no-plus-sign": "error",
+      "jsonc/no-regexp-literals": "error",
+      "jsonc/no-sparse-arrays": "error",
+      "jsonc/no-template-literals": "error",
+      "jsonc/no-undefined-value": "error",
+      "jsonc/no-unicode-codepoint-escapes": "error",
+      "jsonc/no-useless-escape": "error",
       "jsonc/object-curly-newline": ["error", { consistent: true, multiline: true }],
       "jsonc/object-curly-spacing": ["error", "always"],
-      "jsonc/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }]
+      "jsonc/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }],
+      "jsonc/quote-props": "error",
+      "jsonc/quotes": "error",
+      "jsonc/space-unary-ops": "error",
+      "jsonc/valid-json-number": "error",
+      "jsonc/vue-custom-block/no-parsing-error": "error"
     }
   }
 ];
@@ -467,21 +502,19 @@ function markdown(options = {}) {
         }
       },
       plugins: {
-        ts: default11
+        ts: default10
       },
       rules: {
-        ...default7.configs.recommended.overrides[1].rules,
         "antfu/no-cjs-exports": OFF,
         "antfu/no-ts-export-equal": OFF,
-        "import/no-unresolved": OFF,
+        "eol-last": OFF,
         "no-alert": OFF,
         "no-console": OFF,
-        "no-restricted-imports": OFF,
         "no-undef": OFF,
         "no-unused-expressions": OFF,
         "no-unused-vars": OFF,
         "node/prefer-global/process": OFF,
-        "ts/comma-dangle": OFF,
+        "style/comma-dangle": OFF,
         "ts/consistent-type-imports": OFF,
         "ts/no-namespace": OFF,
         "ts/no-redeclare": OFF,
@@ -489,6 +522,7 @@ function markdown(options = {}) {
         "ts/no-unused-vars": OFF,
         "ts/no-use-before-define": OFF,
         "ts/no-var-requires": OFF,
+        "unicode-bom": "off",
         "unused-imports/no-unused-imports": OFF,
         "unused-imports/no-unused-vars": OFF
       }
@@ -726,9 +760,7 @@ var sortTsconfig = [
 ];
 
 // src/configs/stylistic.ts
-import { packages } from "@eslint-stylistic/metadata";
-var tsPackage = packages.find((i) => i.shortId === "ts");
-var javascriptStylistic = [
+var stylistic = [
   {
     plugins: {
       style: default9
@@ -736,20 +768,16 @@ var javascriptStylistic = [
     rules: {
       "antfu/consistent-list-newline": "error",
       "antfu/if-newline": "error",
-      "comma-dangle": ["error", "always-multiline"],
       "curly": ["error", "multi-or-nest", "consistent"],
-      "quotes": ["error", "single"],
-      "semi": ["error", "never"],
       "style/array-bracket-spacing": ["error", "never"],
       "style/arrow-spacing": ["error", { after: true, before: true }],
       "style/block-spacing": ["error", "always"],
       "style/brace-style": ["error", "stroustrup", { allowSingleLine: true }],
+      "style/comma-dangle": ["error", "always-multiline"],
       "style/comma-spacing": ["error", { after: true, before: false }],
       "style/comma-style": ["error", "last"],
       "style/computed-property-spacing": ["error", "never", { enforceForClassMembers: true }],
       "style/dot-location": ["error", "property"],
-      "style/func-call-spacing": OFF,
-      "style/generator-star-spacing": OFF,
       "style/indent": ["error", 4, {
         ArrayExpression: 1,
         CallExpression: { arguments: 1 },
@@ -791,6 +819,7 @@ var javascriptStylistic = [
       "style/key-spacing": ["error", { afterColon: true, beforeColon: false }],
       "style/keyword-spacing": ["error", { after: true, before: true }],
       "style/lines-between-class-members": ["error", "always", { exceptAfterSingleLine: true }],
+      "style/member-delimiter-style": ["error", { multiline: { delimiter: "none" } }],
       "style/multiline-ternary": ["error", "always-multiline"],
       "style/no-mixed-spaces-and-tabs": "error",
       "style/no-multi-spaces": "error",
@@ -803,7 +832,9 @@ var javascriptStylistic = [
       "style/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }],
       "style/operator-linebreak": ["error", "before"],
       "style/padded-blocks": ["error", { blocks: "never", classes: "never", switches: "never" }],
+      "style/quotes": ["error", "single"],
       "style/rest-spread-spacing": ["error", "never"],
+      "style/semi": ["error", "never"],
       "style/semi-spacing": ["error", { after: true, before: false }],
       "style/space-before-blocks": ["error", "always"],
       "style/space-before-function-paren": ["error", { anonymous: "always", asyncArrow: "always", named: "never" }],
@@ -823,53 +854,11 @@ var javascriptStylistic = [
       }],
       "style/template-curly-spacing": "error",
       "style/template-tag-spacing": ["error", "never"],
+      "style/type-annotation-spacing": ["error", {}],
       "style/yield-star-spacing": ["error", "both"]
     }
   }
 ];
-var typescriptStylistic = [
-  {
-    plugins: {
-      "style-ts": default10,
-      "ts": default11
-    },
-    rules: {
-      ...stylisticJsToTS(javascriptStylistic[0].rules),
-      "comma-dangle": OFF,
-      "quotes": OFF,
-      "semi": OFF,
-      "style-ts/member-delimiter-style": ["error", { multiline: { delimiter: "none" } }],
-      "style-ts/type-annotation-spacing": ["error", {}],
-      "ts/comma-dangle": ["error", "always-multiline"],
-      "ts/quotes": ["error", "single"],
-      "ts/semi": ["error", "never"]
-    }
-  }
-];
-function stylisticJsToTS(input) {
-  return {
-    // turn off all stylistic rules from style
-    ...Object.fromEntries(
-      Object.entries(input).map(([key]) => {
-        if (!key.startsWith("style/"))
-          return null;
-        const basename = key.replace("style/", "");
-        if (tsPackage.rules.find((i) => i.name === basename))
-          return [key, OFF];
-        return null;
-      }).filter(Boolean)
-    ),
-    // rename all stylistic rules from style to style/ts
-    ...Object.fromEntries(
-      Object.entries(input).map(([key, value]) => {
-        if (!key.startsWith("style/"))
-          return null;
-        const basename = key.replace("style/", "");
-        return tsPackage.rules.find((i) => i.name === basename) ? [`style-ts/${basename}`, value] : null;
-      }).filter(Boolean)
-    )
-  };
-}
 
 // src/configs/typescript.ts
 import process from "process";
@@ -887,6 +876,30 @@ function renameRules(rules, from, to) {
     })
   );
 }
+var rulesOn = /* @__PURE__ */ new Set();
+var rulesOff = /* @__PURE__ */ new Set();
+function recordRulesStateConfigs(configs) {
+  for (const config of configs)
+    recordRulesState(config.rules ?? {});
+  return configs;
+}
+function recordRulesState(rules) {
+  for (const [key, value] of Object.entries(rules ?? {})) {
+    const firstValue = Array.isArray(value) ? value[0] : value;
+    if (firstValue == null)
+      continue;
+    if (firstValue === "off" || firstValue === 0)
+      rulesOff.add(key);
+    else
+      rulesOn.add(key);
+  }
+  return rules;
+}
+function warnUnnecessaryOffRules() {
+  const unnecessaryOffRules = [...rulesOff].filter((key) => !rulesOn.has(key));
+  for (const off of unnecessaryOffRules)
+    console.warn(`[eslint] rule \`${off}\` is never turned on, you can remove the rule from your config`);
+}
 
 // src/configs/typescript.ts
 function typescript(options) {
@@ -901,7 +914,7 @@ function typescript(options) {
         ...componentExts.map((ext) => `**/*.${ext}`)
       ],
       languageOptions: {
-        parser: default17,
+        parser: default16,
         parserOptions: {
           sourceType: "module"
         }
@@ -909,16 +922,16 @@ function typescript(options) {
       plugins: {
         antfu: default2,
         import: default4,
-        ts: default11
+        ts: default10
       },
       rules: {
         ...renameRules(
-          default11.configs["eslint-recommended"].overrides[0].rules,
+          default10.configs["eslint-recommended"].overrides[0].rules,
           "@typescript-eslint/",
           "ts/"
         ),
         ...renameRules(
-          default11.configs.strict.rules,
+          default10.configs.strict.rules,
           "@typescript-eslint/",
           "ts/"
         ),
@@ -935,18 +948,10 @@ function typescript(options) {
         "no-use-before-define": OFF,
         "no-useless-constructor": OFF,
         "ts/ban-ts-comment": ["error", { "ts-ignore": "allow-with-description" }],
-        "ts/ban-ts-ignore": OFF,
-        "ts/consistent-indexed-object-style": OFF,
         "ts/consistent-type-definitions": ["error", "interface"],
         "ts/consistent-type-imports": ["error", { disallowTypeAnnotations: false, prefer: "type-imports" }],
-        "ts/explicit-function-return-type": OFF,
-        "ts/explicit-member-accessibility": OFF,
-        "ts/explicit-module-boundary-types": OFF,
-        "ts/naming-convention": OFF,
         "ts/no-dupe-class-members": "error",
         "ts/no-dynamic-delete": OFF,
-        "ts/no-empty-function": OFF,
-        "ts/no-empty-interface": OFF,
         "ts/no-explicit-any": OFF,
         "ts/no-extra-parens": ["error", "functions"],
         "ts/no-invalid-this": "error",
@@ -957,7 +962,6 @@ function typescript(options) {
         "ts/no-require-imports": "error",
         "ts/no-unused-vars": OFF,
         "ts/no-use-before-define": ["error", { classes: false, functions: false, variables: true }],
-        "ts/parameter-properties": OFF,
         "ts/prefer-ts-expect-error": "error",
         "ts/triple-slash-reference": OFF,
         "ts/unified-signatures": OFF
@@ -1001,14 +1005,14 @@ function typescriptWithLanguageServer(options) {
       ],
       ignores: ["**/*.md/*.*"],
       languageOptions: {
-        parser: default17,
+        parser: default16,
         parserOptions: {
           project: [tsconfigPath],
           tsconfigRootDir
         }
       },
       plugins: {
-        ts: default11
+        ts: default10
       },
       rules: {
         "dot-notation": OFF,
@@ -1039,7 +1043,7 @@ function typescriptWithLanguageServer(options) {
 var unicorn = [
   {
     plugins: {
-      unicorn: default12
+      unicorn: default11
     },
     rules: {
       // Pass error message when throwing errors
@@ -1084,30 +1088,30 @@ function vue(options = {}) {
     {
       files: [GLOB_VUE],
       languageOptions: {
-        parser: default18,
+        parser: default17,
         parserOptions: {
           ecmaFeatures: {
             jsx: true
           },
           extraFileExtensions: [".vue"],
-          parser: options.typescript ? default17 : null,
+          parser: options.typescript ? default16 : null,
           sourceType: "module"
         }
       },
       plugins: {
-        vue: default14
+        vue: default13
       },
-      processor: default14.processors[".vue"],
+      processor: default13.processors[".vue"],
       rules: {
-        ...default14.configs.base.rules,
+        ...default13.configs.base.rules,
         ...vueVersion === "3" ? {
-          ...default14.configs["vue3-essential"].rules,
-          ...default14.configs["vue3-strongly-recommended"].rules,
-          ...default14.configs["vue3-recommended"].rules
+          ...default13.configs["vue3-essential"].rules,
+          ...default13.configs["vue3-strongly-recommended"].rules,
+          ...default13.configs["vue3-recommended"].rules
         } : {
-          ...default14.configs.essential.rules,
-          ...default14.configs["strongly-recommended"].rules,
-          ...default14.configs.recommended.rules
+          ...default13.configs.essential.rules,
+          ...default13.configs["strongly-recommended"].rules,
+          ...default13.configs.recommended.rules
         },
         "node/prefer-global/process": OFF,
         "vue/array-bracket-spacing": ["error", "never"],
@@ -1209,17 +1213,31 @@ var yml = [
   {
     files: [GLOB_YAML],
     languageOptions: {
-      parser: default19
+      parser: default18
     },
     plugins: {
-      yml: default15
+      yml: default14
     },
     rules: {
-      ...default15.configs.standard.rules,
       "style/spaced-comment": OFF,
-      "yml/no-empty-document": OFF,
-      "yml/no-empty-mapping-value": OFF,
-      "yml/quotes": ["error", { avoidEscape: false, prefer: "single" }]
+      "yml/block-mapping": "error",
+      "yml/block-mapping-question-indicator-newline": "error",
+      "yml/block-sequence": "error",
+      "yml/block-sequence-hyphen-indicator-newline": "error",
+      "yml/flow-mapping-curly-newline": "error",
+      "yml/flow-mapping-curly-spacing": "error",
+      "yml/flow-sequence-bracket-newline": "error",
+      "yml/flow-sequence-bracket-spacing": "error",
+      "yml/indent": ["error", 2],
+      "yml/key-spacing": "error",
+      "yml/no-empty-key": "error",
+      "yml/no-empty-sequence-entry": "error",
+      "yml/no-irregular-whitespace": "error",
+      "yml/no-tab-indent": "error",
+      "yml/plain-scalar": "error",
+      "yml/quotes": ["error", { avoidEscape: false, prefer: "single" }],
+      "yml/spaced-comment": "error",
+      "yml/vue-custom-block/no-parsing-error": "error"
     }
   }
 ];
@@ -1230,7 +1248,7 @@ function test(options = {}) {
     {
       files: GLOB_TESTS,
       plugins: {
-        "no-only-tests": default16
+        "no-only-tests": default15
       },
       rules: {
         "no-only-tests/no-only-tests": options.isInEditor ? OFF : "error"
@@ -1277,8 +1295,6 @@ function lincy(options = {}, ...userConfigs) {
   const componentExts = [];
   if (enableVue)
     componentExts.push("vue");
-  if (enableStylistic)
-    configs.push(javascriptStylistic);
   if (enableTypeScript) {
     configs.push(typescript({ componentExts }));
     if (typeof enableTypeScript !== "boolean") {
@@ -1287,9 +1303,9 @@ function lincy(options = {}, ...userConfigs) {
         componentExts
       }));
     }
-    if (enableStylistic)
-      configs.push(typescriptStylistic);
   }
+  if (enableStylistic)
+    configs.push(stylistic);
   if (options.test ?? true)
     configs.push(test({ isInEditor }));
   if (enableVue)
@@ -1312,10 +1328,11 @@ function lincy(options = {}, ...userConfigs) {
   }, {});
   if (Object.keys(fusedConfig).length)
     configs.push([fusedConfig]);
-  return combine(
+  const merged = combine(
     ...configs,
     ...userConfigs
   );
+  return merged;
 }
 
 // src/index.ts
@@ -1327,39 +1344,40 @@ export {
   ignores,
   imports,
   javascript,
-  javascriptStylistic,
   jsdoc,
   jsonc,
   lincy,
   markdown,
   node,
-  default20 as parserJsonc,
-  default17 as parserTs,
-  default18 as parserVue,
-  default19 as parserYml,
+  default19 as parserJsonc,
+  default16 as parserTs,
+  default17 as parserVue,
+  default18 as parserYml,
   default2 as pluginAntfu,
   default3 as pluginComments,
   default4 as pluginImport,
   default5 as pluginJsdoc,
   default6 as pluginJsonc,
   default7 as pluginMarkdown,
-  default16 as pluginNoOnlyTests,
+  default15 as pluginNoOnlyTests,
   default8 as pluginNode,
-  default9 as pluginStylisticJs,
-  default10 as pluginStylisticTs,
-  default11 as pluginTs,
-  default12 as pluginUnicorn,
-  default13 as pluginUnusedImports,
-  default14 as pluginVue,
-  default15 as pluginYml,
+  default9 as pluginStylistic,
+  default10 as pluginTs,
+  default11 as pluginUnicorn,
+  default12 as pluginUnusedImports,
+  default13 as pluginVue,
+  default14 as pluginYml,
+  recordRulesState,
+  recordRulesStateConfigs,
   renameRules,
   sortPackageJson,
   sortTsconfig,
+  stylistic,
   test,
   typescript,
-  typescriptStylistic,
   typescriptWithLanguageServer,
   unicorn,
   vue,
+  warnUnnecessaryOffRules,
   yml
 };
