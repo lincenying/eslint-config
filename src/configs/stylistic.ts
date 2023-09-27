@@ -1,7 +1,12 @@
 import type { FlatESLintConfigItem } from 'eslint-define-config'
 import { pluginAntfu, pluginStylistic } from '../plugins'
+import type { OptionsOverrides } from '../types'
 
-export function stylistic(): FlatESLintConfigItem[] {
+export function stylistic(options: OptionsOverrides = {}): FlatESLintConfigItem[] {
+    const {
+        overrides = {},
+    } = options
+
     return [
         {
             plugins: {
@@ -100,6 +105,8 @@ export function stylistic(): FlatESLintConfigItem[] {
                 'style/template-tag-spacing': ['error', 'never'],
                 'style/type-annotation-spacing': ['error', {}],
                 'style/yield-star-spacing': ['error', 'both'],
+
+                ...overrides,
             },
         },
     ]

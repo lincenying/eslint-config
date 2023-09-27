@@ -17,10 +17,10 @@ import {
     stylistic,
     test,
     typescript,
-    typescriptWithLanguageServer,
+    typescriptWithTypes,
     unicorn,
     vue,
-    yml,
+    yaml,
 } from './configs'
 import type { OptionsConfig } from './types'
 import { combine } from './utils'
@@ -94,7 +94,7 @@ export function lincy(options: OptionsConfig & FlatESLintConfigItem = {}, ...use
         }))
 
         if (typeof enableTypeScript !== 'boolean') {
-            configs.push(typescriptWithLanguageServer({
+            configs.push(typescriptWithTypes({
                 ...enableTypeScript,
                 componentExts,
                 overrides: overrides.typescriptWithTypes,
@@ -128,7 +128,7 @@ export function lincy(options: OptionsConfig & FlatESLintConfigItem = {}, ...use
     }
 
     if (options.yaml ?? true)
-        configs.push(yml())
+        configs.push(yaml())
 
     if (options.markdown ?? true) {
         configs.push(markdown({

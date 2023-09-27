@@ -135,8 +135,8 @@ export default lincy({
     vue: true, // 默认值: 检测是否安装vue依赖
     // 是否启用 jsonc 规则
     jsonc: false, // 默认值: 检测是否安装typescript依赖
-    // 是否启用 yml 规则
-    yml: false, // 默认值: true
+    // 是否启用 yaml 规则
+    yaml: false, // 默认值: true
     // 是否启用 .gitignore 文件
     gitignore: false, // 默认值: true
     // 是否启用 test 规则
@@ -190,6 +190,7 @@ export default lincy(
     },
     // 你还可以继续配置多个 ESLint Flat Configs
     {
+        files: ['**/*.ts'],
         rules: {},
     },
 )
@@ -204,36 +205,34 @@ import {
     ignores,
     imports,
     javascript,
-    javascriptStylistic,
     jsdoc,
     jsonc,
     markdown,
     node,
     sortPackageJson,
     sortTsconfig,
+    stylistic,
     typescript,
-    typescriptStylistic,
     unicorn,
     vue,
-    yml,
+    yaml,
 } from '@lincy/eslint-config'
 
 export default [
-    ...ignores,
+    ...ignores(),
     ...javascript(),
-    ...comments,
-    ...node,
-    ...jsdoc,
-    ...imports,
-    ...unicorn,
-    ...javascriptStylistic,
+    ...comments(),
+    ...node(),
+    ...jsdoc(),
+    ...imports(),
+    ...unicorn(),
 
     ...typescript(),
-    ...typescriptStylistic,
+    ...stylistic(),
 
     ...vue(),
-    ...jsonc,
-    ...yml,
+    ...jsonc(),
+    ...yaml(),
     ...markdown(),
 ]
 ```
@@ -246,12 +245,13 @@ export default [
 
 由于平面配置支持显式提供了插件名称，因此我们重命名了一些插件以使它们更加一致并隐藏实现细节。
 
-| Original Prefix | New Prefix | Source Plugin |
-| --------------- | ---------- | ------------- |
-| `i/*` | `import/*` | [eslint-plugin-i](https://github.com/un-es/eslint-plugin-i) |
-| `n/*` | `node` | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n)
-| `@typescript-eslint/*` | `ts/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
-| `@stylistic/js` | `style/*` | [@stylistic/eslint-plugin-js](https://github.com/eslint-stylistic/eslint-stylistic) |
+| New Prefix | Original Prefix | Source Plugin |
+| --- | --- | --- |
+| `import/*` | `i/*` | [eslint-plugin-i](https://github.com/un-es/eslint-plugin-i) |
+| `node/*` | `n/*` | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n) |
+| `yaml/*` | `yml/*` | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml) |
+| `ts/*` | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
+| `style/*` | `@stylistic/*` | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic) |
 
 当您想要覆盖规则或内联禁用它们时，您需要更新到新的前缀：
 
@@ -259,6 +259,52 @@ export default [
 -// eslint-disable-next-line @typescript-eslint/consistent-type-definitions
 +// eslint-disable-next-line ts/consistent-type-definitions
 type foo = { bar: 2 }
+```
+
+### Rules Overrides
+
+Certain rules would only be enabled in specific files, for example, `ts/*` rules would only be enabled in `.ts` files and `vue/*` rules would only be enabled in `.vue` files. If you want to override the rules, you need to specify the file extension:
+
+```js
+// eslint.config.js
+import antfu from '@antfu/eslint-config'
+
+export default antfu(
+    { vue: true, typescript: true },
+    {
+    // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
+        files: ['**/*.vue'],
+        rules: {
+            'vue/operator-linebreak': ['error', 'before'],
+        },
+    },
+    {
+    // Without `files`, they are general rules for all files
+        rules: {
+            'style/semi': ['error', 'never'],
+        },
+    }
+)
+```
+
+We also provided an `overrides` options to make it easier:
+
+```js
+// eslint.config.js
+import antfu from '@antfu/eslint-config'
+
+export default antfu({
+    overrides: {
+        vue: {
+            'vue/operator-linebreak': ['error', 'before'],
+        },
+        typescript: {
+            'ts/consistent-type-definitions': ['error', 'interface'],
+        },
+        yaml: {},
+    // ...
+    }
+})
 ```
 
 ### Type Aware Rules
