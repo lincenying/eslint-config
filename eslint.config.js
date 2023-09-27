@@ -2,7 +2,18 @@ import sortKeys from 'eslint-plugin-sort-keys'
 import lincy from '@lincy/eslint-config'
 
 const config = lincy(
-    undefined,
+    {
+        vue: false,
+        overrides: {
+            stylistic: {
+                'antfu/consistent-list-newline': 'off',
+            },
+            ignores: [
+                '**/assets',
+                '**/static',
+            ],
+        },
+    },
     {
         files: ['src/**/*.ts'],
         plugins: {
