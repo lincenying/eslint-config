@@ -3,14 +3,18 @@ import { getPackageInfoSync } from 'local-pkg'
 import { GLOB_VUE } from '../globs'
 import { parserTs, parserVue, pluginVue } from '../plugins'
 import { OFF } from '../flags'
-import type { OptionsHasTypeScript } from '../types'
+import type { OptionsHasTypeScript, OptionsOverrides } from '../types'
 
 const pkg = getPackageInfoSync('vue')
 let vueVersion = pkg && pkg.version
 vueVersion = (vueVersion && vueVersion[0])
 vueVersion = Number.isNaN(vueVersion) ? '3' : vueVersion
 
-export function vue(options: OptionsHasTypeScript = {}): FlatESLintConfigItem[] {
+export function vue(options: OptionsHasTypeScript & OptionsOverrides = {}): FlatESLintConfigItem[] {
+    const {
+        overrides = {},
+    } = options
+
     return [
         {
             plugins: {
@@ -138,6 +142,8 @@ export function vue(options: OptionsHasTypeScript = {}): FlatESLintConfigItem[] 
                 'vue/space-infix-ops': 'error',
                 'vue/space-unary-ops': ['error', { nonwords: false, words: true }],
                 'vue/template-curly-spacing': 'error',
+
+                ...overrides,
             },
         },
     ]
