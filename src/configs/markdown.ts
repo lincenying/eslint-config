@@ -1,20 +1,20 @@
 import type { FlatESLintConfigItem } from 'eslint-define-config'
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from '../globs'
-import { pluginMarkdown, pluginTs } from '../plugins'
+import { pluginMarkdown } from '../plugins'
 import { OFF } from '../flags'
 import type { OptionsComponentExts } from '../types'
 
 export function markdown(options: OptionsComponentExts = {}): FlatESLintConfigItem[] {
-    const {
-        componentExts = [],
-    } = options
+    const { componentExts = [] } = options
 
     return [
         {
-            files: [GLOB_MARKDOWN],
             plugins: {
                 markdown: pluginMarkdown,
             },
+        },
+        {
+            files: [GLOB_MARKDOWN],
             processor: 'markdown/markdown',
         },
         {
@@ -28,9 +28,6 @@ export function markdown(options: OptionsComponentExts = {}): FlatESLintConfigIt
                         impliedStrict: true,
                     },
                 },
-            },
-            plugins: {
-                ts: pluginTs as any,
             },
             rules: {
                 'antfu/no-cjs-exports': OFF,
@@ -57,7 +54,6 @@ export function markdown(options: OptionsComponentExts = {}): FlatESLintConfigIt
                 'ts/no-var-requires': OFF,
 
                 'unicode-bom': 'off',
-
                 'unused-imports/no-unused-imports': OFF,
                 'unused-imports/no-unused-vars': OFF,
             },
