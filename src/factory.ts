@@ -70,13 +70,16 @@ export function lincy(options: OptionsConfig & FlatESLintConfigItem = {}, ...use
 
     // Base configs
     configs.push(
-        ignores,
-        javascript({ isInEditor }),
-        comments,
-        node,
-        jsdoc,
-        imports,
-        unicorn,
+        ignores(),
+        javascript({
+            isInEditor,
+            overrides: overrides.javascript,
+        }),
+        comments(),
+        node(),
+        jsdoc(),
+        imports(),
+        unicorn(),
     )
 
     // In the future we may support more component extensions like Svelte or so
@@ -100,7 +103,7 @@ export function lincy(options: OptionsConfig & FlatESLintConfigItem = {}, ...use
     }
 
     if (enableStylistic)
-        configs.push(stylistic)
+        configs.push(stylistic())
 
     if (options.test ?? true) {
         configs.push(test({
@@ -118,14 +121,14 @@ export function lincy(options: OptionsConfig & FlatESLintConfigItem = {}, ...use
 
     if (options.jsonc ?? true) {
         configs.push(
-            jsonc,
-            sortPackageJson,
-            sortTsconfig,
+            jsonc(),
+            sortPackageJson(),
+            sortTsconfig(),
         )
     }
 
     if (options.yaml ?? true)
-        configs.push(yml)
+        configs.push(yml())
 
     if (options.markdown ?? true) {
         configs.push(markdown({
