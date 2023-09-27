@@ -22,6 +22,7 @@ export interface OptionsHasTypeScript {
 
 export interface OptionsOverrides {
     overrides?: FlatESLintConfigItem['rules']
+    ignores?: string[]
 }
 
 export interface OptionsIsInEditor {
@@ -110,5 +111,6 @@ export interface OptionsConfig {
         jsonc?: FlatESLintConfigItem['rules']
         markdown?: FlatESLintConfigItem['rules']
         yaml?: FlatESLintConfigItem['rules']
+        ignores?: string[]
     }
 }

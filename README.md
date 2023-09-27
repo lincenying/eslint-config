@@ -263,7 +263,7 @@ type foo = { bar: 2 }
 
 ### Rules Overrides
 
-Certain rules would only be enabled in specific files, for example, `ts/*` rules would only be enabled in `.ts` files and `vue/*` rules would only be enabled in `.vue` files. If you want to override the rules, you need to specify the file extension:
+某些规则仅在特定文件中启用，例如，“ts/*”规则仅在“.ts”文件中启用，“vue/*”规则仅在“.vue”文件中启用。 如果要覆盖规则，则需要指定文件扩展名：
 
 ```js
 // eslint.config.js
@@ -272,14 +272,14 @@ import antfu from '@antfu/eslint-config'
 export default antfu(
     { vue: true, typescript: true },
     {
-    // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
+        // 记得在这里指定文件 glob，否则可能会导致 vue 插件处理非 vue 文件
         files: ['**/*.vue'],
         rules: {
             'vue/operator-linebreak': ['error', 'before'],
         },
     },
     {
-    // Without `files`, they are general rules for all files
+        // 如果没有 `files`，它们是所有文件的通用规则
         rules: {
             'style/semi': ['error', 'never'],
         },
@@ -287,7 +287,7 @@ export default antfu(
 )
 ```
 
-We also provided an `overrides` options to make it easier:
+还可以使用“overrides”选项以使其更容易：
 
 ```js
 // eslint.config.js
@@ -301,7 +301,15 @@ export default antfu({
         typescript: {
             'ts/consistent-type-definitions': ['error', 'interface'],
         },
+        javascript: {},
+        stylistic: {
+            'antfu/consistent-list-newline': 'off',
+        },
         yaml: {},
+        ignores: [
+            '**/assets',
+            '**/static',
+        ]
     // ...
     }
 })

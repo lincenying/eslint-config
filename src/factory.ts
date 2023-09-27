@@ -70,7 +70,9 @@ export function lincy(options: OptionsConfig & FlatESLintConfigItem = {}, ...use
 
     // Base configs
     configs.push(
-        ignores(),
+        ignores({
+            ignores: overrides.ignores,
+        }),
         javascript({
             isInEditor,
             overrides: overrides.javascript,
