@@ -172,7 +172,10 @@ function ignores(options = {}) {
 }
 
 // src/configs/imports.ts
-function imports() {
+function imports(options = {}) {
+  const {
+    stylistic: stylistic2 = true
+  } = options;
   return [
     {
       plugins: {
@@ -181,13 +184,15 @@ function imports() {
       rules: {
         "import/export": "error",
         "import/first": "error",
-        "import/newline-after-import": ["error", { considerComments: true, count: 1 }],
         "import/no-duplicates": "error",
         "import/no-mutable-exports": "error",
         "import/no-named-default": "error",
         "import/no-self-import": "error",
         "import/no-webpack-loader-syntax": "error",
-        "import/order": "error"
+        "import/order": "error",
+        ...stylistic2 ? {
+          "import/newline-after-import": ["error", { considerComments: true, count: 1 }]
+        } : {}
       }
     }
   ];
@@ -432,7 +437,10 @@ function javascript(options = {}) {
 }
 
 // src/configs/jsdoc.ts
-function jsdoc() {
+function jsdoc(options = {}) {
+  const {
+    stylistic: stylistic2 = true
+  } = options;
   return [
     {
       plugins: {
@@ -440,16 +448,13 @@ function jsdoc() {
       },
       rules: {
         "jsdoc/check-access": "warn",
-        "jsdoc/check-alignment": "warn",
         "jsdoc/check-param-names": "warn",
         "jsdoc/check-property-names": "warn",
         "jsdoc/check-types": "warn",
         "jsdoc/empty-tags": "warn",
         "jsdoc/implements-on-classes": "warn",
-        "jsdoc/multiline-blocks": "warn",
         "jsdoc/no-defaults": "warn",
         "jsdoc/no-multi-asterisks": "warn",
-        "jsdoc/no-types": "warn",
         "jsdoc/require-param-name": "warn",
         "jsdoc/require-property": "warn",
         "jsdoc/require-property-description": "warn",
@@ -457,14 +462,22 @@ function jsdoc() {
         "jsdoc/require-returns-check": "warn",
         "jsdoc/require-returns-description": "warn",
         "jsdoc/require-yields-check": "warn",
-        "jsdoc/valid-types": "warn"
+        "jsdoc/valid-types": "warn",
+        ...stylistic2 ? {
+          "jsdoc/check-alignment": "warn",
+          "jsdoc/multiline-blocks": "warn"
+        } : {}
       }
     }
   ];
 }
 
 // src/configs/jsonc.ts
-function jsonc() {
+function jsonc(options = {}) {
+  const {
+    stylistic: stylistic2 = true,
+    overrides = {}
+  } = options;
   return [
     {
       plugins: {
@@ -477,11 +490,6 @@ function jsonc() {
         parser: default19
       },
       rules: {
-        "jsonc/array-bracket-spacing": ["error", "never"],
-        "jsonc/comma-dangle": ["error", "never"],
-        "jsonc/comma-style": ["error", "last"],
-        "jsonc/indent": ["error", 2],
-        "jsonc/key-spacing": ["error", { afterColon: true, beforeColon: false }],
         "jsonc/no-bigint-literals": "error",
         "jsonc/no-binary-expression": "error",
         "jsonc/no-binary-numeric-literals": "error",
@@ -505,14 +513,22 @@ function jsonc() {
         "jsonc/no-undefined-value": "error",
         "jsonc/no-unicode-codepoint-escapes": "error",
         "jsonc/no-useless-escape": "error",
-        "jsonc/object-curly-newline": ["error", { consistent: true, multiline: true }],
-        "jsonc/object-curly-spacing": ["error", "always"],
-        "jsonc/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }],
-        "jsonc/quote-props": "error",
-        "jsonc/quotes": "error",
         "jsonc/space-unary-ops": "error",
         "jsonc/valid-json-number": "error",
-        "jsonc/vue-custom-block/no-parsing-error": "error"
+        "jsonc/vue-custom-block/no-parsing-error": "error",
+        ...stylistic2 ? {
+          "jsonc/array-bracket-spacing": ["error", "never"],
+          "jsonc/comma-dangle": ["error", "never"],
+          "jsonc/comma-style": ["error", "last"],
+          "jsonc/indent": ["error", 2],
+          "jsonc/key-spacing": ["error", { afterColon: true, beforeColon: false }],
+          "jsonc/object-curly-newline": ["error", { consistent: true, multiline: true }],
+          "jsonc/object-curly-spacing": ["error", "always"],
+          "jsonc/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }],
+          "jsonc/quote-props": "error",
+          "jsonc/quotes": "error"
+        } : {},
+        ...overrides
       }
     }
   ];
@@ -874,7 +890,7 @@ function stylistic(options = {}) {
         "style/keyword-spacing": ["error", { after: true, before: true }],
         "style/lines-between-class-members": ["error", "always", { exceptAfterSingleLine: true }],
         "style/member-delimiter-style": ["error", { multiline: { delimiter: "none" } }],
-        "style/multiline-ternary": ["error", "always-multiline"],
+        "style/multiline-ternary": ["error", "never"],
         "style/no-mixed-spaces-and-tabs": "error",
         "style/no-multi-spaces": "error",
         "style/no-multiple-empty-lines": ["error", { max: 1, maxBOF: 0, maxEOF: 0 }],
@@ -1148,7 +1164,8 @@ vueVersion = vueVersion && vueVersion[0];
 vueVersion = Number.isNaN(vueVersion) ? "3" : vueVersion;
 function vue(options = {}) {
   const {
-    overrides = {}
+    overrides = {},
+    stylistic: stylistic2 = true
   } = options;
   return [
     {
@@ -1182,20 +1199,9 @@ function vue(options = {}) {
           ...default13.configs.recommended.rules
         },
         "node/prefer-global/process": OFF,
-        "vue/array-bracket-spacing": ["error", "never"],
-        "vue/arrow-spacing": ["error", { after: true, before: true }],
         "vue/block-order": ["error", {
           order: ["template", "script", "style"]
         }],
-        "vue/block-spacing": ["error", "always"],
-        "vue/block-tag-newline": ["error", {
-          multiline: "always",
-          singleline: "always"
-        }],
-        "vue/brace-style": ["error", "stroustrup", { allowSingleLine: true }],
-        "vue/comma-dangle": ["error", "always-multiline"],
-        "vue/comma-spacing": ["error", { after: true, before: false }],
-        "vue/comma-style": ["error", "last"],
         "vue/component-name-in-template-casing": ["error", "PascalCase"],
         "vue/component-options-name-casing": ["error", "PascalCase"],
         "vue/custom-event-name-casing": vueVersion === "3" ? ["error", "camelCase"] : ["error", "kebab-case"],
@@ -1206,9 +1212,6 @@ function vue(options = {}) {
         "vue/dot-location": ["error", "property"],
         "vue/dot-notation": ["error", { allowKeywords: true }],
         "vue/eqeqeq": ["error", "smart"],
-        "vue/html-comment-content-spacing": ["error", "always", {
-          exceptions: ["-"]
-        }],
         "vue/html-indent": ["error", 4, {
           alignAttributesVertically: true,
           attribute: 1,
@@ -1225,8 +1228,6 @@ function vue(options = {}) {
           math: "always",
           svg: "always"
         }],
-        "vue/key-spacing": ["error", { afterColon: true, beforeColon: false }],
-        "vue/keyword-spacing": ["error", { after: true, before: true }],
         "vue/max-attributes-per-line": OFF,
         "vue/multi-word-component-names": OFF,
         "vue/no-constant-condition": "warn",
@@ -1248,9 +1249,6 @@ function vue(options = {}) {
         "vue/no-useless-v-bind": "error",
         "vue/no-v-html": OFF,
         "vue/no-v-text-v-html-on-component": OFF,
-        "vue/object-curly-newline": ["error", { consistent: true, multiline: true }],
-        "vue/object-curly-spacing": ["error", "always"],
-        "vue/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }],
         "vue/object-shorthand": [
           "error",
           "always",
@@ -1259,18 +1257,39 @@ function vue(options = {}) {
             ignoreConstructors: false
           }
         ],
-        "vue/operator-linebreak": ["error", "before"],
-        "vue/padding-line-between-blocks": ["error", "always"],
         "vue/prefer-separate-static-class": "error",
         "vue/prefer-template": "error",
-        "vue/quote-props": ["error", "consistent-as-needed"],
         "vue/require-default-prop": OFF,
         "vue/require-prop-types": OFF,
         "vue/singleline-html-element-content-newline": "off",
-        "vue/space-in-parens": ["error", "never"],
         "vue/space-infix-ops": "error",
         "vue/space-unary-ops": ["error", { nonwords: false, words: true }],
-        "vue/template-curly-spacing": "error",
+        ...stylistic2 ? {
+          "vue/array-bracket-spacing": ["error", "never"],
+          "vue/arrow-spacing": ["error", { after: true, before: true }],
+          "vue/block-spacing": ["error", "always"],
+          "vue/block-tag-newline": ["error", {
+            multiline: "always",
+            singleline: "always"
+          }],
+          "vue/brace-style": ["error", "stroustrup", { allowSingleLine: true }],
+          "vue/comma-dangle": ["error", "always-multiline"],
+          "vue/comma-spacing": ["error", { after: true, before: false }],
+          "vue/comma-style": ["error", "last"],
+          "vue/html-comment-content-spacing": ["error", "always", {
+            exceptions: ["-"]
+          }],
+          "vue/key-spacing": ["error", { afterColon: true, beforeColon: false }],
+          "vue/keyword-spacing": ["error", { after: true, before: true }],
+          "vue/object-curly-newline": OFF,
+          "vue/object-curly-spacing": ["error", "always"],
+          "vue/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }],
+          "vue/operator-linebreak": ["error", "before"],
+          "vue/padding-line-between-blocks": ["error", "always"],
+          "vue/quote-props": ["error", "consistent-as-needed"],
+          "vue/space-in-parens": ["error", "never"],
+          "vue/template-curly-spacing": "error"
+        } : {},
         ...overrides
       }
     }
@@ -1280,7 +1299,8 @@ function vue(options = {}) {
 // src/configs/yaml.ts
 function yaml(options = {}) {
   const {
-    overrides = {}
+    overrides = {},
+    stylistic: stylistic2 = true
   } = options;
   return [
     {
@@ -1296,23 +1316,25 @@ function yaml(options = {}) {
       rules: {
         "style/spaced-comment": OFF,
         "yaml/block-mapping": "error",
-        "yaml/block-mapping-question-indicator-newline": "error",
         "yaml/block-sequence": "error",
-        "yaml/block-sequence-hyphen-indicator-newline": "error",
-        "yaml/flow-mapping-curly-newline": "error",
-        "yaml/flow-mapping-curly-spacing": "error",
-        "yaml/flow-sequence-bracket-newline": "error",
-        "yaml/flow-sequence-bracket-spacing": "error",
-        "yaml/indent": ["error", 2],
-        "yaml/key-spacing": "error",
         "yaml/no-empty-key": "error",
         "yaml/no-empty-sequence-entry": "error",
         "yaml/no-irregular-whitespace": "error",
-        "yaml/no-tab-indent": "error",
         "yaml/plain-scalar": "error",
-        "yaml/quotes": ["error", { avoidEscape: false, prefer: "single" }],
-        "yaml/spaced-comment": "error",
         "yaml/vue-custom-block/no-parsing-error": "error",
+        ...stylistic2 ? {
+          "yaml/block-mapping-question-indicator-newline": "error",
+          "yaml/block-sequence-hyphen-indicator-newline": "error",
+          "yaml/flow-mapping-curly-newline": "error",
+          "yaml/flow-mapping-curly-spacing": "error",
+          "yaml/flow-sequence-bracket-newline": "error",
+          "yaml/flow-sequence-bracket-spacing": "error",
+          "yaml/indent": ["error", 2],
+          "yaml/key-spacing": "error",
+          "yaml/no-tab-indent": "error",
+          "yaml/quotes": ["error", { avoidEscape: false, prefer: "single" }],
+          "yaml/spaced-comment": "error"
+        } : {},
         ...overrides
       }
     }
@@ -1386,8 +1408,12 @@ function lincy(options = {}, ...userConfigs) {
     }),
     comments(),
     node(),
-    jsdoc(),
-    imports(),
+    jsdoc({
+      stylistic: enableStylistic
+    }),
+    imports({
+      stylistic: enableStylistic
+    }),
     unicorn()
   );
   const componentExts = [];
@@ -1420,18 +1446,26 @@ function lincy(options = {}, ...userConfigs) {
   if (enableVue) {
     configs.push(vue({
       overrides: overrides.vue,
+      stylistic: enableStylistic,
       typescript: !!enableTypeScript
     }));
   }
   if (options.jsonc ?? true) {
     configs.push(
-      jsonc(),
+      jsonc({
+        overrides: overrides.jsonc,
+        stylistic: enableStylistic
+      }),
       sortPackageJson(),
       sortTsconfig()
     );
   }
-  if (options.yaml ?? true)
-    configs.push(yaml());
+  if (options.yaml ?? true) {
+    configs.push(yaml({
+      overrides: overrides.yaml,
+      stylistic: enableStylistic
+    }));
+  }
   if (options.markdown ?? true) {
     configs.push(markdown({
       componentExts,

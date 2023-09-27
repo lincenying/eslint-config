@@ -69,7 +69,7 @@ export function stylistic(options: OptionsOverrides = {}): FlatESLintConfigItem[
                 'style/keyword-spacing': ['error', { after: true, before: true }],
                 'style/lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
                 'style/member-delimiter-style': ['error', { multiline: { delimiter: 'none' } }],
-                'style/multiline-ternary': ['error', 'always-multiline'],
+                'style/multiline-ternary': ['error', 'never'],
                 'style/no-mixed-spaces-and-tabs': 'error',
                 'style/no-multi-spaces': 'error',
                 'style/no-multiple-empty-lines': ['error', { max: 1, maxBOF: 0, maxEOF: 0 }],

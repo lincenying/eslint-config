@@ -35,6 +35,9 @@ interface OptionsTypeScriptWithTypes {
 interface OptionsHasTypeScript {
     typescript?: boolean;
 }
+interface OptionsStylistic {
+    stylistic?: boolean;
+}
 interface OptionsOverrides {
     overrides?: FlatESLintConfigItem['rules'];
     ignores?: string[];
@@ -127,13 +130,13 @@ declare function comments(): FlatESLintConfigItem[];
 
 declare function ignores(options?: OptionsOverrides): FlatESLintConfigItem[];
 
-declare function imports(): FlatESLintConfigItem[];
+declare function imports(options?: OptionsStylistic): FlatESLintConfigItem[];
 
 declare function javascript(options?: OptionsIsInEditor & OptionsOverrides): FlatESLintConfigItem[];
 
-declare function jsdoc(): FlatESLintConfigItem[];
+declare function jsdoc(options?: OptionsStylistic): FlatESLintConfigItem[];
 
-declare function jsonc(): FlatESLintConfigItem[];
+declare function jsonc(options?: OptionsStylistic & OptionsOverrides): FlatESLintConfigItem[];
 
 declare function markdown(options?: OptionsComponentExts & OptionsOverrides): FlatESLintConfigItem[];
 
@@ -159,9 +162,9 @@ declare function typescriptWithTypes(options: OptionsTypeScriptWithTypes & Optio
 
 declare function unicorn(): FlatESLintConfigItem[];
 
-declare function vue(options?: OptionsHasTypeScript & OptionsOverrides): FlatESLintConfigItem[];
+declare function vue(options?: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic): FlatESLintConfigItem[];
 
-declare function yaml(options?: OptionsOverrides): FlatESLintConfigItem[];
+declare function yaml(options?: OptionsOverrides & OptionsStylistic): FlatESLintConfigItem[];
 
 declare function test(options?: OptionsIsInEditor & OptionsOverrides): FlatESLintConfigItem[];
 
@@ -198,4 +201,4 @@ declare const GLOB_TESTS: string[];
 declare const GLOB_ALL_SRC: string[];
 declare const GLOB_EXCLUDE: string[];
 
-export { GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIsInEditor, OptionsOverrides, OptionsTypeScriptWithTypes, combine, comments, lincy as default, ignores, imports, javascript, jsdoc, jsonc, lincy, markdown, node, recordRulesState, recordRulesStateConfigs, renameRules, sortPackageJson, sortTsconfig, stylistic, test, typescript, typescriptWithTypes, unicorn, vue, warnUnnecessaryOffRules, yaml };
+export { GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIsInEditor, OptionsOverrides, OptionsStylistic, OptionsTypeScriptWithTypes, combine, comments, lincy as default, ignores, imports, javascript, jsdoc, jsonc, lincy, markdown, node, recordRulesState, recordRulesStateConfigs, renameRules, sortPackageJson, sortTsconfig, stylistic, test, typescript, typescriptWithTypes, unicorn, vue, warnUnnecessaryOffRules, yaml };
