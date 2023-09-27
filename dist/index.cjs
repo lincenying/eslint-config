@@ -30,6 +30,27 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
+  GLOB_ALL_SRC: () => GLOB_ALL_SRC,
+  GLOB_CSS: () => GLOB_CSS,
+  GLOB_EXCLUDE: () => GLOB_EXCLUDE,
+  GLOB_HTML: () => GLOB_HTML,
+  GLOB_JS: () => GLOB_JS,
+  GLOB_JSON: () => GLOB_JSON,
+  GLOB_JSON5: () => GLOB_JSON5,
+  GLOB_JSONC: () => GLOB_JSONC,
+  GLOB_JSX: () => GLOB_JSX,
+  GLOB_LESS: () => GLOB_LESS,
+  GLOB_MARKDOWN: () => GLOB_MARKDOWN,
+  GLOB_MARKDOWN_CODE: () => GLOB_MARKDOWN_CODE,
+  GLOB_SCSS: () => GLOB_SCSS,
+  GLOB_SRC: () => GLOB_SRC,
+  GLOB_SRC_EXT: () => GLOB_SRC_EXT,
+  GLOB_STYLE: () => GLOB_STYLE,
+  GLOB_TESTS: () => GLOB_TESTS,
+  GLOB_TS: () => GLOB_TS,
+  GLOB_TSX: () => GLOB_TSX,
+  GLOB_VUE: () => GLOB_VUE,
+  GLOB_YAML: () => GLOB_YAML,
   combine: () => combine,
   comments: () => comments,
   default: () => src_default,
@@ -44,7 +65,7 @@ __export(src_exports, {
   parserJsonc: () => import_jsonc_eslint_parser.default,
   parserTs: () => import_parser.default,
   parserVue: () => import_vue_eslint_parser.default,
-  parserYml: () => import_yaml_eslint_parser.default,
+  parserYaml: () => import_yaml_eslint_parser.default,
   pluginAntfu: () => import_eslint_plugin_antfu.default,
   pluginComments: () => import_eslint_plugin_eslint_comments.default,
   pluginImport: () => import_eslint_plugin_i.default,
@@ -58,7 +79,7 @@ __export(src_exports, {
   pluginUnicorn: () => import_eslint_plugin_unicorn.default,
   pluginUnusedImports: () => import_eslint_plugin_unused_imports.default,
   pluginVue: () => import_eslint_plugin_vue.default,
-  pluginYml: () => import_eslint_plugin_yml.default,
+  pluginYaml: () => import_eslint_plugin_yml.default,
   recordRulesState: () => recordRulesState,
   recordRulesStateConfigs: () => recordRulesStateConfigs,
   renameRules: () => renameRules,
@@ -67,11 +88,11 @@ __export(src_exports, {
   stylistic: () => stylistic,
   test: () => test,
   typescript: () => typescript,
-  typescriptWithLanguageServer: () => typescriptWithLanguageServer,
+  typescriptWithTypes: () => typescriptWithTypes,
   unicorn: () => unicorn,
   vue: () => vue,
   warnUnnecessaryOffRules: () => warnUnnecessaryOffRules,
-  yml: () => yml
+  yaml: () => yaml
 });
 module.exports = __toCommonJS(src_exports);
 
@@ -163,36 +184,55 @@ var import_yaml_eslint_parser = __toESM(require("yaml-eslint-parser"), 1);
 var import_jsonc_eslint_parser = __toESM(require("jsonc-eslint-parser"), 1);
 
 // src/configs/comments.ts
-var comments = [
-  {
-    plugins: {
-      "eslint-comments": import_eslint_plugin_eslint_comments.default
-    },
-    rules: {
-      "eslint-comments/no-aggregating-enable": "error",
-      "eslint-comments/no-duplicate-disable": "error",
-      "eslint-comments/no-unlimited-disable": "error",
-      "eslint-comments/no-unused-enable": "error"
+function comments() {
+  return [
+    {
+      plugins: {
+        "eslint-comments": import_eslint_plugin_eslint_comments.default
+      },
+      rules: {
+        "eslint-comments/no-aggregating-enable": "error",
+        "eslint-comments/no-duplicate-disable": "error",
+        "eslint-comments/no-unlimited-disable": "error",
+        "eslint-comments/no-unused-enable": "error"
+      }
     }
-  }
-];
+  ];
+}
 
 // src/globs.ts
 var GLOB_SRC_EXT = "?([cm])[jt]s?(x)";
 var GLOB_SRC = "**/*.?([cm])[jt]s?(x)";
+var GLOB_JS = "**/*.?([cm])js";
+var GLOB_JSX = "**/*.?([cm])jsx";
 var GLOB_TS = "**/*.?([cm])ts";
 var GLOB_TSX = "**/*.?([cm])tsx";
+var GLOB_STYLE = "**/*.{c,le,sc}ss";
+var GLOB_CSS = "**/*.css";
+var GLOB_LESS = "**/*.less";
+var GLOB_SCSS = "**/*.scss";
 var GLOB_JSON = "**/*.json";
 var GLOB_JSON5 = "**/*.json5";
 var GLOB_JSONC = "**/*.jsonc";
 var GLOB_MARKDOWN = "**/*.md";
 var GLOB_VUE = "**/*.vue";
 var GLOB_YAML = "**/*.y?(a)ml";
+var GLOB_HTML = "**/*.htm?(l)";
 var GLOB_MARKDOWN_CODE = `${GLOB_MARKDOWN}/${GLOB_SRC}`;
 var GLOB_TESTS = [
   `**/__tests__/**/*.${GLOB_SRC_EXT}`,
   `**/*.spec.${GLOB_SRC_EXT}`,
   `**/*.test.${GLOB_SRC_EXT}`
+];
+var GLOB_ALL_SRC = [
+  GLOB_SRC,
+  GLOB_STYLE,
+  GLOB_JSON,
+  GLOB_JSON5,
+  GLOB_MARKDOWN,
+  GLOB_VUE,
+  GLOB_YAML,
+  GLOB_HTML
 ];
 var GLOB_EXCLUDE = [
   "**/node_modules",
@@ -219,29 +259,41 @@ var GLOB_EXCLUDE = [
 ];
 
 // src/configs/ignores.ts
-var ignores = [
-  { ignores: GLOB_EXCLUDE }
-];
+function ignores(options = {}) {
+  const {
+    ignores: ignores2 = []
+  } = options;
+  return [
+    {
+      ignores: [
+        ...GLOB_EXCLUDE,
+        ...ignores2
+      ]
+    }
+  ];
+}
 
 // src/configs/imports.ts
-var imports = [
-  {
-    plugins: {
-      import: import_eslint_plugin_i.default
-    },
-    rules: {
-      "import/export": "error",
-      "import/first": "error",
-      "import/newline-after-import": ["error", { considerComments: true, count: 1 }],
-      "import/no-duplicates": "error",
-      "import/no-mutable-exports": "error",
-      "import/no-named-default": "error",
-      "import/no-self-import": "error",
-      "import/no-webpack-loader-syntax": "error",
-      "import/order": "error"
+function imports() {
+  return [
+    {
+      plugins: {
+        import: import_eslint_plugin_i.default
+      },
+      rules: {
+        "import/export": "error",
+        "import/first": "error",
+        "import/newline-after-import": ["error", { considerComments: true, count: 1 }],
+        "import/no-duplicates": "error",
+        "import/no-mutable-exports": "error",
+        "import/no-named-default": "error",
+        "import/no-self-import": "error",
+        "import/no-webpack-loader-syntax": "error",
+        "import/order": "error"
+      }
     }
-  }
-];
+  ];
+}
 
 // src/configs/javascript.ts
 var import_globals = __toESM(require("globals"), 1);
@@ -251,6 +303,10 @@ var OFF = 0;
 
 // src/configs/javascript.ts
 function javascript(options = {}) {
+  const {
+    isInEditor = false,
+    overrides = {}
+  } = options;
   return [
     {
       languageOptions: {
@@ -455,7 +511,7 @@ function javascript(options = {}) {
         ],
         "symbol-description": "error",
         "unicode-bom": ["error", "never"],
-        "unused-imports/no-unused-imports": options.isInEditor ? OFF : "error",
+        "unused-imports/no-unused-imports": isInEditor ? OFF : "error",
         "unused-imports/no-unused-vars": [
           "error",
           { args: "after-used", argsIgnorePattern: "^_", vars: "all", varsIgnorePattern: "^_" }
@@ -464,7 +520,8 @@ function javascript(options = {}) {
         "valid-typeof": ["error", { requireStringLiterals: true }],
         "vars-on-top": "error",
         "wrap-iife": ["error", "any", { functionPrototypeMethods: true }],
-        "yoda": ["error", "never"]
+        "yoda": ["error", "never"],
+        ...overrides
       }
     },
     {
@@ -477,97 +534,106 @@ function javascript(options = {}) {
 }
 
 // src/configs/jsdoc.ts
-var jsdoc = [
-  {
-    plugins: {
-      jsdoc: import_eslint_plugin_jsdoc.default
-    },
-    rules: {
-      "jsdoc/check-access": "warn",
-      "jsdoc/check-alignment": "warn",
-      "jsdoc/check-param-names": "warn",
-      "jsdoc/check-property-names": "warn",
-      "jsdoc/check-types": "warn",
-      "jsdoc/empty-tags": "warn",
-      "jsdoc/implements-on-classes": "warn",
-      "jsdoc/multiline-blocks": "warn",
-      "jsdoc/no-defaults": "warn",
-      "jsdoc/no-multi-asterisks": "warn",
-      "jsdoc/no-types": "warn",
-      "jsdoc/require-param-name": "warn",
-      "jsdoc/require-property": "warn",
-      "jsdoc/require-property-description": "warn",
-      "jsdoc/require-property-name": "warn",
-      "jsdoc/require-returns-check": "warn",
-      "jsdoc/require-returns-description": "warn",
-      "jsdoc/require-yields-check": "warn",
-      "jsdoc/valid-types": "warn"
+function jsdoc() {
+  return [
+    {
+      plugins: {
+        jsdoc: import_eslint_plugin_jsdoc.default
+      },
+      rules: {
+        "jsdoc/check-access": "warn",
+        "jsdoc/check-alignment": "warn",
+        "jsdoc/check-param-names": "warn",
+        "jsdoc/check-property-names": "warn",
+        "jsdoc/check-types": "warn",
+        "jsdoc/empty-tags": "warn",
+        "jsdoc/implements-on-classes": "warn",
+        "jsdoc/multiline-blocks": "warn",
+        "jsdoc/no-defaults": "warn",
+        "jsdoc/no-multi-asterisks": "warn",
+        "jsdoc/no-types": "warn",
+        "jsdoc/require-param-name": "warn",
+        "jsdoc/require-property": "warn",
+        "jsdoc/require-property-description": "warn",
+        "jsdoc/require-property-name": "warn",
+        "jsdoc/require-returns-check": "warn",
+        "jsdoc/require-returns-description": "warn",
+        "jsdoc/require-yields-check": "warn",
+        "jsdoc/valid-types": "warn"
+      }
     }
-  }
-];
+  ];
+}
 
 // src/configs/jsonc.ts
-var jsonc = [
-  {
-    files: [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
-    languageOptions: {
-      parser: import_jsonc_eslint_parser.default
+function jsonc() {
+  return [
+    {
+      plugins: {
+        jsonc: import_eslint_plugin_jsonc.default
+      }
     },
-    plugins: {
-      jsonc: import_eslint_plugin_jsonc.default
-    },
-    rules: {
-      "jsonc/array-bracket-spacing": ["error", "never"],
-      "jsonc/comma-dangle": ["error", "never"],
-      "jsonc/comma-style": ["error", "last"],
-      "jsonc/indent": ["error", 2],
-      "jsonc/key-spacing": ["error", { afterColon: true, beforeColon: false }],
-      "jsonc/no-bigint-literals": "error",
-      "jsonc/no-binary-expression": "error",
-      "jsonc/no-binary-numeric-literals": "error",
-      "jsonc/no-dupe-keys": "error",
-      "jsonc/no-escape-sequence-in-identifier": "error",
-      "jsonc/no-floating-decimal": "error",
-      "jsonc/no-hexadecimal-numeric-literals": "error",
-      "jsonc/no-infinity": "error",
-      "jsonc/no-multi-str": "error",
-      "jsonc/no-nan": "error",
-      "jsonc/no-number-props": "error",
-      "jsonc/no-numeric-separators": "error",
-      "jsonc/no-octal": "error",
-      "jsonc/no-octal-escape": "error",
-      "jsonc/no-octal-numeric-literals": "error",
-      "jsonc/no-parenthesized": "error",
-      "jsonc/no-plus-sign": "error",
-      "jsonc/no-regexp-literals": "error",
-      "jsonc/no-sparse-arrays": "error",
-      "jsonc/no-template-literals": "error",
-      "jsonc/no-undefined-value": "error",
-      "jsonc/no-unicode-codepoint-escapes": "error",
-      "jsonc/no-useless-escape": "error",
-      "jsonc/object-curly-newline": ["error", { consistent: true, multiline: true }],
-      "jsonc/object-curly-spacing": ["error", "always"],
-      "jsonc/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }],
-      "jsonc/quote-props": "error",
-      "jsonc/quotes": "error",
-      "jsonc/space-unary-ops": "error",
-      "jsonc/valid-json-number": "error",
-      "jsonc/vue-custom-block/no-parsing-error": "error"
+    {
+      files: [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
+      languageOptions: {
+        parser: import_jsonc_eslint_parser.default
+      },
+      rules: {
+        "jsonc/array-bracket-spacing": ["error", "never"],
+        "jsonc/comma-dangle": ["error", "never"],
+        "jsonc/comma-style": ["error", "last"],
+        "jsonc/indent": ["error", 2],
+        "jsonc/key-spacing": ["error", { afterColon: true, beforeColon: false }],
+        "jsonc/no-bigint-literals": "error",
+        "jsonc/no-binary-expression": "error",
+        "jsonc/no-binary-numeric-literals": "error",
+        "jsonc/no-dupe-keys": "error",
+        "jsonc/no-escape-sequence-in-identifier": "error",
+        "jsonc/no-floating-decimal": "error",
+        "jsonc/no-hexadecimal-numeric-literals": "error",
+        "jsonc/no-infinity": "error",
+        "jsonc/no-multi-str": "error",
+        "jsonc/no-nan": "error",
+        "jsonc/no-number-props": "error",
+        "jsonc/no-numeric-separators": "error",
+        "jsonc/no-octal": "error",
+        "jsonc/no-octal-escape": "error",
+        "jsonc/no-octal-numeric-literals": "error",
+        "jsonc/no-parenthesized": "error",
+        "jsonc/no-plus-sign": "error",
+        "jsonc/no-regexp-literals": "error",
+        "jsonc/no-sparse-arrays": "error",
+        "jsonc/no-template-literals": "error",
+        "jsonc/no-undefined-value": "error",
+        "jsonc/no-unicode-codepoint-escapes": "error",
+        "jsonc/no-useless-escape": "error",
+        "jsonc/object-curly-newline": ["error", { consistent: true, multiline: true }],
+        "jsonc/object-curly-spacing": ["error", "always"],
+        "jsonc/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }],
+        "jsonc/quote-props": "error",
+        "jsonc/quotes": "error",
+        "jsonc/space-unary-ops": "error",
+        "jsonc/valid-json-number": "error",
+        "jsonc/vue-custom-block/no-parsing-error": "error"
+      }
     }
-  }
-];
+  ];
+}
 
 // src/configs/markdown.ts
 function markdown(options = {}) {
   const {
-    componentExts = []
+    componentExts = [],
+    overrides = {}
   } = options;
   return [
     {
-      files: [GLOB_MARKDOWN],
       plugins: {
         markdown: import_eslint_plugin_markdown.default
-      },
+      }
+    },
+    {
+      files: [GLOB_MARKDOWN],
       processor: "markdown/markdown"
     },
     {
@@ -581,9 +647,6 @@ function markdown(options = {}) {
             impliedStrict: true
           }
         }
-      },
-      plugins: {
-        ts: import_eslint_plugin2.default
       },
       rules: {
         "antfu/no-cjs-exports": OFF,
@@ -605,341 +668,355 @@ function markdown(options = {}) {
         "ts/no-var-requires": OFF,
         "unicode-bom": "off",
         "unused-imports/no-unused-imports": OFF,
-        "unused-imports/no-unused-vars": OFF
+        "unused-imports/no-unused-vars": OFF,
+        ...overrides
       }
     }
   ];
 }
 
 // src/configs/node.ts
-var node = [
-  {
-    plugins: {
-      node: import_eslint_plugin_n.default
-    },
-    rules: {
-      "node/handle-callback-err": ["error", "^(err|error)$"],
-      "node/no-deprecated-api": "error",
-      "node/no-exports-assign": "error",
-      "node/no-new-require": "error",
-      "node/no-path-concat": "error",
-      "node/prefer-global/buffer": ["error", "never"],
-      "node/prefer-global/process": ["error", "never"],
-      "node/process-exit-as-throw": "error"
+function node() {
+  return [
+    {
+      plugins: {
+        node: import_eslint_plugin_n.default
+      },
+      rules: {
+        "node/handle-callback-err": ["error", "^(err|error)$"],
+        "node/no-deprecated-api": "error",
+        "node/no-exports-assign": "error",
+        "node/no-new-require": "error",
+        "node/no-path-concat": "error",
+        "node/prefer-global/buffer": ["error", "never"],
+        "node/prefer-global/process": ["error", "never"],
+        "node/process-exit-as-throw": "error"
+      }
     }
-  }
-];
+  ];
+}
 
 // src/configs/sort.ts
-var sortPackageJson = [
-  {
-    files: ["**/package.json"],
-    rules: {
-      "jsonc/sort-array-values": [
-        "error",
-        {
-          order: { type: "asc" },
-          pathPattern: "^files$"
-        }
-      ],
-      "jsonc/sort-keys": [
-        "error",
-        {
-          order: [
-            "publisher",
-            "name",
-            "displayName",
-            "type",
-            "version",
-            "private",
-            "packageManager",
-            "description",
-            "author",
-            "license",
-            "funding",
-            "homepage",
-            "repository",
-            "bugs",
-            "keywords",
-            "categories",
-            "sideEffects",
-            "exports",
-            "main",
-            "module",
-            "unpkg",
-            "jsdelivr",
-            "types",
-            "typesVersions",
-            "bin",
-            "icon",
-            "files",
-            "engines",
-            "activationEvents",
-            "contributes",
-            "scripts",
-            "peerDependencies",
-            "peerDependenciesMeta",
-            "dependencies",
-            "optionalDependencies",
-            "devDependencies",
-            "pnpm",
-            "overrides",
-            "resolutions",
-            "husky",
-            "simple-git-hooks",
-            "lint-staged",
-            "eslintConfig"
-          ],
-          pathPattern: "^$"
-        },
-        {
-          order: { type: "asc" },
-          pathPattern: "^(?:dev|peer|optional|bundled)?[Dd]ependencies$"
-        },
-        {
-          order: { type: "asc" },
-          pathPattern: "^resolutions$"
-        },
-        {
-          order: { type: "asc" },
-          pathPattern: "^pnpm.overrides$"
-        },
-        {
-          order: [
-            "types",
-            "import",
-            "require",
-            "default"
-          ],
-          pathPattern: "^exports.*$"
-        }
-      ]
+function sortPackageJson() {
+  return [
+    {
+      files: ["**/package.json"],
+      rules: {
+        "jsonc/sort-array-values": [
+          "error",
+          {
+            order: { type: "asc" },
+            pathPattern: "^files$"
+          }
+        ],
+        "jsonc/sort-keys": [
+          "error",
+          {
+            order: [
+              "publisher",
+              "name",
+              "displayName",
+              "type",
+              "version",
+              "private",
+              "packageManager",
+              "description",
+              "author",
+              "license",
+              "funding",
+              "homepage",
+              "repository",
+              "bugs",
+              "keywords",
+              "categories",
+              "sideEffects",
+              "exports",
+              "main",
+              "module",
+              "unpkg",
+              "jsdelivr",
+              "types",
+              "typesVersions",
+              "bin",
+              "icon",
+              "files",
+              "engines",
+              "activationEvents",
+              "contributes",
+              "scripts",
+              "peerDependencies",
+              "peerDependenciesMeta",
+              "dependencies",
+              "optionalDependencies",
+              "devDependencies",
+              "pnpm",
+              "overrides",
+              "resolutions",
+              "husky",
+              "simple-git-hooks",
+              "lint-staged",
+              "eslintConfig"
+            ],
+            pathPattern: "^$"
+          },
+          {
+            order: { type: "asc" },
+            pathPattern: "^(?:dev|peer|optional|bundled)?[Dd]ependencies$"
+          },
+          {
+            order: { type: "asc" },
+            pathPattern: "^resolutions$"
+          },
+          {
+            order: { type: "asc" },
+            pathPattern: "^pnpm.overrides$"
+          },
+          {
+            order: [
+              "types",
+              "import",
+              "require",
+              "default"
+            ],
+            pathPattern: "^exports.*$"
+          }
+        ]
+      }
     }
-  }
-];
-var sortTsconfig = [
-  {
-    files: ["**/tsconfig.json", "**/tsconfig.*.json"],
-    rules: {
-      "jsonc/sort-keys": [
-        "error",
-        {
-          order: [
-            "extends",
-            "compilerOptions",
-            "references",
-            "files",
-            "include",
-            "exclude"
-          ],
-          pathPattern: "^$"
-        },
-        {
-          order: [
-            /* Projects */
-            "incremental",
-            "composite",
-            "tsBuildInfoFile",
-            "disableSourceOfProjectReferenceRedirect",
-            "disableSolutionSearching",
-            "disableReferencedProjectLoad",
-            /* Language and Environment */
-            "target",
-            "lib",
-            "jsx",
-            "experimentalDecorators",
-            "emitDecoratorMetadata",
-            "jsxFactory",
-            "jsxFragmentFactory",
-            "jsxImportSource",
-            "reactNamespace",
-            "noLib",
-            "useDefineForClassFields",
-            "moduleDetection",
-            /* Modules */
-            "module",
-            "rootDir",
-            "moduleResolution",
-            "baseUrl",
-            "paths",
-            "rootDirs",
-            "typeRoots",
-            "types",
-            "allowUmdGlobalAccess",
-            "moduleSuffixes",
-            "allowImportingTsExtensions",
-            "resolvePackageJsonExports",
-            "resolvePackageJsonImports",
-            "customConditions",
-            "resolveJsonModule",
-            "allowArbitraryExtensions",
-            "noResolve",
-            /* JavaScript Support */
-            "allowJs",
-            "checkJs",
-            "maxNodeModuleJsDepth",
-            /* Emit */
-            "declaration",
-            "declarationMap",
-            "emitDeclarationOnly",
-            "sourceMap",
-            "inlineSourceMap",
-            "outFile",
-            "outDir",
-            "removeComments",
-            "noEmit",
-            "importHelpers",
-            "importsNotUsedAsValues",
-            "downlevelIteration",
-            "sourceRoot",
-            "mapRoot",
-            "inlineSources",
-            "emitBOM",
-            "newLine",
-            "stripInternal",
-            "noEmitHelpers",
-            "noEmitOnError",
-            "preserveConstEnums",
-            "declarationDir",
-            "preserveValueImports",
-            /* Interop Constraints */
-            "isolatedModules",
-            "verbatimModuleSyntax",
-            "allowSyntheticDefaultImports",
-            "esModuleInterop",
-            "preserveSymlinks",
-            "forceConsistentCasingInFileNames",
-            /* Type Checking */
-            "strict",
-            "strictBindCallApply",
-            "strictFunctionTypes",
-            "strictNullChecks",
-            "strictPropertyInitialization",
-            "allowUnreachableCode",
-            "allowUnusedLabels",
-            "alwaysStrict",
-            "exactOptionalPropertyTypes",
-            "noFallthroughCasesInSwitch",
-            "noImplicitAny",
-            "noImplicitOverride",
-            "noImplicitReturns",
-            "noImplicitThis",
-            "noPropertyAccessFromIndexSignature",
-            "noUncheckedIndexedAccess",
-            "noUnusedLocals",
-            "noUnusedParameters",
-            "useUnknownInCatchVariables",
-            /* Completeness */
-            "skipDefaultLibCheck",
-            "skipLibCheck"
-          ],
-          pathPattern: "^compilerOptions$"
-        }
-      ]
+  ];
+}
+function sortTsconfig() {
+  return [
+    {
+      files: ["**/tsconfig.json", "**/tsconfig.*.json"],
+      rules: {
+        "jsonc/sort-keys": [
+          "error",
+          {
+            order: [
+              "extends",
+              "compilerOptions",
+              "references",
+              "files",
+              "include",
+              "exclude"
+            ],
+            pathPattern: "^$"
+          },
+          {
+            order: [
+              /* Projects */
+              "incremental",
+              "composite",
+              "tsBuildInfoFile",
+              "disableSourceOfProjectReferenceRedirect",
+              "disableSolutionSearching",
+              "disableReferencedProjectLoad",
+              /* Language and Environment */
+              "target",
+              "lib",
+              "jsx",
+              "experimentalDecorators",
+              "emitDecoratorMetadata",
+              "jsxFactory",
+              "jsxFragmentFactory",
+              "jsxImportSource",
+              "reactNamespace",
+              "noLib",
+              "useDefineForClassFields",
+              "moduleDetection",
+              /* Modules */
+              "module",
+              "rootDir",
+              "moduleResolution",
+              "baseUrl",
+              "paths",
+              "rootDirs",
+              "typeRoots",
+              "types",
+              "allowUmdGlobalAccess",
+              "moduleSuffixes",
+              "allowImportingTsExtensions",
+              "resolvePackageJsonExports",
+              "resolvePackageJsonImports",
+              "customConditions",
+              "resolveJsonModule",
+              "allowArbitraryExtensions",
+              "noResolve",
+              /* JavaScript Support */
+              "allowJs",
+              "checkJs",
+              "maxNodeModuleJsDepth",
+              /* Emit */
+              "declaration",
+              "declarationMap",
+              "emitDeclarationOnly",
+              "sourceMap",
+              "inlineSourceMap",
+              "outFile",
+              "outDir",
+              "removeComments",
+              "noEmit",
+              "importHelpers",
+              "importsNotUsedAsValues",
+              "downlevelIteration",
+              "sourceRoot",
+              "mapRoot",
+              "inlineSources",
+              "emitBOM",
+              "newLine",
+              "stripInternal",
+              "noEmitHelpers",
+              "noEmitOnError",
+              "preserveConstEnums",
+              "declarationDir",
+              "preserveValueImports",
+              /* Interop Constraints */
+              "isolatedModules",
+              "verbatimModuleSyntax",
+              "allowSyntheticDefaultImports",
+              "esModuleInterop",
+              "preserveSymlinks",
+              "forceConsistentCasingInFileNames",
+              /* Type Checking */
+              "strict",
+              "strictBindCallApply",
+              "strictFunctionTypes",
+              "strictNullChecks",
+              "strictPropertyInitialization",
+              "allowUnreachableCode",
+              "allowUnusedLabels",
+              "alwaysStrict",
+              "exactOptionalPropertyTypes",
+              "noFallthroughCasesInSwitch",
+              "noImplicitAny",
+              "noImplicitOverride",
+              "noImplicitReturns",
+              "noImplicitThis",
+              "noPropertyAccessFromIndexSignature",
+              "noUncheckedIndexedAccess",
+              "noUnusedLocals",
+              "noUnusedParameters",
+              "useUnknownInCatchVariables",
+              /* Completeness */
+              "skipDefaultLibCheck",
+              "skipLibCheck"
+            ],
+            pathPattern: "^compilerOptions$"
+          }
+        ]
+      }
     }
-  }
-];
+  ];
+}
 
 // src/configs/stylistic.ts
-var stylistic = [
-  {
-    plugins: {
-      style: import_eslint_plugin.default
-    },
-    rules: {
-      "antfu/consistent-list-newline": "error",
-      "antfu/if-newline": "error",
-      "curly": ["error", "multi-or-nest", "consistent"],
-      "style/array-bracket-spacing": ["error", "never"],
-      "style/arrow-spacing": ["error", { after: true, before: true }],
-      "style/block-spacing": ["error", "always"],
-      "style/brace-style": ["error", "stroustrup", { allowSingleLine: true }],
-      "style/comma-dangle": ["error", "always-multiline"],
-      "style/comma-spacing": ["error", { after: true, before: false }],
-      "style/comma-style": ["error", "last"],
-      "style/computed-property-spacing": ["error", "never", { enforceForClassMembers: true }],
-      "style/dot-location": ["error", "property"],
-      "style/indent": ["error", 4, {
-        ArrayExpression: 1,
-        CallExpression: { arguments: 1 },
-        FunctionDeclaration: { body: 1, parameters: 1 },
-        FunctionExpression: { body: 1, parameters: 1 },
-        ImportDeclaration: 1,
-        MemberExpression: 1,
-        ObjectExpression: 1,
-        SwitchCase: 1,
-        VariableDeclarator: 1,
-        flatTernaryExpressions: false,
-        ignoreComments: false,
-        ignoredNodes: [
-          "TemplateLiteral *",
-          "JSXElement",
-          "JSXElement > *",
-          "JSXAttribute",
-          "JSXIdentifier",
-          "JSXNamespacedName",
-          "JSXMemberExpression",
-          "JSXSpreadAttribute",
-          "JSXExpressionContainer",
-          "JSXOpeningElement",
-          "JSXClosingElement",
-          "JSXFragment",
-          "JSXOpeningFragment",
-          "JSXClosingFragment",
-          "JSXText",
-          "JSXEmptyExpression",
-          "JSXSpreadChild",
-          "TSTypeParameterInstantiation",
-          "FunctionExpression > .params[decorators.length > 0]",
-          "FunctionExpression > .params > :matches(Decorator, :not(:first-child))",
-          "ClassBody.body > PropertyDefinition[decorators.length > 0] > .key"
-        ],
-        offsetTernaryExpressions: true,
-        outerIIFEBody: 1
-      }],
-      "style/key-spacing": ["error", { afterColon: true, beforeColon: false }],
-      "style/keyword-spacing": ["error", { after: true, before: true }],
-      "style/lines-between-class-members": ["error", "always", { exceptAfterSingleLine: true }],
-      "style/member-delimiter-style": ["error", { multiline: { delimiter: "none" } }],
-      "style/multiline-ternary": ["error", "always-multiline"],
-      "style/no-mixed-spaces-and-tabs": "error",
-      "style/no-multi-spaces": "error",
-      "style/no-multiple-empty-lines": ["error", { max: 1, maxBOF: 0, maxEOF: 0 }],
-      "style/no-tabs": "error",
-      "style/no-trailing-spaces": "error",
-      "style/no-whitespace-before-property": "error",
-      "style/object-curly-newline": ["error", { consistent: true, multiline: true }],
-      "style/object-curly-spacing": ["error", "always"],
-      "style/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }],
-      "style/operator-linebreak": ["error", "before"],
-      "style/padded-blocks": ["error", { blocks: "never", classes: "never", switches: "never" }],
-      "style/quotes": ["error", "single"],
-      "style/rest-spread-spacing": ["error", "never"],
-      "style/semi": ["error", "never"],
-      "style/semi-spacing": ["error", { after: true, before: false }],
-      "style/space-before-blocks": ["error", "always"],
-      "style/space-before-function-paren": ["error", { anonymous: "always", asyncArrow: "always", named: "never" }],
-      "style/space-in-parens": ["error", "never"],
-      "style/space-infix-ops": "error",
-      "style/space-unary-ops": ["error", { nonwords: false, words: true }],
-      "style/spaced-comment": ["error", "always", {
-        block: {
-          balanced: true,
-          exceptions: ["*"],
-          markers: ["!"]
-        },
-        line: {
-          exceptions: ["/", "#"],
-          markers: ["/"]
-        }
-      }],
-      "style/template-curly-spacing": "error",
-      "style/template-tag-spacing": ["error", "never"],
-      "style/type-annotation-spacing": ["error", {}],
-      "style/yield-star-spacing": ["error", "both"]
+function stylistic(options = {}) {
+  const {
+    overrides = {}
+  } = options;
+  return [
+    {
+      plugins: {
+        antfu: import_eslint_plugin_antfu.default,
+        style: import_eslint_plugin.default
+      },
+      rules: {
+        "antfu/consistent-list-newline": "error",
+        "antfu/if-newline": "error",
+        "curly": ["error", "multi-or-nest", "consistent"],
+        "style/array-bracket-spacing": ["error", "never"],
+        "style/arrow-spacing": ["error", { after: true, before: true }],
+        "style/block-spacing": ["error", "always"],
+        "style/brace-style": ["error", "stroustrup", { allowSingleLine: true }],
+        "style/comma-dangle": ["error", "always-multiline"],
+        "style/comma-spacing": ["error", { after: true, before: false }],
+        "style/comma-style": ["error", "last"],
+        "style/computed-property-spacing": ["error", "never", { enforceForClassMembers: true }],
+        "style/dot-location": ["error", "property"],
+        "style/indent": ["error", 4, {
+          ArrayExpression: 1,
+          CallExpression: { arguments: 1 },
+          FunctionDeclaration: { body: 1, parameters: 1 },
+          FunctionExpression: { body: 1, parameters: 1 },
+          ImportDeclaration: 1,
+          MemberExpression: 1,
+          ObjectExpression: 1,
+          SwitchCase: 1,
+          VariableDeclarator: 1,
+          flatTernaryExpressions: false,
+          ignoreComments: false,
+          ignoredNodes: [
+            "TemplateLiteral *",
+            "JSXElement",
+            "JSXElement > *",
+            "JSXAttribute",
+            "JSXIdentifier",
+            "JSXNamespacedName",
+            "JSXMemberExpression",
+            "JSXSpreadAttribute",
+            "JSXExpressionContainer",
+            "JSXOpeningElement",
+            "JSXClosingElement",
+            "JSXFragment",
+            "JSXOpeningFragment",
+            "JSXClosingFragment",
+            "JSXText",
+            "JSXEmptyExpression",
+            "JSXSpreadChild",
+            "TSTypeParameterInstantiation",
+            "FunctionExpression > .params[decorators.length > 0]",
+            "FunctionExpression > .params > :matches(Decorator, :not(:first-child))",
+            "ClassBody.body > PropertyDefinition[decorators.length > 0] > .key"
+          ],
+          offsetTernaryExpressions: true,
+          outerIIFEBody: 1
+        }],
+        "style/key-spacing": ["error", { afterColon: true, beforeColon: false }],
+        "style/keyword-spacing": ["error", { after: true, before: true }],
+        "style/lines-between-class-members": ["error", "always", { exceptAfterSingleLine: true }],
+        "style/member-delimiter-style": ["error", { multiline: { delimiter: "none" } }],
+        "style/multiline-ternary": ["error", "always-multiline"],
+        "style/no-mixed-spaces-and-tabs": "error",
+        "style/no-multi-spaces": "error",
+        "style/no-multiple-empty-lines": ["error", { max: 1, maxBOF: 0, maxEOF: 0 }],
+        "style/no-tabs": "error",
+        "style/no-trailing-spaces": "error",
+        "style/no-whitespace-before-property": "error",
+        "style/object-curly-newline": ["error", { consistent: true, multiline: true }],
+        "style/object-curly-spacing": ["error", "always"],
+        "style/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }],
+        "style/operator-linebreak": ["error", "before"],
+        "style/padded-blocks": ["error", { blocks: "never", classes: "never", switches: "never" }],
+        "style/quotes": ["error", "single"],
+        "style/rest-spread-spacing": ["error", "never"],
+        "style/semi": ["error", "never"],
+        "style/semi-spacing": ["error", { after: true, before: false }],
+        "style/space-before-blocks": ["error", "always"],
+        "style/space-before-function-paren": ["error", { anonymous: "always", asyncArrow: "always", named: "never" }],
+        "style/space-in-parens": ["error", "never"],
+        "style/space-infix-ops": "error",
+        "style/space-unary-ops": ["error", { nonwords: false, words: true }],
+        "style/spaced-comment": ["error", "always", {
+          block: {
+            balanced: true,
+            exceptions: ["*"],
+            markers: ["!"]
+          },
+          line: {
+            exceptions: ["/", "#"],
+            markers: ["/"]
+          }
+        }],
+        "style/template-curly-spacing": "error",
+        "style/template-tag-spacing": ["error", "never"],
+        "style/type-annotation-spacing": ["error", {}],
+        "style/yield-star-spacing": ["error", "both"],
+        ...overrides
+      }
     }
-  }
-];
+  ];
+}
 
 // src/configs/typescript.ts
 var import_node_process = __toESM(require("process"), 1);
@@ -985,9 +1062,18 @@ function warnUnnecessaryOffRules() {
 // src/configs/typescript.ts
 function typescript(options) {
   const {
-    componentExts = []
+    componentExts = [],
+    overrides = {}
   } = options ?? {};
   return [
+    {
+      // Install the plugins without globs, so they can be configured separately.
+      plugins: {
+        antfu: import_eslint_plugin_antfu.default,
+        import: import_eslint_plugin_i.default,
+        ts: import_eslint_plugin2.default
+      }
+    },
     {
       files: [
         GLOB_TS,
@@ -999,11 +1085,6 @@ function typescript(options) {
         parserOptions: {
           sourceType: "module"
         }
-      },
-      plugins: {
-        antfu: import_eslint_plugin_antfu.default,
-        import: import_eslint_plugin_i.default,
-        ts: import_eslint_plugin2.default
       },
       rules: {
         ...renameRules(
@@ -1045,7 +1126,8 @@ function typescript(options) {
         "ts/no-use-before-define": ["error", { classes: false, functions: false, variables: true }],
         "ts/prefer-ts-expect-error": "error",
         "ts/triple-slash-reference": OFF,
-        "ts/unified-signatures": OFF
+        "ts/unified-signatures": OFF,
+        ...overrides
       }
     },
     {
@@ -1071,18 +1153,20 @@ function typescript(options) {
     }
   ];
 }
-function typescriptWithLanguageServer(options) {
+function typescriptWithTypes(options) {
   const {
     componentExts = [],
     tsconfigPath,
-    tsconfigRootDir = import_node_process.default.cwd()
+    tsconfigRootDir = import_node_process.default.cwd(),
+    overrides = {}
   } = options;
   return [
     {
       files: [
         GLOB_TS,
         GLOB_TSX,
-        ...componentExts.map((ext) => `**/*.${ext}`)
+        ...componentExts.map((ext) => `**/*.${ext}`),
+        "!**/*.md/*.*"
       ],
       ignores: ["**/*.md/*.*"],
       languageOptions: {
@@ -1091,9 +1175,6 @@ function typescriptWithLanguageServer(options) {
           project: [tsconfigPath],
           tsconfigRootDir
         }
-      },
-      plugins: {
-        ts: import_eslint_plugin2.default
       },
       rules: {
         "dot-notation": OFF,
@@ -1114,50 +1195,53 @@ function typescriptWithLanguageServer(options) {
         "ts/no-unsafe-return": "error",
         "ts/restrict-plus-operands": "error",
         "ts/restrict-template-expressions": "error",
-        "ts/unbound-method": "error"
+        "ts/unbound-method": "error",
+        ...overrides
       }
     }
   ];
 }
 
 // src/configs/unicorn.ts
-var unicorn = [
-  {
-    plugins: {
-      unicorn: import_eslint_plugin_unicorn.default
-    },
-    rules: {
-      // Pass error message when throwing errors
-      "unicorn/error-message": "error",
-      // Uppercase regex escapes
-      "unicorn/escape-case": "error",
-      // Array.isArray instead of instanceof
-      "unicorn/no-instanceof-array": "error",
-      // Ban `new Array` as `Array` constructor's params are ambiguous
-      "unicorn/no-new-array": "error",
-      // Prevent deprecated `new Buffer()`
-      "unicorn/no-new-buffer": "error",
-      // Keep regex literals safe!
-      "unicorn/no-unsafe-regex": "error",
-      // Lowercase number formatting for octal, hex, binary (0x1'error' instead of 0X1'error')
-      "unicorn/number-literal-case": "error",
-      // includes over indexOf when checking for existence
-      "unicorn/prefer-includes": "error",
-      // Prefer using the node: protocol
-      "unicorn/prefer-node-protocol": "error",
-      // Prefer using number properties like `Number.isNaN` rather than `isNaN`
-      "unicorn/prefer-number-properties": "error",
-      // String methods startsWith/endsWith instead of more complicated stuff
-      "unicorn/prefer-string-starts-ends-with": "error",
-      // textContent instead of innerText
-      "unicorn/prefer-text-content": "error",
-      // Enforce throwing type error when throwing error while checking typeof
-      "unicorn/prefer-type-error": "error",
-      // Use new when throwing error
-      "unicorn/throw-new-error": "error"
+function unicorn() {
+  return [
+    {
+      plugins: {
+        unicorn: import_eslint_plugin_unicorn.default
+      },
+      rules: {
+        // Pass error message when throwing errors
+        "unicorn/error-message": "error",
+        // Uppercase regex escapes
+        "unicorn/escape-case": "error",
+        // Array.isArray instead of instanceof
+        "unicorn/no-instanceof-array": "error",
+        // Ban `new Array` as `Array` constructor's params are ambiguous
+        "unicorn/no-new-array": "error",
+        // Prevent deprecated `new Buffer()`
+        "unicorn/no-new-buffer": "error",
+        // Keep regex literals safe!
+        "unicorn/no-unsafe-regex": "error",
+        // Lowercase number formatting for octal, hex, binary (0x1'error' instead of 0X1'error')
+        "unicorn/number-literal-case": "error",
+        // includes over indexOf when checking for existence
+        "unicorn/prefer-includes": "error",
+        // Prefer using the node: protocol
+        "unicorn/prefer-node-protocol": "error",
+        // Prefer using number properties like `Number.isNaN` rather than `isNaN`
+        "unicorn/prefer-number-properties": "error",
+        // String methods startsWith/endsWith instead of more complicated stuff
+        "unicorn/prefer-string-starts-ends-with": "error",
+        // textContent instead of innerText
+        "unicorn/prefer-text-content": "error",
+        // Enforce throwing type error when throwing error while checking typeof
+        "unicorn/prefer-type-error": "error",
+        // Use new when throwing error
+        "unicorn/throw-new-error": "error"
+      }
     }
-  }
-];
+  ];
+}
 
 // src/configs/vue.ts
 var pkg = getPackageInfoSync("vue");
@@ -1165,7 +1249,15 @@ var vueVersion = pkg && pkg.version;
 vueVersion = vueVersion && vueVersion[0];
 vueVersion = Number.isNaN(vueVersion) ? "3" : vueVersion;
 function vue(options = {}) {
+  const {
+    overrides = {}
+  } = options;
   return [
+    {
+      plugins: {
+        vue: import_eslint_plugin_vue.default
+      }
+    },
     {
       files: [GLOB_VUE],
       languageOptions: {
@@ -1178,9 +1270,6 @@ function vue(options = {}) {
           parser: options.typescript ? import_parser.default : null,
           sourceType: "module"
         }
-      },
-      plugins: {
-        vue: import_eslint_plugin_vue.default
       },
       processor: import_eslint_plugin_vue.default.processors[".vue"],
       rules: {
@@ -1283,56 +1372,72 @@ function vue(options = {}) {
         "vue/space-in-parens": ["error", "never"],
         "vue/space-infix-ops": "error",
         "vue/space-unary-ops": ["error", { nonwords: false, words: true }],
-        "vue/template-curly-spacing": "error"
+        "vue/template-curly-spacing": "error",
+        ...overrides
       }
     }
   ];
 }
 
-// src/configs/yml.ts
-var yml = [
-  {
-    files: [GLOB_YAML],
-    languageOptions: {
-      parser: import_yaml_eslint_parser.default
+// src/configs/yaml.ts
+function yaml(options = {}) {
+  const {
+    overrides = {}
+  } = options;
+  return [
+    {
+      plugins: {
+        yaml: import_eslint_plugin_yml.default
+      }
     },
-    plugins: {
-      yml: import_eslint_plugin_yml.default
-    },
-    rules: {
-      "style/spaced-comment": OFF,
-      "yml/block-mapping": "error",
-      "yml/block-mapping-question-indicator-newline": "error",
-      "yml/block-sequence": "error",
-      "yml/block-sequence-hyphen-indicator-newline": "error",
-      "yml/flow-mapping-curly-newline": "error",
-      "yml/flow-mapping-curly-spacing": "error",
-      "yml/flow-sequence-bracket-newline": "error",
-      "yml/flow-sequence-bracket-spacing": "error",
-      "yml/indent": ["error", 2],
-      "yml/key-spacing": "error",
-      "yml/no-empty-key": "error",
-      "yml/no-empty-sequence-entry": "error",
-      "yml/no-irregular-whitespace": "error",
-      "yml/no-tab-indent": "error",
-      "yml/plain-scalar": "error",
-      "yml/quotes": ["error", { avoidEscape: false, prefer: "single" }],
-      "yml/spaced-comment": "error",
-      "yml/vue-custom-block/no-parsing-error": "error"
+    {
+      files: [GLOB_YAML],
+      languageOptions: {
+        parser: import_yaml_eslint_parser.default
+      },
+      rules: {
+        "style/spaced-comment": OFF,
+        "yaml/block-mapping": "error",
+        "yaml/block-mapping-question-indicator-newline": "error",
+        "yaml/block-sequence": "error",
+        "yaml/block-sequence-hyphen-indicator-newline": "error",
+        "yaml/flow-mapping-curly-newline": "error",
+        "yaml/flow-mapping-curly-spacing": "error",
+        "yaml/flow-sequence-bracket-newline": "error",
+        "yaml/flow-sequence-bracket-spacing": "error",
+        "yaml/indent": ["error", 2],
+        "yaml/key-spacing": "error",
+        "yaml/no-empty-key": "error",
+        "yaml/no-empty-sequence-entry": "error",
+        "yaml/no-irregular-whitespace": "error",
+        "yaml/no-tab-indent": "error",
+        "yaml/plain-scalar": "error",
+        "yaml/quotes": ["error", { avoidEscape: false, prefer: "single" }],
+        "yaml/spaced-comment": "error",
+        "yaml/vue-custom-block/no-parsing-error": "error",
+        ...overrides
+      }
     }
-  }
-];
+  ];
+}
 
 // src/configs/test.ts
 function test(options = {}) {
+  const {
+    isInEditor = false,
+    overrides = {}
+  } = options;
   return [
     {
-      files: GLOB_TESTS,
       plugins: {
         "no-only-tests": import_eslint_plugin_no_only_tests.default
-      },
+      }
+    },
+    {
+      files: GLOB_TESTS,
       rules: {
-        "no-only-tests/no-only-tests": options.isInEditor ? OFF : "error"
+        "no-only-tests/no-only-tests": isInEditor ? OFF : "error",
+        ...overrides
       }
     }
   ];
@@ -1349,12 +1454,21 @@ var flatConfigProps = [
   "rules",
   "settings"
 ];
+var VuePackages = [
+  "vue",
+  "nuxt",
+  "vitepress",
+  "@slidev/cli"
+];
 function lincy(options = {}, ...userConfigs) {
-  const isInEditor = options.isInEditor ?? !!((import_node_process2.default.env.VSCODE_PID || import_node_process2.default.env.JETBRAINS_IDE) && !import_node_process2.default.env.CI);
-  const enableVue = options.vue ?? (isPackageExists("vue") || isPackageExists("nuxt") || isPackageExists("vitepress") || isPackageExists("@slidev/cli"));
-  const enableTypeScript = options.typescript ?? isPackageExists("typescript");
-  const enableStylistic = options.stylistic ?? true;
-  const enableGitignore = options.gitignore ?? true;
+  const {
+    isInEditor = !!((import_node_process2.default.env.VSCODE_PID || import_node_process2.default.env.JETBRAINS_IDE) && !import_node_process2.default.env.CI),
+    vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
+    typescript: enableTypeScript = isPackageExists("typescript"),
+    stylistic: enableStylistic = true,
+    gitignore: enableGitignore = true,
+    overrides = {}
+  } = options;
   const configs = [];
   if (enableGitignore) {
     if (typeof enableGitignore !== "boolean") {
@@ -1365,43 +1479,64 @@ function lincy(options = {}, ...userConfigs) {
     }
   }
   configs.push(
-    ignores,
-    javascript({ isInEditor }),
-    comments,
-    node,
-    jsdoc,
-    imports,
-    unicorn
+    ignores({
+      ignores: overrides.ignores
+    }),
+    javascript({
+      isInEditor,
+      overrides: overrides.javascript
+    }),
+    comments(),
+    node(),
+    jsdoc(),
+    imports(),
+    unicorn()
   );
   const componentExts = [];
   if (enableVue)
     componentExts.push("vue");
   if (enableTypeScript) {
-    configs.push(typescript({ componentExts }));
+    configs.push(typescript({
+      componentExts,
+      overrides: overrides.typescript
+    }));
     if (typeof enableTypeScript !== "boolean") {
-      configs.push(typescriptWithLanguageServer({
+      configs.push(typescriptWithTypes({
         ...enableTypeScript,
-        componentExts
+        componentExts,
+        overrides: overrides.typescriptWithTypes
       }));
     }
   }
   if (enableStylistic)
-    configs.push(stylistic);
-  if (options.test ?? true)
-    configs.push(test({ isInEditor }));
-  if (enableVue)
-    configs.push(vue({ typescript: !!enableTypeScript }));
+    configs.push(stylistic());
+  if (options.test ?? true) {
+    configs.push(test({
+      isInEditor,
+      overrides: overrides.test
+    }));
+  }
+  if (enableVue) {
+    configs.push(vue({
+      overrides: overrides.vue,
+      typescript: !!enableTypeScript
+    }));
+  }
   if (options.jsonc ?? true) {
     configs.push(
-      jsonc,
-      sortPackageJson,
-      sortTsconfig
+      jsonc(),
+      sortPackageJson(),
+      sortTsconfig()
     );
   }
   if (options.yaml ?? true)
-    configs.push(yml);
-  if (options.markdown ?? true)
-    configs.push(markdown({ componentExts }));
+    configs.push(yaml());
+  if (options.markdown ?? true) {
+    configs.push(markdown({
+      componentExts,
+      overrides: overrides.markdown
+    }));
+  }
   const fusedConfig = flatConfigProps.reduce((acc, key) => {
     if (key in options)
       acc[key] = options[key];
@@ -1420,6 +1555,27 @@ function lincy(options = {}, ...userConfigs) {
 var src_default = lincy;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  GLOB_ALL_SRC,
+  GLOB_CSS,
+  GLOB_EXCLUDE,
+  GLOB_HTML,
+  GLOB_JS,
+  GLOB_JSON,
+  GLOB_JSON5,
+  GLOB_JSONC,
+  GLOB_JSX,
+  GLOB_LESS,
+  GLOB_MARKDOWN,
+  GLOB_MARKDOWN_CODE,
+  GLOB_SCSS,
+  GLOB_SRC,
+  GLOB_SRC_EXT,
+  GLOB_STYLE,
+  GLOB_TESTS,
+  GLOB_TS,
+  GLOB_TSX,
+  GLOB_VUE,
+  GLOB_YAML,
   combine,
   comments,
   ignores,
@@ -1433,7 +1589,7 @@ var src_default = lincy;
   parserJsonc,
   parserTs,
   parserVue,
-  parserYml,
+  parserYaml,
   pluginAntfu,
   pluginComments,
   pluginImport,
@@ -1447,7 +1603,7 @@ var src_default = lincy;
   pluginUnicorn,
   pluginUnusedImports,
   pluginVue,
-  pluginYml,
+  pluginYaml,
   recordRulesState,
   recordRulesStateConfigs,
   renameRules,
@@ -1456,9 +1612,9 @@ var src_default = lincy;
   stylistic,
   test,
   typescript,
-  typescriptWithLanguageServer,
+  typescriptWithTypes,
   unicorn,
   vue,
   warnUnnecessaryOffRules,
-  yml
+  yaml
 });
