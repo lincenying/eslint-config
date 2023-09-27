@@ -104,8 +104,11 @@ export function lincy(options: OptionsConfig & FlatESLintConfigItem = {}, ...use
         }
     }
 
-    if (enableStylistic)
-        configs.push(stylistic())
+    if (enableStylistic) {
+        configs.push(stylistic({
+            overrides: overrides.stylistic,
+        }))
+    }
 
     if (options.test ?? true) {
         configs.push(test({

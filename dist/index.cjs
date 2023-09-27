@@ -1508,8 +1508,11 @@ function lincy(options = {}, ...userConfigs) {
       }));
     }
   }
-  if (enableStylistic)
-    configs.push(stylistic());
+  if (enableStylistic) {
+    configs.push(stylistic({
+      overrides: overrides.stylistic
+    }));
+  }
   if (options.test ?? true) {
     configs.push(test({
       isInEditor,
