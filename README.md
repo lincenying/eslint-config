@@ -5,7 +5,7 @@
 - 单引号，无结尾分号
 - 自动格式化
 - 专为与 TypeScript、Vue(2/3) 一起使用而设计，开箱即用
-- Lint 也适用于 json、yaml、markdown、react
+- 也适用于 json、yaml、markdown、react
 - import导入排序, 对象字⾯量项尾逗号
 - 合理的默认值，最佳实践，只需一行配置
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new)
@@ -52,20 +52,20 @@ For example:
 
 ```jsonc
 {
-  // Enable the flat config support
+  // 开启eslint扁平化配置
   "eslint.experimental.useFlatConfig": true,
 
-  // Disable the default formatter
+  // 禁用默认的格式化
   "prettier.enable": false,
   "editor.formatOnSave": false,
 
-  // Auto fix
+  // 开启自动修复
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true,
     "source.organizeImports": false
   },
 
-  // Silent the stylistic rules in you IDE, but still auto fix them
+  // 在 IDE 中静默样式规则，但仍会自动修复它们
   "eslint.rules.customizations": [
     { "rule": "@stylistic/*", "severity": "off" },
     { "rule": "*-indent", "severity": "off" },
@@ -78,10 +78,7 @@ For example:
     { "rule": "*semi", "severity": "off" }
   ],
 
-  // The following is optional.
-  // It's better to put under project setting `.vscode/settings.json`
-  // to avoid conflicts with working with different eslint configs
-  // that does not support all formats.
+  // 为所有支持的语言启用 eslint
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -102,6 +99,8 @@ For example:
 通常你只需要导入 `lincy` 预设：
 
 #### esm
+如果 package.json 中开启了`"type": "module",`
+
 ```js
 // eslint.config.js
 import lincy from '@lincy/eslint-config'
@@ -113,6 +112,8 @@ export default lincy()
 ```
 
 #### cjs
+如果 package.json 中没有开启`"type": "module",`
+
 ```js
 // eslint.config.js
 const lincy = require('@lincy/eslint-config').lincy
@@ -146,7 +147,7 @@ export default lincy({
     // 覆盖规则
     overrides: {},
 
-    // 包含以下键名将会自动整合到一个规则里
+    // 工厂函数第一个参数默认为各规则的开关, 但是也可以作为追加规则使用, 当包含以下键名将会自动整合到一个规则里
     files: [],
     ignores: [],
     languageOptions: {},
@@ -172,7 +173,7 @@ const autoImport = JSON.parse(
 
 export default lincy(
     {
-    // Configures for config
+        // 配置, 参考上一个代码块
     },
     // 启用 unocss
     {
@@ -242,13 +243,13 @@ export default [
 ]
 ```
 
-查看 [configs](https://github.com/lincenying/eslint-config/blob/main/src/configs) 和 [factory](https://github.com/lincenying/eslint-config/blob/ main/src/factory.ts）了解更多详细信息。
+查看 [configs](https://github.com/lincenying/eslint-config/blob/main/src/configs) 和 [factory](https://github.com/lincenying/eslint-config/blob/main/src/factory.ts）了解更多详细信息。
 
 > Thanks to [sxzz/eslint-config](https://github.com/sxzz/eslint-config) for the inspiration and reference.
 
 ## Plugins Renaming
 
-由于平面配置支持显式提供了插件名称，因此我们重命名了一些插件以使它们更加一致并隐藏实现细节。
+由于扁平化配置支持显式提供了插件名称，因此我们重命名了一些插件以使它们更加一致并隐藏实现细节。
 
 | New Prefix | Original Prefix | Source Plugin |
 | --- | --- | --- |
@@ -334,7 +335,7 @@ export default lincy({
             '**/assets',
             '**/static',
         ]
-    // ...
+        // ...
     }
 })
 ```
@@ -356,6 +357,12 @@ export default lincy({
 
 ### React
 react拓展规则
+
+安装react插件
+
+```bash
+npm i -D eslint-plugin-react eslint-plugin-react-hooks
+```
 
 ```js
 // eslint.config.js
