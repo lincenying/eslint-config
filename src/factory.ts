@@ -94,7 +94,7 @@ export function lincy(options: OptionsConfig & FlatESLintConfigItem = {}, ...use
 
     if (enableTypeScript) {
         configs.push(typescript({
-            ...typeof enableTypeScript !== 'boolean' ? enableTypeScript : {},
+            ...(typeof enableTypeScript !== 'boolean' ? enableTypeScript : {}),
             componentExts,
             overrides: overrides.typescript,
         }))

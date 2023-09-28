@@ -1,4 +1,4 @@
-# @lincy/eslint-config
+# @lincy/eslint-config Eslint扁平化规则
 
 [![npm](https://img.shields.io/npm/v/@lincy/eslint-config?color=444&label=)](https://npmjs.com/package/@lincy/eslint-config)
 
@@ -143,6 +143,18 @@ export default lincy({
     test: false, // 默认值: true
     // 是否启用 markdown 规则
     markdown: false, // 默认值: true
+    // 覆盖规则
+    overrides: {},
+
+    // 包含以下键名将会自动整合到一个规则里
+    files: [],
+    ignores: [],
+    languageOptions: {},
+    linterOptions: {},
+    processor: {},
+    plugins: {},
+    rules: [],
+    settings: {}
 })
 ```
 
@@ -180,13 +192,6 @@ export default lincy(
                 // 其他 globals
             },
         },
-    },
-    // 自定义排除文件(夹)
-    {
-        ignores: [
-            '**/assets',
-            '**/static',
-        ],
     },
     // 你还可以继续配置多个 ESLint Flat Configs
     {
@@ -267,10 +272,21 @@ type foo = { bar: 2 }
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import lincy from '@lincy/eslint-config'
 
-export default antfu(
-    { vue: true, typescript: true },
+export default lincy(
+    {
+        isInEditor: true,
+        vue: true,
+        typescript: true,
+        stylistic: true,
+        gitignore: true,
+        test: true,
+        jsonc: true,
+        yaml: true,
+        markdown: true,
+        overrides: {}
+    },
     {
         // 记得在这里指定文件 glob，否则可能会导致 vue 插件处理非 vue 文件
         files: ['**/*.vue'],
@@ -291,21 +307,29 @@ export default antfu(
 
 ```js
 // eslint.config.js
-import antfu from '@antfu/eslint-config'
+import lincy from '@lincy/eslint-config'
 
-export default antfu({
+export default lincy({
     overrides: {
+        // 重写vue规则
         vue: {
             'vue/operator-linebreak': ['error', 'before'],
         },
+        // 重写ts规则
         typescript: {
             'ts/consistent-type-definitions': ['error', 'interface'],
         },
+        // 重写js规则
         javascript: {},
         stylistic: {
-            'antfu/consistent-list-newline': 'off',
+            'lincy/consistent-list-newline': 'off',
         },
         yaml: {},
+        jsonc: {},
+        markdown: {},
+        test: {},
+
+        // 追加自定义排除文件(夹)
         ignores: [
             '**/assets',
             '**/static',

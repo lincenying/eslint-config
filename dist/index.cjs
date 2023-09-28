@@ -88,7 +88,6 @@ __export(src_exports, {
   stylistic: () => stylistic,
   test: () => test,
   typescript: () => typescript,
-  typescriptWithTypes: () => typescriptWithTypes,
   unicorn: () => unicorn,
   vue: () => vue,
   warnUnnecessaryOffRules: () => warnUnnecessaryOffRules,
@@ -281,9 +280,12 @@ function imports(options = {}) {
   return [
     {
       plugins: {
+        antfu: import_eslint_plugin_antfu.default,
         import: import_eslint_plugin_i.default
       },
       rules: {
+        "antfu/import-dedupe": "error",
+        "antfu/no-import-node-modules-by-path": "error",
         "import/export": "error",
         "import/first": "error",
         "import/no-duplicates": "error",
@@ -339,8 +341,6 @@ function javascript(options = {}) {
       },
       rules: {
         "accessor-pairs": ["error", { enforceForClassMembers: true, setWithoutGet: true }],
-        "antfu/import-dedupe": "error",
-        "antfu/no-import-node-modules-by-path": "error",
         "antfu/top-level-function": "error",
         "array-callback-return": "error",
         "arrow-parens": ["error", "as-needed", { requireForBlockBody: true }],
@@ -685,6 +685,25 @@ function markdown(options = {}) {
         "unicode-bom": "off",
         "unused-imports/no-unused-imports": OFF,
         "unused-imports/no-unused-vars": OFF,
+        // Type aware rules
+        ...{
+          "ts/await-thenable": OFF,
+          "ts/dot-notation": OFF,
+          "ts/no-floating-promises": OFF,
+          "ts/no-for-in-array": OFF,
+          "ts/no-implied-eval": OFF,
+          "ts/no-misused-promises": OFF,
+          "ts/no-throw-literal": OFF,
+          "ts/no-unnecessary-type-assertion": OFF,
+          "ts/no-unsafe-argument": OFF,
+          "ts/no-unsafe-assignment": OFF,
+          "ts/no-unsafe-call": OFF,
+          "ts/no-unsafe-member-access": OFF,
+          "ts/no-unsafe-return": OFF,
+          "ts/restrict-plus-operands": OFF,
+          "ts/restrict-template-expressions": OFF,
+          "ts/unbound-method": OFF
+        },
         ...overrides
       }
     }
@@ -1079,8 +1098,31 @@ function warnUnnecessaryOffRules() {
 function typescript(options) {
   const {
     componentExts = [],
-    overrides = {}
+    overrides = {},
+    parserOptions = {},
+    tsconfigPath
   } = options ?? {};
+  const typeAwareRules = {
+    "dot-notation": OFF,
+    "no-implied-eval": OFF,
+    "no-throw-literal": OFF,
+    "ts/await-thenable": "error",
+    "ts/dot-notation": ["error", { allowKeywords: true }],
+    "ts/no-floating-promises": "error",
+    "ts/no-for-in-array": "error",
+    "ts/no-implied-eval": "error",
+    "ts/no-misused-promises": "error",
+    "ts/no-throw-literal": "error",
+    "ts/no-unnecessary-type-assertion": "error",
+    "ts/no-unsafe-argument": "error",
+    "ts/no-unsafe-assignment": "error",
+    "ts/no-unsafe-call": "error",
+    "ts/no-unsafe-member-access": "error",
+    "ts/no-unsafe-return": "error",
+    "ts/restrict-plus-operands": "error",
+    "ts/restrict-template-expressions": "error",
+    "ts/unbound-method": "error"
+  };
   return [
     {
       // Install the plugins without globs, so they can be configured separately.
@@ -1099,7 +1141,12 @@ function typescript(options) {
       languageOptions: {
         parser: import_parser.default,
         parserOptions: {
-          sourceType: "module"
+          sourceType: "module",
+          ...tsconfigPath ? {
+            project: [tsconfigPath],
+            tsconfigRootDir: import_node_process.default.cwd()
+          } : {},
+          ...parserOptions
         }
       },
       rules: {
@@ -1143,6 +1190,7 @@ function typescript(options) {
         "ts/prefer-ts-expect-error": "error",
         "ts/triple-slash-reference": OFF,
         "ts/unified-signatures": OFF,
+        ...tsconfigPath ? typeAwareRules : {},
         ...overrides
       }
     },
@@ -1165,54 +1213,6 @@ function typescript(options) {
       rules: {
         "ts/no-require-imports": OFF,
         "ts/no-var-requires": OFF
-      }
-    }
-  ];
-}
-function typescriptWithTypes(options) {
-  const {
-    componentExts = [],
-    tsconfigPath,
-    tsconfigRootDir = import_node_process.default.cwd(),
-    overrides = {}
-  } = options;
-  return [
-    {
-      files: [
-        GLOB_TS,
-        GLOB_TSX,
-        ...componentExts.map((ext) => `**/*.${ext}`),
-        "!**/*.md/*.*"
-      ],
-      ignores: ["**/*.md/*.*"],
-      languageOptions: {
-        parser: import_parser.default,
-        parserOptions: {
-          project: [tsconfigPath],
-          tsconfigRootDir
-        }
-      },
-      rules: {
-        "dot-notation": OFF,
-        "no-implied-eval": OFF,
-        "no-throw-literal": OFF,
-        "ts/await-thenable": "error",
-        "ts/dot-notation": ["error", { allowKeywords: true }],
-        "ts/no-floating-promises": "error",
-        "ts/no-for-in-array": "error",
-        "ts/no-implied-eval": "error",
-        "ts/no-misused-promises": "error",
-        "ts/no-throw-literal": "error",
-        "ts/no-unnecessary-type-assertion": "error",
-        "ts/no-unsafe-argument": "error",
-        "ts/no-unsafe-assignment": "error",
-        "ts/no-unsafe-call": "error",
-        "ts/no-unsafe-member-access": "error",
-        "ts/no-unsafe-return": "error",
-        "ts/restrict-plus-operands": "error",
-        "ts/restrict-template-expressions": "error",
-        "ts/unbound-method": "error",
-        ...overrides
       }
     }
   ];
@@ -1523,16 +1523,10 @@ function lincy(options = {}, ...userConfigs) {
     componentExts.push("vue");
   if (enableTypeScript) {
     configs.push(typescript({
+      ...typeof enableTypeScript !== "boolean" ? enableTypeScript : {},
       componentExts,
       overrides: overrides.typescript
     }));
-    if (typeof enableTypeScript !== "boolean") {
-      configs.push(typescriptWithTypes({
-        ...enableTypeScript,
-        componentExts,
-        overrides: overrides.typescriptWithTypes
-      }));
-    }
   }
   if (enableStylistic) {
     configs.push(stylistic({
@@ -1649,7 +1643,6 @@ var src_default = lincy;
   stylistic,
   test,
   typescript,
-  typescriptWithTypes,
   unicorn,
   vue,
   warnUnnecessaryOffRules,

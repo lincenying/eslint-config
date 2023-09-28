@@ -1,5 +1,7 @@
 import { FlatESLintConfigItem } from 'eslint-define-config';
 import { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
+import { ParserOptions } from '@typescript-eslint/parser';
+export { default as parserTs } from '@typescript-eslint/parser';
 export { default as pluginAntfu } from 'eslint-plugin-antfu';
 export { default as pluginComments } from 'eslint-plugin-eslint-comments';
 export { default as pluginImport } from 'eslint-plugin-i';
@@ -14,7 +16,6 @@ export { default as pluginUnusedImports } from 'eslint-plugin-unused-imports';
 export { default as pluginVue } from 'eslint-plugin-vue';
 export { default as pluginYaml } from 'eslint-plugin-yml';
 export { default as pluginNoOnlyTests } from 'eslint-plugin-no-only-tests';
-export { default as parserTs } from '@typescript-eslint/parser';
 export { default as parserVue } from 'vue-eslint-parser';
 export { default as parserYaml } from 'yaml-eslint-parser';
 export { default as parserJsonc } from 'jsonc-eslint-parser';
@@ -28,9 +29,18 @@ interface OptionsComponentExts {
      */
     componentExts?: string[];
 }
+interface OptionsTypeScriptParserOptions {
+    /**
+     * Additional parser options for TypeScript.
+     */
+    parserOptions?: Partial<ParserOptions>;
+}
 interface OptionsTypeScriptWithTypes {
-    tsconfigPath: string;
-    tsconfigRootDir?: string;
+    /**
+     * When this options is provided, type aware rules will be enabled.
+     * @see https://typescript-eslint.io/linting/typed-linting/
+     */
+    tsconfigPath?: string;
 }
 interface OptionsHasTypeScript {
     typescript?: boolean;
@@ -110,7 +120,6 @@ interface OptionsConfig {
     overrides?: {
         javascript?: FlatESLintConfigItem['rules'];
         typescript?: FlatESLintConfigItem['rules'];
-        typescriptWithTypes?: FlatESLintConfigItem['rules'];
         stylistic?: FlatESLintConfigItem['rules'];
         test?: FlatESLintConfigItem['rules'];
         vue?: FlatESLintConfigItem['rules'];
@@ -157,8 +166,7 @@ declare function sortTsconfig(): FlatESLintConfigItem[];
 
 declare function stylistic(options?: OptionsOverrides): FlatESLintConfigItem[];
 
-declare function typescript(options?: OptionsComponentExts & OptionsOverrides): FlatESLintConfigItem[];
-declare function typescriptWithTypes(options: OptionsTypeScriptWithTypes & OptionsComponentExts & OptionsOverrides): FlatESLintConfigItem[];
+declare function typescript(options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions): FlatESLintConfigItem[];
 
 declare function unicorn(): FlatESLintConfigItem[];
 
@@ -201,4 +209,4 @@ declare const GLOB_TESTS: string[];
 declare const GLOB_ALL_SRC: string[];
 declare const GLOB_EXCLUDE: string[];
 
-export { GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIsInEditor, OptionsOverrides, OptionsStylistic, OptionsTypeScriptWithTypes, combine, comments, lincy as default, ignores, imports, javascript, jsdoc, jsonc, lincy, markdown, node, recordRulesState, recordRulesStateConfigs, renameRules, sortPackageJson, sortTsconfig, stylistic, test, typescript, typescriptWithTypes, unicorn, vue, warnUnnecessaryOffRules, yaml };
+export { GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIsInEditor, OptionsOverrides, OptionsStylistic, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, combine, comments, lincy as default, ignores, imports, javascript, jsdoc, jsonc, lincy, markdown, node, recordRulesState, recordRulesStateConfigs, renameRules, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, vue, warnUnnecessaryOffRules, yaml };
