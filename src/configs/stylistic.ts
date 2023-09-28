@@ -14,7 +14,7 @@ export function stylistic(options: OptionsOverrides = {}): FlatESLintConfigItem[
                 style: pluginStylistic,
             },
             rules: {
-                'antfu/consistent-list-newline': 'error',
+                'antfu/consistent-list-newline': 'off',
                 'antfu/if-newline': 'error',
                 'curly': ['error', 'multi-or-nest', 'consistent'],
 

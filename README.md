@@ -323,7 +323,7 @@ export default lincy({
         // 重写js规则
         javascript: {},
         stylistic: {
-            'lincy/consistent-list-newline': 'off',
+            'antfu/consistent-list-newline': 'error',
         },
         yaml: {},
         jsonc: {},
@@ -394,31 +394,24 @@ export default lincy(
             },
         },
         rules: {
-            'react/display-name': 'error',
-            'react/jsx-key': 'error',
-            'react/jsx-no-comment-textnodes': 'error',
-            'react/jsx-no-duplicate-props': 'error',
-            'react/jsx-no-target-blank': 'error',
-            'react/jsx-no-undef': 'error',
-            'react/jsx-uses-react': 'error',
-            'react/jsx-uses-vars': 'error',
-            'react/no-children-prop': 'error',
-            'react/no-danger-with-children': 'error',
-            'react/no-deprecated': 'error',
-            'react/no-direct-mutation-state': 'error',
-            'react/no-find-dom-node': 'error',
-            'react/no-is-mounted': 'error',
-            'react/no-render-return-value': 'error',
-            'react/no-string-refs': 'error',
-            'react/no-unescaped-entities': 'error',
-            'react/no-unknown-property': 'error',
+            ...pluginReact.configs.all.rules,
+            ...pluginReactHooks.configs.recommended.rules,
+            'react/jsx-filename-extension': 'off', // 禁止可能包含 JSX 文件扩展名
+            'react/jsx-first-prop-new-line': 'off', // 强制 JSX 中第一个属性的正确位置
+            'react/jsx-no-bind': 'off', // .bind()JSX 属性中禁止使用箭头函数
+            'react/forbid-component-props': 'off', // 禁止组件上使用某些 props
+            'react/jsx-max-props-per-line': ['error', { maximum: 4 }], // 在 JSX 中的单行上强制执行最多 props 数量
+            'react/jsx-no-literals': 'off', // 禁止在 JSX 中使用字符串文字
+            'react/jsx-one-expression-per-line': 'off',
+            'react/no-danger': 'off',
+            'react/jsx-max-depth': 'off',
+            'react/jsx-newline': 'off',
+            'react/require-default-props': 'off',
+            'react/jsx-props-no-spreading': 'off',
             'react/no-unsafe': 'off',
-            'react/prop-types': 'error',
-            'react/require-render-return': 'error',
             'jsx-quotes': ['error', 'prefer-double'],
             'react/react-in-jsx-scope': 'off',
-            'react-hooks/rules-of-hooks': 'error',
-            'react-hooks/exhaustive-deps': 'warn',
+            'react/hook-use-state': 'off',
         },
     },
 )
