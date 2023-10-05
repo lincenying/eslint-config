@@ -1,6 +1,6 @@
 import process from 'node:process'
 import type { FlatESLintConfigItem } from 'eslint-define-config'
-import { GLOB_TS, GLOB_TSX } from '../globs'
+import { GLOB_SRC } from '../globs'
 import { parserTs, pluginAntfu, pluginImport, pluginTs } from '../plugins'
 import { OFF } from '../flags'
 import type { OptionsComponentExts, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from '../types'
@@ -47,8 +47,7 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
         },
         {
             files: [
-                GLOB_TS,
-                GLOB_TSX,
+                GLOB_SRC,
                 ...componentExts.map(ext => `**/*.${ext}`),
             ],
             languageOptions: {
@@ -81,7 +80,6 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
                 'antfu/no-ts-export-equal': 'error',
 
                 'no-dupe-class-members': OFF,
-                'no-extra-parens': OFF,
                 'no-invalid-this': OFF,
                 'no-loss-of-precision': OFF,
                 'no-redeclare': OFF,
@@ -89,12 +87,13 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
                 'no-useless-constructor': OFF,
 
                 'ts/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
+                'ts/ban-types': ['error', { types: { Function: false } }],
                 'ts/consistent-type-definitions': ['error', 'interface'],
                 'ts/consistent-type-imports': ['error', { disallowTypeAnnotations: false, prefer: 'type-imports' }],
                 'ts/no-dupe-class-members': 'error',
                 'ts/no-dynamic-delete': OFF,
                 'ts/no-explicit-any': OFF,
-                'ts/no-extra-parens': ['error', 'functions'],
+                'ts/no-extraneous-class': OFF,
                 'ts/no-invalid-this': 'error',
                 'ts/no-invalid-void-type': OFF,
                 'ts/no-loss-of-precision': 'error',
@@ -103,6 +102,7 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
                 'ts/no-require-imports': 'error',
                 'ts/no-unused-vars': OFF,
                 'ts/no-use-before-define': ['error', { classes: false, functions: false, variables: true }],
+                'ts/no-useless-constructor': OFF,
                 'ts/prefer-ts-expect-error': 'error',
                 'ts/triple-slash-reference': OFF,
                 'ts/unified-signatures': OFF,
@@ -116,6 +116,7 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
             rules: {
                 'eslint-comments/no-unlimited-disable': OFF,
                 'import/no-duplicates': OFF,
+                'no-restricted-syntax': ['error', '[declare=true]'],
                 'unused-imports/no-unused-vars': OFF,
             },
         },

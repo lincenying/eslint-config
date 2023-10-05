@@ -1,12 +1,15 @@
 import { FlatESLintConfigItem } from 'eslint-define-config';
 import { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import { ParserOptions } from '@typescript-eslint/parser';
-export { default as parserTs } from '@typescript-eslint/parser';
+import * as parser from '@typescript-eslint/parser';
+export { parser as parserTs };
 export { default as pluginAntfu } from 'eslint-plugin-antfu';
 export { default as pluginComments } from 'eslint-plugin-eslint-comments';
-export { default as pluginImport } from 'eslint-plugin-i';
+import * as eslintPluginI from 'eslint-plugin-i';
+export { eslintPluginI as pluginImport };
 export { default as pluginJsdoc } from 'eslint-plugin-jsdoc';
-export { default as pluginJsonc } from 'eslint-plugin-jsonc';
+import * as eslintPluginJsonc from 'eslint-plugin-jsonc';
+export { eslintPluginJsonc as pluginJsonc };
 export { default as pluginMarkdown } from 'eslint-plugin-markdown';
 export { default as pluginNode } from 'eslint-plugin-n';
 export { default as pluginStylistic } from '@stylistic/eslint-plugin';
@@ -14,7 +17,8 @@ export { default as pluginTs } from '@typescript-eslint/eslint-plugin';
 export { default as pluginUnicorn } from 'eslint-plugin-unicorn';
 export { default as pluginUnusedImports } from 'eslint-plugin-unused-imports';
 export { default as pluginVue } from 'eslint-plugin-vue';
-export { default as pluginYaml } from 'eslint-plugin-yml';
+import * as eslintPluginYml from 'eslint-plugin-yml';
+export { eslintPluginYml as pluginYaml };
 export { default as pluginNoOnlyTests } from 'eslint-plugin-no-only-tests';
 export { default as parserVue } from 'vue-eslint-parser';
 export { default as parserYaml } from 'yaml-eslint-parser';
@@ -46,7 +50,14 @@ interface OptionsHasTypeScript {
     typescript?: boolean;
 }
 interface OptionsStylistic {
-    stylistic?: boolean;
+    stylistic?: boolean | StylisticConfig;
+}
+interface StylisticConfig {
+    indent?: number | 'tab';
+    quotes?: 'single' | 'double';
+}
+interface StylisticOverridesConfig extends OptionsStylistic {
+    overrides?: FlatESLintConfigItem['rules'];
 }
 interface OptionsOverrides {
     overrides?: FlatESLintConfigItem['rules'];
@@ -55,7 +66,7 @@ interface OptionsOverrides {
 interface OptionsIsInEditor {
     isInEditor?: boolean;
 }
-interface OptionsConfig {
+interface OptionsConfig extends OptionsComponentExts {
     /**
      * Enable gitignore support.
      *
@@ -108,7 +119,7 @@ interface OptionsConfig {
      *
      * @default true
      */
-    stylistic?: boolean;
+    stylistic?: boolean | StylisticConfig;
     /**
      * Control to disable some rules in editors.
      * @default auto-detect based on the process.env
@@ -164,7 +175,7 @@ declare function sortPackageJson(): FlatESLintConfigItem[];
  */
 declare function sortTsconfig(): FlatESLintConfigItem[];
 
-declare function stylistic(options?: OptionsOverrides): FlatESLintConfigItem[];
+declare function stylistic(options?: StylisticOverridesConfig): FlatESLintConfigItem[];
 
 declare function typescript(options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions): FlatESLintConfigItem[];
 
@@ -209,4 +220,4 @@ declare const GLOB_TESTS: string[];
 declare const GLOB_ALL_SRC: string[];
 declare const GLOB_EXCLUDE: string[];
 
-export { GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIsInEditor, OptionsOverrides, OptionsStylistic, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, combine, comments, lincy as default, ignores, imports, javascript, jsdoc, jsonc, lincy, markdown, node, recordRulesState, recordRulesStateConfigs, renameRules, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, vue, warnUnnecessaryOffRules, yaml };
+export { GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIsInEditor, OptionsOverrides, OptionsStylistic, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, StylisticConfig, StylisticOverridesConfig, combine, comments, lincy as default, ignores, imports, javascript, jsdoc, jsonc, lincy, markdown, node, recordRulesState, recordRulesStateConfigs, renameRules, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, vue, warnUnnecessaryOffRules, yaml };

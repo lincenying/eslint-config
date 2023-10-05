@@ -32,7 +32,16 @@ export interface OptionsHasTypeScript {
 }
 
 export interface OptionsStylistic {
-    stylistic?: boolean
+    stylistic?: boolean | StylisticConfig
+}
+
+export interface StylisticConfig {
+    indent?: number | 'tab'
+    quotes?: 'single' | 'double'
+}
+
+export interface StylisticOverridesConfig extends OptionsStylistic {
+    overrides?: FlatESLintConfigItem['rules']
 }
 
 export interface OptionsOverrides {
@@ -44,7 +53,7 @@ export interface OptionsIsInEditor {
     isInEditor?: boolean
 }
 
-export interface OptionsConfig {
+export interface OptionsConfig extends OptionsComponentExts {
     /**
      * Enable gitignore support.
      *
@@ -104,7 +113,7 @@ export interface OptionsConfig {
      *
      * @default true
      */
-    stylistic?: boolean
+    stylistic?: boolean | StylisticConfig
 
     /**
      * Control to disable some rules in editors.

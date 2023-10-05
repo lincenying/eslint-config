@@ -311,6 +311,9 @@ export default lincy(
 import lincy from '@lincy/eslint-config'
 
 export default lincy({
+    stylistic: {
+        indent: 4
+    },
     overrides: {
         // 重写vue规则
         vue: {

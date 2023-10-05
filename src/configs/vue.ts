@@ -16,6 +16,10 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
         stylistic = true,
     } = options
 
+    const {
+        indent = 4,
+    } = typeof stylistic === 'boolean' ? {} : stylistic
+
     return [
         {
             plugins: {
@@ -63,7 +67,7 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
                 'vue/dot-location': ['error', 'property'],
                 'vue/dot-notation': ['error', { allowKeywords: true }],
                 'vue/eqeqeq': ['error', 'smart'],
-                'vue/html-indent': ['error', 4, {
+                'vue/html-indent': ['error', indent, {
                     alignAttributesVertically: true,
                     attribute: 1,
                     baseIndent: 1,
