@@ -129,21 +129,21 @@ import lincy from '@lincy/eslint-config'
 
 export default lincy({
     // 是否启用 stylistic 格式化规则
-    stylistic: true, // 默认值: true
+    stylistic: true, // 默认值: true, 可选: false | { indent: number | 'tab', quotes: 'single' | 'double'}
     // 是否启用 typescript 规则
-    typescript: true, // 默认值: 检测是否安装typescript依赖
+    typescript: true, // 默认值: 检测是否安装typescript依赖, 可选: false
     // 是否启用 vue 规则
-    vue: true, // 默认值: 检测是否安装vue依赖
+    vue: true, // 默认值: 检测是否安装vue依赖, 可选: false
     // 是否启用 jsonc 规则
-    jsonc: false, // 默认值: 检测是否安装typescript依赖
+    jsonc: false, // 默认值: true, 可选: false
     // 是否启用 yaml 规则
-    yaml: false, // 默认值: true
+    yaml: false, // 默认值: true, 可选: false
     // 是否启用 .gitignore 文件
-    gitignore: false, // 默认值: true
+    gitignore: false, // 默认值: true, 可选: false
     // 是否启用 test 规则
-    test: false, // 默认值: true
+    test: false, // 默认值: true, 可选: false
     // 是否启用 markdown 规则
-    markdown: false, // 默认值: true
+    markdown: false, // 默认值: true, 可选: false
     // 覆盖规则
     overrides: {},
 
