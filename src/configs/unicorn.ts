@@ -22,6 +22,8 @@ export function unicorn(): FlatESLintConfigItem[] {
                 'unicorn/no-unsafe-regex': 'error',
                 // Lowercase number formatting for octal, hex, binary (0x1'error' instead of 0X1'error')
                 'unicorn/number-literal-case': 'error',
+                // textContent instead of innerText
+                'unicorn/prefer-dom-node-text-content': 'error',
                 // includes over indexOf when checking for existence
                 'unicorn/prefer-includes': 'error',
                 // Prefer using the node: protocol
@@ -30,8 +32,6 @@ export function unicorn(): FlatESLintConfigItem[] {
                 'unicorn/prefer-number-properties': 'error',
                 // String methods startsWith/endsWith instead of more complicated stuff
                 'unicorn/prefer-string-starts-ends-with': 'error',
-                // textContent instead of innerText
-                'unicorn/prefer-text-content': 'error',
                 // Enforce throwing type error when throwing error while checking typeof
                 'unicorn/prefer-type-error': 'error',
                 // Use new when throwing error

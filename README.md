@@ -67,7 +67,7 @@ For example:
 
   // 在 IDE 中静默样式规则，但仍会自动修复它们
   "eslint.rules.customizations": [
-    { "rule": "@stylistic/*", "severity": "off" },
+    { "rule": "style/*", "severity": "off" },
     { "rule": "*-indent", "severity": "off" },
     { "rule": "*-spacing", "severity": "off" },
     { "rule": "*-spaces", "severity": "off" },
