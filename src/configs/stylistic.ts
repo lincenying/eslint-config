@@ -1,8 +1,7 @@
-import type { FlatESLintConfigItem } from 'eslint-define-config'
 import { pluginAntfu, pluginStylistic } from '../plugins'
-import type { StylisticConfig, StylisticOverridesConfig } from '../types'
+import type { ConfigItem, StylisticOverridesConfig } from '../types'
 
-export function stylistic(options: StylisticOverridesConfig = {}): FlatESLintConfigItem[] {
+export function stylistic(options: StylisticOverridesConfig = {}): ConfigItem[] {
     const {
         overrides = {},
         stylistic = {},
@@ -23,8 +22,8 @@ export function stylistic(options: StylisticOverridesConfig = {}): FlatESLintCon
                 'antfu/consistent-list-newline': 'off',
                 'antfu/if-newline': 'error',
                 'antfu/top-level-function': 'error',
-                'curly': ['error', 'multi-or-nest', 'consistent'],
 
+                'curly': ['error', 'multi-or-nest', 'consistent'],
                 'style/array-bracket-spacing': ['error', 'never'],
                 'style/arrow-spacing': ['error', { after: true, before: true }],
                 'style/block-spacing': ['error', 'always'],

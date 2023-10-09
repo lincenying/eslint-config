@@ -1,8 +1,9 @@
-import { FlatESLintConfigItem } from 'eslint-define-config';
 import { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import { ParserOptions } from '@typescript-eslint/parser';
 import * as parser from '@typescript-eslint/parser';
 export { parser as parserTs };
+import { MergeIntersection, EslintRules, Unprefix, TypeScriptRules, RenamePrefix, VitestRules, YmlRules, NRules, Prefix, ImportRules, JsoncRules, VueRules, UnicornRules, EslintCommentsRules, RuleConfig, FlatESLintConfigItem } from '@antfu/eslint-define-config';
+import { Rules as Rules$1 } from 'eslint-plugin-antfu';
 export { default as pluginAntfu } from 'eslint-plugin-antfu';
 export { default as pluginComments } from 'eslint-plugin-eslint-comments';
 import * as eslintPluginI from 'eslint-plugin-i';
@@ -24,6 +25,24 @@ export { default as parserVue } from 'vue-eslint-parser';
 export { default as parserYaml } from 'yaml-eslint-parser';
 export { default as parserJsonc } from 'jsonc-eslint-parser';
 
+type MergedRules = MergeIntersection<EslintRules & Unprefix<TypeScriptRules, '@typescript-eslint/'>>;
+type StylisticRules = Pick<MergedRules, 'array-bracket-newline' | 'array-bracket-spacing' | 'array-element-newline' | 'arrow-spacing' | 'block-spacing' | 'brace-style' | 'comma-dangle' | 'comma-spacing' | 'comma-style' | 'computed-property-spacing' | 'dot-location' | 'eol-last' | 'func-call-spacing' | 'function-call-argument-newline' | 'function-paren-newline' | 'generator-star-spacing' | 'implicit-arrow-linebreak' | 'indent' | 'jsx-quotes' | 'key-spacing' | 'keyword-spacing' | 'linebreak-style' | 'lines-around-comment' | 'lines-around-directive' | 'lines-between-class-members' | 'max-len' | 'max-statements-per-line' | 'multiline-ternary' | 'new-parens' | 'newline-after-var' | 'newline-before-return' | 'newline-per-chained-call' | 'no-confusing-arrow' | 'no-extra-parens' | 'no-extra-semi' | 'no-floating-decimal' | 'no-mixed-operators' | 'no-mixed-spaces-and-tabs' | 'no-multi-spaces' | 'no-multiple-empty-lines' | 'no-spaced-func' | 'no-tabs' | 'no-trailing-spaces' | 'no-whitespace-before-property' | 'nonblock-statement-body-position' | 'object-curly-newline' | 'object-curly-spacing' | 'object-property-newline' | 'one-var-declaration-per-line' | 'operator-linebreak' | 'padded-blocks' | 'padding-line-between-statements' | 'quote-props' | 'quotes' | 'rest-spread-spacing' | 'semi' | 'semi-spacing' | 'semi-style' | 'space-before-blocks' | 'space-before-function-paren' | 'space-in-parens' | 'space-infix-ops' | 'space-unary-ops' | 'spaced-comment' | 'switch-colon-spacing' | 'template-curly-spacing' | 'template-tag-spacing' | 'wrap-iife' | 'wrap-regex' | 'yield-star-spacing' | 'member-delimiter-style' | 'type-annotation-spacing'>;
+
+type Rules = MergeIntersection<RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> & RenamePrefix<VitestRules, 'vitest/', 'test/'> & RenamePrefix<YmlRules, 'yml/', 'yaml/'> & RenamePrefix<NRules, 'n/', 'node/'> & Prefix<StylisticRules, 'style/'> & Prefix<Rules$1, 'antfu/'> & ImportRules & EslintRules & JsoncRules & VueRules & UnicornRules & EslintCommentsRules & {
+    'test/no-only-tests': RuleConfig<[]>;
+}>;
+type ConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
+    /**
+     * Custom name of each config item
+     */
+    name?: string;
+    /**
+     * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
+     *
+     * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
+     */
+    plugins?: Record<string, any>;
+};
 interface OptionsComponentExts {
     /**
      * Additional extensions for components.
@@ -57,10 +76,12 @@ interface StylisticConfig {
     quotes?: 'single' | 'double';
 }
 interface StylisticOverridesConfig extends OptionsStylistic {
-    overrides?: FlatESLintConfigItem['rules'];
+    overrides?: ConfigItem['rules'];
 }
 interface OptionsOverrides {
-    overrides?: FlatESLintConfigItem['rules'];
+    overrides?: ConfigItem['rules'];
+}
+interface OptionsIgnores {
     ignores?: string[];
 }
 interface OptionsIsInEditor {
@@ -129,14 +150,14 @@ interface OptionsConfig extends OptionsComponentExts {
      * Provide overrides for rules for each integration.
      */
     overrides?: {
-        javascript?: FlatESLintConfigItem['rules'];
-        typescript?: FlatESLintConfigItem['rules'];
-        stylistic?: FlatESLintConfigItem['rules'];
-        test?: FlatESLintConfigItem['rules'];
-        vue?: FlatESLintConfigItem['rules'];
-        jsonc?: FlatESLintConfigItem['rules'];
-        markdown?: FlatESLintConfigItem['rules'];
-        yaml?: FlatESLintConfigItem['rules'];
+        javascript?: ConfigItem['rules'];
+        typescript?: ConfigItem['rules'];
+        stylistic?: ConfigItem['rules'];
+        test?: ConfigItem['rules'];
+        vue?: ConfigItem['rules'];
+        jsonc?: ConfigItem['rules'];
+        markdown?: ConfigItem['rules'];
+        yaml?: ConfigItem['rules'];
         ignores?: string[];
     };
 }
@@ -144,59 +165,56 @@ interface OptionsConfig extends OptionsComponentExts {
 /**
  * Construct an array of ESLint flat config items.
  */
-declare function lincy(options?: OptionsConfig & FlatESLintConfigItem, ...userConfigs: (FlatESLintConfigItem | FlatESLintConfigItem[])[]): FlatESLintConfigItem[];
+declare function lincy(options?: OptionsConfig & ConfigItem, ...userConfigs: (ConfigItem | ConfigItem[])[]): ConfigItem[];
 
-declare function comments(): FlatESLintConfigItem[];
+declare function comments(): ConfigItem[];
 
-declare function ignores(options?: OptionsOverrides): FlatESLintConfigItem[];
+declare function ignores(options?: OptionsIgnores): ConfigItem[];
 
-declare function imports(options?: OptionsStylistic): FlatESLintConfigItem[];
+declare function imports(options?: OptionsStylistic): ConfigItem[];
 
-declare function javascript(options?: OptionsIsInEditor & OptionsOverrides): FlatESLintConfigItem[];
+declare function javascript(options?: OptionsIsInEditor & OptionsOverrides): ConfigItem[];
 
-declare function jsdoc(options?: OptionsStylistic): FlatESLintConfigItem[];
+declare function jsdoc(options?: OptionsStylistic): ConfigItem[];
 
-declare function jsonc(options?: OptionsStylistic & OptionsOverrides): FlatESLintConfigItem[];
+declare function jsonc(options?: OptionsStylistic & OptionsOverrides): ConfigItem[];
 
-declare function markdown(options?: OptionsComponentExts & OptionsOverrides): FlatESLintConfigItem[];
+declare function markdown(options?: OptionsComponentExts & OptionsOverrides): ConfigItem[];
 
-declare function node(): FlatESLintConfigItem[];
+declare function node(): ConfigItem[];
 
 /**
  * Sort package.json
  *
  * Requires `jsonc` config
  */
-declare function sortPackageJson(): FlatESLintConfigItem[];
+declare function sortPackageJson(): ConfigItem[];
 /**
  * Sort tsconfig.json
  *
  * Requires `jsonc` config
  */
-declare function sortTsconfig(): FlatESLintConfigItem[];
+declare function sortTsconfig(): ConfigItem[];
 
-declare function stylistic(options?: StylisticOverridesConfig): FlatESLintConfigItem[];
+declare function stylistic(options?: StylisticOverridesConfig): ConfigItem[];
 
-declare function typescript(options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions): FlatESLintConfigItem[];
+declare function typescript(options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions): ConfigItem[];
 
-declare function unicorn(): FlatESLintConfigItem[];
+declare function unicorn(): ConfigItem[];
 
-declare function vue(options?: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic): FlatESLintConfigItem[];
+declare function vue(options?: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic): ConfigItem[];
 
-declare function yaml(options?: OptionsOverrides & OptionsStylistic): FlatESLintConfigItem[];
+declare function yaml(options?: OptionsOverrides & OptionsStylistic): ConfigItem[];
 
-declare function test(options?: OptionsIsInEditor & OptionsOverrides): FlatESLintConfigItem[];
+declare function test(options?: OptionsIsInEditor & OptionsOverrides): ConfigItem[];
 
 /**
  * Combine array and non-array configs into a single array.
  */
-declare function combine(...configs: (FlatESLintConfigItem | FlatESLintConfigItem[])[]): FlatESLintConfigItem[];
+declare function combine(...configs: (ConfigItem | ConfigItem[])[]): ConfigItem[];
 declare function renameRules(rules: Record<string, any>, from: string, to: string): {
     [k: string]: any;
 };
-declare function recordRulesStateConfigs(configs: FlatESLintConfigItem[]): FlatESLintConfigItem[];
-declare function recordRulesState(rules: FlatESLintConfigItem['rules']): FlatESLintConfigItem['rules'];
-declare function warnUnnecessaryOffRules(): void;
 
 declare const GLOB_SRC_EXT = "?([cm])[jt]s?(x)";
 declare const GLOB_SRC = "**/*.?([cm])[jt]s?(x)";
@@ -220,4 +238,4 @@ declare const GLOB_TESTS: string[];
 declare const GLOB_ALL_SRC: string[];
 declare const GLOB_EXCLUDE: string[];
 
-export { GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIsInEditor, OptionsOverrides, OptionsStylistic, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, StylisticConfig, StylisticOverridesConfig, combine, comments, lincy as default, ignores, imports, javascript, jsdoc, jsonc, lincy, markdown, node, recordRulesState, recordRulesStateConfigs, renameRules, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, vue, warnUnnecessaryOffRules, yaml };
+export { ConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIgnores, OptionsIsInEditor, OptionsOverrides, OptionsStylistic, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, Rules, StylisticConfig, StylisticOverridesConfig, combine, comments, lincy as default, ignores, imports, javascript, jsdoc, jsonc, lincy, markdown, node, renameRules, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, vue, yaml };

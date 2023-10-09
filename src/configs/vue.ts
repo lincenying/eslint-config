@@ -1,16 +1,14 @@
-import type { FlatESLintConfigItem } from 'eslint-define-config'
 import { getPackageInfoSync } from 'local-pkg'
+import type { ConfigItem, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic } from '../types'
 import { GLOB_VUE } from '../globs'
 import { parserTs, parserVue, pluginVue } from '../plugins'
-import { OFF } from '../flags'
-import type { OptionsHasTypeScript, OptionsOverrides, OptionsStylistic } from '../types'
 
 const pkg = getPackageInfoSync('vue')
 let vueVersion = pkg && pkg.version
 vueVersion = (vueVersion && vueVersion[0])
 vueVersion = Number.isNaN(vueVersion) ? '3' : vueVersion
 
-export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic = {}): FlatESLintConfigItem[] {
+export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic = {}): ConfigItem[] {
     const {
         overrides = {},
         stylistic = true,
@@ -52,7 +50,7 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
                     ...pluginVue.configs.recommended.rules as any,
                 }),
 
-                'node/prefer-global/process': OFF,
+                'node/prefer-global/process': 'off',
 
                 'vue/block-order': ['error', {
                     order: ['template', 'script', 'style'],
@@ -83,10 +81,10 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
                     math: 'always',
                     svg: 'always',
                 }],
-                'vue/max-attributes-per-line': OFF,
-                'vue/multi-word-component-names': OFF,
+                'vue/max-attributes-per-line': 'off',
+                'vue/multi-word-component-names': 'off',
                 'vue/no-constant-condition': 'warn',
-                'vue/no-dupe-keys': OFF,
+                'vue/no-dupe-keys': 'off',
                 'vue/no-empty-pattern': 'error',
                 'vue/no-extra-parens': ['error', 'functions'],
                 'vue/no-irregular-whitespace': 'error',
@@ -99,12 +97,12 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
                 ],
                 'vue/no-restricted-v-bind': ['error', '/^v-/'],
 
-                'vue/no-setup-props-reactivity-loss': OFF,
+                'vue/no-setup-props-reactivity-loss': 'off',
                 'vue/no-sparse-arrays': 'error',
                 'vue/no-unused-refs': 'error',
                 'vue/no-useless-v-bind': 'error',
-                'vue/no-v-html': OFF,
-                'vue/no-v-text-v-html-on-component': OFF,
+                'vue/no-v-html': 'off',
+                'vue/no-v-text-v-html-on-component': 'off',
                 'vue/object-shorthand': [
                     'error',
                     'always',
@@ -115,8 +113,8 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
                 ],
                 'vue/prefer-separate-static-class': 'error',
                 'vue/prefer-template': 'error',
-                'vue/require-default-prop': OFF,
-                'vue/require-prop-types': OFF,
+                'vue/require-default-prop': 'off',
+                'vue/require-prop-types': 'off',
                 'vue/singleline-html-element-content-newline': 'off',
                 'vue/space-infix-ops': 'error',
                 'vue/space-unary-ops': ['error', { nonwords: false, words: true }],
@@ -138,7 +136,7 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
                     }],
                     'vue/key-spacing': ['error', { afterColon: true, beforeColon: false }],
                     'vue/keyword-spacing': ['error', { after: true, before: true }],
-                    'vue/object-curly-newline': OFF,
+                    'vue/object-curly-newline': 'off',
                     'vue/object-curly-spacing': ['error', 'always'],
                     'vue/object-property-newline': ['error', { allowMultiplePropertiesPerLine: true }],
                     'vue/operator-linebreak': ['error', 'before'],

@@ -1,6 +1,5 @@
 import process from 'node:process'
 import fs from 'node:fs'
-import type { FlatESLintConfigItem } from 'eslint-define-config'
 import { isPackageExists } from 'local-pkg'
 import gitignore from 'eslint-config-flat-gitignore'
 import {
@@ -21,10 +20,10 @@ import {
     vue,
     yaml,
 } from './configs'
-import type { OptionsConfig } from './types'
+import type { ConfigItem, OptionsConfig } from './types'
 import { combine } from './utils'
 
-const flatConfigProps: (keyof FlatESLintConfigItem)[] = [
+const flatConfigProps: (keyof ConfigItem)[] = [
     'files',
     'ignores',
     'languageOptions',
@@ -45,7 +44,7 @@ const VuePackages = [
 /**
  * Construct an array of ESLint flat config items.
  */
-export function lincy(options: OptionsConfig & FlatESLintConfigItem = {}, ...userConfigs: (FlatESLintConfigItem | FlatESLintConfigItem[])[]) {
+export function lincy(options: OptionsConfig & ConfigItem = {}, ...userConfigs: (ConfigItem | ConfigItem[])[]) {
     const {
         isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
         vue: enableVue = VuePackages.some(i => isPackageExists(i)),
@@ -56,7 +55,7 @@ export function lincy(options: OptionsConfig & FlatESLintConfigItem = {}, ...use
         componentExts = [],
     } = options
 
-    const configs: FlatESLintConfigItem[][] = []
+    const configs: ConfigItem[][] = []
 
     if (enableGitignore) {
         if (typeof enableGitignore !== 'boolean') {
@@ -151,9 +150,9 @@ export function lincy(options: OptionsConfig & FlatESLintConfigItem = {}, ...use
     // We pick the known keys as ESLint would do schema validation
     const fusedConfig = flatConfigProps.reduce((acc, key) => {
         if (key in options)
-            acc[key] = options[key]
+            acc[key] = options[key] as any
         return acc
-    }, {} as FlatESLintConfigItem)
+    }, {} as ConfigItem)
 
     if (Object.keys(fusedConfig).length)
         configs.push([fusedConfig])

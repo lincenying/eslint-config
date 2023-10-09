@@ -1,11 +1,11 @@
-import type { FlatESLintConfigItem } from 'eslint-define-config'
+import type { ConfigItem, OptionsStylistic } from '../types'
 import { pluginAntfu, pluginImport } from '../plugins'
-import type { OptionsStylistic } from '../types'
 
-export function imports(options: OptionsStylistic = {}): FlatESLintConfigItem[] {
+export function imports(options: OptionsStylistic = {}): ConfigItem[] {
     const {
         stylistic = true,
     } = options
+
     return [
         {
             plugins: {
@@ -24,11 +24,9 @@ export function imports(options: OptionsStylistic = {}): FlatESLintConfigItem[] 
                 'import/no-webpack-loader-syntax': 'error',
                 'import/order': 'error',
 
-                ...(
-                    stylistic ? {
-                        'import/newline-after-import': ['error', { considerComments: true, count: 1 }],
-                    } : {}
-                ),
+                ...(stylistic ? {
+                    'import/newline-after-import': ['error', { considerComments: true, count: 1 }],
+                } : {}),
             },
         },
     ]

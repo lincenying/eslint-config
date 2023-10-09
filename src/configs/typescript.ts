@@ -1,12 +1,10 @@
 import process from 'node:process'
-import type { FlatESLintConfigItem } from 'eslint-define-config'
 import { GLOB_SRC } from '../globs'
 import { parserTs, pluginAntfu, pluginImport, pluginTs } from '../plugins'
-import { OFF } from '../flags'
-import type { OptionsComponentExts, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from '../types'
+import type { ConfigItem, OptionsComponentExts, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from '../types'
 import { renameRules } from '../utils'
 
-export function typescript(options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions): FlatESLintConfigItem[] {
+export function typescript(options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions): ConfigItem[] {
     const {
         componentExts = [],
         overrides = {},
@@ -14,10 +12,10 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
         tsconfigPath,
     } = options ?? {}
 
-    const typeAwareRules: FlatESLintConfigItem['rules'] = {
-        'dot-notation': OFF,
-        'no-implied-eval': OFF,
-        'no-throw-literal': OFF,
+    const typeAwareRules: ConfigItem['rules'] = {
+        'dot-notation': 'off',
+        'no-implied-eval': 'off',
+        'no-throw-literal': 'off',
         'ts/await-thenable': 'error',
         'ts/dot-notation': ['error', { allowKeywords: true }],
         'ts/no-floating-promises': 'error',
@@ -79,33 +77,33 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
                 'antfu/no-const-enum': 'error',
                 'antfu/no-ts-export-equal': 'error',
 
-                'no-dupe-class-members': OFF,
-                'no-invalid-this': OFF,
-                'no-loss-of-precision': OFF,
-                'no-redeclare': OFF,
-                'no-use-before-define': OFF,
-                'no-useless-constructor': OFF,
+                'no-dupe-class-members': 'off',
+                'no-invalid-this': 'off',
+                'no-loss-of-precision': 'off',
+                'no-redeclare': 'off',
+                'no-use-before-define': 'off',
+                'no-useless-constructor': 'off',
 
                 'ts/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
                 'ts/ban-types': ['error', { types: { Function: false } }],
                 'ts/consistent-type-definitions': ['error', 'interface'],
                 'ts/consistent-type-imports': ['error', { disallowTypeAnnotations: false, prefer: 'type-imports' }],
                 'ts/no-dupe-class-members': 'error',
-                'ts/no-dynamic-delete': OFF,
-                'ts/no-explicit-any': OFF,
-                'ts/no-extraneous-class': OFF,
+                'ts/no-dynamic-delete': 'off',
+                'ts/no-explicit-any': 'off',
+                'ts/no-extraneous-class': 'off',
                 'ts/no-invalid-this': 'error',
-                'ts/no-invalid-void-type': OFF,
+                'ts/no-invalid-void-type': 'off',
                 'ts/no-loss-of-precision': 'error',
-                'ts/no-non-null-assertion': OFF,
+                'ts/no-non-null-assertion': 'off',
                 'ts/no-redeclare': 'error',
                 'ts/no-require-imports': 'error',
-                'ts/no-unused-vars': OFF,
+                'ts/no-unused-vars': 'off',
                 'ts/no-use-before-define': ['error', { classes: false, functions: false, variables: true }],
-                'ts/no-useless-constructor': OFF,
+                'ts/no-useless-constructor': 'off',
                 'ts/prefer-ts-expect-error': 'error',
-                'ts/triple-slash-reference': OFF,
-                'ts/unified-signatures': OFF,
+                'ts/triple-slash-reference': 'off',
+                'ts/unified-signatures': 'off',
 
                 ...tsconfigPath ? typeAwareRules : {},
                 ...overrides,
@@ -114,23 +112,23 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
         {
             files: ['**/*.d.ts'],
             rules: {
-                'eslint-comments/no-unlimited-disable': OFF,
-                'import/no-duplicates': OFF,
-                'no-restricted-syntax': OFF,
-                'unused-imports/no-unused-vars': OFF,
+                'eslint-comments/no-unlimited-disable': 'off',
+                'import/no-duplicates': 'off',
+                'no-restricted-syntax': 'off',
+                'unused-imports/no-unused-vars': 'off',
             },
         },
         {
             files: ['**/*.{test,spec}.ts?(x)'],
             rules: {
-                'no-unused-expressions': OFF,
+                'no-unused-expressions': 'off',
             },
         },
         {
             files: ['**/*.js', '**/*.cjs'],
             rules: {
-                'ts/no-require-imports': OFF,
-                'ts/no-var-requires': OFF,
+                'ts/no-require-imports': 'off',
+                'ts/no-var-requires': 'off',
             },
         },
     ]

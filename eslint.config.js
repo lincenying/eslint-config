@@ -1,6 +1,6 @@
 import sortKeys from 'eslint-plugin-sort-keys'
-import lincy from '@lincy/eslint-config'
 import styleMigrate from '@stylistic/eslint-plugin-migrate'
+import lincy from './dist/index.js'
 
 const config = lincy(
     {

@@ -1,8 +1,7 @@
-import type { FlatESLintConfigItem } from 'eslint-define-config'
+import type { ConfigItem, OptionsIgnores } from '../types'
 import { GLOB_EXCLUDE } from '../globs'
-import type { OptionsOverrides } from '../types'
 
-export function ignores(options: OptionsOverrides = {}): FlatESLintConfigItem[] {
+export function ignores(options: OptionsIgnores = {}): ConfigItem[] {
     const {
         ignores = [],
     } = options

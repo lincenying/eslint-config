@@ -1,11 +1,9 @@
-import type { FlatESLintConfigItem } from 'eslint-define-config'
 import globals from 'globals'
+import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from '../types'
 import { pluginAntfu, pluginUnusedImports } from '../plugins'
-import { OFF } from '../flags'
-import type { OptionsIsInEditor, OptionsOverrides } from '../types'
 import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
 
-export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): FlatESLintConfigItem[] {
+export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): ConfigItem[] {
     const {
         isInEditor = false,
         overrides = {},
@@ -31,6 +29,9 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                     sourceType: 'module',
                 },
                 sourceType: 'module',
+            },
+            linterOptions: {
+                reportUnusedDisableDirectives: true,
             },
             plugins: {
                 'antfu': pluginAntfu,
@@ -58,7 +59,7 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                 'no-compare-neg-zero': 'error',
                 'no-cond-assign': ['error', 'always'],
                 // 'no-console': ['error', { allow: ['warn', 'error'] }],
-                'no-console': OFF,
+                'no-console': 'off',
                 'no-const-assign': 'error',
                 'no-constant-condition': 'warn',
                 'no-control-regex': 'error',
@@ -204,7 +205,7 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                 'symbol-description': 'error',
                 'unicode-bom': ['error', 'never'],
 
-                'unused-imports/no-unused-imports': isInEditor ? OFF : 'error',
+                'unused-imports/no-unused-imports': isInEditor ? 'off' : 'error',
                 'unused-imports/no-unused-vars': [
                     'error',
                     { args: 'after-used', argsIgnorePattern: '^_', vars: 'all', varsIgnorePattern: '^_' },
@@ -221,7 +222,7 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
         {
             files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
             rules: {
-                'no-console': OFF,
+                'no-console': 'off',
             },
         },
     ]

@@ -1,6 +1,57 @@
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
-import type { FlatESLintConfigItem } from 'eslint-define-config'
 import type { ParserOptions } from '@typescript-eslint/parser'
+import type {
+    EslintCommentsRules,
+    EslintRules,
+    FlatESLintConfigItem,
+    ImportRules,
+    JsoncRules,
+    MergeIntersection,
+    NRules,
+    Prefix,
+    RenamePrefix,
+    RuleConfig,
+    TypeScriptRules,
+    UnicornRules,
+    VitestRules,
+    VueRules,
+    YmlRules,
+} from '@antfu/eslint-define-config'
+import type { Rules as AntfuRules } from 'eslint-plugin-antfu'
+import type { StylisticRules } from './generated/stylistic'
+
+export type Rules = MergeIntersection<
+    RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &
+    RenamePrefix<VitestRules, 'vitest/', 'test/'> &
+    RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
+    RenamePrefix<NRules, 'n/', 'node/'> &
+    Prefix<StylisticRules, 'style/'> &
+    Prefix<AntfuRules, 'antfu/'> &
+    ImportRules &
+    EslintRules &
+    JsoncRules &
+    VueRules &
+    UnicornRules &
+    EslintCommentsRules &
+    {
+        'test/no-only-tests': RuleConfig<[]>
+    }
+>
+
+export type ConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
+    /**
+     * Custom name of each config item
+     */
+    name?: string
+
+    // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
+    /**
+     * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
+     *
+     * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
+     */
+    plugins?: Record<string, any>
+}
 
 export interface OptionsComponentExts {
     /**
@@ -41,11 +92,14 @@ export interface StylisticConfig {
 }
 
 export interface StylisticOverridesConfig extends OptionsStylistic {
-    overrides?: FlatESLintConfigItem['rules']
+    overrides?: ConfigItem['rules']
 }
 
 export interface OptionsOverrides {
-    overrides?: FlatESLintConfigItem['rules']
+    overrides?: ConfigItem['rules']
+}
+
+export interface OptionsIgnores {
     ignores?: string[]
 }
 
@@ -125,14 +179,14 @@ export interface OptionsConfig extends OptionsComponentExts {
      * Provide overrides for rules for each integration.
      */
     overrides?: {
-        javascript?: FlatESLintConfigItem['rules']
-        typescript?: FlatESLintConfigItem['rules']
-        stylistic?: FlatESLintConfigItem['rules']
-        test?: FlatESLintConfigItem['rules']
-        vue?: FlatESLintConfigItem['rules']
-        jsonc?: FlatESLintConfigItem['rules']
-        markdown?: FlatESLintConfigItem['rules']
-        yaml?: FlatESLintConfigItem['rules']
+        javascript?: ConfigItem['rules']
+        typescript?: ConfigItem['rules']
+        stylistic?: ConfigItem['rules']
+        test?: ConfigItem['rules']
+        vue?: ConfigItem['rules']
+        jsonc?: ConfigItem['rules']
+        markdown?: ConfigItem['rules']
+        yaml?: ConfigItem['rules']
         ignores?: string[]
     }
 }

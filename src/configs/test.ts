@@ -1,10 +1,8 @@
-import type { FlatESLintConfigItem } from 'eslint-define-config'
+import type { ConfigItem, OptionsIsInEditor, OptionsOverrides } from '../types'
 import { pluginNoOnlyTests } from '../plugins'
 import { GLOB_TESTS } from '../globs'
-import { OFF } from '../flags'
-import type { OptionsIsInEditor, OptionsOverrides } from '../types'
 
-export function test(options: OptionsIsInEditor & OptionsOverrides = {}): FlatESLintConfigItem[] {
+export function test(options: OptionsIsInEditor & OptionsOverrides = {}): ConfigItem[] {
     const {
         isInEditor = false,
         overrides = {},
@@ -19,7 +17,7 @@ export function test(options: OptionsIsInEditor & OptionsOverrides = {}): FlatES
         {
             files: GLOB_TESTS,
             rules: {
-                'no-only-tests/no-only-tests': isInEditor ? OFF : 'error',
+                'no-only-tests/no-only-tests': isInEditor ? 'off' : 'error',
 
                 ...overrides,
             },

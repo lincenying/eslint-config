@@ -1,9 +1,7 @@
-import type { FlatESLintConfigItem } from 'eslint-define-config'
+import type { ConfigItem, OptionsStylistic } from '../types'
 import { pluginJsdoc } from '../plugins'
 
-import type { OptionsStylistic } from '../types'
-
-export function jsdoc(options: OptionsStylistic = {}): FlatESLintConfigItem[] {
+export function jsdoc(options: OptionsStylistic = {}): ConfigItem[] {
     const {
         stylistic = true,
     } = options
