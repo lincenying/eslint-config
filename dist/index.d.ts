@@ -2,7 +2,7 @@ import { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import { ParserOptions } from '@typescript-eslint/parser';
 import * as parser from '@typescript-eslint/parser';
 export { parser as parserTs };
-import { MergeIntersection, EslintRules, Unprefix, TypeScriptRules, RenamePrefix, VitestRules, YmlRules, NRules, Prefix, ImportRules, JsoncRules, VueRules, UnicornRules, EslintCommentsRules, RuleConfig, FlatESLintConfigItem } from '@antfu/eslint-define-config';
+import { MergeIntersection, EslintRules, Unprefix, ReactRules, TypeScriptRules, RenamePrefix, VitestRules, YmlRules, NRules, Prefix, ImportRules, JsoncRules, VueRules, UnicornRules, EslintCommentsRules, RuleConfig, FlatESLintConfigItem } from '@antfu/eslint-define-config';
 import { Rules as Rules$1 } from 'eslint-plugin-antfu';
 export { default as pluginAntfu } from 'eslint-plugin-antfu';
 export { default as pluginComments } from 'eslint-plugin-eslint-comments';
@@ -25,8 +25,8 @@ export { default as parserVue } from 'vue-eslint-parser';
 export { default as parserYaml } from 'yaml-eslint-parser';
 export { default as parserJsonc } from 'jsonc-eslint-parser';
 
-type MergedRules = MergeIntersection<EslintRules & Unprefix<TypeScriptRules, '@typescript-eslint/'>>;
-type StylisticRules = Pick<MergedRules, 'array-bracket-newline' | 'array-bracket-spacing' | 'array-element-newline' | 'arrow-spacing' | 'block-spacing' | 'brace-style' | 'comma-dangle' | 'comma-spacing' | 'comma-style' | 'computed-property-spacing' | 'dot-location' | 'eol-last' | 'func-call-spacing' | 'function-call-argument-newline' | 'function-paren-newline' | 'generator-star-spacing' | 'implicit-arrow-linebreak' | 'indent' | 'jsx-quotes' | 'key-spacing' | 'keyword-spacing' | 'linebreak-style' | 'lines-around-comment' | 'lines-around-directive' | 'lines-between-class-members' | 'max-len' | 'max-statements-per-line' | 'multiline-ternary' | 'new-parens' | 'newline-after-var' | 'newline-before-return' | 'newline-per-chained-call' | 'no-confusing-arrow' | 'no-extra-parens' | 'no-extra-semi' | 'no-floating-decimal' | 'no-mixed-operators' | 'no-mixed-spaces-and-tabs' | 'no-multi-spaces' | 'no-multiple-empty-lines' | 'no-spaced-func' | 'no-tabs' | 'no-trailing-spaces' | 'no-whitespace-before-property' | 'nonblock-statement-body-position' | 'object-curly-newline' | 'object-curly-spacing' | 'object-property-newline' | 'one-var-declaration-per-line' | 'operator-linebreak' | 'padded-blocks' | 'padding-line-between-statements' | 'quote-props' | 'quotes' | 'rest-spread-spacing' | 'semi' | 'semi-spacing' | 'semi-style' | 'space-before-blocks' | 'space-before-function-paren' | 'space-in-parens' | 'space-infix-ops' | 'space-unary-ops' | 'spaced-comment' | 'switch-colon-spacing' | 'template-curly-spacing' | 'template-tag-spacing' | 'wrap-iife' | 'wrap-regex' | 'yield-star-spacing' | 'member-delimiter-style' | 'type-annotation-spacing'>;
+type MergedRules = MergeIntersection<EslintRules & Unprefix<ReactRules, 'react/'> & Unprefix<TypeScriptRules, '@typescript-eslint/'>>;
+type StylisticRules = Pick<MergedRules, 'array-bracket-newline' | 'array-bracket-spacing' | 'array-element-newline' | 'arrow-spacing' | 'block-spacing' | 'brace-style' | 'comma-dangle' | 'comma-spacing' | 'comma-style' | 'computed-property-spacing' | 'dot-location' | 'eol-last' | 'func-call-spacing' | 'function-call-argument-newline' | 'function-paren-newline' | 'generator-star-spacing' | 'implicit-arrow-linebreak' | 'indent' | 'jsx-quotes' | 'key-spacing' | 'keyword-spacing' | 'linebreak-style' | 'lines-around-comment' | 'lines-around-directive' | 'lines-between-class-members' | 'max-len' | 'max-statements-per-line' | 'multiline-ternary' | 'new-parens' | 'newline-after-var' | 'newline-before-return' | 'newline-per-chained-call' | 'no-confusing-arrow' | 'no-extra-parens' | 'no-extra-semi' | 'no-floating-decimal' | 'no-mixed-operators' | 'no-mixed-spaces-and-tabs' | 'no-multi-spaces' | 'no-multiple-empty-lines' | 'no-spaced-func' | 'no-tabs' | 'no-trailing-spaces' | 'no-whitespace-before-property' | 'nonblock-statement-body-position' | 'object-curly-newline' | 'object-curly-spacing' | 'object-property-newline' | 'one-var-declaration-per-line' | 'operator-linebreak' | 'padded-blocks' | 'padding-line-between-statements' | 'quote-props' | 'quotes' | 'rest-spread-spacing' | 'semi' | 'semi-spacing' | 'semi-style' | 'space-before-blocks' | 'space-before-function-paren' | 'space-in-parens' | 'space-infix-ops' | 'space-unary-ops' | 'spaced-comment' | 'switch-colon-spacing' | 'template-curly-spacing' | 'template-tag-spacing' | 'wrap-iife' | 'wrap-regex' | 'yield-star-spacing' | 'block-spacing' | 'brace-style' | 'comma-dangle' | 'comma-spacing' | 'func-call-spacing' | 'indent' | 'key-spacing' | 'keyword-spacing' | 'lines-around-comment' | 'lines-between-class-members' | 'member-delimiter-style' | 'object-curly-spacing' | 'padding-line-between-statements' | 'quotes' | 'semi' | 'space-before-blocks' | 'space-before-function-paren' | 'space-infix-ops' | 'type-annotation-spacing'>;
 
 type Rules = MergeIntersection<RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> & RenamePrefix<VitestRules, 'vitest/', 'test/'> & RenamePrefix<YmlRules, 'yml/', 'yaml/'> & RenamePrefix<NRules, 'n/', 'node/'> & Prefix<StylisticRules, 'style/'> & Prefix<Rules$1, 'antfu/'> & ImportRules & EslintRules & JsoncRules & VueRules & UnicornRules & EslintCommentsRules & {
     'test/no-only-tests': RuleConfig<[]>;
@@ -74,6 +74,7 @@ interface OptionsStylistic {
 interface StylisticConfig {
     indent?: number | 'tab';
     quotes?: 'single' | 'double';
+    jsx?: boolean;
 }
 interface StylisticOverridesConfig extends OptionsStylistic {
     overrides?: ConfigItem['rules'];
@@ -105,6 +106,14 @@ interface OptionsConfig extends OptionsComponentExts {
      * @default auto-detect based on the dependencies
      */
     typescript?: boolean | OptionsTypeScriptWithTypes;
+    /**
+     * Enable JSX related rules.
+     *
+     * Currently only stylistic rules are included.
+     *
+     * @default true
+     */
+    jsx?: boolean;
     /**
      * Enable test support.
      *

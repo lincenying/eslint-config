@@ -86,6 +86,7 @@ var GLOB_EXCLUDE = [
   "**/temp",
   "**/.vitepress/cache",
   "**/.nuxt",
+  "**/.next",
   "**/.vercel",
   "**/.changeset",
   "**/.idea",
@@ -778,7 +779,8 @@ function stylistic(options = {}) {
   } = options;
   const {
     indent = 4,
-    quotes = "single"
+    quotes = "single",
+    jsx = true
   } = typeof stylistic2 === "boolean" ? {} : stylistic2;
   return [
     {
@@ -839,7 +841,6 @@ function stylistic(options = {}) {
           offsetTernaryExpressions: true,
           outerIIFEBody: 1
         }],
-        "style/jsx-quotes": "error",
         "style/key-spacing": ["error", { afterColon: true, beforeColon: false }],
         "style/keyword-spacing": ["error", { after: true, before: true }],
         "style/lines-between-class-members": ["error", "always", { exceptAfterSingleLine: true }],
@@ -894,6 +895,19 @@ function stylistic(options = {}) {
         "style/type-annotation-spacing": ["error", {}],
         "style/wrap-iife": ["error", "any", { functionPrototypeMethods: true }],
         "style/yield-star-spacing": ["error", "both"],
+        ...jsx ? {
+          "style/jsx-child-element-spacing": "error",
+          "style/jsx-closing-bracket-location": ["error", "line-aligned"],
+          "style/jsx-curly-newline": "error",
+          "style/jsx-curly-spacing": ["error", "never", { allowMultiline: true }],
+          "style/jsx-equals-spacing": "error",
+          "style/jsx-first-prop-new-line": "error",
+          "style/jsx-indent": ["error", indent],
+          "style/jsx-indent-props": ["error", indent],
+          "style/jsx-quotes": "error",
+          "style/jsx-tag-spacing": "error",
+          "style/jsx-wrap-multilines": "error"
+        } : {},
         ...overrides
       }
     }
@@ -1001,6 +1015,7 @@ function typescript(options) {
         "ts/no-dynamic-delete": "off",
         "ts/no-explicit-any": "off",
         "ts/no-extraneous-class": "off",
+        "ts/no-import-type-side-effects": "error",
         "ts/no-invalid-this": "error",
         "ts/no-invalid-void-type": "off",
         "ts/no-loss-of-precision": "error",
@@ -1135,7 +1150,9 @@ function vue(options = {}) {
         "vue/component-name-in-template-casing": ["error", "PascalCase"],
         "vue/component-options-name-casing": ["error", "PascalCase"],
         "vue/custom-event-name-casing": vueVersion === "3" ? ["error", "camelCase"] : ["error", "kebab-case"],
-        ...vueVersion === "2" ? { "vue/require-explicit-emits": "off" } : null,
+        ...vueVersion === "2" ? {
+          "vue/require-explicit-emits": "off"
+        } : null,
         "vue/define-macros-order": ["error", {
           order: ["defineOptions", "defineProps", "defineEmits", "defineSlots"]
         }],
@@ -1198,17 +1215,12 @@ function vue(options = {}) {
           "vue/array-bracket-spacing": ["error", "never"],
           "vue/arrow-spacing": ["error", { after: true, before: true }],
           "vue/block-spacing": ["error", "always"],
-          "vue/block-tag-newline": ["error", {
-            multiline: "always",
-            singleline: "always"
-          }],
+          "vue/block-tag-newline": ["error", { multiline: "always", singleline: "always" }],
           "vue/brace-style": ["error", "stroustrup", { allowSingleLine: true }],
           "vue/comma-dangle": ["error", "always-multiline"],
           "vue/comma-spacing": ["error", { after: true, before: false }],
           "vue/comma-style": ["error", "last"],
-          "vue/html-comment-content-spacing": ["error", "always", {
-            exceptions: ["-"]
-          }],
+          "vue/html-comment-content-spacing": ["error", "always", { exceptions: ["-"] }],
           "vue/key-spacing": ["error", { afterColon: true, beforeColon: false }],
           "vue/keyword-spacing": ["error", { after: true, before: true }],
           "vue/object-curly-newline": "off",
@@ -1315,11 +1327,13 @@ function lincy(options = {}, ...userConfigs) {
     isInEditor = !!((process2.env.VSCODE_PID || process2.env.JETBRAINS_IDE) && !process2.env.CI),
     vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
     typescript: enableTypeScript = isPackageExists("typescript"),
-    stylistic: enableStylistic = true,
     gitignore: enableGitignore = true,
     overrides = {},
     componentExts = []
   } = options;
+  const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === "object" ? options.stylistic : {};
+  if (stylisticOptions && !("jsx" in stylisticOptions))
+    stylisticOptions.jsx = options.jsx ?? true;
   const configs = [];
   if (enableGitignore) {
     if (typeof enableGitignore !== "boolean") {
@@ -1340,10 +1354,10 @@ function lincy(options = {}, ...userConfigs) {
     comments(),
     node(),
     jsdoc({
-      stylistic: enableStylistic
+      stylistic: stylisticOptions
     }),
     imports({
-      stylistic: enableStylistic
+      stylistic: stylisticOptions
     }),
     unicorn()
   );
@@ -1356,10 +1370,10 @@ function lincy(options = {}, ...userConfigs) {
       overrides: overrides.typescript
     }));
   }
-  if (enableStylistic) {
+  if (stylisticOptions) {
     configs.push(stylistic({
       overrides: overrides.stylistic,
-      stylistic: typeof enableStylistic === "boolean" ? {} : enableStylistic
+      stylistic: stylisticOptions
     }));
   }
   if (options.test ?? true) {
@@ -1371,7 +1385,7 @@ function lincy(options = {}, ...userConfigs) {
   if (enableVue) {
     configs.push(vue({
       overrides: overrides.vue,
-      stylistic: enableStylistic,
+      stylistic: stylisticOptions,
       typescript: !!enableTypeScript
     }));
   }
@@ -1379,7 +1393,7 @@ function lincy(options = {}, ...userConfigs) {
     configs.push(
       jsonc({
         overrides: overrides.jsonc,
-        stylistic: enableStylistic
+        stylistic: stylisticOptions
       }),
       sortPackageJson(),
       sortTsconfig()
@@ -1388,7 +1402,7 @@ function lincy(options = {}, ...userConfigs) {
   if (options.yaml ?? true) {
     configs.push(yaml({
       overrides: overrides.yaml,
-      stylistic: enableStylistic
+      stylistic: stylisticOptions
     }));
   }
   if (options.markdown ?? true) {

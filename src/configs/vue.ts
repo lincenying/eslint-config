@@ -58,7 +58,9 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
                 'vue/component-name-in-template-casing': ['error', 'PascalCase'],
                 'vue/component-options-name-casing': ['error', 'PascalCase'],
                 'vue/custom-event-name-casing': vueVersion === '3' ? ['error', 'camelCase'] : ['error', 'kebab-case'],
-                ...(vueVersion === '2' ? { 'vue/require-explicit-emits': 'off' } : null),
+                ...(vueVersion === '2' ? {
+                    'vue/require-explicit-emits': 'off',
+                } : null),
                 'vue/define-macros-order': ['error', {
                     order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'],
                 }],
@@ -123,17 +125,12 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
                     'vue/array-bracket-spacing': ['error', 'never'],
                     'vue/arrow-spacing': ['error', { after: true, before: true }],
                     'vue/block-spacing': ['error', 'always'],
-                    'vue/block-tag-newline': ['error', {
-                        multiline: 'always',
-                        singleline: 'always',
-                    }],
+                    'vue/block-tag-newline': ['error', { multiline: 'always', singleline: 'always' }],
                     'vue/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
                     'vue/comma-dangle': ['error', 'always-multiline'],
                     'vue/comma-spacing': ['error', { after: true, before: false }],
                     'vue/comma-style': ['error', 'last'],
-                    'vue/html-comment-content-spacing': ['error', 'always', {
-                        exceptions: ['-'],
-                    }],
+                    'vue/html-comment-content-spacing': ['error', 'always', { exceptions: ['-'] }],
                     'vue/key-spacing': ['error', { afterColon: true, beforeColon: false }],
                     'vue/keyword-spacing': ['error', { after: true, before: true }],
                     'vue/object-curly-newline': 'off',

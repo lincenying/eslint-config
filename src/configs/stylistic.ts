@@ -10,6 +10,7 @@ export function stylistic(options: StylisticOverridesConfig = {}): ConfigItem[] 
     const {
         indent = 4,
         quotes = 'single',
+        jsx = true,
     } = typeof stylistic === 'boolean' ? {} : stylistic
 
     return [
@@ -24,6 +25,7 @@ export function stylistic(options: StylisticOverridesConfig = {}): ConfigItem[] 
                 'antfu/top-level-function': 'error',
 
                 'curly': ['error', 'multi-or-nest', 'consistent'],
+
                 'style/array-bracket-spacing': ['error', 'never'],
                 'style/arrow-spacing': ['error', { after: true, before: true }],
                 'style/block-spacing': ['error', 'always'],
@@ -72,7 +74,6 @@ export function stylistic(options: StylisticOverridesConfig = {}): ConfigItem[] 
                     offsetTernaryExpressions: true,
                     outerIIFEBody: 1,
                 }],
-                'style/jsx-quotes': 'error',
                 'style/key-spacing': ['error', { afterColon: true, beforeColon: false }],
                 'style/keyword-spacing': ['error', { after: true, before: true }],
                 'style/lines-between-class-members': ['error', 'always', { exceptAfterSingleLine: true }],
@@ -127,6 +128,20 @@ export function stylistic(options: StylisticOverridesConfig = {}): ConfigItem[] 
                 'style/type-annotation-spacing': ['error', {}],
                 'style/wrap-iife': ['error', 'any', { functionPrototypeMethods: true }],
                 'style/yield-star-spacing': ['error', 'both'],
+
+                ...jsx ? {
+                    'style/jsx-child-element-spacing': 'error',
+                    'style/jsx-closing-bracket-location': ['error', 'line-aligned'],
+                    'style/jsx-curly-newline': 'error',
+                    'style/jsx-curly-spacing': ['error', 'never', { allowMultiline: true }],
+                    'style/jsx-equals-spacing': 'error',
+                    'style/jsx-first-prop-new-line': 'error',
+                    'style/jsx-indent': ['error', indent],
+                    'style/jsx-indent-props': ['error', indent],
+                    'style/jsx-quotes': 'error',
+                    'style/jsx-tag-spacing': 'error',
+                    'style/jsx-wrap-multilines': 'error',
+                } : {},
 
                 ...overrides,
             },

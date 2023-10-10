@@ -2,6 +2,8 @@
 
 [![npm](https://img.shields.io/npm/v/@lincy/eslint-config?color=444&label=)](https://npmjs.com/package/@lincy/eslint-config)
 
+> Thanks to [sxzz/eslint-config](https://github.com/sxzz/eslint-config) and [antfu/eslint-config](https://github.com/antfu/eslint-config) for the inspiration and reference.
+
 - 单引号，无结尾分号
 - 自动格式化
 - 专为与 TypeScript、Vue(2/3) 一起使用而设计，开箱即用
@@ -129,7 +131,7 @@ import lincy from '@lincy/eslint-config'
 
 export default lincy({
     // 是否启用 stylistic 格式化规则
-    stylistic: true, // 默认值: true, 可选: false | { indent: number | 'tab', quotes: 'single' | 'double'}
+    stylistic: true, // 默认值: true, 可选: false | { indent: number | 'tab', quotes: 'single' | 'double', jsx: boolean}
     // 是否启用 typescript 规则
     typescript: true, // 默认值: 检测是否安装typescript依赖, 可选: false
     // 是否启用 vue 规则
@@ -245,9 +247,8 @@ export default [
 
 查看 [configs](https://github.com/lincenying/eslint-config/blob/main/src/configs) 和 [factory](https://github.com/lincenying/eslint-config/blob/main/src/factory.ts）了解更多详细信息。
 
-> Thanks to [sxzz/eslint-config](https://github.com/sxzz/eslint-config) and [antfu/eslint-config](https://github.com/antfu/eslint-config) for the inspiration and reference.
 
-## Plugins Renaming
+### 插件重命名
 
 由于扁平化配置支持显式提供了插件名称，因此我们重命名了一些插件以使它们更加一致并隐藏实现细节。
 
@@ -267,7 +268,7 @@ export default [
 type foo = { bar: 2 }
 ```
 
-### Rules Overrides
+### 规则覆盖
 
 某些规则仅在特定文件中启用，例如，“ts/*”规则仅在“.ts”文件中启用，“vue/*”规则仅在“.vue”文件中启用。 如果要覆盖规则，则需要指定文件扩展名：
 
@@ -343,7 +344,7 @@ export default lincy({
 })
 ```
 
-### Type Aware Rules
+### 类型感知规则
 
 您可以选择通过将选项对象传递给“typescript”配置来启用[类型感知规则](https://typescript-eslint.io/linting/typed-linting/)：
 
