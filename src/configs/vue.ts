@@ -105,14 +105,10 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
                 'vue/no-useless-v-bind': 'error',
                 'vue/no-v-html': 'off',
                 'vue/no-v-text-v-html-on-component': 'off',
-                'vue/object-shorthand': [
-                    'error',
-                    'always',
-                    {
-                        avoidQuotes: true,
-                        ignoreConstructors: false,
-                    },
-                ],
+                'vue/object-shorthand': ['error', 'always', {
+                    avoidQuotes: true,
+                    ignoreConstructors: false,
+                }],
                 'vue/prefer-separate-static-class': 'error',
                 'vue/prefer-template': 'error',
                 'vue/require-default-prop': 'off',

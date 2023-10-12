@@ -896,17 +896,33 @@ function stylistic(options = {}) {
         "style/wrap-iife": ["error", "any", { functionPrototypeMethods: true }],
         "style/yield-star-spacing": ["error", "both"],
         ...jsx ? {
-          "style/jsx-child-element-spacing": "error",
-          "style/jsx-closing-bracket-location": ["error", "line-aligned"],
+          "style/jsx-closing-bracket-location": "error",
+          "style/jsx-closing-tag-location": "error",
+          "style/jsx-curly-brace-presence": ["error", { propElementValues: "always" }],
           "style/jsx-curly-newline": "error",
-          "style/jsx-curly-spacing": ["error", "never", { allowMultiline: true }],
+          "style/jsx-curly-spacing": ["error", "never"],
           "style/jsx-equals-spacing": "error",
           "style/jsx-first-prop-new-line": "error",
-          "style/jsx-indent": ["error", indent],
+          "style/jsx-indent": ["error", indent, { checkAttributes: true, indentLogicalExpressions: true }],
           "style/jsx-indent-props": ["error", indent],
+          "style/jsx-max-props-per-line": ["error", { maximum: 1, when: "multiline" }],
+          "style/jsx-one-expression-per-line": ["error", { allow: "single-child" }],
           "style/jsx-quotes": "error",
-          "style/jsx-tag-spacing": "error",
-          "style/jsx-wrap-multilines": "error"
+          "style/jsx-tag-spacing": ["error", {
+            afterOpening: "never",
+            beforeClosing: "never",
+            beforeSelfClosing: "always",
+            closingSlash: "never"
+          }],
+          "style/jsx-wrap-multilines": ["error", {
+            arrow: "parens-new-line",
+            assignment: "parens-new-line",
+            condition: "parens-new-line",
+            declaration: "parens-new-line",
+            logical: "parens-new-line",
+            prop: "parens-new-line",
+            return: "parens-new-line"
+          }]
         } : {},
         ...overrides
       }
@@ -1196,14 +1212,10 @@ function vue(options = {}) {
         "vue/no-useless-v-bind": "error",
         "vue/no-v-html": "off",
         "vue/no-v-text-v-html-on-component": "off",
-        "vue/object-shorthand": [
-          "error",
-          "always",
-          {
-            avoidQuotes: true,
-            ignoreConstructors: false
-          }
-        ],
+        "vue/object-shorthand": ["error", "always", {
+          avoidQuotes: true,
+          ignoreConstructors: false
+        }],
         "vue/prefer-separate-static-class": "error",
         "vue/prefer-template": "error",
         "vue/require-default-prop": "off",

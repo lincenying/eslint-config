@@ -136,6 +136,8 @@ export default lincy({
     typescript: true, // 默认值: 检测是否安装typescript依赖, 可选: false
     // 是否启用 vue 规则
     vue: true, // 默认值: 检测是否安装vue依赖, 可选: false
+    // 是否启用 jsx 规则
+    jsx: true, // 默认值: true, 可选: false
     // 是否启用 jsonc 规则
     jsonc: false, // 默认值: true, 可选: false
     // 是否启用 yaml 规则
@@ -280,6 +282,7 @@ export default lincy(
     {
         isInEditor: true,
         vue: true,
+        jsx: true,
         typescript: true,
         stylistic: true,
         gitignore: true,
@@ -377,6 +380,8 @@ import pluginReactHooks from 'eslint-plugin-react-hooks'
 export default lincy(
     {
         vue: false,
+        // 关闭stylistic提供的jsx规则, 直接使用eslint-plugin-react
+        jsx: false,
     },
     // react 相关规则
     {
