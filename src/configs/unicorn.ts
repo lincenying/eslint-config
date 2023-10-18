@@ -8,7 +8,7 @@ export function unicorn(): ConfigItem[] {
                 unicorn: pluginUnicorn,
             },
             rules: {
-            // Pass error message when throwing errors
+                // Pass error message when throwing errors
                 'unicorn/error-message': 'error',
                 // Uppercase regex escapes
                 'unicorn/escape-case': 'error',

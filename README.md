@@ -148,6 +148,8 @@ export default lincy({
     test: false, // 默认值: true, 可选: false
     // 是否启用 markdown 规则
     markdown: false, // 默认值: true, 可选: false
+    // 是否启用 eslint-plugin-sort-keys 规则
+    sortKeys: true, // 默认值: false, 可选: true
     // 覆盖规则
     overrides: {},
 
@@ -219,6 +221,7 @@ import {
     jsonc,
     markdown,
     node,
+    sortKeys,
     sortPackageJson,
     sortTsconfig,
     stylistic,
@@ -229,12 +232,15 @@ import {
 } from '@lincy/eslint-config'
 
 export default [
-    ...ignores(),
-    ...javascript(),
     ...comments(),
-    ...node(),
-    ...jsdoc(),
+    ...ignores(),
     ...imports(),
+    ...javascript(),
+    ...jsdoc(),
+    ...node(),
+    ...sortKeys(),
+    ...sortPackageJson(),
+    ...sortTsconfig(),
     ...unicorn(),
 
     ...typescript(),
@@ -290,6 +296,7 @@ export default lincy(
         jsonc: true,
         yaml: true,
         markdown: true,
+        sortKeys: true,
         overrides: {}
     },
     {

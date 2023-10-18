@@ -19,10 +19,11 @@ import { default as default10 } from "eslint-plugin-unused-imports";
 import { default as default11 } from "eslint-plugin-vue";
 import * as pluginYaml from "eslint-plugin-yml";
 import { default as default12 } from "eslint-plugin-no-only-tests";
+import { default as default13 } from "eslint-plugin-sort-keys";
 import * as parserTs from "@typescript-eslint/parser";
-import { default as default13 } from "vue-eslint-parser";
-import { default as default14 } from "yaml-eslint-parser";
-import { default as default15 } from "jsonc-eslint-parser";
+import { default as default14 } from "vue-eslint-parser";
+import { default as default15 } from "yaml-eslint-parser";
+import { default as default16 } from "jsonc-eslint-parser";
 
 // src/configs/comments.ts
 function comments() {
@@ -415,7 +416,7 @@ function jsonc(options = {}) {
     {
       files: [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
       languageOptions: {
-        parser: default15
+        parser: default16
       },
       rules: {
         "jsonc/no-bigint-literals": "error",
@@ -1137,7 +1138,7 @@ function vue(options = {}) {
     {
       files: [GLOB_VUE],
       languageOptions: {
-        parser: default13,
+        parser: default14,
         parserOptions: {
           ecmaFeatures: {
             jsx: true
@@ -1265,7 +1266,7 @@ function yaml(options = {}) {
     {
       files: [GLOB_YAML],
       languageOptions: {
-        parser: default14
+        parser: default15
       },
       rules: {
         "style/spaced-comment": "off",
@@ -1317,6 +1318,17 @@ function test(options = {}) {
   ];
 }
 
+// src/configs/sort-keys.ts
+function sortKeys() {
+  return [
+    {
+      plugins: {
+        "sort-keys": default13
+      }
+    }
+  ];
+}
+
 // src/factory.ts
 var flatConfigProps = [
   "files",
@@ -1340,6 +1352,7 @@ function lincy(options = {}, ...userConfigs) {
     vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
     typescript: enableTypeScript = isPackageExists("typescript"),
     gitignore: enableGitignore = true,
+    sortKeys: enableSortKeys = false,
     overrides = {},
     componentExts = []
   } = options;
@@ -1373,6 +1386,8 @@ function lincy(options = {}, ...userConfigs) {
     }),
     unicorn()
   );
+  if (enableSortKeys)
+    configs.push(sortKeys());
   if (enableVue)
     componentExts.push("vue");
   if (enableTypeScript) {
@@ -1472,10 +1487,10 @@ export {
   lincy,
   markdown,
   node,
-  default15 as parserJsonc,
+  default16 as parserJsonc,
   parserTs,
-  default13 as parserVue,
-  default14 as parserYaml,
+  default14 as parserVue,
+  default15 as parserYaml,
   default2 as pluginAntfu,
   default3 as pluginComments,
   pluginImport,
@@ -1484,6 +1499,7 @@ export {
   default5 as pluginMarkdown,
   default12 as pluginNoOnlyTests,
   default6 as pluginNode,
+  default13 as pluginSortKeys,
   default7 as pluginStylistic,
   default8 as pluginTs,
   default9 as pluginUnicorn,
@@ -1491,6 +1507,7 @@ export {
   default11 as pluginVue,
   pluginYaml,
   renameRules,
+  sortKeys,
   sortPackageJson,
   sortTsconfig,
   stylistic,

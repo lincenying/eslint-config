@@ -15,6 +15,7 @@ export { default as pluginUnusedImports } from 'eslint-plugin-unused-imports'
 export { default as pluginVue } from 'eslint-plugin-vue'
 export * as pluginYaml from 'eslint-plugin-yml'
 export { default as pluginNoOnlyTests } from 'eslint-plugin-no-only-tests'
+export { default as pluginSortKeys } from 'eslint-plugin-sort-keys'
 
 export * as parserTs from '@typescript-eslint/parser'
 export { default as parserVue } from 'vue-eslint-parser'

@@ -74,6 +74,7 @@ __export(src_exports, {
   pluginMarkdown: () => import_eslint_plugin_markdown.default,
   pluginNoOnlyTests: () => import_eslint_plugin_no_only_tests.default,
   pluginNode: () => import_eslint_plugin_n.default,
+  pluginSortKeys: () => import_eslint_plugin_sort_keys.default,
   pluginStylistic: () => import_eslint_plugin.default,
   pluginTs: () => import_eslint_plugin2.default,
   pluginUnicorn: () => import_eslint_plugin_unicorn.default,
@@ -81,6 +82,7 @@ __export(src_exports, {
   pluginVue: () => import_eslint_plugin_vue.default,
   pluginYaml: () => pluginYaml,
   renameRules: () => renameRules,
+  sortKeys: () => sortKeys,
   sortPackageJson: () => sortPackageJson,
   sortTsconfig: () => sortTsconfig,
   stylistic: () => stylistic,
@@ -113,6 +115,7 @@ var import_eslint_plugin_unused_imports = __toESM(require("eslint-plugin-unused-
 var import_eslint_plugin_vue = __toESM(require("eslint-plugin-vue"), 1);
 var pluginYaml = __toESM(require("eslint-plugin-yml"), 1);
 var import_eslint_plugin_no_only_tests = __toESM(require("eslint-plugin-no-only-tests"), 1);
+var import_eslint_plugin_sort_keys = __toESM(require("eslint-plugin-sort-keys"), 1);
 var parserTs = __toESM(require("@typescript-eslint/parser"), 1);
 var import_vue_eslint_parser = __toESM(require("vue-eslint-parser"), 1);
 var import_yaml_eslint_parser = __toESM(require("yaml-eslint-parser"), 1);
@@ -1411,6 +1414,17 @@ function test(options = {}) {
   ];
 }
 
+// src/configs/sort-keys.ts
+function sortKeys() {
+  return [
+    {
+      plugins: {
+        "sort-keys": import_eslint_plugin_sort_keys.default
+      }
+    }
+  ];
+}
+
 // src/factory.ts
 var flatConfigProps = [
   "files",
@@ -1434,6 +1448,7 @@ function lincy(options = {}, ...userConfigs) {
     vue: enableVue = VuePackages.some((i) => (0, import_local_pkg2.isPackageExists)(i)),
     typescript: enableTypeScript = (0, import_local_pkg2.isPackageExists)("typescript"),
     gitignore: enableGitignore = true,
+    sortKeys: enableSortKeys = false,
     overrides = {},
     componentExts = []
   } = options;
@@ -1467,6 +1482,8 @@ function lincy(options = {}, ...userConfigs) {
     }),
     unicorn()
   );
+  if (enableSortKeys)
+    configs.push(sortKeys());
   if (enableVue)
     componentExts.push("vue");
   if (enableTypeScript) {
@@ -1578,6 +1595,7 @@ var src_default = lincy;
   pluginMarkdown,
   pluginNoOnlyTests,
   pluginNode,
+  pluginSortKeys,
   pluginStylistic,
   pluginTs,
   pluginUnicorn,
@@ -1585,6 +1603,7 @@ var src_default = lincy;
   pluginVue,
   pluginYaml,
   renameRules,
+  sortKeys,
   sortPackageJson,
   sortTsconfig,
   stylistic,

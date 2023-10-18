@@ -11,6 +11,7 @@ import {
     jsonc,
     markdown,
     node,
+    sortKeys,
     sortPackageJson,
     sortTsconfig,
     stylistic,
@@ -50,6 +51,7 @@ export function lincy(options: OptionsConfig & ConfigItem = {}, ...userConfigs: 
         vue: enableVue = VuePackages.some(i => isPackageExists(i)),
         typescript: enableTypeScript = isPackageExists('typescript'),
         gitignore: enableGitignore = true,
+        sortKeys: enableSortKeys = false,
         overrides = {},
         componentExts = [],
     } = options
@@ -89,6 +91,9 @@ export function lincy(options: OptionsConfig & ConfigItem = {}, ...userConfigs: 
         }),
         unicorn(),
     )
+
+    if (enableSortKeys)
+        configs.push(sortKeys())
 
     // In the future we may support more component extensions like Svelte or so
     if (enableVue)

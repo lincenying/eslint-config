@@ -21,6 +21,7 @@ export { default as pluginVue } from 'eslint-plugin-vue';
 import * as eslintPluginYml from 'eslint-plugin-yml';
 export { eslintPluginYml as pluginYaml };
 export { default as pluginNoOnlyTests } from 'eslint-plugin-no-only-tests';
+export { default as pluginSortKeys } from 'eslint-plugin-sort-keys';
 export { default as parserVue } from 'vue-eslint-parser';
 export { default as parserYaml } from 'yaml-eslint-parser';
 export { default as parserJsonc } from 'jsonc-eslint-parser';
@@ -145,6 +146,12 @@ interface OptionsConfig extends OptionsComponentExts {
      */
     markdown?: boolean;
     /**
+     * Enable SortKeys.
+     *
+     * @default false
+     */
+    sortKeys?: boolean;
+    /**
      * Enable stylistic rules.
      *
      * @default true
@@ -218,6 +225,13 @@ declare function yaml(options?: OptionsOverrides & OptionsStylistic): ConfigItem
 declare function test(options?: OptionsIsInEditor & OptionsOverrides): ConfigItem[];
 
 /**
+ * Optional sort-keys plugin
+ *
+ * @see https://github.com/namnm/eslint-plugin-sort-keys
+ */
+declare function sortKeys(): ConfigItem[];
+
+/**
  * Combine array and non-array configs into a single array.
  */
 declare function combine(...configs: (ConfigItem | ConfigItem[])[]): ConfigItem[];
@@ -247,4 +261,4 @@ declare const GLOB_TESTS: string[];
 declare const GLOB_ALL_SRC: string[];
 declare const GLOB_EXCLUDE: string[];
 
-export { ConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIgnores, OptionsIsInEditor, OptionsOverrides, OptionsStylistic, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, Rules, StylisticConfig, StylisticOverridesConfig, combine, comments, lincy as default, ignores, imports, javascript, jsdoc, jsonc, lincy, markdown, node, renameRules, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, vue, yaml };
+export { ConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIgnores, OptionsIsInEditor, OptionsOverrides, OptionsStylistic, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, Rules, StylisticConfig, StylisticOverridesConfig, combine, comments, lincy as default, ignores, imports, javascript, jsdoc, jsonc, lincy, markdown, node, renameRules, sortKeys, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, vue, yaml };

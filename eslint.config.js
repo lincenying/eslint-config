@@ -1,10 +1,10 @@
-import sortKeys from 'eslint-plugin-sort-keys'
 import styleMigrate from '@stylistic/eslint-plugin-migrate'
 import lincy from './dist/index.js'
 
 const config = lincy(
     {
         vue: false,
+        sortKeys: true,
         stylistic: {
             indent: 4,
             quotes: 'single',
@@ -21,9 +21,6 @@ const config = lincy(
     },
     {
         files: ['src/**/*.ts'],
-        plugins: {
-            'sort-keys': sortKeys,
-        },
         rules: {
             'sort-keys/sort-keys-fix': 'error',
         },

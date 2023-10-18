@@ -173,6 +173,13 @@ export interface OptionsConfig extends OptionsComponentExts {
     markdown?: boolean
 
     /**
+     * Enable SortKeys support.
+     *
+     * @default false
+     */
+    sortKeys?: boolean
+
+    /**
      * Enable stylistic rules.
      *
      * @default true
