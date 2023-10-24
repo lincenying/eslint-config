@@ -51,6 +51,7 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
             languageOptions: {
                 parser: parserTs,
                 parserOptions: {
+                    extraFileExtensions: componentExts.map(ext => `.${ext}`),
                     sourceType: 'module',
                     ...(tsconfigPath ? {
                         project: [tsconfigPath],
