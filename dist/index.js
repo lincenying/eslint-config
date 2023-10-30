@@ -994,6 +994,7 @@ function typescript(options) {
       languageOptions: {
         parser: parserTs,
         parserOptions: {
+          extraFileExtensions: componentExts.map((ext) => `.${ext}`),
           sourceType: "module",
           ...tsconfigPath ? {
             project: [tsconfigPath],
