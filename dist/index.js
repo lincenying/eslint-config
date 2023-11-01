@@ -947,14 +947,16 @@ function renameRules(rules, from, to) {
     })
   );
 }
+function toArray(value) {
+  return Array.isArray(value) ? value : [value];
+}
 
 // src/configs/typescript.ts
 function typescript(options) {
   const {
     componentExts = [],
     overrides = {},
-    parserOptions = {},
-    tsconfigPath
+    parserOptions = {}
   } = options ?? {};
   const typeAwareRules = {
     "dot-notation": "off",
@@ -977,6 +979,7 @@ function typescript(options) {
     "ts/restrict-template-expressions": "error",
     "ts/unbound-method": "error"
   };
+  const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : void 0;
   return [
     {
       // Install the plugins without globs, so they can be configured separately.
@@ -997,7 +1000,7 @@ function typescript(options) {
           extraFileExtensions: componentExts.map((ext) => `.${ext}`),
           sourceType: "module",
           ...tsconfigPath ? {
-            project: [tsconfigPath],
+            project: tsconfigPath,
             tsconfigRootDir: process.cwd()
           } : {},
           ...parserOptions
@@ -1513,6 +1516,7 @@ export {
   sortTsconfig,
   stylistic,
   test,
+  toArray,
   typescript,
   unicorn,
   vue,

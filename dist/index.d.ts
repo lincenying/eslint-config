@@ -64,7 +64,7 @@ interface OptionsTypeScriptWithTypes {
      * When this options is provided, type aware rules will be enabled.
      * @see https://typescript-eslint.io/linting/typed-linting/
      */
-    tsconfigPath?: string;
+    tsconfigPath?: string | string[];
 }
 interface OptionsHasTypeScript {
     typescript?: boolean;
@@ -238,6 +238,7 @@ declare function combine(...configs: (ConfigItem | ConfigItem[])[]): ConfigItem[
 declare function renameRules(rules: Record<string, any>, from: string, to: string): {
     [k: string]: any;
 };
+declare function toArray<T>(value: T | T[]): T[];
 
 declare const GLOB_SRC_EXT = "?([cm])[jt]s?(x)";
 declare const GLOB_SRC = "**/*.?([cm])[jt]s?(x)";
@@ -261,4 +262,4 @@ declare const GLOB_TESTS: string[];
 declare const GLOB_ALL_SRC: string[];
 declare const GLOB_EXCLUDE: string[];
 
-export { ConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIgnores, OptionsIsInEditor, OptionsOverrides, OptionsStylistic, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, Rules, StylisticConfig, StylisticOverridesConfig, combine, comments, lincy as default, ignores, imports, javascript, jsdoc, jsonc, lincy, markdown, node, renameRules, sortKeys, sortPackageJson, sortTsconfig, stylistic, test, typescript, unicorn, vue, yaml };
+export { ConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsHasTypeScript, OptionsIgnores, OptionsIsInEditor, OptionsOverrides, OptionsStylistic, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, Rules, StylisticConfig, StylisticOverridesConfig, combine, comments, lincy as default, ignores, imports, javascript, jsdoc, jsonc, lincy, markdown, node, renameRules, sortKeys, sortPackageJson, sortTsconfig, stylistic, test, toArray, typescript, unicorn, vue, yaml };
