@@ -365,6 +365,7 @@ import lincy from '@lincy/eslint-config'
 export default lincy({
     typescript: {
         tsconfigPath: 'tsconfig.json',
+        // tsconfigPath: ['tsconfig.json'], // 也可以是数组
     },
 })
 ```

@@ -2,14 +2,13 @@ import process from 'node:process'
 import { GLOB_SRC } from '../globs'
 import { parserTs, pluginAntfu, pluginImport, pluginTs } from '../plugins'
 import type { ConfigItem, OptionsComponentExts, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes } from '../types'
-import { renameRules } from '../utils'
+import { renameRules, toArray } from '../utils'
 
 export function typescript(options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions): ConfigItem[] {
     const {
         componentExts = [],
         overrides = {},
         parserOptions = {},
-        tsconfigPath,
     } = options ?? {}
 
     const typeAwareRules: ConfigItem['rules'] = {
@@ -34,6 +33,8 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
         'ts/unbound-method': 'error',
     }
 
+    const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : undefined
+
     return [
         {
             // Install the plugins without globs, so they can be configured separately.
@@ -54,7 +55,7 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
                     extraFileExtensions: componentExts.map(ext => `.${ext}`),
                     sourceType: 'module',
                     ...(tsconfigPath ? {
-                        project: [tsconfigPath],
+                        project: tsconfigPath,
                         tsconfigRootDir: process.cwd(),
                     } : {}),
                     ...parserOptions as any,
