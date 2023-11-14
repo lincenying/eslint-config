@@ -349,6 +349,24 @@ export default lincy({
 })
 ```
 
+#### `perfectionist` (sorting)
+
+这个插件 [`eslint-plugin-perfectionist`](https://github.com/azat-io/eslint-plugin-perfectionist) 允许你排序对象键名，导入，自动修复等。
+
+安装了插件，但默认情况下没有启用任何规则。
+
+建议使用[configuration comments]单独选择每个文件。(https://eslint.org/docs/latest/use/configure/rules#using-configuration-comments-1).
+
+```js
+/* eslint perfectionist/sort-objects: "error" */
+const objectWantedToSort = {
+    a: 2,
+    b: 1,
+    c: 3,
+}
+/* eslint perfectionist/sort-objects: "off" */
+```
+
 ### 类型感知规则
 
 您可以选择通过将选项对象传递给“typescript”配置来启用[类型感知规则](https://typescript-eslint.io/linting/typed-linting/)：
