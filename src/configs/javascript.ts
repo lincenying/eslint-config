@@ -43,7 +43,6 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                 'antfu/top-level-function': 'error',
 
                 'array-callback-return': 'error',
-                'arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
                 'block-scoped-var': 'error',
                 'constructor-super': 'error',
                 'default-case-last': 'error',
@@ -202,6 +201,7 @@ export function javascript(options: OptionsIsInEditor & OptionsOverrides = {}): 
                         memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
                     },
                 ],
+                'style/arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
                 'symbol-description': 'error',
                 'unicode-bom': ['error', 'never'],
 

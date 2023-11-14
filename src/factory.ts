@@ -11,7 +11,7 @@ import {
     jsonc,
     markdown,
     node,
-    sortKeys,
+    perfectionist,
     sortPackageJson,
     sortTsconfig,
     stylistic,
@@ -47,13 +47,12 @@ const VuePackages = [
  */
 export function lincy(options: OptionsConfig & ConfigItem = {}, ...userConfigs: (ConfigItem | ConfigItem[])[]) {
     const {
-        isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
-        vue: enableVue = VuePackages.some(i => isPackageExists(i)),
-        typescript: enableTypeScript = isPackageExists('typescript'),
-        gitignore: enableGitignore = true,
-        sortKeys: enableSortKeys = false,
-        overrides = {},
         componentExts = [],
+        gitignore: enableGitignore = true,
+        isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
+        overrides = {},
+        typescript: enableTypeScript = isPackageExists('typescript'),
+        vue: enableVue = VuePackages.some(i => isPackageExists(i)),
     } = options
 
     const stylisticOptions = options.stylistic === false ? false : (typeof options.stylistic === 'object' ? options.stylistic : {})
@@ -90,10 +89,10 @@ export function lincy(options: OptionsConfig & ConfigItem = {}, ...userConfigs: 
             stylistic: stylisticOptions,
         }),
         unicorn(),
-    )
 
-    if (enableSortKeys)
-        configs.push(sortKeys())
+        // Optional plugins (installed but not enabled by default)
+        perfectionist(),
+    )
 
     // In the future we may support more component extensions like Svelte or so
     if (enableVue)

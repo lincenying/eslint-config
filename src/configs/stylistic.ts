@@ -9,8 +9,8 @@ export function stylistic(options: StylisticOverridesConfig = {}): ConfigItem[] 
 
     const {
         indent = 4,
-        quotes = 'single',
         jsx = true,
+        quotes = 'single',
     } = typeof stylistic === 'boolean' ? {} : stylistic
 
     return [
@@ -39,14 +39,9 @@ export function stylistic(options: StylisticOverridesConfig = {}): ConfigItem[] 
                 'style/indent': ['error', indent, {
                     ArrayExpression: 1,
                     CallExpression: { arguments: 1 },
+                    flatTernaryExpressions: false,
                     FunctionDeclaration: { body: 1, parameters: 1 },
                     FunctionExpression: { body: 1, parameters: 1 },
-                    ImportDeclaration: 1,
-                    MemberExpression: 1,
-                    ObjectExpression: 1,
-                    SwitchCase: 1,
-                    VariableDeclarator: 1,
-                    flatTernaryExpressions: false,
                     ignoreComments: false,
                     ignoredNodes: [
                         'TemplateLiteral *',
@@ -71,8 +66,13 @@ export function stylistic(options: StylisticOverridesConfig = {}): ConfigItem[] 
                         'FunctionExpression > .params > :matches(Decorator, :not(:first-child))',
                         'ClassBody.body > PropertyDefinition[decorators.length > 0] > .key',
                     ],
+                    ImportDeclaration: 1,
+                    MemberExpression: 1,
+                    ObjectExpression: 1,
                     offsetTernaryExpressions: true,
                     outerIIFEBody: 1,
+                    SwitchCase: 1,
+                    VariableDeclarator: 1,
                 }],
                 'style/key-spacing': ['error', { afterColon: true, beforeColon: false }],
                 'style/keyword-spacing': ['error', { after: true, before: true }],

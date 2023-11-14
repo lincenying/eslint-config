@@ -20,10 +20,11 @@ import { default as default11 } from "eslint-plugin-vue";
 import * as pluginYaml from "eslint-plugin-yml";
 import { default as default12 } from "eslint-plugin-no-only-tests";
 import { default as default13 } from "eslint-plugin-sort-keys";
+import { default as default14 } from "eslint-plugin-perfectionist";
 import * as parserTs from "@typescript-eslint/parser";
-import { default as default14 } from "vue-eslint-parser";
-import { default as default15 } from "yaml-eslint-parser";
-import { default as default16 } from "jsonc-eslint-parser";
+import { default as default15 } from "vue-eslint-parser";
+import { default as default16 } from "yaml-eslint-parser";
+import { default as default17 } from "jsonc-eslint-parser";
 
 // src/configs/comments.ts
 function comments() {
@@ -184,7 +185,6 @@ function javascript(options = {}) {
         "accessor-pairs": ["error", { enforceForClassMembers: true, setWithoutGet: true }],
         "antfu/top-level-function": "error",
         "array-callback-return": "error",
-        "arrow-parens": ["error", "as-needed", { requireForBlockBody: true }],
         "block-scoped-var": "error",
         "constructor-super": "error",
         "default-case-last": "error",
@@ -343,6 +343,7 @@ function javascript(options = {}) {
             memberSyntaxSortOrder: ["none", "all", "multiple", "single"]
           }
         ],
+        "style/arrow-parens": ["error", "as-needed", { requireForBlockBody: true }],
         "symbol-description": "error",
         "unicode-bom": ["error", "never"],
         "unused-imports/no-unused-imports": isInEditor ? "off" : "error",
@@ -404,8 +405,8 @@ function jsdoc(options = {}) {
 // src/configs/jsonc.ts
 function jsonc(options = {}) {
   const {
-    stylistic: stylistic2 = true,
-    overrides = {}
+    overrides = {},
+    stylistic: stylistic2 = true
   } = options;
   return [
     {
@@ -416,7 +417,7 @@ function jsonc(options = {}) {
     {
       files: [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
       languageOptions: {
-        parser: default16
+        parser: default17
       },
       rules: {
         "jsonc/no-bigint-literals": "error",
@@ -780,8 +781,8 @@ function stylistic(options = {}) {
   } = options;
   const {
     indent = 4,
-    quotes = "single",
-    jsx = true
+    jsx = true,
+    quotes = "single"
   } = typeof stylistic2 === "boolean" ? {} : stylistic2;
   return [
     {
@@ -807,14 +808,9 @@ function stylistic(options = {}) {
         "style/indent": ["error", indent, {
           ArrayExpression: 1,
           CallExpression: { arguments: 1 },
+          flatTernaryExpressions: false,
           FunctionDeclaration: { body: 1, parameters: 1 },
           FunctionExpression: { body: 1, parameters: 1 },
-          ImportDeclaration: 1,
-          MemberExpression: 1,
-          ObjectExpression: 1,
-          SwitchCase: 1,
-          VariableDeclarator: 1,
-          flatTernaryExpressions: false,
           ignoreComments: false,
           ignoredNodes: [
             "TemplateLiteral *",
@@ -839,8 +835,13 @@ function stylistic(options = {}) {
             "FunctionExpression > .params > :matches(Decorator, :not(:first-child))",
             "ClassBody.body > PropertyDefinition[decorators.length > 0] > .key"
           ],
+          ImportDeclaration: 1,
+          MemberExpression: 1,
+          ObjectExpression: 1,
           offsetTernaryExpressions: true,
-          outerIIFEBody: 1
+          outerIIFEBody: 1,
+          SwitchCase: 1,
+          VariableDeclarator: 1
         }],
         "style/key-spacing": ["error", { afterColon: true, beforeColon: false }],
         "style/keyword-spacing": ["error", { after: true, before: true }],
@@ -936,7 +937,7 @@ import process from "process";
 
 // src/utils.ts
 function combine(...configs) {
-  return configs.flatMap((config) => Array.isArray(config) ? config : [config]);
+  return configs.flat();
 }
 function renameRules(rules, from, to) {
   return Object.fromEntries(
@@ -1142,7 +1143,7 @@ function vue(options = {}) {
     {
       files: [GLOB_VUE],
       languageOptions: {
-        parser: default14,
+        parser: default15,
         parserOptions: {
           ecmaFeatures: {
             jsx: true
@@ -1270,7 +1271,7 @@ function yaml(options = {}) {
     {
       files: [GLOB_YAML],
       languageOptions: {
-        parser: default15
+        parser: default16
       },
       rules: {
         "style/spaced-comment": "off",
@@ -1322,12 +1323,12 @@ function test(options = {}) {
   ];
 }
 
-// src/configs/sort-keys.ts
-function sortKeys() {
+// src/configs/perfectionist.ts
+function perfectionist() {
   return [
     {
       plugins: {
-        "sort-keys": default13
+        perfectionist: default14
       }
     }
   ];
@@ -1352,13 +1353,12 @@ var VuePackages = [
 ];
 function lincy(options = {}, ...userConfigs) {
   const {
-    isInEditor = !!((process2.env.VSCODE_PID || process2.env.JETBRAINS_IDE) && !process2.env.CI),
-    vue: enableVue = VuePackages.some((i) => isPackageExists(i)),
-    typescript: enableTypeScript = isPackageExists("typescript"),
+    componentExts = [],
     gitignore: enableGitignore = true,
-    sortKeys: enableSortKeys = false,
+    isInEditor = !!((process2.env.VSCODE_PID || process2.env.JETBRAINS_IDE) && !process2.env.CI),
     overrides = {},
-    componentExts = []
+    typescript: enableTypeScript = isPackageExists("typescript"),
+    vue: enableVue = VuePackages.some((i) => isPackageExists(i))
   } = options;
   const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === "object" ? options.stylistic : {};
   if (stylisticOptions && !("jsx" in stylisticOptions))
@@ -1388,10 +1388,10 @@ function lincy(options = {}, ...userConfigs) {
     imports({
       stylistic: stylisticOptions
     }),
-    unicorn()
+    unicorn(),
+    // Optional plugins (installed but not enabled by default)
+    perfectionist()
   );
-  if (enableSortKeys)
-    configs.push(sortKeys());
   if (enableVue)
     componentExts.push("vue");
   if (enableTypeScript) {
@@ -1491,10 +1491,11 @@ export {
   lincy,
   markdown,
   node,
-  default16 as parserJsonc,
+  default17 as parserJsonc,
   parserTs,
-  default14 as parserVue,
-  default15 as parserYaml,
+  default15 as parserVue,
+  default16 as parserYaml,
+  perfectionist,
   default2 as pluginAntfu,
   default3 as pluginComments,
   pluginImport,
@@ -1503,6 +1504,7 @@ export {
   default5 as pluginMarkdown,
   default12 as pluginNoOnlyTests,
   default6 as pluginNode,
+  default14 as pluginPerfectionist,
   default13 as pluginSortKeys,
   default7 as pluginStylistic,
   default8 as pluginTs,
@@ -1511,7 +1513,6 @@ export {
   default11 as pluginVue,
   pluginYaml,
   renameRules,
-  sortKeys,
   sortPackageJson,
   sortTsconfig,
   stylistic,

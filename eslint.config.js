@@ -4,7 +4,6 @@ import lincy from './dist/index.js'
 const config = lincy(
     {
         vue: false,
-        sortKeys: true,
         stylistic: {
             indent: 4,
             quotes: 'single',
@@ -22,7 +21,7 @@ const config = lincy(
     {
         files: ['src/**/*.ts'],
         rules: {
-            'sort-keys/sort-keys-fix': 'error',
+            'perfectionist/sort-objects': 'error',
         },
     },
     {

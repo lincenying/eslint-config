@@ -66,6 +66,7 @@ __export(src_exports, {
   parserTs: () => parserTs,
   parserVue: () => import_vue_eslint_parser.default,
   parserYaml: () => import_yaml_eslint_parser.default,
+  perfectionist: () => perfectionist,
   pluginAntfu: () => import_eslint_plugin_antfu.default,
   pluginComments: () => import_eslint_plugin_eslint_comments.default,
   pluginImport: () => pluginImport,
@@ -74,6 +75,7 @@ __export(src_exports, {
   pluginMarkdown: () => import_eslint_plugin_markdown.default,
   pluginNoOnlyTests: () => import_eslint_plugin_no_only_tests.default,
   pluginNode: () => import_eslint_plugin_n.default,
+  pluginPerfectionist: () => import_eslint_plugin_perfectionist.default,
   pluginSortKeys: () => import_eslint_plugin_sort_keys.default,
   pluginStylistic: () => import_eslint_plugin.default,
   pluginTs: () => import_eslint_plugin2.default,
@@ -82,7 +84,6 @@ __export(src_exports, {
   pluginVue: () => import_eslint_plugin_vue.default,
   pluginYaml: () => pluginYaml,
   renameRules: () => renameRules,
-  sortKeys: () => sortKeys,
   sortPackageJson: () => sortPackageJson,
   sortTsconfig: () => sortTsconfig,
   stylistic: () => stylistic,
@@ -117,6 +118,7 @@ var import_eslint_plugin_vue = __toESM(require("eslint-plugin-vue"), 1);
 var pluginYaml = __toESM(require("eslint-plugin-yml"), 1);
 var import_eslint_plugin_no_only_tests = __toESM(require("eslint-plugin-no-only-tests"), 1);
 var import_eslint_plugin_sort_keys = __toESM(require("eslint-plugin-sort-keys"), 1);
+var import_eslint_plugin_perfectionist = __toESM(require("eslint-plugin-perfectionist"), 1);
 var parserTs = __toESM(require("@typescript-eslint/parser"), 1);
 var import_vue_eslint_parser = __toESM(require("vue-eslint-parser"), 1);
 var import_yaml_eslint_parser = __toESM(require("yaml-eslint-parser"), 1);
@@ -281,7 +283,6 @@ function javascript(options = {}) {
         "accessor-pairs": ["error", { enforceForClassMembers: true, setWithoutGet: true }],
         "antfu/top-level-function": "error",
         "array-callback-return": "error",
-        "arrow-parens": ["error", "as-needed", { requireForBlockBody: true }],
         "block-scoped-var": "error",
         "constructor-super": "error",
         "default-case-last": "error",
@@ -440,6 +441,7 @@ function javascript(options = {}) {
             memberSyntaxSortOrder: ["none", "all", "multiple", "single"]
           }
         ],
+        "style/arrow-parens": ["error", "as-needed", { requireForBlockBody: true }],
         "symbol-description": "error",
         "unicode-bom": ["error", "never"],
         "unused-imports/no-unused-imports": isInEditor ? "off" : "error",
@@ -501,8 +503,8 @@ function jsdoc(options = {}) {
 // src/configs/jsonc.ts
 function jsonc(options = {}) {
   const {
-    stylistic: stylistic2 = true,
-    overrides = {}
+    overrides = {},
+    stylistic: stylistic2 = true
   } = options;
   return [
     {
@@ -877,8 +879,8 @@ function stylistic(options = {}) {
   } = options;
   const {
     indent = 4,
-    quotes = "single",
-    jsx = true
+    jsx = true,
+    quotes = "single"
   } = typeof stylistic2 === "boolean" ? {} : stylistic2;
   return [
     {
@@ -904,14 +906,9 @@ function stylistic(options = {}) {
         "style/indent": ["error", indent, {
           ArrayExpression: 1,
           CallExpression: { arguments: 1 },
+          flatTernaryExpressions: false,
           FunctionDeclaration: { body: 1, parameters: 1 },
           FunctionExpression: { body: 1, parameters: 1 },
-          ImportDeclaration: 1,
-          MemberExpression: 1,
-          ObjectExpression: 1,
-          SwitchCase: 1,
-          VariableDeclarator: 1,
-          flatTernaryExpressions: false,
           ignoreComments: false,
           ignoredNodes: [
             "TemplateLiteral *",
@@ -936,8 +933,13 @@ function stylistic(options = {}) {
             "FunctionExpression > .params > :matches(Decorator, :not(:first-child))",
             "ClassBody.body > PropertyDefinition[decorators.length > 0] > .key"
           ],
+          ImportDeclaration: 1,
+          MemberExpression: 1,
+          ObjectExpression: 1,
           offsetTernaryExpressions: true,
-          outerIIFEBody: 1
+          outerIIFEBody: 1,
+          SwitchCase: 1,
+          VariableDeclarator: 1
         }],
         "style/key-spacing": ["error", { afterColon: true, beforeColon: false }],
         "style/keyword-spacing": ["error", { after: true, before: true }],
@@ -1033,7 +1035,7 @@ var import_node_process = __toESM(require("process"), 1);
 
 // src/utils.ts
 function combine(...configs) {
-  return configs.flatMap((config) => Array.isArray(config) ? config : [config]);
+  return configs.flat();
 }
 function renameRules(rules, from, to) {
   return Object.fromEntries(
@@ -1419,12 +1421,12 @@ function test(options = {}) {
   ];
 }
 
-// src/configs/sort-keys.ts
-function sortKeys() {
+// src/configs/perfectionist.ts
+function perfectionist() {
   return [
     {
       plugins: {
-        "sort-keys": import_eslint_plugin_sort_keys.default
+        perfectionist: import_eslint_plugin_perfectionist.default
       }
     }
   ];
@@ -1449,13 +1451,12 @@ var VuePackages = [
 ];
 function lincy(options = {}, ...userConfigs) {
   const {
-    isInEditor = !!((import_node_process2.default.env.VSCODE_PID || import_node_process2.default.env.JETBRAINS_IDE) && !import_node_process2.default.env.CI),
-    vue: enableVue = VuePackages.some((i) => (0, import_local_pkg2.isPackageExists)(i)),
-    typescript: enableTypeScript = (0, import_local_pkg2.isPackageExists)("typescript"),
+    componentExts = [],
     gitignore: enableGitignore = true,
-    sortKeys: enableSortKeys = false,
+    isInEditor = !!((import_node_process2.default.env.VSCODE_PID || import_node_process2.default.env.JETBRAINS_IDE) && !import_node_process2.default.env.CI),
     overrides = {},
-    componentExts = []
+    typescript: enableTypeScript = (0, import_local_pkg2.isPackageExists)("typescript"),
+    vue: enableVue = VuePackages.some((i) => (0, import_local_pkg2.isPackageExists)(i))
   } = options;
   const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === "object" ? options.stylistic : {};
   if (stylisticOptions && !("jsx" in stylisticOptions))
@@ -1485,10 +1486,10 @@ function lincy(options = {}, ...userConfigs) {
     imports({
       stylistic: stylisticOptions
     }),
-    unicorn()
+    unicorn(),
+    // Optional plugins (installed but not enabled by default)
+    perfectionist()
   );
-  if (enableSortKeys)
-    configs.push(sortKeys());
   if (enableVue)
     componentExts.push("vue");
   if (enableTypeScript) {
@@ -1592,6 +1593,7 @@ var src_default = lincy;
   parserTs,
   parserVue,
   parserYaml,
+  perfectionist,
   pluginAntfu,
   pluginComments,
   pluginImport,
@@ -1600,6 +1602,7 @@ var src_default = lincy;
   pluginMarkdown,
   pluginNoOnlyTests,
   pluginNode,
+  pluginPerfectionist,
   pluginSortKeys,
   pluginStylistic,
   pluginTs,
@@ -1608,7 +1611,6 @@ var src_default = lincy;
   pluginVue,
   pluginYaml,
   renameRules,
-  sortKeys,
   sortPackageJson,
   sortTsconfig,
   stylistic,

@@ -133,9 +133,9 @@ export default lincy({
     // 是否启用 stylistic 格式化规则
     stylistic: true, // 默认值: true, 可选: false | { indent: number | 'tab', quotes: 'single' | 'double', jsx: boolean}
     // 是否启用 typescript 规则
-    typescript: true, // 默认值: 检测是否安装typescript依赖, 可选: false
+    typescript: true, // 默认值: 检测是否安装typescript依赖, 可选: false | true
     // 是否启用 vue 规则
-    vue: true, // 默认值: 检测是否安装vue依赖, 可选: false
+    vue: true, // 默认值: 检测是否安装vue依赖, 可选: false | true
     // 是否启用 jsx 规则
     jsx: true, // 默认值: true, 可选: false
     // 是否启用 jsonc 规则
@@ -148,8 +148,6 @@ export default lincy({
     test: false, // 默认值: true, 可选: false
     // 是否启用 markdown 规则
     markdown: false, // 默认值: true, 可选: false
-    // 是否启用 eslint-plugin-sort-keys 规则
-    sortKeys: true, // 默认值: false, 可选: true
     // 覆盖规则
     overrides: {},
 
@@ -203,7 +201,9 @@ export default lincy(
     // 你还可以继续配置多个 ESLint Flat Configs
     {
         files: ['**/*.ts'],
-        rules: {},
+        rules: {
+            'perfectionist/sort-objects': 'error',
+        },
     },
 )
 ```
@@ -221,7 +221,7 @@ import {
     jsonc,
     markdown,
     node,
-    sortKeys,
+    perfectionist,
     sortPackageJson,
     sortTsconfig,
     stylistic,
@@ -232,20 +232,16 @@ import {
 } from '@lincy/eslint-config'
 
 export default [
-    ...comments(),
     ...ignores(),
-    ...imports(),
-    ...javascript(),
-    ...jsdoc(),
+    ...javascript(/* Options */),
+    ...comments(),
     ...node(),
-    ...sortKeys(),
-    ...sortPackageJson(),
-    ...sortTsconfig(),
+    ...jsdoc(),
+    ...imports(),
     ...unicorn(),
-
-    ...typescript(),
+    ...perfectionist(),
+    ...typescript(/* Options */),
     ...stylistic(),
-
     ...vue(),
     ...jsonc(),
     ...yaml(),
@@ -296,7 +292,6 @@ export default lincy(
         jsonc: true,
         yaml: true,
         markdown: true,
-        sortKeys: true,
         overrides: {}
     },
     {
