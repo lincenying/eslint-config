@@ -9,6 +9,7 @@ import { pluginPerfectionist } from '../plugins'
 export function perfectionist(): ConfigItem[] {
     return [
         {
+            name: 'eslint:perfectionist',
             plugins: {
                 perfectionist: pluginPerfectionist,
             },

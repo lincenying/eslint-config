@@ -20,6 +20,7 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
 
     return [
         {
+            name: 'eslint:vue:setup',
             plugins: {
                 vue: pluginVue,
             },
@@ -37,6 +38,7 @@ export function vue(options: OptionsHasTypeScript & OptionsOverrides & OptionsSt
                     sourceType: 'module',
                 },
             },
+            name: 'eslint:vue:rules',
             processor: pluginVue.processors['.vue'],
             rules: {
                 ...pluginVue.configs.base.rules as any,

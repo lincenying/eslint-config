@@ -38,6 +38,7 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
     return [
         {
             // Install the plugins without globs, so they can be configured separately.
+            name: 'eslint:typescript:setup',
             plugins: {
                 antfu: pluginAntfu,
                 import: pluginImport,
@@ -61,6 +62,7 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
                     ...parserOptions as any,
                 },
             },
+            name: 'eslint:typescript:rules',
             rules: {
                 ...renameRules(
                     pluginTs.configs['eslint-recommended'].overrides![0].rules!,
@@ -75,9 +77,6 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
 
                 'antfu/generic-spacing': 'error',
                 'antfu/named-tuple-spacing': 'error',
-                'antfu/no-cjs-exports': 'error',
-                'antfu/no-const-enum': 'error',
-                'antfu/no-ts-export-equal': 'error',
 
                 'no-dupe-class-members': 'off',
                 'no-invalid-this': 'off',
@@ -85,7 +84,6 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
                 'no-redeclare': 'off',
                 'no-use-before-define': 'off',
                 'no-useless-constructor': 'off',
-
                 'ts/ban-ts-comment': ['error', { 'ts-ignore': 'allow-with-description' }],
                 'ts/ban-types': ['error', { types: { Function: false } }],
                 'ts/consistent-type-definitions': ['error', 'interface'],
@@ -114,6 +112,7 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
         },
         {
             files: ['**/*.d.ts'],
+            name: 'eslint:typescript:dts-overrides',
             rules: {
                 'eslint-comments/no-unlimited-disable': 'off',
                 'import/no-duplicates': 'off',
@@ -123,12 +122,14 @@ export function typescript(options?: OptionsComponentExts & OptionsOverrides & O
         },
         {
             files: ['**/*.{test,spec}.ts?(x)'],
+            name: 'eslint:typescript:tests-overrides',
             rules: {
                 'no-unused-expressions': 'off',
             },
         },
         {
             files: ['**/*.js', '**/*.cjs'],
+            name: 'eslint:typescript:javascript-overrides',
             rules: {
                 'ts/no-require-imports': 'off',
                 'ts/no-var-requires': 'off',

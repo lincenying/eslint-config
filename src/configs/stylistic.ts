@@ -15,6 +15,7 @@ export function stylistic(options: StylisticOverridesConfig = {}): ConfigItem[] 
 
     return [
         {
+            name: 'eslint:stylistic',
             plugins: {
                 antfu: pluginAntfu,
                 style: pluginStylistic,

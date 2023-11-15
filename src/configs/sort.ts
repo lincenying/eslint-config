@@ -9,6 +9,7 @@ export function sortPackageJson(): ConfigItem[] {
     return [
         {
             files: ['**/package.json'],
+            name: 'eslint:sort-package-json',
             rules: {
                 'jsonc/sort-array-values': [
                     'error',
@@ -103,6 +104,7 @@ export function sortTsconfig(): ConfigItem[] {
     return [
         {
             files: ['**/tsconfig.json', '**/tsconfig.*.json'],
+            name: 'eslint:sort-tsconfig',
             rules: {
                 'jsonc/sort-keys': [
                     'error',

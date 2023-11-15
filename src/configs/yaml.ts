@@ -10,6 +10,7 @@ export function yaml(options: OptionsOverrides & OptionsStylistic = {}): ConfigI
 
     return [
         {
+            name: 'eslint:yaml:setup',
             plugins: {
                 yaml: pluginYaml as any,
             },
@@ -19,6 +20,7 @@ export function yaml(options: OptionsOverrides & OptionsStylistic = {}): ConfigI
             languageOptions: {
                 parser: parserYaml,
             },
+            name: 'eslint:yaml:rules',
             rules: {
                 'style/spaced-comment': 'off',
 

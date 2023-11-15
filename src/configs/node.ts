@@ -4,6 +4,7 @@ import { pluginNode } from '../plugins'
 export function node(): ConfigItem[] {
     return [
         {
+            name: 'eslint:node',
             plugins: {
                 node: pluginNode,
             },

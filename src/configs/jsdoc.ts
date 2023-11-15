@@ -8,6 +8,7 @@ export function jsdoc(options: OptionsStylistic = {}): ConfigItem[] {
 
     return [
         {
+            name: 'eslint:jsdoc',
             plugins: {
                 jsdoc: pluginJsdoc,
             },

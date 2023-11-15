@@ -8,6 +8,7 @@ export function imports(options: OptionsStylistic = {}): ConfigItem[] {
 
     return [
         {
+            name: 'eslint:imports',
             plugins: {
                 antfu: pluginAntfu,
                 import: pluginImport,
