@@ -63,6 +63,8 @@ export function stylistic(options: StylisticOverridesConfig = {}): ConfigItem[] 
                         'JSXText',
                         'JSXEmptyExpression',
                         'JSXSpreadChild',
+                        'TSUnionType',
+                        'TSIntersectionType',
                         'TSTypeParameterInstantiation',
                         'FunctionExpression > .params[decorators.length > 0]',
                         'FunctionExpression > .params > :matches(Decorator, :not(:first-child))',
