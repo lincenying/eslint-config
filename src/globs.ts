@@ -49,7 +49,11 @@ export const GLOB_EXCLUDE = [
 
     '**/output',
     '**/coverage',
+    '**/tmp',
     '**/temp',
+    '**/.tmp',
+    '**/.temp',
+    '**/.history',
     '**/.vitepress/cache',
     '**/.nuxt',
     '**/.next',

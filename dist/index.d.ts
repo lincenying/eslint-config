@@ -25,7 +25,7 @@ export { default as pluginVue } from 'eslint-plugin-vue';
 import * as eslintPluginYml from 'eslint-plugin-yml';
 export { eslintPluginYml as pluginYaml };
 export { default as pluginNoOnlyTests } from 'eslint-plugin-no-only-tests';
-export { default as pluginSortKeys } from 'eslint-plugin-sort-keys';
+export { default as pluginVitest } from 'eslint-plugin-vitest';
 export { default as pluginPerfectionist } from 'eslint-plugin-perfectionist';
 export { default as parserVue } from 'vue-eslint-parser';
 export { default as parserYaml } from 'yaml-eslint-parser';

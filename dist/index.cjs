@@ -76,11 +76,11 @@ __export(src_exports, {
   pluginNoOnlyTests: () => import_eslint_plugin_no_only_tests.default,
   pluginNode: () => import_eslint_plugin_n.default,
   pluginPerfectionist: () => import_eslint_plugin_perfectionist.default,
-  pluginSortKeys: () => import_eslint_plugin_sort_keys.default,
   pluginStylistic: () => import_eslint_plugin.default,
   pluginTs: () => import_eslint_plugin2.default,
   pluginUnicorn: () => import_eslint_plugin_unicorn.default,
   pluginUnusedImports: () => import_eslint_plugin_unused_imports.default,
+  pluginVitest: () => import_eslint_plugin_vitest.default,
   pluginVue: () => import_eslint_plugin_vue.default,
   pluginYaml: () => pluginYaml,
   renameRules: () => renameRules,
@@ -117,7 +117,7 @@ var import_eslint_plugin_unused_imports = __toESM(require("eslint-plugin-unused-
 var import_eslint_plugin_vue = __toESM(require("eslint-plugin-vue"), 1);
 var pluginYaml = __toESM(require("eslint-plugin-yml"), 1);
 var import_eslint_plugin_no_only_tests = __toESM(require("eslint-plugin-no-only-tests"), 1);
-var import_eslint_plugin_sort_keys = __toESM(require("eslint-plugin-sort-keys"), 1);
+var import_eslint_plugin_vitest = __toESM(require("eslint-plugin-vitest"), 1);
 var import_eslint_plugin_perfectionist = __toESM(require("eslint-plugin-perfectionist"), 1);
 var parserTs = __toESM(require("@typescript-eslint/parser"), 1);
 var import_vue_eslint_parser = __toESM(require("vue-eslint-parser"), 1);
@@ -128,6 +128,7 @@ var import_jsonc_eslint_parser = __toESM(require("jsonc-eslint-parser"), 1);
 function comments() {
   return [
     {
+      name: "eslint:comments",
       plugins: {
         "eslint-comments": import_eslint_plugin_eslint_comments.default
       },
@@ -183,7 +184,11 @@ var GLOB_EXCLUDE = [
   "**/pnpm-lock.yaml",
   "**/output",
   "**/coverage",
+  "**/tmp",
   "**/temp",
+  "**/.tmp",
+  "**/.temp",
+  "**/.history",
   "**/.vitepress/cache",
   "**/.nuxt",
   "**/.next",
@@ -222,6 +227,7 @@ function imports(options = {}) {
   } = options;
   return [
     {
+      name: "eslint:imports",
       plugins: {
         antfu: import_eslint_plugin_antfu.default,
         import: pluginImport
@@ -275,6 +281,7 @@ function javascript(options = {}) {
       linterOptions: {
         reportUnusedDisableDirectives: true
       },
+      name: "eslint:javascript",
       plugins: {
         "antfu": import_eslint_plugin_antfu.default,
         "unused-imports": import_eslint_plugin_unused_imports.default
@@ -458,6 +465,7 @@ function javascript(options = {}) {
     },
     {
       files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
+      name: "eslint:scripts-overrides",
       rules: {
         "no-console": "off"
       }
@@ -472,6 +480,7 @@ function jsdoc(options = {}) {
   } = options;
   return [
     {
+      name: "eslint:jsdoc",
       plugins: {
         jsdoc: import_eslint_plugin_jsdoc.default
       },
@@ -508,6 +517,7 @@ function jsonc(options = {}) {
   } = options;
   return [
     {
+      name: "eslint:jsonc:setup",
       plugins: {
         jsonc: pluginJsonc
       }
@@ -517,6 +527,7 @@ function jsonc(options = {}) {
       languageOptions: {
         parser: import_jsonc_eslint_parser.default
       },
+      name: "eslint:jsonc:rules",
       rules: {
         "jsonc/no-bigint-literals": "error",
         "jsonc/no-binary-expression": "error",
@@ -570,12 +581,14 @@ function markdown(options = {}) {
   } = options;
   return [
     {
+      name: "eslint:markdown:setup",
       plugins: {
         markdown: import_eslint_plugin_markdown.default
       }
     },
     {
       files: [GLOB_MARKDOWN],
+      name: "eslint:markdown:processor",
       processor: "markdown/markdown"
     },
     {
@@ -590,13 +603,18 @@ function markdown(options = {}) {
           }
         }
       },
+      name: "eslint:markdown:rules",
       rules: {
-        "antfu/no-cjs-exports": "off",
         "antfu/no-ts-export-equal": "off",
+        "import/newline-after-import": "off",
         "no-alert": "off",
         "no-console": "off",
+        "no-labels": "off",
+        "no-lone-blocks": "off",
+        "no-restricted-syntax": "off",
         "no-undef": "off",
         "no-unused-expressions": "off",
+        "no-unused-labels": "off",
         "no-unused-vars": "off",
         "node/prefer-global/process": "off",
         "style/comma-dangle": "off",
@@ -640,6 +658,7 @@ function markdown(options = {}) {
 function node() {
   return [
     {
+      name: "eslint:node",
       plugins: {
         node: import_eslint_plugin_n.default
       },
@@ -662,6 +681,7 @@ function sortPackageJson() {
   return [
     {
       files: ["**/package.json"],
+      name: "eslint:sort-package-json",
       rules: {
         "jsonc/sort-array-values": [
           "error",
@@ -750,6 +770,7 @@ function sortTsconfig() {
   return [
     {
       files: ["**/tsconfig.json", "**/tsconfig.*.json"],
+      name: "eslint:sort-tsconfig",
       rules: {
         "jsonc/sort-keys": [
           "error",
@@ -884,6 +905,7 @@ function stylistic(options = {}) {
   } = typeof stylistic2 === "boolean" ? {} : stylistic2;
   return [
     {
+      name: "eslint:stylistic",
       plugins: {
         antfu: import_eslint_plugin_antfu.default,
         style: import_eslint_plugin.default
@@ -891,6 +913,7 @@ function stylistic(options = {}) {
       rules: {
         "antfu/consistent-list-newline": "off",
         "antfu/if-newline": "error",
+        "antfu/indent-binary-ops": ["error", { indent }],
         "antfu/top-level-function": "error",
         "curly": ["error", "multi-or-nest", "consistent"],
         "style/array-bracket-spacing": ["error", "never"],
@@ -1082,6 +1105,7 @@ function typescript(options) {
   return [
     {
       // Install the plugins without globs, so they can be configured separately.
+      name: "eslint:typescript:setup",
       plugins: {
         antfu: import_eslint_plugin_antfu.default,
         import: pluginImport,
@@ -1105,6 +1129,7 @@ function typescript(options) {
           ...parserOptions
         }
       },
+      name: "eslint:typescript:rules",
       rules: {
         ...renameRules(
           import_eslint_plugin2.default.configs["eslint-recommended"].overrides[0].rules,
@@ -1118,9 +1143,6 @@ function typescript(options) {
         ),
         "antfu/generic-spacing": "error",
         "antfu/named-tuple-spacing": "error",
-        "antfu/no-cjs-exports": "error",
-        "antfu/no-const-enum": "error",
-        "antfu/no-ts-export-equal": "error",
         "no-dupe-class-members": "off",
         "no-invalid-this": "off",
         "no-loss-of-precision": "off",
@@ -1154,6 +1176,7 @@ function typescript(options) {
     },
     {
       files: ["**/*.d.ts"],
+      name: "eslint:typescript:dts-overrides",
       rules: {
         "eslint-comments/no-unlimited-disable": "off",
         "import/no-duplicates": "off",
@@ -1163,12 +1186,14 @@ function typescript(options) {
     },
     {
       files: ["**/*.{test,spec}.ts?(x)"],
+      name: "eslint:typescript:tests-overrides",
       rules: {
         "no-unused-expressions": "off"
       }
     },
     {
       files: ["**/*.js", "**/*.cjs"],
+      name: "eslint:typescript:javascript-overrides",
       rules: {
         "ts/no-require-imports": "off",
         "ts/no-var-requires": "off"
@@ -1181,6 +1206,7 @@ function typescript(options) {
 function unicorn() {
   return [
     {
+      name: "eslint:unicorn",
       plugins: {
         unicorn: import_eslint_plugin_unicorn.default
       },
@@ -1234,6 +1260,7 @@ function vue(options = {}) {
   } = typeof stylistic2 === "boolean" ? {} : stylistic2;
   return [
     {
+      name: "eslint:vue:setup",
       plugins: {
         vue: import_eslint_plugin_vue.default
       }
@@ -1251,6 +1278,7 @@ function vue(options = {}) {
           sourceType: "module"
         }
       },
+      name: "eslint:vue:rules",
       processor: import_eslint_plugin_vue.default.processors[".vue"],
       rules: {
         ...import_eslint_plugin_vue.default.configs.base.rules,
@@ -1362,6 +1390,7 @@ function yaml(options = {}) {
   } = options;
   return [
     {
+      name: "eslint:yaml:setup",
       plugins: {
         yaml: pluginYaml
       }
@@ -1371,6 +1400,7 @@ function yaml(options = {}) {
       languageOptions: {
         parser: import_yaml_eslint_parser.default
       },
+      name: "eslint:yaml:rules",
       rules: {
         "style/spaced-comment": "off",
         "yaml/block-mapping": "error",
@@ -1407,14 +1437,28 @@ function test(options = {}) {
   } = options;
   return [
     {
+      name: "eslint:test:setup",
       plugins: {
-        "no-only-tests": import_eslint_plugin_no_only_tests.default
+        test: {
+          ...import_eslint_plugin_vitest.default,
+          rules: {
+            ...import_eslint_plugin_vitest.default.rules,
+            // extend `test/no-only-tests` rule
+            ...import_eslint_plugin_no_only_tests.default.rules
+          }
+        }
       }
     },
     {
       files: GLOB_TESTS,
+      name: "eslint:test:rules",
       rules: {
-        "no-only-tests/no-only-tests": isInEditor ? "off" : "error",
+        "node/prefer-global/process": "off",
+        "test/consistent-test-it": ["error", { fn: "it", withinDescribe: "it" }],
+        "test/no-identical-title": "error",
+        "test/no-only-tests": isInEditor ? "off" : "error",
+        "test/prefer-hooks-in-order": "error",
+        "test/prefer-lowercase-title": "error",
         ...overrides
       }
     }
@@ -1425,6 +1469,7 @@ function test(options = {}) {
 function perfectionist() {
   return [
     {
+      name: "eslint:perfectionist",
       plugins: {
         perfectionist: import_eslint_plugin_perfectionist.default
       }
@@ -1603,11 +1648,11 @@ var src_default = lincy;
   pluginNoOnlyTests,
   pluginNode,
   pluginPerfectionist,
-  pluginSortKeys,
   pluginStylistic,
   pluginTs,
   pluginUnicorn,
   pluginUnusedImports,
+  pluginVitest,
   pluginVue,
   pluginYaml,
   renameRules,
