@@ -1030,9 +1030,13 @@ async function stylistic(options = {}) {
           "style/jsx-first-prop-new-line": "error",
           "style/jsx-indent": ["error", indent, { checkAttributes: true, indentLogicalExpressions: true }],
           "style/jsx-indent-props": ["error", indent],
-          "style/jsx-max-props-per-line": ["error", { maximum: 1, when: "multiline" }],
+          "style/jsx-max-props-per-line": ["error", { maximum: 1 }],
+          // 在 JSX 中的单行上强制执行最多 props 数量
+          "style/jsx-newline": "off",
+          // 在 jsx 元素和表达式之后换行
           "style/jsx-one-expression-per-line": ["error", { allow: "single-child" }],
-          "style/jsx-quotes": "error",
+          "style/jsx-quotes": ["error", "prefer-double"],
+          // 强制在 JSX 属性中一致使用双引号或单引号
           "style/jsx-tag-spacing": ["error", {
             afterOpening: "never",
             beforeClosing: "never",
@@ -1548,16 +1552,6 @@ async function react(options = {}) {
         // 使用 JSX 时需要引入 React
         "react/require-default-props": "off",
         // 为每个非必需 prop 强制执行 defaultProps 定义
-        "style/jsx-first-prop-new-line": "off",
-        // 强制 JSX 中第一个属性的正确位置
-        "style/jsx-max-props-per-line": ["error", { maximum: 4 }],
-        // 在 JSX 中的单行上强制执行最多 props 数量
-        "style/jsx-newline": "off",
-        // 在 jsx 元素和表达式之后换行
-        "style/jsx-one-expression-per-line": "off",
-        // 每行一个 JSX 元素
-        "style/jsx-quotes": ["error", "prefer-double"],
-        // 强制在 JSX 属性中一致使用双引号或单引号
         ...overrides
       },
       settings: {
@@ -1604,8 +1598,6 @@ async function lincy(options = {}, ...userConfigs) {
   if (stylisticOptions) {
     if (!("jsx" in stylisticOptions))
       stylisticOptions.jsx = options.jsx ?? true;
-    if (enableReact)
-      stylisticOptions.jsx = false;
   }
   const configs = [];
   if (enableGitignore) {
