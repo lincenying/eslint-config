@@ -68,10 +68,6 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
     if (stylisticOptions) {
         if (!('jsx' in stylisticOptions))
             stylisticOptions.jsx = options.jsx ?? true
-
-        // 开启 react 规则时, 自动禁用 stylistic 的 jsx 规则
-        if (enableReact)
-            stylisticOptions.jsx = false
     }
 
     const configs: Awaitable<FlatConfigItem[]>[] = []

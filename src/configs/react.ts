@@ -51,11 +51,6 @@ export async function react(options: OptionsReact = {}): Promise<FlatConfigItem[
                 'react/no-unsafe': 'off', // 禁止使用不安全的生命周期方法
                 'react/react-in-jsx-scope': 'off', // 使用 JSX 时需要引入 React
                 'react/require-default-props': 'off', // 为每个非必需 prop 强制执行 defaultProps 定义
-                'style/jsx-first-prop-new-line': 'off', // 强制 JSX 中第一个属性的正确位置
-                'style/jsx-max-props-per-line': ['error', { maximum: 4 }], // 在 JSX 中的单行上强制执行最多 props 数量
-                'style/jsx-newline': 'off', // 在 jsx 元素和表达式之后换行
-                'style/jsx-one-expression-per-line': 'off', // 每行一个 JSX 元素
-                'style/jsx-quotes': ['error', 'prefer-double'], // 强制在 JSX 属性中一致使用双引号或单引号
 
                 ...overrides,
             },
