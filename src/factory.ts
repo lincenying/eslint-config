@@ -1,7 +1,6 @@
 import process from 'node:process'
 import fs from 'node:fs'
 import { isPackageExists } from 'local-pkg'
-import gitignore from 'eslint-config-flat-gitignore'
 import {
     comments,
     ignores,
@@ -12,6 +11,7 @@ import {
     markdown,
     node,
     perfectionist,
+    react,
     sortPackageJson,
     sortTsconfig,
     stylistic,
@@ -21,10 +21,10 @@ import {
     vue,
     yaml,
 } from './configs'
-import type { ConfigItem, OptionsConfig } from './types'
-import { combine } from './utils'
+import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types'
+import { combine, interopDefault } from './utils'
 
-const flatConfigProps: (keyof ConfigItem)[] = [
+const flatConfigProps: (keyof FlatConfigItem)[] = [
     'files',
     'ignores',
     'languageOptions',
@@ -42,32 +42,47 @@ const VuePackages = [
     '@slidev/cli',
 ]
 
+const ReactPackages = [
+    'react',
+    'next',
+]
+
 /**
  * Construct an array of ESLint flat config items.
  */
-export function lincy(options: OptionsConfig & ConfigItem = {}, ...userConfigs: (ConfigItem | ConfigItem[])[]) {
+export async function lincy(options: OptionsConfig & FlatConfigItem = {},
+    ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
+): Promise<UserConfigItem[]> {
     const {
         componentExts = [],
         gitignore: enableGitignore = true,
         isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
         overrides = {},
+        react: enableReact = ReactPackages.some(i => isPackageExists(i)),
         typescript: enableTypeScript = isPackageExists('typescript'),
         vue: enableVue = VuePackages.some(i => isPackageExists(i)),
     } = options
 
     const stylisticOptions = options.stylistic === false ? false : (typeof options.stylistic === 'object' ? options.stylistic : {})
-    if (stylisticOptions && !('jsx' in stylisticOptions))
-        stylisticOptions.jsx = options.jsx ?? true
 
-    const configs: ConfigItem[][] = []
+    if (stylisticOptions) {
+        if (!('jsx' in stylisticOptions))
+            stylisticOptions.jsx = options.jsx ?? true
+
+        // 开启 react 规则时, 自动禁用 stylistic 的 jsx 规则
+        if (enableReact)
+            stylisticOptions.jsx = false
+    }
+
+    const configs: Awaitable<FlatConfigItem[]>[] = []
 
     if (enableGitignore) {
         if (typeof enableGitignore !== 'boolean') {
-            configs.push([gitignore(enableGitignore)])
+            configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r(enableGitignore)]))
         }
         else {
             if (fs.existsSync('.gitignore'))
-                configs.push([gitignore()])
+                configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r()]))
         }
     }
 
@@ -128,6 +143,13 @@ export function lincy(options: OptionsConfig & ConfigItem = {}, ...userConfigs: 
         }))
     }
 
+    if (enableReact) {
+        configs.push(react({
+            overrides: overrides.react,
+            ...(typeof enableReact !== 'boolean' ? enableReact : {}),
+        }))
+    }
+
     if (options.jsonc ?? true) {
         configs.push(
             jsonc({
@@ -159,7 +181,7 @@ export function lincy(options: OptionsConfig & ConfigItem = {}, ...userConfigs: 
         if (key in options)
             acc[key] = options[key] as any
         return acc
-    }, {} as ConfigItem)
+    }, {} as FlatConfigItem)
 
     if (Object.keys(fusedConfig).length)
         configs.push([fusedConfig])

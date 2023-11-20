@@ -1,3 +1,4 @@
+import type { Linter } from 'eslint'
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
 import type { ParserOptions } from '@typescript-eslint/parser'
 import type {
@@ -25,28 +26,30 @@ export type WrapRuleConfig<T extends { [key: string]: any }> = {
     [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>
 }
 
+export type Awaitable<T> = T | Promise<T>
+
 export type Rules = WrapRuleConfig<
   MergeIntersection<
-    RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &
-    RenamePrefix<VitestRules, 'vitest/', 'test/'> &
-    RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
-    RenamePrefix<NRules, 'n/', 'node/'> &
-    Prefix<StylisticRules, 'style/'> &
-    Prefix<AntfuRules, 'antfu/'> &
-    JSDocRules &
-    ImportRules &
-    EslintRules &
-    JsoncRules &
-    VueRules &
-    UnicornRules &
-    EslintCommentsRules &
-    {
-        'test/no-only-tests': RuleConfig<[]>
-    }
+      RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &
+      RenamePrefix<VitestRules, 'vitest/', 'test/'> &
+      RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
+      RenamePrefix<NRules, 'n/', 'node/'> &
+      Prefix<StylisticRules, 'style/'> &
+      Prefix<AntfuRules, 'antfu/'> &
+      JSDocRules &
+      ImportRules &
+      EslintRules &
+      JsoncRules &
+      VueRules &
+      UnicornRules &
+      EslintCommentsRules &
+      {
+          'test/no-only-tests': RuleConfig<[]>
+      }
   >
 >
 
-export type ConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
+export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
     /**
      * Custom name of each config item
      */
@@ -60,6 +63,8 @@ export type ConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
      */
     plugins?: Record<string, any>
 }
+
+export type UserConfigItem = FlatConfigItem | Linter.FlatConfig
 
 export interface OptionsComponentExts {
     /**
@@ -101,11 +106,11 @@ export interface StylisticConfig {
 }
 
 export interface StylisticOverridesConfig extends OptionsStylistic {
-    overrides?: ConfigItem['rules']
+    overrides?: FlatConfigItem['rules']
 }
 
 export interface OptionsOverrides {
-    overrides?: ConfigItem['rules']
+    overrides?: FlatConfigItem['rules']
 }
 
 export interface OptionsIgnores {
@@ -114,6 +119,12 @@ export interface OptionsIgnores {
 
 export interface OptionsIsInEditor {
     isInEditor?: boolean
+}
+
+export interface OptionsReact {
+    jsx?: boolean
+    version?: string
+    overrides?: FlatConfigItem['rules']
 }
 
 export interface OptionsConfig extends OptionsComponentExts {
@@ -160,6 +171,13 @@ export interface OptionsConfig extends OptionsComponentExts {
     vue?: boolean
 
     /**
+     * Enable React support.
+     *
+     * @default auto-detect based on the dependencies
+     */
+    react?: boolean
+
+    /**
      * Enable JSONC support.
      *
      * @default true
@@ -197,14 +215,15 @@ export interface OptionsConfig extends OptionsComponentExts {
      * Provide overrides for rules for each integration.
      */
     overrides?: {
-        javascript?: ConfigItem['rules']
-        typescript?: ConfigItem['rules']
-        stylistic?: ConfigItem['rules']
-        test?: ConfigItem['rules']
-        vue?: ConfigItem['rules']
-        jsonc?: ConfigItem['rules']
-        markdown?: ConfigItem['rules']
-        yaml?: ConfigItem['rules']
+        javascript?: FlatConfigItem['rules']
+        typescript?: FlatConfigItem['rules']
+        stylistic?: FlatConfigItem['rules']
+        test?: FlatConfigItem['rules']
+        vue?: FlatConfigItem['rules']
+        react?: FlatConfigItem['rules']
+        jsonc?: FlatConfigItem['rules']
+        markdown?: FlatConfigItem['rules']
+        yaml?: FlatConfigItem['rules']
         ignores?: string[]
     }
 }

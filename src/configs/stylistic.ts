@@ -1,7 +1,8 @@
-import { pluginAntfu, pluginStylistic } from '../plugins'
-import type { ConfigItem, StylisticOverridesConfig } from '../types'
+import { interopDefault } from '../utils'
+import type { FlatConfigItem, StylisticOverridesConfig } from '../types'
+import { pluginAntfu } from '../plugins'
 
-export function stylistic(options: StylisticOverridesConfig = {}): ConfigItem[] {
+export async function stylistic(options: StylisticOverridesConfig = {}): Promise<FlatConfigItem[]> {
     const {
         overrides = {},
         stylistic = {},
@@ -12,6 +13,8 @@ export function stylistic(options: StylisticOverridesConfig = {}): ConfigItem[] 
         jsx = true,
         quotes = 'single',
     } = typeof stylistic === 'boolean' ? {} : stylistic
+
+    const pluginStylistic = await interopDefault(import('@stylistic/eslint-plugin'))
 
     return [
         {

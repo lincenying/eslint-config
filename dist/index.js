@@ -2,32 +2,18 @@
 import process2 from "process";
 import fs from "fs";
 import { isPackageExists } from "local-pkg";
-import gitignore from "eslint-config-flat-gitignore";
 
 // src/plugins.ts
 import { default as default2 } from "eslint-plugin-antfu";
 import { default as default3 } from "eslint-plugin-eslint-comments";
 import * as pluginImport from "eslint-plugin-i";
-import { default as default4 } from "eslint-plugin-jsdoc";
-import * as pluginJsonc from "eslint-plugin-jsonc";
-import { default as default5 } from "eslint-plugin-markdown";
-import { default as default6 } from "eslint-plugin-n";
-import { default as default7 } from "@stylistic/eslint-plugin";
-import { default as default8 } from "@typescript-eslint/eslint-plugin";
-import { default as default9 } from "eslint-plugin-unicorn";
-import { default as default10 } from "eslint-plugin-unused-imports";
-import { default as default11 } from "eslint-plugin-vue";
-import * as pluginYaml from "eslint-plugin-yml";
-import { default as default12 } from "eslint-plugin-no-only-tests";
-import { default as default13 } from "eslint-plugin-vitest";
-import { default as default14 } from "eslint-plugin-perfectionist";
-import * as parserTs from "@typescript-eslint/parser";
-import { default as default15 } from "vue-eslint-parser";
-import { default as default16 } from "yaml-eslint-parser";
-import { default as default17 } from "jsonc-eslint-parser";
+import { default as default4 } from "eslint-plugin-n";
+import { default as default5 } from "eslint-plugin-unicorn";
+import { default as default6 } from "eslint-plugin-unused-imports";
+import { default as default7 } from "eslint-plugin-perfectionist";
 
 // src/configs/comments.ts
-function comments() {
+async function comments() {
   return [
     {
       name: "eslint:comments",
@@ -108,7 +94,7 @@ var GLOB_EXCLUDE = [
 ];
 
 // src/configs/ignores.ts
-function ignores(options = {}) {
+async function ignores(options = {}) {
   const {
     ignores: ignores2 = []
   } = options;
@@ -123,7 +109,7 @@ function ignores(options = {}) {
 }
 
 // src/configs/imports.ts
-function imports(options = {}) {
+async function imports(options = {}) {
   const {
     stylistic: stylistic2 = true
   } = options;
@@ -154,7 +140,7 @@ function imports(options = {}) {
 
 // src/configs/javascript.ts
 import globals from "globals";
-function javascript(options = {}) {
+async function javascript(options = {}) {
   const {
     isInEditor = false,
     overrides = {}
@@ -186,7 +172,7 @@ function javascript(options = {}) {
       name: "eslint:javascript",
       plugins: {
         "antfu": default2,
-        "unused-imports": default10
+        "unused-imports": default6
       },
       rules: {
         "accessor-pairs": ["error", { enforceForClassMembers: true, setWithoutGet: true }],
@@ -375,8 +361,30 @@ function javascript(options = {}) {
   ];
 }
 
+// src/utils.ts
+async function combine(...configs) {
+  const resolved = await Promise.all(configs);
+  return resolved.flat();
+}
+function renameRules(rules, from, to) {
+  return Object.fromEntries(
+    Object.entries(rules).map(([key, value]) => {
+      if (key.startsWith(from))
+        return [to + key.slice(from.length), value];
+      return [key, value];
+    })
+  );
+}
+function toArray(value) {
+  return Array.isArray(value) ? value : [value];
+}
+async function interopDefault(m) {
+  const resolved = await m;
+  return resolved.default || resolved;
+}
+
 // src/configs/jsdoc.ts
-function jsdoc(options = {}) {
+async function jsdoc(options = {}) {
   const {
     stylistic: stylistic2 = true
   } = options;
@@ -384,7 +392,8 @@ function jsdoc(options = {}) {
     {
       name: "eslint:jsdoc",
       plugins: {
-        jsdoc: default4
+        // @ts-expect-error missing types
+        jsdoc: await interopDefault(import("eslint-plugin-jsdoc"))
       },
       rules: {
         "jsdoc/check-access": "warn",
@@ -412,11 +421,18 @@ function jsdoc(options = {}) {
 }
 
 // src/configs/jsonc.ts
-function jsonc(options = {}) {
+async function jsonc(options = {}) {
   const {
     overrides = {},
     stylistic: stylistic2 = true
   } = options;
+  const [
+    pluginJsonc,
+    parserJsonc
+  ] = await Promise.all([
+    interopDefault(import("eslint-plugin-jsonc")),
+    interopDefault(import("jsonc-eslint-parser"))
+  ]);
   return [
     {
       name: "eslint:jsonc:setup",
@@ -427,7 +443,7 @@ function jsonc(options = {}) {
     {
       files: [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
       languageOptions: {
-        parser: default17
+        parser: parserJsonc
       },
       name: "eslint:jsonc:rules",
       rules: {
@@ -476,7 +492,7 @@ function jsonc(options = {}) {
 }
 
 // src/configs/markdown.ts
-function markdown(options = {}) {
+async function markdown(options = {}) {
   const {
     componentExts = [],
     overrides = {}
@@ -485,7 +501,8 @@ function markdown(options = {}) {
     {
       name: "eslint:markdown:setup",
       plugins: {
-        markdown: default5
+        // @ts-expect-error missing types
+        markdown: await interopDefault(import("eslint-plugin-markdown"))
       }
     },
     {
@@ -557,12 +574,12 @@ function markdown(options = {}) {
 }
 
 // src/configs/node.ts
-function node() {
+async function node() {
   return [
     {
       name: "eslint:node",
       plugins: {
-        node: default6
+        node: default4
       },
       rules: {
         "node/handle-callback-err": ["error", "^(err|error)$"],
@@ -579,7 +596,7 @@ function node() {
 }
 
 // src/configs/sort.ts
-function sortPackageJson() {
+async function sortPackageJson() {
   return [
     {
       files: ["**/package.json"],
@@ -795,7 +812,7 @@ function sortTsconfig() {
 }
 
 // src/configs/stylistic.ts
-function stylistic(options = {}) {
+async function stylistic(options = {}) {
   const {
     overrides = {},
     stylistic: stylistic2 = {}
@@ -805,12 +822,13 @@ function stylistic(options = {}) {
     jsx = true,
     quotes = "single"
   } = typeof stylistic2 === "boolean" ? {} : stylistic2;
+  const pluginStylistic = await interopDefault(import("@stylistic/eslint-plugin"));
   return [
     {
       name: "eslint:stylistic",
       plugins: {
         antfu: default2,
-        style: default7
+        style: pluginStylistic
       },
       rules: {
         "antfu/consistent-list-newline": "off",
@@ -959,26 +977,7 @@ function stylistic(options = {}) {
 
 // src/configs/typescript.ts
 import process from "process";
-
-// src/utils.ts
-function combine(...configs) {
-  return configs.flat();
-}
-function renameRules(rules, from, to) {
-  return Object.fromEntries(
-    Object.entries(rules).map(([key, value]) => {
-      if (key.startsWith(from))
-        return [to + key.slice(from.length), value];
-      return [key, value];
-    })
-  );
-}
-function toArray(value) {
-  return Array.isArray(value) ? value : [value];
-}
-
-// src/configs/typescript.ts
-function typescript(options) {
+async function typescript(options) {
   const {
     componentExts = [],
     overrides = {},
@@ -1006,14 +1005,20 @@ function typescript(options) {
     "ts/unbound-method": "error"
   };
   const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : void 0;
+  const [
+    pluginTs,
+    parserTs
+  ] = await Promise.all([
+    interopDefault(import("@typescript-eslint/eslint-plugin")),
+    interopDefault(import("@typescript-eslint/parser"))
+  ]);
   return [
     {
       // Install the plugins without globs, so they can be configured separately.
       name: "eslint:typescript:setup",
       plugins: {
         antfu: default2,
-        import: pluginImport,
-        ts: default8
+        ts: pluginTs
       }
     },
     {
@@ -1036,12 +1041,12 @@ function typescript(options) {
       name: "eslint:typescript:rules",
       rules: {
         ...renameRules(
-          default8.configs["eslint-recommended"].overrides[0].rules,
+          pluginTs.configs["eslint-recommended"].overrides[0].rules,
           "@typescript-eslint/",
           "ts/"
         ),
         ...renameRules(
-          default8.configs.strict.rules,
+          pluginTs.configs.strict.rules,
           "@typescript-eslint/",
           "ts/"
         ),
@@ -1107,12 +1112,12 @@ function typescript(options) {
 }
 
 // src/configs/unicorn.ts
-function unicorn() {
+async function unicorn() {
   return [
     {
       name: "eslint:unicorn",
       plugins: {
-        unicorn: default9
+        unicorn: default5
       },
       rules: {
         // Pass error message when throwing errors
@@ -1154,7 +1159,7 @@ var pkg = getPackageInfoSync("vue");
 var vueVersion = pkg && pkg.version;
 vueVersion = vueVersion && vueVersion[0];
 vueVersion = Number.isNaN(vueVersion) ? "3" : vueVersion;
-function vue(options = {}) {
+async function vue(options = {}) {
   const {
     overrides = {},
     stylistic: stylistic2 = true
@@ -1162,38 +1167,46 @@ function vue(options = {}) {
   const {
     indent = 4
   } = typeof stylistic2 === "boolean" ? {} : stylistic2;
+  const [
+    pluginVue,
+    parserVue
+  ] = await Promise.all([
+    // @ts-expect-error missing types
+    interopDefault(import("eslint-plugin-vue")),
+    interopDefault(import("vue-eslint-parser"))
+  ]);
   return [
     {
       name: "eslint:vue:setup",
       plugins: {
-        vue: default11
+        vue: pluginVue
       }
     },
     {
       files: [GLOB_VUE],
       languageOptions: {
-        parser: default15,
+        parser: parserVue,
         parserOptions: {
           ecmaFeatures: {
             jsx: true
           },
           extraFileExtensions: [".vue"],
-          parser: options.typescript ? parserTs : null,
+          parser: options.typescript ? await interopDefault(import("@typescript-eslint/parser")) : null,
           sourceType: "module"
         }
       },
       name: "eslint:vue:rules",
-      processor: default11.processors[".vue"],
+      processor: pluginVue.processors[".vue"],
       rules: {
-        ...default11.configs.base.rules,
+        ...pluginVue.configs.base.rules,
         ...vueVersion === "3" ? {
-          ...default11.configs["vue3-essential"].rules,
-          ...default11.configs["vue3-strongly-recommended"].rules,
-          ...default11.configs["vue3-recommended"].rules
+          ...pluginVue.configs["vue3-essential"].rules,
+          ...pluginVue.configs["vue3-strongly-recommended"].rules,
+          ...pluginVue.configs["vue3-recommended"].rules
         } : {
-          ...default11.configs.essential.rules,
-          ...default11.configs["strongly-recommended"].rules,
-          ...default11.configs.recommended.rules
+          ...pluginVue.configs.essential.rules,
+          ...pluginVue.configs["strongly-recommended"].rules,
+          ...pluginVue.configs.recommended.rules
         },
         "node/prefer-global/process": "off",
         "vue/block-order": ["error", {
@@ -1287,11 +1300,18 @@ function vue(options = {}) {
 }
 
 // src/configs/yaml.ts
-function yaml(options = {}) {
+async function yaml(options = {}) {
   const {
     overrides = {},
     stylistic: stylistic2 = true
   } = options;
+  const [
+    pluginYaml,
+    parserYaml
+  ] = await Promise.all([
+    interopDefault(import("eslint-plugin-yml")),
+    interopDefault(import("yaml-eslint-parser"))
+  ]);
   return [
     {
       name: "eslint:yaml:setup",
@@ -1302,7 +1322,7 @@ function yaml(options = {}) {
     {
       files: [GLOB_YAML],
       languageOptions: {
-        parser: default16
+        parser: parserYaml
       },
       name: "eslint:yaml:rules",
       rules: {
@@ -1334,21 +1354,29 @@ function yaml(options = {}) {
 }
 
 // src/configs/test.ts
-function test(options = {}) {
+async function test(options = {}) {
   const {
     isInEditor = false,
     overrides = {}
   } = options;
+  const [
+    pluginVitest,
+    pluginNoOnlyTests
+  ] = await Promise.all([
+    interopDefault(import("eslint-plugin-vitest")),
+    // @ts-expect-error missing types
+    interopDefault(import("eslint-plugin-no-only-tests"))
+  ]);
   return [
     {
       name: "eslint:test:setup",
       plugins: {
         test: {
-          ...default13,
+          ...pluginVitest,
           rules: {
-            ...default13.rules,
+            ...pluginVitest.rules,
             // extend `test/no-only-tests` rule
-            ...default12.rules
+            ...pluginNoOnlyTests.rules
           }
         }
       }
@@ -1370,12 +1398,92 @@ function test(options = {}) {
 }
 
 // src/configs/perfectionist.ts
-function perfectionist() {
+async function perfectionist() {
   return [
     {
       name: "eslint:perfectionist",
       plugins: {
-        perfectionist: default14
+        perfectionist: default7
+      }
+    }
+  ];
+}
+
+// src/configs/react.ts
+async function react(options = {}) {
+  const {
+    jsx = true,
+    overrides = {},
+    version = "17.0"
+  } = options;
+  const [
+    pluginReact,
+    pluginReactHooks
+  ] = await Promise.all([
+    // @ts-expect-error missing types
+    interopDefault(import("eslint-plugin-react")),
+    // @ts-expect-error missing types
+    interopDefault(import("eslint-plugin-react-hooks"))
+  ]);
+  return [
+    {
+      name: "eslint:react:setup",
+      plugins: {
+        "react": pluginReact,
+        "react-hooks": pluginReactHooks
+      }
+    },
+    {
+      files: [GLOB_JSX, GLOB_TSX],
+      languageOptions: {
+        parserOptions: {
+          ecmaFeatures: {
+            jsx
+          }
+        }
+      },
+      name: "eslint:react:rules",
+      rules: {
+        ...pluginReact.configs.all.rules,
+        ...pluginReactHooks.configs.recommended.rules,
+        "react/forbid-component-props": "off",
+        // 禁止组件上使用某些 props
+        "react/hook-use-state": "off",
+        // useState 钩子值和 setter 变量的解构和对称命名
+        "react/jsx-filename-extension": "off",
+        // 禁止可能包含 JSX 文件扩展名
+        "react/jsx-max-depth": "off",
+        // 强制 JSX 最大深度
+        "react/jsx-no-bind": "off",
+        // .bind()JSX 属性中禁止使用箭头函数
+        "react/jsx-no-literals": "off",
+        // 禁止在 JSX 中使用字符串文字
+        "react/jsx-props-no-spreading": "off",
+        // 强制任何 JSX 属性都不会传播
+        "react/no-danger": "off",
+        // 禁止使用 dangerouslySetInnerHTML
+        "react/no-unsafe": "off",
+        // 禁止使用不安全的生命周期方法
+        "react/react-in-jsx-scope": "off",
+        // 使用 JSX 时需要引入 React
+        "react/require-default-props": "off",
+        // 为每个非必需 prop 强制执行 defaultProps 定义
+        "style/jsx-first-prop-new-line": "off",
+        // 强制 JSX 中第一个属性的正确位置
+        "style/jsx-max-props-per-line": ["error", { maximum: 4 }],
+        // 在 JSX 中的单行上强制执行最多 props 数量
+        "style/jsx-newline": "off",
+        // 在 jsx 元素和表达式之后换行
+        "style/jsx-one-expression-per-line": "off",
+        // 每行一个 JSX 元素
+        "style/jsx-quotes": ["error", "prefer-double"],
+        // 强制在 JSX 属性中一致使用双引号或单引号
+        ...overrides
+      },
+      settings: {
+        react: {
+          version
+        }
       }
     }
   ];
@@ -1398,25 +1506,34 @@ var VuePackages = [
   "vitepress",
   "@slidev/cli"
 ];
-function lincy(options = {}, ...userConfigs) {
+var ReactPackages = [
+  "react",
+  "next"
+];
+async function lincy(options = {}, ...userConfigs) {
   const {
     componentExts = [],
     gitignore: enableGitignore = true,
     isInEditor = !!((process2.env.VSCODE_PID || process2.env.JETBRAINS_IDE) && !process2.env.CI),
     overrides = {},
+    react: enableReact = ReactPackages.some((i) => isPackageExists(i)),
     typescript: enableTypeScript = isPackageExists("typescript"),
     vue: enableVue = VuePackages.some((i) => isPackageExists(i))
   } = options;
   const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === "object" ? options.stylistic : {};
-  if (stylisticOptions && !("jsx" in stylisticOptions))
-    stylisticOptions.jsx = options.jsx ?? true;
+  if (stylisticOptions) {
+    if (!("jsx" in stylisticOptions))
+      stylisticOptions.jsx = options.jsx ?? true;
+    if (enableReact)
+      stylisticOptions.jsx = false;
+  }
   const configs = [];
   if (enableGitignore) {
     if (typeof enableGitignore !== "boolean") {
-      configs.push([gitignore(enableGitignore)]);
+      configs.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r(enableGitignore)]));
     } else {
       if (fs.existsSync(".gitignore"))
-        configs.push([gitignore()]);
+        configs.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r()]));
     }
   }
   configs.push(
@@ -1465,6 +1582,12 @@ function lincy(options = {}, ...userConfigs) {
       overrides: overrides.vue,
       stylistic: stylisticOptions,
       typescript: !!enableTypeScript
+    }));
+  }
+  if (enableReact) {
+    configs.push(react({
+      overrides: overrides.react,
+      ...typeof enableReact !== "boolean" ? enableReact : {}
     }));
   }
   if (options.jsonc ?? true) {
@@ -1532,33 +1655,15 @@ export {
   src_default as default,
   ignores,
   imports,
+  interopDefault,
   javascript,
   jsdoc,
   jsonc,
   lincy,
   markdown,
   node,
-  default17 as parserJsonc,
-  parserTs,
-  default15 as parserVue,
-  default16 as parserYaml,
   perfectionist,
-  default2 as pluginAntfu,
-  default3 as pluginComments,
-  pluginImport,
-  default4 as pluginJsdoc,
-  pluginJsonc,
-  default5 as pluginMarkdown,
-  default12 as pluginNoOnlyTests,
-  default6 as pluginNode,
-  default14 as pluginPerfectionist,
-  default7 as pluginStylistic,
-  default8 as pluginTs,
-  default9 as pluginUnicorn,
-  default10 as pluginUnusedImports,
-  default13 as pluginVitest,
-  default11 as pluginVue,
-  pluginYaml,
+  react,
   renameRules,
   sortPackageJson,
   sortTsconfig,

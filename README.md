@@ -6,8 +6,8 @@
 
 - 单引号，无结尾分号
 - 自动格式化
-- 专为与 TypeScript、Vue(2/3) 一起使用而设计，开箱即用
-- 也适用于 json、yaml、markdown、react
+- 专为与 TypeScript、Vue(2/3)、React 一起使用而设计，开箱即用
+- 也适用于 json、yaml、markdown
 - import导入排序, 对象字⾯量项尾逗号
 - 合理的默认值，最佳实践，只需一行配置
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new)
@@ -131,23 +131,45 @@ import lincy from '@lincy/eslint-config'
 
 export default lincy({
     // 是否启用 stylistic 格式化规则
-    stylistic: true, // 默认值: true, 可选: false | { indent: number | 'tab', quotes: 'single' | 'double', jsx: boolean}
+    // 默认值: true
+    // 可选: false | { indent: number | 'tab', quotes: 'single' | 'double', jsx: boolean}
+    stylistic: true,
     // 是否启用 typescript 规则
-    typescript: true, // 默认值: 检测是否安装typescript依赖, 可选: false | true
+    // 默认值: 检测是否安装typescript依赖,
+    // 可选: false | true | { parserOptions: {} }
+    typescript: true,
     // 是否启用 vue 规则
-    vue: true, // 默认值: 检测是否安装vue依赖, 可选: false | true
+    // 默认值: 检测是否安装vue依赖,
+    // 可选: false | true
+    vue: true,
     // 是否启用 jsx 规则
-    jsx: true, // 默认值: true, 可选: false
+    // 默认值: true,
+    // 可选: false
+    jsx: true,
+    // 是否启用 react 规则
+    // 默认值: 检测是否安装react依赖,
+    // 可选: false | true | { jsx: boolean, version: string }
+    react: true,
     // 是否启用 jsonc 规则
-    jsonc: false, // 默认值: true, 可选: false
+    // 默认值: true,
+    // 可选: false
+    jsonc: false,
     // 是否启用 yaml 规则
-    yaml: false, // 默认值: true, 可选: false
+    // 默认值: true,
+    // 可选: false
+    yaml: false,
     // 是否启用 .gitignore 文件
-    gitignore: false, // 默认值: true, 可选: false
+    // 默认值: true,
+    // 可选: false | { ignores: string[] }
+    gitignore: false,
     // 是否启用 test 规则
-    test: false, // 默认值: true, 可选: false
+    // 默认值: true,
+    // 可选: false
+    test: false,
     // 是否启用 markdown 规则
-    markdown: false, // 默认值: true, 可选: false
+    // 默认值: true,
+    // 可选: false
+    markdown: false,
     // 覆盖规则
     overrides: {},
 
@@ -208,11 +230,12 @@ export default lincy(
 )
 ```
 
-更高级的是，您还可以导入非常细粒度的配置并根据需要组合它们：
+您还可以导入非常细粒度的配置并根据需要组合它们：
 
 ```js
 // eslint.config.js
 import {
+    combine,
     comments,
     ignores,
     imports,
@@ -222,6 +245,7 @@ import {
     markdown,
     node,
     perfectionist,
+    react,
     sortPackageJson,
     sortTsconfig,
     stylistic,
@@ -231,22 +255,23 @@ import {
     yaml,
 } from '@lincy/eslint-config'
 
-export default [
-    ...ignores(),
-    ...javascript(/* Options */),
-    ...comments(),
-    ...node(),
-    ...jsdoc(),
-    ...imports(),
-    ...unicorn(),
-    ...perfectionist(),
-    ...typescript(/* Options */),
-    ...stylistic(),
-    ...vue(),
-    ...jsonc(),
-    ...yaml(),
-    ...markdown(),
-]
+export default combine(
+    ignores(),
+    javascript(/* Options */),
+    comments(),
+    node(),
+    jsdoc(),
+    imports(),
+    unicorn(),
+    perfectionist(),
+    typescript(/* Options */),
+    stylistic(/* Options */),
+    vue(),
+    react(/* Options */),
+    jsonc(),
+    yaml(),
+    markdown(),
+)
 ```
 
 查看 [configs](https://github.com/lincenying/eslint-config/blob/main/src/configs) 和 [factory](https://github.com/lincenying/eslint-config/blob/main/src/factory.ts）了解更多详细信息。
@@ -285,6 +310,7 @@ export default lincy(
         isInEditor: true,
         vue: true,
         jsx: true,
+        react: true,
         typescript: true,
         stylistic: true,
         gitignore: true,
@@ -321,16 +347,23 @@ export default lincy({
         indent: 4
     },
     overrides: {
-        // 重写vue规则
+        // 覆盖 vue 规则
         vue: {
             'vue/operator-linebreak': ['error', 'before'],
         },
-        // 重写ts规则
+        // 覆盖 react 规则
+        react: {
+            'react/forbid-component-props': 'error',
+        },
+        // 覆盖 ts 规则
         typescript: {
             'ts/consistent-type-definitions': ['error', 'interface'],
         },
-        // 重写js规则
-        javascript: {},
+        // 覆盖 js 规则
+        javascript: {
+            'no-undef': 'off',
+        },
+        // 覆盖 stylistic 规则
         stylistic: {
             'antfu/consistent-list-newline': 'error',
         },
@@ -381,70 +414,6 @@ export default lincy({
         // tsconfigPath: ['tsconfig.json'], // 也可以是数组
     },
 })
-```
-
-### React
-react拓展规则
-
-安装react插件
-
-```bash
-npm i -D eslint-plugin-react eslint-plugin-react-hooks
-```
-
-```js
-// eslint.config.js
-import lincy from '@lincy/eslint-config'
-import pluginReact from 'eslint-plugin-react'
-import pluginReactHooks from 'eslint-plugin-react-hooks'
-
-export default lincy(
-    {
-        vue: false,
-        // 关闭stylistic提供的jsx规则, 直接使用eslint-plugin-react
-        jsx: false,
-    },
-    // react 相关规则
-    {
-        files: ['**/*.{jsx,tsx}'],
-        settings: {
-            react: {
-                version: '17.0',
-            },
-        },
-        plugins: {
-            'react': pluginReact,
-            'react-hooks': pluginReactHooks,
-        },
-        languageOptions: {
-            parserOptions: {
-                ecmaFeatures: {
-                    jsx: true,
-                },
-            },
-        },
-        rules: {
-            ...pluginReact.configs.all.rules,
-            ...pluginReactHooks.configs.recommended.rules,
-            'react/jsx-filename-extension': 'off', // 禁止可能包含 JSX 文件扩展名
-            'react/jsx-first-prop-new-line': 'off', // 强制 JSX 中第一个属性的正确位置
-            'react/jsx-no-bind': 'off', // .bind()JSX 属性中禁止使用箭头函数
-            'react/forbid-component-props': 'off', // 禁止组件上使用某些 props
-            'react/jsx-max-props-per-line': ['error', { maximum: 4 }], // 在 JSX 中的单行上强制执行最多 props 数量
-            'react/jsx-no-literals': 'off', // 禁止在 JSX 中使用字符串文字
-            'react/jsx-one-expression-per-line': 'off', // 每行一个 JSX 元素
-            'react/no-danger': 'off', // 禁止使用 dangerouslySetInnerHTML
-            'react/jsx-max-depth': 'off', // 强制 JSX 最大深度
-            'react/jsx-newline': 'off', // 在 jsx 元素和表达式之后换行
-            'react/require-default-props': 'off', // 为每个非必需 prop 强制执行 defaultProps 定义
-            'react/jsx-props-no-spreading': 'off', // 强制任何 JSX 属性都不会传播
-            'react/no-unsafe': 'off', // 禁止使用不安全的生命周期方法
-            'jsx-quotes': ['error', 'prefer-double'], // 强制在 JSX 属性中一致使用双引号或单引号
-            'react/react-in-jsx-scope': 'off', // 使用 JSX 时需要引入 React
-            'react/hook-use-state': 'off', // useState 钩子值和 setter 变量的解构和对称命名
-        },
-    },
-)
 ```
 
 ### Lint Staged
