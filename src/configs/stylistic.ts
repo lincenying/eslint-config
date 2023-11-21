@@ -146,7 +146,7 @@ export async function stylistic(options: StylisticOverridesConfig = {}): Promise
                     'style/jsx-first-prop-new-line': 'error',
                     'style/jsx-indent': ['error', indent, { checkAttributes: true, indentLogicalExpressions: true }],
                     'style/jsx-indent-props': ['error', indent],
-                    'style/jsx-max-props-per-line': ['error', { maximum: 1 }], // 在 JSX 中的单行上强制执行最多 props 数量
+                    'style/jsx-max-props-per-line': ['error', { maximum: 4 }], // 在 JSX 中的单行上强制执行最多 props 数量
                     'style/jsx-newline': 'off', // 在 jsx 元素和表达式之后换行
                     'style/jsx-one-expression-per-line': ['error', { allow: 'single-child' }],
                     'style/jsx-quotes': ['error', 'prefer-double'], // 强制在 JSX 属性中一致使用双引号或单引号
