@@ -46,9 +46,9 @@ For example:
 }
 ```
 
-## VS Code support (auto fix)
+## VS Code support (自动修复)
 
-安装[VS Code ESLint扩展](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+安装 [VS Code ESLint扩展](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
 将以下设置添加到您的“settings.json”：
 
@@ -130,47 +130,69 @@ module.exports = lincy()
 import lincy from '@lincy/eslint-config'
 
 export default lincy({
-    // 是否启用 stylistic 格式化规则
-    // 默认值: true
-    // 可选: false | { indent: number | 'tab', quotes: 'single' | 'double', jsx: boolean}
+    /**
+     * 是否启用 stylistic 格式化规则
+     * @default 默认值: true
+     * @example 可选: false | { indent: number | 'tab'; quotes: 'single' | 'double'; jsx: boolean}
+     */
     stylistic: true,
-    // 是否启用 typescript 规则
-    // 默认值: 检测是否安装typescript依赖,
-    // 可选: false | true | { parserOptions: {} }
+    /**
+     * 是否启用 typescript 规则
+     * @default 默认值: 检测是否安装typescript依赖,
+     * @example 可选: false | true | { parserOptions: {} }
+     */
     typescript: true,
-    // 是否启用 vue 规则
-    // 默认值: 检测是否安装vue依赖,
-    // 可选: false | true
+    /**
+     * 是否启用 vue 规则
+     * @default 默认值: 检测是否安装vue依赖,
+     * @example 可选: false | true
+     */
     vue: true,
-    // 是否启用 jsx 规则
-    // 默认值: true,
-    // 可选: false
+    /**
+     * 是否启用 jsx 规则
+     * @default 默认值: true,
+     * @example 可选: false
+     */
     jsx: true,
-    // 是否启用 react 规则
-    // 默认值: 检测是否安装react依赖,
-    // 可选: false | true | { jsx: boolean, version: string }
+    /**
+     * 是否启用 react 规则
+     * @default 默认值: 检测是否安装react依赖,
+     * @example 可选: false | true | { jsx: boolean; version: string }
+     */
     react: true,
-    // 是否启用 jsonc 规则
-    // 默认值: true,
-    // 可选: false
+    /**
+     * 是否启用 jsonc 规则
+     * @default 默认值: true,
+     * @example 可选: false
+     */
     jsonc: false,
-    // 是否启用 yaml 规则
-    // 默认值: true,
-    // 可选: false
+    /**
+     * 是否启用 yaml 规则
+     * @default 默认值: true,
+     * @example 可选: false
+     */
     yaml: false,
-    // 是否启用 .gitignore 文件
-    // 默认值: true,
-    // 可选: false | { ignores: string[] }
+    /**
+     * 是否启用 .gitignore 文件
+     * @default 默认值: true,
+     * @example 可选: false | { ignores: string[] }
+     */
     gitignore: false,
-    // 是否启用 test 规则
-    // 默认值: true,
-    // 可选: false
+    /**
+     * 是否启用 test 规则
+     * @default 默认值: true,
+     * @example 可选: false
+     */
     test: false,
-    // 是否启用 markdown 规则
-    // 默认值: true,
-    // 可选: false
+    /**
+     * 是否启用 markdown 规则
+     * @default 默认值: true,
+     * @example 可选: false
+     */
     markdown: false,
-    // 覆盖规则
+    /**
+     * 覆盖规则
+     */
     overrides: {},
 
     // 工厂函数第一个参数默认为各规则的开关, 但是也可以作为追加规则使用, 当包含以下键名将会自动整合到一个规则里
@@ -185,7 +207,8 @@ export default lincy({
 })
 ```
 
-`lincy` 工厂函数还接受任意数量的自定义配置覆盖：
+`lincy` 工厂函数还接受任意数量的自定义配置覆盖
+下面示例为添加`unocss`规则和添加`auto-import`生成的全局方法
 
 ```js
 // eslint.config.js
