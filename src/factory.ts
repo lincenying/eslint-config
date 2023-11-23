@@ -21,7 +21,7 @@ import {
     vue,
     yaml,
 } from './configs'
-import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types'
+import type { Awaitable, FlatConfigItem, OptionsConfig, OptionsFiles, UserConfigItem } from './types'
 import { combine, interopDefault } from './utils'
 
 const flatConfigProps: (keyof FlatConfigItem)[] = [
@@ -126,6 +126,7 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
 
     if (options.test ?? true) {
         configs.push(test({
+            ...(typeof options.test !== 'boolean' ? options.test : {}),
             isInEditor,
             overrides: overrides.test,
         }))
@@ -133,6 +134,7 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
 
     if (enableVue) {
         configs.push(vue({
+            ...(typeof options.vue !== 'boolean' ? options.vue : {}),
             overrides: overrides.vue,
             stylistic: stylisticOptions,
             typescript: !!enableTypeScript,
@@ -141,14 +143,15 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
 
     if (enableReact) {
         configs.push(react({
-            overrides: overrides.react,
             ...(typeof enableReact !== 'boolean' ? enableReact : {}),
+            overrides: overrides.react,
         }))
     }
 
     if (options.jsonc ?? true) {
         configs.push(
             jsonc({
+                ...(typeof options.jsonc !== 'boolean' ? options.jsonc : {}),
                 overrides: overrides.jsonc,
                 stylistic: stylisticOptions,
             }),
@@ -159,6 +162,7 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
 
     if (options.yaml ?? true) {
         configs.push(yaml({
+            ...(typeof options.yaml !== 'boolean' ? options.yaml : {}),
             overrides: overrides.yaml,
             stylistic: stylisticOptions,
         }))
@@ -166,6 +170,7 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
 
     if (options.markdown ?? true) {
         configs.push(markdown({
+            ...(typeof options.markdown !== 'boolean' ? options.markdown : {}),
             componentExts,
             overrides: overrides.markdown,
         }))

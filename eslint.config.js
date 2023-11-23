@@ -1,7 +1,7 @@
 import styleMigrate from '@stylistic/eslint-plugin-migrate'
 import lincy from './dist/index.js'
 
-const config = lincy(
+const config = await lincy(
     {
         vue: false,
         stylistic: {

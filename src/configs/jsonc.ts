@@ -1,9 +1,10 @@
-import type { FlatConfigItem, OptionsOverrides, OptionsStylistic } from '../types'
+import type { FlatConfigItem, OptionsFiles, OptionsOverrides, OptionsStylistic } from '../types'
 import { GLOB_JSON, GLOB_JSON5, GLOB_JSONC } from '../globs'
 import { interopDefault } from '../utils'
 
-export async function jsonc(options: OptionsStylistic & OptionsOverrides = {}): Promise<FlatConfigItem[]> {
+export async function jsonc(options: OptionsFiles & OptionsStylistic & OptionsOverrides = {}): Promise<FlatConfigItem[]> {
     const {
+        files = [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
         overrides = {},
         stylistic = true,
     } = options
@@ -24,7 +25,7 @@ export async function jsonc(options: OptionsStylistic & OptionsOverrides = {}): 
             },
         },
         {
-            files: [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
+            files,
             languageOptions: {
                 parser: parserJsonc,
             },

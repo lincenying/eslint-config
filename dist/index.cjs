@@ -503,6 +503,7 @@ async function jsdoc(options = {}) {
 // src/configs/jsonc.ts
 async function jsonc(options = {}) {
   const {
+    files = [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
     overrides = {},
     stylistic: stylistic2 = true
   } = options;
@@ -521,7 +522,7 @@ async function jsonc(options = {}) {
       }
     },
     {
-      files: [GLOB_JSON, GLOB_JSON5, GLOB_JSONC],
+      files,
       languageOptions: {
         parser: parserJsonc
       },
@@ -575,6 +576,7 @@ async function jsonc(options = {}) {
 async function markdown(options = {}) {
   const {
     componentExts = [],
+    files = [GLOB_MARKDOWN],
     overrides = {}
   } = options;
   return [
@@ -586,7 +588,7 @@ async function markdown(options = {}) {
       }
     },
     {
-      files: [GLOB_MARKDOWN],
+      files,
       name: "eslint:markdown:processor",
       processor: "markdown/markdown"
     },
@@ -1030,7 +1032,7 @@ async function stylistic(options = {}) {
           "style/jsx-first-prop-new-line": "error",
           "style/jsx-indent": ["error", indent, { checkAttributes: true, indentLogicalExpressions: true }],
           "style/jsx-indent-props": ["error", indent],
-          "style/jsx-max-props-per-line": ["error", { maximum: 1 }],
+          "style/jsx-max-props-per-line": ["error", { maximum: 4 }],
           // 在 JSX 中的单行上强制执行最多 props 数量
           "style/jsx-newline": "off",
           // 在 jsx 元素和表达式之后换行
@@ -1061,12 +1063,16 @@ async function stylistic(options = {}) {
 
 // src/configs/typescript.ts
 var import_node_process = __toESM(require("process"), 1);
-async function typescript(options) {
+async function typescript(options = {}) {
   const {
     componentExts = [],
     overrides = {},
     parserOptions = {}
-  } = options ?? {};
+  } = options;
+  const files = options.files ?? [
+    GLOB_SRC,
+    ...componentExts.map((ext) => `**/*.${ext}`)
+  ];
   const typeAwareRules = {
     "dot-notation": "off",
     "no-implied-eval": "off",
@@ -1106,10 +1112,7 @@ async function typescript(options) {
       }
     },
     {
-      files: [
-        GLOB_SRC,
-        ...componentExts.map((ext) => `**/*.${ext}`)
-      ],
+      files,
       languageOptions: {
         parser: parserTs,
         parserOptions: {
@@ -1245,6 +1248,7 @@ vueVersion = vueVersion && vueVersion[0];
 vueVersion = Number.isNaN(vueVersion) ? "3" : vueVersion;
 async function vue(options = {}) {
   const {
+    files = [GLOB_VUE],
     overrides = {},
     stylistic: stylistic2 = true
   } = options;
@@ -1267,7 +1271,7 @@ async function vue(options = {}) {
       }
     },
     {
-      files: [GLOB_VUE],
+      files,
       languageOptions: {
         parser: parserVue,
         parserOptions: {
@@ -1386,6 +1390,7 @@ async function vue(options = {}) {
 // src/configs/yaml.ts
 async function yaml(options = {}) {
   const {
+    files = [GLOB_YAML],
     overrides = {},
     stylistic: stylistic2 = true
   } = options;
@@ -1404,7 +1409,7 @@ async function yaml(options = {}) {
       }
     },
     {
-      files: [GLOB_YAML],
+      files,
       languageOptions: {
         parser: parserYaml
       },
@@ -1440,6 +1445,7 @@ async function yaml(options = {}) {
 // src/configs/test.ts
 async function test(options = {}) {
   const {
+    files = GLOB_TESTS,
     isInEditor = false,
     overrides = {}
   } = options;
@@ -1466,7 +1472,7 @@ async function test(options = {}) {
       }
     },
     {
-      files: GLOB_TESTS,
+      files,
       name: "eslint:test:rules",
       rules: {
         "node/prefer-global/process": "off",
@@ -1496,6 +1502,7 @@ async function perfectionist() {
 // src/configs/react.ts
 async function react(options = {}) {
   const {
+    files = [GLOB_JSX, GLOB_TSX],
     jsx = true,
     overrides = {},
     version = "17.0"
@@ -1518,7 +1525,7 @@ async function react(options = {}) {
       }
     },
     {
-      files: [GLOB_JSX, GLOB_TSX],
+      files,
       languageOptions: {
         parserOptions: {
           ecmaFeatures: {
@@ -1715,12 +1722,14 @@ async function lincy(options = {}, ...userConfigs) {
   }
   if (options.test ?? true) {
     configs.push(test({
+      ...typeof options.test !== "boolean" ? options.test : {},
       isInEditor,
       overrides: overrides.test
     }));
   }
   if (enableVue) {
     configs.push(vue({
+      ...typeof options.vue !== "boolean" ? options.vue : {},
       overrides: overrides.vue,
       stylistic: stylisticOptions,
       typescript: !!enableTypeScript
@@ -1735,6 +1744,7 @@ async function lincy(options = {}, ...userConfigs) {
   if (options.jsonc ?? true) {
     configs.push(
       jsonc({
+        ...typeof options.jsonc !== "boolean" ? options.jsonc : {},
         overrides: overrides.jsonc,
         stylistic: stylisticOptions
       }),
@@ -1744,12 +1754,14 @@ async function lincy(options = {}, ...userConfigs) {
   }
   if (options.yaml ?? true) {
     configs.push(yaml({
+      ...typeof options.yaml !== "boolean" ? options.yaml : {},
       overrides: overrides.yaml,
       stylistic: stylisticOptions
     }));
   }
   if (options.markdown ?? true) {
     configs.push(markdown({
+      ...typeof options.markdown !== "boolean" ? options.markdown : {},
       componentExts,
       overrides: overrides.markdown
     }));

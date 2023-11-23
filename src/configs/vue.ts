@@ -1,6 +1,6 @@
 import { getPackageInfoSync } from 'local-pkg'
 import { interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic } from '../types'
+import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic } from '../types'
 import { GLOB_VUE } from '../globs'
 
 const pkg = getPackageInfoSync('vue')
@@ -9,9 +9,10 @@ vueVersion = (vueVersion && vueVersion[0])
 vueVersion = Number.isNaN(vueVersion) ? '3' : vueVersion
 
 export async function vue(
-    options: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic = {},
+    options: OptionsFiles & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic = {},
 ): Promise<FlatConfigItem[]> {
     const {
+        files = [GLOB_VUE],
         overrides = {},
         stylistic = true,
     } = options
@@ -37,7 +38,7 @@ export async function vue(
             },
         },
         {
-            files: [GLOB_VUE],
+            files,
             languageOptions: {
                 parser: parserVue,
                 parserOptions: {

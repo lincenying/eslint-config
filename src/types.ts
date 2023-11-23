@@ -10,6 +10,8 @@ import type {
     MergeIntersection,
     NRules,
     Prefix,
+    ReactHooksRules,
+    ReactRules,
     RenamePrefix,
     RuleConfig,
     VitestRules,
@@ -36,6 +38,8 @@ export type Rules = WrapRuleConfig<
       RenamePrefix<NRules, 'n/', 'node/'> &
       Prefix<StylisticRules, 'style/'> &
       Prefix<AntfuRules, 'antfu/'> &
+      ReactHooksRules &
+      ReactRules &
       JSDocRules &
       ImportRules &
       EslintRules &
@@ -65,6 +69,13 @@ export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'>
 }
 
 export type UserConfigItem = FlatConfigItem | Linter.FlatConfig
+
+export interface OptionsFiles {
+    /**
+     * Override the `files` option to provide custom globs.
+     */
+    files?: string[]
+}
 
 export interface OptionsComponentExts {
     /**
@@ -145,7 +156,7 @@ export interface OptionsConfig extends OptionsComponentExts {
      *
      * @default auto-detect based on the dependencies
      */
-    typescript?: boolean | OptionsTypeScriptWithTypes | OptionsTypeScriptParserOptions
+    typescript?: boolean | OptionsTypeScriptWithTypes | OptionsTypeScriptParserOptions | OptionsFiles
 
     /**
      * Enable JSX related rules.
@@ -161,42 +172,42 @@ export interface OptionsConfig extends OptionsComponentExts {
      *
      * @default true
      */
-    test?: boolean
+    test?: boolean | OptionsFiles
 
     /**
      * Enable Vue support.
      *
      * @default auto-detect based on the dependencies
      */
-    vue?: boolean
+    vue?: boolean | OptionsFiles
 
     /**
      * Enable React support.
      *
      * @default auto-detect based on the dependencies
      */
-    react?: boolean
+    react?: boolean | OptionsReact | OptionsFiles
 
     /**
      * Enable JSONC support.
      *
      * @default true
      */
-    jsonc?: boolean
+    jsonc?: boolean | OptionsFiles
 
     /**
      * Enable YAML support.
      *
      * @default true
      */
-    yaml?: boolean
+    yaml?: boolean | OptionsFiles
 
     /**
      * Enable Markdown support.
      *
      * @default true
      */
-    markdown?: boolean
+    markdown?: boolean | OptionsFiles
 
     /**
      * Enable stylistic rules.

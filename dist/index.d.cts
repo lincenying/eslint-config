@@ -1,7 +1,7 @@
 import { Linter } from 'eslint';
 import { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import { ParserOptions } from '@typescript-eslint/parser';
-import { RuleConfig, MergeIntersection, RenamePrefix, VitestRules, YmlRules, NRules, Prefix, ImportRules, EslintRules, JsoncRules, VueRules, EslintCommentsRules, FlatESLintConfigItem } from '@antfu/eslint-define-config';
+import { RuleConfig, MergeIntersection, RenamePrefix, VitestRules, YmlRules, NRules, Prefix, ReactHooksRules, ReactRules, ImportRules, EslintRules, JsoncRules, VueRules, EslintCommentsRules, FlatESLintConfigItem } from '@antfu/eslint-define-config';
 import { RuleOptions as RuleOptions$1 } from '@eslint-types/jsdoc/types';
 import { RuleOptions } from '@eslint-types/typescript-eslint/types';
 import { RuleOptions as RuleOptions$2 } from '@eslint-types/unicorn/types';
@@ -14,7 +14,7 @@ type WrapRuleConfig<T extends {
     [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>;
 };
 type Awaitable<T> = T | Promise<T>;
-type Rules = WrapRuleConfig<MergeIntersection<RenamePrefix<RuleOptions, '@typescript-eslint/', 'ts/'> & RenamePrefix<VitestRules, 'vitest/', 'test/'> & RenamePrefix<YmlRules, 'yml/', 'yaml/'> & RenamePrefix<NRules, 'n/', 'node/'> & Prefix<UnprefixedRuleOptions, 'style/'> & Prefix<Rules$1, 'antfu/'> & RuleOptions$1 & ImportRules & EslintRules & JsoncRules & VueRules & RuleOptions$2 & EslintCommentsRules & {
+type Rules = WrapRuleConfig<MergeIntersection<RenamePrefix<RuleOptions, '@typescript-eslint/', 'ts/'> & RenamePrefix<VitestRules, 'vitest/', 'test/'> & RenamePrefix<YmlRules, 'yml/', 'yaml/'> & RenamePrefix<NRules, 'n/', 'node/'> & Prefix<UnprefixedRuleOptions, 'style/'> & Prefix<Rules$1, 'antfu/'> & ReactHooksRules & ReactRules & RuleOptions$1 & ImportRules & EslintRules & JsoncRules & VueRules & RuleOptions$2 & EslintCommentsRules & {
     'test/no-only-tests': RuleConfig<[]>;
 }>>;
 type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
@@ -30,6 +30,12 @@ type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
     plugins?: Record<string, any>;
 };
 type UserConfigItem = FlatConfigItem | Linter.FlatConfig;
+interface OptionsFiles {
+    /**
+     * Override the `files` option to provide custom globs.
+     */
+    files?: string[];
+}
 interface OptionsComponentExts {
     /**
      * Additional extensions for components.
@@ -97,7 +103,7 @@ interface OptionsConfig extends OptionsComponentExts {
      *
      * @default auto-detect based on the dependencies
      */
-    typescript?: boolean | OptionsTypeScriptWithTypes | OptionsTypeScriptParserOptions;
+    typescript?: boolean | OptionsTypeScriptWithTypes | OptionsTypeScriptParserOptions | OptionsFiles;
     /**
      * Enable JSX related rules.
      *
@@ -111,37 +117,37 @@ interface OptionsConfig extends OptionsComponentExts {
      *
      * @default true
      */
-    test?: boolean;
+    test?: boolean | OptionsFiles;
     /**
      * Enable Vue support.
      *
      * @default auto-detect based on the dependencies
      */
-    vue?: boolean;
+    vue?: boolean | OptionsFiles;
     /**
      * Enable React support.
      *
      * @default auto-detect based on the dependencies
      */
-    react?: boolean;
+    react?: boolean | OptionsReact | OptionsFiles;
     /**
      * Enable JSONC support.
      *
      * @default true
      */
-    jsonc?: boolean;
+    jsonc?: boolean | OptionsFiles;
     /**
      * Enable YAML support.
      *
      * @default true
      */
-    yaml?: boolean;
+    yaml?: boolean | OptionsFiles;
     /**
      * Enable Markdown support.
      *
      * @default true
      */
-    markdown?: boolean;
+    markdown?: boolean | OptionsFiles;
     /**
      * Enable stylistic rules.
      *
@@ -185,9 +191,9 @@ declare function javascript(options?: OptionsIsInEditor & OptionsOverrides): Pro
 
 declare function jsdoc(options?: OptionsStylistic): Promise<FlatConfigItem[]>;
 
-declare function jsonc(options?: OptionsStylistic & OptionsOverrides): Promise<FlatConfigItem[]>;
+declare function jsonc(options?: OptionsFiles & OptionsStylistic & OptionsOverrides): Promise<FlatConfigItem[]>;
 
-declare function markdown(options?: OptionsComponentExts & OptionsOverrides): Promise<FlatConfigItem[]>;
+declare function markdown(options?: OptionsFiles & OptionsComponentExts & OptionsOverrides): Promise<FlatConfigItem[]>;
 
 declare function node(): Promise<FlatConfigItem[]>;
 
@@ -206,15 +212,15 @@ declare function sortTsconfig(): FlatConfigItem[];
 
 declare function stylistic(options?: StylisticOverridesConfig): Promise<FlatConfigItem[]>;
 
-declare function typescript(options?: OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions): Promise<FlatConfigItem[]>;
+declare function typescript(options?: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions): Promise<FlatConfigItem[]>;
 
 declare function unicorn(): Promise<FlatConfigItem[]>;
 
-declare function vue(options?: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic): Promise<FlatConfigItem[]>;
+declare function vue(options?: OptionsFiles & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic): Promise<FlatConfigItem[]>;
 
-declare function yaml(options?: OptionsOverrides & OptionsStylistic): Promise<FlatConfigItem[]>;
+declare function yaml(options?: OptionsFiles & OptionsOverrides & OptionsStylistic): Promise<FlatConfigItem[]>;
 
-declare function test(options?: OptionsIsInEditor & OptionsOverrides): Promise<FlatConfigItem[]>;
+declare function test(options?: OptionsFiles & OptionsIsInEditor & OptionsOverrides): Promise<FlatConfigItem[]>;
 
 /**
  * Optional perfectionist plugin for props and items sorting.
@@ -223,7 +229,7 @@ declare function test(options?: OptionsIsInEditor & OptionsOverrides): Promise<F
  */
 declare function perfectionist(): Promise<FlatConfigItem[]>;
 
-declare function react(options?: OptionsReact): Promise<FlatConfigItem[]>;
+declare function react(options?: OptionsFiles & OptionsReact): Promise<FlatConfigItem[]>;
 
 /**
  * Combine array and non-array configs into a single array.
@@ -259,4 +265,4 @@ declare const GLOB_TESTS: string[];
 declare const GLOB_ALL_SRC: string[];
 declare const GLOB_EXCLUDE: string[];
 
-export { type Awaitable, type FlatConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsReact, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type Rules, type StylisticConfig, type StylisticOverridesConfig, type UserConfigItem, type WrapRuleConfig, combine, comments, lincy as default, ignores, imports, interopDefault, javascript, jsdoc, jsonc, lincy, markdown, node, perfectionist, react, renameRules, sortPackageJson, sortTsconfig, stylistic, test, toArray, typescript, unicorn, vue, yaml };
+export { type Awaitable, type FlatConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsReact, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type Rules, type StylisticConfig, type StylisticOverridesConfig, type UserConfigItem, type WrapRuleConfig, combine, comments, lincy as default, ignores, imports, interopDefault, javascript, jsdoc, jsonc, lincy, markdown, node, perfectionist, react, renameRules, sortPackageJson, sortTsconfig, stylistic, test, toArray, typescript, unicorn, vue, yaml };

@@ -1,10 +1,11 @@
-import type { FlatConfigItem, OptionsComponentExts, OptionsOverrides } from '../types'
+import type { FlatConfigItem, OptionsComponentExts, OptionsFiles, OptionsOverrides } from '../types'
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from '../globs'
 import { interopDefault } from '../utils'
 
-export async function markdown(options: OptionsComponentExts & OptionsOverrides = {}): Promise<FlatConfigItem[]> {
+export async function markdown(options: OptionsFiles & OptionsComponentExts & OptionsOverrides = {}): Promise<FlatConfigItem[]> {
     const {
         componentExts = [],
+        files = [GLOB_MARKDOWN],
         overrides = {},
     } = options
 
@@ -17,7 +18,7 @@ export async function markdown(options: OptionsComponentExts & OptionsOverrides 
             },
         },
         {
-            files: [GLOB_MARKDOWN],
+            files,
             name: 'eslint:markdown:processor',
             processor: 'markdown/markdown',
         },

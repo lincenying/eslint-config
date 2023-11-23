@@ -1,9 +1,10 @@
 import { interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsReact } from '../types'
+import type { FlatConfigItem, OptionsFiles, OptionsReact } from '../types'
 import { GLOB_JSX, GLOB_TSX } from '../globs'
 
-export async function react(options: OptionsReact = {}): Promise<FlatConfigItem[]> {
+export async function react(options: OptionsFiles & OptionsReact = {}): Promise<FlatConfigItem[]> {
     const {
+        files = [GLOB_JSX, GLOB_TSX],
         jsx = true,
         overrides = {},
         version = '17.0',
@@ -28,7 +29,7 @@ export async function react(options: OptionsReact = {}): Promise<FlatConfigItem[
             },
         },
         {
-            files: [GLOB_JSX, GLOB_TSX],
+            files,
             languageOptions: {
                 parserOptions: {
                     ecmaFeatures: {
