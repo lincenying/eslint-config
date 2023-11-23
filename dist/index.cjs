@@ -1737,8 +1737,8 @@ async function lincy(options = {}, ...userConfigs) {
   }
   if (enableReact) {
     configs.push(react({
-      overrides: overrides.react,
-      ...typeof enableReact !== "boolean" ? enableReact : {}
+      ...typeof enableReact !== "boolean" ? enableReact : {},
+      overrides: overrides.react
     }));
   }
   if (options.jsonc ?? true) {

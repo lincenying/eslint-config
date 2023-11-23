@@ -74,7 +74,7 @@
     "@lincy/eslint-config": "workspace:*",
     "@stylistic/eslint-plugin-migrate": "^1.4.0",
     "@types/eslint": "^8.44.7",
-    "@types/node": "^20.9.3",
+    "@types/node": "^20.9.4",
     "bumpp": "^9.2.0",
     "eslint": "^8.54.0",
     "eslint-flat-config-viewer": "^0.1.3",
