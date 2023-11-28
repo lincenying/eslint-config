@@ -36,7 +36,7 @@ export async function react(options: OptionsFiles & OptionsReact = {}): Promise<
         interopDefault(import('eslint-plugin-react-refresh')),
     ] as const)
 
-    const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
+    const _isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
         i => isPackageExists(i),
     )
 
@@ -65,10 +65,11 @@ export async function react(options: OptionsFiles & OptionsReact = {}): Promise<
                 'react-hooks/rules-of-hooks': 'error',
 
                 // react-refresh
-                'react-refresh/only-export-components': [
-                    'warn',
-                    { allowConstantExport: isAllowConstantExport },
-                ],
+                // 'react-refresh/only-export-components': [
+                //     'warn',
+                //     { allowConstantExport: _isAllowConstantExport },
+                // ],
+                'react-refresh/only-export-components': 'off',
 
                 // react
                 'react/boolean-prop-naming': 'error',

@@ -1468,7 +1468,7 @@ async function react(options = {}) {
     // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-react-refresh"))
   ]);
-  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
+  const _isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
     (i) => isPackageExists2(i)
   );
   return [
@@ -1495,10 +1495,11 @@ async function react(options = {}) {
         "react-hooks/exhaustive-deps": "warn",
         "react-hooks/rules-of-hooks": "error",
         // react-refresh
-        "react-refresh/only-export-components": [
-          "warn",
-          { allowConstantExport: isAllowConstantExport }
-        ],
+        // 'react-refresh/only-export-components': [
+        //     'warn',
+        //     { allowConstantExport: _isAllowConstantExport },
+        // ],
+        "react-refresh/only-export-components": "off",
         // react
         "react/boolean-prop-naming": "error",
         "react/button-has-type": "error",
