@@ -19,7 +19,7 @@ type Rules = WrapRuleConfig<MergeIntersection<RenamePrefix<RuleOptions, '@typesc
 }>>;
 type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
     /**
-     * Custom name of each config item
+     * 每个配置项的自定义名称
      */
     name?: string;
     /**
@@ -32,13 +32,13 @@ type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
 type UserConfigItem = FlatConfigItem | Linter.FlatConfig;
 interface OptionsFiles {
     /**
-     * Override the `files` option to provide custom globs.
+     * 自定义 glob 覆盖 “files” 选项
      */
     files?: string[];
 }
 interface OptionsComponentExts {
     /**
-     * Additional extensions for components.
+     * 组件的附加扩展
      *
      * @example ['vue']
      * @default []
@@ -47,13 +47,13 @@ interface OptionsComponentExts {
 }
 interface OptionsTypeScriptParserOptions {
     /**
-     * Additional parser options for TypeScript.
+     * TypeScript 的附加解析器选项。
      */
     parserOptions?: Partial<ParserOptions>;
 }
 interface OptionsTypeScriptWithTypes {
     /**
-     * When this options is provided, type aware rules will be enabled.
+     * 提供此选项后，将启用类型感知规则。
      * @see https://typescript-eslint.io/linting/typed-linting/
      */
     tsconfigPath?: string | string[];
@@ -65,8 +65,11 @@ interface OptionsStylistic {
     stylistic?: boolean | StylisticConfig;
 }
 interface StylisticConfig {
+    /** 缩进 */
     indent?: number | 'tab';
+    /** 单引号, 双引号 */
     quotes?: 'single' | 'double';
+    /** 是否开启jsx贵州 */
     jsx?: boolean;
 }
 interface StylisticOverridesConfig extends OptionsStylistic {
@@ -82,13 +85,27 @@ interface OptionsIsInEditor {
     isInEditor?: boolean;
 }
 interface OptionsReact {
+    typescript?: boolean;
     jsx?: boolean;
+    /** react 版本 */
     version?: string;
     overrides?: FlatConfigItem['rules'];
 }
+interface OptionsUnoCSS {
+    /**
+     * 启用 attributify 支持.
+     * @default true
+     */
+    attributify?: boolean;
+    /**
+     * 启用严格模式，抛出有关阻止列表类的错误.
+     * @default false
+     */
+    strict?: boolean;
+}
 interface OptionsConfig extends OptionsComponentExts {
     /**
-     * Enable gitignore support.
+     * 启用 gitignore 支持.
      *
      * Passing an object to configure the options.
      *
@@ -97,70 +114,84 @@ interface OptionsConfig extends OptionsComponentExts {
      */
     gitignore?: boolean | FlatGitignoreOptions;
     /**
-     * Enable TypeScript support.
+     * 启用 TypeScript 支持.
      *
-     * Passing an object to enable TypeScript Language Server support.
+     * 传递对象以启用 TypeScript 语言服务器支持.
      *
      * @default auto-detect based on the dependencies
      */
     typescript?: boolean | OptionsTypeScriptWithTypes | OptionsTypeScriptParserOptions | OptionsFiles;
     /**
-     * Enable JSX related rules.
+     * 启用 JSX 相关规则.
      *
-     * Currently only stylistic rules are included.
+     * 目前仅包含风格规则.
      *
      * @default true
      */
     jsx?: boolean;
     /**
-     * Enable test support.
+     * 启用 test 支持.
      *
      * @default true
      */
     test?: boolean | OptionsFiles;
     /**
-     * Enable Vue support.
+     * 启用 Vue 支持.
      *
      * @default auto-detect based on the dependencies
      */
     vue?: boolean | OptionsFiles;
     /**
-     * Enable React support.
+     * 启用 React 支持.
+     *
+     * 需要安装:
+     * - `eslint-plugin-react`
+     * - `eslint-plugin-react-hooks`
+     * - `eslint-plugin-react-refresh`
      *
      * @default auto-detect based on the dependencies
      */
     react?: boolean | OptionsReact | OptionsFiles;
     /**
-     * Enable JSONC support.
+     * 启用 unocss rules.
+     *
+     * 需要安装:
+     * - `@unocss/eslint-plugin`
+     *
+     * @default false
+     */
+    unocss?: boolean | OptionsUnoCSS;
+    /**
+     * 启用 JSONC 支持.
      *
      * @default true
      */
     jsonc?: boolean | OptionsFiles;
     /**
-     * Enable YAML support.
+     * 启用 YAML 支持.
      *
      * @default true
      */
     yaml?: boolean | OptionsFiles;
     /**
-     * Enable Markdown support.
+     * 启用 Markdown 支持.
      *
      * @default true
      */
     markdown?: boolean | OptionsFiles;
     /**
-     * Enable stylistic rules.
+     * 启用 stylistic rules.
      *
      * @default true
      */
     stylistic?: boolean | StylisticConfig;
     /**
-     * Control to disable some rules in editors.
+     * 控制再编辑器中禁用某些规则.
      * @default auto-detect based on the process.env
      */
     isInEditor?: boolean;
     /**
-     * Provide overrides for rules for each integration.
+     * 为每个集成提供规则覆盖
      */
     overrides?: {
         javascript?: FlatConfigItem['rules'];
@@ -231,6 +262,8 @@ declare function perfectionist(): Promise<FlatConfigItem[]>;
 
 declare function react(options?: OptionsFiles & OptionsReact): Promise<FlatConfigItem[]>;
 
+declare function unocss(options?: OptionsUnoCSS): Promise<FlatConfigItem[]>;
+
 /**
  * Combine array and non-array configs into a single array.
  */
@@ -242,6 +275,7 @@ declare function toArray<T>(value: T | T[]): T[];
 declare function interopDefault<T>(m: Awaitable<T>): Promise<T extends {
     default: infer U;
 } ? U : T>;
+declare function ensurePackages(packages: string[]): Promise<void>;
 
 declare const GLOB_SRC_EXT = "?([cm])[jt]s?(x)";
 declare const GLOB_SRC = "**/*.?([cm])[jt]s?(x)";
@@ -265,4 +299,4 @@ declare const GLOB_TESTS: string[];
 declare const GLOB_ALL_SRC: string[];
 declare const GLOB_EXCLUDE: string[];
 
-export { type Awaitable, type FlatConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsReact, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type Rules, type StylisticConfig, type StylisticOverridesConfig, type UserConfigItem, type WrapRuleConfig, combine, comments, lincy as default, ignores, imports, interopDefault, javascript, jsdoc, jsonc, lincy, markdown, node, perfectionist, react, renameRules, sortPackageJson, sortTsconfig, stylistic, test, toArray, typescript, unicorn, vue, yaml };
+export { type Awaitable, type FlatConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsReact, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type OptionsUnoCSS, type Rules, type StylisticConfig, type StylisticOverridesConfig, type UserConfigItem, type WrapRuleConfig, combine, comments, lincy as default, ensurePackages, ignores, imports, interopDefault, javascript, jsdoc, jsonc, lincy, markdown, node, perfectionist, react, renameRules, sortPackageJson, sortTsconfig, stylistic, test, toArray, typescript, unicorn, unocss, vue, yaml };

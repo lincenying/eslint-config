@@ -55,11 +55,11 @@ export type Rules = WrapRuleConfig<
 
 export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
     /**
-     * Custom name of each config item
+     * 每个配置项的自定义名称
      */
     name?: string
 
-    // Relax plugins type limitation, as most of the plugins did not have correct type info yet.
+    // 放宽插件类型限制，因为大多数插件还没有正确的类型信息。
     /**
      * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
      *
@@ -72,14 +72,14 @@ export type UserConfigItem = FlatConfigItem | Linter.FlatConfig
 
 export interface OptionsFiles {
     /**
-     * Override the `files` option to provide custom globs.
+     * 自定义 glob 覆盖 “files” 选项
      */
     files?: string[]
 }
 
 export interface OptionsComponentExts {
     /**
-     * Additional extensions for components.
+     * 组件的附加扩展
      *
      * @example ['vue']
      * @default []
@@ -89,14 +89,14 @@ export interface OptionsComponentExts {
 
 export interface OptionsTypeScriptParserOptions {
     /**
-     * Additional parser options for TypeScript.
+     * TypeScript 的附加解析器选项。
      */
     parserOptions?: Partial<ParserOptions>
 }
 
 export interface OptionsTypeScriptWithTypes {
     /**
-     * When this options is provided, type aware rules will be enabled.
+     * 提供此选项后，将启用类型感知规则。
      * @see https://typescript-eslint.io/linting/typed-linting/
      */
     tsconfigPath?: string | string[]
@@ -111,8 +111,11 @@ export interface OptionsStylistic {
 }
 
 export interface StylisticConfig {
+    /** 缩进 */
     indent?: number | 'tab'
+    /** 单引号, 双引号 */
     quotes?: 'single' | 'double'
+    /** 是否开启jsx贵州 */
     jsx?: boolean
 }
 
@@ -135,13 +138,27 @@ export interface OptionsIsInEditor {
 export interface OptionsReact {
     typescript?: boolean
     jsx?: boolean
+    /** react 版本 */
     version?: string
     overrides?: FlatConfigItem['rules']
 }
 
+export interface OptionsUnoCSS {
+    /**
+     * 启用 attributify 支持.
+     * @default true
+     */
+    attributify?: boolean
+    /**
+     * 启用严格模式，抛出有关阻止列表类的错误.
+     * @default false
+     */
+    strict?: boolean
+}
+
 export interface OptionsConfig extends OptionsComponentExts {
     /**
-     * Enable gitignore support.
+     * 启用 gitignore 支持.
      *
      * Passing an object to configure the options.
      *
@@ -151,80 +168,95 @@ export interface OptionsConfig extends OptionsComponentExts {
     gitignore?: boolean | FlatGitignoreOptions
 
     /**
-     * Enable TypeScript support.
+     * 启用 TypeScript 支持.
      *
-     * Passing an object to enable TypeScript Language Server support.
+     * 传递对象以启用 TypeScript 语言服务器支持.
      *
      * @default auto-detect based on the dependencies
      */
     typescript?: boolean | OptionsTypeScriptWithTypes | OptionsTypeScriptParserOptions | OptionsFiles
 
     /**
-     * Enable JSX related rules.
+     * 启用 JSX 相关规则.
      *
-     * Currently only stylistic rules are included.
+     * 目前仅包含风格规则.
      *
      * @default true
      */
     jsx?: boolean
 
     /**
-     * Enable test support.
+     * 启用 test 支持.
      *
      * @default true
      */
     test?: boolean | OptionsFiles
 
     /**
-     * Enable Vue support.
+     * 启用 Vue 支持.
      *
      * @default auto-detect based on the dependencies
      */
     vue?: boolean | OptionsFiles
 
     /**
-     * Enable React support.
+     * 启用 React 支持.
+     *
+     * 需要安装:
+     * - `eslint-plugin-react`
+     * - `eslint-plugin-react-hooks`
+     * - `eslint-plugin-react-refresh`
      *
      * @default auto-detect based on the dependencies
      */
     react?: boolean | OptionsReact | OptionsFiles
 
     /**
-     * Enable JSONC support.
+     * 启用 unocss rules.
+     *
+     * 需要安装:
+     * - `@unocss/eslint-plugin`
+     *
+     * @default false
+     */
+    unocss?: boolean | OptionsUnoCSS
+
+    /**
+     * 启用 JSONC 支持.
      *
      * @default true
      */
     jsonc?: boolean | OptionsFiles
 
     /**
-     * Enable YAML support.
+     * 启用 YAML 支持.
      *
      * @default true
      */
     yaml?: boolean | OptionsFiles
 
     /**
-     * Enable Markdown support.
+     * 启用 Markdown 支持.
      *
      * @default true
      */
     markdown?: boolean | OptionsFiles
 
     /**
-     * Enable stylistic rules.
+     * 启用 stylistic rules.
      *
      * @default true
      */
     stylistic?: boolean | StylisticConfig
 
     /**
-     * Control to disable some rules in editors.
+     * 控制再编辑器中禁用某些规则.
      * @default auto-detect based on the process.env
      */
     isInEditor?: boolean
 
     /**
-     * Provide overrides for rules for each integration.
+     * 为每个集成提供规则覆盖
      */
     overrides?: {
         javascript?: FlatConfigItem['rules']

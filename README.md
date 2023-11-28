@@ -161,6 +161,12 @@ export default lincy({
      */
     react: true,
     /**
+     * 是否启用 unocss 规则
+     * @default 默认值: false,
+     * @example 可选: true | { attributify?: boolean; strict?: boolean }
+     */
+    unocss: true,
+    /**
      * 是否启用 jsonc 规则
      * @default 默认值: true,
      * @example 可选: false | { files?: string[] }
@@ -208,7 +214,7 @@ export default lincy({
 ```
 
 `lincy` 工厂函数还接受任意数量的自定义配置覆盖
-下面示例为添加`unocss`规则和添加`auto-import`生成的全局方法
+下面示例为添加`auto-import`生成的全局方法
 
 ```js
 // eslint.config.js
@@ -223,16 +229,8 @@ const autoImport = JSON.parse(
 export default lincy(
     {
         // 配置, 参考上一个代码块
-    },
-    // 启用 unocss
-    {
-        plugins: {
-            '@unocss': plugin,
-        },
-        rules: {
-            ...plugin.configs.recommended.rules,
-            '@unocss/order': 'off',
-        },
+        // 启用 unocss
+        unocss: true
     },
     // 启用 auto-import 生成的 .eslintrc-auto-import.json
     {
@@ -274,6 +272,7 @@ import {
     stylistic,
     typescript,
     unicorn,
+    unocss,
     vue,
     yaml,
 } from '@lincy/eslint-config'
@@ -291,6 +290,7 @@ export default combine(
     stylistic(/* Options */),
     vue(),
     react(/* Options */),
+    unocss(/* Options */),
     jsonc(),
     yaml(),
     markdown(),
@@ -404,6 +404,40 @@ export default lincy({
     }
 })
 ```
+
+### 可选配置
+
+提供了一些可选配置，默认情况下不包含它们的依赖项
+
+#### React
+
+当检测到依赖安装了`react`, 则默认开启
+
+运行“npx eslint”会提示您安装所需的依赖项，当然，您也可以手动安装它们：
+
+```bash
+pnpm i -D eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh
+```
+
+#### UnoCSS
+
+要启用 UnoCSS 支持，需要显式打开它
+
+```js
+// eslint.config.js
+import lincy from '@lincy/eslint-config'
+
+export default lincy({
+    unocss: true,
+})
+```
+
+运行“npx eslint”会提示您安装所需的依赖项，当然，您也可以手动安装它们：
+
+```bash
+pnpm i -D @unocss/eslint-plugin
+```
+
 
 #### `perfectionist` (sorting)
 

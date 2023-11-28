@@ -18,6 +18,7 @@ import {
     test,
     typescript,
     unicorn,
+    unocss,
     vue,
     yaml,
 } from './configs'
@@ -60,6 +61,7 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
         overrides = {},
         react: enableReact = ReactPackages.some(i => isPackageExists(i)),
         typescript: enableTypeScript = isPackageExists('typescript'),
+        unocss: enableUnoCSS = false,
         vue: enableVue = VuePackages.some(i => isPackageExists(i)),
     } = options
 
@@ -147,6 +149,12 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
             overrides: overrides.react,
             typescript: !!enableTypeScript,
         }))
+    }
+
+    if (enableUnoCSS) {
+        configs.push(unocss(
+            typeof enableUnoCSS === 'boolean' ? {} : enableUnoCSS,
+        ))
     }
 
     if (options.jsonc ?? true) {

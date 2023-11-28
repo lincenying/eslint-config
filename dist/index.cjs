@@ -54,6 +54,7 @@ __export(src_exports, {
   combine: () => combine,
   comments: () => comments,
   default: () => src_default,
+  ensurePackages: () => ensurePackages,
   ignores: () => ignores,
   imports: () => imports,
   interopDefault: () => interopDefault,
@@ -73,15 +74,16 @@ __export(src_exports, {
   toArray: () => toArray,
   typescript: () => typescript,
   unicorn: () => unicorn,
+  unocss: () => unocss,
   vue: () => vue,
   yaml: () => yaml
 });
 module.exports = __toCommonJS(src_exports);
 
 // src/factory.ts
-var import_node_process2 = __toESM(require("process"), 1);
+var import_node_process3 = __toESM(require("process"), 1);
 var import_node_fs = __toESM(require("fs"), 1);
-var import_local_pkg2 = require("local-pkg");
+var import_local_pkg4 = require("local-pkg");
 
 // src/plugins.ts
 var import_eslint_plugin_antfu = __toESM(require("eslint-plugin-antfu"), 1);
@@ -442,6 +444,8 @@ async function javascript(options = {}) {
 }
 
 // src/utils.ts
+var import_node_process = __toESM(require("process"), 1);
+var import_local_pkg = require("local-pkg");
 async function combine(...configs) {
   const resolved = await Promise.all(configs);
   return resolved.flat();
@@ -461,6 +465,23 @@ function toArray(value) {
 async function interopDefault(m) {
   const resolved = await m;
   return resolved.default || resolved;
+}
+async function ensurePackages(packages) {
+  if (import_node_process.default.stdout.isTTY === false)
+    return;
+  const nonExistingPackages = packages.filter((i) => !(0, import_local_pkg.isPackageExists)(i));
+  if (nonExistingPackages.length === 0)
+    return;
+  const { default: prompts } = await import("prompts");
+  const { result } = await prompts([
+    {
+      message: `${nonExistingPackages.length === 1 ? "Package is" : "Packages are"} required for this config: ${nonExistingPackages.join(", ")}. Do you want to install them?`,
+      name: "result",
+      type: "confirm"
+    }
+  ]);
+  if (result)
+    await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
 }
 
 // src/configs/jsdoc.ts
@@ -1062,7 +1083,7 @@ async function stylistic(options = {}) {
 }
 
 // src/configs/typescript.ts
-var import_node_process = __toESM(require("process"), 1);
+var import_node_process2 = __toESM(require("process"), 1);
 async function typescript(options = {}) {
   const {
     componentExts = [],
@@ -1120,7 +1141,7 @@ async function typescript(options = {}) {
           sourceType: "module",
           ...tsconfigPath ? {
             project: tsconfigPath,
-            tsconfigRootDir: import_node_process.default.cwd()
+            tsconfigRootDir: import_node_process2.default.cwd()
           } : {},
           ...parserOptions
         }
@@ -1241,8 +1262,8 @@ async function unicorn() {
 }
 
 // src/configs/vue.ts
-var import_local_pkg = require("local-pkg");
-var pkg = (0, import_local_pkg.getPackageInfoSync)("vue");
+var import_local_pkg2 = require("local-pkg");
+var pkg = (0, import_local_pkg2.getPackageInfoSync)("vue");
 var vueVersion = pkg && pkg.version;
 vueVersion = vueVersion && vueVersion[0];
 vueVersion = Number.isNaN(vueVersion) ? "3" : vueVersion;
@@ -1500,28 +1521,45 @@ async function perfectionist() {
 }
 
 // src/configs/react.ts
+var import_local_pkg3 = require("local-pkg");
+var ReactRefreshAllowConstantExportPackages = [
+  "vite"
+];
 async function react(options = {}) {
   const {
     files = [GLOB_JSX, GLOB_TSX],
     jsx = true,
     overrides = {},
+    typescript: typescript2 = true,
     version = "17.0"
   } = options;
+  await ensurePackages([
+    "eslint-plugin-react",
+    "eslint-plugin-react-hooks",
+    "eslint-plugin-react-refresh"
+  ]);
   const [
     pluginReact,
-    pluginReactHooks
+    pluginReactHooks,
+    pluginReactRefresh
   ] = await Promise.all([
     // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-react")),
     // @ts-expect-error missing types
-    interopDefault(import("eslint-plugin-react-hooks"))
+    interopDefault(import("eslint-plugin-react-hooks")),
+    // @ts-expect-error missing types
+    interopDefault(import("eslint-plugin-react-refresh"))
   ]);
+  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
+    (i) => (0, import_local_pkg3.isPackageExists)(i)
+  );
   return [
     {
       name: "eslint:react:setup",
       plugins: {
         "react": pluginReact,
-        "react-hooks": pluginReactHooks
+        "react-hooks": pluginReactHooks,
+        "react-refresh": pluginReactRefresh
       }
     },
     {
@@ -1535,8 +1573,15 @@ async function react(options = {}) {
       },
       name: "eslint:react:rules",
       rules: {
+        // react-hooks
         "react-hooks/exhaustive-deps": "warn",
         "react-hooks/rules-of-hooks": "error",
+        // react-refresh
+        "react-refresh/only-export-components": [
+          "warn",
+          { allowConstantExport: isAllowConstantExport }
+        ],
+        // react
         "react/boolean-prop-naming": "error",
         "react/button-has-type": "error",
         "react/default-props-match-prop-types": "error",
@@ -1629,12 +1674,49 @@ async function react(options = {}) {
         "react/static-property-placement": "error",
         "react/style-prop-object": "error",
         "react/void-dom-elements-no-children": "error",
+        ...typescript2 ? {
+          "react/jsx-no-undef": "off",
+          "react/prop-type": "off"
+        } : {},
         ...overrides
       },
       settings: {
         react: {
           version
         }
+      }
+    }
+  ];
+}
+
+// src/configs/unocss.ts
+async function unocss(options = {}) {
+  const {
+    attributify = true,
+    strict = false
+  } = options;
+  await ensurePackages([
+    "@unocss/eslint-plugin"
+  ]);
+  const [
+    pluginUnoCSS
+  ] = await Promise.all([
+    interopDefault(import("@unocss/eslint-plugin"))
+  ]);
+  return [
+    {
+      name: "eslint:unocss",
+      plugins: {
+        unocss: pluginUnoCSS
+      },
+      rules: {
+        "unocss/order": "off",
+        ...attributify ? {
+          "unocss/order-attributify": "warn"
+        } : {},
+        ...strict ? {
+          "unocss/blocklist": "error"
+        } : {}
       }
     }
   ];
@@ -1665,11 +1747,12 @@ async function lincy(options = {}, ...userConfigs) {
   const {
     componentExts = [],
     gitignore: enableGitignore = true,
-    isInEditor = !!((import_node_process2.default.env.VSCODE_PID || import_node_process2.default.env.JETBRAINS_IDE) && !import_node_process2.default.env.CI),
+    isInEditor = !!((import_node_process3.default.env.VSCODE_PID || import_node_process3.default.env.JETBRAINS_IDE) && !import_node_process3.default.env.CI),
     overrides = {},
-    react: enableReact = ReactPackages.some((i) => (0, import_local_pkg2.isPackageExists)(i)),
-    typescript: enableTypeScript = (0, import_local_pkg2.isPackageExists)("typescript"),
-    vue: enableVue = VuePackages.some((i) => (0, import_local_pkg2.isPackageExists)(i))
+    react: enableReact = ReactPackages.some((i) => (0, import_local_pkg4.isPackageExists)(i)),
+    typescript: enableTypeScript = (0, import_local_pkg4.isPackageExists)("typescript"),
+    unocss: enableUnoCSS = false,
+    vue: enableVue = VuePackages.some((i) => (0, import_local_pkg4.isPackageExists)(i))
   } = options;
   const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === "object" ? options.stylistic : {};
   if (stylisticOptions) {
@@ -1738,8 +1821,14 @@ async function lincy(options = {}, ...userConfigs) {
   if (enableReact) {
     configs.push(react({
       ...typeof enableReact !== "boolean" ? enableReact : {},
-      overrides: overrides.react
+      overrides: overrides.react,
+      typescript: !!enableTypeScript
     }));
+  }
+  if (enableUnoCSS) {
+    configs.push(unocss(
+      typeof enableUnoCSS === "boolean" ? {} : enableUnoCSS
+    ));
   }
   if (options.jsonc ?? true) {
     configs.push(
@@ -1807,6 +1896,7 @@ var src_default = lincy;
   GLOB_YAML,
   combine,
   comments,
+  ensurePackages,
   ignores,
   imports,
   interopDefault,
@@ -1826,6 +1916,7 @@ var src_default = lincy;
   toArray,
   typescript,
   unicorn,
+  unocss,
   vue,
   yaml
 });

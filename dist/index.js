@@ -1,7 +1,7 @@
 // src/factory.ts
-import process2 from "process";
+import process3 from "process";
 import fs from "fs";
-import { isPackageExists } from "local-pkg";
+import { isPackageExists as isPackageExists3 } from "local-pkg";
 
 // src/plugins.ts
 import { default as default2 } from "eslint-plugin-antfu";
@@ -362,6 +362,8 @@ async function javascript(options = {}) {
 }
 
 // src/utils.ts
+import process from "process";
+import { isPackageExists } from "local-pkg";
 async function combine(...configs) {
   const resolved = await Promise.all(configs);
   return resolved.flat();
@@ -381,6 +383,23 @@ function toArray(value) {
 async function interopDefault(m) {
   const resolved = await m;
   return resolved.default || resolved;
+}
+async function ensurePackages(packages) {
+  if (process.stdout.isTTY === false)
+    return;
+  const nonExistingPackages = packages.filter((i) => !isPackageExists(i));
+  if (nonExistingPackages.length === 0)
+    return;
+  const { default: prompts } = await import("prompts");
+  const { result } = await prompts([
+    {
+      message: `${nonExistingPackages.length === 1 ? "Package is" : "Packages are"} required for this config: ${nonExistingPackages.join(", ")}. Do you want to install them?`,
+      name: "result",
+      type: "confirm"
+    }
+  ]);
+  if (result)
+    await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
 }
 
 // src/configs/jsdoc.ts
@@ -982,7 +1001,7 @@ async function stylistic(options = {}) {
 }
 
 // src/configs/typescript.ts
-import process from "process";
+import process2 from "process";
 async function typescript(options = {}) {
   const {
     componentExts = [],
@@ -1040,7 +1059,7 @@ async function typescript(options = {}) {
           sourceType: "module",
           ...tsconfigPath ? {
             project: tsconfigPath,
-            tsconfigRootDir: process.cwd()
+            tsconfigRootDir: process2.cwd()
           } : {},
           ...parserOptions
         }
@@ -1420,28 +1439,45 @@ async function perfectionist() {
 }
 
 // src/configs/react.ts
+import { isPackageExists as isPackageExists2 } from "local-pkg";
+var ReactRefreshAllowConstantExportPackages = [
+  "vite"
+];
 async function react(options = {}) {
   const {
     files = [GLOB_JSX, GLOB_TSX],
     jsx = true,
     overrides = {},
+    typescript: typescript2 = true,
     version = "17.0"
   } = options;
+  await ensurePackages([
+    "eslint-plugin-react",
+    "eslint-plugin-react-hooks",
+    "eslint-plugin-react-refresh"
+  ]);
   const [
     pluginReact,
-    pluginReactHooks
+    pluginReactHooks,
+    pluginReactRefresh
   ] = await Promise.all([
     // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-react")),
     // @ts-expect-error missing types
-    interopDefault(import("eslint-plugin-react-hooks"))
+    interopDefault(import("eslint-plugin-react-hooks")),
+    // @ts-expect-error missing types
+    interopDefault(import("eslint-plugin-react-refresh"))
   ]);
+  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
+    (i) => isPackageExists2(i)
+  );
   return [
     {
       name: "eslint:react:setup",
       plugins: {
         "react": pluginReact,
-        "react-hooks": pluginReactHooks
+        "react-hooks": pluginReactHooks,
+        "react-refresh": pluginReactRefresh
       }
     },
     {
@@ -1455,8 +1491,15 @@ async function react(options = {}) {
       },
       name: "eslint:react:rules",
       rules: {
+        // react-hooks
         "react-hooks/exhaustive-deps": "warn",
         "react-hooks/rules-of-hooks": "error",
+        // react-refresh
+        "react-refresh/only-export-components": [
+          "warn",
+          { allowConstantExport: isAllowConstantExport }
+        ],
+        // react
         "react/boolean-prop-naming": "error",
         "react/button-has-type": "error",
         "react/default-props-match-prop-types": "error",
@@ -1549,12 +1592,49 @@ async function react(options = {}) {
         "react/static-property-placement": "error",
         "react/style-prop-object": "error",
         "react/void-dom-elements-no-children": "error",
+        ...typescript2 ? {
+          "react/jsx-no-undef": "off",
+          "react/prop-type": "off"
+        } : {},
         ...overrides
       },
       settings: {
         react: {
           version
         }
+      }
+    }
+  ];
+}
+
+// src/configs/unocss.ts
+async function unocss(options = {}) {
+  const {
+    attributify = true,
+    strict = false
+  } = options;
+  await ensurePackages([
+    "@unocss/eslint-plugin"
+  ]);
+  const [
+    pluginUnoCSS
+  ] = await Promise.all([
+    interopDefault(import("@unocss/eslint-plugin"))
+  ]);
+  return [
+    {
+      name: "eslint:unocss",
+      plugins: {
+        unocss: pluginUnoCSS
+      },
+      rules: {
+        "unocss/order": "off",
+        ...attributify ? {
+          "unocss/order-attributify": "warn"
+        } : {},
+        ...strict ? {
+          "unocss/blocklist": "error"
+        } : {}
       }
     }
   ];
@@ -1585,11 +1665,12 @@ async function lincy(options = {}, ...userConfigs) {
   const {
     componentExts = [],
     gitignore: enableGitignore = true,
-    isInEditor = !!((process2.env.VSCODE_PID || process2.env.JETBRAINS_IDE) && !process2.env.CI),
+    isInEditor = !!((process3.env.VSCODE_PID || process3.env.JETBRAINS_IDE) && !process3.env.CI),
     overrides = {},
-    react: enableReact = ReactPackages.some((i) => isPackageExists(i)),
-    typescript: enableTypeScript = isPackageExists("typescript"),
-    vue: enableVue = VuePackages.some((i) => isPackageExists(i))
+    react: enableReact = ReactPackages.some((i) => isPackageExists3(i)),
+    typescript: enableTypeScript = isPackageExists3("typescript"),
+    unocss: enableUnoCSS = false,
+    vue: enableVue = VuePackages.some((i) => isPackageExists3(i))
   } = options;
   const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === "object" ? options.stylistic : {};
   if (stylisticOptions) {
@@ -1658,8 +1739,14 @@ async function lincy(options = {}, ...userConfigs) {
   if (enableReact) {
     configs.push(react({
       ...typeof enableReact !== "boolean" ? enableReact : {},
-      overrides: overrides.react
+      overrides: overrides.react,
+      typescript: !!enableTypeScript
     }));
+  }
+  if (enableUnoCSS) {
+    configs.push(unocss(
+      typeof enableUnoCSS === "boolean" ? {} : enableUnoCSS
+    ));
   }
   if (options.jsonc ?? true) {
     configs.push(
@@ -1727,6 +1814,7 @@ export {
   combine,
   comments,
   src_default as default,
+  ensurePackages,
   ignores,
   imports,
   interopDefault,
@@ -1746,6 +1834,7 @@ export {
   toArray,
   typescript,
   unicorn,
+  unocss,
   vue,
   yaml
 };
