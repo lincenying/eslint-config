@@ -145,6 +145,7 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
         configs.push(react({
             ...(typeof enableReact !== 'boolean' ? enableReact : {}),
             overrides: overrides.react,
+            typescript: !!enableTypeScript,
         }))
     }
 

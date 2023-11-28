@@ -133,6 +133,7 @@ export interface OptionsIsInEditor {
 }
 
 export interface OptionsReact {
+    typescript?: boolean
     jsx?: boolean
     version?: string
     overrides?: FlatConfigItem['rules']

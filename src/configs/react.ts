@@ -1,24 +1,44 @@
-import { interopDefault } from '../utils'
+import { isPackageExists } from 'local-pkg'
+import { ensurePackages, interopDefault } from '../utils'
 import type { FlatConfigItem, OptionsFiles, OptionsReact } from '../types'
 import { GLOB_JSX, GLOB_TSX } from '../globs'
+
+// react refresh
+const ReactRefreshAllowConstantExportPackages = [
+    'vite',
+]
 
 export async function react(options: OptionsFiles & OptionsReact = {}): Promise<FlatConfigItem[]> {
     const {
         files = [GLOB_JSX, GLOB_TSX],
         jsx = true,
         overrides = {},
+        typescript = true,
         version = '17.0',
     } = options
+
+    await ensurePackages([
+        'eslint-plugin-react',
+        'eslint-plugin-react-hooks',
+        'eslint-plugin-react-refresh',
+    ])
 
     const [
         pluginReact,
         pluginReactHooks,
+        pluginReactRefresh,
     ] = await Promise.all([
         // @ts-expect-error missing types
         interopDefault(import('eslint-plugin-react')),
         // @ts-expect-error missing types
         interopDefault(import('eslint-plugin-react-hooks')),
+        // @ts-expect-error missing types
+        interopDefault(import('eslint-plugin-react-refresh')),
     ] as const)
+
+    const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
+        i => isPackageExists(i),
+    )
 
     return [
         {
@@ -26,6 +46,7 @@ export async function react(options: OptionsFiles & OptionsReact = {}): Promise<
             plugins: {
                 'react': pluginReact,
                 'react-hooks': pluginReactHooks,
+                'react-refresh': pluginReactRefresh,
             },
         },
         {
@@ -39,8 +60,17 @@ export async function react(options: OptionsFiles & OptionsReact = {}): Promise<
             },
             name: 'eslint:react:rules',
             rules: {
+                // react-hooks
                 'react-hooks/exhaustive-deps': 'warn',
                 'react-hooks/rules-of-hooks': 'error',
+
+                // react-refresh
+                'react-refresh/only-export-components': [
+                    'warn',
+                    { allowConstantExport: isAllowConstantExport },
+                ],
+
+                // react
                 'react/boolean-prop-naming': 'error',
                 'react/button-has-type': 'error',
                 'react/default-props-match-prop-types': 'error',
@@ -122,6 +152,11 @@ export async function react(options: OptionsFiles & OptionsReact = {}): Promise<
                 'react/static-property-placement': 'error',
                 'react/style-prop-object': 'error',
                 'react/void-dom-elements-no-children': 'error',
+
+                ...typescript ? {
+                    'react/jsx-no-undef': 'off',
+                    'react/prop-type': 'off',
+                } : {},
 
                 ...overrides,
             },
