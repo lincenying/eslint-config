@@ -1,5 +1,5 @@
 import type { FlatConfigItem, OptionsComponentExts, OptionsFiles, OptionsOverrides } from '../types'
-import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE } from '../globs'
+import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from '../globs'
 import { interopDefault } from '../utils'
 
 export async function markdown(options: OptionsFiles & OptionsComponentExts & OptionsOverrides = {}): Promise<FlatConfigItem[]> {
@@ -19,6 +19,7 @@ export async function markdown(options: OptionsFiles & OptionsComponentExts & Op
         },
         {
             files,
+            ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
             name: 'eslint:markdown:processor',
             processor: 'markdown/markdown',
         },
@@ -34,7 +35,7 @@ export async function markdown(options: OptionsFiles & OptionsComponentExts & Op
                     },
                 },
             },
-            name: 'eslint:markdown:rules',
+            name: 'eslint:markdown:disabled',
             rules: {
                 'antfu/no-ts-export-equal': 'off',
 

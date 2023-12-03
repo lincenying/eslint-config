@@ -14,7 +14,7 @@ export async function react(options: OptionsFiles & OptionsReact = {}): Promise<
         jsx = true,
         overrides = {},
         typescript = true,
-        version = '17.0',
+        version = 'detect',
     } = options
 
     await ensurePackages([
