@@ -4,15 +4,15 @@
 
 > Thanks to [sxzz/eslint-config](https://github.com/sxzz/eslint-config) and [antfu/eslint-config](https://github.com/antfu/eslint-config) for the inspiration and reference.
 
-- 单引号，无结尾分号
-- 自动格式化
-- 专为与 TypeScript、Vue(2/3)、React 一起使用而设计，开箱即用
-- 也适用于 json、yaml、markdown
-- import导入排序, 对象字⾯量项尾逗号
-- 合理的默认值，最佳实践，只需一行配置
-- [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new)
-- 使用 [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
-- **风格原则**: 读取最小，差异稳定
+-   单引号，无结尾分号
+-   自动格式化
+-   专为与 TypeScript、Vue(2/3)、React 一起使用而设计，开箱即用
+-   也适用于 json、yaml、markdown
+-   import导入排序, 对象字⾯量项尾逗号
+-   合理的默认值，最佳实践，只需一行配置
+-   [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new)
+-   使用 [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
+-   **风格原则**: 读取最小，差异稳定
 
 ## Usage
 
@@ -101,6 +101,7 @@ For example:
 通常你只需要导入 `lincy` 预设：
 
 #### esm
+
 如果 package.json 中开启了`"type": "module",`
 
 ```js
@@ -114,6 +115,7 @@ export default lincy()
 ```
 
 #### cjs
+
 如果 package.json 中没有开启`"type": "module",`
 
 ```js
@@ -196,6 +198,12 @@ export default lincy({
      * @example 可选: false | { files?: string[] }
      */
     markdown: false,
+    /**
+     * 是否启用 formatters 规则
+     * @default 默认值: false,
+     * @example 可选: true | { css?: 'prettier' | boolean; html?: 'prettier' | boolean; toml?: 'dprint' | boolean; markdown?: 'prettier' | 'dprint' | boolean }
+     */
+    formatters: false,
     /**
      * 覆盖规则
      */
@@ -299,18 +307,17 @@ export default combine(
 
 查看 [configs](https://github.com/lincenying/eslint-config/blob/main/src/configs) 和 [factory](https://github.com/lincenying/eslint-config/blob/main/src/factory.ts）了解更多详细信息。
 
-
 ### 插件重命名
 
 由于扁平化配置支持显式提供了插件名称，因此我们重命名了一些插件以使它们更加一致并隐藏实现细节。
 
-| New Prefix | Original Prefix | Source Plugin |
-| --- | --- | --- |
-| `import/*` | `i/*` | [eslint-plugin-i](https://github.com/un-es/eslint-plugin-i) |
-| `node/*` | `n/*` | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n) |
-| `yaml/*` | `yml/*` | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml) |
-| `ts/*` | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
-| `style/*` | `@stylistic/*` | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic) |
+| New Prefix | Original Prefix        | Source Plugin                                                                              |
+| ---------- | ---------------------- | ------------------------------------------------------------------------------------------ |
+| `import/*` | `i/*`                  | [eslint-plugin-i](https://github.com/un-es/eslint-plugin-i)                                |
+| `node/*`   | `n/*`                  | [eslint-plugin-n](https://github.com/eslint-community/eslint-plugin-n)                     |
+| `yaml/*`   | `yml/*`                | [eslint-plugin-yml](https://github.com/ota-meshi/eslint-plugin-yml)                        |
+| `ts/*`     | `@typescript-eslint/*` | [@typescript-eslint/eslint-plugin](https://github.com/typescript-eslint/typescript-eslint) |
+| `style/*`  | `@stylistic/*`         | [@stylistic/eslint-plugin](https://github.com/eslint-stylistic/eslint-stylistic)           |
 
 当您想要覆盖规则或内联禁用它们时，您需要更新到新的前缀：
 
@@ -322,7 +329,7 @@ type foo = { bar: 2 }
 
 ### 规则覆盖
 
-某些规则仅在特定文件中启用，例如，“ts/*”规则仅在“.ts”文件中启用，“vue/*”规则仅在“.vue”文件中启用。 如果要覆盖规则，则需要指定文件扩展名：
+某些规则仅在特定文件中启用，例如，“ts/_”规则仅在“.ts”文件中启用，“vue/_”规则仅在“.vue”文件中启用。 如果要覆盖规则，则需要指定文件扩展名：
 
 ```js
 // eslint.config.js
@@ -437,7 +444,6 @@ export default lincy({
 ```bash
 pnpm i -D @unocss/eslint-plugin
 ```
-
 
 #### `perfectionist` (sorting)
 

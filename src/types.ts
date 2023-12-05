@@ -23,6 +23,7 @@ import type { RuleOptions as TypeScriptRules } from '@eslint-types/typescript-es
 import type { RuleOptions as UnicornRules } from '@eslint-types/unicorn/types'
 import type { Rules as AntfuRules } from 'eslint-plugin-antfu'
 import type { StylisticCustomizeOptions, UnprefixedRuleOptions as StylisticRules } from '@stylistic/eslint-plugin'
+import type { VendoredPrettierOptions } from './prettier.types'
 
 export type WrapRuleConfig<T extends { [key: string]: any }> = {
     [K in keyof T]: T[K] extends RuleConfig ? T[K] : RuleConfig<T[K]>
@@ -31,26 +32,26 @@ export type WrapRuleConfig<T extends { [key: string]: any }> = {
 export type Awaitable<T> = T | Promise<T>
 
 export type Rules = WrapRuleConfig<
-  MergeIntersection<
-      RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &
-      RenamePrefix<VitestRules, 'vitest/', 'test/'> &
-      RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
-      RenamePrefix<NRules, 'n/', 'node/'> &
-      Prefix<StylisticRules, 'style/'> &
-      Prefix<AntfuRules, 'antfu/'> &
-      ReactHooksRules &
-      ReactRules &
-      JSDocRules &
-      ImportRules &
-      EslintRules &
-      JsoncRules &
-      VueRules &
-      UnicornRules &
-      EslintCommentsRules &
-      {
-          'test/no-only-tests': RuleConfig<[]>
-      }
-  >
+    MergeIntersection<
+        RenamePrefix<TypeScriptRules, '@typescript-eslint/', 'ts/'> &
+        RenamePrefix<VitestRules, 'vitest/', 'test/'> &
+        RenamePrefix<YmlRules, 'yml/', 'yaml/'> &
+        RenamePrefix<NRules, 'n/', 'node/'> &
+        Prefix<StylisticRules, 'style/'> &
+        Prefix<AntfuRules, 'antfu/'> &
+        ReactHooksRules &
+        ReactRules &
+        JSDocRules &
+        ImportRules &
+        EslintRules &
+        JsoncRules &
+        VueRules &
+        UnicornRules &
+        EslintCommentsRules &
+        {
+            'test/no-only-tests': RuleConfig<[]>
+        }
+    >
 >
 
 export type FlatConfigItem = Omit<FlatESLintConfigItem<Rules, false>, 'plugins'> & {
@@ -75,6 +76,57 @@ export interface OptionsFiles {
      * 自定义 glob 覆盖 “files” 选项
      */
     files?: string[]
+}
+
+export interface OptionsFormatters {
+    /**
+     * 启用对 CSS、Less、Sass 和 SCSS 的格式化支持.
+     *
+     * 目前仅支持Prettier.
+     */
+    css?: 'prettier' | boolean
+
+    /**
+     * 启用 HTML 格式支持.
+     *
+     * 目前仅支持Prettier.
+     */
+    html?: 'prettier' | boolean
+
+    /**
+     * 启用 TOML 格式支持.
+     *
+     * 目前仅支持dprint.
+     */
+    toml?: 'dprint' | boolean
+
+    /**
+     * 启用对 Markdown 的格式化支持.
+     *
+     * 同时支持 Prettier 和 dprint.
+     *
+     * 当设置为“true”时，将使用 Prettier.
+     */
+    markdown?: 'prettier' | 'dprint' | boolean
+
+    /**
+     * 启用 GraphQL 的格式化支持.
+     */
+    graphql?: 'prettier' | boolean
+
+    /**
+     * Prettier 的自定义选项.
+     *
+     * 默认情况下它是由我们自己的配置控制的.
+     */
+    prettierOptions?: VendoredPrettierOptions
+
+    /**
+     * dprint 的自定义选项.
+     *
+     * 默认情况下它是由我们自己的配置控制的.
+     */
+    dprintOptions?: boolean
 }
 
 export interface OptionsComponentExts {
@@ -166,7 +218,7 @@ export interface OptionsConfig extends OptionsComponentExts {
      *
      * 传递对象以启用 TypeScript 语言服务器支持.
      *
-     * @default auto-detect based on the dependencies
+     * @default 根据依赖关系自动检测
      */
     typescript?: boolean | OptionsTypeScriptWithTypes | OptionsTypeScriptParserOptions | OptionsFiles
 
@@ -189,7 +241,7 @@ export interface OptionsConfig extends OptionsComponentExts {
     /**
      * 启用 Vue 支持.
      *
-     * @default auto-detect based on the dependencies
+     * @default 根据依赖关系自动检测
      */
     vue?: boolean | OptionsFiles
 
@@ -201,7 +253,7 @@ export interface OptionsConfig extends OptionsComponentExts {
      * - `eslint-plugin-react-hooks`
      * - `eslint-plugin-react-refresh`
      *
-     * @default auto-detect based on the dependencies
+     * @default 根据依赖关系自动检测
      */
     react?: boolean | OptionsReact | OptionsFiles
 
@@ -214,6 +266,16 @@ export interface OptionsConfig extends OptionsComponentExts {
      * @default false
      */
     unocss?: boolean | OptionsUnoCSS
+
+    /**
+     * 使用外部格式化程序格式化文件.
+     *
+     * 需要安装:
+     * - `eslint-plugin-format`
+     *
+     * @default false
+     */
+    formatters?: boolean | OptionsFormatters
 
     /**
      * 启用 JSONC 支持.
@@ -237,7 +299,7 @@ export interface OptionsConfig extends OptionsComponentExts {
     markdown?: boolean | OptionsFiles
 
     /**
-     * 启用 stylistic rules.
+     * 启用 stylistic 规则.
      *
      * @default true
      */
@@ -245,7 +307,7 @@ export interface OptionsConfig extends OptionsComponentExts {
 
     /**
      * 控制再编辑器中禁用某些规则.
-     * @default auto-detect based on the process.env
+     * @default 基于 process.env 自动检测
      */
     isInEditor?: boolean
 

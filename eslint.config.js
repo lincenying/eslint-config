@@ -8,6 +8,13 @@ const config = await lincy(
             indent: 4,
             quotes: 'single',
         },
+        formatters: {
+            css: true,
+            graphql: true,
+            html: true,
+            markdown: true,
+            toml: false,
+        },
         overrides: {
             stylistic: {
                 'antfu/consistent-list-newline': 'off',

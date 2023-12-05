@@ -39,12 +39,14 @@ var GLOB_TS = "**/*.?([cm])ts";
 var GLOB_TSX = "**/*.?([cm])tsx";
 var GLOB_STYLE = "**/*.{c,le,sc}ss";
 var GLOB_CSS = "**/*.css";
+var GLOB_POSTCSS = "**/*.{p,post}css";
 var GLOB_LESS = "**/*.less";
 var GLOB_SCSS = "**/*.scss";
 var GLOB_JSON = "**/*.json";
 var GLOB_JSON5 = "**/*.json5";
 var GLOB_JSONC = "**/*.jsonc";
 var GLOB_MARKDOWN = "**/*.md";
+var GLOB_MARKDOWN_IN_MARKDOWN = "**/*.md/*.md";
 var GLOB_VUE = "**/*.vue";
 var GLOB_YAML = "**/*.y?(a)ml";
 var GLOB_HTML = "**/*.htm?(l)";
@@ -512,24 +514,56 @@ async function jsonc(options = {}) {
 }
 
 // src/configs/markdown.ts
-async function markdown(options = {}) {
+async function markdown(options = {}, formatMarkdown = false) {
   const {
     componentExts = [],
     files = [GLOB_MARKDOWN],
     overrides = {}
   } = options;
+  const markdown2 = await interopDefault(import("eslint-plugin-markdown"));
+  const baseProcessor = markdown2.processors.markdown;
+  const processor = !formatMarkdown ? {
+    meta: {
+      name: "markdown-processor"
+    },
+    supportsAutofix: true,
+    ...baseProcessor
+  } : {
+    meta: {
+      name: "markdown-processor-with-content"
+    },
+    postprocess(messages, filename) {
+      const markdownContent = messages.pop();
+      const codeSnippets = baseProcessor.postprocess(messages, filename);
+      return [
+        ...markdownContent || [],
+        ...codeSnippets || []
+      ];
+    },
+    preprocess(text, filename) {
+      const result = baseProcessor.preprocess(text, filename);
+      return [
+        ...result,
+        {
+          filename: ".__markdown_content__",
+          text
+        }
+      ];
+    },
+    supportsAutofix: true
+  };
   return [
     {
       name: "eslint:markdown:setup",
       plugins: {
-        // @ts-expect-error missing types
-        markdown: await interopDefault(import("eslint-plugin-markdown"))
+        markdown: markdown2
       }
     },
     {
       files,
+      ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
       name: "eslint:markdown:processor",
-      processor: "markdown/markdown"
+      processor
     },
     {
       files: [
@@ -543,9 +577,8 @@ async function markdown(options = {}) {
           }
         }
       },
-      name: "eslint:markdown:rules",
+      name: "eslint:markdown:disables",
       rules: {
-        "antfu/no-ts-export-equal": "off",
         "import/newline-after-import": "off",
         "no-alert": "off",
         "no-console": "off",
@@ -594,6 +627,246 @@ async function markdown(options = {}) {
   ];
 }
 
+// src/configs/perfectionist.ts
+async function perfectionist() {
+  return [
+    {
+      name: "eslint:perfectionist",
+      plugins: {
+        perfectionist: default7
+      }
+    }
+  ];
+}
+
+// src/configs/stylistic.ts
+var StylisticConfigDefaults = {
+  indent: 4,
+  jsx: true,
+  quotes: "single",
+  semi: false
+};
+async function stylistic(options = {}) {
+  const {
+    overrides = {},
+    stylistic: stylistic2 = StylisticConfigDefaults
+  } = options;
+  const {
+    indent,
+    jsx,
+    quotes,
+    semi
+  } = typeof stylistic2 === "boolean" ? StylisticConfigDefaults : stylistic2;
+  const pluginStylistic = await interopDefault(import("@stylistic/eslint-plugin"));
+  const config = pluginStylistic.configs.customize({
+    flat: true,
+    indent,
+    jsx,
+    pluginName: "style",
+    quotes,
+    semi
+  });
+  return [
+    {
+      name: "eslint:stylistic",
+      plugins: {
+        antfu: default2,
+        style: pluginStylistic
+      },
+      rules: {
+        ...config.rules,
+        "antfu/consistent-list-newline": "off",
+        "antfu/if-newline": "error",
+        "antfu/top-level-function": "error",
+        "curly": ["error", "multi-or-nest", "consistent"],
+        "style/multiline-ternary": ["error", "never"],
+        ...overrides
+      }
+    }
+  ];
+}
+
+// src/configs/formatters.ts
+async function formatters(options = {}, stylistic2 = {}) {
+  await ensurePackages([
+    "eslint-plugin-format"
+  ]);
+  if (options === true) {
+    options = {
+      css: true,
+      graphql: false,
+      html: true,
+      markdown: true,
+      toml: true
+    };
+  }
+  const {
+    indent,
+    quotes,
+    semi
+  } = {
+    ...StylisticConfigDefaults,
+    ...stylistic2
+  };
+  const prettierOptions = Object.assign(
+    {
+      semi,
+      singleQuote: quotes === "single",
+      tabWidth: typeof indent === "number" ? indent : 2,
+      trailingComma: "all",
+      useTabs: indent === "tab"
+    },
+    options.prettierOptions || {}
+  );
+  const dprintOptions = Object.assign(
+    {
+      indentWidth: typeof indent === "number" ? indent : 2,
+      quoteStyle: quotes === "single" ? "preferSingle" : "preferDouble",
+      useTabs: indent === "tab"
+    },
+    options.dprintOptions || {}
+  );
+  const pluginFormat = await interopDefault(import("eslint-plugin-format"));
+  const configs = [
+    {
+      name: "eslint:formatters:setup",
+      plugins: {
+        format: pluginFormat
+      }
+    }
+  ];
+  if (options.css) {
+    configs.push(
+      {
+        files: [GLOB_CSS, GLOB_POSTCSS],
+        languageOptions: {
+          parser: pluginFormat.parserPlain
+        },
+        name: "eslint:formatter:css",
+        rules: {
+          "format/prettier": [
+            "error",
+            {
+              ...prettierOptions,
+              parser: "css"
+            }
+          ]
+        }
+      },
+      {
+        files: [GLOB_SCSS],
+        languageOptions: {
+          parser: pluginFormat.parserPlain
+        },
+        name: "eslint:formatter:scss",
+        rules: {
+          "format/prettier": [
+            "error",
+            {
+              ...prettierOptions,
+              parser: "scss"
+            }
+          ]
+        }
+      },
+      {
+        files: [GLOB_LESS],
+        languageOptions: {
+          parser: pluginFormat.parserPlain
+        },
+        name: "eslint:formatter:less",
+        rules: {
+          "format/prettier": [
+            "error",
+            {
+              ...prettierOptions,
+              parser: "less"
+            }
+          ]
+        }
+      }
+    );
+  }
+  if (options.html) {
+    configs.push({
+      files: ["**/*.html"],
+      languageOptions: {
+        parser: pluginFormat.parserPlain
+      },
+      name: "eslint:formatter:html",
+      rules: {
+        "format/prettier": [
+          "error",
+          {
+            ...prettierOptions,
+            parser: "html"
+          }
+        ]
+      }
+    });
+  }
+  if (options.toml) {
+    configs.push({
+      files: ["**/*.toml"],
+      languageOptions: {
+        parser: pluginFormat.parserPlain
+      },
+      name: "eslint:formatter:toml",
+      rules: {
+        "format/dprint": [
+          "error",
+          {
+            ...dprintOptions,
+            language: "toml"
+          }
+        ]
+      }
+    });
+  }
+  if (options.markdown) {
+    const formater = options.markdown === true ? "prettier" : options.markdown;
+    configs.push({
+      files: ["**/*.__markdown_content__"],
+      languageOptions: {
+        parser: pluginFormat.parserPlain
+      },
+      name: "eslint:formatter:markdown",
+      rules: {
+        [`format/${formater}`]: [
+          "error",
+          formater === "prettier" ? {
+            ...prettierOptions,
+            embeddedLanguageFormatting: "off",
+            parser: "markdown"
+          } : {
+            ...dprintOptions,
+            language: "markdown"
+          }
+        ]
+      }
+    });
+  }
+  if (options.graphql) {
+    configs.push({
+      files: ["**/*.graphql"],
+      languageOptions: {
+        parser: pluginFormat.parserPlain
+      },
+      name: "eslint:formatter:graphql",
+      rules: {
+        "format/prettier": [
+          "error",
+          {
+            ...prettierOptions,
+            parser: "graphql"
+          }
+        ]
+      }
+    });
+  }
+  return configs;
+}
+
 // src/configs/node.ts
 async function node() {
   return [
@@ -611,6 +884,176 @@ async function node() {
         "node/prefer-global/buffer": ["error", "never"],
         "node/prefer-global/process": ["error", "never"],
         "node/process-exit-as-throw": "error"
+      }
+    }
+  ];
+}
+
+// src/configs/react.ts
+import { isPackageExists as isPackageExists2 } from "local-pkg";
+var ReactRefreshAllowConstantExportPackages = [
+  "vite"
+];
+async function react(options = {}) {
+  const {
+    files = [GLOB_JSX, GLOB_TSX],
+    jsx = true,
+    overrides = {},
+    typescript: typescript2 = true,
+    version = "detect"
+  } = options;
+  await ensurePackages([
+    "eslint-plugin-react",
+    "eslint-plugin-react-hooks",
+    "eslint-plugin-react-refresh"
+  ]);
+  const [
+    pluginReact,
+    pluginReactHooks,
+    pluginReactRefresh
+  ] = await Promise.all([
+    // @ts-expect-error missing types
+    interopDefault(import("eslint-plugin-react")),
+    // @ts-expect-error missing types
+    interopDefault(import("eslint-plugin-react-hooks")),
+    // @ts-expect-error missing types
+    interopDefault(import("eslint-plugin-react-refresh"))
+  ]);
+  const _isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
+    (i) => isPackageExists2(i)
+  );
+  return [
+    {
+      name: "eslint:react:setup",
+      plugins: {
+        "react": pluginReact,
+        "react-hooks": pluginReactHooks,
+        "react-refresh": pluginReactRefresh
+      }
+    },
+    {
+      files,
+      languageOptions: {
+        parserOptions: {
+          ecmaFeatures: {
+            jsx
+          }
+        }
+      },
+      name: "eslint:react:rules",
+      rules: {
+        // react-hooks
+        "react-hooks/exhaustive-deps": "warn",
+        "react-hooks/rules-of-hooks": "error",
+        // react-refresh
+        // 'react-refresh/only-export-components': [
+        //     'warn',
+        //     { allowConstantExport: _isAllowConstantExport },
+        // ],
+        "react-refresh/only-export-components": "off",
+        // react
+        "react/boolean-prop-naming": "error",
+        "react/button-has-type": "error",
+        "react/default-props-match-prop-types": "error",
+        "react/destructuring-assignment": "error",
+        "react/display-name": "error",
+        "react/forbid-component-props": "off",
+        // 禁止组件上使用某些 props
+        "react/forbid-dom-props": "error",
+        "react/forbid-elements": "error",
+        "react/forbid-foreign-prop-types": "error",
+        "react/forbid-prop-types": "error",
+        "react/function-component-definition": "error",
+        "react/hook-use-state": "off",
+        // useState 钩子值和 setter 变量的解构和对称命名
+        "react/iframe-missing-sandbox": "error",
+        "react/jsx-boolean-value": "error",
+        "react/jsx-filename-extension": "off",
+        // 禁止可能包含 JSX 文件扩展名
+        "react/jsx-fragments": "error",
+        "react/jsx-handler-names": "error",
+        "react/jsx-key": "error",
+        "react/jsx-max-depth": "off",
+        // 强制 JSX 最大深度
+        "react/jsx-no-bind": "off",
+        // .bind()JSX 属性中禁止使用箭头函数
+        "react/jsx-no-comment-textnodes": "error",
+        "react/jsx-no-constructed-context-values": "error",
+        "react/jsx-no-duplicate-props": "error",
+        "react/jsx-no-leaked-render": "error",
+        "react/jsx-no-literals": "off",
+        // 禁止在 JSX 中使用字符串文字
+        "react/jsx-no-script-url": "error",
+        "react/jsx-no-target-blank": "error",
+        "react/jsx-no-undef": "error",
+        "react/jsx-no-useless-fragment": "error",
+        "react/jsx-pascal-case": "error",
+        "react/jsx-props-no-spreading": "off",
+        // 强制任何 JSX 属性都不会传播
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error",
+        "react/no-access-state-in-setstate": "error",
+        "react/no-adjacent-inline-elements": "error",
+        "react/no-array-index-key": "error",
+        "react/no-arrow-function-lifecycle": "error",
+        "react/no-children-prop": "error",
+        "react/no-danger": "off",
+        // 禁止使用 dangerouslySetInnerHTML
+        "react/no-danger-with-children": "error",
+        "react/no-deprecated": "error",
+        "react/no-did-mount-set-state": "error",
+        "react/no-did-update-set-state": "error",
+        "react/no-direct-mutation-state": "error",
+        "react/no-find-dom-node": "error",
+        "react/no-invalid-html-attribute": "error",
+        "react/no-is-mounted": "error",
+        "react/no-multi-comp": "error",
+        "react/no-namespace": "error",
+        "react/no-object-type-as-default-prop": "error",
+        "react/no-redundant-should-component-update": "error",
+        "react/no-render-return-value": "error",
+        "react/no-set-state": "error",
+        "react/no-string-refs": "error",
+        "react/no-this-in-sfc": "error",
+        "react/no-typos": "error",
+        "react/no-unescaped-entities": "error",
+        "react/no-unknown-property": "error",
+        "react/no-unsafe": "off",
+        // 禁止使用不安全的生命周期方法
+        "react/no-unstable-nested-components": "error",
+        "react/no-unused-class-component-methods": "error",
+        "react/no-unused-prop-types": "error",
+        "react/no-unused-state": "error",
+        "react/no-will-update-set-state": "error",
+        "react/prefer-es6-class": "error",
+        "react/prefer-exact-props": "error",
+        "react/prefer-read-only-props": "error",
+        "react/prefer-stateless-function": "error",
+        "react/prop-types": "error",
+        "react/react-in-jsx-scope": "off",
+        // 使用 JSX 时需要引入 React
+        "react/require-default-props": "off",
+        // 为每个非必需 prop 强制执行 defaultProps 定义
+        "react/require-optimization": "error",
+        "react/require-render-return": "error",
+        "react/self-closing-comp": "error",
+        "react/sort-comp": "error",
+        "react/sort-default-props": "error",
+        "react/sort-prop-types": "error",
+        "react/state-in-constructor": "error",
+        "react/static-property-placement": "error",
+        "react/style-prop-object": "error",
+        "react/void-dom-elements-no-children": "error",
+        ...typescript2 ? {
+          "react/jsx-no-undef": "off",
+          "react/prop-type": "off"
+        } : {},
+        ...overrides
+      },
+      settings: {
+        react: {
+          version
+        }
       }
     }
   ];
@@ -832,168 +1275,45 @@ function sortTsconfig() {
   ];
 }
 
-// src/configs/stylistic.ts
-async function stylistic(options = {}) {
+// src/configs/test.ts
+async function test(options = {}) {
   const {
-    overrides = {},
-    stylistic: stylistic2 = {}
+    files = GLOB_TESTS,
+    isInEditor = false,
+    overrides = {}
   } = options;
-  const {
-    indent = 4,
-    jsx = true,
-    quotes = "single"
-  } = typeof stylistic2 === "boolean" ? {} : stylistic2;
-  const pluginStylistic = await interopDefault(import("@stylistic/eslint-plugin"));
+  const [
+    pluginVitest,
+    pluginNoOnlyTests
+  ] = await Promise.all([
+    interopDefault(import("eslint-plugin-vitest")),
+    // @ts-expect-error missing types
+    interopDefault(import("eslint-plugin-no-only-tests"))
+  ]);
   return [
     {
-      name: "eslint:stylistic",
+      name: "eslint:test:setup",
       plugins: {
-        antfu: default2,
-        style: pluginStylistic
-      },
-      rules: {
-        "antfu/consistent-list-newline": "off",
-        "antfu/if-newline": "error",
-        "antfu/indent-binary-ops": ["error", { indent }],
-        "antfu/top-level-function": "error",
-        "curly": ["error", "multi-or-nest", "consistent"],
-        "style/array-bracket-spacing": ["error", "never"],
-        "style/arrow-spacing": ["error", { after: true, before: true }],
-        "style/block-spacing": ["error", "always"],
-        "style/brace-style": ["error", "stroustrup", { allowSingleLine: true }],
-        "style/comma-dangle": ["error", "always-multiline"],
-        "style/comma-spacing": ["error", { after: true, before: false }],
-        "style/comma-style": ["error", "last"],
-        "style/computed-property-spacing": ["error", "never", { enforceForClassMembers: true }],
-        "style/dot-location": ["error", "property"],
-        "style/eol-last": "error",
-        "style/indent": ["error", indent, {
-          ArrayExpression: 1,
-          CallExpression: { arguments: 1 },
-          flatTernaryExpressions: false,
-          FunctionDeclaration: { body: 1, parameters: 1 },
-          FunctionExpression: { body: 1, parameters: 1 },
-          ignoreComments: false,
-          ignoredNodes: [
-            "TemplateLiteral *",
-            "JSXElement",
-            "JSXElement > *",
-            "JSXAttribute",
-            "JSXIdentifier",
-            "JSXNamespacedName",
-            "JSXMemberExpression",
-            "JSXSpreadAttribute",
-            "JSXExpressionContainer",
-            "JSXOpeningElement",
-            "JSXClosingElement",
-            "JSXFragment",
-            "JSXOpeningFragment",
-            "JSXClosingFragment",
-            "JSXText",
-            "JSXEmptyExpression",
-            "JSXSpreadChild",
-            "TSUnionType",
-            "TSIntersectionType",
-            "TSTypeParameterInstantiation",
-            "FunctionExpression > .params[decorators.length > 0]",
-            "FunctionExpression > .params > :matches(Decorator, :not(:first-child))",
-            "ClassBody.body > PropertyDefinition[decorators.length > 0] > .key"
-          ],
-          ImportDeclaration: 1,
-          MemberExpression: 1,
-          ObjectExpression: 1,
-          offsetTernaryExpressions: true,
-          outerIIFEBody: 1,
-          SwitchCase: 1,
-          VariableDeclarator: 1
-        }],
-        "style/key-spacing": ["error", { afterColon: true, beforeColon: false }],
-        "style/keyword-spacing": ["error", { after: true, before: true }],
-        "style/lines-between-class-members": ["error", "always", { exceptAfterSingleLine: true }],
-        "style/max-statements-per-line": ["error", { max: 1 }],
-        "style/member-delimiter-style": ["error", { multiline: { delimiter: "none" } }],
-        "style/multiline-ternary": ["error", "never"],
-        "style/new-parens": "error",
-        "style/no-extra-parens": ["error", "functions"],
-        "style/no-floating-decimal": "error",
-        "style/no-mixed-operators": ["error", {
-          allowSamePrecedence: true,
-          groups: [
-            ["==", "!=", "===", "!==", ">", ">=", "<", "<="],
-            ["&&", "||"],
-            ["in", "instanceof"]
-          ]
-        }],
-        "style/no-mixed-spaces-and-tabs": "error",
-        "style/no-multi-spaces": "error",
-        "style/no-multiple-empty-lines": ["error", { max: 1, maxBOF: 0, maxEOF: 0 }],
-        "style/no-tabs": indent === "tab" ? "off" : "error",
-        "style/no-trailing-spaces": "error",
-        "style/no-whitespace-before-property": "error",
-        "style/object-curly-newline": ["error", { consistent: true, multiline: true }],
-        "style/object-curly-spacing": ["error", "always"],
-        "style/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }],
-        "style/operator-linebreak": ["error", "before"],
-        "style/padded-blocks": ["error", { blocks: "never", classes: "never", switches: "never" }],
-        "style/quote-props": ["error", "consistent-as-needed"],
-        "style/quotes": ["error", quotes, { allowTemplateLiterals: true, avoidEscape: false }],
-        "style/rest-spread-spacing": ["error", "never"],
-        "style/semi": ["error", "never"],
-        "style/semi-spacing": ["error", { after: true, before: false }],
-        "style/space-before-blocks": ["error", "always"],
-        "style/space-before-function-paren": ["error", { anonymous: "always", asyncArrow: "always", named: "never" }],
-        "style/space-in-parens": ["error", "never"],
-        "style/space-infix-ops": "error",
-        "style/space-unary-ops": ["error", { nonwords: false, words: true }],
-        "style/spaced-comment": ["error", "always", {
-          block: {
-            balanced: true,
-            exceptions: ["*"],
-            markers: ["!"]
-          },
-          line: {
-            exceptions: ["/", "#"],
-            markers: ["/"]
+        test: {
+          ...pluginVitest,
+          rules: {
+            ...pluginVitest.rules,
+            // extend `test/no-only-tests` rule
+            ...pluginNoOnlyTests.rules
           }
-        }],
-        "style/template-curly-spacing": "error",
-        "style/template-tag-spacing": ["error", "never"],
-        "style/type-annotation-spacing": ["error", {}],
-        "style/wrap-iife": ["error", "any", { functionPrototypeMethods: true }],
-        "style/yield-star-spacing": ["error", "both"],
-        ...jsx ? {
-          "style/jsx-closing-bracket-location": "error",
-          "style/jsx-closing-tag-location": "error",
-          "style/jsx-curly-brace-presence": ["error", { propElementValues: "always" }],
-          "style/jsx-curly-newline": "error",
-          "style/jsx-curly-spacing": ["error", "never"],
-          "style/jsx-equals-spacing": "error",
-          "style/jsx-first-prop-new-line": "error",
-          "style/jsx-indent": ["error", indent, { checkAttributes: true, indentLogicalExpressions: true }],
-          "style/jsx-indent-props": ["error", indent],
-          "style/jsx-max-props-per-line": ["error", { maximum: 4 }],
-          // 在 JSX 中的单行上强制执行最多 props 数量
-          "style/jsx-newline": "off",
-          // 在 jsx 元素和表达式之后换行
-          "style/jsx-one-expression-per-line": ["error", { allow: "single-child" }],
-          "style/jsx-quotes": ["error", "prefer-double"],
-          // 强制在 JSX 属性中一致使用双引号或单引号
-          "style/jsx-tag-spacing": ["error", {
-            afterOpening: "never",
-            beforeClosing: "never",
-            beforeSelfClosing: "always",
-            closingSlash: "never"
-          }],
-          "style/jsx-wrap-multilines": ["error", {
-            arrow: "parens-new-line",
-            assignment: "parens-new-line",
-            condition: "parens-new-line",
-            declaration: "parens-new-line",
-            logical: "parens-new-line",
-            prop: "parens-new-line",
-            return: "parens-new-line"
-          }]
-        } : {},
+        }
+      }
+    },
+    {
+      files,
+      name: "eslint:test:rules",
+      rules: {
+        "node/prefer-global/process": "off",
+        "test/consistent-test-it": ["error", { fn: "it", withinDescribe: "it" }],
+        "test/no-identical-title": "error",
+        "test/no-only-tests": isInEditor ? "off" : "error",
+        "test/prefer-hooks-in-order": "error",
+        "test/prefer-lowercase-title": "error",
         ...overrides
       }
     }
@@ -1076,10 +1396,7 @@ async function typescript(options = {}) {
           "@typescript-eslint/",
           "ts/"
         ),
-        "antfu/generic-spacing": "error",
-        "antfu/named-tuple-spacing": "error",
         "no-dupe-class-members": "off",
-        "no-invalid-this": "off",
         "no-loss-of-precision": "off",
         "no-redeclare": "off",
         "no-use-before-define": "off",
@@ -1093,7 +1410,6 @@ async function typescript(options = {}) {
         "ts/no-explicit-any": "off",
         "ts/no-extraneous-class": "off",
         "ts/no-import-type-side-effects": "error",
-        "ts/no-invalid-this": "error",
         "ts/no-invalid-void-type": "off",
         "ts/no-loss-of-precision": "error",
         "ts/no-non-null-assertion": "off",
@@ -1174,6 +1490,39 @@ async function unicorn() {
         "unicorn/prefer-type-error": "error",
         // Use new when throwing error
         "unicorn/throw-new-error": "error"
+      }
+    }
+  ];
+}
+
+// src/configs/unocss.ts
+async function unocss(options = {}) {
+  const {
+    attributify = true,
+    strict = false
+  } = options;
+  await ensurePackages([
+    "@unocss/eslint-plugin"
+  ]);
+  const [
+    pluginUnoCSS
+  ] = await Promise.all([
+    interopDefault(import("@unocss/eslint-plugin"))
+  ]);
+  return [
+    {
+      name: "eslint:unocss",
+      plugins: {
+        unocss: pluginUnoCSS
+      },
+      rules: {
+        "unocss/order": "off",
+        ...attributify ? {
+          "unocss/order-attributify": "warn"
+        } : {},
+        ...strict ? {
+          "unocss/blocklist": "error"
+        } : {}
       }
     }
   ];
@@ -1381,266 +1730,6 @@ async function yaml(options = {}) {
   ];
 }
 
-// src/configs/test.ts
-async function test(options = {}) {
-  const {
-    files = GLOB_TESTS,
-    isInEditor = false,
-    overrides = {}
-  } = options;
-  const [
-    pluginVitest,
-    pluginNoOnlyTests
-  ] = await Promise.all([
-    interopDefault(import("eslint-plugin-vitest")),
-    // @ts-expect-error missing types
-    interopDefault(import("eslint-plugin-no-only-tests"))
-  ]);
-  return [
-    {
-      name: "eslint:test:setup",
-      plugins: {
-        test: {
-          ...pluginVitest,
-          rules: {
-            ...pluginVitest.rules,
-            // extend `test/no-only-tests` rule
-            ...pluginNoOnlyTests.rules
-          }
-        }
-      }
-    },
-    {
-      files,
-      name: "eslint:test:rules",
-      rules: {
-        "node/prefer-global/process": "off",
-        "test/consistent-test-it": ["error", { fn: "it", withinDescribe: "it" }],
-        "test/no-identical-title": "error",
-        "test/no-only-tests": isInEditor ? "off" : "error",
-        "test/prefer-hooks-in-order": "error",
-        "test/prefer-lowercase-title": "error",
-        ...overrides
-      }
-    }
-  ];
-}
-
-// src/configs/perfectionist.ts
-async function perfectionist() {
-  return [
-    {
-      name: "eslint:perfectionist",
-      plugins: {
-        perfectionist: default7
-      }
-    }
-  ];
-}
-
-// src/configs/react.ts
-import { isPackageExists as isPackageExists2 } from "local-pkg";
-var ReactRefreshAllowConstantExportPackages = [
-  "vite"
-];
-async function react(options = {}) {
-  const {
-    files = [GLOB_JSX, GLOB_TSX],
-    jsx = true,
-    overrides = {},
-    typescript: typescript2 = true,
-    version = "17.0"
-  } = options;
-  await ensurePackages([
-    "eslint-plugin-react",
-    "eslint-plugin-react-hooks",
-    "eslint-plugin-react-refresh"
-  ]);
-  const [
-    pluginReact,
-    pluginReactHooks,
-    pluginReactRefresh
-  ] = await Promise.all([
-    // @ts-expect-error missing types
-    interopDefault(import("eslint-plugin-react")),
-    // @ts-expect-error missing types
-    interopDefault(import("eslint-plugin-react-hooks")),
-    // @ts-expect-error missing types
-    interopDefault(import("eslint-plugin-react-refresh"))
-  ]);
-  const _isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
-    (i) => isPackageExists2(i)
-  );
-  return [
-    {
-      name: "eslint:react:setup",
-      plugins: {
-        "react": pluginReact,
-        "react-hooks": pluginReactHooks,
-        "react-refresh": pluginReactRefresh
-      }
-    },
-    {
-      files,
-      languageOptions: {
-        parserOptions: {
-          ecmaFeatures: {
-            jsx
-          }
-        }
-      },
-      name: "eslint:react:rules",
-      rules: {
-        // react-hooks
-        "react-hooks/exhaustive-deps": "warn",
-        "react-hooks/rules-of-hooks": "error",
-        // react-refresh
-        // 'react-refresh/only-export-components': [
-        //     'warn',
-        //     { allowConstantExport: _isAllowConstantExport },
-        // ],
-        "react-refresh/only-export-components": "off",
-        // react
-        "react/boolean-prop-naming": "error",
-        "react/button-has-type": "error",
-        "react/default-props-match-prop-types": "error",
-        "react/destructuring-assignment": "error",
-        "react/display-name": "error",
-        "react/forbid-component-props": "off",
-        // 禁止组件上使用某些 props
-        "react/forbid-dom-props": "error",
-        "react/forbid-elements": "error",
-        "react/forbid-foreign-prop-types": "error",
-        "react/forbid-prop-types": "error",
-        "react/function-component-definition": "error",
-        "react/hook-use-state": "off",
-        // useState 钩子值和 setter 变量的解构和对称命名
-        "react/iframe-missing-sandbox": "error",
-        "react/jsx-boolean-value": "error",
-        "react/jsx-filename-extension": "off",
-        // 禁止可能包含 JSX 文件扩展名
-        "react/jsx-fragments": "error",
-        "react/jsx-handler-names": "error",
-        "react/jsx-key": "error",
-        "react/jsx-max-depth": "off",
-        // 强制 JSX 最大深度
-        "react/jsx-no-bind": "off",
-        // .bind()JSX 属性中禁止使用箭头函数
-        "react/jsx-no-comment-textnodes": "error",
-        "react/jsx-no-constructed-context-values": "error",
-        "react/jsx-no-duplicate-props": "error",
-        "react/jsx-no-leaked-render": "error",
-        "react/jsx-no-literals": "off",
-        // 禁止在 JSX 中使用字符串文字
-        "react/jsx-no-script-url": "error",
-        "react/jsx-no-target-blank": "error",
-        "react/jsx-no-undef": "error",
-        "react/jsx-no-useless-fragment": "error",
-        "react/jsx-pascal-case": "error",
-        "react/jsx-props-no-spreading": "off",
-        // 强制任何 JSX 属性都不会传播
-        "react/jsx-uses-react": "error",
-        "react/jsx-uses-vars": "error",
-        "react/no-access-state-in-setstate": "error",
-        "react/no-adjacent-inline-elements": "error",
-        "react/no-array-index-key": "error",
-        "react/no-arrow-function-lifecycle": "error",
-        "react/no-children-prop": "error",
-        "react/no-danger": "off",
-        // 禁止使用 dangerouslySetInnerHTML
-        "react/no-danger-with-children": "error",
-        "react/no-deprecated": "error",
-        "react/no-did-mount-set-state": "error",
-        "react/no-did-update-set-state": "error",
-        "react/no-direct-mutation-state": "error",
-        "react/no-find-dom-node": "error",
-        "react/no-invalid-html-attribute": "error",
-        "react/no-is-mounted": "error",
-        "react/no-multi-comp": "error",
-        "react/no-namespace": "error",
-        "react/no-object-type-as-default-prop": "error",
-        "react/no-redundant-should-component-update": "error",
-        "react/no-render-return-value": "error",
-        "react/no-set-state": "error",
-        "react/no-string-refs": "error",
-        "react/no-this-in-sfc": "error",
-        "react/no-typos": "error",
-        "react/no-unescaped-entities": "error",
-        "react/no-unknown-property": "error",
-        "react/no-unsafe": "off",
-        // 禁止使用不安全的生命周期方法
-        "react/no-unstable-nested-components": "error",
-        "react/no-unused-class-component-methods": "error",
-        "react/no-unused-prop-types": "error",
-        "react/no-unused-state": "error",
-        "react/no-will-update-set-state": "error",
-        "react/prefer-es6-class": "error",
-        "react/prefer-exact-props": "error",
-        "react/prefer-read-only-props": "error",
-        "react/prefer-stateless-function": "error",
-        "react/prop-types": "error",
-        "react/react-in-jsx-scope": "off",
-        // 使用 JSX 时需要引入 React
-        "react/require-default-props": "off",
-        // 为每个非必需 prop 强制执行 defaultProps 定义
-        "react/require-optimization": "error",
-        "react/require-render-return": "error",
-        "react/self-closing-comp": "error",
-        "react/sort-comp": "error",
-        "react/sort-default-props": "error",
-        "react/sort-prop-types": "error",
-        "react/state-in-constructor": "error",
-        "react/static-property-placement": "error",
-        "react/style-prop-object": "error",
-        "react/void-dom-elements-no-children": "error",
-        ...typescript2 ? {
-          "react/jsx-no-undef": "off",
-          "react/prop-type": "off"
-        } : {},
-        ...overrides
-      },
-      settings: {
-        react: {
-          version
-        }
-      }
-    }
-  ];
-}
-
-// src/configs/unocss.ts
-async function unocss(options = {}) {
-  const {
-    attributify = true,
-    strict = false
-  } = options;
-  await ensurePackages([
-    "@unocss/eslint-plugin"
-  ]);
-  const [
-    pluginUnoCSS
-  ] = await Promise.all([
-    interopDefault(import("@unocss/eslint-plugin"))
-  ]);
-  return [
-    {
-      name: "eslint:unocss",
-      plugins: {
-        unocss: pluginUnoCSS
-      },
-      rules: {
-        "unocss/order": "off",
-        ...attributify ? {
-          "unocss/order-attributify": "warn"
-        } : {},
-        ...strict ? {
-          "unocss/blocklist": "error"
-        } : {}
-      }
-    }
-  ];
-}
-
 // src/factory.ts
 var flatConfigProps = [
   "files",
@@ -1768,11 +1857,20 @@ async function lincy(options = {}, ...userConfigs) {
     }));
   }
   if (options.markdown ?? true) {
-    configs.push(markdown({
-      ...typeof options.markdown !== "boolean" ? options.markdown : {},
-      componentExts,
-      overrides: overrides.markdown
-    }));
+    configs.push(markdown(
+      {
+        ...typeof options.markdown !== "boolean" ? options.markdown : {},
+        componentExts,
+        overrides: overrides.markdown
+      },
+      options.formatters === true || !!(options.formatters || {})?.markdown
+    ));
+  }
+  if (options.formatters) {
+    configs.push(formatters(
+      options.formatters,
+      typeof stylisticOptions === "boolean" ? {} : stylisticOptions
+    ));
   }
   const fusedConfig = flatConfigProps.reduce((acc, key) => {
     if (key in options)
@@ -1803,6 +1901,8 @@ export {
   GLOB_LESS,
   GLOB_MARKDOWN,
   GLOB_MARKDOWN_CODE,
+  GLOB_MARKDOWN_IN_MARKDOWN,
+  GLOB_POSTCSS,
   GLOB_SCSS,
   GLOB_SRC,
   GLOB_SRC_EXT,
@@ -1812,10 +1912,12 @@ export {
   GLOB_TSX,
   GLOB_VUE,
   GLOB_YAML,
+  StylisticConfigDefaults,
   combine,
   comments,
   src_default as default,
   ensurePackages,
+  formatters,
   ignores,
   imports,
   interopDefault,

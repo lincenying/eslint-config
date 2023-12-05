@@ -22,8 +22,9 @@ import {
     vue,
     yaml,
 } from './configs'
-import type { Awaitable, FlatConfigItem, OptionsConfig, OptionsFiles, UserConfigItem } from './types'
+import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types'
 import { combine, interopDefault } from './utils'
+import { formatters } from './configs/formatters'
 
 const flatConfigProps: (keyof FlatConfigItem)[] = [
     'files',
@@ -49,7 +50,7 @@ const ReactPackages = [
 ]
 
 /**
- * Construct an array of ESLint flat config items.
+ * 构造一个ESLint扁平化配置项数组。
  */
 export async function lincy(options: OptionsConfig & FlatConfigItem = {},
     ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
@@ -178,11 +179,21 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
     }
 
     if (options.markdown ?? true) {
-        configs.push(markdown({
-            ...(typeof options.markdown !== 'boolean' ? options.markdown : {}),
-            componentExts,
-            overrides: overrides.markdown,
-        }))
+        configs.push(markdown(
+            {
+                ...(typeof options.markdown !== 'boolean' ? options.markdown : {}),
+                componentExts,
+                overrides: overrides.markdown,
+            },
+            options.formatters === true || !!(options.formatters || {})?.markdown,
+        ))
+    }
+
+    if (options.formatters) {
+        configs.push(formatters(
+            options.formatters,
+            typeof stylisticOptions === 'boolean' ? {} : stylisticOptions,
+        ))
     }
 
     // User can optionally pass a flat config item to the first argument

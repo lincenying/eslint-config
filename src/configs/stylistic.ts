@@ -45,10 +45,11 @@ export async function stylistic(options: StylisticOverridesConfig = {}): Promise
 
                 'antfu/consistent-list-newline': 'off',
                 'antfu/if-newline': 'error',
-                'antfu/indent-binary-ops': ['error', { indent }],
                 'antfu/top-level-function': 'error',
 
                 'curly': ['error', 'multi-or-nest', 'consistent'],
+
+                'style/multiline-ternary': ['error', 'never'],
 
                 ...overrides,
             },
