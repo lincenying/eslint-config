@@ -49,6 +49,8 @@ export async function stylistic(options: StylisticOverridesConfig = {}): Promise
 
                 'curly': ['error', 'multi-or-nest', 'consistent'],
 
+                // 覆盖`stylistic`默认规则
+                'style/member-delimiter-style': ['error', { multiline: { delimiter: 'none' } }],
                 'style/multiline-ternary': ['error', 'never'],
 
                 ...overrides,
