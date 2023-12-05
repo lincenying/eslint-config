@@ -1,7 +1,7 @@
 {
   "name": "@lincy/eslint-config",
   "type": "module",
-  "version": "4.2.0",
+  "version": "4.2.1",
   "packageManager": "pnpm@8.7.6",
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
