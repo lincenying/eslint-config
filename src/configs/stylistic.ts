@@ -20,7 +20,7 @@ export async function stylistic(options: StylisticOverridesConfig = {}): Promise
         jsx,
         quotes,
         semi,
-    } = typeof stylistic === 'boolean' ? StylisticConfigDefaults : stylistic
+    } = typeof stylistic === 'boolean' ? StylisticConfigDefaults : { ...StylisticConfigDefaults, ...stylistic }
 
     const pluginStylistic = await interopDefault(import('@stylistic/eslint-plugin'))
 

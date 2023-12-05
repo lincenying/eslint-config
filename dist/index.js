@@ -656,7 +656,7 @@ async function stylistic(options = {}) {
     jsx,
     quotes,
     semi
-  } = typeof stylistic2 === "boolean" ? StylisticConfigDefaults : stylistic2;
+  } = typeof stylistic2 === "boolean" ? StylisticConfigDefaults : { ...StylisticConfigDefaults, ...stylistic2 };
   const pluginStylistic = await interopDefault(import("@stylistic/eslint-plugin"));
   const config = pluginStylistic.configs.customize({
     flat: true,
