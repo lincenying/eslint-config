@@ -147,7 +147,7 @@ export default lincy({
     /**
      * 是否启用 vue 规则
      * @default 默认值: 检测是否安装vue依赖,
-     * @example 可选: false | true | { files?: string[] }
+     * @example 可选: false | true | { files?: string[]; sfcBlocks: boolean }
      */
     vue: true,
     /**
@@ -207,7 +207,41 @@ export default lincy({
     /**
      * 覆盖规则
      */
-    overrides: {},
+    overrides: {
+        ignores: [
+            // 忽略的路径/文件
+        ],
+        javascript: {
+            // javascript 规则
+        },
+        typescript: {
+            // typescript 规则
+        },
+        stylistic: {
+            // stylistic 规则
+        },
+        test: {
+            // test 规则
+        },
+        vue: {
+            // vue 规则
+        },
+        react: {
+            // react 规则
+        },
+        jsonc: {
+            // jsonc 规则
+        },
+        yaml: {
+            // yaml 规则
+        },
+        markdown: {
+            // markdown 规则
+        },
+        unocss: {
+            // unocss 规则
+        }
+    },
 
     // 工厂函数第一个参数默认为各规则的开关, 但是也可以作为追加规则使用, 当包含以下键名将会自动整合到一个规则里
     files: [],
@@ -337,7 +371,6 @@ import lincy from '@lincy/eslint-config'
 
 export default lincy(
     {
-        isInEditor: true,
         vue: true,
         jsx: true,
         react: true,

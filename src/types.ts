@@ -1,6 +1,7 @@
 import type { Linter } from 'eslint'
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
 import type { ParserOptions } from '@typescript-eslint/parser'
+import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks'
 import type {
     EslintCommentsRules,
     EslintRules,
@@ -76,6 +77,16 @@ export interface OptionsFiles {
      * 自定义 glob 覆盖 “files” 选项
      */
     files?: string[]
+}
+
+export interface OptionsVue {
+    /**
+     * 为 Vue SFC 创建虚拟文件以启用 linting.
+     *
+     * @see https://github.com/antfu/eslint-processor-vue-blocks
+     * @default true
+     */
+    sfcBlocks?: boolean | VueBlocksOptions
 }
 
 export interface OptionsFormatters {
@@ -244,7 +255,7 @@ export interface OptionsConfig extends OptionsComponentExts {
      *
      * @default 根据依赖关系自动检测
      */
-    vue?: boolean | OptionsFiles
+    vue?: boolean | OptionsFiles | OptionsVue
 
     /**
      * 启用 React 支持.

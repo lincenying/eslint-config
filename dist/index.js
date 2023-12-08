@@ -514,44 +514,15 @@ async function jsonc(options = {}) {
 }
 
 // src/configs/markdown.ts
-async function markdown(options = {}, formatMarkdown = false) {
+import * as parserPlain from "eslint-parser-plain";
+import { mergeProcessors, processorPassThrough } from "eslint-merge-processors";
+async function markdown(options = {}) {
   const {
     componentExts = [],
     files = [GLOB_MARKDOWN],
     overrides = {}
   } = options;
   const markdown2 = await interopDefault(import("eslint-plugin-markdown"));
-  const baseProcessor = markdown2.processors.markdown;
-  const processor = !formatMarkdown ? {
-    meta: {
-      name: "markdown-processor"
-    },
-    supportsAutofix: true,
-    ...baseProcessor
-  } : {
-    meta: {
-      name: "markdown-processor-with-content"
-    },
-    postprocess(messages, filename) {
-      const markdownContent = messages.pop();
-      const codeSnippets = baseProcessor.postprocess(messages, filename);
-      return [
-        ...markdownContent || [],
-        ...codeSnippets || []
-      ];
-    },
-    preprocess(text, filename) {
-      const result = baseProcessor.preprocess(text, filename);
-      return [
-        ...result,
-        {
-          filename: ".__markdown_content__",
-          text
-        }
-      ];
-    },
-    supportsAutofix: true
-  };
   return [
     {
       name: "eslint:markdown:setup",
@@ -563,7 +534,17 @@ async function markdown(options = {}, formatMarkdown = false) {
       files,
       ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
       name: "eslint:markdown:processor",
-      processor
+      processor: mergeProcessors([
+        markdown2.processors.markdown,
+        processorPassThrough
+      ])
+    },
+    {
+      files,
+      languageOptions: {
+        parser: parserPlain
+      },
+      name: "eslint:markdown:parser"
     },
     {
       files: [
@@ -639,6 +620,9 @@ async function perfectionist() {
   ];
 }
 
+// src/configs/formatters.ts
+import * as parserPlain2 from "eslint-parser-plain";
+
 // src/configs/stylistic.ts
 var StylisticConfigDefaults = {
   indent: 4,
@@ -712,6 +696,7 @@ async function formatters(options = {}, stylistic2 = {}) {
   };
   const prettierOptions = Object.assign(
     {
+      endOfLine: "auto",
       semi,
       singleQuote: quotes === "single",
       tabWidth: typeof indent === "number" ? indent : 2,
@@ -742,7 +727,7 @@ async function formatters(options = {}, stylistic2 = {}) {
       {
         files: [GLOB_CSS, GLOB_POSTCSS],
         languageOptions: {
-          parser: pluginFormat.parserPlain
+          parser: parserPlain2
         },
         name: "eslint:formatter:css",
         rules: {
@@ -758,7 +743,7 @@ async function formatters(options = {}, stylistic2 = {}) {
       {
         files: [GLOB_SCSS],
         languageOptions: {
-          parser: pluginFormat.parserPlain
+          parser: parserPlain2
         },
         name: "eslint:formatter:scss",
         rules: {
@@ -774,7 +759,7 @@ async function formatters(options = {}, stylistic2 = {}) {
       {
         files: [GLOB_LESS],
         languageOptions: {
-          parser: pluginFormat.parserPlain
+          parser: parserPlain2
         },
         name: "eslint:formatter:less",
         rules: {
@@ -793,7 +778,7 @@ async function formatters(options = {}, stylistic2 = {}) {
     configs.push({
       files: ["**/*.html"],
       languageOptions: {
-        parser: pluginFormat.parserPlain
+        parser: parserPlain2
       },
       name: "eslint:formatter:html",
       rules: {
@@ -811,7 +796,7 @@ async function formatters(options = {}, stylistic2 = {}) {
     configs.push({
       files: ["**/*.toml"],
       languageOptions: {
-        parser: pluginFormat.parserPlain
+        parser: parserPlain2
       },
       name: "eslint:formatter:toml",
       rules: {
@@ -828,9 +813,9 @@ async function formatters(options = {}, stylistic2 = {}) {
   if (options.markdown) {
     const formater = options.markdown === true ? "prettier" : options.markdown;
     configs.push({
-      files: ["**/*.__markdown_content__"],
+      files: [GLOB_MARKDOWN],
       languageOptions: {
-        parser: pluginFormat.parserPlain
+        parser: parserPlain2
       },
       name: "eslint:formatter:markdown",
       rules: {
@@ -852,7 +837,7 @@ async function formatters(options = {}, stylistic2 = {}) {
     configs.push({
       files: ["**/*.graphql"],
       languageOptions: {
-        parser: pluginFormat.parserPlain
+        parser: parserPlain2
       },
       name: "eslint:formatter:graphql",
       rules: {
@@ -1501,6 +1486,7 @@ async function unicorn() {
 async function unocss(options = {}) {
   const {
     attributify = true,
+    overrides = {},
     strict = false
   } = options;
   await ensurePackages([
@@ -1524,13 +1510,15 @@ async function unocss(options = {}) {
         } : {},
         ...strict ? {
           "unocss/blocklist": "error"
-        } : {}
+        } : {},
+        ...overrides
       }
     }
   ];
 }
 
 // src/configs/vue.ts
+import { mergeProcessors as mergeProcessors2 } from "eslint-merge-processors";
 import { getPackageInfoSync } from "local-pkg";
 var pkg = getPackageInfoSync("vue");
 var vueVersion = pkg && pkg.version;
@@ -1542,16 +1530,19 @@ async function vue(options = {}) {
     overrides = {},
     stylistic: stylistic2 = true
   } = options;
+  const sfcBlocks = options.sfcBlocks === true ? {} : options.sfcBlocks ?? {};
   const {
     indent = 4
   } = typeof stylistic2 === "boolean" ? {} : stylistic2;
   const [
     pluginVue,
-    parserVue
+    parserVue,
+    processorVueBlocks
   ] = await Promise.all([
     // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-vue")),
-    interopDefault(import("vue-eslint-parser"))
+    interopDefault(import("vue-eslint-parser")),
+    interopDefault(import("eslint-processor-vue-blocks"))
   ]);
   return [
     {
@@ -1574,7 +1565,16 @@ async function vue(options = {}) {
         }
       },
       name: "eslint:vue:rules",
-      processor: pluginVue.processors[".vue"],
+      processor: sfcBlocks === false ? pluginVue.processors[".vue"] : mergeProcessors2([
+        pluginVue.processors[".vue"],
+        processorVueBlocks({
+          ...sfcBlocks,
+          blocks: {
+            ...sfcBlocks.blocks,
+            styles: true
+          }
+        })
+      ]),
       rules: {
         ...pluginVue.configs.base.rules,
         ...vueVersion === "3" ? {
@@ -1837,7 +1837,10 @@ async function lincy(options = {}, ...userConfigs) {
   }
   if (enableUnoCSS) {
     configs.push(unocss(
-      typeof enableUnoCSS === "boolean" ? {} : enableUnoCSS
+      {
+        ...typeof enableUnoCSS === "boolean" ? {} : enableUnoCSS,
+        overrides: overrides.unocss
+      }
     ));
   }
   if (options.jsonc ?? true) {
@@ -1864,8 +1867,7 @@ async function lincy(options = {}, ...userConfigs) {
         ...typeof options.markdown !== "boolean" ? options.markdown : {},
         componentExts,
         overrides: overrides.markdown
-      },
-      options.formatters === true || !!(options.formatters || {})?.markdown
+      }
     ));
   }
   if (options.formatters) {

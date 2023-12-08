@@ -1,4 +1,5 @@
-import { GLOB_CSS, GLOB_LESS, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
+import * as parserPlain from 'eslint-parser-plain'
+import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
 import { ensurePackages, interopDefault } from '../utils'
 import type { FlatConfigItem, OptionsFormatters, StylisticConfig } from '../types'
 import { StylisticConfigDefaults } from './stylistic'
@@ -33,6 +34,7 @@ export async function formatters(
 
     const prettierOptions: VendoredPrettierOptions = Object.assign(
         {
+            endOfLine: 'auto',
             semi,
             singleQuote: quotes === 'single',
             tabWidth: typeof indent === 'number' ? indent : 2,
@@ -67,7 +69,7 @@ export async function formatters(
             {
                 files: [GLOB_CSS, GLOB_POSTCSS],
                 languageOptions: {
-                    parser: pluginFormat.parserPlain,
+                    parser: parserPlain,
                 },
                 name: 'eslint:formatter:css',
                 rules: {
@@ -83,7 +85,7 @@ export async function formatters(
             {
                 files: [GLOB_SCSS],
                 languageOptions: {
-                    parser: pluginFormat.parserPlain,
+                    parser: parserPlain,
                 },
                 name: 'eslint:formatter:scss',
                 rules: {
@@ -99,7 +101,7 @@ export async function formatters(
             {
                 files: [GLOB_LESS],
                 languageOptions: {
-                    parser: pluginFormat.parserPlain,
+                    parser: parserPlain,
                 },
                 name: 'eslint:formatter:less',
                 rules: {
@@ -119,7 +121,7 @@ export async function formatters(
         configs.push({
             files: ['**/*.html'],
             languageOptions: {
-                parser: pluginFormat.parserPlain,
+                parser: parserPlain,
             },
             name: 'eslint:formatter:html',
             rules: {
@@ -138,7 +140,7 @@ export async function formatters(
         configs.push({
             files: ['**/*.toml'],
             languageOptions: {
-                parser: pluginFormat.parserPlain,
+                parser: parserPlain,
             },
             name: 'eslint:formatter:toml',
             rules: {
@@ -157,9 +159,9 @@ export async function formatters(
         const formater = options.markdown === true ? 'prettier' : options.markdown
 
         configs.push({
-            files: ['**/*.__markdown_content__'],
+            files: [GLOB_MARKDOWN],
             languageOptions: {
-                parser: pluginFormat.parserPlain,
+                parser: parserPlain,
             },
             name: 'eslint:formatter:markdown',
             rules: {
@@ -182,7 +184,7 @@ export async function formatters(
         configs.push({
             files: ['**/*.graphql'],
             languageOptions: {
-                parser: pluginFormat.parserPlain,
+                parser: parserPlain,
             },
             name: 'eslint:formatter:graphql',
             rules: {

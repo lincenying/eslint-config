@@ -1,6 +1,7 @@
+import { mergeProcessors } from 'eslint-merge-processors'
 import { getPackageInfoSync } from 'local-pkg'
 import { interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic } from '../types'
+import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic, OptionsVue } from '../types'
 import { GLOB_VUE } from '../globs'
 
 const pkg = getPackageInfoSync('vue')
@@ -9,13 +10,15 @@ vueVersion = (vueVersion && vueVersion[0])
 vueVersion = Number.isNaN(vueVersion) ? '3' : vueVersion
 
 export async function vue(
-    options: OptionsFiles & OptionsHasTypeScript & OptionsOverrides & OptionsStylistic = {},
+    options: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles & OptionsVue = {},
 ): Promise<FlatConfigItem[]> {
     const {
         files = [GLOB_VUE],
         overrides = {},
         stylistic = true,
     } = options
+
+    const sfcBlocks = options.sfcBlocks === true ? {} : options.sfcBlocks ?? {}
 
     const {
         indent = 4,
@@ -24,10 +27,12 @@ export async function vue(
     const [
         pluginVue,
         parserVue,
+        processorVueBlocks,
     ] = await Promise.all([
         // @ts-expect-error missing types
         interopDefault(import('eslint-plugin-vue')),
         interopDefault(import('vue-eslint-parser')),
+        interopDefault(import('eslint-processor-vue-blocks')),
     ] as const)
 
     return [
@@ -51,7 +56,16 @@ export async function vue(
                 },
             },
             name: 'eslint:vue:rules',
-            processor: pluginVue.processors['.vue'],
+            processor: sfcBlocks === false ? pluginVue.processors['.vue'] : mergeProcessors([
+                pluginVue.processors['.vue'],
+                processorVueBlocks({
+                    ...sfcBlocks,
+                    blocks: {
+                        ...sfcBlocks.blocks,
+                        styles: true,
+                    },
+                }),
+            ]),
             rules: {
                 ...pluginVue.configs.base.rules as any,
                 ...(vueVersion === '3' ? {

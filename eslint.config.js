@@ -3,7 +3,6 @@ import lincy from './dist/index.js'
 
 const config = await lincy(
     {
-        vue: false,
         stylistic: {
             indent: 4,
             quotes: 'single',
