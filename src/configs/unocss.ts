@@ -6,6 +6,7 @@ export async function unocss(
 ): Promise<FlatConfigItem[]> {
     const {
         attributify = true,
+        overrides = {},
         strict = false,
     } = options
 
@@ -33,6 +34,7 @@ export async function unocss(
                 ...strict ? {
                     'unocss/blocklist': 'error',
                 } : {},
+                ...overrides,
             },
         },
     ]

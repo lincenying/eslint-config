@@ -200,6 +200,7 @@ export interface OptionsUnoCSS {
      * @default false
      */
     strict?: boolean
+    overrides?: FlatConfigItem['rules']
 }
 
 export interface OptionsConfig extends OptionsComponentExts {
@@ -324,6 +325,7 @@ export interface OptionsConfig extends OptionsComponentExts {
         jsonc?: FlatConfigItem['rules']
         markdown?: FlatConfigItem['rules']
         yaml?: FlatConfigItem['rules']
+        unocss?: FlatConfigItem['rules']
         ignores?: string[]
     }
 }

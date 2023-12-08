@@ -154,7 +154,10 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
 
     if (enableUnoCSS) {
         configs.push(unocss(
-            typeof enableUnoCSS === 'boolean' ? {} : enableUnoCSS,
+            {
+                ...(typeof enableUnoCSS === 'boolean' ? {} : enableUnoCSS),
+                overrides: overrides.unocss,
+            },
         ))
     }
 
@@ -193,6 +196,7 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
         configs.push(formatters(
             options.formatters,
             typeof stylisticOptions === 'boolean' ? {} : stylisticOptions,
+            options.markdown !== false,
         ))
     }
 
