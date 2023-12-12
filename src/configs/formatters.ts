@@ -15,11 +15,10 @@ export async function formatters(
 
     if (options === true) {
         options = {
-            css: true,
-            graphql: false,
+            css: false,
+            graphql: true,
             html: true,
             markdown: true,
-            toml: true,
         }
     }
 
@@ -34,10 +33,10 @@ export async function formatters(
 
     const prettierOptions: VendoredPrettierOptions = Object.assign(
         {
-            endOfLine: 'auto',
+            endOfLine: 'lf',
             semi,
             singleQuote: quotes === 'single',
-            tabWidth: typeof indent === 'number' ? indent : 2,
+            tabWidth: typeof indent === 'number' ? indent : 4,
             trailingComma: 'all',
             useTabs: indent === 'tab',
         } satisfies VendoredPrettierOptions,
@@ -46,7 +45,7 @@ export async function formatters(
 
     const dprintOptions = Object.assign(
         {
-            indentWidth: typeof indent === 'number' ? indent : 2,
+            indentWidth: typeof indent === 'number' ? indent : 4,
             quoteStyle: quotes === 'single' ? 'preferSingle' : 'preferDouble',
             useTabs: indent === 'tab',
         },
@@ -130,25 +129,6 @@ export async function formatters(
                     {
                         ...prettierOptions,
                         parser: 'html',
-                    },
-                ],
-            },
-        })
-    }
-
-    if (options.toml) {
-        configs.push({
-            files: ['**/*.toml'],
-            languageOptions: {
-                parser: parserPlain,
-            },
-            name: 'eslint:formatter:toml',
-            rules: {
-                'format/dprint': [
-                    'error',
-                    {
-                        ...dprintOptions,
-                        language: 'toml',
                     },
                 ],
             },

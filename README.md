@@ -70,6 +70,7 @@ For example:
   // 在 IDE 中静默样式规则，但仍会自动修复它们
   "eslint.rules.customizations": [
     { "rule": "style/*", "severity": "off" },
+    { "rule": "format/*", "severity": "off" },
     { "rule": "*-indent", "severity": "off" },
     { "rule": "*-spacing", "severity": "off" },
     { "rule": "*-spaces", "severity": "off" },
@@ -91,7 +92,8 @@ For example:
     "markdown",
     "json",
     "jsonc",
-    "yaml"
+    "yaml",
+    "toml"
   ]
 }
 ```
@@ -135,7 +137,7 @@ export default lincy({
     /**
      * 是否启用 stylistic 格式化规则
      * @default 默认值: true
-     * @example 可选: false | { indent?: number | 'tab'; quotes?: 'single' | 'double'; jsx?: boolean; semi?: boolean}
+     * @example 可选: false | { indent?: number | 'tab'; quotes?: 'single' | 'double'; jsx?: boolean; semi?: boolean }
      */
     stylistic: true,
     /**
@@ -181,6 +183,12 @@ export default lincy({
      */
     yaml: false,
     /**
+     * 是否启用 toml 规则
+     * @default 默认值: false,
+     * @example 可选: true
+     */
+    toml: false,
+    /**
      * 是否启用 .gitignore 文件
      * @default 默认值: true,
      * @example 可选: false | { ignores?: string[] }
@@ -201,7 +209,7 @@ export default lincy({
     /**
      * 是否启用 formatters 规则
      * @default 默认值: false,
-     * @example 可选: true | { css?: 'prettier' | boolean; html?: 'prettier' | boolean; toml?: 'dprint' | boolean; markdown?: 'prettier' | 'dprint' | boolean }
+     * @example 可选: true | { css?: 'prettier' | boolean; html?: 'prettier' | boolean; markdown?: 'prettier' | 'dprint' | boolean }
      */
     formatters: false,
     /**
@@ -234,6 +242,9 @@ export default lincy({
         },
         yaml: {
             // yaml 规则
+        },
+        toml: {
+            // toml 规则
         },
         markdown: {
             // markdown 规则
@@ -295,6 +306,9 @@ export default lincy(
 
 您还可以导入非常细粒度的配置并根据需要组合它们：
 
+<details>
+<summary>点击展开例子</summary>
+
 ```js
 // eslint.config.js
 import {
@@ -312,6 +326,7 @@ import {
     sortPackageJson,
     sortTsconfig,
     stylistic,
+    toml,
     typescript,
     unicorn,
     unocss,
@@ -335,9 +350,12 @@ export default combine(
     unocss(/* Options */),
     jsonc(),
     yaml(),
+    toml(),
     markdown(),
 )
 ```
+
+</details>
 
 查看 [configs](https://github.com/lincenying/eslint-config/blob/main/src/configs) 和 [factory](https://github.com/lincenying/eslint-config/blob/main/src/factory.ts）了解更多详细信息。
 
@@ -449,11 +467,47 @@ export default lincy({
 
 提供了一些可选配置，默认情况下不包含它们的依赖项
 
+#### Formatters
+
+使用外部格式化程序来格式化 ESLint 无法处理的文件（.css、.html 等）。 由 [eslint-plugin-format](https://github.com/antfu/eslint-plugin-format) 提供支持
+
+```js
+// eslint.config.js
+import lincy from '@lincy/eslint-config'
+
+export default lincy({
+    formatters: {
+        /**
+         * 格式化 CSS、LESS、SCSS 文件，以及 Vue 中的 `<style>` 块
+         * 默认使用 Prettier
+         */
+        css: true,
+        /**
+         * 格式化 HTML 文件
+         * 默认使用 Prettier
+         */
+        html: true,
+        /**
+         * 格式化 Markdown 文件
+         * 支持 Prettier 和 dprint
+         * 默认使用 Prettier
+         */
+        markdown: 'prettier'
+    }
+})
+```
+
+运行“npx eslint”会提示您安装所需的依赖项，当然，也可以手动安装它们：
+
+```bash
+pnpm add eslint-plugin-format -D
+```
+
 #### React
 
 当检测到依赖安装了`react`, 则默认开启
 
-运行“npx eslint”会提示您安装所需的依赖项，当然，您也可以手动安装它们：
+运行“npx eslint”会提示您安装所需的依赖项，当然，也可以手动安装它们：
 
 ```bash
 pnpm i -D eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh
@@ -472,11 +526,13 @@ export default lincy({
 })
 ```
 
-运行“npx eslint”会提示您安装所需的依赖项，当然，您也可以手动安装它们：
+运行“npx eslint”会提示您安装所需的依赖项，当然，也可以手动安装它们：
 
 ```bash
 pnpm i -D @unocss/eslint-plugin
 ```
+
+### 可选规则
 
 #### `perfectionist` (sorting)
 

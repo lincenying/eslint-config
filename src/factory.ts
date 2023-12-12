@@ -16,6 +16,7 @@ import {
     sortTsconfig,
     stylistic,
     test,
+    toml,
     typescript,
     unicorn,
     unocss,
@@ -177,6 +178,13 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
         configs.push(yaml({
             ...(typeof options.yaml !== 'boolean' ? options.yaml : {}),
             overrides: overrides.yaml,
+            stylistic: stylisticOptions,
+        }))
+    }
+
+    if (options.toml) {
+        configs.push(toml({
+            overrides: overrides.toml,
             stylistic: stylisticOptions,
         }))
     }

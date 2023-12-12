@@ -3,17 +3,12 @@ import lincy from './dist/index.js'
 
 const config = await lincy(
     {
+        toml: true,
         stylistic: {
             indent: 4,
             quotes: 'single',
         },
-        formatters: {
-            css: true,
-            graphql: true,
-            html: true,
-            markdown: true,
-            toml: false,
-        },
+        formatters: true,
         overrides: {
             stylistic: {
                 'antfu/consistent-list-newline': 'off',

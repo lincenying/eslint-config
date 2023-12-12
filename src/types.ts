@@ -105,13 +105,6 @@ export interface OptionsFormatters {
     html?: 'prettier' | boolean
 
     /**
-     * 启用 TOML 格式支持.
-     *
-     * 目前仅支持dprint.
-     */
-    toml?: 'dprint' | boolean
-
-    /**
      * 启用对 Markdown 的格式化支持.
      *
      * 同时支持 Prettier 和 dprint.
@@ -304,6 +297,13 @@ export interface OptionsConfig extends OptionsComponentExts {
     yaml?: boolean | OptionsFiles
 
     /**
+     * 启用 TOML 支持.
+     *
+     * @default false
+     */
+    toml?: boolean
+
+    /**
      * 启用 Markdown 支持.
      *
      * @default true
@@ -336,6 +336,7 @@ export interface OptionsConfig extends OptionsComponentExts {
         jsonc?: FlatConfigItem['rules']
         markdown?: FlatConfigItem['rules']
         yaml?: FlatConfigItem['rules']
+        toml?: FlatConfigItem['rules']
         unocss?: FlatConfigItem['rules']
         ignores?: string[]
     }

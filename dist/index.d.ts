@@ -154,12 +154,6 @@ interface OptionsFormatters {
      */
     html?: 'prettier' | boolean;
     /**
-     * 启用 TOML 格式支持.
-     *
-     * 目前仅支持dprint.
-     */
-    toml?: 'dprint' | boolean;
-    /**
      * 启用对 Markdown 的格式化支持.
      *
      * 同时支持 Prettier 和 dprint.
@@ -326,6 +320,12 @@ interface OptionsConfig extends OptionsComponentExts {
      */
     yaml?: boolean | OptionsFiles;
     /**
+     * 启用 TOML 支持.
+     *
+     * @default false
+     */
+    toml?: boolean;
+    /**
      * 启用 Markdown 支持.
      *
      * @default true
@@ -355,6 +355,7 @@ interface OptionsConfig extends OptionsComponentExts {
         jsonc?: FlatConfigItem['rules'];
         markdown?: FlatConfigItem['rules'];
         yaml?: FlatConfigItem['rules'];
+        toml?: FlatConfigItem['rules'];
         unocss?: FlatConfigItem['rules'];
         ignores?: string[];
     };
@@ -420,6 +421,8 @@ declare function vue(options?: OptionsHasTypeScript & OptionsOverrides & Options
 
 declare function yaml(options?: OptionsFiles & OptionsOverrides & OptionsStylistic): Promise<FlatConfigItem[]>;
 
+declare function toml(options?: OptionsOverrides & OptionsStylistic & OptionsFiles): Promise<FlatConfigItem[]>;
+
 /**
  * Combine array and non-array configs into a single array.
  */
@@ -451,10 +454,11 @@ declare const GLOB_MARKDOWN = "**/*.md";
 declare const GLOB_MARKDOWN_IN_MARKDOWN = "**/*.md/*.md";
 declare const GLOB_VUE = "**/*.vue";
 declare const GLOB_YAML = "**/*.y?(a)ml";
+declare const GLOB_TOML = "**/*.toml";
 declare const GLOB_HTML = "**/*.htm?(l)";
 declare const GLOB_MARKDOWN_CODE = "**/*.md/**/*.?([cm])[jt]s?(x)";
 declare const GLOB_TESTS: string[];
 declare const GLOB_ALL_SRC: string[];
 declare const GLOB_EXCLUDE: string[];
 
-export { type Awaitable, type FlatConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsFormatters, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsReact, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type OptionsUnoCSS, type OptionsVue, type Rules, type StylisticConfig, StylisticConfigDefaults, type StylisticOverridesConfig, type UserConfigItem, type WrapRuleConfig, combine, comments, lincy as default, ensurePackages, formatters, ignores, imports, interopDefault, javascript, jsdoc, jsonc, lincy, markdown, node, perfectionist, react, renameRules, sortPackageJson, sortTsconfig, stylistic, test, toArray, typescript, unicorn, unocss, vue, yaml };
+export { type Awaitable, type FlatConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsFormatters, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsReact, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type OptionsUnoCSS, type OptionsVue, type Rules, type StylisticConfig, StylisticConfigDefaults, type StylisticOverridesConfig, type UserConfigItem, type WrapRuleConfig, combine, comments, lincy as default, ensurePackages, formatters, ignores, imports, interopDefault, javascript, jsdoc, jsonc, lincy, markdown, node, perfectionist, react, renameRules, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };

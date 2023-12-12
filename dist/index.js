@@ -49,6 +49,7 @@ var GLOB_MARKDOWN = "**/*.md";
 var GLOB_MARKDOWN_IN_MARKDOWN = "**/*.md/*.md";
 var GLOB_VUE = "**/*.vue";
 var GLOB_YAML = "**/*.y?(a)ml";
+var GLOB_TOML = "**/*.toml";
 var GLOB_HTML = "**/*.htm?(l)";
 var GLOB_MARKDOWN_CODE = `${GLOB_MARKDOWN}/${GLOB_SRC}`;
 var GLOB_TESTS = [
@@ -679,11 +680,10 @@ async function formatters(options = {}, stylistic2 = {}) {
   ]);
   if (options === true) {
     options = {
-      css: true,
-      graphql: false,
+      css: false,
+      graphql: true,
       html: true,
-      markdown: true,
-      toml: true
+      markdown: true
     };
   }
   const {
@@ -696,10 +696,10 @@ async function formatters(options = {}, stylistic2 = {}) {
   };
   const prettierOptions = Object.assign(
     {
-      endOfLine: "auto",
+      endOfLine: "lf",
       semi,
       singleQuote: quotes === "single",
-      tabWidth: typeof indent === "number" ? indent : 2,
+      tabWidth: typeof indent === "number" ? indent : 4,
       trailingComma: "all",
       useTabs: indent === "tab"
     },
@@ -707,7 +707,7 @@ async function formatters(options = {}, stylistic2 = {}) {
   );
   const dprintOptions = Object.assign(
     {
-      indentWidth: typeof indent === "number" ? indent : 2,
+      indentWidth: typeof indent === "number" ? indent : 4,
       quoteStyle: quotes === "single" ? "preferSingle" : "preferDouble",
       useTabs: indent === "tab"
     },
@@ -787,24 +787,6 @@ async function formatters(options = {}, stylistic2 = {}) {
           {
             ...prettierOptions,
             parser: "html"
-          }
-        ]
-      }
-    });
-  }
-  if (options.toml) {
-    configs.push({
-      files: ["**/*.toml"],
-      languageOptions: {
-        parser: parserPlain2
-      },
-      name: "eslint:formatter:toml",
-      rules: {
-        "format/dprint": [
-          "error",
-          {
-            ...dprintOptions,
-            language: "toml"
           }
         ]
       }
@@ -1112,15 +1094,11 @@ async function sortPackageJson() {
           },
           {
             order: { type: "asc" },
-            pathPattern: "^(?:dev|peer|optional|bundled)?[Dd]ependencies$"
+            pathPattern: "^(?:dev|peer|optional|bundled)?[Dd]ependencies(Meta)?$"
           },
           {
             order: { type: "asc" },
-            pathPattern: "^resolutions$"
-          },
-          {
-            order: { type: "asc" },
-            pathPattern: "^pnpm.overrides$"
+            pathPattern: "^(?:resolutions|overrides|pnpm.overrides)$"
           },
           {
             order: [
@@ -1298,6 +1276,7 @@ async function test(options = {}) {
         "node/prefer-global/process": "off",
         "test/consistent-test-it": ["error", { fn: "it", withinDescribe: "it" }],
         "test/no-identical-title": "error",
+        "test/no-import-node-test": "error",
         "test/no-only-tests": isInEditor ? "off" : "error",
         "test/prefer-hooks-in-order": "error",
         "test/prefer-lowercase-title": "error",
@@ -1732,6 +1711,65 @@ async function yaml(options = {}) {
   ];
 }
 
+// src/configs/toml.ts
+async function toml(options = {}) {
+  const {
+    files = [GLOB_TOML],
+    overrides = {},
+    stylistic: stylistic2 = true
+  } = options;
+  const {
+    indent = 4
+  } = typeof stylistic2 === "boolean" ? {} : stylistic2;
+  const [
+    pluginToml,
+    parserToml
+  ] = await Promise.all([
+    interopDefault(import("eslint-plugin-toml")),
+    interopDefault(import("toml-eslint-parser"))
+  ]);
+  return [
+    {
+      name: "antfu:toml:setup",
+      plugins: {
+        toml: pluginToml
+      }
+    },
+    {
+      files,
+      languageOptions: {
+        parser: parserToml
+      },
+      name: "antfu:toml:rules",
+      rules: {
+        "style/spaced-comment": "off",
+        "toml/comma-style": "error",
+        "toml/keys-order": "error",
+        "toml/no-space-dots": "error",
+        "toml/no-unreadable-number-separator": "error",
+        "toml/precision-of-fractional-seconds": "error",
+        "toml/precision-of-integer": "error",
+        "toml/tables-order": "error",
+        "toml/vue-custom-block/no-parsing-error": "error",
+        ...stylistic2 ? {
+          "toml/array-bracket-newline": "error",
+          "toml/array-bracket-spacing": "error",
+          "toml/array-element-newline": "error",
+          "toml/indent": ["error", indent === "tab" ? 4 : indent],
+          "toml/inline-table-curly-spacing": "error",
+          "toml/key-spacing": "error",
+          "toml/padding-line-between-pairs": "error",
+          "toml/padding-line-between-tables": "error",
+          "toml/quoted-keys": "error",
+          "toml/spaced-comment": "error",
+          "toml/table-bracket-spacing": "error"
+        } : {},
+        ...overrides
+      }
+    }
+  ];
+}
+
 // src/factory.ts
 var flatConfigProps = [
   "files",
@@ -1861,6 +1899,12 @@ async function lincy(options = {}, ...userConfigs) {
       stylistic: stylisticOptions
     }));
   }
+  if (options.toml) {
+    configs.push(toml({
+      overrides: overrides.toml,
+      stylistic: stylisticOptions
+    }));
+  }
   if (options.markdown ?? true) {
     configs.push(markdown(
       {
@@ -1912,6 +1956,7 @@ export {
   GLOB_SRC_EXT,
   GLOB_STYLE,
   GLOB_TESTS,
+  GLOB_TOML,
   GLOB_TS,
   GLOB_TSX,
   GLOB_VUE,
@@ -1939,6 +1984,7 @@ export {
   stylistic,
   test,
   toArray,
+  toml,
   typescript,
   unicorn,
   unocss,
