@@ -1,94 +1,94 @@
 /**
- * Vendor types from Prettier so we don't rely on the dependency.
+ * 来自 Prettier 的供应商类型，因此不依赖依赖项
  */
 
 export type VendoredPrettierOptions = Partial<VendoredPrettierOptionsRequired>
 
 export interface VendoredPrettierOptionsRequired {
     /**
-     * Specify the number of spaces per indentation-level.
+     * 指定每个缩进的空格数.
      */
     tabWidth: number
     /**
-     * Indent lines with tabs instead of spaces
+     * 使用制表符而不是空格来缩进行
      */
     useTabs?: boolean
     /**
-     * Print semicolons at the ends of statements.
+     * 在语句末尾添加分号.
      */
     semi: boolean
     /**
-     * Use single quotes instead of double quotes.
+     * 使用单引号代替双引号.
      */
     singleQuote: boolean
     /**
-     * Use single quotes in JSX.
+     * 在 JSX 中使用单引号.
      */
     jsxSingleQuote: boolean
     /**
-     * Print trailing commas wherever possible.
+     * 尽可能添加尾随逗号.
      */
     trailingComma: 'none' | 'es5' | 'all'
     /**
-     * Print spaces between brackets in object literals.
+     * 对象文字中括号之间的空格.
      */
     bracketSpacing: boolean
     /**
-     * Put the `>` of a multi-line HTML (HTML, JSX, Vue, Angular) element at the end of the last line instead of being
-     * alone on the next line (does not apply to self closing elements).
+     * 将多行 HTML（HTML、JSX、Vue、Angular）元素的 `>` 放在最后一行的末尾，
+     * 而不是单独放在下一行（不适用于自闭合元素）。
      */
     bracketSameLine: boolean
     /**
-     * Put the `>` of a multi-line JSX element at the end of the last line instead of being alone on the next line.
-     * @deprecated use bracketSameLine instead
+     * 将多行 JSX 元素的 `>` 放在最后一行的末尾，而不是单独放在下一行.
+     * @deprecated 使用 bracketSameLine 代替
      */
     jsxBracketSameLine: boolean
     /**
-     * Format only a segment of a file.
+     * 仅格式化文件的一部分.
      */
     rangeStart: number
     /**
-     * Format only a segment of a file.
+     * 仅格式化文件的一部分.
      * @default Number.POSITIVE_INFINITY
      */
     rangeEnd: number
     /**
-     * By default, Prettier will wrap markdown text as-is since some services use a linebreak-sensitive renderer.
-     * In some cases you may want to rely on editor/viewer soft wrapping instead, so this option allows you to opt out.
+     * 默认情况下，Prettier 将按原样包装 Markdown 文本，因为某些服务使用换行敏感渲染器.
+     * 在某些情况下，您可能希望依靠编辑器/查看器软包装，因此此选项允许您选择退出.
      * @default "preserve"
      */
     proseWrap: 'always' | 'never' | 'preserve'
     /**
-     * Include parentheses around a sole arrow function parameter.
+     * 箭头函数参数周围包含括号.
      * @default "always"
      */
     arrowParens: 'avoid' | 'always'
     /**
-     * Provide ability to support new languages to prettier.
+     * 为 Prettier 提供支持新语言的能力.
      */
     plugins: Array<string | any>
     /**
-     * How to handle whitespaces in HTML.
+     * 如何处理 HTML 中的空格.
      * @default "css"
      */
     htmlWhitespaceSensitivity: 'css' | 'strict' | 'ignore'
     /**
-     * Which end of line characters to apply.
+     * 应用哪个换行符.
      * @default "lf"
      */
     endOfLine: 'auto' | 'lf' | 'crlf' | 'cr'
     /**
-     * Change when properties in objects are quoted.
+     * 引用对象中的属性时发生更改.
      * @default "as-needed"
      */
     quoteProps: 'as-needed' | 'consistent' | 'preserve'
     /**
-     * Whether or not to indent the code inside <script> and <style> tags in Vue files.
+     * 是否缩进Vue文件中<script>和<style>标签内的代码.
      * @default false
      */
     vueIndentScriptAndStyle: boolean
     /**
-     * Enforce single attribute per line in HTML, Vue and JSX.
+     * 在 HTML、Vue 和 JSX 中强制每行使用单一属性.
      * @default false
      */
     singleAttributePerLine: boolean
