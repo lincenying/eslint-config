@@ -59,7 +59,7 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
     const {
         componentExts = [],
         gitignore: enableGitignore = true,
-        isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE) && !process.env.CI),
+        isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
         overrides = {},
         react: enableReact = ReactPackages.some(i => isPackageExists(i)),
         typescript: enableTypeScript = isPackageExists('typescript'),
@@ -154,12 +154,10 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
     }
 
     if (enableUnoCSS) {
-        configs.push(unocss(
-            {
-                ...(typeof enableUnoCSS === 'boolean' ? {} : enableUnoCSS),
-                overrides: overrides.unocss,
-            },
-        ))
+        configs.push(unocss({
+            ...(typeof enableUnoCSS === 'boolean' ? {} : enableUnoCSS),
+            overrides: overrides.unocss,
+        }))
     }
 
     if (options.jsonc ?? true) {
@@ -190,13 +188,11 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
     }
 
     if (options.markdown ?? true) {
-        configs.push(markdown(
-            {
-                ...(typeof options.markdown !== 'boolean' ? options.markdown : {}),
-                componentExts,
-                overrides: overrides.markdown,
-            },
-        ))
+        configs.push(markdown({
+            ...(typeof options.markdown !== 'boolean' ? options.markdown : {}),
+            componentExts,
+            overrides: overrides.markdown,
+        }))
     }
 
     if (options.formatters) {

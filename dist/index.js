@@ -47,6 +47,7 @@ var GLOB_JSON5 = "**/*.json5";
 var GLOB_JSONC = "**/*.jsonc";
 var GLOB_MARKDOWN = "**/*.md";
 var GLOB_MARKDOWN_IN_MARKDOWN = "**/*.md/*.md";
+var GLOB_SVELTE = "**/*.svelte";
 var GLOB_VUE = "**/*.vue";
 var GLOB_YAML = "**/*.y?(a)ml";
 var GLOB_TOML = "**/*.toml";
@@ -63,6 +64,7 @@ var GLOB_ALL_SRC = [
   GLOB_JSON,
   GLOB_JSON5,
   GLOB_MARKDOWN,
+  GLOB_SVELTE,
   GLOB_VUE,
   GLOB_YAML,
   GLOB_HTML
@@ -125,6 +127,7 @@ async function imports(options = {}) {
       },
       rules: {
         "antfu/import-dedupe": "error",
+        "antfu/no-import-dist": "error",
         "antfu/no-import-node-modules-by-path": "error",
         "import/first": "error",
         "import/no-duplicates": "error",
@@ -804,6 +807,7 @@ async function formatters(options = {}, stylistic2 = {}) {
         [`format/${formater}`]: [
           "error",
           formater === "prettier" ? {
+            printWidth: 200,
             ...prettierOptions,
             embeddedLanguageFormatting: "off",
             parser: "markdown"
@@ -1298,6 +1302,7 @@ async function typescript(options = {}) {
     GLOB_SRC,
     ...componentExts.map((ext) => `**/*.${ext}`)
   ];
+  const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
   const typeAwareRules = {
     "dot-notation": "off",
     "no-implied-eval": "off",
@@ -1387,6 +1392,13 @@ async function typescript(options = {}) {
         "ts/prefer-ts-expect-error": "error",
         "ts/triple-slash-reference": "off",
         "ts/unified-signatures": "off",
+        ...overrides
+      }
+    },
+    {
+      files: filesTypeAware,
+      name: "eslint:typescript:rules-type-aware",
+      rules: {
         ...tsconfigPath ? typeAwareRules : {},
         ...overrides
       }
@@ -1795,7 +1807,7 @@ async function lincy(options = {}, ...userConfigs) {
   const {
     componentExts = [],
     gitignore: enableGitignore = true,
-    isInEditor = !!((process3.env.VSCODE_PID || process3.env.JETBRAINS_IDE) && !process3.env.CI),
+    isInEditor = !!((process3.env.VSCODE_PID || process3.env.JETBRAINS_IDE || process3.env.VIM) && !process3.env.CI),
     overrides = {},
     react: enableReact = ReactPackages.some((i) => isPackageExists3(i)),
     typescript: enableTypeScript = isPackageExists3("typescript"),
@@ -1874,12 +1886,10 @@ async function lincy(options = {}, ...userConfigs) {
     }));
   }
   if (enableUnoCSS) {
-    configs.push(unocss(
-      {
-        ...typeof enableUnoCSS === "boolean" ? {} : enableUnoCSS,
-        overrides: overrides.unocss
-      }
-    ));
+    configs.push(unocss({
+      ...typeof enableUnoCSS === "boolean" ? {} : enableUnoCSS,
+      overrides: overrides.unocss
+    }));
   }
   if (options.jsonc ?? true) {
     configs.push(
@@ -1906,13 +1916,11 @@ async function lincy(options = {}, ...userConfigs) {
     }));
   }
   if (options.markdown ?? true) {
-    configs.push(markdown(
-      {
-        ...typeof options.markdown !== "boolean" ? options.markdown : {},
-        componentExts,
-        overrides: overrides.markdown
-      }
-    ));
+    configs.push(markdown({
+      ...typeof options.markdown !== "boolean" ? options.markdown : {},
+      componentExts,
+      overrides: overrides.markdown
+    }));
   }
   if (options.formatters) {
     configs.push(formatters(
@@ -1955,6 +1963,7 @@ export {
   GLOB_SRC,
   GLOB_SRC_EXT,
   GLOB_STYLE,
+  GLOB_SVELTE,
   GLOB_TESTS,
   GLOB_TOML,
   GLOB_TS,

@@ -10,94 +10,99 @@ import { Rules as Rules$1 } from 'eslint-plugin-antfu';
 import { UnprefixedRuleOptions, StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
 
 /**
- * Vendor types from Prettier so we don't rely on the dependency.
+ * 来自 Prettier 的供应商类型，因此不依赖依赖项
  */
 type VendoredPrettierOptions = Partial<VendoredPrettierOptionsRequired>;
 interface VendoredPrettierOptionsRequired {
     /**
-     * Specify the number of spaces per indentation-level.
+     * 指定换行的行长度.
+     * @default 200
+     */
+    printWidth: number;
+    /**
+     * 指定每个缩进的空格数.
      */
     tabWidth: number;
     /**
-     * Indent lines with tabs instead of spaces
+     * 使用制表符而不是空格来缩进行
      */
     useTabs?: boolean;
     /**
-     * Print semicolons at the ends of statements.
+     * 在语句末尾添加分号.
      */
     semi: boolean;
     /**
-     * Use single quotes instead of double quotes.
+     * 使用单引号代替双引号.
      */
     singleQuote: boolean;
     /**
-     * Use single quotes in JSX.
+     * 在 JSX 中使用单引号.
      */
     jsxSingleQuote: boolean;
     /**
-     * Print trailing commas wherever possible.
+     * 尽可能添加尾随逗号.
      */
     trailingComma: 'none' | 'es5' | 'all';
     /**
-     * Print spaces between brackets in object literals.
+     * 对象文字中括号之间的空格.
      */
     bracketSpacing: boolean;
     /**
-     * Put the `>` of a multi-line HTML (HTML, JSX, Vue, Angular) element at the end of the last line instead of being
-     * alone on the next line (does not apply to self closing elements).
+     * 将多行 HTML（HTML、JSX、Vue、Angular）元素的 `>` 放在最后一行的末尾，
+     * 而不是单独放在下一行（不适用于自闭合元素）。
      */
     bracketSameLine: boolean;
     /**
-     * Put the `>` of a multi-line JSX element at the end of the last line instead of being alone on the next line.
-     * @deprecated use bracketSameLine instead
+     * 将多行 JSX 元素的 `>` 放在最后一行的末尾，而不是单独放在下一行.
+     * @deprecated 使用 bracketSameLine 代替
      */
     jsxBracketSameLine: boolean;
     /**
-     * Format only a segment of a file.
+     * 仅格式化文件的一部分.
      */
     rangeStart: number;
     /**
-     * Format only a segment of a file.
+     * 仅格式化文件的一部分.
      * @default Number.POSITIVE_INFINITY
      */
     rangeEnd: number;
     /**
-     * By default, Prettier will wrap markdown text as-is since some services use a linebreak-sensitive renderer.
-     * In some cases you may want to rely on editor/viewer soft wrapping instead, so this option allows you to opt out.
+     * 默认情况下，Prettier 将按原样包装 Markdown 文本，因为某些服务使用换行敏感渲染器.
+     * 在某些情况下，您可能希望依靠编辑器/查看器软包装，因此此选项允许您选择退出.
      * @default "preserve"
      */
     proseWrap: 'always' | 'never' | 'preserve';
     /**
-     * Include parentheses around a sole arrow function parameter.
+     * 箭头函数参数周围包含括号.
      * @default "always"
      */
     arrowParens: 'avoid' | 'always';
     /**
-     * Provide ability to support new languages to prettier.
+     * 为 Prettier 提供支持新语言的能力.
      */
     plugins: Array<string | any>;
     /**
-     * How to handle whitespaces in HTML.
+     * 如何处理 HTML 中的空格.
      * @default "css"
      */
     htmlWhitespaceSensitivity: 'css' | 'strict' | 'ignore';
     /**
-     * Which end of line characters to apply.
+     * 应用哪个换行符.
      * @default "lf"
      */
     endOfLine: 'auto' | 'lf' | 'crlf' | 'cr';
     /**
-     * Change when properties in objects are quoted.
+     * 引用对象中的属性时发生更改.
      * @default "as-needed"
      */
     quoteProps: 'as-needed' | 'consistent' | 'preserve';
     /**
-     * Whether or not to indent the code inside <script> and <style> tags in Vue files.
+     * 是否缩进Vue文件中<script>和<style>标签内的代码.
      * @default false
      */
     vueIndentScriptAndStyle: boolean;
     /**
-     * Enforce single attribute per line in HTML, Vue and JSX.
+     * 在 HTML、Vue 和 JSX 中强制每行使用单一属性.
      * @default false
      */
     singleAttributePerLine: boolean;
@@ -192,6 +197,11 @@ interface OptionsTypeScriptParserOptions {
      * TypeScript 的附加解析器选项。
      */
     parserOptions?: Partial<ParserOptions>;
+    /**
+     * 应该识别类型的文件的全局模式.
+     * @default ['**\/*.{ts,tsx}']
+     */
+    filesTypeAware?: string[];
 }
 interface OptionsTypeScriptWithTypes {
     /**
@@ -290,6 +300,16 @@ interface OptionsConfig extends OptionsComponentExts {
      */
     react?: boolean | OptionsReact | OptionsFiles;
     /**
+     * 启用 svelte 支持.
+     *
+     * 需要安装:
+     * - `eslint-plugin-svelte`
+     * - `svelte-eslint-parser`
+     *
+     * @default false
+     */
+    svelte?: boolean;
+    /**
      * 启用 unocss rules.
      *
      * 需要安装:
@@ -352,6 +372,7 @@ interface OptionsConfig extends OptionsComponentExts {
         test?: FlatConfigItem['rules'];
         vue?: FlatConfigItem['rules'];
         react?: FlatConfigItem['rules'];
+        svelte?: FlatConfigItem['rules'];
         jsonc?: FlatConfigItem['rules'];
         markdown?: FlatConfigItem['rules'];
         yaml?: FlatConfigItem['rules'];
@@ -452,6 +473,7 @@ declare const GLOB_JSON5 = "**/*.json5";
 declare const GLOB_JSONC = "**/*.jsonc";
 declare const GLOB_MARKDOWN = "**/*.md";
 declare const GLOB_MARKDOWN_IN_MARKDOWN = "**/*.md/*.md";
+declare const GLOB_SVELTE = "**/*.svelte";
 declare const GLOB_VUE = "**/*.vue";
 declare const GLOB_YAML = "**/*.y?(a)ml";
 declare const GLOB_TOML = "**/*.toml";
@@ -461,4 +483,4 @@ declare const GLOB_TESTS: string[];
 declare const GLOB_ALL_SRC: string[];
 declare const GLOB_EXCLUDE: string[];
 
-export { type Awaitable, type FlatConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsFormatters, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsReact, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type OptionsUnoCSS, type OptionsVue, type Rules, type StylisticConfig, StylisticConfigDefaults, type StylisticOverridesConfig, type UserConfigItem, type WrapRuleConfig, combine, comments, lincy as default, ensurePackages, formatters, ignores, imports, interopDefault, javascript, jsdoc, jsonc, lincy, markdown, node, perfectionist, react, renameRules, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };
+export { type Awaitable, type FlatConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsFormatters, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsReact, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type OptionsUnoCSS, type OptionsVue, type Rules, type StylisticConfig, StylisticConfigDefaults, type StylisticOverridesConfig, type UserConfigItem, type WrapRuleConfig, combine, comments, lincy as default, ensurePackages, formatters, ignores, imports, interopDefault, javascript, jsdoc, jsonc, lincy, markdown, node, perfectionist, react, renameRules, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };

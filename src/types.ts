@@ -148,6 +148,12 @@ export interface OptionsTypeScriptParserOptions {
      * TypeScript 的附加解析器选项。
      */
     parserOptions?: Partial<ParserOptions>
+
+    /**
+     * 应该识别类型的文件的全局模式.
+     * @default ['**\/*.{ts,tsx}']
+     */
+    filesTypeAware?: string[]
 }
 
 export interface OptionsTypeScriptWithTypes {
@@ -263,6 +269,17 @@ export interface OptionsConfig extends OptionsComponentExts {
     react?: boolean | OptionsReact | OptionsFiles
 
     /**
+     * 启用 svelte 支持.
+     *
+     * 需要安装:
+     * - `eslint-plugin-svelte`
+     * - `svelte-eslint-parser`
+     *
+     * @default false
+     */
+    svelte?: boolean
+
+    /**
      * 启用 unocss rules.
      *
      * 需要安装:
@@ -333,6 +350,7 @@ export interface OptionsConfig extends OptionsComponentExts {
         test?: FlatConfigItem['rules']
         vue?: FlatConfigItem['rules']
         react?: FlatConfigItem['rules']
+        svelte?: FlatConfigItem['rules']
         jsonc?: FlatConfigItem['rules']
         markdown?: FlatConfigItem['rules']
         yaml?: FlatConfigItem['rules']
