@@ -216,7 +216,7 @@ async function imports(options = {}) {
       },
       rules: {
         "antfu/import-dedupe": "error",
-        "antfu/no-import-dist": "error",
+        "antfu/no-import-dist": "off",
         "antfu/no-import-node-modules-by-path": "error",
         "import/first": "error",
         "import/no-duplicates": "error",
