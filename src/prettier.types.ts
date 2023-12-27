@@ -6,6 +6,11 @@ export type VendoredPrettierOptions = Partial<VendoredPrettierOptionsRequired>
 
 export interface VendoredPrettierOptionsRequired {
     /**
+     * 指定换行的行长度.
+     * @default 200
+     */
+    printWidth: number
+    /**
      * 指定每个缩进的空格数.
      */
     tabWidth: number

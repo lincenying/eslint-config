@@ -148,6 +148,7 @@ export async function formatters(
                 [`format/${formater}`]: [
                     'error',
                     formater === 'prettier' ? {
+                        printWidth: 200,
                         ...prettierOptions,
                         embeddedLanguageFormatting: 'off',
                         parser: 'markdown',

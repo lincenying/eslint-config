@@ -48,6 +48,7 @@ __export(src_exports, {
   GLOB_SRC: () => GLOB_SRC,
   GLOB_SRC_EXT: () => GLOB_SRC_EXT,
   GLOB_STYLE: () => GLOB_STYLE,
+  GLOB_SVELTE: () => GLOB_SVELTE,
   GLOB_TESTS: () => GLOB_TESTS,
   GLOB_TOML: () => GLOB_TOML,
   GLOB_TS: () => GLOB_TS,
@@ -135,6 +136,7 @@ var GLOB_JSON5 = "**/*.json5";
 var GLOB_JSONC = "**/*.jsonc";
 var GLOB_MARKDOWN = "**/*.md";
 var GLOB_MARKDOWN_IN_MARKDOWN = "**/*.md/*.md";
+var GLOB_SVELTE = "**/*.svelte";
 var GLOB_VUE = "**/*.vue";
 var GLOB_YAML = "**/*.y?(a)ml";
 var GLOB_TOML = "**/*.toml";
@@ -151,6 +153,7 @@ var GLOB_ALL_SRC = [
   GLOB_JSON,
   GLOB_JSON5,
   GLOB_MARKDOWN,
+  GLOB_SVELTE,
   GLOB_VUE,
   GLOB_YAML,
   GLOB_HTML
@@ -213,6 +216,7 @@ async function imports(options = {}) {
       },
       rules: {
         "antfu/import-dedupe": "error",
+        "antfu/no-import-dist": "error",
         "antfu/no-import-node-modules-by-path": "error",
         "import/first": "error",
         "import/no-duplicates": "error",
@@ -892,6 +896,7 @@ async function formatters(options = {}, stylistic2 = {}) {
         [`format/${formater}`]: [
           "error",
           formater === "prettier" ? {
+            printWidth: 200,
             ...prettierOptions,
             embeddedLanguageFormatting: "off",
             parser: "markdown"
@@ -1386,6 +1391,7 @@ async function typescript(options = {}) {
     GLOB_SRC,
     ...componentExts.map((ext) => `**/*.${ext}`)
   ];
+  const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
   const typeAwareRules = {
     "dot-notation": "off",
     "no-implied-eval": "off",
@@ -1475,6 +1481,13 @@ async function typescript(options = {}) {
         "ts/prefer-ts-expect-error": "error",
         "ts/triple-slash-reference": "off",
         "ts/unified-signatures": "off",
+        ...overrides
+      }
+    },
+    {
+      files: filesTypeAware,
+      name: "eslint:typescript:rules-type-aware",
+      rules: {
         ...tsconfigPath ? typeAwareRules : {},
         ...overrides
       }
@@ -1883,7 +1896,7 @@ async function lincy(options = {}, ...userConfigs) {
   const {
     componentExts = [],
     gitignore: enableGitignore = true,
-    isInEditor = !!((import_node_process3.default.env.VSCODE_PID || import_node_process3.default.env.JETBRAINS_IDE) && !import_node_process3.default.env.CI),
+    isInEditor = !!((import_node_process3.default.env.VSCODE_PID || import_node_process3.default.env.JETBRAINS_IDE || import_node_process3.default.env.VIM) && !import_node_process3.default.env.CI),
     overrides = {},
     react: enableReact = ReactPackages.some((i) => (0, import_local_pkg4.isPackageExists)(i)),
     typescript: enableTypeScript = (0, import_local_pkg4.isPackageExists)("typescript"),
@@ -1962,12 +1975,10 @@ async function lincy(options = {}, ...userConfigs) {
     }));
   }
   if (enableUnoCSS) {
-    configs.push(unocss(
-      {
-        ...typeof enableUnoCSS === "boolean" ? {} : enableUnoCSS,
-        overrides: overrides.unocss
-      }
-    ));
+    configs.push(unocss({
+      ...typeof enableUnoCSS === "boolean" ? {} : enableUnoCSS,
+      overrides: overrides.unocss
+    }));
   }
   if (options.jsonc ?? true) {
     configs.push(
@@ -1994,13 +2005,11 @@ async function lincy(options = {}, ...userConfigs) {
     }));
   }
   if (options.markdown ?? true) {
-    configs.push(markdown(
-      {
-        ...typeof options.markdown !== "boolean" ? options.markdown : {},
-        componentExts,
-        overrides: overrides.markdown
-      }
-    ));
+    configs.push(markdown({
+      ...typeof options.markdown !== "boolean" ? options.markdown : {},
+      componentExts,
+      overrides: overrides.markdown
+    }));
   }
   if (options.formatters) {
     configs.push(formatters(
@@ -2044,6 +2053,7 @@ var src_default = lincy;
   GLOB_SRC,
   GLOB_SRC_EXT,
   GLOB_STYLE,
+  GLOB_SVELTE,
   GLOB_TESTS,
   GLOB_TOML,
   GLOB_TS,
