@@ -1756,7 +1756,7 @@ async function toml(options = {}) {
   ]);
   return [
     {
-      name: "antfu:toml:setup",
+      name: "eslint:toml:setup",
       plugins: {
         toml: pluginToml
       }
@@ -1766,7 +1766,7 @@ async function toml(options = {}) {
       languageOptions: {
         parser: parserToml
       },
-      name: "antfu:toml:rules",
+      name: "eslint:toml:rules",
       rules: {
         "style/spaced-comment": "off",
         "toml/comma-style": "error",
