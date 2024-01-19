@@ -322,7 +322,6 @@ async function javascript(options = {}) {
         "no-multi-str": "error",
         "no-new": "error",
         "no-new-func": "error",
-        "no-new-object": "error",
         "no-new-symbol": "error",
         "no-new-wrappers": "error",
         "no-obj-calls": "error",
@@ -506,7 +505,6 @@ async function jsdoc(options = {}) {
     {
       name: "eslint:jsdoc",
       plugins: {
-        // @ts-expect-error missing types
         jsdoc: await interopDefault(import("eslint-plugin-jsdoc"))
       },
       rules: {
@@ -1392,6 +1390,8 @@ async function typescript(options = {}) {
     ...componentExts.map((ext) => `**/*.${ext}`)
   ];
   const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
+  const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : void 0;
+  const isTypeAware = !!tsconfigPath;
   const typeAwareRules = {
     "dot-notation": "off",
     "no-implied-eval": "off",
@@ -1413,7 +1413,6 @@ async function typescript(options = {}) {
     "ts/restrict-template-expressions": "error",
     "ts/unbound-method": "error"
   };
-  const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : void 0;
   const [
     pluginTs,
     parserTs
@@ -1421,6 +1420,25 @@ async function typescript(options = {}) {
     interopDefault(import("@typescript-eslint/eslint-plugin")),
     interopDefault(import("@typescript-eslint/parser"))
   ]);
+  function makeParser(typeAware, files2, ignores2) {
+    return {
+      files: files2,
+      ...ignores2 ? { ignores: ignores2 } : {},
+      languageOptions: {
+        parser: parserTs,
+        parserOptions: {
+          extraFileExtensions: componentExts.map((ext) => `.${ext}`),
+          sourceType: "module",
+          ...typeAware ? {
+            project: tsconfigPath,
+            tsconfigRootDir: import_node_process2.default.cwd()
+          } : {},
+          ...parserOptions
+        }
+      },
+      name: `eslint:typescript:${typeAware ? "type-aware-parser" : "parser"}`
+    };
+  }
   return [
     {
       // Install the plugins without globs, so they can be configured separately.
@@ -1430,20 +1448,15 @@ async function typescript(options = {}) {
         ts: pluginTs
       }
     },
+    // assign type-aware parser for type-aware files and type-unaware parser for the rest
+    ...isTypeAware ? [
+      makeParser(true, filesTypeAware),
+      makeParser(false, files, filesTypeAware)
+    ] : [
+      makeParser(false, files)
+    ],
     {
       files,
-      languageOptions: {
-        parser: parserTs,
-        parserOptions: {
-          extraFileExtensions: componentExts.map((ext) => `.${ext}`),
-          sourceType: "module",
-          ...tsconfigPath ? {
-            project: tsconfigPath,
-            tsconfigRootDir: import_node_process2.default.cwd()
-          } : {},
-          ...parserOptions
-        }
-      },
       name: "eslint:typescript:rules",
       rules: {
         ...renameRules(
@@ -1672,6 +1685,7 @@ async function vue(options = {}) {
         }],
         "vue/component-name-in-template-casing": ["error", "PascalCase"],
         "vue/component-options-name-casing": ["error", "PascalCase"],
+        "vue/component-tags-order": "off",
         "vue/custom-event-name-casing": vueVersion === "3" ? ["error", "camelCase"] : ["error", "kebab-case"],
         ...vueVersion === "2" ? {
           "vue/require-explicit-emits": "off"

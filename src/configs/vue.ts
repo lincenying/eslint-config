@@ -79,12 +79,13 @@ export async function vue(
                 }),
 
                 'node/prefer-global/process': 'off',
-
                 'vue/block-order': ['error', {
                     order: ['template', 'script', 'style'],
                 }],
+
                 'vue/component-name-in-template-casing': ['error', 'PascalCase'],
                 'vue/component-options-name-casing': ['error', 'PascalCase'],
+                'vue/component-tags-order': 'off',
                 'vue/custom-event-name-casing': vueVersion === '3' ? ['error', 'camelCase'] : ['error', 'kebab-case'],
                 ...(vueVersion === '2' ? {
                     'vue/require-explicit-emits': 'off',
