@@ -110,6 +110,7 @@ export async function typescript(options: OptionsFiles & OptionsComponentExts & 
                 'ts/ban-types': ['error', { types: { Function: false } }],
                 'ts/consistent-type-definitions': ['error', 'interface'],
                 'ts/consistent-type-imports': ['error', { disallowTypeAnnotations: false, prefer: 'type-imports' }],
+                'ts/method-signature-style': ['error', 'property'],
                 'ts/no-dupe-class-members': 'error',
                 'ts/no-dynamic-delete': 'off',
                 'ts/no-explicit-any': 'off',
