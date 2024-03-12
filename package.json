@@ -34,7 +34,7 @@
     "lint": "pnpm run stub && eslint .",
     "lint:fix": "eslint . --fix",
     "lint:ts": "tsc --noEmit",
-    "prepare": "sh simple-git-hooks.sh"
+    "prepare": "npx simple-git-hooks"
   },
   "peerDependencies": {
     "@unocss/eslint-plugin": ">=0.50.0",
