@@ -6,7 +6,7 @@ import { isPackageExists as isPackageExists3 } from "local-pkg";
 // src/plugins.ts
 import { default as default2 } from "eslint-plugin-antfu";
 import { default as default3 } from "eslint-plugin-eslint-comments";
-import * as pluginImport from "eslint-plugin-i";
+import * as pluginImport from "eslint-plugin-import-x";
 import { default as default4 } from "eslint-plugin-n";
 import { default as default5 } from "eslint-plugin-unicorn";
 import { default as default6 } from "eslint-plugin-unused-imports";
@@ -373,14 +373,33 @@ async function combine(...configs) {
   const resolved = await Promise.all(configs);
   return resolved.flat();
 }
-function renameRules(rules, from, to) {
+function renameRules(rules, map) {
   return Object.fromEntries(
     Object.entries(rules).map(([key, value]) => {
-      if (key.startsWith(from))
-        return [to + key.slice(from.length), value];
+      for (const [from, to] of Object.entries(map)) {
+        if (key.startsWith(`${from}/`))
+          return [to + key.slice(from.length), value];
+      }
       return [key, value];
     })
   );
+}
+function renamePluginInConfigs(configs, map) {
+  return configs.map((i) => {
+    const clone = { ...i };
+    if (clone.rules)
+      clone.rules = renameRules(clone.rules, map);
+    if (clone.plugins) {
+      clone.plugins = Object.fromEntries(
+        Object.entries(clone.plugins).map(([key, value]) => {
+          if (key in map)
+            return [map[key], value];
+          return [key, value];
+        })
+      );
+    }
+    return clone;
+  });
 }
 function toArray(value) {
   return Array.isArray(value) ? value : [value];
@@ -1110,6 +1129,22 @@ async function sortPackageJson() {
               "default"
             ],
             pathPattern: "^exports.*$"
+          },
+          {
+            order: [
+              // client hooks only
+              "pre-commit",
+              "prepare-commit-msg",
+              "commit-msg",
+              "post-commit",
+              "pre-rebase",
+              "post-rewrite",
+              "post-checkout",
+              "post-merge",
+              "pre-push",
+              "pre-auto-gc"
+            ],
+            pathPattern: "^(?:gitHooks|husky|simple-git-hooks)$"
           }
         ]
       }
@@ -1372,13 +1407,11 @@ async function typescript(options = {}) {
       rules: {
         ...renameRules(
           pluginTs.configs["eslint-recommended"].overrides[0].rules,
-          "@typescript-eslint/",
-          "ts/"
+          { "@typescript-eslint": "ts" }
         ),
         ...renameRules(
           pluginTs.configs.strict.rules,
-          "@typescript-eslint/",
-          "ts/"
+          { "@typescript-eslint": "ts" }
         ),
         "no-dupe-class-members": "off",
         "no-loss-of-precision": "off",
@@ -1833,12 +1866,21 @@ var VuePackages = [
   "vitepress",
   "@slidev/cli"
 ];
+var defaultPluginRenaming = {
+  "@stylistic": "style",
+  "@typescript-eslint": "ts",
+  "import-x": "import",
+  "n": "node",
+  "vitest": "test",
+  "yml": "yaml"
+};
 var ReactPackages = [
   "react",
   "next"
 ];
 async function lincy(options = {}, ...userConfigs) {
   const {
+    autoRenamePlugins = true,
     componentExts = [],
     gitignore: enableGitignore = true,
     isInEditor = !!((process3.env.VSCODE_PID || process3.env.JETBRAINS_IDE || process3.env.VIM) && !process3.env.CI),
@@ -1969,10 +2011,12 @@ async function lincy(options = {}, ...userConfigs) {
   }, {});
   if (Object.keys(fusedConfig).length)
     configs.push([fusedConfig]);
-  const merged = combine(
+  const merged = await combine(
     ...configs,
     ...userConfigs
   );
+  if (autoRenamePlugins)
+    return renamePluginInConfigs(merged, defaultPluginRenaming);
   return merged;
 }
 
@@ -2008,6 +2052,7 @@ export {
   combine,
   comments,
   src_default as default,
+  defaultPluginRenaming,
   ensurePackages,
   formatters,
   ignores,
@@ -2021,6 +2066,7 @@ export {
   node,
   perfectionist,
   react,
+  renamePluginInConfigs,
   renameRules,
   sortPackageJson,
   sortTsconfig,

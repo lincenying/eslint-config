@@ -101,7 +101,6 @@ export async function react(options: OptionsFiles & OptionsReact = {}): Promise<
                 'react/jsx-no-target-blank': 'error',
                 'react/jsx-no-undef': 'error',
                 'react/jsx-no-useless-fragment': 'error',
-                'react/jsx-pascal-case': 'error',
                 'react/jsx-props-no-spreading': 'off', // 强制任何 JSX 属性都不会传播
                 'react/jsx-uses-react': 'error',
                 'react/jsx-uses-vars': 'error',
@@ -153,6 +152,7 @@ export async function react(options: OptionsFiles & OptionsReact = {}): Promise<
                 'react/static-property-placement': 'error',
                 'react/style-prop-object': 'error',
                 'react/void-dom-elements-no-children': 'error',
+                'style/jsx-pascal-case': 'error',
 
                 ...typescript ? {
                     'react/jsx-no-undef': 'off',

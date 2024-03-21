@@ -10,15 +10,35 @@ export async function combine(...configs: Awaitable<UserConfigItem | UserConfigI
     return resolved.flat()
 }
 
-export function renameRules(rules: Record<string, any>, from: string, to: string) {
+export function renameRules(rules: Record<string, any>, map: Record<string, string>) {
     return Object.fromEntries(
-        Object.entries(rules)
-            .map(([key, value]) => {
-                if (key.startsWith(from))
+        Object.entries(rules).map(([key, value]) => {
+            for (const [from, to] of Object.entries(map)) {
+                if (key.startsWith(`${from}/`))
                     return [to + key.slice(from.length), value]
-                return [key, value]
-            }),
+            }
+            return [key, value]
+        }),
     )
+}
+
+export function renamePluginInConfigs(configs: UserConfigItem[], map: Record<string, string>): UserConfigItem[] {
+    return configs.map((i) => {
+        const clone = { ...i }
+        if (clone.rules)
+            clone.rules = renameRules(clone.rules, map)
+        if (clone.plugins) {
+            clone.plugins = Object.fromEntries(
+                Object.entries(clone.plugins)
+                    .map(([key, value]) => {
+                        if (key in map)
+                            return [map[key], value]
+                        return [key, value]
+                    }),
+            )
+        }
+        return clone
+    })
 }
 
 export function toArray<T>(value: T | T[]): T[] {

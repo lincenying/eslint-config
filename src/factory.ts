@@ -24,7 +24,7 @@ import {
     yaml,
 } from './configs'
 import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types'
-import { combine, interopDefault } from './utils'
+import { combine, interopDefault, renamePluginInConfigs } from './utils'
 import { formatters } from './configs/formatters'
 
 const flatConfigProps: (keyof FlatConfigItem)[] = [
@@ -46,6 +46,15 @@ const VuePackages = [
     '@slidev/cli',
 ]
 
+export const defaultPluginRenaming = {
+    '@stylistic': 'style',
+    '@typescript-eslint': 'ts',
+    'import-x': 'import',
+    'n': 'node',
+    'vitest': 'test',
+    'yml': 'yaml',
+}
+
 const ReactPackages = [
     'react',
     'next',
@@ -58,6 +67,7 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
     ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
 ): Promise<UserConfigItem[]> {
     const {
+        autoRenamePlugins = true,
         componentExts = [],
         gitignore: enableGitignore = true,
         isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
@@ -214,10 +224,13 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
     if (Object.keys(fusedConfig).length)
         configs.push([fusedConfig])
 
-    const merged = combine(
+    const merged = await combine(
         ...configs,
         ...userConfigs,
     )
+
+    if (autoRenamePlugins)
+        return renamePluginInConfigs(merged, defaultPluginRenaming)
 
     return merged
 }

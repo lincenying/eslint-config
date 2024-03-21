@@ -59,6 +59,7 @@ __export(src_exports, {
   combine: () => combine,
   comments: () => comments,
   default: () => src_default,
+  defaultPluginRenaming: () => defaultPluginRenaming,
   ensurePackages: () => ensurePackages,
   formatters: () => formatters,
   ignores: () => ignores,
@@ -72,6 +73,7 @@ __export(src_exports, {
   node: () => node,
   perfectionist: () => perfectionist,
   react: () => react,
+  renamePluginInConfigs: () => renamePluginInConfigs,
   renameRules: () => renameRules,
   sortPackageJson: () => sortPackageJson,
   sortTsconfig: () => sortTsconfig,
@@ -95,7 +97,7 @@ var import_local_pkg4 = require("local-pkg");
 // src/plugins.ts
 var import_eslint_plugin_antfu = __toESM(require("eslint-plugin-antfu"), 1);
 var import_eslint_plugin_eslint_comments = __toESM(require("eslint-plugin-eslint-comments"), 1);
-var pluginImport = __toESM(require("eslint-plugin-i"), 1);
+var pluginImport = __toESM(require("eslint-plugin-import-x"), 1);
 var import_eslint_plugin_n = __toESM(require("eslint-plugin-n"), 1);
 var import_eslint_plugin_unicorn = __toESM(require("eslint-plugin-unicorn"), 1);
 var import_eslint_plugin_unused_imports = __toESM(require("eslint-plugin-unused-imports"), 1);
@@ -462,14 +464,33 @@ async function combine(...configs) {
   const resolved = await Promise.all(configs);
   return resolved.flat();
 }
-function renameRules(rules, from, to) {
+function renameRules(rules, map) {
   return Object.fromEntries(
     Object.entries(rules).map(([key, value]) => {
-      if (key.startsWith(from))
-        return [to + key.slice(from.length), value];
+      for (const [from, to] of Object.entries(map)) {
+        if (key.startsWith(`${from}/`))
+          return [to + key.slice(from.length), value];
+      }
       return [key, value];
     })
   );
+}
+function renamePluginInConfigs(configs, map) {
+  return configs.map((i) => {
+    const clone = { ...i };
+    if (clone.rules)
+      clone.rules = renameRules(clone.rules, map);
+    if (clone.plugins) {
+      clone.plugins = Object.fromEntries(
+        Object.entries(clone.plugins).map(([key, value]) => {
+          if (key in map)
+            return [map[key], value];
+          return [key, value];
+        })
+      );
+    }
+    return clone;
+  });
 }
 function toArray(value) {
   return Array.isArray(value) ? value : [value];
@@ -1199,6 +1220,22 @@ async function sortPackageJson() {
               "default"
             ],
             pathPattern: "^exports.*$"
+          },
+          {
+            order: [
+              // client hooks only
+              "pre-commit",
+              "prepare-commit-msg",
+              "commit-msg",
+              "post-commit",
+              "pre-rebase",
+              "post-rewrite",
+              "post-checkout",
+              "post-merge",
+              "pre-push",
+              "pre-auto-gc"
+            ],
+            pathPattern: "^(?:gitHooks|husky|simple-git-hooks)$"
           }
         ]
       }
@@ -1461,13 +1498,11 @@ async function typescript(options = {}) {
       rules: {
         ...renameRules(
           pluginTs.configs["eslint-recommended"].overrides[0].rules,
-          "@typescript-eslint/",
-          "ts/"
+          { "@typescript-eslint": "ts" }
         ),
         ...renameRules(
           pluginTs.configs.strict.rules,
-          "@typescript-eslint/",
-          "ts/"
+          { "@typescript-eslint": "ts" }
         ),
         "no-dupe-class-members": "off",
         "no-loss-of-precision": "off",
@@ -1922,12 +1957,21 @@ var VuePackages = [
   "vitepress",
   "@slidev/cli"
 ];
+var defaultPluginRenaming = {
+  "@stylistic": "style",
+  "@typescript-eslint": "ts",
+  "import-x": "import",
+  "n": "node",
+  "vitest": "test",
+  "yml": "yaml"
+};
 var ReactPackages = [
   "react",
   "next"
 ];
 async function lincy(options = {}, ...userConfigs) {
   const {
+    autoRenamePlugins = true,
     componentExts = [],
     gitignore: enableGitignore = true,
     isInEditor = !!((import_node_process3.default.env.VSCODE_PID || import_node_process3.default.env.JETBRAINS_IDE || import_node_process3.default.env.VIM) && !import_node_process3.default.env.CI),
@@ -2058,10 +2102,12 @@ async function lincy(options = {}, ...userConfigs) {
   }, {});
   if (Object.keys(fusedConfig).length)
     configs.push([fusedConfig]);
-  const merged = combine(
+  const merged = await combine(
     ...configs,
     ...userConfigs
   );
+  if (autoRenamePlugins)
+    return renamePluginInConfigs(merged, defaultPluginRenaming);
   return merged;
 }
 
@@ -2097,6 +2143,7 @@ var src_default = lincy;
   StylisticConfigDefaults,
   combine,
   comments,
+  defaultPluginRenaming,
   ensurePackages,
   formatters,
   ignores,
@@ -2110,6 +2157,7 @@ var src_default = lincy;
   node,
   perfectionist,
   react,
+  renamePluginInConfigs,
   renameRules,
   sortPackageJson,
   sortTsconfig,

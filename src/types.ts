@@ -341,6 +341,13 @@ export interface OptionsConfig extends OptionsComponentExts {
     isInEditor?: boolean
 
     /**
+     * Automatically rename plugins in the config.
+     *
+     * @default true
+     */
+    autoRenamePlugins?: boolean
+
+    /**
      * 为每个集成提供规则覆盖
      */
     overrides?: {

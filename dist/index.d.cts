@@ -363,6 +363,12 @@ interface OptionsConfig extends OptionsComponentExts {
      */
     isInEditor?: boolean;
     /**
+     * Automatically rename plugins in the config.
+     *
+     * @default true
+     */
+    autoRenamePlugins?: boolean;
+    /**
      * 为每个集成提供规则覆盖
      */
     overrides?: {
@@ -382,6 +388,14 @@ interface OptionsConfig extends OptionsComponentExts {
     };
 }
 
+declare const defaultPluginRenaming: {
+    '@stylistic': string;
+    '@typescript-eslint': string;
+    'import-x': string;
+    n: string;
+    vitest: string;
+    yml: string;
+};
 /**
  * 构造一个ESLint扁平化配置项数组。
  */
@@ -448,9 +462,42 @@ declare function toml(options?: OptionsOverrides & OptionsStylistic & OptionsFil
  * Combine array and non-array configs into a single array.
  */
 declare function combine(...configs: Awaitable<UserConfigItem | UserConfigItem[]>[]): Promise<UserConfigItem[]>;
-declare function renameRules(rules: Record<string, any>, from: string, to: string): {
+/**
+ * Rename plugin prefixes in a rule object.
+ * Accepts a map of prefixes to rename.
+ *
+ * @example
+ * ```ts
+ * import { renameRules } from '@lincy/eslint-config'
+ *
+ * export default [{
+ *   rules: renameRules(
+ *     {
+ *       '@typescript-eslint/indent': 'error'
+ *     },
+ *     { '@typescript-eslint': 'ts' }
+ *   )
+ * }]
+ * ```
+ */
+declare function renameRules(rules: Record<string, any>, map: Record<string, string>): {
     [k: string]: any;
 };
+/**
+ * Rename plugin names a flat configs array
+ *
+ * @example
+ * ```ts
+ * import { renamePluginInConfigs } from '@lincy/eslint-config'
+ * import someConfigs from './some-configs'
+ *
+ * export default renamePluginInConfigs(someConfigs, {
+ *   '@typescript-eslint': 'ts',
+ *   'import-x': 'import',
+ * })
+ * ```
+ */
+declare function renamePluginInConfigs(configs: UserConfigItem[], map: Record<string, string>): UserConfigItem[];
 declare function toArray<T>(value: T | T[]): T[];
 declare function interopDefault<T>(m: Awaitable<T>): Promise<T extends {
     default: infer U;
@@ -483,4 +530,4 @@ declare const GLOB_TESTS: string[];
 declare const GLOB_ALL_SRC: string[];
 declare const GLOB_EXCLUDE: string[];
 
-export { type Awaitable, type FlatConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsFormatters, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsReact, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type OptionsUnoCSS, type OptionsVue, type Rules, type StylisticConfig, StylisticConfigDefaults, type StylisticOverridesConfig, type UserConfigItem, type WrapRuleConfig, combine, comments, lincy as default, ensurePackages, formatters, ignores, imports, interopDefault, javascript, jsdoc, jsonc, lincy, markdown, node, perfectionist, react, renameRules, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };
+export { type Awaitable, type FlatConfigItem, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsFormatters, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsReact, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type OptionsUnoCSS, type OptionsVue, type Rules, type StylisticConfig, StylisticConfigDefaults, type StylisticOverridesConfig, type UserConfigItem, type WrapRuleConfig, combine, comments, lincy as default, defaultPluginRenaming, ensurePackages, formatters, ignores, imports, interopDefault, javascript, jsdoc, jsonc, lincy, markdown, node, perfectionist, react, renamePluginInConfigs, renameRules, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };
