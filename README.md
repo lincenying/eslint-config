@@ -33,9 +33,7 @@ export default lincy()
 
 > 通常您不需要`.eslintignore`，因为它已由预设提供。
 
-### Add script for package.json
-
-For example:
+### 在 package.json 中添加脚本
 
 ```json
 {
@@ -46,7 +44,7 @@ For example:
 }
 ```
 
-## VS Code support (自动修复)
+## VS Code support (保存时自动修复)
 
 安装 [VS Code ESLint扩展](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
@@ -478,7 +476,7 @@ import lincy from '@lincy/eslint-config'
 export default lincy({
     formatters: {
         /**
-         * 格式化 CSS、LESS、SCSS 文件，以及 Vue 中的 `<style>` 块
+         * 格式化 CSS、LESS、SCSS 文件，以及 Vue 中的 `<style>` 模块
          * 默认使用 Prettier
          */
         css: true,

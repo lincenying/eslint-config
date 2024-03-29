@@ -1,14 +1,14 @@
 import * as parserPlain from 'eslint-parser-plain'
 import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
 import { ensurePackages, interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsFormatters, StylisticConfig } from '../types'
+import type { OptionsFormatters, StylisticConfig, TypedFlatConfigItem } from '../types'
 import { StylisticConfigDefaults } from './stylistic'
 import type { VendoredPrettierOptions } from '@/prettier.types'
 
 export async function formatters(
     options: OptionsFormatters | true = {},
     stylistic: StylisticConfig = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
     await ensurePackages([
         'eslint-plugin-format',
     ])
@@ -54,7 +54,7 @@ export async function formatters(
 
     const pluginFormat = await interopDefault(import('eslint-plugin-format'))
 
-    const configs: FlatConfigItem[] = [
+    const configs: TypedFlatConfigItem[] = [
         {
             name: 'eslint:formatters:setup',
             plugins: {

@@ -1,7 +1,7 @@
 import { mergeProcessors } from 'eslint-merge-processors'
 import { getPackageInfoSync } from 'local-pkg'
 import { interopDefault } from '../utils'
-import type { FlatConfigItem, OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic, OptionsVue } from '../types'
+import type { OptionsFiles, OptionsHasTypeScript, OptionsOverrides, OptionsStylistic, OptionsVue, TypedFlatConfigItem } from '../types'
 import { GLOB_VUE } from '../globs'
 
 const pkg = getPackageInfoSync('vue')
@@ -11,7 +11,7 @@ vueVersion = Number.isNaN(vueVersion) ? '3' : vueVersion
 
 export async function vue(
     options: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles & OptionsVue = {},
-): Promise<FlatConfigItem[]> {
+): Promise<TypedFlatConfigItem[]> {
     const {
         files = [GLOB_VUE],
         overrides = {},

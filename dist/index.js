@@ -1,7 +1,8 @@
 // src/factory.ts
-import process3 from "process";
-import fs from "fs";
+import process3 from "node:process";
+import fs from "node:fs";
 import { isPackageExists as isPackageExists3 } from "local-pkg";
+import { FlatConfigPipeline } from "eslint-flat-config-utils";
 
 // src/plugins.ts
 import { default as default2 } from "eslint-plugin-antfu";
@@ -90,6 +91,7 @@ var GLOB_EXCLUDE = [
   "**/.idea",
   "**/.output",
   "**/.vite-inspect",
+  "**/.yarn",
   "**/CHANGELOG*.md",
   "**/*.min.*",
   "**/LICENSE*",
@@ -367,7 +369,7 @@ async function javascript(options = {}) {
 }
 
 // src/utils.ts
-import process from "process";
+import process from "node:process";
 import { isPackageExists } from "local-pkg";
 async function combine(...configs) {
   const resolved = await Promise.all(configs);
@@ -977,7 +979,6 @@ async function react(options = {}) {
         "react/jsx-no-target-blank": "error",
         "react/jsx-no-undef": "error",
         "react/jsx-no-useless-fragment": "error",
-        "react/jsx-pascal-case": "error",
         "react/jsx-props-no-spreading": "off",
         // 强制任何 JSX 属性都不会传播
         "react/jsx-uses-react": "error",
@@ -1034,6 +1035,7 @@ async function react(options = {}) {
         "react/static-property-placement": "error",
         "react/style-prop-object": "error",
         "react/void-dom-elements-no-children": "error",
+        "style/jsx-pascal-case": "error",
         ...typescript2 ? {
           "react/jsx-no-undef": "off",
           "react/prop-type": "off"
@@ -1324,7 +1326,7 @@ async function test(options = {}) {
 }
 
 // src/configs/typescript.ts
-import process2 from "process";
+import process2 from "node:process";
 async function typescript(options = {}) {
   const {
     componentExts = [],
@@ -1878,7 +1880,7 @@ var ReactPackages = [
   "react",
   "next"
 ];
-async function lincy(options = {}, ...userConfigs) {
+function lincy(options = {}, ...userConfigs) {
   const {
     autoRenamePlugins = true,
     componentExts = [],
@@ -2011,13 +2013,14 @@ async function lincy(options = {}, ...userConfigs) {
   }, {});
   if (Object.keys(fusedConfig).length)
     configs.push([fusedConfig]);
-  const merged = await combine(
+  let pipeline = new FlatConfigPipeline();
+  pipeline = pipeline.append(
     ...configs,
     ...userConfigs
   );
   if (autoRenamePlugins)
-    return renamePluginInConfigs(merged, defaultPluginRenaming);
-  return merged;
+    pipeline = pipeline.renamePlugins(defaultPluginRenaming);
+  return pipeline;
 }
 
 // src/index.ts

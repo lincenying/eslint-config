@@ -1,6 +1,7 @@
 import process from 'node:process'
 import fs from 'node:fs'
 import { isPackageExists } from 'local-pkg'
+import { FlatConfigPipeline } from 'eslint-flat-config-utils'
 import {
     comments,
     ignores,
@@ -23,11 +24,11 @@ import {
     vue,
     yaml,
 } from './configs'
-import type { Awaitable, FlatConfigItem, OptionsConfig, UserConfigItem } from './types'
-import { combine, interopDefault, renamePluginInConfigs } from './utils'
+import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
+import { interopDefault } from './utils'
 import { formatters } from './configs/formatters'
 
-const flatConfigProps: (keyof FlatConfigItem)[] = [
+const flatConfigProps: (keyof TypedFlatConfigItem)[] = [
     'name',
     'files',
     'ignores',
@@ -63,9 +64,10 @@ const ReactPackages = [
 /**
  * 构造一个ESLint扁平化配置项数组。
  */
-export async function lincy(options: OptionsConfig & FlatConfigItem = {},
-    ...userConfigs: Awaitable<UserConfigItem | UserConfigItem[]>[]
-): Promise<UserConfigItem[]> {
+export function lincy(
+    options: OptionsConfig & TypedFlatConfigItem = {},
+    ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]
+): FlatConfigPipeline<TypedFlatConfigItem> {
     const {
         autoRenamePlugins = true,
         componentExts = [],
@@ -85,7 +87,7 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
             stylisticOptions.jsx = options.jsx ?? true
     }
 
-    const configs: Awaitable<FlatConfigItem[]>[] = []
+    const configs: Awaitable<TypedFlatConfigItem[]>[] = []
 
     if (enableGitignore) {
         if (typeof enableGitignore !== 'boolean') {
@@ -219,18 +221,20 @@ export async function lincy(options: OptionsConfig & FlatConfigItem = {},
         if (key in options)
             acc[key] = options[key] as any
         return acc
-    }, {} as FlatConfigItem)
+    }, {} as TypedFlatConfigItem)
 
     if (Object.keys(fusedConfig).length)
         configs.push([fusedConfig])
 
-    const merged = await combine(
+    let pipeline = new FlatConfigPipeline<TypedFlatConfigItem>()
+
+    pipeline = pipeline.append(
         ...configs,
         ...userConfigs,
     )
 
     if (autoRenamePlugins)
-        return renamePluginInConfigs(merged, defaultPluginRenaming)
+        pipeline = pipeline.renamePlugins(defaultPluginRenaming)
 
-    return merged
+    return pipeline
 }

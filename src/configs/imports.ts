@@ -1,7 +1,7 @@
-import type { FlatConfigItem, OptionsStylistic } from '../types'
+import type { OptionsStylistic, TypedFlatConfigItem } from '../types'
 import { pluginAntfu, pluginImport } from '../plugins'
 
-export async function imports(options: OptionsStylistic = {}): Promise<FlatConfigItem[]> {
+export async function imports(options: OptionsStylistic = {}): Promise<TypedFlatConfigItem[]> {
     const {
         stylistic = true,
     } = options

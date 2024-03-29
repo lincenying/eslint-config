@@ -1,7 +1,7 @@
 import styleMigrate from '@stylistic/eslint-plugin-migrate'
 import lincy from './dist/index.js'
 
-const config = await lincy(
+const config = lincy(
     {
         toml: true,
         stylistic: {

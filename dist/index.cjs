@@ -93,6 +93,7 @@ module.exports = __toCommonJS(src_exports);
 var import_node_process3 = __toESM(require("process"), 1);
 var import_node_fs = __toESM(require("fs"), 1);
 var import_local_pkg4 = require("local-pkg");
+var import_eslint_flat_config_utils = require("eslint-flat-config-utils");
 
 // src/plugins.ts
 var import_eslint_plugin_antfu = __toESM(require("eslint-plugin-antfu"), 1);
@@ -181,6 +182,7 @@ var GLOB_EXCLUDE = [
   "**/.idea",
   "**/.output",
   "**/.vite-inspect",
+  "**/.yarn",
   "**/CHANGELOG*.md",
   "**/*.min.*",
   "**/LICENSE*",
@@ -1068,7 +1070,6 @@ async function react(options = {}) {
         "react/jsx-no-target-blank": "error",
         "react/jsx-no-undef": "error",
         "react/jsx-no-useless-fragment": "error",
-        "react/jsx-pascal-case": "error",
         "react/jsx-props-no-spreading": "off",
         // 强制任何 JSX 属性都不会传播
         "react/jsx-uses-react": "error",
@@ -1125,6 +1126,7 @@ async function react(options = {}) {
         "react/static-property-placement": "error",
         "react/style-prop-object": "error",
         "react/void-dom-elements-no-children": "error",
+        "style/jsx-pascal-case": "error",
         ...typescript2 ? {
           "react/jsx-no-undef": "off",
           "react/prop-type": "off"
@@ -1969,7 +1971,7 @@ var ReactPackages = [
   "react",
   "next"
 ];
-async function lincy(options = {}, ...userConfigs) {
+function lincy(options = {}, ...userConfigs) {
   const {
     autoRenamePlugins = true,
     componentExts = [],
@@ -2102,13 +2104,14 @@ async function lincy(options = {}, ...userConfigs) {
   }, {});
   if (Object.keys(fusedConfig).length)
     configs.push([fusedConfig]);
-  const merged = await combine(
+  let pipeline = new import_eslint_flat_config_utils.FlatConfigPipeline();
+  pipeline = pipeline.append(
     ...configs,
     ...userConfigs
   );
   if (autoRenamePlugins)
-    return renamePluginInConfigs(merged, defaultPluginRenaming);
-  return merged;
+    pipeline = pipeline.renamePlugins(defaultPluginRenaming);
+  return pipeline;
 }
 
 // src/index.ts
