@@ -1,7 +1,7 @@
 import process from 'node:process'
 import fs from 'node:fs'
 import { isPackageExists } from 'local-pkg'
-import { FlatConfigPipeline } from 'eslint-flat-config-utils'
+import { FlatConfigComposer } from 'eslint-flat-config-utils'
 import {
     comments,
     ignores,
@@ -67,7 +67,7 @@ const ReactPackages = [
 export function lincy(
     options: OptionsConfig & TypedFlatConfigItem = {},
     ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]
-): FlatConfigPipeline<TypedFlatConfigItem> {
+): FlatConfigComposer<TypedFlatConfigItem> {
     const {
         autoRenamePlugins = true,
         componentExts = [],
@@ -226,7 +226,7 @@ export function lincy(
     if (Object.keys(fusedConfig).length)
         configs.push([fusedConfig])
 
-    let pipeline = new FlatConfigPipeline<TypedFlatConfigItem>()
+    let pipeline = new FlatConfigComposer<TypedFlatConfigItem>()
 
     pipeline = pipeline.append(
         ...configs,

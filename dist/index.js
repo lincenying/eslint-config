@@ -2,7 +2,7 @@
 import process3 from "node:process";
 import fs from "node:fs";
 import { isPackageExists as isPackageExists3 } from "local-pkg";
-import { FlatConfigPipeline } from "eslint-flat-config-utils";
+import { FlatConfigComposer } from "eslint-flat-config-utils";
 
 // src/plugins.ts
 import { default as default2 } from "eslint-plugin-antfu";
@@ -2013,7 +2013,7 @@ function lincy(options = {}, ...userConfigs) {
   }, {});
   if (Object.keys(fusedConfig).length)
     configs.push([fusedConfig]);
-  let pipeline = new FlatConfigPipeline();
+  let pipeline = new FlatConfigComposer();
   pipeline = pipeline.append(
     ...configs,
     ...userConfigs

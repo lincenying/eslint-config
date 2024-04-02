@@ -2104,7 +2104,7 @@ function lincy(options = {}, ...userConfigs) {
   }, {});
   if (Object.keys(fusedConfig).length)
     configs.push([fusedConfig]);
-  let pipeline = new import_eslint_flat_config_utils.FlatConfigPipeline();
+  let pipeline = new import_eslint_flat_config_utils.FlatConfigComposer();
   pipeline = pipeline.append(
     ...configs,
     ...userConfigs
