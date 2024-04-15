@@ -470,8 +470,9 @@ function renameRules(rules, map) {
   return Object.fromEntries(
     Object.entries(rules).map(([key, value]) => {
       for (const [from, to] of Object.entries(map)) {
-        if (key.startsWith(`${from}/`))
+        if (key.startsWith(`${from}/`)) {
           return [to + key.slice(from.length), value];
+        }
       }
       return [key, value];
     })
@@ -480,13 +481,15 @@ function renameRules(rules, map) {
 function renamePluginInConfigs(configs, map) {
   return configs.map((i) => {
     const clone = { ...i };
-    if (clone.rules)
+    if (clone.rules) {
       clone.rules = renameRules(clone.rules, map);
+    }
     if (clone.plugins) {
       clone.plugins = Object.fromEntries(
         Object.entries(clone.plugins).map(([key, value]) => {
-          if (key in map)
+          if (key in map) {
             return [map[key], value];
+          }
           return [key, value];
         })
       );
@@ -502,11 +505,13 @@ async function interopDefault(m) {
   return resolved.default || resolved;
 }
 async function ensurePackages(packages) {
-  if (import_node_process.default.stdout.isTTY === false)
+  if (import_node_process.default.stdout.isTTY === false) {
     return;
+  }
   const nonExistingPackages = packages.filter((i) => !(0, import_local_pkg.isPackageExists)(i));
-  if (nonExistingPackages.length === 0)
+  if (nonExistingPackages.length === 0) {
     return;
+  }
   const { default: prompts } = await import("prompts");
   const { result } = await prompts([
     {
@@ -515,8 +520,9 @@ async function ensurePackages(packages) {
       type: "confirm"
     }
   ]);
-  if (result)
+  if (result) {
     await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
+  }
 }
 
 // src/configs/jsdoc.ts
@@ -741,6 +747,7 @@ var parserPlain2 = __toESM(require("eslint-parser-plain"), 1);
 var StylisticConfigDefaults = {
   indent: 4,
   jsx: true,
+  lessOpinionated: true,
   quotes: "single",
   semi: false
 };
@@ -752,6 +759,7 @@ async function stylistic(options = {}) {
   const {
     indent,
     jsx,
+    lessOpinionated,
     quotes,
     semi
   } = typeof stylistic2 === "boolean" ? StylisticConfigDefaults : { ...StylisticConfigDefaults, ...stylistic2 };
@@ -774,9 +782,13 @@ async function stylistic(options = {}) {
       rules: {
         ...config.rules,
         "antfu/consistent-list-newline": "off",
-        "antfu/if-newline": "error",
-        "antfu/top-level-function": "error",
-        "curly": ["error", "multi-or-nest", "consistent"],
+        ...lessOpinionated ? {
+          curly: ["error", "all"]
+        } : {
+          "antfu/if-newline": "error",
+          "antfu/top-level-function": "error",
+          "curly": ["error", "multi-or-nest", "consistent"]
+        },
         // 覆盖`stylistic`默认规则
         "style/member-delimiter-style": ["error", { multiline: { delimiter: "none" } }],
         "style/multiline-ternary": ["error", "never"],
@@ -889,7 +901,7 @@ async function formatters(options = {}, stylistic2 = {}) {
   }
   if (options.html) {
     configs.push({
-      files: ["**/*.html"],
+      files: [GLOB_HTML],
       languageOptions: {
         parser: parserPlain2
       },
@@ -1985,16 +1997,18 @@ function lincy(options = {}, ...userConfigs) {
   } = options;
   const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === "object" ? options.stylistic : {};
   if (stylisticOptions) {
-    if (!("jsx" in stylisticOptions))
+    if (!("jsx" in stylisticOptions)) {
       stylisticOptions.jsx = options.jsx ?? true;
+    }
   }
   const configs = [];
   if (enableGitignore) {
     if (typeof enableGitignore !== "boolean") {
       configs.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r(enableGitignore)]));
     } else {
-      if (import_node_fs.default.existsSync(".gitignore"))
+      if (import_node_fs.default.existsSync(".gitignore")) {
         configs.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r()]));
+      }
     }
   }
   configs.push(
@@ -2017,8 +2031,9 @@ function lincy(options = {}, ...userConfigs) {
     // Optional plugins (installed but not enabled by default)
     perfectionist()
   );
-  if (enableVue)
+  if (enableVue) {
     componentExts.push("vue");
+  }
   if (enableTypeScript) {
     configs.push(typescript({
       ...typeof enableTypeScript !== "boolean" ? enableTypeScript : {},
@@ -2098,20 +2113,23 @@ function lincy(options = {}, ...userConfigs) {
     ));
   }
   const fusedConfig = flatConfigProps.reduce((acc, key) => {
-    if (key in options)
+    if (key in options) {
       acc[key] = options[key];
+    }
     return acc;
   }, {});
-  if (Object.keys(fusedConfig).length)
+  if (Object.keys(fusedConfig).length) {
     configs.push([fusedConfig]);
-  let pipeline = new import_eslint_flat_config_utils.FlatConfigComposer();
-  pipeline = pipeline.append(
+  }
+  let composer = new import_eslint_flat_config_utils.FlatConfigComposer();
+  composer = composer.append(
     ...configs,
     ...userConfigs
   );
-  if (autoRenamePlugins)
-    pipeline = pipeline.renamePlugins(defaultPluginRenaming);
-  return pipeline;
+  if (autoRenamePlugins) {
+    composer = composer.renamePlugins(defaultPluginRenaming);
+  }
+  return composer;
 }
 
 // src/index.ts

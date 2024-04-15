@@ -1,5 +1,5 @@
 import * as parserPlain from 'eslint-parser-plain'
-import { GLOB_CSS, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
+import { GLOB_CSS, GLOB_HTML, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
 import { ensurePackages, interopDefault } from '../utils'
 import type { OptionsFormatters, StylisticConfig, TypedFlatConfigItem } from '../types'
 import { StylisticConfigDefaults } from './stylistic'
@@ -118,7 +118,7 @@ export async function formatters(
 
     if (options.html) {
         configs.push({
-            files: ['**/*.html'],
+            files: [GLOB_HTML],
             languageOptions: {
                 parser: parserPlain,
             },

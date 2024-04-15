@@ -83,8 +83,9 @@ export function lincy(
     const stylisticOptions = options.stylistic === false ? false : (typeof options.stylistic === 'object' ? options.stylistic : {})
 
     if (stylisticOptions) {
-        if (!('jsx' in stylisticOptions))
+        if (!('jsx' in stylisticOptions)) {
             stylisticOptions.jsx = options.jsx ?? true
+        }
     }
 
     const configs: Awaitable<TypedFlatConfigItem[]>[] = []
@@ -94,8 +95,9 @@ export function lincy(
             configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r(enableGitignore)]))
         }
         else {
-            if (fs.existsSync('.gitignore'))
+            if (fs.existsSync('.gitignore')) {
                 configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r()]))
+            }
         }
     }
 
@@ -123,8 +125,9 @@ export function lincy(
     )
 
     // In the future we may support more component extensions like Svelte or so
-    if (enableVue)
+    if (enableVue) {
         componentExts.push('vue')
+    }
 
     if (enableTypeScript) {
         configs.push(typescript({
@@ -218,23 +221,26 @@ export function lincy(
     // User can optionally pass a flat config item to the first argument
     // We pick the known keys as ESLint would do schema validation
     const fusedConfig = flatConfigProps.reduce((acc, key) => {
-        if (key in options)
+        if (key in options) {
             acc[key] = options[key] as any
+        }
         return acc
     }, {} as TypedFlatConfigItem)
 
-    if (Object.keys(fusedConfig).length)
+    if (Object.keys(fusedConfig).length) {
         configs.push([fusedConfig])
+    }
 
-    let pipeline = new FlatConfigComposer<TypedFlatConfigItem>()
+    let composer = new FlatConfigComposer<TypedFlatConfigItem>()
 
-    pipeline = pipeline.append(
+    composer = composer.append(
         ...configs,
         ...userConfigs,
     )
 
-    if (autoRenamePlugins)
-        pipeline = pipeline.renamePlugins(defaultPluginRenaming)
+    if (autoRenamePlugins) {
+        composer = composer.renamePlugins(defaultPluginRenaming)
+    }
 
-    return pipeline
+    return composer
 }

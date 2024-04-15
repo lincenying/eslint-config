@@ -130,6 +130,16 @@ export interface OptionsStylistic {
 }
 
 export interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent' | 'quotes' | 'jsx' | 'semi'> {
+    /**
+     * Disable some opinionated rules to Anthony's preference.
+     *
+     * Including:
+     * - `antfu/top-level-function`
+     * - `antfu/if-newline`
+     *
+     * @default false
+     */
+    lessOpinionated?: boolean
 }
 
 export interface StylisticOverridesConfig extends OptionsStylistic {

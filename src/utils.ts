@@ -14,8 +14,9 @@ export function renameRules(rules: Record<string, any>, map: Record<string, stri
     return Object.fromEntries(
         Object.entries(rules).map(([key, value]) => {
             for (const [from, to] of Object.entries(map)) {
-                if (key.startsWith(`${from}/`))
+                if (key.startsWith(`${from}/`)) {
                     return [to + key.slice(from.length), value]
+                }
             }
             return [key, value]
         }),
@@ -25,16 +26,17 @@ export function renameRules(rules: Record<string, any>, map: Record<string, stri
 export function renamePluginInConfigs(configs: TypedFlatConfigItem[], map: Record<string, string>): TypedFlatConfigItem[] {
     return configs.map((i) => {
         const clone = { ...i }
-        if (clone.rules)
+        if (clone.rules) {
             clone.rules = renameRules(clone.rules, map)
+        }
         if (clone.plugins) {
             clone.plugins = Object.fromEntries(
-                Object.entries(clone.plugins)
-                    .map(([key, value]) => {
-                        if (key in map)
-                            return [map[key], value]
-                        return [key, value]
-                    }),
+                Object.entries(clone.plugins).map(([key, value]) => {
+                    if (key in map) {
+                        return [map[key], value]
+                    }
+                    return [key, value]
+                }),
             )
         }
         return clone
@@ -51,12 +53,14 @@ export async function interopDefault<T>(m: Awaitable<T>): Promise<T extends { de
 }
 
 export async function ensurePackages(packages: string[]) {
-    if (process.stdout.isTTY === false)
+    if (process.stdout.isTTY === false) {
         return
+    }
 
     const nonExistingPackages = packages.filter(i => !isPackageExists(i))
-    if (nonExistingPackages.length === 0)
+    if (nonExistingPackages.length === 0) {
         return
+    }
 
     const { default: prompts } = await import('prompts')
     const { result } = await prompts([
@@ -66,6 +70,7 @@ export async function ensurePackages(packages: string[]) {
             type: 'confirm',
         },
     ])
-    if (result)
+    if (result) {
         await import('@antfu/install-pkg').then(i => i.installPackage(nonExistingPackages, { dev: true }))
+    }
 }

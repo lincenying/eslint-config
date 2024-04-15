@@ -135,7 +135,7 @@ export default lincy({
     /**
      * 是否启用 stylistic 格式化规则
      * @default 默认值: true
-     * @example 可选: false | { indent?: number | 'tab'; quotes?: 'single' | 'double'; jsx?: boolean; semi?: boolean }
+     * @example 可选: false | { indent?: number | 'tab'; quotes?: 'single' | 'double'; jsx?: boolean; semi?: boolean; lessOpinionated?: boolean; }
      */
     stylistic: true,
     /**

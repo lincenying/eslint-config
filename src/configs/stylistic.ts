@@ -5,6 +5,7 @@ import { pluginAntfu } from '../plugins'
 export const StylisticConfigDefaults: StylisticConfig = {
     indent: 4,
     jsx: true,
+    lessOpinionated: true,
     quotes: 'single',
     semi: false,
 }
@@ -18,6 +19,7 @@ export async function stylistic(options: StylisticOverridesConfig = {}): Promise
     const {
         indent,
         jsx,
+        lessOpinionated,
         quotes,
         semi,
     } = typeof stylistic === 'boolean' ? StylisticConfigDefaults : { ...StylisticConfigDefaults, ...stylistic }
@@ -44,10 +46,14 @@ export async function stylistic(options: StylisticOverridesConfig = {}): Promise
                 ...config.rules,
 
                 'antfu/consistent-list-newline': 'off',
-                'antfu/if-newline': 'error',
-                'antfu/top-level-function': 'error',
 
-                'curly': ['error', 'multi-or-nest', 'consistent'],
+                ...(lessOpinionated ? {
+                    curly: ['error', 'all'],
+                } : {
+                    'antfu/if-newline': 'error',
+                    'antfu/top-level-function': 'error',
+                    'curly': ['error', 'multi-or-nest', 'consistent'],
+                }),
 
                 // 覆盖`stylistic`默认规则
                 'style/member-delimiter-style': ['error', { multiline: { delimiter: 'none' } }],
