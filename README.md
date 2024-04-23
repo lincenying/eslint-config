@@ -508,7 +508,7 @@ pnpm add eslint-plugin-format -D
 运行“npx eslint”会提示您安装所需的依赖项，当然，也可以手动安装它们：
 
 ```bash
-pnpm i -D eslint-plugin-react eslint-plugin-react-hooks eslint-plugin-react-refresh
+pnpm i -D @eslint-react/eslint-plugin eslint-plugin-react-hooks eslint-plugin-react-refresh
 ```
 
 #### UnoCSS
@@ -540,14 +540,14 @@ pnpm i -D @unocss/eslint-plugin
 
 建议使用[configuration comments]单独选择每个文件。(https://eslint.org/docs/latest/use/configure/rules#using-configuration-comments-1).
 
-```js
+```ts
 /* eslint perfectionist/sort-objects: "error" */
 const objectWantedToSort = {
     a: 2,
     b: 1,
     c: 3,
 }
-/* eslint perfectionist/sort-objects: "off" */
+/* e slint perfectionist/sort-objects: "off" */
 ```
 
 ### 类型感知规则

@@ -159,6 +159,7 @@ export interface OptionsIsInEditor {
 }
 
 export interface OptionsReact {
+    tsconfigPath?: string
     typescript?: boolean
     jsx?: boolean
     /** react 版本 */
@@ -227,7 +228,7 @@ export interface OptionsConfig extends OptionsComponentExts {
      * 启用 React 支持.
      *
      * 需要安装:
-     * - `eslint-plugin-react`
+     * - `@eslint-react/eslint-plugin`
      * - `eslint-plugin-react-hooks`
      * - `eslint-plugin-react-refresh`
      *

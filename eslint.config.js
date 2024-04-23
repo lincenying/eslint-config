@@ -3,6 +3,7 @@ import lincy from './dist/index.js'
 
 const config = lincy(
     {
+        react: true,
         toml: true,
         stylistic: {
             indent: 4,
