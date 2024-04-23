@@ -1048,7 +1048,7 @@ async function react(options = {}) {
       rules: {
         // recommended rules from @eslint-react/dom
         "react-dom/no-children-in-void-dom-elements": "warn",
-        "react-dom/no-dangerously-set-innerhtml": "warn",
+        "react-dom/no-dangerously-set-innerhtml": "off",
         "react-dom/no-dangerously-set-innerhtml-with-children": "error",
         "react-dom/no-find-dom-node": "error",
         "react-dom/no-missing-button-type": "warn",
