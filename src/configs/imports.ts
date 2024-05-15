@@ -1,5 +1,6 @@
 import type { OptionsStylistic, TypedFlatConfigItem } from '../types'
 import { pluginAntfu, pluginImport } from '../plugins'
+import { GLOB_SRC_EXT } from '../globs'
 
 export async function imports(options: OptionsStylistic = {}): Promise<TypedFlatConfigItem[]> {
     const {
@@ -8,14 +9,14 @@ export async function imports(options: OptionsStylistic = {}): Promise<TypedFlat
 
     return [
         {
-            name: 'eslint:imports',
+            name: 'eslint:imports:rules',
             plugins: {
                 antfu: pluginAntfu,
                 import: pluginImport,
             },
             rules: {
                 'antfu/import-dedupe': 'error',
-                'antfu/no-import-dist': 'off',
+                'antfu/no-import-dist': 'error',
                 'antfu/no-import-node-modules-by-path': 'error',
 
                 'import/first': 'error',
@@ -29,6 +30,14 @@ export async function imports(options: OptionsStylistic = {}): Promise<TypedFlat
                 ...(stylistic ? {
                     'import/newline-after-import': ['error', { considerComments: true, count: 1 }],
                 } : {}),
+            },
+        },
+        {
+            files: ['**/bin/**/*', `**/bin.${GLOB_SRC_EXT}`],
+            name: 'eslint:imports:disables:bin',
+            rules: {
+                'antfu/no-import-dist': 'off',
+                'antfu/no-import-node-modules-by-path': 'off',
             },
         },
     ]

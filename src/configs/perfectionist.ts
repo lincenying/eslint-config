@@ -9,7 +9,7 @@ import { pluginPerfectionist } from '../plugins'
 export async function perfectionist(): Promise<TypedFlatConfigItem[]> {
     return [
         {
-            name: 'eslint:perfectionist',
+            name: 'eslint:perfectionist:setup',
             plugins: {
                 perfectionist: pluginPerfectionist,
             },

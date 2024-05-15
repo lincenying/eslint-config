@@ -4,7 +4,7 @@ import { pluginNode } from '../plugins'
 export async function node(): Promise<TypedFlatConfigItem[]> {
     return [
         {
-            name: 'eslint:node',
+            name: 'eslint:node:rules',
             plugins: {
                 node: pluginNode,
             },

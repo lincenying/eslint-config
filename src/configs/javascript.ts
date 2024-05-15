@@ -35,15 +35,13 @@ export async function javascript(
             linterOptions: {
                 reportUnusedDisableDirectives: true,
             },
-            name: 'eslint:javascript',
+            name: 'eslint:javascript:rules',
             plugins: {
                 'antfu': pluginAntfu,
                 'unused-imports': pluginUnusedImports,
             },
             rules: {
                 'accessor-pairs': ['error', { enforceForClassMembers: true, setWithoutGet: true }],
-
-                'antfu/top-level-function': 'error',
 
                 'array-callback-return': 'error',
                 'block-scoped-var': 'error',
@@ -63,7 +61,6 @@ export async function javascript(
                 // 'no-console': ['error', { allow: ['warn', 'error'] }],
                 'no-console': 'off',
                 'no-const-assign': 'error',
-                'no-constant-condition': 'warn',
                 'no-control-regex': 'error',
                 'no-debugger': 'error',
                 'no-delete-var': 'error',
@@ -85,7 +82,6 @@ export async function javascript(
                 'no-implied-eval': 'error',
                 'no-import-assign': 'error',
                 'no-invalid-regexp': 'error',
-                'no-invalid-this': 'error',
                 'no-irregular-whitespace': 'error',
                 'no-iterator': 'error',
                 'no-labels': ['error', { allowLoop: false, allowSwitch: false }],
@@ -95,7 +91,7 @@ export async function javascript(
                 'no-multi-str': 'error',
                 'no-new': 'error',
                 'no-new-func': 'error',
-                'no-new-symbol': 'error',
+                'no-new-native-nonconstructor': 'error',
                 'no-new-wrappers': 'error',
                 'no-obj-calls': 'error',
                 'no-octal': 'error',
@@ -162,7 +158,6 @@ export async function javascript(
                 'no-useless-rename': 'error',
                 'no-useless-return': 'error',
                 'no-var': 'error',
-                'no-void': 'error',
                 'no-with': 'error',
                 'object-shorthand': [
                     'error',
@@ -203,16 +198,20 @@ export async function javascript(
                         memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
                     },
                 ],
-                'style/arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
+
                 'symbol-description': 'error',
                 'unicode-bom': ['error', 'never'],
-
                 'unused-imports/no-unused-imports': isInEditor ? 'off' : 'error',
                 'unused-imports/no-unused-vars': [
                     'error',
-                    { args: 'after-used', argsIgnorePattern: '^_', ignoreRestSiblings: true, vars: 'all', varsIgnorePattern: '^_' },
+                    {
+                        args: 'after-used',
+                        argsIgnorePattern: '^_',
+                        ignoreRestSiblings: true,
+                        vars: 'all',
+                        varsIgnorePattern: '^_',
+                    },
                 ],
-
                 'use-isnan': ['error', { enforceForIndexOf: true, enforceForSwitchCase: true }],
                 'valid-typeof': ['error', { requireStringLiterals: true }],
                 'vars-on-top': 'error',
@@ -223,7 +222,7 @@ export async function javascript(
         },
         {
             files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
-            name: 'eslint:scripts-overrides',
+            name: 'eslint:scripts:disables',
             rules: {
                 'no-console': 'off',
             },

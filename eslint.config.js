@@ -1,5 +1,5 @@
 import styleMigrate from '@stylistic/eslint-plugin-migrate'
-import lincy from './dist/index.js'
+import lincy from '@lincy/eslint-config'
 
 const config = lincy(
     {

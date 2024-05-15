@@ -4,7 +4,9 @@ import { GLOB_SRC, GLOB_TS, GLOB_TSX } from '../globs'
 import { pluginAntfu } from '../plugins'
 import { interopDefault, renameRules, toArray } from '../utils'
 
-export async function typescript(options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions = {}): Promise<TypedFlatConfigItem[]> {
+export async function typescript(
+    options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions = {},
+): Promise<TypedFlatConfigItem[]> {
     const {
         componentExts = [],
         overrides = {},
@@ -30,7 +32,6 @@ export async function typescript(options: OptionsFiles & OptionsComponentExts & 
         'ts/no-for-in-array': 'error',
         'ts/no-implied-eval': 'error',
         'ts/no-misused-promises': 'error',
-        'ts/no-throw-literal': 'error',
         'ts/no-unnecessary-type-assertion': 'error',
         'ts/no-unsafe-argument': 'error',
         'ts/no-unsafe-assignment': 'error',
@@ -128,17 +129,17 @@ export async function typescript(options: OptionsFiles & OptionsComponentExts & 
                 ...overrides,
             },
         },
-        {
+        ...isTypeAware ? [{
             files: filesTypeAware,
             name: 'eslint:typescript:rules-type-aware',
             rules: {
                 ...tsconfigPath ? typeAwareRules : {},
                 ...overrides,
             },
-        },
+        }] : [],
         {
             files: ['**/*.d.ts'],
-            name: 'eslint:typescript:dts-overrides',
+            name: 'eslint:typescript:disables:dts',
             rules: {
                 'eslint-comments/no-unlimited-disable': 'off',
                 'import/no-duplicates': 'off',
@@ -148,14 +149,14 @@ export async function typescript(options: OptionsFiles & OptionsComponentExts & 
         },
         {
             files: ['**/*.{test,spec}.ts?(x)'],
-            name: 'eslint:typescript:tests-overrides',
+            name: 'eslint:typescript:disables:test',
             rules: {
                 'no-unused-expressions': 'off',
             },
         },
         {
             files: ['**/*.js', '**/*.cjs'],
-            name: 'eslint:typescript:javascript-overrides',
+            name: 'eslint:typescript:disables:cjs',
             rules: {
                 'ts/no-require-imports': 'off',
                 'ts/no-var-requires': 'off',

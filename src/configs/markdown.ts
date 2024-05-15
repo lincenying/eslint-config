@@ -89,7 +89,6 @@ export async function markdown(
                     'ts/no-for-in-array': 'off',
                     'ts/no-implied-eval': 'off',
                     'ts/no-misused-promises': 'off',
-                    'ts/no-throw-literal': 'off',
                     'ts/no-unnecessary-type-assertion': 'off',
                     'ts/no-unsafe-argument': 'off',
                     'ts/no-unsafe-assignment': 'off',

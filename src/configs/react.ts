@@ -113,7 +113,6 @@ export async function react(options: OptionsFiles & OptionsReact = {}): Promise<
                 'react/no-create-ref': 'error',
                 'react/no-direct-mutation-state': 'error',
                 'react/no-duplicate-key': 'error',
-                'react/no-implicit-key': 'error',
                 'react/no-missing-key': 'error',
                 'react/no-nested-components': 'warn',
                 'react/no-redundant-should-component-update': 'error',

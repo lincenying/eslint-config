@@ -1,5 +1,5 @@
 import * as parserPlain from 'eslint-parser-plain'
-import { GLOB_CSS, GLOB_HTML, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
+import { GLOB_CSS, GLOB_GRAPHQL, GLOB_HTML, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
 import { ensurePackages, interopDefault } from '../utils'
 import type { OptionsFormatters, StylisticConfig, TypedFlatConfigItem } from '../types'
 import { StylisticConfigDefaults } from './stylistic'
@@ -9,6 +9,8 @@ export async function formatters(
     options: OptionsFormatters | true = {},
     stylistic: StylisticConfig = {},
 ): Promise<TypedFlatConfigItem[]> {
+    const defaultIndent = 4
+
     await ensurePackages([
         'eslint-plugin-format',
     ])
@@ -36,7 +38,7 @@ export async function formatters(
             endOfLine: 'lf',
             semi,
             singleQuote: quotes === 'single',
-            tabWidth: typeof indent === 'number' ? indent : 4,
+            tabWidth: typeof indent === 'number' ? indent : defaultIndent,
             trailingComma: 'all',
             useTabs: indent === 'tab',
         } satisfies VendoredPrettierOptions,
@@ -45,7 +47,7 @@ export async function formatters(
 
     const dprintOptions = Object.assign(
         {
-            indentWidth: typeof indent === 'number' ? indent : 4,
+            indentWidth: typeof indent === 'number' ? indent : defaultIndent,
             quoteStyle: quotes === 'single' ? 'preferSingle' : 'preferDouble',
             useTabs: indent === 'tab',
         },
@@ -163,7 +165,7 @@ export async function formatters(
 
     if (options.graphql) {
         configs.push({
-            files: ['**/*.graphql'],
+            files: [GLOB_GRAPHQL],
             languageOptions: {
                 parser: parserPlain,
             },

@@ -103,7 +103,6 @@ export async function vue(
 
                 'vue/component-name-in-template-casing': ['error', 'PascalCase'],
                 'vue/component-options-name-casing': ['error', 'PascalCase'],
-                'vue/component-tags-order': 'off',
                 'vue/custom-event-name-casing': vueVersion === '3' ? ['error', 'camelCase'] : ['error', 'kebab-case'],
                 ...(vueVersion === '2' ? {
                     'vue/require-explicit-emits': 'off',

@@ -33,6 +33,7 @@ __export(src_exports, {
   GLOB_ALL_SRC: () => GLOB_ALL_SRC,
   GLOB_CSS: () => GLOB_CSS,
   GLOB_EXCLUDE: () => GLOB_EXCLUDE,
+  GLOB_GRAPHQL: () => GLOB_GRAPHQL,
   GLOB_HTML: () => GLOB_HTML,
   GLOB_JS: () => GLOB_JS,
   GLOB_JSON: () => GLOB_JSON,
@@ -144,6 +145,7 @@ var GLOB_VUE = "**/*.vue";
 var GLOB_YAML = "**/*.y?(a)ml";
 var GLOB_TOML = "**/*.toml";
 var GLOB_HTML = "**/*.htm?(l)";
+var GLOB_GRAPHQL = "**/*.{g,graph}ql";
 var GLOB_MARKDOWN_CODE = `${GLOB_MARKDOWN}/${GLOB_SRC}`;
 var GLOB_TESTS = [
   `**/__tests__/**/*.${GLOB_SRC_EXT}`,
@@ -213,14 +215,14 @@ async function imports(options = {}) {
   } = options;
   return [
     {
-      name: "eslint:imports",
+      name: "eslint:imports:rules",
       plugins: {
         antfu: import_eslint_plugin_antfu.default,
         import: pluginImport
       },
       rules: {
         "antfu/import-dedupe": "error",
-        "antfu/no-import-dist": "off",
+        "antfu/no-import-dist": "error",
         "antfu/no-import-node-modules-by-path": "error",
         "import/first": "error",
         "import/no-duplicates": "error",
@@ -232,6 +234,14 @@ async function imports(options = {}) {
         ...stylistic2 ? {
           "import/newline-after-import": ["error", { considerComments: true, count: 1 }]
         } : {}
+      }
+    },
+    {
+      files: ["**/bin/**/*", `**/bin.${GLOB_SRC_EXT}`],
+      name: "eslint:imports:disables:bin",
+      rules: {
+        "antfu/no-import-dist": "off",
+        "antfu/no-import-node-modules-by-path": "off"
       }
     }
   ];
@@ -268,14 +278,13 @@ async function javascript(options = {}) {
       linterOptions: {
         reportUnusedDisableDirectives: true
       },
-      name: "eslint:javascript",
+      name: "eslint:javascript:rules",
       plugins: {
         "antfu": import_eslint_plugin_antfu.default,
         "unused-imports": import_eslint_plugin_unused_imports.default
       },
       rules: {
         "accessor-pairs": ["error", { enforceForClassMembers: true, setWithoutGet: true }],
-        "antfu/top-level-function": "error",
         "array-callback-return": "error",
         "block-scoped-var": "error",
         "constructor-super": "error",
@@ -294,7 +303,6 @@ async function javascript(options = {}) {
         // 'no-console': ['error', { allow: ['warn', 'error'] }],
         "no-console": "off",
         "no-const-assign": "error",
-        "no-constant-condition": "warn",
         "no-control-regex": "error",
         "no-debugger": "error",
         "no-delete-var": "error",
@@ -316,7 +324,6 @@ async function javascript(options = {}) {
         "no-implied-eval": "error",
         "no-import-assign": "error",
         "no-invalid-regexp": "error",
-        "no-invalid-this": "error",
         "no-irregular-whitespace": "error",
         "no-iterator": "error",
         "no-labels": ["error", { allowLoop: false, allowSwitch: false }],
@@ -326,7 +333,7 @@ async function javascript(options = {}) {
         "no-multi-str": "error",
         "no-new": "error",
         "no-new-func": "error",
-        "no-new-symbol": "error",
+        "no-new-native-nonconstructor": "error",
         "no-new-wrappers": "error",
         "no-obj-calls": "error",
         "no-octal": "error",
@@ -393,7 +400,6 @@ async function javascript(options = {}) {
         "no-useless-rename": "error",
         "no-useless-return": "error",
         "no-var": "error",
-        "no-void": "error",
         "no-with": "error",
         "object-shorthand": [
           "error",
@@ -434,13 +440,18 @@ async function javascript(options = {}) {
             memberSyntaxSortOrder: ["none", "all", "multiple", "single"]
           }
         ],
-        "style/arrow-parens": ["error", "as-needed", { requireForBlockBody: true }],
         "symbol-description": "error",
         "unicode-bom": ["error", "never"],
         "unused-imports/no-unused-imports": isInEditor ? "off" : "error",
         "unused-imports/no-unused-vars": [
           "error",
-          { args: "after-used", argsIgnorePattern: "^_", ignoreRestSiblings: true, vars: "all", varsIgnorePattern: "^_" }
+          {
+            args: "after-used",
+            argsIgnorePattern: "^_",
+            ignoreRestSiblings: true,
+            vars: "all",
+            varsIgnorePattern: "^_"
+          }
         ],
         "use-isnan": ["error", { enforceForIndexOf: true, enforceForSwitchCase: true }],
         "valid-typeof": ["error", { requireStringLiterals: true }],
@@ -451,7 +462,7 @@ async function javascript(options = {}) {
     },
     {
       files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
-      name: "eslint:scripts-overrides",
+      name: "eslint:scripts:disables",
       rules: {
         "no-console": "off"
       }
@@ -532,7 +543,7 @@ async function jsdoc(options = {}) {
   } = options;
   return [
     {
-      name: "eslint:jsdoc",
+      name: "eslint:jsdoc:rules",
       plugins: {
         jsdoc: await interopDefault(import("eslint-plugin-jsdoc"))
       },
@@ -711,7 +722,6 @@ async function markdown(options = {}) {
           "ts/no-for-in-array": "off",
           "ts/no-implied-eval": "off",
           "ts/no-misused-promises": "off",
-          "ts/no-throw-literal": "off",
           "ts/no-unnecessary-type-assertion": "off",
           "ts/no-unsafe-argument": "off",
           "ts/no-unsafe-assignment": "off",
@@ -732,7 +742,7 @@ async function markdown(options = {}) {
 async function perfectionist() {
   return [
     {
-      name: "eslint:perfectionist",
+      name: "eslint:perfectionist:setup",
       plugins: {
         perfectionist: import_eslint_plugin_perfectionist.default
       }
@@ -800,6 +810,7 @@ async function stylistic(options = {}) {
 
 // src/configs/formatters.ts
 async function formatters(options = {}, stylistic2 = {}) {
+  const defaultIndent = 4;
   await ensurePackages([
     "eslint-plugin-format"
   ]);
@@ -824,7 +835,7 @@ async function formatters(options = {}, stylistic2 = {}) {
       endOfLine: "lf",
       semi,
       singleQuote: quotes === "single",
-      tabWidth: typeof indent === "number" ? indent : 4,
+      tabWidth: typeof indent === "number" ? indent : defaultIndent,
       trailingComma: "all",
       useTabs: indent === "tab"
     },
@@ -832,7 +843,7 @@ async function formatters(options = {}, stylistic2 = {}) {
   );
   const dprintOptions = Object.assign(
     {
-      indentWidth: typeof indent === "number" ? indent : 4,
+      indentWidth: typeof indent === "number" ? indent : defaultIndent,
       quoteStyle: quotes === "single" ? "preferSingle" : "preferDouble",
       useTabs: indent === "tab"
     },
@@ -943,7 +954,7 @@ async function formatters(options = {}, stylistic2 = {}) {
   }
   if (options.graphql) {
     configs.push({
-      files: ["**/*.graphql"],
+      files: [GLOB_GRAPHQL],
       languageOptions: {
         parser: parserPlain2
       },
@@ -966,7 +977,7 @@ async function formatters(options = {}, stylistic2 = {}) {
 async function node() {
   return [
     {
-      name: "eslint:node",
+      name: "eslint:node:rules",
       plugins: {
         node: import_eslint_plugin_n.default
       },
@@ -1084,7 +1095,6 @@ async function react(options = {}) {
         "react/no-create-ref": "error",
         "react/no-direct-mutation-state": "error",
         "react/no-duplicate-key": "error",
-        "react/no-implicit-key": "error",
         "react/no-missing-key": "error",
         "react/no-nested-components": "warn",
         "react/no-redundant-should-component-update": "error",
@@ -1417,7 +1427,6 @@ async function typescript(options = {}) {
     "ts/no-for-in-array": "error",
     "ts/no-implied-eval": "error",
     "ts/no-misused-promises": "error",
-    "ts/no-throw-literal": "error",
     "ts/no-unnecessary-type-assertion": "error",
     "ts/no-unsafe-argument": "error",
     "ts/no-unsafe-assignment": "error",
@@ -1511,17 +1520,17 @@ async function typescript(options = {}) {
         ...overrides
       }
     },
-    {
+    ...isTypeAware ? [{
       files: filesTypeAware,
       name: "eslint:typescript:rules-type-aware",
       rules: {
         ...tsconfigPath ? typeAwareRules : {},
         ...overrides
       }
-    },
+    }] : [],
     {
       files: ["**/*.d.ts"],
-      name: "eslint:typescript:dts-overrides",
+      name: "eslint:typescript:disables:dts",
       rules: {
         "eslint-comments/no-unlimited-disable": "off",
         "import/no-duplicates": "off",
@@ -1531,14 +1540,14 @@ async function typescript(options = {}) {
     },
     {
       files: ["**/*.{test,spec}.ts?(x)"],
-      name: "eslint:typescript:tests-overrides",
+      name: "eslint:typescript:disables:test",
       rules: {
         "no-unused-expressions": "off"
       }
     },
     {
       files: ["**/*.js", "**/*.cjs"],
-      name: "eslint:typescript:javascript-overrides",
+      name: "eslint:typescript:disables:cjs",
       rules: {
         "ts/no-require-imports": "off",
         "ts/no-var-requires": "off"
@@ -1566,8 +1575,6 @@ async function unicorn() {
         "unicorn/no-new-array": "error",
         // Prevent deprecated `new Buffer()`
         "unicorn/no-new-buffer": "error",
-        // Keep regex literals safe!
-        "unicorn/no-unsafe-regex": "error",
         // Lowercase number formatting for octal, hex, binary (0x1'error' instead of 0X1'error')
         "unicorn/number-literal-case": "error",
         // textContent instead of innerText
@@ -1717,7 +1724,6 @@ async function vue(options = {}) {
         }],
         "vue/component-name-in-template-casing": ["error", "PascalCase"],
         "vue/component-options-name-casing": ["error", "PascalCase"],
-        "vue/component-tags-order": "off",
         "vue/custom-event-name-casing": vueVersion === "3" ? ["error", "camelCase"] : ["error", "kebab-case"],
         ...vueVersion === "2" ? {
           "vue/require-explicit-emits": "off"
@@ -2107,6 +2113,7 @@ var src_default = lincy;
   GLOB_ALL_SRC,
   GLOB_CSS,
   GLOB_EXCLUDE,
+  GLOB_GRAPHQL,
   GLOB_HTML,
   GLOB_JS,
   GLOB_JSON,
