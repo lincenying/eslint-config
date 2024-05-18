@@ -74,6 +74,7 @@ __export(src_exports, {
   node: () => node,
   perfectionist: () => perfectionist,
   react: () => react,
+  regexp: () => regexp,
   renamePluginInConfigs: () => renamePluginInConfigs,
   renameRules: () => renameRules,
   sortPackageJson: () => sortPackageJson,
@@ -473,8 +474,8 @@ async function javascript(options = {}) {
 // src/utils.ts
 var import_node_process = __toESM(require("process"), 1);
 var import_local_pkg = require("local-pkg");
-async function combine(...configs) {
-  const resolved = await Promise.all(configs);
+async function combine(...configs2) {
+  const resolved = await Promise.all(configs2);
   return resolved.flat();
 }
 function renameRules(rules, map) {
@@ -489,8 +490,8 @@ function renameRules(rules, map) {
     })
   );
 }
-function renamePluginInConfigs(configs, map) {
-  return configs.map((i) => {
+function renamePluginInConfigs(configs2, map) {
+  return configs2.map((i) => {
     const clone = { ...i };
     if (clone.rules) {
       clone.rules = renameRules(clone.rules, map);
@@ -850,7 +851,7 @@ async function formatters(options = {}, stylistic2 = {}) {
     options.dprintOptions || {}
   );
   const pluginFormat = await interopDefault(import("eslint-plugin-format"));
-  const configs = [
+  const configs2 = [
     {
       name: "eslint:formatters:setup",
       plugins: {
@@ -859,7 +860,7 @@ async function formatters(options = {}, stylistic2 = {}) {
     }
   ];
   if (options.css) {
-    configs.push(
+    configs2.push(
       {
         files: [GLOB_CSS, GLOB_POSTCSS],
         languageOptions: {
@@ -911,7 +912,7 @@ async function formatters(options = {}, stylistic2 = {}) {
     );
   }
   if (options.html) {
-    configs.push({
+    configs2.push({
       files: [GLOB_HTML],
       languageOptions: {
         parser: parserPlain2
@@ -930,7 +931,7 @@ async function formatters(options = {}, stylistic2 = {}) {
   }
   if (options.markdown) {
     const formater = options.markdown === true ? "prettier" : options.markdown;
-    configs.push({
+    configs2.push({
       files: [GLOB_MARKDOWN],
       languageOptions: {
         parser: parserPlain2
@@ -953,7 +954,7 @@ async function formatters(options = {}, stylistic2 = {}) {
     });
   }
   if (options.graphql) {
-    configs.push({
+    configs2.push({
       files: [GLOB_GRAPHQL],
       languageOptions: {
         parser: parserPlain2
@@ -970,7 +971,7 @@ async function formatters(options = {}, stylistic2 = {}) {
       }
     });
   }
-  return configs;
+  return configs2;
 }
 
 // src/configs/node.ts
@@ -1123,6 +1124,32 @@ async function react(options = {}) {
         react: {
           version
         }
+      }
+    }
+  ];
+}
+
+// src/configs/regexp.ts
+var import_eslint_plugin_regexp = require("eslint-plugin-regexp");
+async function regexp(options = {}) {
+  const config = import_eslint_plugin_regexp.configs["flat/recommended"];
+  const rules = {
+    ...config.rules
+  };
+  if (options.level === "warn") {
+    for (const key in rules) {
+      if (rules[key] === "error") {
+        rules[key] = "warn";
+      }
+    }
+  }
+  return [
+    {
+      ...config,
+      name: "eslint/regexp/rules",
+      rules: {
+        ...rules,
+        ...options.overrides
       }
     }
   ];
@@ -1965,6 +1992,7 @@ function lincy(options = {}, ...userConfigs) {
     isInEditor = !!((import_node_process3.default.env.VSCODE_PID || import_node_process3.default.env.JETBRAINS_IDE || import_node_process3.default.env.VIM) && !import_node_process3.default.env.CI),
     overrides = {},
     react: enableReact = ReactPackages.some((i) => (0, import_local_pkg4.isPackageExists)(i)),
+    regexp: enableRegexp = true,
     typescript: enableTypeScript = (0, import_local_pkg4.isPackageExists)("typescript"),
     unocss: enableUnoCSS = false,
     vue: enableVue = VuePackages.some((i) => (0, import_local_pkg4.isPackageExists)(i))
@@ -1975,17 +2003,17 @@ function lincy(options = {}, ...userConfigs) {
       stylisticOptions.jsx = options.jsx ?? true;
     }
   }
-  const configs = [];
+  const configs2 = [];
   if (enableGitignore) {
     if (typeof enableGitignore !== "boolean") {
-      configs.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r(enableGitignore)]));
+      configs2.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r(enableGitignore)]));
     } else {
       if (import_node_fs.default.existsSync(".gitignore")) {
-        configs.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r()]));
+        configs2.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r()]));
       }
     }
   }
-  configs.push(
+  configs2.push(
     ignores({
       ignores: overrides.ignores
     }),
@@ -2009,27 +2037,33 @@ function lincy(options = {}, ...userConfigs) {
     componentExts.push("vue");
   }
   if (enableTypeScript) {
-    configs.push(typescript({
+    configs2.push(typescript({
       ...typeof enableTypeScript !== "boolean" ? enableTypeScript : {},
       componentExts,
       overrides: overrides.typescript
     }));
   }
   if (stylisticOptions) {
-    configs.push(stylistic({
+    configs2.push(stylistic({
       overrides: overrides.stylistic,
       stylistic: stylisticOptions
     }));
   }
+  if (enableRegexp) {
+    configs2.push(regexp({
+      ...typeof enableRegexp === "boolean" ? {} : enableRegexp,
+      overrides: overrides.regexp
+    }));
+  }
   if (options.test ?? true) {
-    configs.push(test({
+    configs2.push(test({
       ...typeof options.test !== "boolean" ? options.test : {},
       isInEditor,
       overrides: overrides.test
     }));
   }
   if (enableVue) {
-    configs.push(vue({
+    configs2.push(vue({
       ...typeof options.vue !== "boolean" ? options.vue : {},
       overrides: overrides.vue,
       stylistic: stylisticOptions,
@@ -2037,20 +2071,20 @@ function lincy(options = {}, ...userConfigs) {
     }));
   }
   if (enableReact) {
-    configs.push(react({
+    configs2.push(react({
       ...typeof enableReact !== "boolean" ? enableReact : {},
       overrides: overrides.react,
       typescript: !!enableTypeScript
     }));
   }
   if (enableUnoCSS) {
-    configs.push(unocss({
+    configs2.push(unocss({
       ...typeof enableUnoCSS === "boolean" ? {} : enableUnoCSS,
       overrides: overrides.unocss
     }));
   }
   if (options.jsonc ?? true) {
-    configs.push(
+    configs2.push(
       jsonc({
         ...typeof options.jsonc !== "boolean" ? options.jsonc : {},
         overrides: overrides.jsonc,
@@ -2061,27 +2095,27 @@ function lincy(options = {}, ...userConfigs) {
     );
   }
   if (options.yaml ?? true) {
-    configs.push(yaml({
+    configs2.push(yaml({
       ...typeof options.yaml !== "boolean" ? options.yaml : {},
       overrides: overrides.yaml,
       stylistic: stylisticOptions
     }));
   }
   if (options.toml) {
-    configs.push(toml({
+    configs2.push(toml({
       overrides: overrides.toml,
       stylistic: stylisticOptions
     }));
   }
   if (options.markdown ?? true) {
-    configs.push(markdown({
+    configs2.push(markdown({
       ...typeof options.markdown !== "boolean" ? options.markdown : {},
       componentExts,
       overrides: overrides.markdown
     }));
   }
   if (options.formatters) {
-    configs.push(formatters(
+    configs2.push(formatters(
       options.formatters,
       typeof stylisticOptions === "boolean" ? {} : stylisticOptions
     ));
@@ -2093,11 +2127,11 @@ function lincy(options = {}, ...userConfigs) {
     return acc;
   }, {});
   if (Object.keys(fusedConfig).length) {
-    configs.push([fusedConfig]);
+    configs2.push([fusedConfig]);
   }
   let composer = new import_eslint_flat_config_utils.FlatConfigComposer();
   composer = composer.append(
-    ...configs,
+    ...configs2,
     ...userConfigs
   );
   if (autoRenamePlugins) {
@@ -2153,6 +2187,7 @@ var src_default = lincy;
   node,
   perfectionist,
   react,
+  regexp,
   renamePluginInConfigs,
   renameRules,
   sortPackageJson,
