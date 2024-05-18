@@ -205,6 +205,12 @@ export default lincy({
      */
     markdown: false,
     /**
+     * 是否启用 regexp 规则
+     * @default 默认值: true,
+     * @example 可选: false | { level?: 'error' | 'warn' }
+     */
+    regexp: true,
+    /**
      * 是否启用 formatters 规则
      * @default 默认值: false,
      * @example 可选: true | { css?: 'prettier' | boolean; html?: 'prettier' | boolean; markdown?: 'prettier' | 'dprint' | boolean }
@@ -249,6 +255,9 @@ export default lincy({
         },
         unocss: {
             // unocss 规则
+        },
+        regexp: {
+            // regexp 规则
         }
     },
 
@@ -321,6 +330,7 @@ import {
     node,
     perfectionist,
     react,
+    regexp,
     sortPackageJson,
     sortTsconfig,
     stylistic,
@@ -350,6 +360,7 @@ export default combine(
     yaml(),
     toml(),
     markdown(),
+    regexp(),
 )
 ```
 
@@ -397,6 +408,7 @@ export default lincy(
         jsonc: true,
         yaml: true,
         markdown: true,
+        regexp: true,
         overrides: {}
     },
     {
@@ -450,6 +462,7 @@ export default lincy({
         jsonc: {},
         markdown: {},
         test: {},
+        regexp: {},
 
         // 追加自定义排除文件(夹)
         ignores: [
