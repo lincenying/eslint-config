@@ -27,6 +27,7 @@ import {
 import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
 import { interopDefault } from './utils'
 import { formatters } from './configs/formatters'
+import { regexp } from './configs/regexp'
 
 const flatConfigProps: (keyof TypedFlatConfigItem)[] = [
     'name',
@@ -79,6 +80,7 @@ export function lincy(
         isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
         overrides = {},
         react: enableReact = ReactPackages.some(i => isPackageExists(i)),
+        regexp: enableRegexp = true,
         typescript: enableTypeScript = isPackageExists('typescript'),
         unocss: enableUnoCSS = false,
         vue: enableVue = VuePackages.some(i => isPackageExists(i)),
@@ -145,6 +147,13 @@ export function lincy(
         configs.push(stylistic({
             overrides: overrides.stylistic,
             stylistic: stylisticOptions,
+        }))
+    }
+
+    if (enableRegexp) {
+        configs.push(regexp({
+            ...(typeof enableRegexp === 'boolean' ? {} : enableRegexp),
+            overrides: overrides.regexp,
         }))
     }
 

@@ -1,6 +1,6 @@
 import { isPackageExists } from 'local-pkg'
 import { ensurePackages, interopDefault, toArray } from '../utils'
-import type { OptionsFiles, OptionsReact, TypedFlatConfigItem } from '../types'
+import type { OptionsFiles, OptionsOverrides, OptionsReact, TypedFlatConfigItem } from '../types'
 import { GLOB_JSX, GLOB_TSX } from '../globs'
 
 // react refresh
@@ -8,7 +8,7 @@ const ReactRefreshAllowConstantExportPackages = [
     'vite',
 ]
 
-export async function react(options: OptionsFiles & OptionsReact = {}): Promise<TypedFlatConfigItem[]> {
+export async function react(options: OptionsFiles & OptionsReact & OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
     const {
         files = [GLOB_JSX, GLOB_TSX],
         jsx = true,

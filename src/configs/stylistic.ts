@@ -1,5 +1,5 @@
 import { interopDefault } from '../utils'
-import type { StylisticConfig, StylisticOverridesConfig, TypedFlatConfigItem } from '../types'
+import type { OptionsOverrides, OptionsStylistic, StylisticConfig, TypedFlatConfigItem } from '../types'
 import { pluginAntfu } from '../plugins'
 
 export const StylisticConfigDefaults: StylisticConfig = {
@@ -10,7 +10,7 @@ export const StylisticConfigDefaults: StylisticConfig = {
     semi: false,
 }
 
-export async function stylistic(options: StylisticOverridesConfig = {}): Promise<TypedFlatConfigItem[]> {
+export async function stylistic(options: OptionsStylistic & OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
     const {
         overrides = {},
         stylistic = StylisticConfigDefaults,

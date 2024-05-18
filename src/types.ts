@@ -142,12 +142,15 @@ export interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent
     lessOpinionated?: boolean
 }
 
-export interface StylisticOverridesConfig extends OptionsStylistic {
+export interface OptionsOverrides {
     overrides?: TypedFlatConfigItem['rules']
 }
 
-export interface OptionsOverrides {
-    overrides?: TypedFlatConfigItem['rules']
+export interface OptionsRegExp {
+    /**
+     * Override rulelevels
+     */
+    level?: 'error' | 'warn'
 }
 
 export interface OptionsIgnores {
@@ -164,7 +167,6 @@ export interface OptionsReact {
     jsx?: boolean
     /** react 版本 */
     version?: string
-    overrides?: TypedFlatConfigItem['rules']
 }
 
 export interface OptionsUnoCSS {
@@ -178,7 +180,6 @@ export interface OptionsUnoCSS {
      * @default false
      */
     strict?: boolean
-    overrides?: TypedFlatConfigItem['rules']
 }
 
 export interface OptionsConfig extends OptionsComponentExts {
@@ -303,6 +304,14 @@ export interface OptionsConfig extends OptionsComponentExts {
     stylistic?: boolean | StylisticConfig
 
     /**
+     * Enable regexp rules.
+     *
+     * @see https://ota-meshi.github.io/eslint-plugin-regexp/
+     * @default true
+     */
+    regexp?: boolean | OptionsRegExp
+
+    /**
      * 控制再编辑器中禁用某些规则.
      * @default 基于 process.env 自动检测
      */
@@ -324,6 +333,7 @@ export interface OptionsConfig extends OptionsComponentExts {
         stylistic?: TypedFlatConfigItem['rules']
         test?: TypedFlatConfigItem['rules']
         vue?: TypedFlatConfigItem['rules']
+        regexp?: TypedFlatConfigItem['rules']
         react?: TypedFlatConfigItem['rules']
         svelte?: TypedFlatConfigItem['rules']
         jsonc?: TypedFlatConfigItem['rules']
