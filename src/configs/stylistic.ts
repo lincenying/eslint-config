@@ -50,9 +50,9 @@ export async function stylistic(options: OptionsStylistic & OptionsOverrides = {
                 ...(lessOpinionated ? {
                     curly: ['error', 'all'],
                 } : {
+                    'antfu/curly': 'error',
                     'antfu/if-newline': 'error',
                     'antfu/top-level-function': 'error',
-                    'curly': ['error', 'multi-or-nest', 'consistent'],
                 }),
 
                 // 覆盖`stylistic`默认规则
