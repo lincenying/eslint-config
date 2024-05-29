@@ -4797,6 +4797,7 @@ export interface RuleOptions {
   /**
    * Enforce using `@ts-expect-error` over `@ts-ignore`
    * @see https://typescript-eslint.io/rules/prefer-ts-expect-error
+   * @deprecated
    */
   'ts/prefer-ts-expect-error'?: Linter.RuleEntry<[]>
   /**

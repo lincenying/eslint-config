@@ -5,7 +5,7 @@ import { pluginAntfu } from '../plugins'
 export const StylisticConfigDefaults: StylisticConfig = {
     indent: 4,
     jsx: true,
-    lessOpinionated: true,
+    lessOpinionated: false,
     quotes: 'single',
     semi: false,
 }
@@ -56,6 +56,7 @@ export async function stylistic(options: OptionsStylistic & OptionsOverrides = {
                 }),
 
                 // 覆盖`stylistic`默认规则
+                'style/brace-style': ['error', 'stroustrup'],
                 'style/member-delimiter-style': ['error', { multiline: { delimiter: 'none' } }],
                 'style/multiline-ternary': ['error', 'never'],
 

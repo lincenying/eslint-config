@@ -136,6 +136,7 @@ export interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent
      * Including:
      * - `antfu/top-level-function`
      * - `antfu/if-newline`
+     * - `antfu/curly`
      *
      * @default false
      */

@@ -168,7 +168,7 @@ export async function vue(
                     'vue/arrow-spacing': ['error', { after: true, before: true }],
                     'vue/block-spacing': ['error', 'always'],
                     'vue/block-tag-newline': ['error', { multiline: 'always', singleline: 'always' }],
-                    'vue/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
+                    'vue/brace-style': ['error', 'stroustrup', { allowSingleLine: false }],
                     'vue/comma-dangle': ['error', 'always-multiline'],
                     'vue/comma-spacing': ['error', { after: true, before: false }],
                     'vue/comma-style': ['error', 'last'],
