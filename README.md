@@ -91,7 +91,12 @@ export default lincy()
     "json",
     "jsonc",
     "yaml",
-    "toml"
+    "toml",
+    "css",
+    "less",
+    "scss",
+    "pcss",
+    "postcss"
   ]
 }
 ```

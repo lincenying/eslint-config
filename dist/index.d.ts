@@ -4903,6 +4903,7 @@ interface RuleOptions {
   /**
    * Enforce using `@ts-expect-error` over `@ts-ignore`
    * @see https://typescript-eslint.io/rules/prefer-ts-expect-error
+   * @deprecated
    */
   'ts/prefer-ts-expect-error'?: Linter.RuleEntry<[]>
   /**
@@ -14472,6 +14473,7 @@ interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent' | 'qu
      * Including:
      * - `antfu/top-level-function`
      * - `antfu/if-newline`
+     * - `antfu/curly`
      *
      * @default false
      */

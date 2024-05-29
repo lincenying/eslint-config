@@ -8,7 +8,7 @@ const config = lincy(
         stylistic: {
             indent: 4,
             quotes: 'single',
-            lessOpinionated: true,
+            lessOpinionated: false,
         },
         formatters: true,
         overrides: {

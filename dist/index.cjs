@@ -758,7 +758,7 @@ var parserPlain2 = __toESM(require("eslint-parser-plain"), 1);
 var StylisticConfigDefaults = {
   indent: 4,
   jsx: true,
-  lessOpinionated: true,
+  lessOpinionated: false,
   quotes: "single",
   semi: false
 };
@@ -801,6 +801,7 @@ async function stylistic(options = {}) {
           "antfu/top-level-function": "error"
         },
         // 覆盖`stylistic`默认规则
+        "style/brace-style": ["error", "stroustrup"],
         "style/member-delimiter-style": ["error", { multiline: { delimiter: "none" } }],
         "style/multiline-ternary": ["error", "never"],
         ...overrides
@@ -1814,7 +1815,7 @@ async function vue(options = {}) {
           "vue/arrow-spacing": ["error", { after: true, before: true }],
           "vue/block-spacing": ["error", "always"],
           "vue/block-tag-newline": ["error", { multiline: "always", singleline: "always" }],
-          "vue/brace-style": ["error", "stroustrup", { allowSingleLine: true }],
+          "vue/brace-style": ["error", "stroustrup", { allowSingleLine: false }],
           "vue/comma-dangle": ["error", "always-multiline"],
           "vue/comma-spacing": ["error", { after: true, before: false }],
           "vue/comma-style": ["error", "last"],
