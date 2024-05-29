@@ -1,5 +1,6 @@
+// @ts-expect-error missing types
 import styleMigrate from '@stylistic/eslint-plugin-migrate'
-import lincy from '@lincy/eslint-config'
+import lincy from './src'
 
 const config = lincy(
     {
@@ -8,7 +9,6 @@ const config = lincy(
         stylistic: {
             indent: 4,
             quotes: 'single',
-            lessOpinionated: false,
         },
         formatters: true,
         overrides: {
