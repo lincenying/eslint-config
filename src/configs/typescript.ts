@@ -20,6 +20,7 @@ export async function typescript(
 
     const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX]
     const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : undefined
+
     const isTypeAware = !!tsconfigPath
 
     const typeAwareRules: TypedFlatConfigItem['rules'] = {
@@ -40,6 +41,7 @@ export async function typescript(
         'ts/no-unsafe-return': 'error',
         'ts/restrict-plus-operands': 'error',
         'ts/restrict-template-expressions': 'error',
+        'ts/strict-boolean-expressions': 'error',
         'ts/unbound-method': 'error',
     }
 
