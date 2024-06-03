@@ -13,13 +13,12 @@ export async function react(options: OptionsFiles & OptionsReact & OptionsOverri
         files = [GLOB_JSX, GLOB_TSX],
         jsx = true,
         overrides = {},
-        typescript = true,
         version = 'detect',
     } = options
 
     const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : undefined
 
-    const isTypeAware = !!tsconfigPath || !typescript
+    const isTypeAware = !!tsconfigPath
 
     await ensurePackages([
         '@eslint-react/eslint-plugin',

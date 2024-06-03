@@ -163,8 +163,7 @@ export interface OptionsIsInEditor {
 }
 
 export interface OptionsReact {
-    tsconfigPath?: string
-    typescript?: boolean
+    tsconfigPath?: string | string[]
     jsx?: boolean
     /** react 版本 */
     version?: string

@@ -88,6 +88,8 @@ export function lincy(
 
     const stylisticOptions = options.stylistic === false ? false : (typeof options.stylistic === 'object' ? options.stylistic : {})
 
+    const tsconfigPath = typeof enableTypeScript !== 'boolean' && 'tsconfigPath' in enableTypeScript ? enableTypeScript.tsconfigPath : undefined
+
     if (stylisticOptions) {
         if (!('jsx' in stylisticOptions)) {
             stylisticOptions.jsx = options.jsx ?? true
@@ -140,6 +142,7 @@ export function lincy(
             ...(typeof enableTypeScript !== 'boolean' ? enableTypeScript : {}),
             componentExts,
             overrides: overrides.typescript,
+            tsconfigPath,
         }))
     }
 
@@ -176,9 +179,9 @@ export function lincy(
 
     if (enableReact) {
         configs.push(react({
+            tsconfigPath,
             ...(typeof enableReact !== 'boolean' ? enableReact : {}),
             overrides: overrides.react,
-            typescript: !!enableTypeScript,
         }))
     }
 
