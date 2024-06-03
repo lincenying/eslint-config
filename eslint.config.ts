@@ -10,6 +10,7 @@ const config = lincy(
             indent: 4,
             quotes: 'single',
         },
+        unocss: true,
         formatters: true,
         overrides: {
             stylistic: {

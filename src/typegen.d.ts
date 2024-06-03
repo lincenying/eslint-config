@@ -292,7 +292,7 @@ export interface RuleOptions {
    */
   'func-names'?: Linter.RuleEntry<FuncNames>
   /**
-   * Enforce the consistent use of either `function` declarations or expressions
+   * Enforce the consistent use of either `function` declarations or expressions assigned to variables
    * @see https://eslint.org/docs/latest/rules/func-style
    */
   'func-style'?: Linter.RuleEntry<FuncStyle>
@@ -2580,6 +2580,16 @@ export interface RuleOptions {
    */
   'react-naming-convention/use-state'?: Linter.RuleEntry<[]>
   'react-refresh/only-export-components'?: Linter.RuleEntry<ReactRefreshOnlyExportComponents>
+  /**
+   * enforce boolean attributes notation in JSX
+   * @see https://eslint-react.xyz/rules/avoid-shorthand-boolean
+   */
+  'react/avoid-shorthand-boolean'?: Linter.RuleEntry<[]>
+  /**
+   * enforce using fragment component instead of shorthand fragment syntax
+   * @see https://eslint-react.xyz/rules/avoid-shorthand-fragment
+   */
+  'react/avoid-shorthand-fragment'?: Linter.RuleEntry<[]>
   /**
    * require all 'forwardRef' components include a 'ref' parameter
    * @see https://eslint-react.xyz/rules/ensure-forward-ref-using-ref

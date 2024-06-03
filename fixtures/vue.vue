@@ -4,7 +4,7 @@
         <button @click="incrementCounter">
             Click me!
         </button>
-        <p>Counter: {{ counter }}</p>
+        <p class="p-24px">Counter: {{ counter }}</p>
     </div>
 </template>
 

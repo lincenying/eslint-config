@@ -1007,11 +1007,10 @@ async function react(options = {}) {
     files = [GLOB_JSX, GLOB_TSX],
     jsx = true,
     overrides = {},
-    typescript: typescript2 = true,
     version = "detect"
   } = options;
   const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : void 0;
-  const isTypeAware = !!tsconfigPath || !typescript2;
+  const isTypeAware = !!tsconfigPath;
   await ensurePackages([
     "@eslint-react/eslint-plugin",
     "eslint-plugin-react-hooks",
@@ -1463,6 +1462,7 @@ async function typescript(options = {}) {
     "ts/no-unsafe-return": "error",
     "ts/restrict-plus-operands": "error",
     "ts/restrict-template-expressions": "error",
+    "ts/strict-boolean-expressions": "error",
     "ts/unbound-method": "error"
   };
   const [
@@ -1999,6 +1999,7 @@ function lincy(options = {}, ...userConfigs) {
     vue: enableVue = VuePackages.some((i) => (0, import_local_pkg4.isPackageExists)(i))
   } = options;
   const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === "object" ? options.stylistic : {};
+  const tsconfigPath = typeof enableTypeScript !== "boolean" && "tsconfigPath" in enableTypeScript ? enableTypeScript.tsconfigPath : void 0;
   if (stylisticOptions) {
     if (!("jsx" in stylisticOptions)) {
       stylisticOptions.jsx = options.jsx ?? true;
@@ -2041,7 +2042,8 @@ function lincy(options = {}, ...userConfigs) {
     configs2.push(typescript({
       ...typeof enableTypeScript !== "boolean" ? enableTypeScript : {},
       componentExts,
-      overrides: overrides.typescript
+      overrides: overrides.typescript,
+      tsconfigPath
     }));
   }
   if (stylisticOptions) {
@@ -2073,9 +2075,9 @@ function lincy(options = {}, ...userConfigs) {
   }
   if (enableReact) {
     configs2.push(react({
+      tsconfigPath,
       ...typeof enableReact !== "boolean" ? enableReact : {},
-      overrides: overrides.react,
-      typescript: !!enableTypeScript
+      overrides: overrides.react
     }));
   }
   if (enableUnoCSS) {
