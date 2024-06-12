@@ -30,6 +30,7 @@ export async function sortPackageJson(): Promise<TypedFlatConfigItem[]> {
                             'private',
                             'packageManager',
                             'description',
+                            'contributors',
                             'author',
                             'license',
                             'funding',

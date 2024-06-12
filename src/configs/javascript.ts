@@ -35,6 +35,9 @@ export async function javascript(
             linterOptions: {
                 reportUnusedDisableDirectives: true,
             },
+            name: 'eslint:javascript:setup',
+        },
+        {
             name: 'eslint:javascript:rules',
             plugins: {
                 'antfu': pluginAntfu,

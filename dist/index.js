@@ -186,6 +186,9 @@ async function javascript(options = {}) {
       linterOptions: {
         reportUnusedDisableDirectives: true
       },
+      name: "eslint:javascript:setup"
+    },
+    {
       name: "eslint:javascript:rules",
       plugins: {
         "antfu": default2,
@@ -552,6 +555,23 @@ async function jsonc(options = {}) {
   ];
 }
 
+// src/configs/jsx.ts
+async function jsx() {
+  return [
+    {
+      files: [GLOB_JSX, GLOB_TSX],
+      languageOptions: {
+        parserOptions: {
+          ecmaFeatures: {
+            jsx: true
+          }
+        }
+      },
+      name: "eslint:jsx:setup"
+    }
+  ];
+}
+
 // src/configs/markdown.ts
 import * as parserPlain from "eslint-parser-plain";
 import { mergeProcessors, processorPassThrough } from "eslint-merge-processors";
@@ -676,7 +696,7 @@ async function stylistic(options = {}) {
   } = options;
   const {
     indent,
-    jsx,
+    jsx: jsx2,
     lessOpinionated,
     quotes,
     semi
@@ -685,7 +705,7 @@ async function stylistic(options = {}) {
   const config = pluginStylistic.configs.customize({
     flat: true,
     indent,
-    jsx,
+    jsx: jsx2,
     pluginName: "style",
     quotes,
     semi
@@ -912,7 +932,7 @@ var ReactRefreshAllowConstantExportPackages = [
 async function react(options = {}) {
   const {
     files = [GLOB_JSX, GLOB_TSX],
-    jsx = true,
+    jsx: jsx2 = true,
     overrides = {},
     version = "detect"
   } = options;
@@ -958,7 +978,7 @@ async function react(options = {}) {
         parser: parserTs,
         parserOptions: {
           ecmaFeatures: {
-            jsx
+            jsx: jsx2
           },
           ...isTypeAware ? { project: tsconfigPath } : {}
         }
@@ -1088,6 +1108,7 @@ async function sortPackageJson() {
               "private",
               "packageManager",
               "description",
+              "contributors",
               "author",
               "license",
               "funding",
@@ -1464,7 +1485,7 @@ async function typescript(options = {}) {
       }
     }] : [],
     {
-      files: ["**/*.d.ts"],
+      files: ["**/*.d.?([cm])ts"],
       name: "eslint:typescript:disables:dts",
       rules: {
         "eslint-comments/no-unlimited-disable": "off",
@@ -1898,6 +1919,7 @@ function lincy(options = {}, ...userConfigs) {
     componentExts = [],
     gitignore: enableGitignore = true,
     isInEditor = !!((process3.env.VSCODE_PID || process3.env.JETBRAINS_IDE || process3.env.VIM) && !process3.env.CI),
+    jsx: enableJsx = true,
     overrides = {},
     react: enableReact = ReactPackages.some((i) => isPackageExists3(i)),
     regexp: enableRegexp = true,
@@ -1909,7 +1931,7 @@ function lincy(options = {}, ...userConfigs) {
   const tsconfigPath = typeof enableTypeScript !== "boolean" && "tsconfigPath" in enableTypeScript ? enableTypeScript.tsconfigPath : void 0;
   if (stylisticOptions) {
     if (!("jsx" in stylisticOptions)) {
-      stylisticOptions.jsx = options.jsx ?? true;
+      stylisticOptions.jsx = enableJsx;
     }
   }
   const configs2 = [];
@@ -1952,6 +1974,9 @@ function lincy(options = {}, ...userConfigs) {
       overrides: overrides.typescript,
       tsconfigPath
     }));
+  }
+  if (enableJsx) {
+    configs2.push(jsx());
   }
   if (stylisticOptions) {
     configs2.push(stylistic({
@@ -2092,6 +2117,7 @@ export {
   javascript,
   jsdoc,
   jsonc,
+  jsx,
   lincy,
   markdown,
   node,

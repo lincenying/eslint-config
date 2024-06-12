@@ -9,6 +9,7 @@ import {
     javascript,
     jsdoc,
     jsonc,
+    jsx,
     markdown,
     node,
     perfectionist,
@@ -78,6 +79,7 @@ export function lincy(
         componentExts = [],
         gitignore: enableGitignore = true,
         isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
+        jsx: enableJsx = true,
         overrides = {},
         react: enableReact = ReactPackages.some(i => isPackageExists(i)),
         regexp: enableRegexp = true,
@@ -92,7 +94,7 @@ export function lincy(
 
     if (stylisticOptions) {
         if (!('jsx' in stylisticOptions)) {
-            stylisticOptions.jsx = options.jsx ?? true
+            stylisticOptions.jsx = enableJsx
         }
     }
 
@@ -144,6 +146,10 @@ export function lincy(
             overrides: overrides.typescript,
             tsconfigPath,
         }))
+    }
+
+    if (enableJsx) {
+        configs.push(jsx())
     }
 
     if (stylisticOptions) {

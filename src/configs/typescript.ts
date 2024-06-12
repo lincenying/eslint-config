@@ -140,7 +140,7 @@ export async function typescript(
             },
         }] : [],
         {
-            files: ['**/*.d.ts'],
+            files: ['**/*.d.?([cm])ts'],
             name: 'eslint:typescript:disables:dts',
             rules: {
                 'eslint-comments/no-unlimited-disable': 'off',
