@@ -187,6 +187,7 @@ var GLOB_EXCLUDE = [
   "**/.output",
   "**/.vite-inspect",
   "**/.yarn",
+  "**/vite.config.*.timestamp-*",
   "**/CHANGELOG*.md",
   "**/*.min.*",
   "**/LICENSE*",
@@ -205,7 +206,8 @@ async function ignores(options = {}) {
       ignores: [
         ...GLOB_EXCLUDE,
         ...ignores2
-      ]
+      ],
+      name: "eslint:ignores"
     }
   ];
 }
@@ -730,6 +732,7 @@ async function markdown(options = {}) {
         "ts/no-namespace": "off",
         "ts/no-redeclare": "off",
         "ts/no-require-imports": "off",
+        "ts/no-unused-expressions": "off",
         "ts/no-unused-vars": "off",
         "ts/no-use-before-define": "off",
         "ts/no-var-requires": "off",
@@ -1469,7 +1472,6 @@ async function typescript(options = {}) {
   const typeAwareRules = {
     "dot-notation": "off",
     "no-implied-eval": "off",
-    "no-throw-literal": "off",
     "ts/await-thenable": "error",
     "ts/dot-notation": ["error", { allowKeywords: true }],
     "ts/no-floating-promises": "error",
@@ -1482,9 +1484,12 @@ async function typescript(options = {}) {
     "ts/no-unsafe-call": "error",
     "ts/no-unsafe-member-access": "error",
     "ts/no-unsafe-return": "error",
+    "ts/promise-function-async": "error",
     "ts/restrict-plus-operands": "error",
     "ts/restrict-template-expressions": "error",
-    "ts/strict-boolean-expressions": "error",
+    "ts/return-await": ["error", "in-try-catch"],
+    "ts/strict-boolean-expressions": ["error", { allowNullableBoolean: true, allowNullableObject: true }],
+    "ts/switch-exhaustiveness-check": "error",
     "ts/unbound-method": "error"
   };
   const [
@@ -1504,7 +1509,10 @@ async function typescript(options = {}) {
           extraFileExtensions: componentExts.map((ext) => `.${ext}`),
           sourceType: "module",
           ...typeAware ? {
-            project: tsconfigPath,
+            projectService: {
+              allowDefaultProject: ["./*.js"],
+              defaultProject: tsconfigPath
+            },
             tsconfigRootDir: import_node_process2.default.cwd()
           } : {},
           ...parserOptions
@@ -1547,12 +1555,12 @@ async function typescript(options = {}) {
         "no-use-before-define": "off",
         "no-useless-constructor": "off",
         "ts/ban-ts-comment": ["error", { "ts-ignore": "allow-with-description" }],
-        "ts/ban-types": ["error", { types: { Function: false } }],
         "ts/consistent-type-definitions": ["error", "interface"],
         "ts/consistent-type-imports": ["error", { disallowTypeAnnotations: false, prefer: "type-imports" }],
         "ts/method-signature-style": ["error", "property"],
         "ts/no-dupe-class-members": "error",
         "ts/no-dynamic-delete": "off",
+        "ts/no-empty-object-type": ["error", { allowInterfaces: "always" }],
         "ts/no-explicit-any": "off",
         "ts/no-extraneous-class": "off",
         "ts/no-import-type-side-effects": "error",
@@ -1564,6 +1572,7 @@ async function typescript(options = {}) {
         "ts/no-unused-vars": "off",
         "ts/no-use-before-define": ["error", { classes: false, functions: false, variables: true }],
         "ts/no-useless-constructor": "off",
+        "ts/no-wrapper-object-types": "error",
         "ts/prefer-ts-expect-error": "error",
         "ts/triple-slash-reference": "off",
         "ts/unified-signatures": "off",
@@ -1574,7 +1583,7 @@ async function typescript(options = {}) {
       files: filesTypeAware,
       name: "eslint:typescript:rules-type-aware",
       rules: {
-        ...tsconfigPath ? typeAwareRules : {},
+        ...typeAwareRules,
         ...overrides
       }
     }] : [],

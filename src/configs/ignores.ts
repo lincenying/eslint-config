@@ -12,6 +12,7 @@ export async function ignores(options: OptionsIgnores = {}): Promise<TypedFlatCo
                 ...GLOB_EXCLUDE,
                 ...ignores,
             ],
+            name: 'eslint:ignores',
         },
     ]
 }
