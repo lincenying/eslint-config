@@ -118,7 +118,7 @@ export interface OptionsTypeScriptWithTypes {
      * 提供此选项后，将启用类型感知规则。
      * @see https://typescript-eslint.io/linting/typed-linting/
      */
-    tsconfigPath?: string | string[]
+    tsconfigPath?: string
 }
 
 export interface OptionsHasTypeScript {
@@ -145,6 +145,15 @@ export interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent
 
 export interface OptionsOverrides {
     overrides?: TypedFlatConfigItem['rules']
+}
+
+export interface OptionsProjectType {
+    /**
+     * Type of the project. `lib` will enable more strict rules for libraries.
+     *
+     * @default 'app'
+     */
+    type?: 'app' | 'lib'
 }
 
 export interface OptionsRegExp {
@@ -182,7 +191,7 @@ export interface OptionsUnoCSS {
     strict?: boolean
 }
 
-export interface OptionsConfig extends OptionsComponentExts {
+export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
     /**
      * 启用 gitignore 支持.
      *

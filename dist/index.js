@@ -1,6 +1,4 @@
 // src/factory.ts
-import process3 from "node:process";
-import fs from "node:fs";
 import { isPackageExists as isPackageExists3 } from "local-pkg";
 import { FlatConfigComposer } from "eslint-flat-config-utils";
 
@@ -447,6 +445,9 @@ async function ensurePackages(packages) {
   if (result) {
     await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
   }
+}
+function isInEditorEnv() {
+  return !!((process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM || process.env.NVIM) && !process.env.CI);
 }
 
 // src/configs/jsdoc.ts
@@ -1354,6 +1355,7 @@ async function test(options = {}) {
         "test/no-only-tests": isInEditor ? "off" : "error",
         "test/prefer-hooks-in-order": "error",
         "test/prefer-lowercase-title": "error",
+        "ts/explicit-function-return-type": "off",
         ...overrides
       }
     }
@@ -1366,14 +1368,15 @@ async function typescript(options = {}) {
   const {
     componentExts = [],
     overrides = {},
-    parserOptions = {}
+    parserOptions = {},
+    type = "app"
   } = options;
   const files = options.files ?? [
     GLOB_SRC,
     ...componentExts.map((ext) => `**/*.${ext}`)
   ];
   const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
-  const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : void 0;
+  const tsconfigPath = options?.tsconfigPath ? options.tsconfigPath : void 0;
   const isTypeAware = !!tsconfigPath;
   const typeAwareRules = {
     "dot-notation": "off",
@@ -1462,7 +1465,10 @@ async function typescript(options = {}) {
         "no-useless-constructor": "off",
         "ts/ban-ts-comment": ["error", { "ts-ignore": "allow-with-description" }],
         "ts/consistent-type-definitions": ["error", "interface"],
-        "ts/consistent-type-imports": ["error", { disallowTypeAnnotations: false, prefer: "type-imports" }],
+        "ts/consistent-type-imports": ["error", {
+          disallowTypeAnnotations: false,
+          prefer: "type-imports"
+        }],
         "ts/method-signature-style": ["error", "property"],
         "ts/no-dupe-class-members": "error",
         "ts/no-dynamic-delete": "off",
@@ -1479,9 +1485,15 @@ async function typescript(options = {}) {
         "ts/no-use-before-define": ["error", { classes: false, functions: false, variables: true }],
         "ts/no-useless-constructor": "off",
         "ts/no-wrapper-object-types": "error",
-        "ts/prefer-ts-expect-error": "error",
         "ts/triple-slash-reference": "off",
         "ts/unified-signatures": "off",
+        ...type === "lib" ? {
+          "ts/explicit-function-return-type": ["error", {
+            allowExpressions: true,
+            allowHigherOrderFunctions: true,
+            allowIIFEs: true
+          }]
+        } : {},
         ...overrides
       }
     },
@@ -1927,7 +1939,7 @@ function lincy(options = {}, ...userConfigs) {
     autoRenamePlugins = true,
     componentExts = [],
     gitignore: enableGitignore = true,
-    isInEditor = !!((process3.env.VSCODE_PID || process3.env.JETBRAINS_IDE || process3.env.VIM) && !process3.env.CI),
+    isInEditor = isInEditorEnv(),
     jsx: enableJsx = true,
     overrides = {},
     react: enableReact = ReactPackages.some((i) => isPackageExists3(i)),
@@ -1948,9 +1960,7 @@ function lincy(options = {}, ...userConfigs) {
     if (typeof enableGitignore !== "boolean") {
       configs2.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r(enableGitignore)]));
     } else {
-      if (fs.existsSync(".gitignore")) {
-        configs2.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r()]));
-      }
+      configs2.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r({ strict: false })]));
     }
   }
   configs2.push(
@@ -1981,7 +1991,8 @@ function lincy(options = {}, ...userConfigs) {
       ...typeof enableTypeScript !== "boolean" ? enableTypeScript : {},
       componentExts,
       overrides: overrides.typescript,
-      tsconfigPath
+      tsconfigPath,
+      type: options.type
     }));
   }
   if (enableJsx) {
@@ -2123,6 +2134,7 @@ export {
   ignores,
   imports,
   interopDefault,
+  isInEditorEnv,
   javascript,
   jsdoc,
   jsonc,

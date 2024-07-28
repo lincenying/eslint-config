@@ -66,6 +66,7 @@ __export(src_exports, {
   ignores: () => ignores,
   imports: () => imports,
   interopDefault: () => interopDefault,
+  isInEditorEnv: () => isInEditorEnv,
   javascript: () => javascript,
   jsdoc: () => jsdoc,
   jsonc: () => jsonc,
@@ -93,8 +94,6 @@ __export(src_exports, {
 module.exports = __toCommonJS(src_exports);
 
 // src/factory.ts
-var import_node_process3 = __toESM(require("process"), 1);
-var import_node_fs = __toESM(require("fs"), 1);
 var import_local_pkg4 = require("local-pkg");
 var import_eslint_flat_config_utils = require("eslint-flat-config-utils");
 
@@ -541,6 +540,9 @@ async function ensurePackages(packages) {
   if (result) {
     await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
   }
+}
+function isInEditorEnv() {
+  return !!((import_node_process.default.env.VSCODE_PID || import_node_process.default.env.VSCODE_CWD || import_node_process.default.env.JETBRAINS_IDE || import_node_process.default.env.VIM || import_node_process.default.env.NVIM) && !import_node_process.default.env.CI);
 }
 
 // src/configs/jsdoc.ts
@@ -1448,6 +1450,7 @@ async function test(options = {}) {
         "test/no-only-tests": isInEditor ? "off" : "error",
         "test/prefer-hooks-in-order": "error",
         "test/prefer-lowercase-title": "error",
+        "ts/explicit-function-return-type": "off",
         ...overrides
       }
     }
@@ -1460,14 +1463,15 @@ async function typescript(options = {}) {
   const {
     componentExts = [],
     overrides = {},
-    parserOptions = {}
+    parserOptions = {},
+    type = "app"
   } = options;
   const files = options.files ?? [
     GLOB_SRC,
     ...componentExts.map((ext) => `**/*.${ext}`)
   ];
   const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
-  const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : void 0;
+  const tsconfigPath = options?.tsconfigPath ? options.tsconfigPath : void 0;
   const isTypeAware = !!tsconfigPath;
   const typeAwareRules = {
     "dot-notation": "off",
@@ -1556,7 +1560,10 @@ async function typescript(options = {}) {
         "no-useless-constructor": "off",
         "ts/ban-ts-comment": ["error", { "ts-ignore": "allow-with-description" }],
         "ts/consistent-type-definitions": ["error", "interface"],
-        "ts/consistent-type-imports": ["error", { disallowTypeAnnotations: false, prefer: "type-imports" }],
+        "ts/consistent-type-imports": ["error", {
+          disallowTypeAnnotations: false,
+          prefer: "type-imports"
+        }],
         "ts/method-signature-style": ["error", "property"],
         "ts/no-dupe-class-members": "error",
         "ts/no-dynamic-delete": "off",
@@ -1573,9 +1580,15 @@ async function typescript(options = {}) {
         "ts/no-use-before-define": ["error", { classes: false, functions: false, variables: true }],
         "ts/no-useless-constructor": "off",
         "ts/no-wrapper-object-types": "error",
-        "ts/prefer-ts-expect-error": "error",
         "ts/triple-slash-reference": "off",
         "ts/unified-signatures": "off",
+        ...type === "lib" ? {
+          "ts/explicit-function-return-type": ["error", {
+            allowExpressions: true,
+            allowHigherOrderFunctions: true,
+            allowIIFEs: true
+          }]
+        } : {},
         ...overrides
       }
     },
@@ -2021,7 +2034,7 @@ function lincy(options = {}, ...userConfigs) {
     autoRenamePlugins = true,
     componentExts = [],
     gitignore: enableGitignore = true,
-    isInEditor = !!((import_node_process3.default.env.VSCODE_PID || import_node_process3.default.env.JETBRAINS_IDE || import_node_process3.default.env.VIM) && !import_node_process3.default.env.CI),
+    isInEditor = isInEditorEnv(),
     jsx: enableJsx = true,
     overrides = {},
     react: enableReact = ReactPackages.some((i) => (0, import_local_pkg4.isPackageExists)(i)),
@@ -2042,9 +2055,7 @@ function lincy(options = {}, ...userConfigs) {
     if (typeof enableGitignore !== "boolean") {
       configs2.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r(enableGitignore)]));
     } else {
-      if (import_node_fs.default.existsSync(".gitignore")) {
-        configs2.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r()]));
-      }
+      configs2.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r({ strict: false })]));
     }
   }
   configs2.push(
@@ -2075,7 +2086,8 @@ function lincy(options = {}, ...userConfigs) {
       ...typeof enableTypeScript !== "boolean" ? enableTypeScript : {},
       componentExts,
       overrides: overrides.typescript,
-      tsconfigPath
+      tsconfigPath,
+      type: options.type
     }));
   }
   if (enableJsx) {
@@ -2217,6 +2229,7 @@ var src_default = lincy;
   ignores,
   imports,
   interopDefault,
+  isInEditorEnv,
   javascript,
   jsdoc,
   jsonc,

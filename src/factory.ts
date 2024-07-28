@@ -1,5 +1,3 @@
-import process from 'node:process'
-import fs from 'node:fs'
 import { isPackageExists } from 'local-pkg'
 import { FlatConfigComposer } from 'eslint-flat-config-utils'
 import {
@@ -26,7 +24,7 @@ import {
     yaml,
 } from './configs'
 import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
-import { interopDefault } from './utils'
+import { interopDefault, isInEditorEnv } from './utils'
 import { formatters } from './configs/formatters'
 import { regexp } from './configs/regexp'
 
@@ -78,7 +76,7 @@ export function lincy(
         autoRenamePlugins = true,
         componentExts = [],
         gitignore: enableGitignore = true,
-        isInEditor = !!((process.env.VSCODE_PID || process.env.JETBRAINS_IDE || process.env.VIM) && !process.env.CI),
+        isInEditor = isInEditorEnv(),
         jsx: enableJsx = true,
         overrides = {},
         react: enableReact = ReactPackages.some(i => isPackageExists(i)),
@@ -105,9 +103,7 @@ export function lincy(
             configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r(enableGitignore)]))
         }
         else {
-            if (fs.existsSync('.gitignore')) {
-                configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r()]))
-            }
+            configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r({ strict: false })]))
         }
     }
 
@@ -145,6 +141,7 @@ export function lincy(
             componentExts,
             overrides: overrides.typescript,
             tsconfigPath,
+            type: options.type,
         }))
     }
 
