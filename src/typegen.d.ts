@@ -4572,6 +4572,11 @@ export interface RuleOptions {
    */
   'ts/no-unnecessary-condition'?: Linter.RuleEntry<TsNoUnnecessaryCondition>
   /**
+   * Disallow unnecessary assignment of constructor property parameter
+   * @see https://typescript-eslint.io/rules/no-unnecessary-parameter-property-assignment
+   */
+  'ts/no-unnecessary-parameter-property-assignment'?: Linter.RuleEntry<[]>
+  /**
    * Disallow unnecessary namespace qualifiers
    * @see https://typescript-eslint.io/rules/no-unnecessary-qualifier
    */
@@ -11809,10 +11814,6 @@ type TsNoExtraneousClass = []|[{
 }]
 // ----- ts/no-floating-promises -----
 type TsNoFloatingPromises = []|[{
-  
-  ignoreVoid?: boolean
-  
-  ignoreIIFE?: boolean
   allowForKnownSafePromises?: (string | {
     from: "file"
     name: (string | [string, ...(string)[]])
@@ -11837,6 +11838,12 @@ type TsNoFloatingPromises = []|[{
     name: (string | [string, ...(string)[]])
     package: string
   })[]
+  
+  checkThenables?: boolean
+  
+  ignoreVoid?: boolean
+  
+  ignoreIIFE?: boolean
 }]
 // ----- ts/no-inferrable-types -----
 type TsNoInferrableTypes = []|[{
@@ -12192,7 +12199,7 @@ type TsRestrictTemplateExpressions = []|[{
   allowNever?: boolean
 }]
 // ----- ts/return-await -----
-type TsReturnAwait = []|[("in-try-catch" | "always" | "never")]
+type TsReturnAwait = []|[("in-try-catch" | "always" | "never" | "error-handling-correctness-only")]
 // ----- ts/sort-type-constituents -----
 type TsSortTypeConstituents = []|[{
   
