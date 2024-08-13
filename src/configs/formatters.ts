@@ -36,6 +36,7 @@ export async function formatters(
     const prettierOptions: VendoredPrettierOptions = Object.assign(
         {
             endOfLine: 'lf',
+            printWidth: 200,
             semi,
             singleQuote: quotes === 'single',
             tabWidth: typeof indent === 'number' ? indent : defaultIndent,
@@ -150,7 +151,6 @@ export async function formatters(
                 [`format/${formater}`]: [
                     'error',
                     formater === 'prettier' ? {
-                        printWidth: 200,
                         ...prettierOptions,
                         embeddedLanguageFormatting: 'off',
                         parser: 'markdown',

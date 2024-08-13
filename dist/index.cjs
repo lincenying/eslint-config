@@ -99,7 +99,7 @@ var import_eslint_flat_config_utils = require("eslint-flat-config-utils");
 
 // src/plugins.ts
 var import_eslint_plugin_antfu = __toESM(require("eslint-plugin-antfu"), 1);
-var import_eslint_plugin_eslint_comments = __toESM(require("eslint-plugin-eslint-comments"), 1);
+var import_eslint_plugin_eslint_comments = __toESM(require("@eslint-community/eslint-plugin-eslint-comments"), 1);
 var pluginImport = __toESM(require("eslint-plugin-import-x"), 1);
 var import_eslint_plugin_n = __toESM(require("eslint-plugin-n"), 1);
 var import_eslint_plugin_unicorn = __toESM(require("eslint-plugin-unicorn"), 1);
@@ -861,6 +861,7 @@ async function formatters(options = {}, stylistic2 = {}) {
   const prettierOptions = Object.assign(
     {
       endOfLine: "lf",
+      printWidth: 200,
       semi,
       singleQuote: quotes === "single",
       tabWidth: typeof indent === "number" ? indent : defaultIndent,
@@ -968,7 +969,6 @@ async function formatters(options = {}, stylistic2 = {}) {
         [`format/${formater}`]: [
           "error",
           formater === "prettier" ? {
-            printWidth: 200,
             ...prettierOptions,
             embeddedLanguageFormatting: "off",
             parser: "markdown"
@@ -1421,7 +1421,7 @@ async function test(options = {}) {
     pluginVitest,
     pluginNoOnlyTests
   ] = await Promise.all([
-    interopDefault(import("eslint-plugin-vitest")),
+    interopDefault(import("@vitest/eslint-plugin")),
     // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-no-only-tests"))
   ]);

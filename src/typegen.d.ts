@@ -219,47 +219,47 @@ export interface RuleOptions {
   'eqeqeq'?: Linter.RuleEntry<Eqeqeq>
   /**
    * require a `eslint-enable` comment for every `eslint-disable` comment
-   * @see https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/disable-enable-pair.html
+   * @see https://eslint-community.github.io/eslint-plugin-eslint-comments/rules/disable-enable-pair.html
    */
   'eslint-comments/disable-enable-pair'?: Linter.RuleEntry<EslintCommentsDisableEnablePair>
   /**
    * disallow a `eslint-enable` comment for multiple `eslint-disable` comments
-   * @see https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-aggregating-enable.html
+   * @see https://eslint-community.github.io/eslint-plugin-eslint-comments/rules/no-aggregating-enable.html
    */
   'eslint-comments/no-aggregating-enable'?: Linter.RuleEntry<[]>
   /**
    * disallow duplicate `eslint-disable` comments
-   * @see https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-duplicate-disable.html
+   * @see https://eslint-community.github.io/eslint-plugin-eslint-comments/rules/no-duplicate-disable.html
    */
   'eslint-comments/no-duplicate-disable'?: Linter.RuleEntry<[]>
   /**
    * disallow `eslint-disable` comments about specific rules
-   * @see https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-restricted-disable.html
+   * @see https://eslint-community.github.io/eslint-plugin-eslint-comments/rules/no-restricted-disable.html
    */
   'eslint-comments/no-restricted-disable'?: Linter.RuleEntry<EslintCommentsNoRestrictedDisable>
   /**
    * disallow `eslint-disable` comments without rule names
-   * @see https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unlimited-disable.html
+   * @see https://eslint-community.github.io/eslint-plugin-eslint-comments/rules/no-unlimited-disable.html
    */
   'eslint-comments/no-unlimited-disable'?: Linter.RuleEntry<[]>
   /**
    * disallow unused `eslint-disable` comments
-   * @see https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-disable.html
+   * @see https://eslint-community.github.io/eslint-plugin-eslint-comments/rules/no-unused-disable.html
    */
   'eslint-comments/no-unused-disable'?: Linter.RuleEntry<[]>
   /**
    * disallow unused `eslint-enable` comments
-   * @see https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-unused-enable.html
+   * @see https://eslint-community.github.io/eslint-plugin-eslint-comments/rules/no-unused-enable.html
    */
   'eslint-comments/no-unused-enable'?: Linter.RuleEntry<[]>
   /**
    * disallow ESLint directive-comments
-   * @see https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/no-use.html
+   * @see https://eslint-community.github.io/eslint-plugin-eslint-comments/rules/no-use.html
    */
   'eslint-comments/no-use'?: Linter.RuleEntry<EslintCommentsNoUse>
   /**
    * require include descriptions in ESLint directive-comments
-   * @see https://mysticatea.github.io/eslint-plugin-eslint-comments/rules/require-description.html
+   * @see https://eslint-community.github.io/eslint-plugin-eslint-comments/rules/require-description.html
    */
   'eslint-comments/require-description'?: Linter.RuleEntry<EslintCommentsRequireDescription>
   /**
@@ -658,7 +658,7 @@ export interface RuleOptions {
   'jsdoc/check-tag-names'?: Linter.RuleEntry<JsdocCheckTagNames>
   /**
    * Checks that any `@template` names are actually used in the connected `@typedef` or type alias.
-   * @see https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/require-template.md#repos-sticky-header
+   * @see https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/check-template-names.md#repos-sticky-header
    */
   'jsdoc/check-template-names'?: Linter.RuleEntry<[]>
   /**
@@ -696,6 +696,11 @@ export interface RuleOptions {
    * @see https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/informative-docs.md#repos-sticky-header
    */
   'jsdoc/informative-docs'?: Linter.RuleEntry<JsdocInformativeDocs>
+  /**
+   * Enforces minimum number of newlines before JSDoc comment blocks
+   * @see https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/lines-before-block.md#repos-sticky-header
+   */
+  'jsdoc/lines-before-block'?: Linter.RuleEntry<JsdocLinesBeforeBlock>
   /**
    * Enforces a regular expression pattern on descriptions.
    * @see https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/match-description.md#repos-sticky-header
@@ -2688,13 +2693,11 @@ export interface RuleOptions {
   /**
    * disallow complex conditional rendering
    * @see https://eslint-react.xyz/docs/rules/no-complex-conditional-rendering
-   * @deprecated
    */
   'react/no-complex-conditional-rendering'?: Linter.RuleEntry<[]>
   /**
    * disallow complex conditional rendering
    * @see https://eslint-react.xyz/docs/rules/no-complex-conditional-rendering
-   * @deprecated
    */
   'react/no-complicated-conditional-rendering'?: Linter.RuleEntry<[]>
   /**
@@ -2728,7 +2731,7 @@ export interface RuleOptions {
    */
   'react/no-direct-mutation-state'?: Linter.RuleEntry<[]>
   /**
-   * disallow duplicate keys in 'key' prop when rendering list
+   * disallow duplicate keys when rendering list
    * @see https://eslint-react.xyz/docs/rules/no-duplicate-key
    */
   'react/no-duplicate-key'?: Linter.RuleEntry<[]>
@@ -2748,7 +2751,7 @@ export interface RuleOptions {
    */
   'react/no-missing-component-display-name'?: Linter.RuleEntry<[]>
   /**
-   * require 'key' prop when rendering list
+   * require 'key' when rendering list
    * @see https://eslint-react.xyz/docs/rules/no-missing-key
    */
   'react/no-missing-key'?: Linter.RuleEntry<[]>
@@ -3872,6 +3875,11 @@ export interface RuleOptions {
    */
   'test/expect-expect'?: Linter.RuleEntry<TestExpectExpect>
   /**
+   * Enforce padding around afterAll blocks
+   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/index.md
+   */
+  'test/index'?: Linter.RuleEntry<[]>
+  /**
    * enforce a maximum number of expect per test
    * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/max-expects.md
    */
@@ -4602,7 +4610,7 @@ export interface RuleOptions {
    */
   'ts/no-unnecessary-type-constraint'?: Linter.RuleEntry<[]>
   /**
-   * Disallow type parameters that only appear once
+   * Disallow type parameters that aren't used multiple times
    * @see https://typescript-eslint.io/rules/no-unnecessary-type-parameters
    */
   'ts/no-unnecessary-type-parameters'?: Linter.RuleEntry<[]>
@@ -4658,7 +4666,7 @@ export interface RuleOptions {
   'ts/no-unused-expressions'?: Linter.RuleEntry<TsNoUnusedExpressions>
   /**
    * Disallow unused variables
-   * @see https://github.com/sweepline/eslint-plugin-unused-imports/blob/master/docs/rules/no-unused-imports.md
+   * @see https://typescript-eslint.io/rules/no-unused-vars
    */
   'ts/no-unused-vars'?: Linter.RuleEntry<TsNoUnusedVars>
   /**
@@ -5586,7 +5594,7 @@ export interface RuleOptions {
   'unused-imports/no-unused-imports'?: Linter.RuleEntry<UnusedImportsNoUnusedImports>
   /**
    * Disallow unused variables
-   * @see https://github.com/sweepline/eslint-plugin-unused-imports/blob/master/docs/rules/no-unused-imports.md
+   * @see https://github.com/sweepline/eslint-plugin-unused-imports/blob/master/docs/rules/no-unused-vars.md
    */
   'unused-imports/no-unused-vars'?: Linter.RuleEntry<UnusedImportsNoUnusedVars>
   /**
@@ -7654,6 +7662,12 @@ type JsdocInformativeDocs = []|[{
   excludedTags?: string[]
   uselessWords?: string[]
 }]
+// ----- jsdoc/lines-before-block -----
+type JsdocLinesBeforeBlock = []|[{
+  excludedTags?: string[]
+  ignoreSameLine?: boolean
+  lines?: number
+}]
 // ----- jsdoc/match-description -----
 type JsdocMatchDescription = []|[{
   contexts?: (string | {
@@ -9701,9 +9715,9 @@ type PerfectionistSortObjects = []|[{
   
   styledComponents?: boolean
   
-  ignorePattern?: string[]
+  destructureOnly?: boolean
   
-  customIgnore?: unknown[]
+  ignorePattern?: string[]
   
   groups?: (string | string[])[]
   
@@ -11127,7 +11141,8 @@ type TestNoRestrictedViMethods = []|[{
 }]
 // ----- test/no-standalone-expect -----
 type TestNoStandaloneExpect = []|[{
-  additionalTestBlockFunctions?: string[]
+  additionaltestblockfunctions?: string[]
+  [k: string]: unknown | undefined
 }]
 // ----- test/prefer-expect-assertions -----
 type TestPreferExpectAssertions = []|[{
@@ -11882,6 +11897,7 @@ type TsNoMisusedPromises = []|[{
   checksVoidReturn?: (boolean | {
     arguments?: boolean
     attributes?: boolean
+    inheritedMethods?: boolean
     properties?: boolean
     returns?: boolean
     variables?: boolean

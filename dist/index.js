@@ -4,7 +4,7 @@ import { FlatConfigComposer } from "eslint-flat-config-utils";
 
 // src/plugins.ts
 import { default as default2 } from "eslint-plugin-antfu";
-import { default as default3 } from "eslint-plugin-eslint-comments";
+import { default as default3 } from "@eslint-community/eslint-plugin-eslint-comments";
 import * as pluginImport from "eslint-plugin-import-x";
 import { default as default4 } from "eslint-plugin-n";
 import { default as default5 } from "eslint-plugin-unicorn";
@@ -766,6 +766,7 @@ async function formatters(options = {}, stylistic2 = {}) {
   const prettierOptions = Object.assign(
     {
       endOfLine: "lf",
+      printWidth: 200,
       semi,
       singleQuote: quotes === "single",
       tabWidth: typeof indent === "number" ? indent : defaultIndent,
@@ -873,7 +874,6 @@ async function formatters(options = {}, stylistic2 = {}) {
         [`format/${formater}`]: [
           "error",
           formater === "prettier" ? {
-            printWidth: 200,
             ...prettierOptions,
             embeddedLanguageFormatting: "off",
             parser: "markdown"
@@ -1326,7 +1326,7 @@ async function test(options = {}) {
     pluginVitest,
     pluginNoOnlyTests
   ] = await Promise.all([
-    interopDefault(import("eslint-plugin-vitest")),
+    interopDefault(import("@vitest/eslint-plugin")),
     // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-no-only-tests"))
   ]);
