@@ -67,6 +67,7 @@ __export(src_exports, {
   imports: () => imports,
   interopDefault: () => interopDefault,
   isInEditorEnv: () => isInEditorEnv,
+  isInGitHooksOrLintStaged: () => isInGitHooksOrLintStaged,
   javascript: () => javascript,
   jsdoc: () => jsdoc,
   jsonc: () => jsonc,
@@ -542,7 +543,14 @@ async function ensurePackages(packages) {
   }
 }
 function isInEditorEnv() {
-  return !!((import_node_process.default.env.VSCODE_PID || import_node_process.default.env.VSCODE_CWD || import_node_process.default.env.JETBRAINS_IDE || import_node_process.default.env.VIM || import_node_process.default.env.NVIM) && !import_node_process.default.env.CI);
+  if (import_node_process.default.env.CI)
+    return false;
+  if (isInGitHooksOrLintStaged())
+    return false;
+  return !!(import_node_process.default.env.VSCODE_PID || import_node_process.default.env.VSCODE_CWD || import_node_process.default.env.JETBRAINS_IDE || import_node_process.default.env.VIM || import_node_process.default.env.NVIM);
+}
+function isInGitHooksOrLintStaged() {
+  return !!(import_node_process.default.env.GIT_PARAMS || import_node_process.default.env.VSCODE_GIT_COMMAND || import_node_process.default.env.npm_lifecycle_script?.startsWith("lint-staged"));
 }
 
 // src/configs/jsdoc.ts
@@ -1470,6 +1478,9 @@ async function typescript(options = {}) {
     GLOB_SRC,
     ...componentExts.map((ext) => `**/*.${ext}`)
   ];
+  const ignoresTypeAware = options.ignoresTypeAware ?? [
+    `${GLOB_MARKDOWN}/**`
+  ];
   const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
   const tsconfigPath = options?.tsconfigPath ? options.tsconfigPath : void 0;
   const isTypeAware = !!tsconfigPath;
@@ -1536,8 +1547,8 @@ async function typescript(options = {}) {
     },
     // assign type-aware parser for type-aware files and type-unaware parser for the rest
     ...isTypeAware ? [
-      makeParser(true, filesTypeAware),
-      makeParser(false, files, filesTypeAware)
+      makeParser(false, files),
+      makeParser(true, filesTypeAware, ignoresTypeAware)
     ] : [
       makeParser(false, files)
     ],
@@ -1594,6 +1605,7 @@ async function typescript(options = {}) {
     },
     ...isTypeAware ? [{
       files: filesTypeAware,
+      ignores: ignoresTypeAware,
       name: "eslint:typescript:rules-type-aware",
       rules: {
         ...typeAwareRules,
@@ -2034,7 +2046,6 @@ function lincy(options = {}, ...userConfigs) {
     autoRenamePlugins = true,
     componentExts = [],
     gitignore: enableGitignore = true,
-    isInEditor = isInEditorEnv(),
     jsx: enableJsx = true,
     overrides = {},
     react: enableReact = ReactPackages.some((i) => (0, import_local_pkg4.isPackageExists)(i)),
@@ -2043,6 +2054,12 @@ function lincy(options = {}, ...userConfigs) {
     unocss: enableUnoCSS = false,
     vue: enableVue = VuePackages.some((i) => (0, import_local_pkg4.isPackageExists)(i))
   } = options;
+  let isInEditor = options.isInEditor;
+  if (isInEditor == null) {
+    isInEditor = isInEditorEnv();
+    if (isInEditor)
+      console.log("[@lincy/eslint-config] Detected running in editor, some rules are disabled.");
+  }
   const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === "object" ? options.stylistic : {};
   const tsconfigPath = typeof enableTypeScript !== "boolean" && "tsconfigPath" in enableTypeScript ? enableTypeScript.tsconfigPath : void 0;
   if (stylisticOptions) {
@@ -2230,6 +2247,7 @@ var src_default = lincy;
   imports,
   interopDefault,
   isInEditorEnv,
+  isInGitHooksOrLintStaged,
   javascript,
   jsdoc,
   jsonc,

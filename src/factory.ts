@@ -76,7 +76,6 @@ export function lincy(
         autoRenamePlugins = true,
         componentExts = [],
         gitignore: enableGitignore = true,
-        isInEditor = isInEditorEnv(),
         jsx: enableJsx = true,
         overrides = {},
         react: enableReact = ReactPackages.some(i => isPackageExists(i)),
@@ -85,6 +84,13 @@ export function lincy(
         unocss: enableUnoCSS = false,
         vue: enableVue = VuePackages.some(i => isPackageExists(i)),
     } = options
+
+    let isInEditor = options.isInEditor
+    if (isInEditor == null) {
+        isInEditor = isInEditorEnv()
+        if (isInEditor)
+            console.log('[@lincy/eslint-config] Detected running in editor, some rules are disabled.')
+    }
 
     const stylisticOptions = options.stylistic === false ? false : (typeof options.stylistic === 'object' ? options.stylistic : {})
 

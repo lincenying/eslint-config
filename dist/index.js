@@ -447,7 +447,14 @@ async function ensurePackages(packages) {
   }
 }
 function isInEditorEnv() {
-  return !!((process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM || process.env.NVIM) && !process.env.CI);
+  if (process.env.CI)
+    return false;
+  if (isInGitHooksOrLintStaged())
+    return false;
+  return !!(process.env.VSCODE_PID || process.env.VSCODE_CWD || process.env.JETBRAINS_IDE || process.env.VIM || process.env.NVIM);
+}
+function isInGitHooksOrLintStaged() {
+  return !!(process.env.GIT_PARAMS || process.env.VSCODE_GIT_COMMAND || process.env.npm_lifecycle_script?.startsWith("lint-staged"));
 }
 
 // src/configs/jsdoc.ts
@@ -1375,6 +1382,9 @@ async function typescript(options = {}) {
     GLOB_SRC,
     ...componentExts.map((ext) => `**/*.${ext}`)
   ];
+  const ignoresTypeAware = options.ignoresTypeAware ?? [
+    `${GLOB_MARKDOWN}/**`
+  ];
   const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
   const tsconfigPath = options?.tsconfigPath ? options.tsconfigPath : void 0;
   const isTypeAware = !!tsconfigPath;
@@ -1441,8 +1451,8 @@ async function typescript(options = {}) {
     },
     // assign type-aware parser for type-aware files and type-unaware parser for the rest
     ...isTypeAware ? [
-      makeParser(true, filesTypeAware),
-      makeParser(false, files, filesTypeAware)
+      makeParser(false, files),
+      makeParser(true, filesTypeAware, ignoresTypeAware)
     ] : [
       makeParser(false, files)
     ],
@@ -1499,6 +1509,7 @@ async function typescript(options = {}) {
     },
     ...isTypeAware ? [{
       files: filesTypeAware,
+      ignores: ignoresTypeAware,
       name: "eslint:typescript:rules-type-aware",
       rules: {
         ...typeAwareRules,
@@ -1939,7 +1950,6 @@ function lincy(options = {}, ...userConfigs) {
     autoRenamePlugins = true,
     componentExts = [],
     gitignore: enableGitignore = true,
-    isInEditor = isInEditorEnv(),
     jsx: enableJsx = true,
     overrides = {},
     react: enableReact = ReactPackages.some((i) => isPackageExists3(i)),
@@ -1948,6 +1958,12 @@ function lincy(options = {}, ...userConfigs) {
     unocss: enableUnoCSS = false,
     vue: enableVue = VuePackages.some((i) => isPackageExists3(i))
   } = options;
+  let isInEditor = options.isInEditor;
+  if (isInEditor == null) {
+    isInEditor = isInEditorEnv();
+    if (isInEditor)
+      console.log("[@lincy/eslint-config] Detected running in editor, some rules are disabled.");
+  }
   const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === "object" ? options.stylistic : {};
   const tsconfigPath = typeof enableTypeScript !== "boolean" && "tsconfigPath" in enableTypeScript ? enableTypeScript.tsconfigPath : void 0;
   if (stylisticOptions) {
@@ -2135,6 +2151,7 @@ export {
   imports,
   interopDefault,
   isInEditorEnv,
+  isInGitHooksOrLintStaged,
   javascript,
   jsdoc,
   jsonc,

@@ -1,6 +1,6 @@
 import process from 'node:process'
 import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, OptionsProjectType, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, TypedFlatConfigItem } from '../types'
-import { GLOB_SRC, GLOB_TS, GLOB_TSX } from '../globs'
+import { GLOB_MARKDOWN, GLOB_SRC, GLOB_TS, GLOB_TSX } from '../globs'
 import { pluginAntfu } from '../plugins'
 import { interopDefault, renameRules } from '../utils'
 
@@ -17,6 +17,10 @@ export async function typescript(
     const files = options.files ?? [
         GLOB_SRC,
         ...componentExts.map(ext => `**/*.${ext}`),
+    ]
+
+    const ignoresTypeAware = options.ignoresTypeAware ?? [
+        `${GLOB_MARKDOWN}/**`,
     ]
 
     const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX]
@@ -90,8 +94,8 @@ export async function typescript(
         },
         // assign type-aware parser for type-aware files and type-unaware parser for the rest
         ...isTypeAware ? [
-            makeParser(true, filesTypeAware),
-            makeParser(false, files, filesTypeAware),
+            makeParser(false, files),
+            makeParser(true, filesTypeAware, ignoresTypeAware),
         ] : [
             makeParser(false, files),
         ],
@@ -149,6 +153,7 @@ export async function typescript(
         },
         ...isTypeAware ? [{
             files: filesTypeAware,
+            ignores: ignoresTypeAware,
             name: 'eslint:typescript:rules-type-aware',
             rules: {
                 ...typeAwareRules,
