@@ -62,6 +62,21 @@ export interface OptionsFormatters {
     html?: 'prettier' | boolean
 
     /**
+     * 启用对 XML 的格式化支持。
+     *
+     * 目前仅支持 Prettier。
+     */
+    xml?: 'prettier' | boolean
+
+    /**
+     * 启用对 SVG 的格式化支持。
+     *
+     * 目前仅支持 Prettier。
+     */
+
+    svg?: 'prettier' | boolean
+
+    /**
      * 启用对 Markdown 的格式化支持.
      *
      * 同时支持 Prettier 和 dprint.

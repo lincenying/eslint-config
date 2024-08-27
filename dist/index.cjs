@@ -50,6 +50,7 @@ __export(src_exports, {
   GLOB_SRC_EXT: () => GLOB_SRC_EXT,
   GLOB_STYLE: () => GLOB_STYLE,
   GLOB_SVELTE: () => GLOB_SVELTE,
+  GLOB_SVG: () => GLOB_SVG,
   GLOB_TESTS: () => GLOB_TESTS,
   GLOB_TOML: () => GLOB_TOML,
   GLOB_TS: () => GLOB_TS,
@@ -68,6 +69,7 @@ __export(src_exports, {
   interopDefault: () => interopDefault,
   isInEditorEnv: () => isInEditorEnv,
   isInGitHooksOrLintStaged: () => isInGitHooksOrLintStaged,
+  isPackageInScope: () => isPackageInScope,
   javascript: () => javascript,
   jsdoc: () => jsdoc,
   jsonc: () => jsonc,
@@ -93,6 +95,10 @@ __export(src_exports, {
   yaml: () => yaml
 });
 module.exports = __toCommonJS(src_exports);
+
+// node_modules/.pnpm/tsup@8.2.4_jiti@1.21.6_postcss@8.4.41_tsx@4.18.0_typescript@5.5.4_yaml@2.5.0/node_modules/tsup/assets/cjs_shims.js
+var getImportMetaUrl = () => typeof document === "undefined" ? new URL(`file:${__filename}`).href : document.currentScript && document.currentScript.src || new URL("main.js", document.baseURI).href;
+var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
 
 // src/factory.ts
 var import_local_pkg4 = require("local-pkg");
@@ -146,6 +152,7 @@ var GLOB_SVELTE = "**/*.svelte";
 var GLOB_VUE = "**/*.vue";
 var GLOB_YAML = "**/*.y?(a)ml";
 var GLOB_TOML = "**/*.toml";
+var GLOB_SVG = "**/*.svg";
 var GLOB_HTML = "**/*.htm?(l)";
 var GLOB_GRAPHQL = "**/*.{g,graph}ql";
 var GLOB_MARKDOWN_CODE = `${GLOB_MARKDOWN}/${GLOB_SRC}`;
@@ -479,7 +486,10 @@ async function javascript(options = {}) {
 
 // src/utils.ts
 var import_node_process = __toESM(require("process"), 1);
+var import_node_url = require("url");
 var import_local_pkg = require("local-pkg");
+var scopeUrl = (0, import_node_url.fileURLToPath)(new URL(".", importMetaUrl));
+var isCwdInScope = (0, import_local_pkg.isPackageExists)("@antfu/eslint-config");
 async function combine(...configs2) {
   const resolved = await Promise.all(configs2);
   return resolved.flat();
@@ -522,25 +532,21 @@ async function interopDefault(m) {
   const resolved = await m;
   return resolved.default || resolved;
 }
+function isPackageInScope(name) {
+  return (0, import_local_pkg.isPackageExists)(name, { paths: [scopeUrl] });
+}
 async function ensurePackages(packages) {
-  if (import_node_process.default.stdout.isTTY === false) {
+  if (import_node_process.default.env.CI || import_node_process.default.stdout.isTTY === false || isCwdInScope === false)
     return;
-  }
-  const nonExistingPackages = packages.filter((i) => !(0, import_local_pkg.isPackageExists)(i));
-  if (nonExistingPackages.length === 0) {
+  const nonExistingPackages = packages.filter((i) => i && !isPackageInScope(i));
+  if (nonExistingPackages.length === 0)
     return;
-  }
-  const { default: prompts } = await import("prompts");
-  const { result } = await prompts([
-    {
-      message: `${nonExistingPackages.length === 1 ? "Package is" : "Packages are"} required for this config: ${nonExistingPackages.join(", ")}. Do you want to install them?`,
-      name: "result",
-      type: "confirm"
-    }
-  ]);
-  if (result) {
+  const p = await import("@clack/prompts");
+  const result = await p.confirm({
+    message: `${nonExistingPackages.length === 1 ? "Package is" : "Packages are"} required for this config: ${nonExistingPackages.join(", ")}. Do you want to install them?`
+  });
+  if (result)
     await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
-  }
 }
 function isInEditorEnv() {
   if (import_node_process.default.env.CI)
@@ -847,17 +853,21 @@ async function stylistic(options = {}) {
 // src/configs/formatters.ts
 async function formatters(options = {}, stylistic2 = {}) {
   const defaultIndent = 4;
-  await ensurePackages([
-    "eslint-plugin-format"
-  ]);
   if (options === true) {
+    const isPrettierPluginXmlInScope = isPackageInScope("@prettier/plugin-xml");
     options = {
       css: false,
       graphql: true,
       html: true,
-      markdown: true
+      markdown: true,
+      svg: isPrettierPluginXmlInScope,
+      xml: isPrettierPluginXmlInScope
     };
   }
+  await ensurePackages([
+    "eslint-plugin-format",
+    options.xml || options.svg ? "@prettier/plugin-xml" : void 0
+  ]);
   const {
     indent,
     quotes,
@@ -878,6 +888,12 @@ async function formatters(options = {}, stylistic2 = {}) {
     },
     options.prettierOptions || {}
   );
+  const prettierXmlOptions = {
+    xmlQuoteAttributes: "double",
+    xmlSelfClosingSpace: true,
+    xmlSortAttributesByKey: false,
+    xmlWhitespaceSensitivity: "ignore"
+  };
   const dprintOptions = Object.assign(
     {
       indentWidth: typeof indent === "number" ? indent : defaultIndent,
@@ -960,6 +976,28 @@ async function formatters(options = {}, stylistic2 = {}) {
           {
             ...prettierOptions,
             parser: "html"
+          }
+        ]
+      }
+    });
+  }
+  if (options.svg) {
+    configs2.push({
+      files: [GLOB_SVG],
+      languageOptions: {
+        parser: parserPlain2
+      },
+      name: "eslint:formatter:svg",
+      rules: {
+        "format/prettier": [
+          "error",
+          {
+            ...prettierXmlOptions,
+            ...prettierOptions,
+            parser: "xml",
+            plugins: [
+              "@prettier/plugin-xml"
+            ]
           }
         ]
       }
@@ -2231,6 +2269,7 @@ var src_default = lincy;
   GLOB_SRC_EXT,
   GLOB_STYLE,
   GLOB_SVELTE,
+  GLOB_SVG,
   GLOB_TESTS,
   GLOB_TOML,
   GLOB_TS,
@@ -2248,6 +2287,7 @@ var src_default = lincy;
   interopDefault,
   isInEditorEnv,
   isInGitHooksOrLintStaged,
+  isPackageInScope,
   javascript,
   jsdoc,
   jsonc,

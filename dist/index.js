@@ -50,6 +50,7 @@ var GLOB_SVELTE = "**/*.svelte";
 var GLOB_VUE = "**/*.vue";
 var GLOB_YAML = "**/*.y?(a)ml";
 var GLOB_TOML = "**/*.toml";
+var GLOB_SVG = "**/*.svg";
 var GLOB_HTML = "**/*.htm?(l)";
 var GLOB_GRAPHQL = "**/*.{g,graph}ql";
 var GLOB_MARKDOWN_CODE = `${GLOB_MARKDOWN}/${GLOB_SRC}`;
@@ -383,7 +384,10 @@ async function javascript(options = {}) {
 
 // src/utils.ts
 import process from "node:process";
+import { fileURLToPath } from "node:url";
 import { isPackageExists } from "local-pkg";
+var scopeUrl = fileURLToPath(new URL(".", import.meta.url));
+var isCwdInScope = isPackageExists("@antfu/eslint-config");
 async function combine(...configs2) {
   const resolved = await Promise.all(configs2);
   return resolved.flat();
@@ -426,25 +430,21 @@ async function interopDefault(m) {
   const resolved = await m;
   return resolved.default || resolved;
 }
+function isPackageInScope(name) {
+  return isPackageExists(name, { paths: [scopeUrl] });
+}
 async function ensurePackages(packages) {
-  if (process.stdout.isTTY === false) {
+  if (process.env.CI || process.stdout.isTTY === false || isCwdInScope === false)
     return;
-  }
-  const nonExistingPackages = packages.filter((i) => !isPackageExists(i));
-  if (nonExistingPackages.length === 0) {
+  const nonExistingPackages = packages.filter((i) => i && !isPackageInScope(i));
+  if (nonExistingPackages.length === 0)
     return;
-  }
-  const { default: prompts } = await import("prompts");
-  const { result } = await prompts([
-    {
-      message: `${nonExistingPackages.length === 1 ? "Package is" : "Packages are"} required for this config: ${nonExistingPackages.join(", ")}. Do you want to install them?`,
-      name: "result",
-      type: "confirm"
-    }
-  ]);
-  if (result) {
+  const p = await import("@clack/prompts");
+  const result = await p.confirm({
+    message: `${nonExistingPackages.length === 1 ? "Package is" : "Packages are"} required for this config: ${nonExistingPackages.join(", ")}. Do you want to install them?`
+  });
+  if (result)
     await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
-  }
 }
 function isInEditorEnv() {
   if (process.env.CI)
@@ -751,17 +751,21 @@ async function stylistic(options = {}) {
 // src/configs/formatters.ts
 async function formatters(options = {}, stylistic2 = {}) {
   const defaultIndent = 4;
-  await ensurePackages([
-    "eslint-plugin-format"
-  ]);
   if (options === true) {
+    const isPrettierPluginXmlInScope = isPackageInScope("@prettier/plugin-xml");
     options = {
       css: false,
       graphql: true,
       html: true,
-      markdown: true
+      markdown: true,
+      svg: isPrettierPluginXmlInScope,
+      xml: isPrettierPluginXmlInScope
     };
   }
+  await ensurePackages([
+    "eslint-plugin-format",
+    options.xml || options.svg ? "@prettier/plugin-xml" : void 0
+  ]);
   const {
     indent,
     quotes,
@@ -782,6 +786,12 @@ async function formatters(options = {}, stylistic2 = {}) {
     },
     options.prettierOptions || {}
   );
+  const prettierXmlOptions = {
+    xmlQuoteAttributes: "double",
+    xmlSelfClosingSpace: true,
+    xmlSortAttributesByKey: false,
+    xmlWhitespaceSensitivity: "ignore"
+  };
   const dprintOptions = Object.assign(
     {
       indentWidth: typeof indent === "number" ? indent : defaultIndent,
@@ -864,6 +874,28 @@ async function formatters(options = {}, stylistic2 = {}) {
           {
             ...prettierOptions,
             parser: "html"
+          }
+        ]
+      }
+    });
+  }
+  if (options.svg) {
+    configs2.push({
+      files: [GLOB_SVG],
+      languageOptions: {
+        parser: parserPlain2
+      },
+      name: "eslint:formatter:svg",
+      rules: {
+        "format/prettier": [
+          "error",
+          {
+            ...prettierXmlOptions,
+            ...prettierOptions,
+            parser: "xml",
+            plugins: [
+              "@prettier/plugin-xml"
+            ]
           }
         ]
       }
@@ -2134,6 +2166,7 @@ export {
   GLOB_SRC_EXT,
   GLOB_STYLE,
   GLOB_SVELTE,
+  GLOB_SVG,
   GLOB_TESTS,
   GLOB_TOML,
   GLOB_TS,
@@ -2152,6 +2185,7 @@ export {
   interopDefault,
   isInEditorEnv,
   isInGitHooksOrLintStaged,
+  isPackageInScope,
   javascript,
   jsdoc,
   jsonc,

@@ -24,12 +24,14 @@ const config = lincy(
     },
     {
         files: ['src/**/*.ts'],
+        name: 'eslint:custom:ts',
         rules: {
             'perfectionist/sort-objects': 'error',
         },
     },
     {
         files: ['src/configs/*.ts'],
+        name: 'eslint:custom:config:ts',
         plugins: {
             'style-migrate': styleMigrate,
         },
