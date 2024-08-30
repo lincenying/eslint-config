@@ -267,8 +267,6 @@ export default lincy({
     },
 
     // 工厂函数第一个参数默认为各规则的开关, 但是也可以作为追加规则使用, 当包含以下键名将会自动整合到一个规则里
-    files: [],
-    ignores: [],
     languageOptions: {},
     linterOptions: {},
     processor: {},
