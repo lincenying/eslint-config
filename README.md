@@ -52,17 +52,14 @@ export default lincy()
 
 ```jsonc
 {
-  // 开启eslint扁平化配置
-  "eslint.experimental.useFlatConfig": true,
-
   // 禁用默认的格式化
   "prettier.enable": false,
   "editor.formatOnSave": false,
 
   // 开启自动修复
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true,
-    "source.organizeImports": false
+    "source.fixAll.eslint": "explicit",
+    "source.organizeImports": "never"
   },
 
   // 在 IDE 中静默样式规则，但仍会自动修复它们
@@ -92,6 +89,9 @@ export default lincy()
     "jsonc",
     "yaml",
     "toml",
+    "xml",
+    "gql",
+    "graphql",
     "css",
     "less",
     "scss",
