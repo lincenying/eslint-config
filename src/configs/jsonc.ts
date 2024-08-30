@@ -21,7 +21,7 @@ export async function jsonc(
 
     return [
         {
-            name: 'eslint:jsonc:setup',
+            name: 'eslint/jsonc/setup',
             plugins: {
                 jsonc: pluginJsonc as any,
             },
@@ -31,7 +31,7 @@ export async function jsonc(
             languageOptions: {
                 parser: parserJsonc,
             },
-            name: 'eslint:jsonc:rules',
+            name: 'eslint/jsonc/rules',
             rules: {
                 'jsonc/no-bigint-literals': 'error',
                 'jsonc/no-binary-expression': 'error',

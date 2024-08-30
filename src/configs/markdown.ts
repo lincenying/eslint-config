@@ -18,7 +18,7 @@ export async function markdown(
 
     return [
         {
-            name: 'eslint:markdown:setup',
+            name: 'eslint/markdown/setup',
             plugins: {
                 markdown,
             },
@@ -26,7 +26,7 @@ export async function markdown(
         {
             files,
             ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
-            name: 'eslint:markdown:processor',
+            name: 'eslint/markdown/processor',
             processor: mergeProcessors([
                 markdown.processors.markdown,
                 processorPassThrough,
@@ -37,7 +37,7 @@ export async function markdown(
             languageOptions: {
                 parser: parserPlain,
             },
-            name: 'eslint:markdown:parser',
+            name: 'eslint/markdown/parser',
         },
         {
             files: [
@@ -51,7 +51,7 @@ export async function markdown(
                     },
                 },
             },
-            name: 'eslint:markdown:disables',
+            name: 'eslint/markdown/disables',
             rules: {
                 'import/newline-after-import': 'off',
 

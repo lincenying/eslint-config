@@ -10,12 +10,7 @@ export type Awaitable<T> = T | Promise<T>
 
 export type Rules = RuleOptions
 
-export type TypedFlatConfigItem = Omit<Linter.FlatConfig, 'plugins'> & {
-    /**
-     * 每个配置项的自定义名称
-     */
-    name?: string
-
+export type TypedFlatConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'plugins'> & {
     // 放宽插件类型限制，因为大多数插件还没有正确的类型信息。
     /**
      * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
@@ -23,10 +18,6 @@ export type TypedFlatConfigItem = Omit<Linter.FlatConfig, 'plugins'> & {
      * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
      */
     plugins?: Record<string, any>
-    /**
-     * An object containing a name-value mapping of rules to use.
-     */
-    rules?: Linter.RulesRecord & Rules
 }
 
 export interface OptionsFiles {
@@ -60,6 +51,20 @@ export interface OptionsFormatters {
      * 目前仅支持Prettier.
      */
     html?: 'prettier' | boolean
+
+    /**
+     * 启用 XML 格式支持
+     *
+     * 目前仅支持 Prettier
+     */
+    xml?: 'prettier' | boolean
+
+    /**
+     * 启用 SVG 格式支持.
+     *
+     * 目前仅支持 Prettier
+     */
+    svg?: 'prettier' | boolean
 
     /**
      * 启用对 Markdown 的格式化支持.
@@ -98,6 +103,15 @@ export interface OptionsComponentExts {
      * @default []
      */
     componentExts?: string[]
+}
+
+export interface OptionsUnicorn {
+    /**
+     * 是否包括“eslint-plugin-unicorn”推荐的所有规则.
+     *
+     * @default false
+     */
+    allRecommended?: boolean
 }
 
 export interface OptionsTypeScriptParserOptions {
@@ -225,6 +239,13 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
      * @default true
      */
     jsx?: boolean
+
+    /**
+     * eslint-plugin-unicorn 的选项.
+     *
+     * @default true
+     */
+    unicorn?: boolean | OptionsUnicorn
 
     /**
      * 启用 test 支持.

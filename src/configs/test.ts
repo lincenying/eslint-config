@@ -20,7 +20,7 @@ export async function test(options: OptionsFiles & OptionsIsInEditor & OptionsOv
 
     return [
         {
-            name: 'eslint:test:setup',
+            name: 'eslint/test/setup',
             plugins: {
                 test: {
                     ...pluginVitest,
@@ -34,7 +34,7 @@ export async function test(options: OptionsFiles & OptionsIsInEditor & OptionsOv
         },
         {
             files,
-            name: 'eslint:test:rules',
+            name: 'eslint/test/rules',
             rules: {
                 'node/prefer-global/process': 'off',
 

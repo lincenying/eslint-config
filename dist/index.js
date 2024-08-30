@@ -15,7 +15,7 @@ import { default as default7 } from "eslint-plugin-perfectionist";
 async function comments() {
   return [
     {
-      name: "eslint:comments",
+      name: "eslint/comments/rules",
       plugins: {
         "eslint-comments": default3
       },
@@ -50,6 +50,8 @@ var GLOB_SVELTE = "**/*.svelte";
 var GLOB_VUE = "**/*.vue";
 var GLOB_YAML = "**/*.y?(a)ml";
 var GLOB_TOML = "**/*.toml";
+var GLOB_XML = "**/*.xml";
+var GLOB_SVG = "**/*.svg";
 var GLOB_HTML = "**/*.htm?(l)";
 var GLOB_GRAPHQL = "**/*.{g,graph}ql";
 var GLOB_MARKDOWN_CODE = `${GLOB_MARKDOWN}/${GLOB_SRC}`;
@@ -111,7 +113,7 @@ async function ignores(options = {}) {
         ...GLOB_EXCLUDE,
         ...ignores2
       ],
-      name: "eslint:ignores"
+      name: "eslint/ignores"
     }
   ];
 }
@@ -123,7 +125,7 @@ async function imports(options = {}) {
   } = options;
   return [
     {
-      name: "eslint:imports:rules",
+      name: "eslint/imports/rules",
       plugins: {
         antfu: default2,
         import: pluginImport
@@ -146,7 +148,7 @@ async function imports(options = {}) {
     },
     {
       files: ["**/bin/**/*", `**/bin.${GLOB_SRC_EXT}`],
-      name: "eslint:imports:disables:bin",
+      name: "eslint/imports/disables/bin",
       rules: {
         "antfu/no-import-dist": "off",
         "antfu/no-import-node-modules-by-path": "off"
@@ -186,10 +188,10 @@ async function javascript(options = {}) {
       linterOptions: {
         reportUnusedDisableDirectives: true
       },
-      name: "eslint:javascript:setup"
+      name: "eslint/javascript/setup"
     },
     {
-      name: "eslint:javascript:rules",
+      name: "eslint/javascript/rules",
       plugins: {
         "antfu": default2,
         "unused-imports": default6
@@ -268,9 +270,6 @@ async function javascript(options = {}) {
         ],
         "no-restricted-syntax": [
           "error",
-          "DebuggerStatement",
-          "LabeledStatement",
-          "WithStatement",
           "TSEnumDeclaration[const=true]",
           "TSExportAssignment"
         ],
@@ -373,7 +372,7 @@ async function javascript(options = {}) {
     },
     {
       files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
-      name: "eslint:scripts:disables",
+      name: "eslint/scripts/disables",
       rules: {
         "no-console": "off"
       }
@@ -383,7 +382,10 @@ async function javascript(options = {}) {
 
 // src/utils.ts
 import process from "node:process";
+import { fileURLToPath } from "node:url";
 import { isPackageExists } from "local-pkg";
+var scopeUrl = fileURLToPath(new URL(".", import.meta.url));
+var isCwdInScope = isPackageExists("@antfu/eslint-config");
 async function combine(...configs2) {
   const resolved = await Promise.all(configs2);
   return resolved.flat();
@@ -426,25 +428,21 @@ async function interopDefault(m) {
   const resolved = await m;
   return resolved.default || resolved;
 }
+function isPackageInScope(name) {
+  return isPackageExists(name, { paths: [scopeUrl] });
+}
 async function ensurePackages(packages) {
-  if (process.stdout.isTTY === false) {
+  if (process.env.CI || process.stdout.isTTY === false || isCwdInScope === false)
     return;
-  }
-  const nonExistingPackages = packages.filter((i) => !isPackageExists(i));
-  if (nonExistingPackages.length === 0) {
+  const nonExistingPackages = packages.filter((i) => i && !isPackageInScope(i));
+  if (nonExistingPackages.length === 0)
     return;
-  }
-  const { default: prompts } = await import("prompts");
-  const { result } = await prompts([
-    {
-      message: `${nonExistingPackages.length === 1 ? "Package is" : "Packages are"} required for this config: ${nonExistingPackages.join(", ")}. Do you want to install them?`,
-      name: "result",
-      type: "confirm"
-    }
-  ]);
-  if (result) {
+  const p = await import("@clack/prompts");
+  const result = await p.confirm({
+    message: `${nonExistingPackages.length === 1 ? "Package is" : "Packages are"} required for this config: ${nonExistingPackages.join(", ")}. Do you want to install them?`
+  });
+  if (result)
     await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
-  }
 }
 function isInEditorEnv() {
   if (process.env.CI)
@@ -464,7 +462,7 @@ async function jsdoc(options = {}) {
   } = options;
   return [
     {
-      name: "eslint:jsdoc:rules",
+      name: "eslint/jsdoc/rules",
       plugins: {
         jsdoc: await interopDefault(import("eslint-plugin-jsdoc"))
       },
@@ -509,7 +507,7 @@ async function jsonc(options = {}) {
   ]);
   return [
     {
-      name: "eslint:jsonc:setup",
+      name: "eslint/jsonc/setup",
       plugins: {
         jsonc: pluginJsonc
       }
@@ -519,7 +517,7 @@ async function jsonc(options = {}) {
       languageOptions: {
         parser: parserJsonc
       },
-      name: "eslint:jsonc:rules",
+      name: "eslint/jsonc/rules",
       rules: {
         "jsonc/no-bigint-literals": "error",
         "jsonc/no-binary-expression": "error",
@@ -577,7 +575,7 @@ async function jsx() {
           }
         }
       },
-      name: "eslint:jsx:setup"
+      name: "eslint/jsx/setup"
     }
   ];
 }
@@ -594,7 +592,7 @@ async function markdown(options = {}) {
   const markdown2 = await interopDefault(import("eslint-plugin-markdown"));
   return [
     {
-      name: "eslint:markdown:setup",
+      name: "eslint/markdown/setup",
       plugins: {
         markdown: markdown2
       }
@@ -602,7 +600,7 @@ async function markdown(options = {}) {
     {
       files,
       ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
-      name: "eslint:markdown:processor",
+      name: "eslint/markdown/processor",
       processor: mergeProcessors([
         markdown2.processors.markdown,
         processorPassThrough
@@ -613,7 +611,7 @@ async function markdown(options = {}) {
       languageOptions: {
         parser: parserPlain
       },
-      name: "eslint:markdown:parser"
+      name: "eslint/markdown/parser"
     },
     {
       files: [
@@ -627,7 +625,7 @@ async function markdown(options = {}) {
           }
         }
       },
-      name: "eslint:markdown:disables",
+      name: "eslint/markdown/disables",
       rules: {
         "import/newline-after-import": "off",
         "no-alert": "off",
@@ -681,7 +679,7 @@ async function markdown(options = {}) {
 async function perfectionist() {
   return [
     {
-      name: "eslint:perfectionist:setup",
+      name: "eslint/perfectionist/setup",
       plugins: {
         perfectionist: default7
       }
@@ -723,7 +721,7 @@ async function stylistic(options = {}) {
   });
   return [
     {
-      name: "eslint:stylistic",
+      name: "eslint/stylistic/rules",
       plugins: {
         antfu: default2,
         style: pluginStylistic
@@ -751,17 +749,21 @@ async function stylistic(options = {}) {
 // src/configs/formatters.ts
 async function formatters(options = {}, stylistic2 = {}) {
   const defaultIndent = 4;
-  await ensurePackages([
-    "eslint-plugin-format"
-  ]);
   if (options === true) {
+    const isPrettierPluginXmlInScope = isPackageInScope("@prettier/plugin-xml");
     options = {
       css: false,
       graphql: true,
       html: true,
-      markdown: true
+      markdown: true,
+      svg: isPrettierPluginXmlInScope,
+      xml: isPrettierPluginXmlInScope
     };
   }
+  await ensurePackages([
+    "eslint-plugin-format",
+    options.xml || options.svg ? "@prettier/plugin-xml" : void 0
+  ]);
   const {
     indent,
     quotes,
@@ -782,6 +784,12 @@ async function formatters(options = {}, stylistic2 = {}) {
     },
     options.prettierOptions || {}
   );
+  const prettierXmlOptions = {
+    xmlQuoteAttributes: "double",
+    xmlSelfClosingSpace: true,
+    xmlSortAttributesByKey: false,
+    xmlWhitespaceSensitivity: "ignore"
+  };
   const dprintOptions = Object.assign(
     {
       indentWidth: typeof indent === "number" ? indent : defaultIndent,
@@ -793,7 +801,7 @@ async function formatters(options = {}, stylistic2 = {}) {
   const pluginFormat = await interopDefault(import("eslint-plugin-format"));
   const configs2 = [
     {
-      name: "eslint:formatters:setup",
+      name: "eslint/formatters/setup",
       plugins: {
         format: pluginFormat
       }
@@ -806,7 +814,7 @@ async function formatters(options = {}, stylistic2 = {}) {
         languageOptions: {
           parser: parserPlain2
         },
-        name: "eslint:formatter:css",
+        name: "eslint/formatters/css",
         rules: {
           "format/prettier": [
             "error",
@@ -822,7 +830,7 @@ async function formatters(options = {}, stylistic2 = {}) {
         languageOptions: {
           parser: parserPlain2
         },
-        name: "eslint:formatter:scss",
+        name: "eslint/formatters/scss",
         rules: {
           "format/prettier": [
             "error",
@@ -838,7 +846,7 @@ async function formatters(options = {}, stylistic2 = {}) {
         languageOptions: {
           parser: parserPlain2
         },
-        name: "eslint:formatter:less",
+        name: "eslint/formatters/less",
         rules: {
           "format/prettier": [
             "error",
@@ -857,13 +865,35 @@ async function formatters(options = {}, stylistic2 = {}) {
       languageOptions: {
         parser: parserPlain2
       },
-      name: "eslint:formatter:html",
+      name: "eslint/formatters/html",
       rules: {
         "format/prettier": [
           "error",
           {
             ...prettierOptions,
             parser: "html"
+          }
+        ]
+      }
+    });
+  }
+  if (options.svg) {
+    configs2.push({
+      files: [GLOB_SVG],
+      languageOptions: {
+        parser: parserPlain2
+      },
+      name: "antfu/formatter/svg",
+      rules: {
+        "format/prettier": [
+          "error",
+          {
+            ...prettierXmlOptions,
+            ...prettierOptions,
+            parser: "xml",
+            plugins: [
+              "@prettier/plugin-xml"
+            ]
           }
         ]
       }
@@ -876,7 +906,7 @@ async function formatters(options = {}, stylistic2 = {}) {
       languageOptions: {
         parser: parserPlain2
       },
-      name: "eslint:formatter:markdown",
+      name: "eslint/formatters/markdown",
       rules: {
         [`format/${formater}`]: [
           "error",
@@ -898,7 +928,7 @@ async function formatters(options = {}, stylistic2 = {}) {
       languageOptions: {
         parser: parserPlain2
       },
-      name: "eslint:formatter:graphql",
+      name: "eslint/formatters/graphql",
       rules: {
         "format/prettier": [
           "error",
@@ -917,7 +947,7 @@ async function formatters(options = {}, stylistic2 = {}) {
 async function node() {
   return [
     {
-      name: "eslint:node:rules",
+      name: "eslint/node/rules",
       plugins: {
         node: default4
       },
@@ -973,7 +1003,7 @@ async function react(options = {}) {
   const plugins = pluginReact.configs.all.plugins;
   return [
     {
-      name: "eslint:react:setup",
+      name: "eslint/react/setup",
       plugins: {
         "react": plugins["@eslint-react"],
         "react-dom": plugins["@eslint-react/dom"],
@@ -994,7 +1024,7 @@ async function react(options = {}) {
           ...isTypeAware ? { project: tsconfigPath } : {}
         }
       },
-      name: "eslint:react:rules",
+      name: "eslint/react/rules",
       rules: {
         // recommended rules from @eslint-react/dom
         "react-dom/no-children-in-void-dom-elements": "warn",
@@ -1098,7 +1128,7 @@ async function sortPackageJson() {
   return [
     {
       files: ["**/package.json"],
-      name: "eslint:sort-package-json",
+      name: "eslint/sort/package-json",
       rules: {
         "jsonc/sort-array-values": [
           "error",
@@ -1200,7 +1230,7 @@ function sortTsconfig() {
   return [
     {
       files: ["**/tsconfig.json", "**/tsconfig.*.json"],
-      name: "eslint:sort-tsconfig",
+      name: "eslint/sort/tsconfig",
       rules: {
         "jsonc/sort-keys": [
           "error",
@@ -1339,7 +1369,7 @@ async function test(options = {}) {
   ]);
   return [
     {
-      name: "eslint:test:setup",
+      name: "eslint/test/setup",
       plugins: {
         test: {
           ...pluginVitest,
@@ -1353,7 +1383,7 @@ async function test(options = {}) {
     },
     {
       files,
-      name: "eslint:test:rules",
+      name: "eslint/test/rules",
       rules: {
         "node/prefer-global/process": "off",
         "test/consistent-test-it": ["error", { fn: "it", withinDescribe: "it" }],
@@ -1437,13 +1467,13 @@ async function typescript(options = {}) {
           ...parserOptions
         }
       },
-      name: `eslint:typescript:${typeAware ? "type-aware-parser" : "parser"}`
+      name: `eslint/typescript/${typeAware ? "type-aware-parser" : "parser"}`
     };
   }
   return [
     {
       // Install the plugins without globs, so they can be configured separately.
-      name: "eslint:typescript:setup",
+      name: "eslint/typescript/setup",
       plugins: {
         antfu: default2,
         ts: pluginTs
@@ -1458,7 +1488,7 @@ async function typescript(options = {}) {
     ],
     {
       files,
-      name: "eslint:typescript:rules",
+      name: "eslint/typescript/rules",
       rules: {
         ...renameRules(
           pluginTs.configs["eslint-recommended"].overrides[0].rules,
@@ -1510,7 +1540,7 @@ async function typescript(options = {}) {
     ...isTypeAware ? [{
       files: filesTypeAware,
       ignores: ignoresTypeAware,
-      name: "eslint:typescript:rules-type-aware",
+      name: "eslint/typescript/rules-type-aware",
       rules: {
         ...typeAwareRules,
         ...overrides
@@ -1518,7 +1548,7 @@ async function typescript(options = {}) {
     }] : [],
     {
       files: ["**/*.d.?([cm])ts"],
-      name: "eslint:typescript:disables:dts",
+      name: "eslint/typescript/disables/dts",
       rules: {
         "eslint-comments/no-unlimited-disable": "off",
         "import/no-duplicates": "off",
@@ -1528,14 +1558,14 @@ async function typescript(options = {}) {
     },
     {
       files: ["**/*.{test,spec}.ts?(x)"],
-      name: "eslint:typescript:disables:test",
+      name: "eslint/typescript/disables/test",
       rules: {
         "no-unused-expressions": "off"
       }
     },
     {
       files: ["**/*.js", "**/*.cjs"],
-      name: "eslint:typescript:disables:cjs",
+      name: "eslint/typescript/disables/cjs",
       rules: {
         "ts/no-require-imports": "off",
         "ts/no-var-requires": "off"
@@ -1545,40 +1575,32 @@ async function typescript(options = {}) {
 }
 
 // src/configs/unicorn.ts
-async function unicorn() {
+async function unicorn(options = {}) {
   return [
     {
-      name: "eslint:unicorn",
+      name: "eslint/unicorn/rules",
       plugins: {
         unicorn: default5
       },
       rules: {
-        // Pass error message when throwing errors
-        "unicorn/error-message": "error",
-        // Uppercase regex escapes
-        "unicorn/escape-case": "error",
-        // Array.isArray instead of instanceof
-        "unicorn/no-instanceof-array": "error",
-        // Ban `new Array` as `Array` constructor's params are ambiguous
-        "unicorn/no-new-array": "error",
-        // Prevent deprecated `new Buffer()`
-        "unicorn/no-new-buffer": "error",
-        // Lowercase number formatting for octal, hex, binary (0x1'error' instead of 0X1'error')
-        "unicorn/number-literal-case": "error",
-        // textContent instead of innerText
-        "unicorn/prefer-dom-node-text-content": "error",
-        // includes over indexOf when checking for existence
-        "unicorn/prefer-includes": "error",
-        // Prefer using the node: protocol
-        "unicorn/prefer-node-protocol": "error",
-        // Prefer using number properties like `Number.isNaN` rather than `isNaN`
-        "unicorn/prefer-number-properties": "error",
-        // String methods startsWith/endsWith instead of more complicated stuff
-        "unicorn/prefer-string-starts-ends-with": "error",
-        // Enforce throwing type error when throwing error while checking typeof
-        "unicorn/prefer-type-error": "error",
-        // Use new when throwing error
-        "unicorn/throw-new-error": "error"
+        ...options.allRecommended ? default5.configs["flat/recommended"].rules : {
+          "unicorn/consistent-empty-array-spread": "error",
+          "unicorn/consistent-function-scoping": "error",
+          "unicorn/error-message": "error",
+          "unicorn/escape-case": "error",
+          "unicorn/new-for-builtins": "error",
+          "unicorn/no-instanceof-array": "error",
+          "unicorn/no-new-array": "error",
+          "unicorn/no-new-buffer": "error",
+          "unicorn/number-literal-case": "error",
+          "unicorn/prefer-dom-node-text-content": "error",
+          "unicorn/prefer-includes": "error",
+          "unicorn/prefer-node-protocol": "error",
+          "unicorn/prefer-number-properties": "error",
+          "unicorn/prefer-string-starts-ends-with": "error",
+          "unicorn/prefer-type-error": "error",
+          "unicorn/throw-new-error": "error"
+        }
       }
     }
   ];
@@ -1601,7 +1623,7 @@ async function unocss(options = {}) {
   ]);
   return [
     {
-      name: "eslint:unocss",
+      name: "eslint/unocss/rules",
       plugins: {
         unocss: pluginUnoCSS
       },
@@ -1666,7 +1688,7 @@ async function vue(options = {}) {
           watchEffect: "readonly"
         }
       },
-      name: "eslint:vue:setup",
+      name: "eslint/vue/setup",
       plugins: {
         vue: pluginVue
       }
@@ -1684,7 +1706,7 @@ async function vue(options = {}) {
           sourceType: "module"
         }
       },
-      name: "eslint:vue:rules",
+      name: "eslint/vue/rules",
       processor: sfcBlocks === false ? pluginVue.processors[".vue"] : mergeProcessors2([
         pluginVue.processors[".vue"],
         processorVueBlocks({
@@ -1813,7 +1835,7 @@ async function yaml(options = {}) {
   ]);
   return [
     {
-      name: "eslint:yaml:setup",
+      name: "eslint/yaml/setup",
       plugins: {
         yaml: pluginYaml
       }
@@ -1823,7 +1845,7 @@ async function yaml(options = {}) {
       languageOptions: {
         parser: parserYaml
       },
-      name: "eslint:yaml:rules",
+      name: "eslint/yaml/rules",
       rules: {
         "style/spaced-comment": "off",
         "yaml/block-mapping": "error",
@@ -1871,7 +1893,7 @@ async function toml(options = {}) {
   ]);
   return [
     {
-      name: "eslint:toml:setup",
+      name: "eslint/toml/setup",
       plugins: {
         toml: pluginToml
       }
@@ -1881,7 +1903,7 @@ async function toml(options = {}) {
       languageOptions: {
         parser: parserToml
       },
-      name: "eslint:toml:rules",
+      name: "eslint/toml/rules",
       rules: {
         "style/spaced-comment": "off",
         "toml/comma-style": "error",
@@ -1914,8 +1936,6 @@ async function toml(options = {}) {
 // src/factory.ts
 var flatConfigProps = [
   "name",
-  "files",
-  "ignores",
   "languageOptions",
   "linterOptions",
   "processor",
@@ -1955,6 +1975,7 @@ function lincy(options = {}, ...userConfigs) {
     react: enableReact = ReactPackages.some((i) => isPackageExists3(i)),
     regexp: enableRegexp = true,
     typescript: enableTypeScript = isPackageExists3("typescript"),
+    unicorn: enableUnicorn = true,
     unocss: enableUnoCSS = false,
     vue: enableVue = VuePackages.some((i) => isPackageExists3(i))
   } = options;
@@ -1974,9 +1995,15 @@ function lincy(options = {}, ...userConfigs) {
   const configs2 = [];
   if (enableGitignore) {
     if (typeof enableGitignore !== "boolean") {
-      configs2.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r(enableGitignore)]));
+      configs2.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r({
+        name: "eslint/gitignore",
+        ...enableGitignore
+      })]));
     } else {
-      configs2.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r({ strict: false })]));
+      configs2.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r({
+        name: "eslint/gitignore",
+        strict: false
+      })]));
     }
   }
   configs2.push(
@@ -1995,10 +2022,12 @@ function lincy(options = {}, ...userConfigs) {
     imports({
       stylistic: stylisticOptions
     }),
-    unicorn(),
     // Optional plugins (installed but not enabled by default)
     perfectionist()
   );
+  if (enableUnicorn) {
+    configs2.push(unicorn(enableUnicorn === true ? {} : enableUnicorn));
+  }
   if (enableVue) {
     componentExts.push("vue");
   }
@@ -2091,6 +2120,9 @@ function lincy(options = {}, ...userConfigs) {
       typeof stylisticOptions === "boolean" ? {} : stylisticOptions
     ));
   }
+  if ("files" in options) {
+    throw new Error("[@lincy/eslint-config] \u7B2C\u4E00\u4E2A\u53C2\u6570\u4E0D\u5E94\u5305\u542B\u201Cfiles\u201D\u5C5E\u6027\uFF0C\u56E0\u4E3A\u9009\u9879\u5E94\u8BE5\u662F\u5168\u5C40\u7684\u3002\u8BF7\u5C06\u5176\u653E\u5728\u7B2C\u4E8C\u4E2A\u6216\u66F4\u540E\u9762\u7684\u914D\u7F6E\u4E2D\u3002");
+  }
   const fusedConfig = flatConfigProps.reduce((acc, key) => {
     if (key in options) {
       acc[key] = options[key];
@@ -2134,11 +2166,13 @@ export {
   GLOB_SRC_EXT,
   GLOB_STYLE,
   GLOB_SVELTE,
+  GLOB_SVG,
   GLOB_TESTS,
   GLOB_TOML,
   GLOB_TS,
   GLOB_TSX,
   GLOB_VUE,
+  GLOB_XML,
   GLOB_YAML,
   StylisticConfigDefaults,
   combine,
@@ -2152,6 +2186,7 @@ export {
   interopDefault,
   isInEditorEnv,
   isInGitHooksOrLintStaged,
+  isPackageInScope,
   javascript,
   jsdoc,
   jsonc,

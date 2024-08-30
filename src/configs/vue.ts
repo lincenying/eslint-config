@@ -55,7 +55,7 @@ export async function vue(
                     watchEffect: 'readonly',
                 },
             },
-            name: 'eslint:vue:setup',
+            name: 'eslint/vue/setup',
             plugins: {
                 vue: pluginVue,
             },
@@ -73,7 +73,7 @@ export async function vue(
                     sourceType: 'module',
                 },
             },
-            name: 'eslint:vue:rules',
+            name: 'eslint/vue/rules',
             processor: sfcBlocks === false ? pluginVue.processors['.vue'] : mergeProcessors([
                 pluginVue.processors['.vue'],
                 processorVueBlocks({

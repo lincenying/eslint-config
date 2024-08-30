@@ -12,7 +12,7 @@ export async function jsx(): Promise<TypedFlatConfigItem[]> {
                     },
                 },
             },
-            name: 'eslint:jsx:setup',
+            name: 'eslint/jsx/setup',
         },
     ]
 }

@@ -48,7 +48,7 @@ export async function react(options: OptionsFiles & OptionsReact & OptionsOverri
 
     return [
         {
-            name: 'eslint:react:setup',
+            name: 'eslint/react/setup',
             plugins: {
                 'react': plugins['@eslint-react'],
                 'react-dom': plugins['@eslint-react/dom'],
@@ -69,7 +69,7 @@ export async function react(options: OptionsFiles & OptionsReact & OptionsOverri
                     ...(isTypeAware ? { project: tsconfigPath } : {}),
                 },
             },
-            name: 'eslint:react:rules',
+            name: 'eslint/react/rules',
             rules: {
                 // recommended rules from @eslint-react/dom
                 'react-dom/no-children-in-void-dom-elements': 'warn',

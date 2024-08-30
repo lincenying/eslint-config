@@ -25,7 +25,7 @@ export async function toml(
 
     return [
         {
-            name: 'eslint:toml:setup',
+            name: 'eslint/toml/setup',
             plugins: {
                 toml: pluginToml,
             },
@@ -35,7 +35,7 @@ export async function toml(
             languageOptions: {
                 parser: parserToml,
             },
-            name: 'eslint:toml:rules',
+            name: 'eslint/toml/rules',
             rules: {
                 'style/spaced-comment': 'off',
 

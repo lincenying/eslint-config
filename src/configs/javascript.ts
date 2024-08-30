@@ -35,10 +35,10 @@ export async function javascript(
             linterOptions: {
                 reportUnusedDisableDirectives: true,
             },
-            name: 'eslint:javascript:setup',
+            name: 'eslint/javascript/setup',
         },
         {
-            name: 'eslint:javascript:rules',
+            name: 'eslint/javascript/rules',
             plugins: {
                 'antfu': pluginAntfu,
                 'unused-imports': pluginUnusedImports,
@@ -118,9 +118,6 @@ export async function javascript(
                 ],
                 'no-restricted-syntax': [
                     'error',
-                    'DebuggerStatement',
-                    'LabeledStatement',
-                    'WithStatement',
                     'TSEnumDeclaration[const=true]',
                     'TSExportAssignment',
                 ],
@@ -225,7 +222,7 @@ export async function javascript(
         },
         {
             files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
-            name: 'eslint:scripts:disables',
+            name: 'eslint/scripts/disables',
             rules: {
                 'no-console': 'off',
             },

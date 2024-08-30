@@ -1,6 +1,6 @@
 // @ts-expect-error missing types
 import styleMigrate from '@stylistic/eslint-plugin-migrate'
-import lincy from '@lincy/eslint-config'
+import lincy from './src'
 
 const config = lincy(
     {
@@ -23,12 +23,14 @@ const config = lincy(
         },
     },
     {
+        name: 'eslint/custom-rules/typescript',
         files: ['src/**/*.ts'],
         rules: {
             'perfectionist/sort-objects': 'error',
         },
     },
     {
+        name: 'eslint/custom-rules/typescript',
         files: ['src/configs/*.ts'],
         plugins: {
             'style-migrate': styleMigrate,

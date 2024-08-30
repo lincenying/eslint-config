@@ -38,10 +38,16 @@
     "jsonc",
     "yaml",
     "toml",
+    "xml",
+    "svg",
     "css",
     "less",
     "scss",
     "pcss",
     "postcss"
-  ]
+  ],
+
+  "eslint.options": {
+    "flags": ["unstable_ts_config"]
+  }
 }

@@ -37,7 +37,7 @@ export async function stylistic(options: OptionsStylistic & OptionsOverrides = {
 
     return [
         {
-            name: 'eslint:stylistic',
+            name: 'eslint/stylistic/rules',
             plugins: {
                 antfu: pluginAntfu,
                 style: pluginStylistic,

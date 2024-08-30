@@ -28,17 +28,15 @@ import { interopDefault, isInEditorEnv } from './utils'
 import { formatters } from './configs/formatters'
 import { regexp } from './configs/regexp'
 
-const flatConfigProps: (keyof TypedFlatConfigItem)[] = [
+const flatConfigProps = [
     'name',
-    'files',
-    'ignores',
     'languageOptions',
     'linterOptions',
     'processor',
     'plugins',
     'rules',
     'settings',
-]
+] satisfies (keyof TypedFlatConfigItem)[]
 
 const VuePackages = [
     'vue',
@@ -69,7 +67,7 @@ const ReactPackages = [
  * 构造一个ESLint扁平化配置项数组。
  */
 export function lincy(
-    options: OptionsConfig & TypedFlatConfigItem = {},
+    options: OptionsConfig & Omit<TypedFlatConfigItem, 'files'> = {},
     ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]
 ): FlatConfigComposer<TypedFlatConfigItem> {
     const {
@@ -81,6 +79,7 @@ export function lincy(
         react: enableReact = ReactPackages.some(i => isPackageExists(i)),
         regexp: enableRegexp = true,
         typescript: enableTypeScript = isPackageExists('typescript'),
+        unicorn: enableUnicorn = true,
         unocss: enableUnoCSS = false,
         vue: enableVue = VuePackages.some(i => isPackageExists(i)),
     } = options
@@ -106,10 +105,16 @@ export function lincy(
 
     if (enableGitignore) {
         if (typeof enableGitignore !== 'boolean') {
-            configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r(enableGitignore)]))
+            configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r({
+                name: 'eslint/gitignore',
+                ...enableGitignore,
+            })]))
         }
         else {
-            configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r({ strict: false })]))
+            configs.push(interopDefault(import('eslint-config-flat-gitignore')).then(r => [r({
+                name: 'eslint/gitignore',
+                strict: false,
+            })]))
         }
     }
 
@@ -130,11 +135,13 @@ export function lincy(
         imports({
             stylistic: stylisticOptions,
         }),
-        unicorn(),
-
         // Optional plugins (installed but not enabled by default)
         perfectionist(),
     )
+
+    if (enableUnicorn) {
+        configs.push(unicorn(enableUnicorn === true ? {} : enableUnicorn))
+    }
 
     // In the future we may support more component extensions like Svelte or so
     if (enableVue) {
@@ -241,6 +248,10 @@ export function lincy(
             options.formatters,
             typeof stylisticOptions === 'boolean' ? {} : stylisticOptions,
         ))
+    }
+
+    if ('files' in options) {
+        throw new Error('[@lincy/eslint-config] 第一个参数不应包含“files”属性，因为选项应该是全局的。请将其放在第二个或更后面的配置中。')
     }
 
     // User can optionally pass a flat config item to the first argument

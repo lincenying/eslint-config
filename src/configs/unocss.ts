@@ -22,7 +22,7 @@ export async function unocss(
 
     return [
         {
-            name: 'eslint:unocss',
+            name: 'eslint/unocss/rules',
             plugins: {
                 unocss: pluginUnoCSS,
             },

@@ -79,14 +79,14 @@ export async function typescript(
                     ...parserOptions as any,
                 },
             },
-            name: `eslint:typescript:${typeAware ? 'type-aware-parser' : 'parser'}`,
+            name: `eslint/typescript/${typeAware ? 'type-aware-parser' : 'parser'}`,
         }
     }
 
     return [
         {
             // Install the plugins without globs, so they can be configured separately.
-            name: 'eslint:typescript:setup',
+            name: 'eslint/typescript/setup',
             plugins: {
                 antfu: pluginAntfu,
                 ts: pluginTs as any,
@@ -101,7 +101,7 @@ export async function typescript(
         ],
         {
             files,
-            name: 'eslint:typescript:rules',
+            name: 'eslint/typescript/rules',
             rules: {
                 ...renameRules(
                     pluginTs.configs['eslint-recommended'].overrides![0].rules!,
@@ -154,7 +154,7 @@ export async function typescript(
         ...isTypeAware ? [{
             files: filesTypeAware,
             ignores: ignoresTypeAware,
-            name: 'eslint:typescript:rules-type-aware',
+            name: 'eslint/typescript/rules-type-aware',
             rules: {
                 ...typeAwareRules,
                 ...overrides,
@@ -162,7 +162,7 @@ export async function typescript(
         }] : [],
         {
             files: ['**/*.d.?([cm])ts'],
-            name: 'eslint:typescript:disables:dts',
+            name: 'eslint/typescript/disables/dts',
             rules: {
                 'eslint-comments/no-unlimited-disable': 'off',
                 'import/no-duplicates': 'off',
@@ -172,14 +172,14 @@ export async function typescript(
         },
         {
             files: ['**/*.{test,spec}.ts?(x)'],
-            name: 'eslint:typescript:disables:test',
+            name: 'eslint/typescript/disables/test',
             rules: {
                 'no-unused-expressions': 'off',
             },
         },
         {
             files: ['**/*.js', '**/*.cjs'],
-            name: 'eslint:typescript:disables:cjs',
+            name: 'eslint/typescript/disables/cjs',
             rules: {
                 'ts/no-require-imports': 'off',
                 'ts/no-var-requires': 'off',

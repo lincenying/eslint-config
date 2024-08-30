@@ -21,7 +21,7 @@ export async function yaml(
 
     return [
         {
-            name: 'eslint:yaml:setup',
+            name: 'eslint/yaml/setup',
             plugins: {
                 yaml: pluginYaml,
             },
@@ -31,7 +31,7 @@ export async function yaml(
             languageOptions: {
                 parser: parserYaml,
             },
-            name: 'eslint:yaml:rules',
+            name: 'eslint/yaml/rules',
             rules: {
                 'style/spaced-comment': 'off',
 

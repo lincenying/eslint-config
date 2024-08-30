@@ -1,6 +1,6 @@
 import * as parserPlain from 'eslint-parser-plain'
-import { GLOB_CSS, GLOB_GRAPHQL, GLOB_HTML, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS } from '../globs'
-import { ensurePackages, interopDefault } from '../utils'
+import { GLOB_CSS, GLOB_GRAPHQL, GLOB_HTML, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SVG } from '../globs'
+import { ensurePackages, interopDefault, isPackageInScope } from '../utils'
 import type { OptionsFormatters, StylisticConfig, TypedFlatConfigItem } from '../types'
 import { StylisticConfigDefaults } from './stylistic'
 import type { VendoredPrettierOptions } from '@/prettier.types'
@@ -11,18 +11,23 @@ export async function formatters(
 ): Promise<TypedFlatConfigItem[]> {
     const defaultIndent = 4
 
-    await ensurePackages([
-        'eslint-plugin-format',
-    ])
-
     if (options === true) {
+        const isPrettierPluginXmlInScope = isPackageInScope('@prettier/plugin-xml')
+
         options = {
             css: false,
             graphql: true,
             html: true,
             markdown: true,
+            svg: isPrettierPluginXmlInScope,
+            xml: isPrettierPluginXmlInScope,
         }
     }
+
+    await ensurePackages([
+        'eslint-plugin-format',
+        (options.xml || options.svg) ? '@prettier/plugin-xml' : undefined,
+    ])
 
     const {
         indent,
@@ -46,6 +51,13 @@ export async function formatters(
         options.prettierOptions || {},
     )
 
+    const prettierXmlOptions = {
+        xmlQuoteAttributes: 'double',
+        xmlSelfClosingSpace: true,
+        xmlSortAttributesByKey: false,
+        xmlWhitespaceSensitivity: 'ignore',
+    }
+
     const dprintOptions = Object.assign(
         {
             indentWidth: typeof indent === 'number' ? indent : defaultIndent,
@@ -59,7 +71,7 @@ export async function formatters(
 
     const configs: TypedFlatConfigItem[] = [
         {
-            name: 'eslint:formatters:setup',
+            name: 'eslint/formatters/setup',
             plugins: {
                 format: pluginFormat,
             },
@@ -73,7 +85,7 @@ export async function formatters(
                 languageOptions: {
                     parser: parserPlain,
                 },
-                name: 'eslint:formatter:css',
+                name: 'eslint/formatters/css',
                 rules: {
                     'format/prettier': [
                         'error',
@@ -89,7 +101,7 @@ export async function formatters(
                 languageOptions: {
                     parser: parserPlain,
                 },
-                name: 'eslint:formatter:scss',
+                name: 'eslint/formatters/scss',
                 rules: {
                     'format/prettier': [
                         'error',
@@ -105,7 +117,7 @@ export async function formatters(
                 languageOptions: {
                     parser: parserPlain,
                 },
-                name: 'eslint:formatter:less',
+                name: 'eslint/formatters/less',
                 rules: {
                     'format/prettier': [
                         'error',
@@ -125,13 +137,36 @@ export async function formatters(
             languageOptions: {
                 parser: parserPlain,
             },
-            name: 'eslint:formatter:html',
+            name: 'eslint/formatters/html',
             rules: {
                 'format/prettier': [
                     'error',
                     {
                         ...prettierOptions,
                         parser: 'html',
+                    },
+                ],
+            },
+        })
+    }
+
+    if (options.svg) {
+        configs.push({
+            files: [GLOB_SVG],
+            languageOptions: {
+                parser: parserPlain,
+            },
+            name: 'antfu/formatter/svg',
+            rules: {
+                'format/prettier': [
+                    'error',
+                    {
+                        ...prettierXmlOptions,
+                        ...prettierOptions,
+                        parser: 'xml',
+                        plugins: [
+                            '@prettier/plugin-xml',
+                        ],
                     },
                 ],
             },
@@ -146,7 +181,7 @@ export async function formatters(
             languageOptions: {
                 parser: parserPlain,
             },
-            name: 'eslint:formatter:markdown',
+            name: 'eslint/formatters/markdown',
             rules: {
                 [`format/${formater}`]: [
                     'error',
@@ -169,7 +204,7 @@ export async function formatters(
             languageOptions: {
                 parser: parserPlain,
             },
-            name: 'eslint:formatter:graphql',
+            name: 'eslint/formatters/graphql',
             rules: {
                 'format/prettier': [
                     'error',
