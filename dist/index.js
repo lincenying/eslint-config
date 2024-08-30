@@ -50,10 +50,7 @@ var GLOB_SVELTE = "**/*.svelte";
 var GLOB_VUE = "**/*.vue";
 var GLOB_YAML = "**/*.y?(a)ml";
 var GLOB_TOML = "**/*.toml";
-<<<<<<< HEAD
 var GLOB_XML = "**/*.xml";
-=======
->>>>>>> 7eef5f4b2988e9a76f4d1f4711ee3a9649a7d2ec
 var GLOB_SVG = "**/*.svg";
 var GLOB_HTML = "**/*.htm?(l)";
 var GLOB_GRAPHQL = "**/*.{g,graph}ql";
@@ -886,11 +883,7 @@ async function formatters(options = {}, stylistic2 = {}) {
       languageOptions: {
         parser: parserPlain2
       },
-<<<<<<< HEAD
-      name: "antfu/formatter/svg",
-=======
-      name: "eslint:formatter:svg",
->>>>>>> 7eef5f4b2988e9a76f4d1f4711ee3a9649a7d2ec
+      name: "eslint/formatters/svg",
       rules: {
         "format/prettier": [
           "error",

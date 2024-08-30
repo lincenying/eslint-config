@@ -97,11 +97,7 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 
-<<<<<<< HEAD
 // node_modules/.pnpm/tsup@8.2.4_jiti@1.21.6_postcss@8.4.41_tsx@4.19.0_typescript@5.5.4_yaml@2.5.0/node_modules/tsup/assets/cjs_shims.js
-=======
-// node_modules/.pnpm/tsup@8.2.4_jiti@1.21.6_postcss@8.4.41_tsx@4.18.0_typescript@5.5.4_yaml@2.5.0/node_modules/tsup/assets/cjs_shims.js
->>>>>>> 7eef5f4b2988e9a76f4d1f4711ee3a9649a7d2ec
 var getImportMetaUrl = () => typeof document === "undefined" ? new URL(`file:${__filename}`).href : document.currentScript && document.currentScript.src || new URL("main.js", document.baseURI).href;
 var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
 
@@ -157,10 +153,7 @@ var GLOB_SVELTE = "**/*.svelte";
 var GLOB_VUE = "**/*.vue";
 var GLOB_YAML = "**/*.y?(a)ml";
 var GLOB_TOML = "**/*.toml";
-<<<<<<< HEAD
 var GLOB_XML = "**/*.xml";
-=======
->>>>>>> 7eef5f4b2988e9a76f4d1f4711ee3a9649a7d2ec
 var GLOB_SVG = "**/*.svg";
 var GLOB_HTML = "**/*.htm?(l)";
 var GLOB_GRAPHQL = "**/*.{g,graph}ql";
@@ -993,11 +986,7 @@ async function formatters(options = {}, stylistic2 = {}) {
       languageOptions: {
         parser: parserPlain2
       },
-<<<<<<< HEAD
-      name: "antfu/formatter/svg",
-=======
-      name: "eslint:formatter:svg",
->>>>>>> 7eef5f4b2988e9a76f4d1f4711ee3a9649a7d2ec
+      name: "eslint/formatters/svg",
       rules: {
         "format/prettier": [
           "error",
