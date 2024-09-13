@@ -1,3 +1,7 @@
+@mixin margin-bottom($key) {
+    margin-bottom: map-get($map, $key);
+}
+
 @media (max-width: 480px) {
     .bd-examples {
         margin-right: -0.75rem;
@@ -8,4 +12,8 @@
         padding-right: 0.75rem;
         padding-left: 0.75rem;
     }
+}
+
+.mb4 {
+    @include margin-bottom(4);
 }

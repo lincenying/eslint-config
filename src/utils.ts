@@ -1,10 +1,33 @@
+import type { Awaitable, TypedFlatConfigItem } from './types'
+
 import process from 'node:process'
 import { fileURLToPath } from 'node:url'
+
 import { isPackageExists } from 'local-pkg'
-import type { Awaitable, TypedFlatConfigItem } from './types'
 
 const scopeUrl = fileURLToPath(new URL('.', import.meta.url))
 const isCwdInScope = isPackageExists('@antfu/eslint-config')
+
+export const parserPlain = {
+    meta: {
+        name: 'parser-plain',
+    },
+    parseForESLint: (code: string) => ({
+        ast: {
+            body: [],
+            comments: [],
+            loc: { end: code.length, start: 0 },
+            range: [0, code.length],
+            tokens: [],
+            type: 'Program',
+        },
+        scopeManager: null,
+        services: { isPlain: true },
+        visitorKeys: {
+            Program: [],
+        },
+    }),
+}
 
 /**
  * Combine array and non-array configs into a single array.

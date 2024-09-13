@@ -1,7 +1,11 @@
-import { isPackageExists } from 'local-pkg'
+import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
+
 import { FlatConfigComposer } from 'eslint-flat-config-utils'
+import { isPackageExists } from 'local-pkg'
+
 import {
     comments,
+    disables,
     ignores,
     imports,
     javascript,
@@ -23,10 +27,9 @@ import {
     vue,
     yaml,
 } from './configs'
-import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
-import { interopDefault, isInEditorEnv } from './utils'
 import { formatters } from './configs/formatters'
 import { regexp } from './configs/regexp'
+import { interopDefault, isInEditorEnv } from './utils'
 
 const flatConfigProps = [
     'name',
@@ -249,6 +252,10 @@ export function lincy(
             typeof stylisticOptions === 'boolean' ? {} : stylisticOptions,
         ))
     }
+
+    configs.push(
+        disables(),
+    )
 
     if ('files' in options) {
         throw new Error('[@lincy/eslint-config] 第一个参数不应包含“files”属性，因为选项应该是全局的。请将其放在第二个或更后面的配置中。')

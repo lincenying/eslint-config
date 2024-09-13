@@ -1,9 +1,9 @@
-import * as parserPlain from 'eslint-parser-plain'
-import { GLOB_CSS, GLOB_GRAPHQL, GLOB_HTML, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SVG } from '../globs'
-import { ensurePackages, interopDefault, isPackageInScope } from '../utils'
+import type { VendoredPrettierOptions } from '../prettier.types'
 import type { OptionsFormatters, StylisticConfig, TypedFlatConfigItem } from '../types'
+
+import { GLOB_CSS, GLOB_GRAPHQL, GLOB_HTML, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SVG } from '../globs'
+import { ensurePackages, interopDefault, isPackageInScope, parserPlain } from '../utils'
 import { StylisticConfigDefaults } from './stylistic'
-import type { VendoredPrettierOptions } from '@/prettier.types'
 
 export async function formatters(
     options: OptionsFormatters | true = {},

@@ -1,7 +1,8 @@
-import globals from 'globals'
 import type { OptionsIsInEditor, OptionsOverrides, TypedFlatConfigItem } from '../types'
+
+import globals from 'globals'
+
 import { pluginAntfu, pluginUnusedImports } from '../plugins'
-import { GLOB_SRC, GLOB_SRC_EXT } from '../globs'
 
 export async function javascript(
     options: OptionsIsInEditor & OptionsOverrides = {},
@@ -218,13 +219,6 @@ export async function javascript(
                 'yoda': ['error', 'never'],
 
                 ...overrides,
-            },
-        },
-        {
-            files: [`scripts/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
-            name: 'eslint/scripts/disables',
-            rules: {
-                'no-console': 'off',
             },
         },
     ]

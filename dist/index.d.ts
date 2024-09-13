@@ -1,9 +1,9 @@
-import { FlatConfigComposer } from 'eslint-flat-config-utils';
+import { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
+import { ParserOptions } from '@typescript-eslint/parser';
 import { Linter } from 'eslint';
 import { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
-import { ParserOptions } from '@typescript-eslint/parser';
 import { Options } from 'eslint-processor-vue-blocks';
-import { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
+import { FlatConfigComposer } from 'eslint-flat-config-utils';
 
 /**
  * 来自 Prettier 的供应商类型，因此不依赖依赖项
@@ -116,12 +116,17 @@ interface RuleOptions {
   'accessor-pairs'?: Linter.RuleEntry<AccessorPairs>
   /**
    * Having line breaks styles to object, array and named imports
+   * @see https://github.com/antfu/eslint-plugin-antfu/blob/main/src/rules/consistent-chaining.md
+   */
+  'antfu/consistent-chaining'?: Linter.RuleEntry<AntfuConsistentChaining>
+  /**
+   * Having line breaks styles to object, array and named imports
    * @see https://github.com/antfu/eslint-plugin-antfu/blob/main/src/rules/consistent-list-newline.md
    */
   'antfu/consistent-list-newline'?: Linter.RuleEntry<AntfuConsistentListNewline>
   /**
    * Enforce Anthony's style of curly bracket
-   * @see https://github.com/antfu/eslint-plugin-antfu/blob/main/src/rules/curly.test.ts
+   * @see https://github.com/antfu/eslint-plugin-antfu/blob/main/src/rules/curly.md
    */
   'antfu/curly'?: Linter.RuleEntry<[]>
   /**
@@ -136,7 +141,7 @@ interface RuleOptions {
   'antfu/import-dedupe'?: Linter.RuleEntry<[]>
   /**
    * Enforce consistent indentation in `unindent` template tag
-   * @see https://github.com/antfu/eslint-plugin-antfu/blob/main/src/rules/indent-unindent.test.ts
+   * @see https://github.com/antfu/eslint-plugin-antfu/blob/main/src/rules/indent-unindent.md
    */
   'antfu/indent-unindent'?: Linter.RuleEntry<AntfuIndentUnindent>
   /**
@@ -476,233 +481,233 @@ interface RuleOptions {
   'implicit-arrow-linebreak'?: Linter.RuleEntry<ImplicitArrowLinebreak>
   /**
    * Enforce or ban the use of inline type-only markers for named imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/consistent-type-specifier-style.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/consistent-type-specifier-style.md
    */
   'import/consistent-type-specifier-style'?: Linter.RuleEntry<ImportConsistentTypeSpecifierStyle>
   /**
    * Ensure a default export is present, given a default import.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/default.md
    */
   'import/default'?: Linter.RuleEntry<[]>
   /**
    * Enforce a leading comment with the webpackChunkName for dynamic imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/dynamic-import-chunkname.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/dynamic-import-chunkname.md
    */
   'import/dynamic-import-chunkname'?: Linter.RuleEntry<ImportDynamicImportChunkname>
   /**
    * Forbid any invalid exports, i.e. re-export of the same name.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/export.md
    */
   'import/export'?: Linter.RuleEntry<[]>
   /**
    * Ensure all exports appear after other statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/exports-last.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/exports-last.md
    */
   'import/exports-last'?: Linter.RuleEntry<[]>
   /**
    * Ensure consistent use of file extension within the import path.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/extensions.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/extensions.md
    */
   'import/extensions'?: Linter.RuleEntry<ImportExtensions>
   /**
    * Ensure all imports appear before other statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/first.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/first.md
    */
   'import/first'?: Linter.RuleEntry<ImportFirst>
   /**
    * Prefer named exports to be grouped together in a single export declaration.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/group-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/group-exports.md
    */
   'import/group-exports'?: Linter.RuleEntry<[]>
   /**
    * Replaced by `import-x/first`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/imports-first.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/imports-first.md
    * @deprecated
    */
   'import/imports-first'?: Linter.RuleEntry<ImportImportsFirst>
   /**
    * Enforce the maximum number of dependencies a module can have.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/max-dependencies.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/max-dependencies.md
    */
   'import/max-dependencies'?: Linter.RuleEntry<ImportMaxDependencies>
   /**
    * Ensure named imports correspond to a named export in the remote file.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/named.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/named.md
    */
   'import/named'?: Linter.RuleEntry<ImportNamed>
   /**
    * Ensure imported namespaces contain dereferenced properties as they are dereferenced.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/namespace.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/namespace.md
    */
   'import/namespace'?: Linter.RuleEntry<ImportNamespace>
   /**
    * Enforce a newline after import statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/newline-after-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/newline-after-import.md
    */
   'import/newline-after-import'?: Linter.RuleEntry<ImportNewlineAfterImport>
   /**
    * Forbid import of modules using absolute paths.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-absolute-path.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-absolute-path.md
    */
   'import/no-absolute-path'?: Linter.RuleEntry<ImportNoAbsolutePath>
   /**
    * Forbid AMD `require` and `define` calls.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-amd.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-amd.md
    */
   'import/no-amd'?: Linter.RuleEntry<[]>
   /**
    * Forbid anonymous values as default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-anonymous-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-anonymous-default-export.md
    */
   'import/no-anonymous-default-export'?: Linter.RuleEntry<ImportNoAnonymousDefaultExport>
   /**
    * Forbid CommonJS `require` calls and `module.exports` or `exports.*`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-commonjs.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-commonjs.md
    */
   'import/no-commonjs'?: Linter.RuleEntry<ImportNoCommonjs>
   /**
    * Forbid a module from importing a module with a dependency path back to itself.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-cycle.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-cycle.md
    */
   'import/no-cycle'?: Linter.RuleEntry<ImportNoCycle>
   /**
    * Forbid default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-default-export.md
    */
   'import/no-default-export'?: Linter.RuleEntry<[]>
   /**
    * Forbid imported names marked with `@deprecated` documentation tag.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-deprecated.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-deprecated.md
    */
   'import/no-deprecated'?: Linter.RuleEntry<[]>
   /**
    * Forbid repeated import of the same module in multiple places.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-duplicates.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-duplicates.md
    */
   'import/no-duplicates'?: Linter.RuleEntry<ImportNoDuplicates>
   /**
    * Forbid `require()` calls with expressions.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-dynamic-require.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-dynamic-require.md
    */
   'import/no-dynamic-require'?: Linter.RuleEntry<ImportNoDynamicRequire>
   /**
    * Forbid empty named import blocks.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-empty-named-blocks.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-empty-named-blocks.md
    */
   'import/no-empty-named-blocks'?: Linter.RuleEntry<[]>
   /**
    * Forbid the use of extraneous packages.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-extraneous-dependencies.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-extraneous-dependencies.md
    */
   'import/no-extraneous-dependencies'?: Linter.RuleEntry<ImportNoExtraneousDependencies>
   /**
    * Forbid import statements with CommonJS module.exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-import-module-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-import-module-exports.md
    */
   'import/no-import-module-exports'?: Linter.RuleEntry<ImportNoImportModuleExports>
   /**
    * Forbid importing the submodules of other modules.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-internal-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-internal-modules.md
    */
   'import/no-internal-modules'?: Linter.RuleEntry<ImportNoInternalModules>
   /**
    * Forbid the use of mutable exports with `var` or `let`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-mutable-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-mutable-exports.md
    */
   'import/no-mutable-exports'?: Linter.RuleEntry<[]>
   /**
    * Forbid use of exported name as identifier of default export.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-named-as-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-named-as-default.md
    */
   'import/no-named-as-default'?: Linter.RuleEntry<[]>
   /**
    * Forbid use of exported name as property of default export.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-named-as-default-member.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-named-as-default-member.md
    */
   'import/no-named-as-default-member'?: Linter.RuleEntry<[]>
   /**
    * Forbid named default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-named-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-named-default.md
    */
   'import/no-named-default'?: Linter.RuleEntry<[]>
   /**
    * Forbid named exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-named-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-named-export.md
    */
   'import/no-named-export'?: Linter.RuleEntry<[]>
   /**
    * Forbid namespace (a.k.a. "wildcard" `*`) imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-namespace.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-namespace.md
    */
   'import/no-namespace'?: Linter.RuleEntry<ImportNoNamespace>
   /**
    * Forbid Node.js builtin modules.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-nodejs-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-nodejs-modules.md
    */
   'import/no-nodejs-modules'?: Linter.RuleEntry<ImportNoNodejsModules>
   /**
    * Forbid importing packages through relative paths.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-relative-packages.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-relative-packages.md
    */
   'import/no-relative-packages'?: Linter.RuleEntry<ImportNoRelativePackages>
   /**
    * Forbid importing modules from parent directories.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-relative-parent-imports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-relative-parent-imports.md
    */
   'import/no-relative-parent-imports'?: Linter.RuleEntry<ImportNoRelativeParentImports>
   /**
    * Forbid importing a default export by a different name.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-rename-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-rename-default.md
    */
   'import/no-rename-default'?: Linter.RuleEntry<ImportNoRenameDefault>
   /**
    * Enforce which files can be imported in a given folder.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-restricted-paths.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-restricted-paths.md
    */
   'import/no-restricted-paths'?: Linter.RuleEntry<ImportNoRestrictedPaths>
   /**
    * Forbid a module from importing itself.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-self-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-self-import.md
    */
   'import/no-self-import'?: Linter.RuleEntry<[]>
   /**
    * Forbid unassigned imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-unassigned-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-unassigned-import.md
    */
   'import/no-unassigned-import'?: Linter.RuleEntry<ImportNoUnassignedImport>
   /**
    * Ensure imports point to a file/module that can be resolved.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-unresolved.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-unresolved.md
    */
   'import/no-unresolved'?: Linter.RuleEntry<ImportNoUnresolved>
   /**
    * Forbid modules without exports, or exports without matching import in another module.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-unused-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-unused-modules.md
    */
   'import/no-unused-modules'?: Linter.RuleEntry<ImportNoUnusedModules>
   /**
    * Forbid unnecessary path segments in import and require statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-useless-path-segments.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-useless-path-segments.md
    */
   'import/no-useless-path-segments'?: Linter.RuleEntry<ImportNoUselessPathSegments>
   /**
    * Forbid webpack loader syntax in imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/no-webpack-loader-syntax.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/no-webpack-loader-syntax.md
    */
   'import/no-webpack-loader-syntax'?: Linter.RuleEntry<[]>
   /**
    * Enforce a convention in module import order.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/order.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/order.md
    */
   'import/order'?: Linter.RuleEntry<ImportOrder>
   /**
    * Prefer a default export if module exports a single name or multiple names.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/prefer-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/prefer-default-export.md
    */
   'import/prefer-default-export'?: Linter.RuleEntry<ImportPreferDefaultExport>
   /**
    * Forbid potentially ambiguous parse goal (`script` vs. `module`).
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.1.1/docs/rules/unambiguous.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.2.1/docs/rules/unambiguous.md
    */
   'import/unambiguous'?: Linter.RuleEntry<[]>
   /**
@@ -1278,6 +1283,34 @@ interface RuleOptions {
    * @see https://eslint.org/docs/latest/rules/logical-assignment-operators
    */
   'logical-assignment-operators'?: Linter.RuleEntry<LogicalAssignmentOperators>
+  /**
+   * Require languages for fenced code blocks.
+   */
+  'markdown/fenced-code-language'?: Linter.RuleEntry<MarkdownFencedCodeLanguage>
+  /**
+   * Enforce heading levels increment by one.
+   */
+  'markdown/heading-increment'?: Linter.RuleEntry<[]>
+  /**
+   * Disallow duplicate headings in the same document.
+   */
+  'markdown/no-duplicate-headings'?: Linter.RuleEntry<[]>
+  /**
+   * Disallow empty links.
+   */
+  'markdown/no-empty-links'?: Linter.RuleEntry<[]>
+  /**
+   * Disallow HTML tags.
+   */
+  'markdown/no-html'?: Linter.RuleEntry<MarkdownNoHtml>
+  /**
+   * Disallow invalid label references.
+   */
+  'markdown/no-invalid-label-refs'?: Linter.RuleEntry<[]>
+  /**
+   * Disallow missing label references.
+   */
+  'markdown/no-missing-label-refs'?: Linter.RuleEntry<[]>
   /**
    * Enforce a maximum number of classes per file
    * @see https://eslint.org/docs/latest/rules/max-classes-per-file
@@ -2503,6 +2536,11 @@ interface RuleOptions {
    */
   'perfectionist/sort-objects'?: Linter.RuleEntry<PerfectionistSortObjects>
   /**
+   * Enforce sorted sets.
+   * @see https://perfectionist.dev/rules/sort-sets
+   */
+  'perfectionist/sort-sets'?: Linter.RuleEntry<PerfectionistSortSets>
+  /**
    * Enforce sorted Svelte attributes.
    * @see https://perfectionist.dev/rules/sort-svelte-attributes
    */
@@ -2671,18 +2709,13 @@ interface RuleOptions {
    */
   'react-dom/no-unsafe-target-blank'?: Linter.RuleEntry<[]>
   /**
-   * enforce custom hooks using other hooks
-   * @see https://eslint-react.xyz/docs/rules/hooks-extra-ensure-custom-hooks-using-other-hooks
+   * enforce custom hooks to use at least one other hook inside
+   * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-redundant-custom-hook
    */
   'react-hooks-extra/ensure-custom-hooks-using-other-hooks'?: Linter.RuleEntry<[]>
   /**
-   * enforce 'useCallback' has non-empty dependencies array
-   * @see https://eslint-react.xyz/docs/rules/hooks-extra-ensure-use-callback-has-non-empty-deps
-   */
-  'react-hooks-extra/ensure-use-callback-has-non-empty-deps'?: Linter.RuleEntry<[]>
-  /**
-   * enforce 'useMemo' has non-empty dependencies array
-   * @see https://eslint-react.xyz/docs/rules/hooks-extra-ensure-use-memo-has-non-empty-deps
+   * disallow unnecessary usage of 'useMemo'
+   * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-unnecessary-use-memo
    */
   'react-hooks-extra/ensure-use-memo-has-non-empty-deps'?: Linter.RuleEntry<[]>
   /**
@@ -2691,10 +2724,25 @@ interface RuleOptions {
    */
   'react-hooks-extra/no-direct-set-state-in-use-effect'?: Linter.RuleEntry<[]>
   /**
-   * disallow direct calls to the 'set' function of 'useState' in 'useLayoutEffect'
-   * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-direct-set-state-in-use-layout-effect
+   * disallow direct calls to the 'set' function of 'useState' in 'useEffect'
+   * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-direct-set-state-in-use-effect
    */
   'react-hooks-extra/no-direct-set-state-in-use-layout-effect'?: Linter.RuleEntry<[]>
+  /**
+   * enforce custom hooks to use at least one other hook inside
+   * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-redundant-custom-hook
+   */
+  'react-hooks-extra/no-redundant-custom-hook'?: Linter.RuleEntry<[]>
+  /**
+   * disallow unnecessary usage of 'useCallback'
+   * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-unnecessary-use-callback
+   */
+  'react-hooks-extra/no-unnecessary-use-callback'?: Linter.RuleEntry<[]>
+  /**
+   * disallow unnecessary usage of 'useMemo'
+   * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-unnecessary-use-memo
+   */
+  'react-hooks-extra/no-unnecessary-use-memo'?: Linter.RuleEntry<[]>
   /**
    * disallow function calls in 'useState' that aren't wrapped in an initializer function
    * @see https://eslint-react.xyz/docs/rules/hooks-extra-prefer-use-state-lazy-initialization
@@ -3385,7 +3433,7 @@ interface RuleOptions {
    * Enforce the use of `u` or `v` flag on RegExp
    * @see https://eslint.org/docs/latest/rules/require-unicode-regexp
    */
-  'require-unicode-regexp'?: Linter.RuleEntry<[]>
+  'require-unicode-regexp'?: Linter.RuleEntry<RequireUnicodeRegexp>
   /**
    * Require generator functions to contain `yield`
    * @see https://eslint.org/docs/latest/rules/require-yield
@@ -3972,103 +4020,103 @@ interface RuleOptions {
   'template-tag-spacing'?: Linter.RuleEntry<TemplateTagSpacing>
   /**
    * require .spec test file pattern
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/consistent-test-filename.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/consistent-test-filename.md
    */
   'test/consistent-test-filename'?: Linter.RuleEntry<TestConsistentTestFilename>
   /**
    * enforce using test or it but not both
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/consistent-test-it.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/consistent-test-it.md
    */
   'test/consistent-test-it'?: Linter.RuleEntry<TestConsistentTestIt>
   /**
    * enforce having expectation in test body
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/expect-expect.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/expect-expect.md
    */
   'test/expect-expect'?: Linter.RuleEntry<TestExpectExpect>
   /**
    * enforce a maximum number of expect per test
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/max-expects.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/max-expects.md
    */
   'test/max-expects'?: Linter.RuleEntry<TestMaxExpects>
   /**
    * require describe block to be less than set max value or default value
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/max-nested-describe.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/max-nested-describe.md
    */
   'test/max-nested-describe'?: Linter.RuleEntry<TestMaxNestedDescribe>
   /**
    * disallow alias methods
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-alias-methods.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-alias-methods.md
    */
   'test/no-alias-methods'?: Linter.RuleEntry<[]>
   /**
    * disallow commented out tests
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-commented-out-tests.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-commented-out-tests.md
    */
   'test/no-commented-out-tests'?: Linter.RuleEntry<[]>
   /**
    * disallow conditional expects
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-conditional-expect.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-conditional-expect.md
    */
   'test/no-conditional-expect'?: Linter.RuleEntry<[]>
   /**
    * disallow conditional tests
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-conditional-in-test.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-conditional-in-test.md
    */
   'test/no-conditional-in-test'?: Linter.RuleEntry<[]>
   /**
    * disallow conditional tests
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-conditional-tests.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-conditional-tests.md
    */
   'test/no-conditional-tests'?: Linter.RuleEntry<[]>
   /**
    * disallow disabled tests
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-disabled-tests.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-disabled-tests.md
    */
   'test/no-disabled-tests'?: Linter.RuleEntry<[]>
   /**
    * disallow using a callback in asynchronous tests and hooks
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-done-callback.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-done-callback.md
    * @deprecated
    */
   'test/no-done-callback'?: Linter.RuleEntry<[]>
   /**
    * disallow duplicate hooks and teardown hooks
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-duplicate-hooks.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-duplicate-hooks.md
    */
   'test/no-duplicate-hooks'?: Linter.RuleEntry<[]>
   /**
    * disallow focused tests
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-focused-tests.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-focused-tests.md
    */
   'test/no-focused-tests'?: Linter.RuleEntry<TestNoFocusedTests>
   /**
    * disallow setup and teardown hooks
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-hooks.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-hooks.md
    */
   'test/no-hooks'?: Linter.RuleEntry<TestNoHooks>
   /**
    * disallow identical titles
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-identical-title.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-identical-title.md
    */
   'test/no-identical-title'?: Linter.RuleEntry<[]>
   /**
    * disallow importing `node:test`
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-import-node-test.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-import-node-test.md
    */
   'test/no-import-node-test'?: Linter.RuleEntry<[]>
   /**
    * disallow string interpolation in snapshots
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-interpolation-in-snapshots.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-interpolation-in-snapshots.md
    */
   'test/no-interpolation-in-snapshots'?: Linter.RuleEntry<[]>
   /**
    * disallow large snapshots
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-large-snapshots.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-large-snapshots.md
    */
   'test/no-large-snapshots'?: Linter.RuleEntry<TestNoLargeSnapshots>
   /**
    * disallow importing from __mocks__ directory
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-mocks-import.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-mocks-import.md
    */
   'test/no-mocks-import'?: Linter.RuleEntry<[]>
   /**
@@ -4078,202 +4126,202 @@ interface RuleOptions {
   'test/no-only-tests'?: Linter.RuleEntry<TestNoOnlyTests>
   /**
    * disallow the use of certain matchers
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-restricted-matchers.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-restricted-matchers.md
    */
   'test/no-restricted-matchers'?: Linter.RuleEntry<TestNoRestrictedMatchers>
   /**
    * disallow specific `vi.` methods
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-restricted-vi-methods.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-restricted-vi-methods.md
    */
   'test/no-restricted-vi-methods'?: Linter.RuleEntry<TestNoRestrictedViMethods>
   /**
    * disallow using `expect` outside of `it` or `test` blocks
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-standalone-expect.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-standalone-expect.md
    */
   'test/no-standalone-expect'?: Linter.RuleEntry<TestNoStandaloneExpect>
   /**
    * disallow using `test` as a prefix
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-test-prefixes.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-test-prefixes.md
    */
   'test/no-test-prefixes'?: Linter.RuleEntry<[]>
   /**
    * disallow return statements in tests
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/no-test-return-statement.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-test-return-statement.md
    */
   'test/no-test-return-statement'?: Linter.RuleEntry<[]>
   /**
    * Enforce padding around `afterAll` blocks
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/padding-around-after-all-blocks.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/padding-around-after-all-blocks.md
    */
   'test/padding-around-after-all-blocks'?: Linter.RuleEntry<[]>
   /**
    * Enforce padding around `afterEach` blocks
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/padding-around-after-each-blocks.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/padding-around-after-each-blocks.md
    */
   'test/padding-around-after-each-blocks'?: Linter.RuleEntry<[]>
   /**
    * Enforce padding around vitest functions
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/padding-around-all.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/padding-around-all.md
    */
   'test/padding-around-all'?: Linter.RuleEntry<[]>
   /**
    * Enforce padding around `beforeAll` blocks
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/padding-around-before-all-blocks.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/padding-around-before-all-blocks.md
    */
   'test/padding-around-before-all-blocks'?: Linter.RuleEntry<[]>
   /**
    * Enforce padding around `beforeEach` blocks
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/padding-around-before-each-blocks.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/padding-around-before-each-blocks.md
    */
   'test/padding-around-before-each-blocks'?: Linter.RuleEntry<[]>
   /**
    * Enforce padding around `describe` blocks
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/padding-around-describe-blocks.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/padding-around-describe-blocks.md
    */
   'test/padding-around-describe-blocks'?: Linter.RuleEntry<[]>
   /**
    * Enforce padding around `expect` groups
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/padding-around-expect-groups.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/padding-around-expect-groups.md
    */
   'test/padding-around-expect-groups'?: Linter.RuleEntry<[]>
   /**
    * Enforce padding around afterAll blocks
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/padding-around-test-blocks.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/padding-around-test-blocks.md
    */
   'test/padding-around-test-blocks'?: Linter.RuleEntry<[]>
   /**
    * enforce using `toBeCalledWith()` or `toHaveBeenCalledWith()`
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-called-with.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-called-with.md
    */
   'test/prefer-called-with'?: Linter.RuleEntry<[]>
   /**
    * enforce using the built-in comparison matchers
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-comparison-matcher.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-comparison-matcher.md
    */
   'test/prefer-comparison-matcher'?: Linter.RuleEntry<[]>
   /**
    * enforce using `each` rather than manual loops
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-each.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-each.md
    */
   'test/prefer-each'?: Linter.RuleEntry<[]>
   /**
    * enforce using the built-in quality matchers
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-equality-matcher.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-equality-matcher.md
    */
   'test/prefer-equality-matcher'?: Linter.RuleEntry<[]>
   /**
    * enforce using expect assertions instead of callbacks
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-expect-assertions.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-expect-assertions.md
    */
   'test/prefer-expect-assertions'?: Linter.RuleEntry<TestPreferExpectAssertions>
   /**
    * enforce using `expect().resolves` over `expect(await ...)` syntax
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-expect-resolves.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-expect-resolves.md
    */
   'test/prefer-expect-resolves'?: Linter.RuleEntry<[]>
   /**
    * enforce having hooks in consistent order
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-hooks-in-order.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-hooks-in-order.md
    */
   'test/prefer-hooks-in-order'?: Linter.RuleEntry<[]>
   /**
    * enforce having hooks before any test cases
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-hooks-on-top.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-hooks-on-top.md
    */
   'test/prefer-hooks-on-top'?: Linter.RuleEntry<[]>
   /**
    * enforce lowercase titles
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-lowercase-title.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-lowercase-title.md
    */
   'test/prefer-lowercase-title'?: Linter.RuleEntry<TestPreferLowercaseTitle>
   /**
    * enforce mock resolved/rejected shorthands for promises
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-mock-promise-shorthand.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-mock-promise-shorthand.md
    */
   'test/prefer-mock-promise-shorthand'?: Linter.RuleEntry<[]>
   /**
    * enforce including a hint with external snapshots
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-snapshot-hint.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-snapshot-hint.md
    */
   'test/prefer-snapshot-hint'?: Linter.RuleEntry<TestPreferSnapshotHint>
   /**
    * enforce using `vi.spyOn`
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-spy-on.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-spy-on.md
    */
   'test/prefer-spy-on'?: Linter.RuleEntry<[]>
   /**
    * enforce strict equal over equal
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-strict-equal.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-strict-equal.md
    */
   'test/prefer-strict-equal'?: Linter.RuleEntry<[]>
   /**
    * enforce using toBe()
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-to-be.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-to-be.md
    */
   'test/prefer-to-be'?: Linter.RuleEntry<[]>
   /**
    * enforce using toBeFalsy()
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-to-be-falsy.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-to-be-falsy.md
    */
   'test/prefer-to-be-falsy'?: Linter.RuleEntry<[]>
   /**
    * enforce using toBeObject()
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-to-be-object.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-to-be-object.md
    */
   'test/prefer-to-be-object'?: Linter.RuleEntry<[]>
   /**
    * enforce using `toBeTruthy`
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-to-be-truthy.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-to-be-truthy.md
    */
   'test/prefer-to-be-truthy'?: Linter.RuleEntry<[]>
   /**
    * enforce using toContain()
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-to-contain.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-to-contain.md
    */
   'test/prefer-to-contain'?: Linter.RuleEntry<[]>
   /**
    * enforce using toHaveLength()
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-to-have-length.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-to-have-length.md
    */
   'test/prefer-to-have-length'?: Linter.RuleEntry<[]>
   /**
    * enforce using `test.todo`
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/prefer-todo.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-todo.md
    */
   'test/prefer-todo'?: Linter.RuleEntry<[]>
   /**
    * require setup and teardown to be within a hook
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/require-hook.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/require-hook.md
    */
   'test/require-hook'?: Linter.RuleEntry<TestRequireHook>
   /**
    * require local Test Context for concurrent snapshot tests
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/require-local-test-context-for-concurrent-snapshots.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/require-local-test-context-for-concurrent-snapshots.md
    */
   'test/require-local-test-context-for-concurrent-snapshots'?: Linter.RuleEntry<[]>
   /**
    * require toThrow() to be called with an error message
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/require-to-throw-message.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/require-to-throw-message.md
    */
   'test/require-to-throw-message'?: Linter.RuleEntry<[]>
   /**
    * enforce that all tests are in a top-level describe
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/require-top-level-describe.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/require-top-level-describe.md
    */
   'test/require-top-level-describe'?: Linter.RuleEntry<TestRequireTopLevelDescribe>
   /**
    * enforce valid describe callback
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/valid-describe-callback.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/valid-describe-callback.md
    */
   'test/valid-describe-callback'?: Linter.RuleEntry<[]>
   /**
    * enforce valid `expect()` usage
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/valid-expect.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/valid-expect.md
    */
   'test/valid-expect'?: Linter.RuleEntry<TestValidExpect>
   /**
    * enforce valid titles
-   * @see https://github.com/veritem/eslint-plugin-vitest/blob/main/docs/rules/valid-title.md
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/valid-title.md
    */
   'test/valid-title'?: Linter.RuleEntry<TestValidTitle>
   /**
@@ -5880,7 +5928,7 @@ interface RuleOptions {
    */
   'vue/define-emits-declaration'?: Linter.RuleEntry<VueDefineEmitsDeclaration>
   /**
-   * enforce order of `defineEmits` and `defineProps` compiler macros
+   * enforce order of compiler macros (`defineProps`, `defineEmits`, etc.)
    * @see https://eslint.vuejs.org/rules/define-macros-order.html
    */
   'vue/define-macros-order'?: Linter.RuleEntry<VueDefineMacrosOrder>
@@ -6010,6 +6058,16 @@ interface RuleOptions {
    */
   'vue/max-lines-per-block'?: Linter.RuleEntry<VueMaxLinesPerBlock>
   /**
+   * enforce maximum number of props in Vue component
+   * @see https://eslint.vuejs.org/rules/max-props.html
+   */
+  'vue/max-props'?: Linter.RuleEntry<VueMaxProps>
+  /**
+   * enforce maximum depth of template
+   * @see https://eslint.vuejs.org/rules/max-template-depth.html
+   */
+  'vue/max-template-depth'?: Linter.RuleEntry<VueMaxTemplateDepth>
+  /**
    * require component names to be always multi-word
    * @see https://eslint.vuejs.org/rules/multi-word-component-names.html
    */
@@ -6065,7 +6123,7 @@ interface RuleOptions {
    */
   'vue/no-child-content'?: Linter.RuleEntry<VueNoChildContent>
   /**
-   * disallow accessing computed properties in `data`.
+   * disallow accessing computed properties in `data`
    * @see https://eslint.vuejs.org/rules/no-computed-properties-in-data.html
    */
   'vue/no-computed-properties-in-data'?: Linter.RuleEntry<[]>
@@ -6613,7 +6671,7 @@ interface RuleOptions {
    */
   'vue/padding-lines-in-component-definition'?: Linter.RuleEntry<VuePaddingLinesInComponentDefinition>
   /**
-   * enforce use of `defineOptions` instead of default export.
+   * enforce use of `defineOptions` instead of default export
    * @see https://eslint.vuejs.org/rules/prefer-define-options.html
    */
   'vue/prefer-define-options'?: Linter.RuleEntry<[]>
@@ -6657,6 +6715,11 @@ interface RuleOptions {
    * @see https://eslint.vuejs.org/rules/require-component-is.html
    */
   'vue/require-component-is'?: Linter.RuleEntry<[]>
+  /**
+   * require components to be the default export
+   * @see https://eslint.vuejs.org/rules/require-default-export.html
+   */
+  'vue/require-default-export'?: Linter.RuleEntry<[]>
   /**
    * require default value for props
    * @see https://eslint.vuejs.org/rules/require-default-prop.html
@@ -6726,7 +6789,7 @@ interface RuleOptions {
    * require control the display of the content inside `<transition>`
    * @see https://eslint.vuejs.org/rules/require-toggle-inside-transition.html
    */
-  'vue/require-toggle-inside-transition'?: Linter.RuleEntry<[]>
+  'vue/require-toggle-inside-transition'?: Linter.RuleEntry<VueRequireToggleInsideTransition>
   /**
    * enforce adding type declarations to object props
    * @see https://eslint.vuejs.org/rules/require-typed-object-prop.html
@@ -7146,6 +7209,11 @@ type AccessorPairs = []|[{
   setWithoutGet?: boolean
   enforceForClassMembers?: boolean
 }]
+// ----- antfu/consistent-chaining -----
+type AntfuConsistentChaining = []|[{
+  
+  allowLeadingPropertyAccess?: boolean
+}]
 // ----- antfu/consistent-list-newline -----
 type AntfuConsistentListNewline = []|[{
   ArrayExpression?: boolean
@@ -7525,6 +7593,7 @@ type ImportNoExtraneousDependencies = []|[{
   packageDir?: (string | unknown[])
   includeInternal?: boolean
   includeTypes?: boolean
+  whitelist?: unknown[]
 }]
 // ----- import/no-import-module-exports -----
 type ImportNoImportModuleExports = []|[{
@@ -8811,6 +8880,14 @@ type LinesBetweenClassMembers = []|[({
 type LogicalAssignmentOperators = (([]|["always"]|["always", {
   enforceForIfStatements?: boolean
 }] | ["never"]) & unknown[])
+// ----- markdown/fenced-code-language -----
+type MarkdownFencedCodeLanguage = []|[{
+  required?: string[]
+}]
+// ----- markdown/no-html -----
+type MarkdownNoHtml = []|[{
+  allowed?: string[]
+}]
 // ----- max-classes-per-file -----
 type MaxClassesPerFile = []|[(number | {
   ignoreExpressions?: boolean
@@ -9696,9 +9773,41 @@ type PerfectionistSortClasses = []|[{
   
   groups?: (string | string[])[]
   
-  customGroups?: {
+  customGroups?: ({
     [k: string]: (string | string[]) | undefined
-  }
+  } | ({
+    
+    groupName?: string
+    
+    type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
+    
+    order?: ("desc" | "asc")
+    anyOf?: {
+      
+      selector?: ("accessor-property" | "index-signature" | "constructor" | "static-block" | "get-method" | "set-method" | "function-property" | "property" | "method")
+      
+      modifiers?: ("protected" | "private" | "public" | "static" | "abstract" | "override" | "readonly" | "decorated" | "declare" | "optional")[]
+      
+      elementNamePattern?: string
+      
+      decoratorNamePattern?: string
+    }[]
+  } | {
+    
+    groupName?: string
+    
+    type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
+    
+    order?: ("desc" | "asc")
+    
+    selector?: ("accessor-property" | "index-signature" | "constructor" | "static-block" | "get-method" | "set-method" | "function-property" | "property" | "method")
+    
+    modifiers?: ("protected" | "private" | "public" | "static" | "abstract" | "override" | "readonly" | "decorated" | "declare" | "optional")[]
+    
+    elementNamePattern?: string
+    
+    decoratorNamePattern?: string
+  })[])
 }]
 // ----- perfectionist/sort-enums -----
 type PerfectionistSortEnums = []|[{
@@ -9735,6 +9844,8 @@ type _PerfectionistSortImportsSortImports = (_PerfectionistSortImportsMaxLineLen
   ignoreCase?: boolean
   
   internalPattern?: string[]
+  
+  sortSideEffects?: boolean
   
   newlinesBetween?: ("ignore" | "always" | "never")
   
@@ -9885,6 +9996,17 @@ type PerfectionistSortObjects = []|[{
   customGroups?: {
     [k: string]: (string | string[]) | undefined
   }
+}]
+// ----- perfectionist/sort-sets -----
+type PerfectionistSortSets = []|[{
+  
+  type?: ("alphabetical" | "natural" | "line-length")
+  
+  order?: ("asc" | "desc")
+  
+  ignoreCase?: boolean
+  
+  groupKind?: ("mixed" | "literals-first" | "spreads-first")
 }]
 // ----- perfectionist/sort-svelte-attributes -----
 type PerfectionistSortSvelteAttributes = []|[{
@@ -10160,6 +10282,10 @@ type RegexpUnicodeProperty = []|[{
 type RequireAtomicUpdates = []|[{
   allowProperties?: boolean
 }]
+// ----- require-unicode-regexp -----
+type RequireUnicodeRegexp = []|[{
+  requireFlag?: ("u" | "v")
+}]
 // ----- rest-spread-spacing -----
 type RestSpreadSpacing = []|[("always" | "never")]
 // ----- semi -----
@@ -10372,6 +10498,7 @@ type StyleIndent = []|[("tab" | number)]|[("tab" | number), {
   offsetTernaryExpressions?: boolean
   ignoredNodes?: string[]
   ignoreComments?: boolean
+  tabLength?: number
 }]
 // ----- style/indent-binary-ops -----
 type StyleIndentBinaryOps = []|[(number | "tab")]
@@ -10743,6 +10870,10 @@ type StyleKeywordSpacing = []|[{
       after?: boolean
     }
     return?: {
+      before?: boolean
+      after?: boolean
+    }
+    satisfies?: {
       before?: boolean
       after?: boolean
     }
@@ -11226,7 +11357,6 @@ type StyleTypeAnnotationSpacing = []|[{
     parameter?: _StyleTypeAnnotationSpacing_SpacingConfig
     property?: _StyleTypeAnnotationSpacing_SpacingConfig
     returnType?: _StyleTypeAnnotationSpacing_SpacingConfig
-    operator?: _StyleTypeAnnotationSpacing_SpacingConfig
   }
 }]
 interface _StyleTypeAnnotationSpacing_SpacingConfig {
@@ -11494,6 +11624,7 @@ type TsBanTsComment = []|[{
   "ts-check"?: (boolean | "allow-with-description" | {
     descriptionFormat?: string
   })
+  
   minimumDescriptionLength?: number
 }]
 // ----- ts/class-literal-property-style -----
@@ -11519,29 +11650,41 @@ type TsConsistentReturn = []|[{
 }]
 // ----- ts/consistent-type-assertions -----
 type TsConsistentTypeAssertions = []|[({
+  
   assertionStyle: "never"
 } | {
+  
   assertionStyle: ("as" | "angle-bracket")
+  
   objectLiteralTypeAssertions?: ("allow" | "allow-as-parameter" | "never")
 })]
 // ----- ts/consistent-type-definitions -----
 type TsConsistentTypeDefinitions = []|[("interface" | "type")]
 // ----- ts/consistent-type-exports -----
 type TsConsistentTypeExports = []|[{
+  
   fixMixedExportsWithInlineTypeSpecifier?: boolean
 }]
 // ----- ts/consistent-type-imports -----
 type TsConsistentTypeImports = []|[{
+  
   disallowTypeAnnotations?: boolean
+  
   fixStyle?: ("separate-type-imports" | "inline-type-imports")
+  
   prefer?: ("type-imports" | "no-type-imports")
 }]
 // ----- ts/dot-notation -----
 type TsDotNotation = []|[{
+  
   allowKeywords?: boolean
+  
   allowPattern?: string
+  
   allowPrivateClassPropertyAccess?: boolean
+  
   allowProtectedClassPropertyAccess?: boolean
+  
   allowIndexSignaturePropertyAccess?: boolean
 }]
 // ----- ts/explicit-function-return-type -----
@@ -11573,6 +11716,7 @@ type TsExplicitMemberAccessibility = []|[{
     properties?: ("explicit" | "no-public" | "off")
     parameterProperties?: ("explicit" | "no-public" | "off")
   }
+  
   ignoredMethodNames?: string[]
 }]
 // ----- ts/explicit-module-boundary-types -----
@@ -11594,8 +11738,11 @@ type TsInitDeclarations = ([]|["always"] | []|["never"]|["never", {
 }])
 // ----- ts/max-params -----
 type TsMaxParams = []|[{
-  maximum?: number
+  
   max?: number
+  
+  maximum?: number
+  
   countVoidThis?: boolean
 }]
 // ----- ts/member-ordering -----
@@ -11949,30 +12096,40 @@ interface _TsNamingConvention_MatchRegexConfig {
 }
 // ----- ts/no-base-to-string -----
 type TsNoBaseToString = []|[{
+  
   ignoredTypeNames?: string[]
 }]
 // ----- ts/no-confusing-void-expression -----
 type TsNoConfusingVoidExpression = []|[{
+  
   ignoreArrowShorthand?: boolean
+  
   ignoreVoidOperator?: boolean
 }]
 // ----- ts/no-duplicate-type-constituents -----
 type TsNoDuplicateTypeConstituents = []|[{
+  
   ignoreIntersections?: boolean
+  
   ignoreUnions?: boolean
 }]
 // ----- ts/no-empty-function -----
 type TsNoEmptyFunction = []|[{
+  
   allow?: ("functions" | "arrowFunctions" | "generatorFunctions" | "methods" | "generatorMethods" | "getters" | "setters" | "constructors" | "private-constructors" | "protected-constructors" | "asyncFunctions" | "asyncMethods" | "decoratedFunctions" | "overrideMethods")[]
 }]
 // ----- ts/no-empty-interface -----
 type TsNoEmptyInterface = []|[{
+  
   allowSingleExtends?: boolean
 }]
 // ----- ts/no-empty-object-type -----
 type TsNoEmptyObjectType = []|[{
+  
   allowInterfaces?: ("always" | "never" | "with-single-extends")
+  
   allowObjectTypes?: ("always" | "never")
+  
   allowWithName?: string
 }]
 // ----- ts/no-explicit-any -----
@@ -11995,6 +12152,7 @@ type TsNoExtraneousClass = []|[{
 }]
 // ----- ts/no-floating-promises -----
 type TsNoFloatingPromises = []|[{
+  
   allowForKnownSafePromises?: (string | {
     from: "file"
     name: (string | [string, ...(string)[]])
@@ -12007,6 +12165,7 @@ type TsNoFloatingPromises = []|[{
     name: (string | [string, ...(string)[]])
     package: string
   })[]
+  
   allowForKnownSafeCalls?: (string | {
     from: "file"
     name: (string | [string, ...(string)[]])
@@ -12028,7 +12187,9 @@ type TsNoFloatingPromises = []|[{
 }]
 // ----- ts/no-inferrable-types -----
 type TsNoInferrableTypes = []|[{
+  
   ignoreParameters?: boolean
+  
   ignoreProperties?: boolean
 }]
 // ----- ts/no-invalid-this -----
@@ -12037,7 +12198,9 @@ type TsNoInvalidThis = []|[{
 }]
 // ----- ts/no-invalid-void-type -----
 type TsNoInvalidVoidType = []|[{
+  
   allowInGenericTypeArguments?: (boolean | [string, ...(string)[]])
+  
   allowAsThisParameter?: boolean
 }]
 // ----- ts/no-magic-numbers -----
@@ -12048,26 +12211,38 @@ type TsNoMagicNumbers = []|[{
   ignoreArrayIndexes?: boolean
   ignoreDefaultValues?: boolean
   ignoreClassFieldInitialValues?: boolean
+  
   ignoreNumericLiteralTypes?: boolean
+  
   ignoreEnums?: boolean
+  
   ignoreReadonlyClassProperties?: boolean
+  
   ignoreTypeIndexes?: boolean
 }]
 // ----- ts/no-meaningless-void-operator -----
 type TsNoMeaninglessVoidOperator = []|[{
+  
   checkNever?: boolean
 }]
 // ----- ts/no-misused-promises -----
 type TsNoMisusedPromises = []|[{
   checksConditionals?: boolean
   checksVoidReturn?: (boolean | {
+    
     arguments?: boolean
+    
     attributes?: boolean
+    
     inheritedMethods?: boolean
+    
     properties?: boolean
+    
     returns?: boolean
+    
     variables?: boolean
   })
+  
   checksSpreads?: boolean
 }]
 // ----- ts/no-namespace -----
@@ -12079,7 +12254,9 @@ type TsNoNamespace = []|[{
 }]
 // ----- ts/no-redeclare -----
 type TsNoRedeclare = []|[{
+  
   builtinGlobals?: boolean
+  
   ignoreDeclarationMerge?: boolean
 }]
 // ----- ts/no-require-imports -----
@@ -12137,11 +12314,17 @@ type TsNoRestrictedTypes = []|[{
 }]
 // ----- ts/no-shadow -----
 type TsNoShadow = []|[{
+  
   builtinGlobals?: boolean
+  
   hoist?: ("all" | "functions" | "never")
+  
   allow?: string[]
+  
   ignoreOnInitialization?: boolean
+  
   ignoreTypeValueShadow?: boolean
+  
   ignoreFunctionTypeParameterNameValueShadow?: boolean
 }]
 // ----- ts/no-this-alias -----
@@ -12198,24 +12381,40 @@ type TsNoUnusedExpressions = []|[{
 }]
 // ----- ts/no-unused-vars -----
 type TsNoUnusedVars = []|[(("all" | "local") | {
+  
   vars?: ("all" | "local")
+  
   varsIgnorePattern?: string
+  
   args?: ("all" | "after-used" | "none")
-  ignoreRestSiblings?: boolean
+  
   argsIgnorePattern?: string
+  
   caughtErrors?: ("all" | "none")
+  
   caughtErrorsIgnorePattern?: string
+  
   destructuredArrayIgnorePattern?: string
+  
   ignoreClassWithStaticInitBlock?: boolean
+  
+  ignoreRestSiblings?: boolean
+  
   reportUsedIgnorePattern?: boolean
 })]
 // ----- ts/no-use-before-define -----
 type TsNoUseBeforeDefine = []|[("nofunc" | {
+  
   functions?: boolean
+  
   classes?: boolean
+  
   enums?: boolean
+  
   variables?: boolean
+  
   typedefs?: boolean
+  
   ignoreTypeReferences?: boolean
   allowNamedExports?: boolean
 })]
@@ -12226,12 +12425,16 @@ type TsNoVarRequires = []|[{
 }]
 // ----- ts/only-throw-error -----
 type TsOnlyThrowError = []|[{
+  
   allowThrowingAny?: boolean
+  
   allowThrowingUnknown?: boolean
 }]
 // ----- ts/parameter-properties -----
 type TsParameterProperties = []|[{
+  
   allow?: ("readonly" | "private" | "protected" | "public" | "private readonly" | "protected readonly" | "public readonly")[]
+  
   prefer?: ("class-property" | "parameter-property")
 }]
 // ----- ts/prefer-destructuring -----
@@ -12266,13 +12469,18 @@ type TsPreferDestructuring = []|[({
 }]
 // ----- ts/prefer-literal-enum-member -----
 type TsPreferLiteralEnumMember = []|[{
+  
   allowBitwiseExpressions?: boolean
 }]
 // ----- ts/prefer-nullish-coalescing -----
 type TsPreferNullishCoalescing = []|[{
+  
   allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing?: boolean
+  
   ignoreConditionalTests?: boolean
+  
   ignoreMixedLogicalExpressions?: boolean
+  
   ignorePrimitives?: ({
     bigint?: boolean
     boolean?: boolean
@@ -12280,6 +12488,7 @@ type TsPreferNullishCoalescing = []|[{
     string?: boolean
     [k: string]: unknown | undefined
   } | true)
+  
   ignoreTernaryTests?: boolean
 }]
 // ----- ts/prefer-optional-chain -----
@@ -12303,14 +12512,17 @@ type TsPreferOptionalChain = []|[{
 }]
 // ----- ts/prefer-promise-reject-errors -----
 type TsPreferPromiseRejectErrors = []|[{
+  
   allowEmptyReject?: boolean
 }]
 // ----- ts/prefer-readonly -----
 type TsPreferReadonly = []|[{
+  
   onlyInlineLambdas?: boolean
 }]
 // ----- ts/prefer-readonly-parameter-types -----
 type TsPreferReadonlyParameterTypes = []|[{
+  
   allow?: (string | {
     from: "file"
     name: (string | [string, ...(string)[]])
@@ -12323,8 +12535,11 @@ type TsPreferReadonlyParameterTypes = []|[{
     name: (string | [string, ...(string)[]])
     package: string
   })[]
+  
   checkParameterProperties?: boolean
+  
   ignoreInferredTypes?: boolean
+  
   treatMethodsAsReadonly?: boolean
 }]
 // ----- ts/prefer-string-starts-ends-with -----
@@ -12338,9 +12553,13 @@ type TsPromiseFunctionAsync = []|[{
   allowAny?: boolean
   
   allowedPromiseNames?: string[]
+  
   checkArrowFunctions?: boolean
+  
   checkFunctionDeclarations?: boolean
+  
   checkFunctionExpressions?: boolean
+  
   checkMethodDeclarations?: boolean
 }]
 // ----- ts/require-array-sort-compare -----
@@ -12381,7 +12600,7 @@ type TsRestrictTemplateExpressions = []|[{
   allowNever?: boolean
 }]
 // ----- ts/return-await -----
-type TsReturnAwait = []|[("in-try-catch" | "always" | "never" | "error-handling-correctness-only")]
+type TsReturnAwait = []|[(("always" | "error-handling-correctness-only" | "in-try-catch" | "never") & string)]
 // ----- ts/sort-type-constituents -----
 type TsSortTypeConstituents = []|[{
   
@@ -12395,13 +12614,21 @@ type TsSortTypeConstituents = []|[{
 }]
 // ----- ts/strict-boolean-expressions -----
 type TsStrictBooleanExpressions = []|[{
+  
   allowString?: boolean
+  
   allowNumber?: boolean
+  
   allowNullableObject?: boolean
+  
   allowNullableBoolean?: boolean
+  
   allowNullableString?: boolean
+  
   allowNullableNumber?: boolean
+  
   allowNullableEnum?: boolean
+  
   allowAny?: boolean
   allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing?: boolean
 }]
@@ -12414,19 +12641,30 @@ type TsSwitchExhaustivenessCheck = []|[{
 }]
 // ----- ts/triple-slash-reference -----
 type TsTripleSlashReference = []|[{
+  
   lib?: ("always" | "never")
+  
   path?: ("always" | "never")
+  
   types?: ("always" | "never" | "prefer-import")
 }]
 // ----- ts/typedef -----
 type TsTypedef = []|[{
+  
   arrayDestructuring?: boolean
+  
   arrowParameter?: boolean
+  
   memberVariableDeclaration?: boolean
+  
   objectDestructuring?: boolean
+  
   parameter?: boolean
+  
   propertyDeclaration?: boolean
+  
   variableDeclaration?: boolean
+  
   variableDeclarationIgnoreFunction?: boolean
 }]
 // ----- ts/unbound-method -----
@@ -12646,28 +12884,48 @@ type UnocssEnforceClassCompile = []|[{
 }]
 // ----- unused-imports/no-unused-imports -----
 type UnusedImportsNoUnusedImports = []|[(("all" | "local") | {
+  
   vars?: ("all" | "local")
+  
   varsIgnorePattern?: string
+  
   args?: ("all" | "after-used" | "none")
-  ignoreRestSiblings?: boolean
+  
   argsIgnorePattern?: string
+  
   caughtErrors?: ("all" | "none")
+  
   caughtErrorsIgnorePattern?: string
+  
   destructuredArrayIgnorePattern?: string
+  
   ignoreClassWithStaticInitBlock?: boolean
+  
+  ignoreRestSiblings?: boolean
+  
   reportUsedIgnorePattern?: boolean
 })]
 // ----- unused-imports/no-unused-vars -----
 type UnusedImportsNoUnusedVars = []|[(("all" | "local") | {
+  
   vars?: ("all" | "local")
+  
   varsIgnorePattern?: string
+  
   args?: ("all" | "after-used" | "none")
-  ignoreRestSiblings?: boolean
+  
   argsIgnorePattern?: string
+  
   caughtErrors?: ("all" | "none")
+  
   caughtErrorsIgnorePattern?: string
+  
   destructuredArrayIgnorePattern?: string
+  
   ignoreClassWithStaticInitBlock?: boolean
+  
+  ignoreRestSiblings?: boolean
+  
   reportUsedIgnorePattern?: boolean
 })]
 // ----- use-isnan -----
@@ -12811,7 +13069,7 @@ type VueCustomEventNameCasing = ([]|[("kebab-case" | "camelCase")]|[("kebab-case
 type VueDefineEmitsDeclaration = []|[("type-based" | "type-literal" | "runtime")]
 // ----- vue/define-macros-order -----
 type VueDefineMacrosOrder = []|[{
-  order?: ("defineEmits" | "defineProps" | "defineOptions" | "defineSlots" | "defineModel")[]
+  order?: string[]
   defineExposeLast?: boolean
 }]
 // ----- vue/define-props-declaration -----
@@ -13157,6 +13415,10 @@ type VueKeywordSpacing = []|[{
       before?: boolean
       after?: boolean
     }
+    satisfies?: {
+      before?: boolean
+      after?: boolean
+    }
     set?: {
       before?: boolean
       after?: boolean
@@ -13345,6 +13607,14 @@ type VueMaxLinesPerBlock = []|[{
   template?: number
   script?: number
   skipBlankLines?: boolean
+}]
+// ----- vue/max-props -----
+type VueMaxProps = []|[{
+  maxProps?: number
+}]
+// ----- vue/max-template-depth -----
+type VueMaxTemplateDepth = []|[{
+  maxDepth?: number
 }]
 // ----- vue/multi-word-component-names -----
 type VueMultiWordComponentNames = []|[{
@@ -13759,6 +14029,10 @@ type VueRequireMacroVariableName = []|[{
 // ----- vue/require-prop-comment -----
 type VueRequirePropComment = []|[{
   type?: ("JSDoc" | "line" | "block" | "any")
+}]
+// ----- vue/require-toggle-inside-transition -----
+type VueRequireToggleInsideTransition = []|[{
+  additionalDirectives?: string[]
 }]
 // ----- vue/return-in-computed-property -----
 type VueReturnInComputedProperty = []|[{
@@ -14414,6 +14688,10 @@ declare function lincy(options?: OptionsConfig & Omit<TypedFlatConfigItem, 'file
 
 declare function comments(): Promise<TypedFlatConfigItem[]>;
 
+declare function disables(): Promise<TypedFlatConfigItem[]>;
+
+declare function formatters(options?: OptionsFormatters | true, stylistic?: StylisticConfig): Promise<TypedFlatConfigItem[]>;
+
 declare function ignores(options?: OptionsIgnores): Promise<TypedFlatConfigItem[]>;
 
 declare function imports(options?: OptionsStylistic): Promise<TypedFlatConfigItem[]>;
@@ -14428,16 +14706,14 @@ declare function jsx(): Promise<TypedFlatConfigItem[]>;
 
 declare function markdown(options?: OptionsFiles & OptionsComponentExts & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
+declare function node(): Promise<TypedFlatConfigItem[]>;
+
 /**
  * Optional perfectionist plugin for props and items sorting.
  *
  * @see https://github.com/azat-io/eslint-plugin-perfectionist
  */
 declare function perfectionist(): Promise<TypedFlatConfigItem[]>;
-
-declare function formatters(options?: OptionsFormatters | true, stylistic?: StylisticConfig): Promise<TypedFlatConfigItem[]>;
-
-declare function node(): Promise<TypedFlatConfigItem[]>;
 
 declare function react(options?: OptionsFiles & OptionsReact & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
@@ -14461,6 +14737,8 @@ declare function stylistic(options?: OptionsStylistic & OptionsOverrides): Promi
 
 declare function test(options?: OptionsFiles & OptionsIsInEditor & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
+declare function toml(options?: OptionsOverrides & OptionsStylistic & OptionsFiles): Promise<TypedFlatConfigItem[]>;
+
 declare function typescript(options?: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions & OptionsProjectType): Promise<TypedFlatConfigItem[]>;
 
 declare function unicorn(options?: OptionsUnicorn): Promise<TypedFlatConfigItem[]>;
@@ -14470,25 +14748,6 @@ declare function unocss(options?: OptionsUnoCSS & OptionsOverrides): Promise<Typ
 declare function vue(options?: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles & OptionsVue): Promise<TypedFlatConfigItem[]>;
 
 declare function yaml(options?: OptionsFiles & OptionsOverrides & OptionsStylistic): Promise<TypedFlatConfigItem[]>;
-
-declare function toml(options?: OptionsOverrides & OptionsStylistic & OptionsFiles): Promise<TypedFlatConfigItem[]>;
-
-/**
- * Combine array and non-array configs into a single array.
- */
-declare function combine(...configs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]): Promise<TypedFlatConfigItem[]>;
-declare function renameRules(rules: Record<string, any>, map: Record<string, string>): {
-    [k: string]: any;
-};
-declare function renamePluginInConfigs(configs: TypedFlatConfigItem[], map: Record<string, string>): TypedFlatConfigItem[];
-declare function toArray<T>(value: T | T[]): T[];
-declare function interopDefault<T>(m: Awaitable<T>): Promise<T extends {
-    default: infer U;
-} ? U : T>;
-declare function isPackageInScope(name: string): boolean;
-declare function ensurePackages(packages: (string | undefined)[]): Promise<void>;
-declare function isInEditorEnv(): boolean;
-declare function isInGitHooksOrLintStaged(): boolean;
 
 declare const GLOB_SRC_EXT = "?([cm])[jt]s?(x)";
 declare const GLOB_SRC = "**/*.?([cm])[jt]s?(x)";
@@ -14519,4 +14778,46 @@ declare const GLOB_TESTS: string[];
 declare const GLOB_ALL_SRC: string[];
 declare const GLOB_EXCLUDE: string[];
 
-export { type Awaitable, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_GRAPHQL, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_SVG, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_XML, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsFormatters, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsProjectType, type OptionsReact, type OptionsRegExp, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type OptionsUnicorn, type OptionsUnoCSS, type OptionsVue, type Rules, type StylisticConfig, StylisticConfigDefaults, type TypedFlatConfigItem, combine, comments, lincy as default, defaultPluginRenaming, ensurePackages, formatters, ignores, imports, interopDefault, isInEditorEnv, isInGitHooksOrLintStaged, isPackageInScope, javascript, jsdoc, jsonc, jsx, lincy, markdown, node, perfectionist, react, regexp, renamePluginInConfigs, renameRules, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };
+declare const parserPlain: {
+    meta: {
+        name: string;
+    };
+    parseForESLint: (code: string) => {
+        ast: {
+            body: never[];
+            comments: never[];
+            loc: {
+                end: number;
+                start: number;
+            };
+            range: number[];
+            tokens: never[];
+            type: string;
+        };
+        scopeManager: null;
+        services: {
+            isPlain: boolean;
+        };
+        visitorKeys: {
+            Program: never[];
+        };
+    };
+};
+/**
+ * Combine array and non-array configs into a single array.
+ */
+declare function combine(...configs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]): Promise<TypedFlatConfigItem[]>;
+declare function renameRules(rules: Record<string, any>, map: Record<string, string>): {
+    [k: string]: any;
+};
+declare function renamePluginInConfigs(configs: TypedFlatConfigItem[], map: Record<string, string>): TypedFlatConfigItem[];
+declare function toArray<T>(value: T | T[]): T[];
+declare function interopDefault<T>(m: Awaitable<T>): Promise<T extends {
+    default: infer U;
+} ? U : T>;
+declare function isPackageInScope(name: string): boolean;
+declare function ensurePackages(packages: (string | undefined)[]): Promise<void>;
+declare function isInEditorEnv(): boolean;
+declare function isInGitHooksOrLintStaged(): boolean;
+
+export { type Awaitable, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_GRAPHQL, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_SVG, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_XML, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsFormatters, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsProjectType, type OptionsReact, type OptionsRegExp, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type OptionsUnicorn, type OptionsUnoCSS, type OptionsVue, type Rules, type StylisticConfig, StylisticConfigDefaults, type TypedFlatConfigItem, combine, comments, lincy as default, defaultPluginRenaming, disables, ensurePackages, formatters, ignores, imports, interopDefault, isInEditorEnv, isInGitHooksOrLintStaged, isPackageInScope, javascript, jsdoc, jsonc, jsx, lincy, markdown, node, parserPlain, perfectionist, react, regexp, renamePluginInConfigs, renameRules, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };

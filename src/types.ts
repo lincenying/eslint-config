@@ -1,8 +1,9 @@
+import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin'
+import type { ParserOptions } from '@typescript-eslint/parser'
 import type { Linter } from 'eslint'
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
-import type { ParserOptions } from '@typescript-eslint/parser'
 import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks'
-import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin'
+
 import type { VendoredPrettierOptions } from './prettier.types'
 import type { RuleOptions } from './typegen'
 

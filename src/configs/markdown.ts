@@ -1,6 +1,8 @@
-import * as parserPlain from 'eslint-parser-plain'
-import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors'
 import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types'
+
+import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors'
+import * as parserPlain from 'eslint-parser-plain'
+
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from '../globs'
 import { interopDefault } from '../utils'
 
@@ -13,8 +15,7 @@ export async function markdown(
         overrides = {},
     } = options
 
-    // @ts-expect-error missing types
-    const markdown = await interopDefault(import('eslint-plugin-markdown'))
+    const markdown = await interopDefault(import('@eslint/markdown'))
 
     return [
         {
@@ -28,7 +29,7 @@ export async function markdown(
             ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
             name: 'eslint/markdown/processor',
             processor: mergeProcessors([
-                markdown.processors.markdown,
+                markdown.processors!.markdown,
                 processorPassThrough,
             ]),
         },
@@ -76,7 +77,6 @@ export async function markdown(
                 'ts/no-unused-expressions': 'off',
                 'ts/no-unused-vars': 'off',
                 'ts/no-use-before-define': 'off',
-                'ts/no-var-requires': 'off',
 
                 'unicode-bom': 'off',
                 'unused-imports/no-unused-imports': 'off',

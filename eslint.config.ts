@@ -1,5 +1,6 @@
 // @ts-expect-error missing types
 import styleMigrate from '@stylistic/eslint-plugin-migrate'
+
 import lincy from './src'
 
 const config = lincy(

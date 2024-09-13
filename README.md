@@ -282,6 +282,7 @@ export default lincy({
 ```js
 // eslint.config.js
 import { readFile } from 'node:fs/promises'
+
 import lincy from '@lincy/eslint-config'
 import plugin from '@unocss/eslint-plugin'
 
