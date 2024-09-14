@@ -1025,16 +1025,18 @@ async function perfectionist(options = {}) {
         "perfectionist/sort-imports": ["error", {
           groups: [
             "type",
-            ["parent-type", "sibling-type", "index-type", "internal-type"],
+            "builtin-type",
+            ["index-type", "parent-type", "sibling-type", "internal-type"],
             "builtin",
             "external",
-            ["internal"],
-            ["parent", "sibling", "index"],
+            "internal",
+            ["index", "parent", "sibling"],
             "side-effect",
             "object",
             "unknown"
           ],
-          // newlinesBetween: 'ignore',
+          internalPattern: ["~/**", "@/**"],
+          newlinesBetween: "ignore",
           order: "asc",
           type: "natural"
         }],
@@ -1661,8 +1663,11 @@ async function typescript(options = {}) {
         "ts/no-redeclare": "error",
         "ts/no-require-imports": "error",
         "ts/no-unused-expressions": ["error", {
+          // allowShortCircuit 设置为 true 将允许你在表达式中使用短路计算（默认值：false）
           allowShortCircuit: true,
+          // allowTaggedTemplates 设置为 true 将使你能够在表达式中使用标记模板字面量（默认值：false）
           allowTaggedTemplates: true,
+          // allowTernary 设置为 true 将使你能够在表达式中使用三元运算符，类似于短路计算（默认值：false）
           allowTernary: true
         }],
         "ts/no-unused-vars": "off",

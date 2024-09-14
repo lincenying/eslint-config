@@ -25,17 +25,18 @@ export async function perfectionist(
                 'perfectionist/sort-imports': ['error', {
                     groups: [
                         'type',
-                        ['parent-type', 'sibling-type', 'index-type', 'internal-type'],
-
+                        'builtin-type',
+                        ['index-type', 'parent-type', 'sibling-type', 'internal-type'],
                         'builtin',
                         'external',
-                        ['internal'],
-                        ['parent', 'sibling', 'index'],
+                        'internal',
+                        ['index', 'parent', 'sibling'],
                         'side-effect',
                         'object',
                         'unknown',
                     ],
-                    // newlinesBetween: 'ignore',
+                    internalPattern: ['~/**', '@/**'],
+                    newlinesBetween: 'ignore',
                     order: 'asc',
                     type: 'natural',
                 }],
