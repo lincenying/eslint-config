@@ -1640,6 +1640,7 @@ async function typescript(options = {}) {
         ),
         "no-dupe-class-members": "off",
         "no-redeclare": "off",
+        "no-unused-expressions": "off",
         "no-use-before-define": "off",
         "no-useless-constructor": "off",
         "ts/ban-ts-comment": ["error", { "ts-ignore": "allow-with-description" }],
@@ -1659,6 +1660,11 @@ async function typescript(options = {}) {
         "ts/no-non-null-assertion": "off",
         "ts/no-redeclare": "error",
         "ts/no-require-imports": "error",
+        "ts/no-unused-expressions": ["error", {
+          allowShortCircuit: true,
+          allowTaggedTemplates: true,
+          allowTernary: true
+        }],
         "ts/no-unused-vars": "off",
         "ts/no-use-before-define": ["error", { classes: false, functions: false, variables: true }],
         "ts/no-useless-constructor": "off",
