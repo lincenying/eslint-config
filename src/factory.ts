@@ -130,20 +130,31 @@ export function lincy(
             isInEditor,
             overrides: overrides.javascript,
         }),
-        comments(),
-        node(),
+        comments({
+            overrides: overrides.comments,
+        }),
+        node({
+            overrides: overrides.node,
+        }),
         jsdoc({
+            overrides: overrides.jsdoc,
             stylistic: stylisticOptions,
         }),
         imports({
+            overrides: overrides.imports,
             stylistic: stylisticOptions,
         }),
         // Optional plugins (installed but not enabled by default)
-        perfectionist(),
+        perfectionist({
+            overrides: overrides.perfectionist,
+        }),
     )
 
     if (enableUnicorn) {
-        configs.push(unicorn(enableUnicorn === true ? {} : enableUnicorn))
+        configs.push(unicorn({
+            ...(enableUnicorn === true ? {} : enableUnicorn),
+            overrides: overrides.unicorn,
+        }))
     }
 
     // In the future we may support more component extensions like Svelte or so

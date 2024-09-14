@@ -1,9 +1,10 @@
-import type { OptionsStylistic, TypedFlatConfigItem } from '../types'
+import type { OptionsOverrides, OptionsStylistic, TypedFlatConfigItem } from '../types'
 
 import { interopDefault } from '../utils'
 
-export async function jsdoc(options: OptionsStylistic = {}): Promise<TypedFlatConfigItem[]> {
+export async function jsdoc(options: OptionsStylistic & OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
     const {
+        overrides = {},
         stylistic = true,
     } = options
 
@@ -34,6 +35,8 @@ export async function jsdoc(options: OptionsStylistic = {}): Promise<TypedFlatCo
                     'jsdoc/check-alignment': 'warn',
                     'jsdoc/multiline-blocks': 'warn',
                 } : {}),
+
+                ...overrides,
             },
         },
     ]

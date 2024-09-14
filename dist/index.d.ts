@@ -14665,6 +14665,12 @@ interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
         yaml?: TypedFlatConfigItem['rules'];
         toml?: TypedFlatConfigItem['rules'];
         unocss?: TypedFlatConfigItem['rules'];
+        perfectionist?: TypedFlatConfigItem['rules'];
+        unicorn?: TypedFlatConfigItem['rules'];
+        comments?: TypedFlatConfigItem['rules'];
+        node?: TypedFlatConfigItem['rules'];
+        imports?: TypedFlatConfigItem['rules'];
+        jsdoc?: TypedFlatConfigItem['rules'];
         ignores?: string[];
     };
 }
@@ -14686,7 +14692,7 @@ declare const defaultPluginRenaming: {
  */
 declare function lincy(options?: OptionsConfig & Omit<TypedFlatConfigItem, 'files'>, ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]): FlatConfigComposer<TypedFlatConfigItem>;
 
-declare function comments(): Promise<TypedFlatConfigItem[]>;
+declare function comments(options?: OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
 declare function disables(): Promise<TypedFlatConfigItem[]>;
 
@@ -14694,11 +14700,11 @@ declare function formatters(options?: OptionsFormatters | true, stylistic?: Styl
 
 declare function ignores(options?: OptionsIgnores): Promise<TypedFlatConfigItem[]>;
 
-declare function imports(options?: OptionsStylistic): Promise<TypedFlatConfigItem[]>;
+declare function imports(options?: OptionsStylistic & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
 declare function javascript(options?: OptionsIsInEditor & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
-declare function jsdoc(options?: OptionsStylistic): Promise<TypedFlatConfigItem[]>;
+declare function jsdoc(options?: OptionsStylistic & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
 declare function jsonc(options?: OptionsFiles & OptionsStylistic & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
@@ -14706,14 +14712,14 @@ declare function jsx(): Promise<TypedFlatConfigItem[]>;
 
 declare function markdown(options?: OptionsFiles & OptionsComponentExts & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
-declare function node(): Promise<TypedFlatConfigItem[]>;
+declare function node(options?: OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
 /**
  * Optional perfectionist plugin for props and items sorting.
  *
  * @see https://github.com/azat-io/eslint-plugin-perfectionist
  */
-declare function perfectionist(): Promise<TypedFlatConfigItem[]>;
+declare function perfectionist(options?: OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
 declare function react(options?: OptionsFiles & OptionsReact & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
@@ -14741,7 +14747,7 @@ declare function toml(options?: OptionsOverrides & OptionsStylistic & OptionsFil
 
 declare function typescript(options?: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions & OptionsProjectType): Promise<TypedFlatConfigItem[]>;
 
-declare function unicorn(options?: OptionsUnicorn): Promise<TypedFlatConfigItem[]>;
+declare function unicorn(options?: OptionsUnicorn & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
 declare function unocss(options?: OptionsUnoCSS & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 

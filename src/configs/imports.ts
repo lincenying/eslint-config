@@ -1,9 +1,10 @@
-import type { OptionsStylistic, TypedFlatConfigItem } from '../types'
+import type { OptionsOverrides, OptionsStylistic, TypedFlatConfigItem } from '../types'
 
 import { pluginAntfu, pluginImport } from '../plugins'
 
-export async function imports(options: OptionsStylistic = {}): Promise<TypedFlatConfigItem[]> {
+export async function imports(options: OptionsStylistic & OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
     const {
+        overrides = {},
         stylistic = true,
     } = options
 
@@ -29,6 +30,8 @@ export async function imports(options: OptionsStylistic = {}): Promise<TypedFlat
                 ...(stylistic ? {
                     'import/newline-after-import': ['error', { considerComments: true, count: 1 }],
                 } : {}),
+
+                ...overrides,
             },
         },
     ]

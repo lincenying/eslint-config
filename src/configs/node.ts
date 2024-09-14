@@ -1,8 +1,12 @@
-import type { TypedFlatConfigItem } from '../types'
+import type { OptionsOverrides, TypedFlatConfigItem } from '../types'
 
 import { pluginNode } from '../plugins'
 
-export async function node(): Promise<TypedFlatConfigItem[]> {
+export async function node(options: OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
+    const {
+        overrides = {},
+    } = options
+
     return [
         {
             name: 'eslint/node/rules',
@@ -18,6 +22,8 @@ export async function node(): Promise<TypedFlatConfigItem[]> {
                 'node/prefer-global/buffer': ['error', 'never'],
                 'node/prefer-global/process': ['error', 'never'],
                 'node/process-exit-as-throw': 'error',
+
+                ...overrides,
             },
         },
     ]

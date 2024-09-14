@@ -378,6 +378,12 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
         yaml?: TypedFlatConfigItem['rules']
         toml?: TypedFlatConfigItem['rules']
         unocss?: TypedFlatConfigItem['rules']
+        perfectionist?: TypedFlatConfigItem['rules']
+        unicorn?: TypedFlatConfigItem['rules']
+        comments?: TypedFlatConfigItem['rules']
+        node?: TypedFlatConfigItem['rules']
+        imports?: TypedFlatConfigItem['rules']
+        jsdoc?: TypedFlatConfigItem['rules']
         ignores?: string[]
     }
 }

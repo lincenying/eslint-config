@@ -117,7 +117,10 @@ var import_eslint_plugin_unicorn = __toESM(require("eslint-plugin-unicorn"), 1);
 var import_eslint_plugin_unused_imports = __toESM(require("eslint-plugin-unused-imports"), 1);
 
 // src/configs/comments.ts
-async function comments() {
+async function comments(options = {}) {
+  const {
+    overrides = {}
+  } = options;
   return [
     {
       name: "eslint/comments/rules",
@@ -128,7 +131,8 @@ async function comments() {
         "eslint-comments/no-aggregating-enable": "error",
         "eslint-comments/no-duplicate-disable": "error",
         "eslint-comments/no-unlimited-disable": "error",
-        "eslint-comments/no-unused-enable": "error"
+        "eslint-comments/no-unused-enable": "error",
+        ...overrides
       }
     }
   ];
@@ -628,6 +632,7 @@ async function ignores(options = {}) {
 // src/configs/imports.ts
 async function imports(options = {}) {
   const {
+    overrides = {},
     stylistic: stylistic2 = true
   } = options;
   return [
@@ -649,7 +654,8 @@ async function imports(options = {}) {
         "import/no-webpack-loader-syntax": "error",
         ...stylistic2 ? {
           "import/newline-after-import": ["error", { considerComments: true, count: 1 }]
-        } : {}
+        } : {},
+        ...overrides
       }
     }
   ];
@@ -864,6 +870,7 @@ async function javascript(options = {}) {
 // src/configs/jsdoc.ts
 async function jsdoc(options = {}) {
   const {
+    overrides = {},
     stylistic: stylistic2 = true
   } = options;
   return [
@@ -891,7 +898,8 @@ async function jsdoc(options = {}) {
         ...stylistic2 ? {
           "jsdoc/check-alignment": "warn",
           "jsdoc/multiline-blocks": "warn"
-        } : {}
+        } : {},
+        ...overrides
       }
     }
   ];
@@ -1081,7 +1089,10 @@ async function markdown(options = {}) {
 }
 
 // src/configs/node.ts
-async function node() {
+async function node(options = {}) {
+  const {
+    overrides = {}
+  } = options;
   return [
     {
       name: "eslint/node/rules",
@@ -1096,14 +1107,18 @@ async function node() {
         "node/no-path-concat": "error",
         "node/prefer-global/buffer": ["error", "never"],
         "node/prefer-global/process": ["error", "never"],
-        "node/process-exit-as-throw": "error"
+        "node/process-exit-as-throw": "error",
+        ...overrides
       }
     }
   ];
 }
 
 // src/configs/perfectionist.ts
-async function perfectionist() {
+async function perfectionist(options = {}) {
+  const {
+    overrides = {}
+  } = options;
   return [
     {
       name: "eslint/perfectionist/setup",
@@ -1115,10 +1130,10 @@ async function perfectionist() {
         "perfectionist/sort-imports": ["error", {
           groups: [
             "type",
-            ["parent-type", "sibling-type", "index-type"],
+            ["parent-type", "sibling-type", "index-type", "internal-type"],
             "builtin",
             "external",
-            ["internal", "internal-type"],
+            ["internal"],
             ["parent", "sibling", "index"],
             "side-effect",
             "object",
@@ -1129,7 +1144,8 @@ async function perfectionist() {
           type: "natural"
         }],
         "perfectionist/sort-named-exports": ["error", { order: "asc", type: "natural" }],
-        "perfectionist/sort-named-imports": ["error", { order: "asc", type: "natural" }]
+        "perfectionist/sort-named-imports": ["error", { order: "asc", type: "natural" }],
+        ...overrides
       }
     }
   ];
@@ -1801,7 +1817,8 @@ async function unicorn(options = {}) {
           "unicorn/prefer-string-starts-ends-with": "error",
           "unicorn/prefer-type-error": "error",
           "unicorn/throw-new-error": "error"
-        }
+        },
+        ...options.overrides
       }
     }
   ];
@@ -2156,19 +2173,30 @@ function lincy(options = {}, ...userConfigs) {
       isInEditor,
       overrides: overrides.javascript
     }),
-    comments(),
-    node(),
+    comments({
+      overrides: overrides.comments
+    }),
+    node({
+      overrides: overrides.node
+    }),
     jsdoc({
+      overrides: overrides.jsdoc,
       stylistic: stylisticOptions
     }),
     imports({
+      overrides: overrides.imports,
       stylistic: stylisticOptions
     }),
     // Optional plugins (installed but not enabled by default)
-    perfectionist()
+    perfectionist({
+      overrides: overrides.perfectionist
+    })
   );
   if (enableUnicorn) {
-    configs2.push(unicorn(enableUnicorn === true ? {} : enableUnicorn));
+    configs2.push(unicorn({
+      ...enableUnicorn === true ? {} : enableUnicorn,
+      overrides: overrides.unicorn
+    }));
   }
   if (enableVue) {
     componentExts.push("vue");

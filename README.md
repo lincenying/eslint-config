@@ -261,6 +261,27 @@ export default lincy({
         unocss: {
             // unocss 规则
         },
+        comments: {
+            // comments 规则
+        },
+        imports: {
+            // imports 规则
+        },
+        jsdoc: {
+            // jsdoc 规则
+        },
+        node: {
+            // node 规则
+        },
+        perfectionist: {
+            // perfectionist 规则
+        },
+        sort: {
+            // sort 规则
+        },
+        unicorn: {
+            // unicorn 规则
+        },
         regexp: {
             // regexp 规则
         }
@@ -325,11 +346,14 @@ export default lincy(
 import {
     combine,
     comments,
+    disables,
+    formatters,
     ignores,
     imports,
     javascript,
     jsdoc,
     jsonc,
+    jsx,
     markdown,
     node,
     perfectionist,
@@ -338,6 +362,7 @@ import {
     sortPackageJson,
     sortTsconfig,
     stylistic,
+    test,
     toml,
     typescript,
     unicorn,
@@ -350,6 +375,8 @@ export default combine(
     ignores(),
     javascript(/* Options */),
     comments(),
+    disables(),
+    formatters(),
     node(),
     jsdoc(),
     imports(),
@@ -361,8 +388,10 @@ export default combine(
     react(/* Options */),
     unocss(/* Options */),
     jsonc(),
+    jsx(),
     yaml(),
     toml(),
+    test(),
     markdown(),
     regexp(),
 )

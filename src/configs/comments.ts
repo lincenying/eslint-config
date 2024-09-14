@@ -1,8 +1,14 @@
-import type { TypedFlatConfigItem } from '../types'
+import type { OptionsOverrides, TypedFlatConfigItem } from '../types'
 
 import { pluginComments } from '../plugins'
 
-export async function comments(): Promise<TypedFlatConfigItem[]> {
+export async function comments(
+    options: OptionsOverrides = {},
+): Promise<TypedFlatConfigItem[]> {
+    const {
+        overrides = {},
+    } = options
+
     return [
         {
             name: 'eslint/comments/rules',
@@ -14,6 +20,7 @@ export async function comments(): Promise<TypedFlatConfigItem[]> {
                 'eslint-comments/no-duplicate-disable': 'error',
                 'eslint-comments/no-unlimited-disable': 'error',
                 'eslint-comments/no-unused-enable': 'error',
+                ...overrides,
             },
         },
     ]
