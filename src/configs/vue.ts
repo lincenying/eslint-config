@@ -99,6 +99,7 @@ export async function vue(
                 }),
 
                 'node/prefer-global/process': 'off',
+                'ts/explicit-function-return-type': 'off',
                 'vue/block-order': ['error', {
                     order: ['template', 'script', 'style'],
                 }],
