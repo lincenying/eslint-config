@@ -99,7 +99,7 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 
-// node_modules/.pnpm/tsup@8.2.4_jiti@1.21.6_postcss@8.4.45_tsx@4.19.1_typescript@5.6.2_yaml@2.5.1/node_modules/tsup/assets/cjs_shims.js
+// node_modules/.pnpm/tsup@8.2.4_jiti@1.21.6_postcss@8.4.47_tsx@4.19.1_typescript@5.6.2_yaml@2.5.1/node_modules/tsup/assets/cjs_shims.js
 var getImportMetaUrl = () => typeof document === "undefined" ? new URL(`file:${__filename}`).href : document.currentScript && document.currentScript.src || new URL("main.js", document.baseURI).href;
 var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
 
@@ -215,7 +215,7 @@ var GLOB_EXCLUDE = [
 async function disables() {
   return [
     {
-      files: [`scripts/${GLOB_SRC}`],
+      files: [`**/scripts/${GLOB_SRC}`],
       name: "eslint/disables/scripts",
       rules: {
         "no-console": "off",
@@ -223,7 +223,7 @@ async function disables() {
       }
     },
     {
-      files: [`cli/${GLOB_SRC}`, `cli.${GLOB_SRC_EXT}`],
+      files: [`**/cli/${GLOB_SRC}`, `**/cli.${GLOB_SRC_EXT}`],
       name: "eslint/disables/cli",
       rules: {
         "no-console": "off"
@@ -1055,6 +1055,7 @@ async function markdown(options = {}) {
         "style/comma-dangle": "off",
         "style/eol-last": "off",
         "ts/consistent-type-imports": "off",
+        "ts/explicit-function-return-type": "off",
         "ts/no-namespace": "off",
         "ts/no-redeclare": "off",
         "ts/no-require-imports": "off",
@@ -1765,7 +1766,7 @@ async function typescript(options = {}) {
         "ts/no-import-type-side-effects": "error",
         "ts/no-invalid-void-type": "off",
         "ts/no-non-null-assertion": "off",
-        "ts/no-redeclare": "error",
+        "ts/no-redeclare": ["error", { builtinGlobals: false }],
         "ts/no-require-imports": "error",
         "ts/no-unused-expressions": ["error", {
           // allowShortCircuit 设置为 true 将允许你在表达式中使用短路计算（默认值：false）
@@ -1958,6 +1959,7 @@ async function vue(options = {}) {
           ...pluginVue.configs.recommended.rules
         },
         "node/prefer-global/process": "off",
+        "ts/explicit-function-return-type": "off",
         "vue/block-order": ["error", {
           order: ["template", "script", "style"]
         }],
