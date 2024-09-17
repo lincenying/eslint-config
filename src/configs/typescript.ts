@@ -145,12 +145,24 @@ export async function typescript(
                     // allowTernary 设置为 true 将使你能够在表达式中使用三元运算符，类似于短路计算（默认值：false）
                     allowTernary: true,
                 }],
-                'ts/no-unused-vars': 'off',
+                'ts/no-unused-vars': [
+                    'error',
+                    {
+                        args: 'all',
+                        argsIgnorePattern: '^_',
+                        caughtErrors: 'all',
+                        caughtErrorsIgnorePattern: '^_',
+                        destructuredArrayIgnorePattern: '^_',
+                        ignoreRestSiblings: true,
+                        varsIgnorePattern: '^_',
+                    },
+                ],
                 'ts/no-use-before-define': ['error', { classes: false, functions: false, variables: true }],
                 'ts/no-useless-constructor': 'off',
                 'ts/no-wrapper-object-types': 'error',
                 'ts/triple-slash-reference': 'off',
                 'ts/unified-signatures': 'off',
+                'unused-imports/no-unused-vars': 'off',
                 ...(type === 'lib' ? {
                     'ts/explicit-function-return-type': ['error', {
                         allowExpressions: true,

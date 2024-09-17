@@ -22,6 +22,17 @@ const config = lincy(
                 '**/static',
             ],
         },
+        ignores: [
+            '**/assets1',
+            '**/static2',
+        ],
+    },
+    {
+        name: 'eslint/other/ignores',
+        ignores: [
+            '**/assets3',
+            '**/static4',
+        ],
     },
     {
         name: 'eslint/custom-rules/typescript',

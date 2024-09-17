@@ -77,6 +77,7 @@ export function lincy(
         autoRenamePlugins = true,
         componentExts = [],
         gitignore: enableGitignore = true,
+        ignores: ignoresList = [],
         jsx: enableJsx = true,
         overrides = {},
         react: enableReact = ReactPackages.some(i => isPackageExists(i)),
@@ -124,7 +125,10 @@ export function lincy(
     // Base configs
     configs.push(
         ignores({
-            ignores: overrides.ignores,
+            ignores: [
+                ...(overrides.ignores || []),
+                ...ignoresList,
+            ],
         }),
         javascript({
             isInEditor,
