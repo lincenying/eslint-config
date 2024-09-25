@@ -99,7 +99,7 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 
-// node_modules/.pnpm/tsup@8.2.4_jiti@1.21.6_postcss@8.4.47_tsx@4.19.1_typescript@5.6.2_yaml@2.5.1/node_modules/tsup/assets/cjs_shims.js
+// node_modules/.pnpm/tsup@8.3.0_jiti@1.21.6_postcss@8.4.47_tsx@4.19.1_typescript@5.6.2_yaml@2.5.1/node_modules/tsup/assets/cjs_shims.js
 var getImportMetaUrl = () => typeof document === "undefined" ? new URL(`file:${__filename}`).href : document.currentScript && document.currentScript.src || new URL("main.js", document.baseURI).href;
 var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
 
@@ -218,6 +218,7 @@ async function disables() {
       files: [`**/scripts/${GLOB_SRC}`],
       name: "eslint/disables/scripts",
       rules: {
+        "antfu/no-top-level-await": "off",
         "no-console": "off",
         "ts/explicit-function-return-type": "off"
       }
@@ -226,6 +227,7 @@ async function disables() {
       files: [`**/cli/${GLOB_SRC}`, `**/cli.${GLOB_SRC_EXT}`],
       name: "eslint/disables/cli",
       rules: {
+        "antfu/no-top-level-await": "off",
         "no-console": "off"
       }
     },
@@ -259,6 +261,15 @@ async function disables() {
       name: "eslint/disables/cjs",
       rules: {
         "ts/no-require-imports": "off"
+      }
+    },
+    {
+      files: [`**/*.config.${GLOB_SRC_EXT}`, `**/*.config.*.${GLOB_SRC_EXT}`],
+      name: "antfu/disables/config-files",
+      rules: {
+        "antfu/no-top-level-await": "off",
+        "no-console": "off",
+        "ts/explicit-function-return-type": "off"
       }
     }
   ];
@@ -702,6 +713,7 @@ async function javascript(options = {}) {
       },
       rules: {
         "accessor-pairs": ["error", { enforceForClassMembers: true, setWithoutGet: true }],
+        "antfu/no-top-level-await": "error",
         "array-callback-return": "error",
         "block-scoped-var": "error",
         "constructor-super": "error",
@@ -1970,6 +1982,7 @@ async function vue(options = {}) {
           ...pluginVue.configs["strongly-recommended"].rules,
           ...pluginVue.configs.recommended.rules
         },
+        "antfu/no-top-level-await": "off",
         "node/prefer-global/process": "off",
         "ts/explicit-function-return-type": "off",
         "vue/block-order": ["error", {

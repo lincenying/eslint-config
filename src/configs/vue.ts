@@ -98,6 +98,7 @@ export async function vue(
                     ...pluginVue.configs.recommended.rules as any,
                 }),
 
+                'antfu/no-top-level-await': 'off',
                 'node/prefer-global/process': 'off',
                 'ts/explicit-function-return-type': 'off',
                 'vue/block-order': ['error', {

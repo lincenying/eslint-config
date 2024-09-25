@@ -113,6 +113,7 @@ async function disables() {
       files: [`**/scripts/${GLOB_SRC}`],
       name: "eslint/disables/scripts",
       rules: {
+        "antfu/no-top-level-await": "off",
         "no-console": "off",
         "ts/explicit-function-return-type": "off"
       }
@@ -121,6 +122,7 @@ async function disables() {
       files: [`**/cli/${GLOB_SRC}`, `**/cli.${GLOB_SRC_EXT}`],
       name: "eslint/disables/cli",
       rules: {
+        "antfu/no-top-level-await": "off",
         "no-console": "off"
       }
     },
@@ -154,6 +156,15 @@ async function disables() {
       name: "eslint/disables/cjs",
       rules: {
         "ts/no-require-imports": "off"
+      }
+    },
+    {
+      files: [`**/*.config.${GLOB_SRC_EXT}`, `**/*.config.*.${GLOB_SRC_EXT}`],
+      name: "antfu/disables/config-files",
+      rules: {
+        "antfu/no-top-level-await": "off",
+        "no-console": "off",
+        "ts/explicit-function-return-type": "off"
       }
     }
   ];
@@ -597,6 +608,7 @@ async function javascript(options = {}) {
       },
       rules: {
         "accessor-pairs": ["error", { enforceForClassMembers: true, setWithoutGet: true }],
+        "antfu/no-top-level-await": "error",
         "array-callback-return": "error",
         "block-scoped-var": "error",
         "constructor-super": "error",
@@ -1865,6 +1877,7 @@ async function vue(options = {}) {
           ...pluginVue.configs["strongly-recommended"].rules,
           ...pluginVue.configs.recommended.rules
         },
+        "antfu/no-top-level-await": "off",
         "node/prefer-global/process": "off",
         "ts/explicit-function-return-type": "off",
         "vue/block-order": ["error", {

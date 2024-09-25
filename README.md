@@ -302,14 +302,12 @@ export default lincy({
 
 ```js
 // eslint.config.js
-import { readFile } from 'node:fs/promises'
+import { readFileSync } from 'node:fs'
 
 import lincy from '@lincy/eslint-config'
 import plugin from '@unocss/eslint-plugin'
 
-const autoImport = JSON.parse(
-    await readFile(new URL('./.eslintrc-auto-import.json', import.meta.url)),
-)
+const autoImport = JSON.parse(readFileSync(new URL('./.eslintrc-auto-import.json', import.meta.url)))
 
 export default lincy(
     {
