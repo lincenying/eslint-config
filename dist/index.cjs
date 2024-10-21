@@ -99,7 +99,7 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 
-// node_modules/.pnpm/tsup@8.3.0_jiti@1.21.6_postcss@8.4.47_tsx@4.19.1_typescript@5.6.2_yaml@2.5.1/node_modules/tsup/assets/cjs_shims.js
+// node_modules/.pnpm/tsup@8.3.0_jiti@2.3.3_postcss@8.4.47_tsx@4.19.1_typescript@5.6.3_yaml@2.6.0/node_modules/tsup/assets/cjs_shims.js
 var getImportMetaUrl = () => typeof document === "undefined" ? new URL(`file:${__filename}`).href : document.currentScript && document.currentScript.src || new URL("main.js", document.baseURI).href;
 var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
 
@@ -247,13 +247,6 @@ async function disables() {
         "import/no-duplicates": "off",
         "no-restricted-syntax": "off",
         "unused-imports/no-unused-vars": "off"
-      }
-    },
-    {
-      files: ["**/*.{test,spec}.([tj])s?(x)"],
-      name: "eslint/disables/test",
-      rules: {
-        "no-unused-expressions": "off"
       }
     },
     {
@@ -428,6 +421,16 @@ async function stylistic(options = {}) {
 }
 
 // src/configs/formatters.ts
+function mergePrettierOptions(options, overrides = {}) {
+  return {
+    ...options,
+    ...overrides,
+    plugins: [
+      ...overrides.plugins || [],
+      ...options.plugins || []
+    ]
+  };
+}
 async function formatters(options = {}, stylistic2 = {}) {
   const defaultIndent = 4;
   if (options === true) {
@@ -499,10 +502,10 @@ async function formatters(options = {}, stylistic2 = {}) {
         rules: {
           "format/prettier": [
             "error",
-            {
+            mergePrettierOptions(prettierOptions, {
               ...prettierOptions,
               parser: "css"
-            }
+            })
           ]
         }
       },
@@ -515,10 +518,10 @@ async function formatters(options = {}, stylistic2 = {}) {
         rules: {
           "format/prettier": [
             "error",
-            {
+            mergePrettierOptions(prettierOptions, {
               ...prettierOptions,
               parser: "scss"
-            }
+            })
           ]
         }
       },
@@ -531,10 +534,10 @@ async function formatters(options = {}, stylistic2 = {}) {
         rules: {
           "format/prettier": [
             "error",
-            {
+            mergePrettierOptions(prettierOptions, {
               ...prettierOptions,
               parser: "less"
-            }
+            })
           ]
         }
       }
@@ -550,10 +553,30 @@ async function formatters(options = {}, stylistic2 = {}) {
       rules: {
         "format/prettier": [
           "error",
-          {
+          mergePrettierOptions(prettierOptions, {
             ...prettierOptions,
             parser: "html"
-          }
+          })
+        ]
+      }
+    });
+  }
+  if (options.xml) {
+    configs2.push({
+      files: [GLOB_XML],
+      languageOptions: {
+        parser: parserPlain
+      },
+      name: "eslint/formatter/xml",
+      rules: {
+        "format/prettier": [
+          "error",
+          mergePrettierOptions({ ...prettierXmlOptions, ...prettierOptions }, {
+            parser: "xml",
+            plugins: [
+              "@prettier/plugin-xml"
+            ]
+          })
         ]
       }
     });
@@ -568,14 +591,12 @@ async function formatters(options = {}, stylistic2 = {}) {
       rules: {
         "format/prettier": [
           "error",
-          {
-            ...prettierXmlOptions,
-            ...prettierOptions,
+          mergePrettierOptions({ ...prettierXmlOptions, ...prettierOptions }, {
             parser: "xml",
             plugins: [
               "@prettier/plugin-xml"
             ]
-          }
+          })
         ]
       }
     });
@@ -591,11 +612,10 @@ async function formatters(options = {}, stylistic2 = {}) {
       rules: {
         [`format/${formater}`]: [
           "error",
-          formater === "prettier" ? {
-            ...prettierOptions,
+          formater === "prettier" ? mergePrettierOptions(prettierOptions, {
             embeddedLanguageFormatting: "off",
             parser: "markdown"
-          } : {
+          }) : {
             ...dprintOptions,
             language: "markdown"
           }
@@ -613,10 +633,9 @@ async function formatters(options = {}, stylistic2 = {}) {
       rules: {
         "format/prettier": [
           "error",
-          {
-            ...prettierOptions,
+          mergePrettierOptions(prettierOptions, {
             parser: "graphql"
-          }
+          })
         ]
       }
     });
@@ -1053,6 +1072,7 @@ async function markdown(options = {}) {
       },
       name: "eslint/markdown/disables",
       rules: {
+        "antfu/no-top-level-await": "off",
         "import/newline-after-import": "off",
         "no-alert": "off",
         "no-console": "off",
@@ -1586,14 +1606,19 @@ async function test(options = {}) {
       files,
       name: "eslint/test/rules",
       rules: {
-        "node/prefer-global/process": "off",
         "test/consistent-test-it": ["error", { fn: "it", withinDescribe: "it" }],
         "test/no-identical-title": "error",
         "test/no-import-node-test": "error",
         "test/no-only-tests": isInEditor ? "off" : "error",
         "test/prefer-hooks-in-order": "error",
         "test/prefer-lowercase-title": "error",
-        "ts/explicit-function-return-type": "off",
+        // Disables
+        ...{
+          "antfu/no-top-level-await": "off",
+          "no-unused-expressions": "off",
+          "node/prefer-global/process": "off",
+          "ts/explicit-function-return-type": "off"
+        },
         ...overrides
       }
     }
@@ -1917,7 +1942,6 @@ async function vue(options = {}) {
     parserVue,
     processorVueBlocks
   ] = await Promise.all([
-    // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-vue")),
     interopDefault(import("vue-eslint-parser")),
     interopDefault(import("eslint-processor-vue-blocks"))
@@ -1994,6 +2018,7 @@ async function vue(options = {}) {
         ...vueVersion === "2" ? {
           "vue/require-explicit-emits": "off"
         } : null,
+        "no-irregular-whitespace": "off",
         "vue/define-macros-order": ["error", {
           order: ["defineOptions", "defineProps", "defineEmits", "defineSlots"]
         }],
@@ -2022,7 +2047,14 @@ async function vue(options = {}) {
         "vue/no-dupe-keys": "off",
         "vue/no-empty-pattern": "error",
         "vue/no-extra-parens": ["error", "functions"],
-        "vue/no-irregular-whitespace": "error",
+        "vue/no-irregular-whitespace": ["error", {
+          skipComments: false,
+          skipHTMLAttributeValues: false,
+          skipHTMLTextContents: true,
+          skipRegExps: false,
+          skipStrings: true,
+          skipTemplates: false
+        }],
         "vue/no-loss-of-precision": "error",
         "vue/no-restricted-syntax": [
           "error",

@@ -31,7 +31,6 @@ export async function vue(
         parserVue,
         processorVueBlocks,
     ] = await Promise.all([
-        // @ts-expect-error missing types
         interopDefault(import('eslint-plugin-vue')),
         interopDefault(import('vue-eslint-parser')),
         interopDefault(import('eslint-processor-vue-blocks')),
@@ -111,6 +110,7 @@ export async function vue(
                 ...(vueVersion === '2' ? {
                     'vue/require-explicit-emits': 'off',
                 } : null),
+                'no-irregular-whitespace': 'off',
                 'vue/define-macros-order': ['error', {
                     order: ['defineOptions', 'defineProps', 'defineEmits', 'defineSlots'],
                 }],
@@ -139,7 +139,14 @@ export async function vue(
                 'vue/no-dupe-keys': 'off',
                 'vue/no-empty-pattern': 'error',
                 'vue/no-extra-parens': ['error', 'functions'],
-                'vue/no-irregular-whitespace': 'error',
+                'vue/no-irregular-whitespace': ['error', {
+                    skipComments: false,
+                    skipHTMLAttributeValues: false,
+                    skipHTMLTextContents: true,
+                    skipRegExps: false,
+                    skipStrings: true,
+                    skipTemplates: false,
+                }],
                 'vue/no-loss-of-precision': 'error',
                 'vue/no-restricted-syntax': [
                     'error',

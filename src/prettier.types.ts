@@ -4,6 +4,11 @@
 
 export type VendoredPrettierOptions = Partial<VendoredPrettierOptionsRequired>
 
+export type VendoredPrettierRuleOptions = VendoredPrettierOptions & {
+    parser?: BuiltInParserName
+    [k: string]: unknown | undefined
+}
+
 export interface VendoredPrettierOptionsRequired {
     /**
      * 指定换行的行长度.
@@ -97,6 +102,27 @@ export interface VendoredPrettierOptionsRequired {
      * @default false
      */
     singleAttributePerLine: boolean
+
+    /**
+     * 如何处理 XML 中的空格
+     * @default "preserve"
+     */
+    xmlQuoteAttributes: 'single' | 'double' | 'preserve'
+    /**
+     * 是否在自闭合 XML 元素的括号内放置空格.
+     * @default true
+     */
+    xmlSelfClosingSpace: boolean
+    /**
+     * 是否按 XML 元素中的键对属性进行排序.
+     * @default false
+     */
+    xmlSortAttributesByKey: boolean
+    /**
+     * 如何处理 XML 中的空格
+     * @default "ignore"
+     */
+    xmlWhitespaceSensitivity: 'ignore' | 'strict' | 'preserve'
 }
 
 export type BuiltInParserName =
@@ -122,6 +148,7 @@ export type BuiltInParserName =
     | 'scss'
     | 'typescript'
     | 'vue'
+    | 'xml'
     | 'yaml'
 
 // This utility is here to handle the case where you have an explicit union

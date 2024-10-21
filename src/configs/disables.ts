@@ -40,13 +40,6 @@ export async function disables(): Promise<TypedFlatConfigItem[]> {
             },
         },
         {
-            files: ['**/*.{test,spec}.([tj])s?(x)'],
-            name: 'eslint/disables/test',
-            rules: {
-                'no-unused-expressions': 'off',
-            },
-        },
-        {
             files: ['**/*.js', '**/*.cjs'],
             name: 'eslint/disables/cjs',
             rules: {

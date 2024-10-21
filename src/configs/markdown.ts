@@ -54,6 +54,7 @@ export async function markdown(
             },
             name: 'eslint/markdown/disables',
             rules: {
+                'antfu/no-top-level-await': 'off',
                 'import/newline-after-import': 'off',
 
                 'no-alert': 'off',
