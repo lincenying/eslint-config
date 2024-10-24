@@ -4,7 +4,7 @@
         <button @click="incrementCounter">
             Click me!
         </button>
-        <p class="p-24px">Counter: {{ counter }}</p>
+        <p class="p-24px">Counter: 　{{ counter }}</p>
     </div>
 </template>
 
@@ -12,7 +12,7 @@
 // Define reactive data and props
 import { ref } from 'vue'
 
-const greeting = ref('Hello, Vue 3!')
+const greeting = ref ('Hello, Vue 3!')
 const counter = ref<number>(0)
 // Define a function
 function incrementCounter() {

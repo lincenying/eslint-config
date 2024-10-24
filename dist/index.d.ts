@@ -4611,7 +4611,7 @@ interface RuleOptions {
    */
   'ts/no-array-delete'?: Linter.RuleEntry<[]>
   /**
-   * Require `.toString()` to only be called on objects which provide useful information when stringified
+   * Require `.toString()` and `.toLocaleString()` to only be called on objects which provide useful information when stringified
    * @see https://typescript-eslint.io/rules/no-base-to-string
    */
   'ts/no-base-to-string'?: Linter.RuleEntry<TsNoBaseToString>
