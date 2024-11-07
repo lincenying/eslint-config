@@ -433,13 +433,22 @@ function mergePrettierOptions(options, overrides = {}) {
 }
 async function formatters(options = {}, stylistic2 = {}) {
   const defaultIndent = 4;
+  const isPrettierPluginXmlInScope = isPackageInScope("@prettier/plugin-xml");
   if (options === true) {
-    const isPrettierPluginXmlInScope = isPackageInScope("@prettier/plugin-xml");
     options = {
       css: false,
       graphql: true,
       html: true,
       markdown: true,
+      svg: isPrettierPluginXmlInScope,
+      xml: isPrettierPluginXmlInScope
+    };
+  } else {
+    options = {
+      css: options.css ?? false,
+      graphql: options.graphql ?? true,
+      html: options.html ?? true,
+      markdown: options.markdown ?? true,
       svg: isPrettierPluginXmlInScope,
       xml: isPrettierPluginXmlInScope
     };

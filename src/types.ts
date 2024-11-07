@@ -302,6 +302,14 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
      * - `eslint-plugin-format`
      *
      * @default false
+     *
+     * 当设置为“true”时，默认值为
+     * {
+     *  css: false,
+     *  graphql: true,
+     *  html: true,
+     *  markdown: true,
+     * }
      */
     formatters?: boolean | OptionsFormatters
 

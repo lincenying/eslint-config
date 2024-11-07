@@ -12,7 +12,9 @@ const config = lincy(
             quotes: 'single',
         },
         unocss: true,
-        formatters: true,
+        formatters: {
+            css: true,
+        },
         overrides: {
             stylistic: {
                 'antfu/consistent-list-newline': 'off',
