@@ -140,7 +140,14 @@ export default lincy({
     /**
      * 是否启用 stylistic 格式化规则
      * @default 默认值: true
-     * @example 可选: false | { indent?: number | 'tab'; quotes?: 'single' | 'double'; jsx?: boolean; semi?: boolean; lessOpinionated?: boolean; }
+     * @example 可选: false |
+     * {
+     *   indent?: number | 'tab';
+     *   quotes?: 'single' | 'double';
+     *   jsx?: boolean;
+     *   semi?: boolean;
+     *   lessOpinionated?: boolean;
+     * }
      */
     stylistic: true,
     /**
@@ -218,7 +225,13 @@ export default lincy({
     /**
      * 是否启用 formatters 规则
      * @default 默认值: false,
-     * @example 可选: true | { css?: 'prettier' | boolean; html?: 'prettier' | boolean; markdown?: 'prettier' | 'dprint' | boolean }
+     * @example 可选: true |
+     * {
+     *   css?: 'prettier' | boolean;
+     *   html?: 'prettier' | boolean;
+     *   graphql?: 'prettier' | boolean;
+     *   markdown?: 'prettier' | 'dprint' | boolean
+     * }
      */
     formatters: false,
     /**
@@ -525,6 +538,11 @@ export default lincy({
          */
         css: true,
         /**
+         * 格式化 graphql 文件
+         * 默认使用 Prettier
+         */
+        graphql: true,
+        /**
          * 格式化 HTML 文件
          * 默认使用 Prettier
          */
@@ -534,7 +552,19 @@ export default lincy({
          * 支持 Prettier 和 dprint
          * 默认使用 Prettier
          */
-        markdown: 'prettier'
+        markdown: 'prettier',
+        /**
+         * 格式化 svg 文件
+         * 需要安装 @prettier/plugin-xml 插件
+         * 默认使用 Prettier
+         */
+        svg: 'prettier',
+        /**
+         * 格式化 xml 文件
+         * 需要安装 @prettier/plugin-xml 插件
+         * 默认使用 Prettier
+         */
+        xml: 'prettier'
     }
 })
 ```
