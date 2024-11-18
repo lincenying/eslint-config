@@ -1,26 +1,31 @@
-import type { OptionsFiles, OptionsOverrides, OptionsReact, TypedFlatConfigItem } from '../types'
+import type { OptionsFiles, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, TypedFlatConfigItem } from '../types'
 
 import { isPackageExists } from 'local-pkg'
 
-import { GLOB_JSX, GLOB_TSX } from '../globs'
-import { ensurePackages, interopDefault, toArray } from '../utils'
+import { GLOB_MARKDOWN, GLOB_SRC, GLOB_TS, GLOB_TSX } from '../globs'
+import { ensurePackages, interopDefault } from '../utils'
 
 // react refresh
 const ReactRefreshAllowConstantExportPackages = [
     'vite',
 ]
 
-export async function react(options: OptionsFiles & OptionsReact & OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
+export async function react(options: OptionsTypeScriptParserOptions & OptionsTypeScriptWithTypes & OptionsOverrides & OptionsFiles = {}): Promise<TypedFlatConfigItem[]> {
     const {
-        files = [GLOB_JSX, GLOB_TSX],
-        jsx = true,
+        files = [GLOB_SRC],
+        filesTypeAware = [GLOB_TS, GLOB_TSX],
+        ignoresTypeAware = [
+            `${GLOB_MARKDOWN}/**`,
+        ],
         overrides = {},
-        version = 'detect',
+        tsconfigPath,
     } = options
 
-    const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : undefined
-
     const isTypeAware = !!tsconfigPath
+
+    const typeAwareRules: TypedFlatConfigItem['rules'] = {
+        'react/no-leaked-conditional-rendering': 'warn',
+    }
 
     await ensurePackages([
         '@eslint-react/eslint-plugin',
@@ -32,14 +37,12 @@ export async function react(options: OptionsFiles & OptionsReact & OptionsOverri
         pluginReact,
         pluginReactHooks,
         pluginReactRefresh,
-        parserTs,
     ] = await Promise.all([
         interopDefault(import('@eslint-react/eslint-plugin')),
         // @ts-expect-error missing types
         interopDefault(import('eslint-plugin-react-hooks')),
         // @ts-expect-error missing types
         interopDefault(import('eslint-plugin-react-refresh')),
-        interopDefault(import('@typescript-eslint/parser')),
     ] as const)
 
     const _isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
@@ -63,13 +66,12 @@ export async function react(options: OptionsFiles & OptionsReact & OptionsOverri
         {
             files,
             languageOptions: {
-                parser: parserTs,
                 parserOptions: {
                     ecmaFeatures: {
-                        jsx,
+                        jsx: true,
                     },
-                    ...(isTypeAware ? { project: tsconfigPath } : {}),
                 },
+                sourceType: 'module',
             },
             name: 'eslint/react/rules',
             rules: {
@@ -133,18 +135,18 @@ export async function react(options: OptionsFiles & OptionsReact & OptionsOverri
                 'react/prefer-shorthand-boolean': 'warn',
                 'react/prefer-shorthand-fragment': 'warn',
 
-                ...isTypeAware ? {
-                    'react/no-leaked-conditional-rendering': 'warn',
-                } : {},
-
                 // overrides
                 ...overrides,
             },
-            settings: {
-                react: {
-                    version,
-                },
-            },
+
         },
+        ...isTypeAware ? [{
+            files: filesTypeAware,
+            ignores: ignoresTypeAware,
+            name: 'eslint/react/type-aware-rules',
+            rules: {
+                ...typeAwareRules,
+            },
+        }] : [],
     ]
 }

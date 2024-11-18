@@ -128,7 +128,7 @@ export interface OptionsTypeScriptParserOptions {
     filesTypeAware?: string[]
 
     /**
-     * Glob patterns for files that should not be type aware.
+     * 不应具有类型感知的文件的 Glob 模式。
      * @default ['**\/*.md\/**']
      */
     ignoresTypeAware?: string[]
@@ -143,10 +143,16 @@ export interface OptionsTypeScriptWithTypes {
 }
 
 export interface OptionsHasTypeScript {
+    /**
+     * 是否开启 typescript
+     */
     typescript?: boolean
 }
 
 export interface OptionsStylistic {
+    /**
+     * 是否开启 stylistic
+     */
     stylistic?: boolean | StylisticConfig
 }
 

@@ -97,8 +97,6 @@ export function lincy(
 
     const stylisticOptions = options.stylistic === false ? false : (typeof options.stylistic === 'object' ? options.stylistic : {})
 
-    const tsconfigPath = typeof enableTypeScript !== 'boolean' && 'tsconfigPath' in enableTypeScript ? enableTypeScript.tsconfigPath : undefined
-
     if (stylisticOptions) {
         if (!('jsx' in stylisticOptions)) {
             stylisticOptions.jsx = enableJsx
@@ -121,6 +119,9 @@ export function lincy(
             })]))
         }
     }
+
+    const typescriptOptions = resolveSubOptions(options, 'typescript')
+    const tsconfigPath = 'tsconfigPath' in typescriptOptions ? typescriptOptions.tsconfigPath : undefined
 
     // Base configs
     configs.push(
@@ -168,8 +169,8 @@ export function lincy(
 
     if (enableTypeScript) {
         configs.push(typescript({
-            ...(typeof enableTypeScript !== 'boolean' ? enableTypeScript : {}),
             componentExts,
+            ...typescriptOptions,
             overrides: overrides.typescript,
             tsconfigPath,
             type: options.type,
@@ -189,14 +190,14 @@ export function lincy(
 
     if (enableRegexp) {
         configs.push(regexp({
-            ...(typeof enableRegexp === 'boolean' ? {} : enableRegexp),
+            ...resolveSubOptions(options, 'regexp'),
             overrides: overrides.regexp,
         }))
     }
 
     if (options.test ?? true) {
         configs.push(test({
-            ...(typeof options.test !== 'boolean' ? options.test : {}),
+            ...resolveSubOptions(options, 'test'),
             isInEditor,
             overrides: overrides.test,
         }))
@@ -204,7 +205,7 @@ export function lincy(
 
     if (enableVue) {
         configs.push(vue({
-            ...(typeof options.vue !== 'boolean' ? options.vue : {}),
+            ...resolveSubOptions(options, 'vue'),
             overrides: overrides.vue,
             stylistic: stylisticOptions,
             typescript: !!enableTypeScript,
@@ -213,15 +214,16 @@ export function lincy(
 
     if (enableReact) {
         configs.push(react({
-            tsconfigPath,
-            ...(typeof enableReact !== 'boolean' ? enableReact : {}),
+            ...typescriptOptions,
+            ...resolveSubOptions(options, 'react'),
             overrides: overrides.react,
+            tsconfigPath,
         }))
     }
 
     if (enableUnoCSS) {
         configs.push(unocss({
-            ...(typeof enableUnoCSS === 'boolean' ? {} : enableUnoCSS),
+            ...resolveSubOptions(options, 'unocss'),
             overrides: overrides.unocss,
         }))
     }
@@ -229,7 +231,7 @@ export function lincy(
     if (options.jsonc ?? true) {
         configs.push(
             jsonc({
-                ...(typeof options.jsonc !== 'boolean' ? options.jsonc : {}),
+                ...resolveSubOptions(options, 'jsonc'),
                 overrides: overrides.jsonc,
                 stylistic: stylisticOptions,
             }),
@@ -240,7 +242,7 @@ export function lincy(
 
     if (options.yaml ?? true) {
         configs.push(yaml({
-            ...(typeof options.yaml !== 'boolean' ? options.yaml : {}),
+            ...resolveSubOptions(options, 'yaml'),
             overrides: overrides.yaml,
             stylistic: stylisticOptions,
         }))
@@ -255,7 +257,7 @@ export function lincy(
 
     if (options.markdown ?? true) {
         configs.push(markdown({
-            ...(typeof options.markdown !== 'boolean' ? options.markdown : {}),
+            ...resolveSubOptions(options, 'markdown'),
             componentExts,
             overrides: overrides.markdown,
         }))
@@ -301,4 +303,15 @@ export function lincy(
     }
 
     return composer
+}
+
+export type ResolvedOptions<T> = T extends boolean
+    ? never
+    : NonNullable<T>
+
+export function resolveSubOptions<K extends keyof OptionsConfig>(
+    options: OptionsConfig,
+    key: K,
+): ResolvedOptions<OptionsConfig[K]> {
+    return typeof options[key] === 'boolean' ? {} as any : options[key] || {}
 }

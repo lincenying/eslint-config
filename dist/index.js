@@ -242,7 +242,8 @@ async function ensurePackages(packages) {
     return;
   const p = await import("@clack/prompts");
   const result = await p.confirm({
-    message: `${nonExistingPackages.length === 1 ? "Package is" : "Packages are"} required for this config: ${nonExistingPackages.join(", ")}. Do you want to install them?`
+    // message: `${nonExistingPackages.length === 1 ? 'Package is' : 'Packages are'} required for this config: ${nonExistingPackages.join(', ')}. Do you want to install them?`,
+    message: `\u6B64\u914D\u7F6E\u9700\u8981\u8F6F\u4EF6\u5305: ${nonExistingPackages.join(", ")}. \u4F60\u60F3\u5B89\u88C5\u5B83\u4EEC\u5417?`
   });
   if (result)
     await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
@@ -307,7 +308,6 @@ async function stylistic(options = {}) {
         },
         // 覆盖`stylistic`默认规则
         "style/brace-style": ["error", "stroustrup"],
-        "style/member-delimiter-style": ["error", { multiline: { delimiter: "none" } }],
         "style/multiline-ternary": ["error", "never"],
         ...overrides
       }
@@ -1097,13 +1097,18 @@ var ReactRefreshAllowConstantExportPackages = [
 ];
 async function react(options = {}) {
   const {
-    files = [GLOB_JSX, GLOB_TSX],
-    jsx: jsx2 = true,
+    files = [GLOB_SRC],
+    filesTypeAware = [GLOB_TS, GLOB_TSX],
+    ignoresTypeAware = [
+      `${GLOB_MARKDOWN}/**`
+    ],
     overrides = {},
-    version = "detect"
+    tsconfigPath
   } = options;
-  const tsconfigPath = options?.tsconfigPath ? toArray(options.tsconfigPath) : void 0;
   const isTypeAware = !!tsconfigPath;
+  const typeAwareRules = {
+    "react/no-leaked-conditional-rendering": "warn"
+  };
   await ensurePackages([
     "@eslint-react/eslint-plugin",
     "eslint-plugin-react-hooks",
@@ -1112,15 +1117,13 @@ async function react(options = {}) {
   const [
     pluginReact,
     pluginReactHooks,
-    pluginReactRefresh,
-    parserTs
+    pluginReactRefresh
   ] = await Promise.all([
     interopDefault(import("@eslint-react/eslint-plugin")),
     // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-react-hooks")),
     // @ts-expect-error missing types
-    interopDefault(import("eslint-plugin-react-refresh")),
-    interopDefault(import("@typescript-eslint/parser"))
+    interopDefault(import("eslint-plugin-react-refresh"))
   ]);
   const _isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
     (i) => isPackageExists2(i)
@@ -1141,13 +1144,12 @@ async function react(options = {}) {
     {
       files,
       languageOptions: {
-        parser: parserTs,
         parserOptions: {
           ecmaFeatures: {
-            jsx: jsx2
-          },
-          ...isTypeAware ? { project: tsconfigPath } : {}
-        }
+            jsx: true
+          }
+        },
+        sourceType: "module"
       },
       name: "eslint/react/rules",
       rules: {
@@ -1207,18 +1209,18 @@ async function react(options = {}) {
         "react/prefer-destructuring-assignment": "warn",
         "react/prefer-shorthand-boolean": "warn",
         "react/prefer-shorthand-fragment": "warn",
-        ...isTypeAware ? {
-          "react/no-leaked-conditional-rendering": "warn"
-        } : {},
         // overrides
         ...overrides
-      },
-      settings: {
-        react: {
-          version
-        }
       }
-    }
+    },
+    ...isTypeAware ? [{
+      files: filesTypeAware,
+      ignores: ignoresTypeAware,
+      name: "eslint/react/type-aware-rules",
+      rules: {
+        ...typeAwareRules
+      }
+    }] : []
   ];
 }
 
@@ -2018,6 +2020,10 @@ async function yaml(options = {}) {
     overrides = {},
     stylistic: stylistic2 = true
   } = options;
+  const {
+    indent = 2,
+    quotes = "single"
+  } = typeof stylistic2 === "boolean" ? {} : stylistic2;
   const [
     pluginYaml,
     parserYaml
@@ -2054,10 +2060,10 @@ async function yaml(options = {}) {
           "yaml/flow-mapping-curly-spacing": "error",
           "yaml/flow-sequence-bracket-newline": "error",
           "yaml/flow-sequence-bracket-spacing": "error",
-          "yaml/indent": ["error", 2],
+          "yaml/indent": ["error", indent === "tab" ? 2 : indent],
           "yaml/key-spacing": "error",
           "yaml/no-tab-indent": "error",
-          "yaml/quotes": ["error", { avoidEscape: false, prefer: "single" }],
+          "yaml/quotes": ["error", { avoidEscape: true, prefer: quotes === "backtick" ? "single" : quotes }],
           "yaml/spaced-comment": "error"
         } : {},
         ...overrides
@@ -2120,7 +2126,6 @@ function lincy(options = {}, ...userConfigs) {
       console.log("[@lincy/eslint-config] Detected running in editor, some rules are disabled.");
   }
   const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === "object" ? options.stylistic : {};
-  const tsconfigPath = typeof enableTypeScript !== "boolean" && "tsconfigPath" in enableTypeScript ? enableTypeScript.tsconfigPath : void 0;
   if (stylisticOptions) {
     if (!("jsx" in stylisticOptions)) {
       stylisticOptions.jsx = enableJsx;
@@ -2140,6 +2145,8 @@ function lincy(options = {}, ...userConfigs) {
       })]));
     }
   }
+  const typescriptOptions = resolveSubOptions(options, "typescript");
+  const tsconfigPath = "tsconfigPath" in typescriptOptions ? typescriptOptions.tsconfigPath : void 0;
   configs2.push(
     ignores({
       ignores: [
@@ -2181,8 +2188,8 @@ function lincy(options = {}, ...userConfigs) {
   }
   if (enableTypeScript) {
     configs2.push(typescript({
-      ...typeof enableTypeScript !== "boolean" ? enableTypeScript : {},
       componentExts,
+      ...typescriptOptions,
       overrides: overrides.typescript,
       tsconfigPath,
       type: options.type
@@ -2199,20 +2206,20 @@ function lincy(options = {}, ...userConfigs) {
   }
   if (enableRegexp) {
     configs2.push(regexp({
-      ...typeof enableRegexp === "boolean" ? {} : enableRegexp,
+      ...resolveSubOptions(options, "regexp"),
       overrides: overrides.regexp
     }));
   }
   if (options.test ?? true) {
     configs2.push(test({
-      ...typeof options.test !== "boolean" ? options.test : {},
+      ...resolveSubOptions(options, "test"),
       isInEditor,
       overrides: overrides.test
     }));
   }
   if (enableVue) {
     configs2.push(vue({
-      ...typeof options.vue !== "boolean" ? options.vue : {},
+      ...resolveSubOptions(options, "vue"),
       overrides: overrides.vue,
       stylistic: stylisticOptions,
       typescript: !!enableTypeScript
@@ -2220,21 +2227,22 @@ function lincy(options = {}, ...userConfigs) {
   }
   if (enableReact) {
     configs2.push(react({
-      tsconfigPath,
-      ...typeof enableReact !== "boolean" ? enableReact : {},
-      overrides: overrides.react
+      ...typescriptOptions,
+      ...resolveSubOptions(options, "react"),
+      overrides: overrides.react,
+      tsconfigPath
     }));
   }
   if (enableUnoCSS) {
     configs2.push(unocss({
-      ...typeof enableUnoCSS === "boolean" ? {} : enableUnoCSS,
+      ...resolveSubOptions(options, "unocss"),
       overrides: overrides.unocss
     }));
   }
   if (options.jsonc ?? true) {
     configs2.push(
       jsonc({
-        ...typeof options.jsonc !== "boolean" ? options.jsonc : {},
+        ...resolveSubOptions(options, "jsonc"),
         overrides: overrides.jsonc,
         stylistic: stylisticOptions
       }),
@@ -2244,7 +2252,7 @@ function lincy(options = {}, ...userConfigs) {
   }
   if (options.yaml ?? true) {
     configs2.push(yaml({
-      ...typeof options.yaml !== "boolean" ? options.yaml : {},
+      ...resolveSubOptions(options, "yaml"),
       overrides: overrides.yaml,
       stylistic: stylisticOptions
     }));
@@ -2257,7 +2265,7 @@ function lincy(options = {}, ...userConfigs) {
   }
   if (options.markdown ?? true) {
     configs2.push(markdown({
-      ...typeof options.markdown !== "boolean" ? options.markdown : {},
+      ...resolveSubOptions(options, "markdown"),
       componentExts,
       overrides: overrides.markdown
     }));
@@ -2292,6 +2300,9 @@ function lincy(options = {}, ...userConfigs) {
     composer = composer.renamePlugins(defaultPluginRenaming);
   }
   return composer;
+}
+function resolveSubOptions(options, key) {
+  return typeof options[key] === "boolean" ? {} : options[key] || {};
 }
 
 // src/index.ts
@@ -2352,6 +2363,7 @@ export {
   regexp,
   renamePluginInConfigs,
   renameRules,
+  resolveSubOptions,
   sortPackageJson,
   sortTsconfig,
   stylistic,

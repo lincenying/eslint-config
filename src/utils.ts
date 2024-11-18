@@ -93,7 +93,8 @@ export async function ensurePackages(packages: (string | undefined)[]): Promise<
 
     const p = await import('@clack/prompts')
     const result = await p.confirm({
-        message: `${nonExistingPackages.length === 1 ? 'Package is' : 'Packages are'} required for this config: ${nonExistingPackages.join(', ')}. Do you want to install them?`,
+        // message: `${nonExistingPackages.length === 1 ? 'Package is' : 'Packages are'} required for this config: ${nonExistingPackages.join(', ')}. Do you want to install them?`,
+        message: `此配置需要软件包: ${nonExistingPackages.join(', ')}. 你想安装它们吗?`,
     })
     if (result)
         await import('@antfu/install-pkg').then(i => i.installPackage(nonExistingPackages, { dev: true }))

@@ -506,233 +506,233 @@ interface RuleOptions {
   'implicit-arrow-linebreak'?: Linter.RuleEntry<ImplicitArrowLinebreak>
   /**
    * Enforce or ban the use of inline type-only markers for named imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/consistent-type-specifier-style.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/consistent-type-specifier-style.md
    */
   'import/consistent-type-specifier-style'?: Linter.RuleEntry<ImportConsistentTypeSpecifierStyle>
   /**
    * Ensure a default export is present, given a default import.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/default.md
    */
   'import/default'?: Linter.RuleEntry<[]>
   /**
    * Enforce a leading comment with the webpackChunkName for dynamic imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/dynamic-import-chunkname.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/dynamic-import-chunkname.md
    */
   'import/dynamic-import-chunkname'?: Linter.RuleEntry<ImportDynamicImportChunkname>
   /**
    * Forbid any invalid exports, i.e. re-export of the same name.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/export.md
    */
   'import/export'?: Linter.RuleEntry<[]>
   /**
    * Ensure all exports appear after other statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/exports-last.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/exports-last.md
    */
   'import/exports-last'?: Linter.RuleEntry<[]>
   /**
    * Ensure consistent use of file extension within the import path.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/extensions.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/extensions.md
    */
   'import/extensions'?: Linter.RuleEntry<ImportExtensions>
   /**
    * Ensure all imports appear before other statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/first.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/first.md
    */
   'import/first'?: Linter.RuleEntry<ImportFirst>
   /**
    * Prefer named exports to be grouped together in a single export declaration.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/group-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/group-exports.md
    */
   'import/group-exports'?: Linter.RuleEntry<[]>
   /**
    * Replaced by `import-x/first`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/imports-first.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/imports-first.md
    * @deprecated
    */
   'import/imports-first'?: Linter.RuleEntry<ImportImportsFirst>
   /**
    * Enforce the maximum number of dependencies a module can have.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/max-dependencies.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/max-dependencies.md
    */
   'import/max-dependencies'?: Linter.RuleEntry<ImportMaxDependencies>
   /**
    * Ensure named imports correspond to a named export in the remote file.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/named.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/named.md
    */
   'import/named'?: Linter.RuleEntry<ImportNamed>
   /**
    * Ensure imported namespaces contain dereferenced properties as they are dereferenced.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/namespace.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/namespace.md
    */
   'import/namespace'?: Linter.RuleEntry<ImportNamespace>
   /**
    * Enforce a newline after import statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/newline-after-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/newline-after-import.md
    */
   'import/newline-after-import'?: Linter.RuleEntry<ImportNewlineAfterImport>
   /**
    * Forbid import of modules using absolute paths.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-absolute-path.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-absolute-path.md
    */
   'import/no-absolute-path'?: Linter.RuleEntry<ImportNoAbsolutePath>
   /**
    * Forbid AMD `require` and `define` calls.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-amd.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-amd.md
    */
   'import/no-amd'?: Linter.RuleEntry<[]>
   /**
    * Forbid anonymous values as default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-anonymous-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-anonymous-default-export.md
    */
   'import/no-anonymous-default-export'?: Linter.RuleEntry<ImportNoAnonymousDefaultExport>
   /**
    * Forbid CommonJS `require` calls and `module.exports` or `exports.*`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-commonjs.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-commonjs.md
    */
   'import/no-commonjs'?: Linter.RuleEntry<ImportNoCommonjs>
   /**
    * Forbid a module from importing a module with a dependency path back to itself.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-cycle.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-cycle.md
    */
   'import/no-cycle'?: Linter.RuleEntry<ImportNoCycle>
   /**
    * Forbid default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-default-export.md
    */
   'import/no-default-export'?: Linter.RuleEntry<[]>
   /**
    * Forbid imported names marked with `@deprecated` documentation tag.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-deprecated.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-deprecated.md
    */
   'import/no-deprecated'?: Linter.RuleEntry<[]>
   /**
    * Forbid repeated import of the same module in multiple places.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-duplicates.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-duplicates.md
    */
   'import/no-duplicates'?: Linter.RuleEntry<ImportNoDuplicates>
   /**
    * Forbid `require()` calls with expressions.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-dynamic-require.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-dynamic-require.md
    */
   'import/no-dynamic-require'?: Linter.RuleEntry<ImportNoDynamicRequire>
   /**
    * Forbid empty named import blocks.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-empty-named-blocks.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-empty-named-blocks.md
    */
   'import/no-empty-named-blocks'?: Linter.RuleEntry<[]>
   /**
    * Forbid the use of extraneous packages.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-extraneous-dependencies.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-extraneous-dependencies.md
    */
   'import/no-extraneous-dependencies'?: Linter.RuleEntry<ImportNoExtraneousDependencies>
   /**
    * Forbid import statements with CommonJS module.exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-import-module-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-import-module-exports.md
    */
   'import/no-import-module-exports'?: Linter.RuleEntry<ImportNoImportModuleExports>
   /**
    * Forbid importing the submodules of other modules.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-internal-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-internal-modules.md
    */
   'import/no-internal-modules'?: Linter.RuleEntry<ImportNoInternalModules>
   /**
    * Forbid the use of mutable exports with `var` or `let`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-mutable-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-mutable-exports.md
    */
   'import/no-mutable-exports'?: Linter.RuleEntry<[]>
   /**
    * Forbid use of exported name as identifier of default export.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-named-as-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-named-as-default.md
    */
   'import/no-named-as-default'?: Linter.RuleEntry<[]>
   /**
    * Forbid use of exported name as property of default export.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-named-as-default-member.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-named-as-default-member.md
    */
   'import/no-named-as-default-member'?: Linter.RuleEntry<[]>
   /**
    * Forbid named default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-named-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-named-default.md
    */
   'import/no-named-default'?: Linter.RuleEntry<[]>
   /**
    * Forbid named exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-named-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-named-export.md
    */
   'import/no-named-export'?: Linter.RuleEntry<[]>
   /**
    * Forbid namespace (a.k.a. "wildcard" `*`) imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-namespace.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-namespace.md
    */
   'import/no-namespace'?: Linter.RuleEntry<ImportNoNamespace>
   /**
    * Forbid Node.js builtin modules.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-nodejs-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-nodejs-modules.md
    */
   'import/no-nodejs-modules'?: Linter.RuleEntry<ImportNoNodejsModules>
   /**
    * Forbid importing packages through relative paths.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-relative-packages.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-relative-packages.md
    */
   'import/no-relative-packages'?: Linter.RuleEntry<ImportNoRelativePackages>
   /**
    * Forbid importing modules from parent directories.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-relative-parent-imports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-relative-parent-imports.md
    */
   'import/no-relative-parent-imports'?: Linter.RuleEntry<ImportNoRelativeParentImports>
   /**
    * Forbid importing a default export by a different name.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-rename-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-rename-default.md
    */
   'import/no-rename-default'?: Linter.RuleEntry<ImportNoRenameDefault>
   /**
    * Enforce which files can be imported in a given folder.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-restricted-paths.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-restricted-paths.md
    */
   'import/no-restricted-paths'?: Linter.RuleEntry<ImportNoRestrictedPaths>
   /**
    * Forbid a module from importing itself.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-self-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-self-import.md
    */
   'import/no-self-import'?: Linter.RuleEntry<[]>
   /**
    * Forbid unassigned imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-unassigned-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-unassigned-import.md
    */
   'import/no-unassigned-import'?: Linter.RuleEntry<ImportNoUnassignedImport>
   /**
    * Ensure imports point to a file/module that can be resolved.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-unresolved.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-unresolved.md
    */
   'import/no-unresolved'?: Linter.RuleEntry<ImportNoUnresolved>
   /**
    * Forbid modules without exports, or exports without matching import in another module.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-unused-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-unused-modules.md
    */
   'import/no-unused-modules'?: Linter.RuleEntry<ImportNoUnusedModules>
   /**
    * Forbid unnecessary path segments in import and require statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-useless-path-segments.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-useless-path-segments.md
    */
   'import/no-useless-path-segments'?: Linter.RuleEntry<ImportNoUselessPathSegments>
   /**
    * Forbid webpack loader syntax in imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/no-webpack-loader-syntax.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/no-webpack-loader-syntax.md
    */
   'import/no-webpack-loader-syntax'?: Linter.RuleEntry<[]>
   /**
    * Enforce a convention in module import order.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/order.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/order.md
    */
   'import/order'?: Linter.RuleEntry<ImportOrder>
   /**
    * Prefer a default export if module exports a single name or multiple names.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/prefer-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/prefer-default-export.md
    */
   'import/prefer-default-export'?: Linter.RuleEntry<ImportPreferDefaultExport>
   /**
    * Forbid potentially ambiguous parse goal (`script` vs. `module`).
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.0/docs/rules/unambiguous.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.4.2/docs/rules/unambiguous.md
    */
   'import/unambiguous'?: Linter.RuleEntry<[]>
   /**
@@ -2729,6 +2729,11 @@ interface RuleOptions {
    */
   'react-dom/no-script-url'?: Linter.RuleEntry<[]>
   /**
+   * disallow usage of unknown DOM property
+   * @see https://eslint-react.xyz/docs/rules/dom-no-unknown-property
+   */
+  'react-dom/no-unknown-property'?: Linter.RuleEntry<ReactDomNoUnknownProperty>
+  /**
    * disallow unsafe iframe 'sandbox' attribute combinations
    * @see https://eslint-react.xyz/docs/rules/dom-no-unsafe-iframe-sandbox
    */
@@ -2824,6 +2829,16 @@ interface RuleOptions {
    * @see https://eslint-react.xyz/docs/rules/ensure-forward-ref-using-ref
    */
   'react/ensure-forward-ref-using-ref'?: Linter.RuleEntry<[]>
+  /**
+   * disallow duplicate props
+   * @see https://eslint-react.xyz/docs/rules/jsx-no-duplicate-props
+   */
+  'react/jsx-no-duplicate-props'?: Linter.RuleEntry<[]>
+  /**
+   * a helper rule to mark variables as used
+   * @see https://eslint-react.xyz/docs/rules/jsx-uses-vars
+   */
+  'react/jsx-uses-vars'?: Linter.RuleEntry<[]>
   /**
    * disallow accessing 'this.state' within 'setState'
    * @see https://eslint-react.xyz/docs/rules/no-access-state-in-setstate
@@ -4364,6 +4379,11 @@ interface RuleOptions {
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/valid-expect.md
    */
   'test/valid-expect'?: Linter.RuleEntry<TestValidExpect>
+  /**
+   * Require promises that have expectations in their chain to be valid
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/valid-expect-in-promise.md
+   */
+  'test/valid-expect-in-promise'?: Linter.RuleEntry<[]>
   /**
    * enforce valid titles
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/valid-title.md
@@ -6766,6 +6786,11 @@ interface RuleOptions {
    */
   'vue/prefer-true-attribute-shorthand'?: Linter.RuleEntry<VuePreferTrueAttributeShorthand>
   /**
+   * require using `useTemplateRef` instead of `ref` for template refs
+   * @see https://eslint.vuejs.org/rules/prefer-use-template-ref.html
+   */
+  'vue/prefer-use-template-ref'?: Linter.RuleEntry<[]>
+  /**
    * enforce specific casing for the Prop name in Vue components
    * @see https://eslint.vuejs.org/rules/prop-name-casing.html
    */
@@ -7568,9 +7593,9 @@ type ImportExtensions = ([]|[("always" | "ignorePackages" | "never")] | []|[("al
   ignorePackages?: boolean
   checkTypeImports?: boolean
   [k: string]: unknown | undefined
-}] | []|[{
-  [k: string]: ("always" | "ignorePackages" | "never")
 }] | []|[("always" | "ignorePackages" | "never")]|[("always" | "ignorePackages" | "never"), {
+  [k: string]: ("always" | "ignorePackages" | "never")
+}] | []|[{
   [k: string]: ("always" | "ignorePackages" | "never")
 }])
 // ----- import/first -----
@@ -10330,6 +10355,11 @@ type Quotes = []|[("single" | "double" | "backtick")]|[("single" | "double" | "b
 })]
 // ----- radix -----
 type Radix = []|[("always" | "as-needed")]
+// ----- react-dom/no-unknown-property -----
+type ReactDomNoUnknownProperty = []|[{
+  ignore?: string[]
+  requireDataLowercase?: boolean
+}]
 // ----- react-hooks/exhaustive-deps -----
 type ReactHooksExhaustiveDeps = []|[{
   additionalHooks?: string
@@ -11722,7 +11752,7 @@ type TestConsistentTestIt = []|[{
 }]
 // ----- test/expect-expect -----
 type TestExpectExpect = []|[{
-  assertFunctionNames?: []|[string]
+  assertFunctionNames?: string[]
   additionalTestBlockFunctions?: string[]
 }]
 // ----- test/max-expects -----
@@ -14152,6 +14182,7 @@ type VueNoRequiredPropWithDefault = []|[{
 type VueNoReservedComponentNames = []|[{
   disallowVueBuiltInComponents?: boolean
   disallowVue3BuiltInComponents?: boolean
+  htmlElementCaseSensitive?: boolean
 }]
 // ----- vue/no-reserved-keys -----
 type VueNoReservedKeys = []|[{
@@ -14822,7 +14853,7 @@ interface OptionsTypeScriptParserOptions {
      */
     filesTypeAware?: string[];
     /**
-     * Glob patterns for files that should not be type aware.
+     * 不应具有类型感知的文件的 Glob 模式。
      * @default ['**\/*.md\/**']
      */
     ignoresTypeAware?: string[];
@@ -14835,9 +14866,15 @@ interface OptionsTypeScriptWithTypes {
     tsconfigPath?: string;
 }
 interface OptionsHasTypeScript {
+    /**
+     * 是否开启 typescript
+     */
     typescript?: boolean;
 }
 interface OptionsStylistic {
+    /**
+     * 是否开启 stylistic
+     */
     stylistic?: boolean | StylisticConfig;
 }
 interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent' | 'quotes' | 'jsx' | 'semi'> {
@@ -15076,6 +15113,8 @@ declare const defaultPluginRenaming: {
  * 构造一个ESLint扁平化配置项数组。
  */
 declare function lincy(options?: OptionsConfig & Omit<TypedFlatConfigItem, 'files'>, ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]): FlatConfigComposer<TypedFlatConfigItem>;
+type ResolvedOptions<T> = T extends boolean ? never : NonNullable<T>;
+declare function resolveSubOptions<K extends keyof OptionsConfig>(options: OptionsConfig, key: K): ResolvedOptions<OptionsConfig[K]>;
 
 declare function comments(options?: OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
@@ -15106,7 +15145,7 @@ declare function node(options?: OptionsOverrides): Promise<TypedFlatConfigItem[]
  */
 declare function perfectionist(options?: OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
-declare function react(options?: OptionsFiles & OptionsReact & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
+declare function react(options?: OptionsTypeScriptParserOptions & OptionsTypeScriptWithTypes & OptionsOverrides & OptionsFiles): Promise<TypedFlatConfigItem[]>;
 
 declare function regexp(options?: OptionsRegExp & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
@@ -15138,7 +15177,7 @@ declare function unocss(options?: OptionsUnoCSS & OptionsOverrides): Promise<Typ
 
 declare function vue(options?: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles & OptionsVue): Promise<TypedFlatConfigItem[]>;
 
-declare function yaml(options?: OptionsFiles & OptionsOverrides & OptionsStylistic): Promise<TypedFlatConfigItem[]>;
+declare function yaml(options?: OptionsOverrides & OptionsStylistic & OptionsFiles): Promise<TypedFlatConfigItem[]>;
 
 declare const GLOB_SRC_EXT = "?([cm])[jt]s?(x)";
 declare const GLOB_SRC = "**/*.?([cm])[jt]s?(x)";
@@ -15211,4 +15250,4 @@ declare function ensurePackages(packages: (string | undefined)[]): Promise<void>
 declare function isInEditorEnv(): boolean;
 declare function isInGitHooksOrLintStaged(): boolean;
 
-export { type Awaitable, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_GRAPHQL, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_SVG, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_XML, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsFormatters, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsProjectType, type OptionsReact, type OptionsRegExp, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type OptionsUnicorn, type OptionsUnoCSS, type OptionsVue, type Rules, type StylisticConfig, StylisticConfigDefaults, type TypedFlatConfigItem, combine, comments, lincy as default, defaultPluginRenaming, disables, ensurePackages, formatters, ignores, imports, interopDefault, isInEditorEnv, isInGitHooksOrLintStaged, isPackageInScope, javascript, jsdoc, jsonc, jsx, lincy, markdown, node, parserPlain, perfectionist, react, regexp, renamePluginInConfigs, renameRules, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };
+export { type Awaitable, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_GRAPHQL, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_SVG, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_XML, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsFormatters, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsProjectType, type OptionsReact, type OptionsRegExp, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type OptionsUnicorn, type OptionsUnoCSS, type OptionsVue, type ResolvedOptions, type Rules, type StylisticConfig, StylisticConfigDefaults, type TypedFlatConfigItem, combine, comments, lincy as default, defaultPluginRenaming, disables, ensurePackages, formatters, ignores, imports, interopDefault, isInEditorEnv, isInGitHooksOrLintStaged, isPackageInScope, javascript, jsdoc, jsonc, jsx, lincy, markdown, node, parserPlain, perfectionist, react, regexp, renamePluginInConfigs, renameRules, resolveSubOptions, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };

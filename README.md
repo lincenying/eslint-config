@@ -153,13 +153,28 @@ export default lincy({
     /**
      * 是否启用 typescript 规则
      * @default 默认值: 检测是否安装typescript依赖,
-     * @example 可选: false | true | { parserOptions: {}; files?: string[] }
+     * @example 可选: false | true |
+     * {
+     *   files?: string[], // 自定义 glob 覆盖 “files” 选项
+     *   componentExts: string[], // 组件的附加扩展
+     *   parserOptions: {};
+     *   filesTypeAware: string[],
+     *   ignoresTypeAware?: string[],
+     *   tsconfigPath?: string,
+     *   type: 'app' | 'lib'
+     * }
      */
     typescript: true,
     /**
      * 是否启用 vue 规则
      * @default 默认值: 检测是否安装vue依赖,
-     * @example 可选: false | true | { files?: string[]; sfcBlocks: boolean }
+     * @example 可选: false | true |
+     * {
+     *   files?: string[]; // 自定义 glob 覆盖 “files” 选项
+     *   stylistic: boolean; // 是否开启 stylistic
+     *   sfcBlocks: boolean; // 为 Vue SFC 创建虚拟文件以启用 linting
+     *   typescript: boolean; // 是否开启 typescript
+     * }
      */
     vue: true,
     /**
@@ -171,31 +186,53 @@ export default lincy({
     /**
      * 是否启用 react 规则
      * @default 默认值: 检测是否安装react依赖,
-     * @example 可选: false | true | { jsx?: boolean; version?: string; files?: string[] }
+     * @example 可选: false | true |
+     * {
+     *   files?: string[], // 自定义 glob 覆盖 “files” 选项
+     *   filesTypeAware?: string[], // 应该识别类型的文件的全局模式.
+     *   ignoresTypeAware?: string[], // 不应具有类型感知的文件的 Glob 模式
+     *   tsconfigPath?: string, // 提供此选项后，将启用类型感知规则
+     * }
      */
     react: true,
     /**
      * 是否启用 unocss 规则
      * @default 默认值: false,
-     * @example 可选: true | { attributify?: boolean; strict?: boolean }
+     * @example 可选: true |
+     * {
+     *   attributify?: boolean; // 启用 attributify 支持.
+     *   strict?: boolean; // 启用严格模式，抛出有关阻止列表类的错误
+     * }
      */
     unocss: true,
     /**
      * 是否启用 jsonc 规则
      * @default 默认值: true,
-     * @example 可选: false | { files?: string[] }
+     * @example 可选: false |
+     * {
+     *   files?: string[]; // 自定义 glob 覆盖 “files” 选项
+     *   stylistic: boolean; // 是否开启 stylistic
+     * }
      */
     jsonc: false,
     /**
      * 是否启用 yaml 规则
      * @default 默认值: true,
-     * @example 可选: false | { files?: string[] }
+     * @example 可选: false |
+     * {
+     *   files?: string[]; // 自定义 glob 覆盖 “files” 选项
+     *   stylistic: boolean; // 是否开启 stylistic
+     * }
      */
     yaml: false,
     /**
      * 是否启用 toml 规则
      * @default 默认值: false,
-     * @example 可选: true
+     * @example 可选: true |
+     * {
+     *   files?: string[]; // 自定义 glob 覆盖 “files” 选项
+     *   stylistic: boolean; // 是否开启 stylistic
+     * }
      */
     toml: false,
     /**
