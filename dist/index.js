@@ -330,13 +330,14 @@ async function formatters(options = {}, stylistic2 = {}) {
   const defaultIndent = 4;
   const isPrettierPluginXmlInScope = isPackageInScope("@prettier/plugin-xml");
   if (options === true) {
+    const isPrettierPluginXmlInScope2 = isPackageInScope("@prettier/plugin-xml");
     options = {
       css: false,
       graphql: true,
       html: true,
       markdown: true,
-      svg: isPrettierPluginXmlInScope,
-      xml: isPrettierPluginXmlInScope
+      svg: isPrettierPluginXmlInScope2,
+      xml: isPrettierPluginXmlInScope2
     };
   } else {
     options = {
@@ -389,7 +390,7 @@ async function formatters(options = {}, stylistic2 = {}) {
   const pluginFormat = await interopDefault(import("eslint-plugin-format"));
   const configs2 = [
     {
-      name: "eslint/formatters/setup",
+      name: "eslint/formatter/setup",
       plugins: {
         format: pluginFormat
       }
@@ -402,12 +403,11 @@ async function formatters(options = {}, stylistic2 = {}) {
         languageOptions: {
           parser: parserPlain
         },
-        name: "eslint/formatters/css",
+        name: "eslint/formatter/css",
         rules: {
           "format/prettier": [
             "error",
             mergePrettierOptions(prettierOptions, {
-              ...prettierOptions,
               parser: "css"
             })
           ]
@@ -418,12 +418,11 @@ async function formatters(options = {}, stylistic2 = {}) {
         languageOptions: {
           parser: parserPlain
         },
-        name: "eslint/formatters/scss",
+        name: "eslint/formatter/scss",
         rules: {
           "format/prettier": [
             "error",
             mergePrettierOptions(prettierOptions, {
-              ...prettierOptions,
               parser: "scss"
             })
           ]
@@ -434,12 +433,11 @@ async function formatters(options = {}, stylistic2 = {}) {
         languageOptions: {
           parser: parserPlain
         },
-        name: "eslint/formatters/less",
+        name: "eslint/formatter/less",
         rules: {
           "format/prettier": [
             "error",
             mergePrettierOptions(prettierOptions, {
-              ...prettierOptions,
               parser: "less"
             })
           ]
@@ -453,12 +451,11 @@ async function formatters(options = {}, stylistic2 = {}) {
       languageOptions: {
         parser: parserPlain
       },
-      name: "eslint/formatters/html",
+      name: "eslint/formatter/html",
       rules: {
         "format/prettier": [
           "error",
           mergePrettierOptions(prettierOptions, {
-            ...prettierOptions,
             parser: "html"
           })
         ]
@@ -491,7 +488,7 @@ async function formatters(options = {}, stylistic2 = {}) {
       languageOptions: {
         parser: parserPlain
       },
-      name: "eslint/formatters/svg",
+      name: "eslint/formatter/svg",
       rules: {
         "format/prettier": [
           "error",
@@ -509,10 +506,11 @@ async function formatters(options = {}, stylistic2 = {}) {
     const formater = options.markdown === true ? "prettier" : options.markdown;
     configs2.push({
       files: [GLOB_MARKDOWN],
+      ignores: [],
       languageOptions: {
         parser: parserPlain
       },
-      name: "eslint/formatters/markdown",
+      name: "eslint/formatter/markdown",
       rules: {
         [`format/${formater}`]: [
           "error",
@@ -533,7 +531,7 @@ async function formatters(options = {}, stylistic2 = {}) {
       languageOptions: {
         parser: parserPlain
       },
-      name: "eslint/formatters/graphql",
+      name: "eslint/formatter/graphql",
       rules: {
         "format/prettier": [
           "error",
@@ -1854,6 +1852,8 @@ async function vue(options = {}) {
   ]);
   return [
     {
+      // This allows Vue plugin to work with auto imports
+      // https://github.com/vuejs/eslint-plugin-vue/pull/2422
       languageOptions: {
         globals: {
           computed: "readonly",
@@ -1896,21 +1896,21 @@ async function vue(options = {}) {
         processorVueBlocks({
           ...sfcBlocks,
           blocks: {
-            ...sfcBlocks.blocks,
-            styles: true
+            styles: true,
+            ...sfcBlocks.blocks
           }
         })
       ]),
       rules: {
         ...pluginVue.configs.base.rules,
-        ...vueVersion === "3" ? {
-          ...pluginVue.configs["vue3-essential"].rules,
-          ...pluginVue.configs["vue3-strongly-recommended"].rules,
-          ...pluginVue.configs["vue3-recommended"].rules
-        } : {
+        ...vueVersion === "2" ? {
           ...pluginVue.configs.essential.rules,
           ...pluginVue.configs["strongly-recommended"].rules,
           ...pluginVue.configs.recommended.rules
+        } : {
+          ...pluginVue.configs["vue3-essential"].rules,
+          ...pluginVue.configs["vue3-strongly-recommended"].rules,
+          ...pluginVue.configs["vue3-recommended"].rules
         },
         "antfu/no-top-level-await": "off",
         "node/prefer-global/process": "off",
@@ -1975,12 +1975,17 @@ async function vue(options = {}) {
         "vue/no-useless-v-bind": "error",
         "vue/no-v-html": "off",
         "vue/no-v-text-v-html-on-component": "off",
-        "vue/object-shorthand": ["error", "always", {
-          avoidQuotes: true,
-          ignoreConstructors: false
-        }],
+        "vue/object-shorthand": [
+          "error",
+          "always",
+          {
+            avoidQuotes: true,
+            ignoreConstructors: false
+          }
+        ],
         "vue/prefer-separate-static-class": "error",
         "vue/prefer-template": "error",
+        "vue/prop-name-casing": ["error", "camelCase"],
         "vue/require-default-prop": "off",
         "vue/require-prop-types": "off",
         "vue/singleline-html-element-content-newline": "off",
@@ -1990,12 +1995,17 @@ async function vue(options = {}) {
           "vue/array-bracket-spacing": ["error", "never"],
           "vue/arrow-spacing": ["error", { after: true, before: true }],
           "vue/block-spacing": ["error", "always"],
-          "vue/block-tag-newline": ["error", { multiline: "always", singleline: "always" }],
+          "vue/block-tag-newline": ["error", {
+            multiline: "always",
+            singleline: "always"
+          }],
           "vue/brace-style": ["error", "stroustrup", { allowSingleLine: false }],
           "vue/comma-dangle": ["error", "always-multiline"],
           "vue/comma-spacing": ["error", { after: true, before: false }],
           "vue/comma-style": ["error", "last"],
-          "vue/html-comment-content-spacing": ["error", "always", { exceptions: ["-"] }],
+          "vue/html-comment-content-spacing": ["error", "always", {
+            exceptions: ["-"]
+          }],
           "vue/key-spacing": ["error", { afterColon: true, beforeColon: false }],
           "vue/keyword-spacing": ["error", { after: true, before: true }],
           "vue/object-curly-newline": "off",
@@ -2099,10 +2109,6 @@ var defaultPluginRenaming = {
   "vitest": "test",
   "yml": "yaml"
 };
-var ReactPackages = [
-  "react",
-  "next"
-];
 function lincy(options = {}, ...userConfigs) {
   const {
     autoRenamePlugins = true,
@@ -2111,7 +2117,7 @@ function lincy(options = {}, ...userConfigs) {
     ignores: ignoresList = [],
     jsx: enableJsx = true,
     overrides = {},
-    react: enableReact = ReactPackages.some((i) => isPackageExists3(i)),
+    react: enableReact = false,
     regexp: enableRegexp = true,
     typescript: enableTypeScript = isPackageExists3("typescript"),
     unicorn: enableUnicorn = true,
@@ -2125,11 +2131,8 @@ function lincy(options = {}, ...userConfigs) {
       console.log("[@lincy/eslint-config] Detected running in editor, some rules are disabled.");
   }
   const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === "object" ? options.stylistic : {};
-  if (stylisticOptions) {
-    if (!("jsx" in stylisticOptions)) {
-      stylisticOptions.jsx = enableJsx;
-    }
-  }
+  if (stylisticOptions && !("jsx" in stylisticOptions))
+    stylisticOptions.jsx = enableJsx;
   const configs2 = [];
   if (enableGitignore) {
     if (typeof enableGitignore !== "boolean") {
@@ -2155,7 +2158,7 @@ function lincy(options = {}, ...userConfigs) {
     }),
     javascript({
       isInEditor,
-      overrides: overrides.javascript
+      overrides: getOverrides(options, "javascript")
     }),
     comments({
       overrides: overrides.comments
@@ -2185,41 +2188,41 @@ function lincy(options = {}, ...userConfigs) {
   if (enableVue) {
     componentExts.push("vue");
   }
+  if (enableJsx) {
+    configs2.push(jsx());
+  }
   if (enableTypeScript) {
     configs2.push(typescript({
-      componentExts,
       ...typescriptOptions,
-      overrides: overrides.typescript,
+      componentExts,
+      overrides: getOverrides(options, "typescript"),
       tsconfigPath,
       type: options.type
     }));
   }
-  if (enableJsx) {
-    configs2.push(jsx());
-  }
   if (stylisticOptions) {
     configs2.push(stylistic({
-      overrides: overrides.stylistic,
+      overrides: getOverrides(options, "stylistic"),
       stylistic: stylisticOptions
     }));
   }
   if (enableRegexp) {
     configs2.push(regexp({
       ...resolveSubOptions(options, "regexp"),
-      overrides: overrides.regexp
+      ...getOverrides(options, "regexp")
     }));
   }
   if (options.test ?? true) {
     configs2.push(test({
       ...resolveSubOptions(options, "test"),
       isInEditor,
-      overrides: overrides.test
+      overrides: getOverrides(options, "test")
     }));
   }
   if (enableVue) {
     configs2.push(vue({
       ...resolveSubOptions(options, "vue"),
-      overrides: overrides.vue,
+      overrides: getOverrides(options, "vue"),
       stylistic: stylisticOptions,
       typescript: !!enableTypeScript
     }));
@@ -2228,21 +2231,21 @@ function lincy(options = {}, ...userConfigs) {
     configs2.push(react({
       ...typescriptOptions,
       ...resolveSubOptions(options, "react"),
-      overrides: overrides.react,
+      overrides: getOverrides(options, "react"),
       tsconfigPath
     }));
   }
   if (enableUnoCSS) {
     configs2.push(unocss({
       ...resolveSubOptions(options, "unocss"),
-      overrides: overrides.unocss
+      overrides: getOverrides(options, "unocss")
     }));
   }
   if (options.jsonc ?? true) {
     configs2.push(
       jsonc({
         ...resolveSubOptions(options, "jsonc"),
-        overrides: overrides.jsonc,
+        overrides: getOverrides(options, "jsonc"),
         stylistic: stylisticOptions
       }),
       sortPackageJson(),
@@ -2252,22 +2255,26 @@ function lincy(options = {}, ...userConfigs) {
   if (options.yaml ?? true) {
     configs2.push(yaml({
       ...resolveSubOptions(options, "yaml"),
-      overrides: overrides.yaml,
+      overrides: getOverrides(options, "yaml"),
       stylistic: stylisticOptions
     }));
   }
-  if (options.toml) {
+  if (options.toml ?? true) {
     configs2.push(toml({
-      overrides: overrides.toml,
+      overrides: getOverrides(options, "toml"),
       stylistic: stylisticOptions
     }));
   }
   if (options.markdown ?? true) {
-    configs2.push(markdown({
-      ...resolveSubOptions(options, "markdown"),
-      componentExts,
-      overrides: overrides.markdown
-    }));
+    configs2.push(
+      markdown(
+        {
+          ...resolveSubOptions(options, "markdown"),
+          componentExts,
+          overrides: getOverrides(options, "markdown")
+        }
+      )
+    );
   }
   if (options.formatters) {
     configs2.push(formatters(
@@ -2282,14 +2289,12 @@ function lincy(options = {}, ...userConfigs) {
     throw new Error("[@lincy/eslint-config] \u7B2C\u4E00\u4E2A\u53C2\u6570\u4E0D\u5E94\u5305\u542B\u201Cfiles\u201D\u5C5E\u6027\uFF0C\u56E0\u4E3A\u9009\u9879\u5E94\u8BE5\u662F\u5168\u5C40\u7684\u3002\u8BF7\u5C06\u5176\u653E\u5728\u7B2C\u4E8C\u4E2A\u6216\u66F4\u540E\u9762\u7684\u914D\u7F6E\u4E2D\u3002");
   }
   const fusedConfig = flatConfigProps.reduce((acc, key) => {
-    if (key in options) {
+    if (key in options)
       acc[key] = options[key];
-    }
     return acc;
   }, {});
-  if (Object.keys(fusedConfig).length) {
+  if (Object.keys(fusedConfig).length)
     configs2.push([fusedConfig]);
-  }
   let composer = new FlatConfigComposer();
   composer = composer.append(
     ...configs2,
@@ -2302,6 +2307,13 @@ function lincy(options = {}, ...userConfigs) {
 }
 function resolveSubOptions(options, key) {
   return typeof options[key] === "boolean" ? {} : options[key] || {};
+}
+function getOverrides(options, key) {
+  const sub = resolveSubOptions(options, key);
+  return {
+    ...options.overrides?.[key],
+    ..."overrides" in sub ? sub.overrides : {}
+  };
 }
 
 // src/index.ts
@@ -2343,6 +2355,7 @@ export {
   disables,
   ensurePackages,
   formatters,
+  getOverrides,
   ignores,
   imports,
   interopDefault,

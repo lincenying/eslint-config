@@ -21,15 +21,15 @@ function incrementCounter() {
 }
 </script>
 
-  <style>
-  .a {  color:   red }
-  </style>
+<style>
+.a {  color:   red }
+</style>
 
-  <style lang="scss">
-  $font-stack: Helvetica, sans-serif;
-  $primary-color:   #333;
+<style lang="scss">
+$font-stack: Helvetica, sans-serif;
+$primary-color:   #333;
 
-  body { font: 100% $font-stack;
-    color: $primary-color;
-  }
-  </style>
+body { font: 100% $font-stack;
+  color: $primary-color;
+}
+</style>

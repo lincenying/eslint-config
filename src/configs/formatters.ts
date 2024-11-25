@@ -2,6 +2,7 @@ import type { VendoredPrettierOptions, VendoredPrettierRuleOptions } from '../pr
 import type { OptionsFormatters, StylisticConfig, TypedFlatConfigItem } from '../types'
 
 import { GLOB_CSS, GLOB_GRAPHQL, GLOB_HTML, GLOB_LESS, GLOB_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SVG, GLOB_XML } from '../globs'
+
 import { ensurePackages, interopDefault, isPackageInScope, parserPlain } from '../utils'
 import { StylisticConfigDefaults } from './stylistic'
 
@@ -27,6 +28,7 @@ export async function formatters(
     const isPrettierPluginXmlInScope = isPackageInScope('@prettier/plugin-xml')
 
     if (options === true) {
+        const isPrettierPluginXmlInScope = isPackageInScope('@prettier/plugin-xml')
         options = {
             css: false,
             graphql: true,
@@ -94,7 +96,7 @@ export async function formatters(
 
     const configs: TypedFlatConfigItem[] = [
         {
-            name: 'eslint/formatters/setup',
+            name: 'eslint/formatter/setup',
             plugins: {
                 format: pluginFormat,
             },
@@ -108,12 +110,11 @@ export async function formatters(
                 languageOptions: {
                     parser: parserPlain,
                 },
-                name: 'eslint/formatters/css',
+                name: 'eslint/formatter/css',
                 rules: {
                     'format/prettier': [
                         'error',
                         mergePrettierOptions(prettierOptions, {
-                            ...prettierOptions,
                             parser: 'css',
                         }),
                     ],
@@ -124,12 +125,11 @@ export async function formatters(
                 languageOptions: {
                     parser: parserPlain,
                 },
-                name: 'eslint/formatters/scss',
+                name: 'eslint/formatter/scss',
                 rules: {
                     'format/prettier': [
                         'error',
                         mergePrettierOptions(prettierOptions, {
-                            ...prettierOptions,
                             parser: 'scss',
                         }),
                     ],
@@ -140,12 +140,11 @@ export async function formatters(
                 languageOptions: {
                     parser: parserPlain,
                 },
-                name: 'eslint/formatters/less',
+                name: 'eslint/formatter/less',
                 rules: {
                     'format/prettier': [
                         'error',
                         mergePrettierOptions(prettierOptions, {
-                            ...prettierOptions,
                             parser: 'less',
                         }),
                     ],
@@ -160,12 +159,11 @@ export async function formatters(
             languageOptions: {
                 parser: parserPlain,
             },
-            name: 'eslint/formatters/html',
+            name: 'eslint/formatter/html',
             rules: {
                 'format/prettier': [
                     'error',
                     mergePrettierOptions(prettierOptions, {
-                        ...prettierOptions,
                         parser: 'html',
                     }),
                 ],
@@ -193,14 +191,13 @@ export async function formatters(
             },
         })
     }
-
     if (options.svg) {
         configs.push({
             files: [GLOB_SVG],
             languageOptions: {
                 parser: parserPlain,
             },
-            name: 'eslint/formatters/svg',
+            name: 'eslint/formatter/svg',
             rules: {
                 'format/prettier': [
                     'error',
@@ -220,10 +217,11 @@ export async function formatters(
 
         configs.push({
             files: [GLOB_MARKDOWN],
+            ignores: [],
             languageOptions: {
                 parser: parserPlain,
             },
-            name: 'eslint/formatters/markdown',
+            name: 'eslint/formatter/markdown',
             rules: {
                 [`format/${formater}`]: [
                     'error',
@@ -245,7 +243,7 @@ export async function formatters(
             languageOptions: {
                 parser: parserPlain,
             },
-            name: 'eslint/formatters/graphql',
+            name: 'eslint/formatter/graphql',
             rules: {
                 'format/prettier': [
                     'error',

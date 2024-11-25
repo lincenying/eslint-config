@@ -26,6 +26,13 @@ runWithConfig('js', {
 runWithConfig('all', {
     typescript: true,
     vue: true,
+    formatters: {
+        css: true,
+        graphql: true,
+        html: true,
+        markdown: true,
+    },
+    toml: true,
 })
 runWithConfig('no-style', {
     typescript: true,
@@ -49,7 +56,6 @@ runWithConfig(
     },
 )
 
-// https://github.com/antfu/eslint-config/issues/255
 runWithConfig(
     'ts-override',
     {
@@ -62,7 +68,6 @@ runWithConfig(
     },
 )
 
-// https://github.com/antfu/eslint-config/issues/255
 runWithConfig(
     'ts-strict',
     {
@@ -77,7 +82,6 @@ runWithConfig(
     },
 )
 
-// https://github.com/antfu/eslint-config/issues/618
 runWithConfig(
     'ts-strict-with-react',
     {

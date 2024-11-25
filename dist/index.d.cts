@@ -1,128 +1,9 @@
+import { Linter } from 'eslint';
 import { StylisticCustomizeOptions } from '@stylistic/eslint-plugin';
 import { ParserOptions } from '@typescript-eslint/parser';
-import { Linter } from 'eslint';
 import { FlatGitignoreOptions } from 'eslint-config-flat-gitignore';
 import { Options } from 'eslint-processor-vue-blocks';
 import { FlatConfigComposer } from 'eslint-flat-config-utils';
-
-/**
- * 来自 Prettier 的供应商类型，因此不依赖依赖项
- */
-type VendoredPrettierOptions = Partial<VendoredPrettierOptionsRequired>;
-interface VendoredPrettierOptionsRequired {
-    /**
-     * 指定换行的行长度.
-     * @default 200
-     */
-    printWidth: number;
-    /**
-     * 指定每个缩进的空格数.
-     */
-    tabWidth: number;
-    /**
-     * 使用制表符而不是空格来缩进行
-     */
-    useTabs?: boolean;
-    /**
-     * 在语句末尾添加分号.
-     */
-    semi: boolean;
-    /**
-     * 使用单引号代替双引号.
-     */
-    singleQuote: boolean;
-    /**
-     * 在 JSX 中使用单引号.
-     */
-    jsxSingleQuote: boolean;
-    /**
-     * 尽可能添加尾随逗号.
-     */
-    trailingComma: 'none' | 'es5' | 'all';
-    /**
-     * 对象文字中括号之间的空格.
-     */
-    bracketSpacing: boolean;
-    /**
-     * 将多行 HTML（HTML、JSX、Vue、Angular）元素的 `>` 放在最后一行的末尾，
-     * 而不是单独放在下一行（不适用于自闭合元素）。
-     */
-    bracketSameLine: boolean;
-    /**
-     * 将多行 JSX 元素的 `>` 放在最后一行的末尾，而不是单独放在下一行.
-     * @deprecated 使用 bracketSameLine 代替
-     */
-    jsxBracketSameLine: boolean;
-    /**
-     * 仅格式化文件的一部分.
-     */
-    rangeStart: number;
-    /**
-     * 仅格式化文件的一部分.
-     * @default Number.POSITIVE_INFINITY
-     */
-    rangeEnd: number;
-    /**
-     * 默认情况下，Prettier 将按原样包装 Markdown 文本，因为某些服务使用换行敏感渲染器.
-     * 在某些情况下，您可能希望依靠编辑器/查看器软包装，因此此选项允许您选择退出.
-     * @default "preserve"
-     */
-    proseWrap: 'always' | 'never' | 'preserve';
-    /**
-     * 箭头函数参数周围包含括号.
-     * @default "always"
-     */
-    arrowParens: 'avoid' | 'always';
-    /**
-     * 为 Prettier 提供支持新语言的能力.
-     */
-    plugins: Array<string | any>;
-    /**
-     * 如何处理 HTML 中的空格.
-     * @default "css"
-     */
-    htmlWhitespaceSensitivity: 'css' | 'strict' | 'ignore';
-    /**
-     * 应用哪个换行符.
-     * @default "lf"
-     */
-    endOfLine: 'auto' | 'lf' | 'crlf' | 'cr';
-    /**
-     * 引用对象中的属性时发生更改.
-     * @default "as-needed"
-     */
-    quoteProps: 'as-needed' | 'consistent' | 'preserve';
-    /**
-     * 是否缩进Vue文件中<script>和<style>标签内的代码.
-     * @default false
-     */
-    vueIndentScriptAndStyle: boolean;
-    /**
-     * 在 HTML、Vue 和 JSX 中强制每行使用单一属性.
-     * @default false
-     */
-    singleAttributePerLine: boolean;
-    /**
-     * 如何处理 XML 中的空格
-     * @default "preserve"
-     */
-    xmlQuoteAttributes: 'single' | 'double' | 'preserve';
-    /**
-     * 是否在自闭合 XML 元素的括号内放置空格.
-     * @default true
-     */
-    xmlSelfClosingSpace: boolean;
-    /**
-     * 是否按 XML 元素中的键对属性进行排序.
-     * @default false
-     */
-    xmlSortAttributesByKey: boolean;
-    /**
-     * 如何处理 XML 中的空格
-     * @default "ignore"
-     */
-    xmlWhitespaceSensitivity: 'ignore' | 'strict' | 'preserve';
-}
 
 /* eslint-disable */
 /* prettier-ignore */
@@ -14824,9 +14705,131 @@ type Yoda = []|[("always" | "never")]|[("always" | "never"), {
   exceptRange?: boolean
   onlyEquality?: boolean
 }]
+// Names of all the configs
+type ConfigNames = 'eslint/comments/rules' | 'eslint/formatter/setup' | 'eslint/formatter/html' | 'eslint/formatter/xml' | 'eslint/formatter/svg' | 'eslint/formatter/markdown' | 'eslint/formatter/graphql' | 'eslint/imports/rules' | 'eslint/javascript/setup' | 'eslint/javascript/rules' | 'eslint/jsdoc/rules' | 'eslint/jsonc/setup' | 'eslint/jsonc/rules' | 'eslint/markdown/setup' | 'eslint/markdown/processor' | 'eslint/markdown/parser' | 'eslint/markdown/disables' | 'eslint/node/rules' | 'eslint/perfectionist/setup' | 'eslint/react/setup' | 'eslint/react/rules' | 'eslint/regexp/rules' | 'eslint/sort/package-json' | 'eslint/stylistic/rules' | 'eslint/test/setup' | 'eslint/test/rules' | 'eslint/toml/setup' | 'eslint/toml/rules' | 'eslint/typescript/setup' | 'eslint/typescript/parser' | 'eslint/typescript/rules' | 'eslint/unicorn/rules' | 'eslint/unocss/rules' | 'eslint/vue/setup' | 'eslint/vue/rules' | 'eslint/yaml/setup' | 'eslint/yaml/rules'
+
+/**
+ * 来自 Prettier 的供应商类型，因此不依赖依赖项
+ */
+type VendoredPrettierOptions = Partial<VendoredPrettierOptionsRequired>;
+interface VendoredPrettierOptionsRequired {
+    /**
+     * 指定换行的行长度.
+     * @default 200
+     */
+    printWidth: number;
+    /**
+     * 指定每个缩进的空格数.
+     */
+    tabWidth: number;
+    /**
+     * 使用制表符而不是空格来缩进行
+     */
+    useTabs?: boolean;
+    /**
+     * 在语句末尾添加分号.
+     */
+    semi: boolean;
+    /**
+     * 使用单引号代替双引号.
+     */
+    singleQuote: boolean;
+    /**
+     * 在 JSX 中使用单引号.
+     */
+    jsxSingleQuote: boolean;
+    /**
+     * 尽可能添加尾随逗号.
+     */
+    trailingComma: 'none' | 'es5' | 'all';
+    /**
+     * 对象文字中括号之间的空格.
+     */
+    bracketSpacing: boolean;
+    /**
+     * 将多行 HTML（HTML、JSX、Vue、Angular）元素的 `>` 放在最后一行的末尾，
+     * 而不是单独放在下一行（不适用于自闭合元素）。
+     */
+    bracketSameLine: boolean;
+    /**
+     * 将多行 JSX 元素的 `>` 放在最后一行的末尾，而不是单独放在下一行.
+     * @deprecated 使用 bracketSameLine 代替
+     */
+    jsxBracketSameLine: boolean;
+    /**
+     * 仅格式化文件的一部分.
+     */
+    rangeStart: number;
+    /**
+     * 仅格式化文件的一部分.
+     * @default Number.POSITIVE_INFINITY
+     */
+    rangeEnd: number;
+    /**
+     * 默认情况下，Prettier 将按原样包装 Markdown 文本，因为某些服务使用换行敏感渲染器.
+     * 在某些情况下，您可能希望依靠编辑器/查看器软包装，因此此选项允许您选择退出.
+     * @default "preserve"
+     */
+    proseWrap: 'always' | 'never' | 'preserve';
+    /**
+     * 箭头函数参数周围包含括号.
+     * @default "always"
+     */
+    arrowParens: 'avoid' | 'always';
+    /**
+     * 为 Prettier 提供支持新语言的能力.
+     */
+    plugins: Array<string | any>;
+    /**
+     * 如何处理 HTML 中的空格.
+     * @default "css"
+     */
+    htmlWhitespaceSensitivity: 'css' | 'strict' | 'ignore';
+    /**
+     * 应用哪个换行符.
+     * @default "lf"
+     */
+    endOfLine: 'auto' | 'lf' | 'crlf' | 'cr';
+    /**
+     * 引用对象中的属性时发生更改.
+     * @default "as-needed"
+     */
+    quoteProps: 'as-needed' | 'consistent' | 'preserve';
+    /**
+     * 是否缩进Vue文件中<script>和<style>标签内的代码.
+     * @default false
+     */
+    vueIndentScriptAndStyle: boolean;
+    /**
+     * 在 HTML、Vue 和 JSX 中强制每行使用单一属性.
+     * @default false
+     */
+    singleAttributePerLine: boolean;
+    /**
+     * 如何处理 XML 中的空格
+     * @default "preserve"
+     */
+    xmlQuoteAttributes: 'single' | 'double' | 'preserve';
+    /**
+     * 是否在自闭合 XML 元素的括号内放置空格.
+     * @default true
+     */
+    xmlSelfClosingSpace: boolean;
+    /**
+     * 是否按 XML 元素中的键对属性进行排序.
+     * @default false
+     */
+    xmlSortAttributesByKey: boolean;
+    /**
+     * 如何处理 XML 中的空格
+     * @default "ignore"
+     */
+    xmlWhitespaceSensitivity: 'ignore' | 'strict' | 'preserve';
+}
 
 type Awaitable<T> = T | Promise<T>;
 type Rules = RuleOptions;
+
 type TypedFlatConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'plugins'> & {
     /**
      * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
@@ -14850,6 +14853,7 @@ interface OptionsVue {
      */
     sfcBlocks?: boolean | Options;
 }
+type OptionsTypescript = (OptionsTypeScriptWithTypes & OptionsOverrides) | (OptionsTypeScriptParserOptions & OptionsOverrides);
 interface OptionsFormatters {
     /**
      * 启用对 CSS、Less、Sass 和 SCSS 的格式化支持.
@@ -14939,6 +14943,10 @@ interface OptionsTypeScriptWithTypes {
      * @see https://typescript-eslint.io/linting/typed-linting/
      */
     tsconfigPath?: string;
+    /**
+     * 覆盖类型感知规则
+     */
+    overridesTypeAware?: TypedFlatConfigItem['rules'];
 }
 interface OptionsHasTypeScript {
     /**
@@ -14988,12 +14996,6 @@ interface OptionsIgnores {
 interface OptionsIsInEditor {
     isInEditor?: boolean;
 }
-interface OptionsReact {
-    tsconfigPath?: string | string[];
-    jsx?: boolean;
-    /** react 版本 */
-    version?: string;
-}
 interface OptionsUnoCSS {
     /**
      * 启用 attributify 支持.
@@ -15016,6 +15018,10 @@ interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
      * @default true
      */
     gitignore?: boolean | FlatGitignoreOptions;
+    /**
+     * Core rules. Can't be disabled.
+     */
+    javascript?: boolean;
     /**
      * 启用 TypeScript 支持.
      *
@@ -15051,53 +15057,6 @@ interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
      */
     vue?: boolean | OptionsFiles | OptionsVue;
     /**
-     * 启用 React 支持.
-     *
-     * 需要安装:
-     * - `@eslint-react/eslint-plugin`
-     * - `eslint-plugin-react-hooks`
-     * - `eslint-plugin-react-refresh`
-     *
-     * @default 根据依赖关系自动检测
-     */
-    react?: boolean | OptionsReact | OptionsFiles;
-    /**
-     * 启用 svelte 支持.
-     *
-     * 需要安装:
-     * - `eslint-plugin-svelte`
-     * - `svelte-eslint-parser`
-     *
-     * @default false
-     */
-    svelte?: boolean;
-    /**
-     * 启用 unocss rules.
-     *
-     * 需要安装:
-     * - `@unocss/eslint-plugin`
-     *
-     * @default false
-     */
-    unocss?: boolean | OptionsUnoCSS;
-    /**
-     * 使用外部格式化程序格式化文件.
-     *
-     * 需要安装:
-     * - `eslint-plugin-format`
-     *
-     * @default false
-     *
-     * 当设置为“true”时，默认值为
-     * {
-     *  css: false,
-     *  graphql: true,
-     *  html: true,
-     *  markdown: true,
-     * }
-     */
-    formatters?: boolean | OptionsFormatters;
-    /**
      * 启用 JSONC 支持.
      *
      * @default true
@@ -15128,19 +15087,56 @@ interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
      */
     stylistic?: boolean | StylisticConfig;
     /**
-     * Enable regexp rules.
+     * 启用 regexp 规则.
      *
      * @see https://ota-meshi.github.io/eslint-plugin-regexp/
      * @default true
      */
-    regexp?: boolean | OptionsRegExp;
+    regexp?: boolean | (OptionsRegExp & OptionsOverrides);
+    /**
+     * 启用 React 支持.
+     *
+     * 需要安装:
+     * - `@eslint-react/eslint-plugin`
+     * - `eslint-plugin-react-hooks`
+     * - `eslint-plugin-react-refresh`
+     *
+     * @default 根据依赖关系自动检测
+     */
+    react?: boolean | OptionsFiles;
+    /**
+     * 启用 unocss rules.
+     *
+     * 需要安装:
+     * - `@unocss/eslint-plugin`
+     *
+     * @default false
+     */
+    unocss?: boolean | OptionsUnoCSS;
+    /**
+     * 使用外部格式化程序格式化文件.
+     *
+     * 需要安装:
+     * - `eslint-plugin-format`
+     *
+     * @default false
+     *
+     * 当设置为“true”时，默认值为
+     * {
+     *  css: false,
+     *  graphql: true,
+     *  html: true,
+     *  markdown: true,
+     * }
+     */
+    formatters?: boolean | OptionsFormatters;
     /**
      * 控制再编辑器中禁用某些规则.
      * @default 基于 process.env 自动检测
      */
     isInEditor?: boolean;
     /**
-     * Automatically rename plugins in the config.
+     * 在配置中自动重命名插件.
      *
      * @default true
      */
@@ -15185,11 +15181,19 @@ declare const defaultPluginRenaming: {
     yml: string;
 };
 /**
- * 构造一个ESLint扁平化配置项数组。
+ * 构建 ESLint 平面配置项数组
+ *
+ * @param {OptionsConfig & TypedFlatConfigItem} options
+ *  生成 ESLint 配置的选项
+ * @param {Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]} userConfigs
+ *  要与生成的配置合并的用户配置
+ * @returns {Promise<TypedFlatConfigItem[]>}
+ *  合并的 ESLint 配置
  */
-declare function lincy(options?: OptionsConfig & Omit<TypedFlatConfigItem, 'files'>, ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]): FlatConfigComposer<TypedFlatConfigItem>;
+declare function lincy(options?: OptionsConfig & Omit<TypedFlatConfigItem, 'files'>, ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.Config[]>[]): FlatConfigComposer<TypedFlatConfigItem, ConfigNames>;
 type ResolvedOptions<T> = T extends boolean ? never : NonNullable<T>;
 declare function resolveSubOptions<K extends keyof OptionsConfig>(options: OptionsConfig, key: K): ResolvedOptions<OptionsConfig[K]>;
+declare function getOverrides<K extends keyof OptionsConfig>(options: OptionsConfig, key: K): Partial<Linter.RulesRecord & RuleOptions>;
 
 declare function comments(options?: OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 
@@ -15325,4 +15329,4 @@ declare function ensurePackages(packages: (string | undefined)[]): Promise<void>
 declare function isInEditorEnv(): boolean;
 declare function isInGitHooksOrLintStaged(): boolean;
 
-export { type Awaitable, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_GRAPHQL, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_SVG, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_XML, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsFormatters, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsProjectType, type OptionsReact, type OptionsRegExp, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type OptionsUnicorn, type OptionsUnoCSS, type OptionsVue, type ResolvedOptions, type Rules, type StylisticConfig, StylisticConfigDefaults, type TypedFlatConfigItem, combine, comments, lincy as default, defaultPluginRenaming, disables, ensurePackages, formatters, ignores, imports, interopDefault, isInEditorEnv, isInGitHooksOrLintStaged, isPackageInScope, javascript, jsdoc, jsonc, jsx, lincy, markdown, node, parserPlain, perfectionist, react, regexp, renamePluginInConfigs, renameRules, resolveSubOptions, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };
+export { type Awaitable, type ConfigNames, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_GRAPHQL, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_SVG, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_XML, GLOB_YAML, type OptionsComponentExts, type OptionsConfig, type OptionsFiles, type OptionsFormatters, type OptionsHasTypeScript, type OptionsIgnores, type OptionsIsInEditor, type OptionsOverrides, type OptionsProjectType, type OptionsRegExp, type OptionsStylistic, type OptionsTypeScriptParserOptions, type OptionsTypeScriptWithTypes, type OptionsTypescript, type OptionsUnicorn, type OptionsUnoCSS, type OptionsVue, type ResolvedOptions, type Rules, type StylisticConfig, StylisticConfigDefaults, type TypedFlatConfigItem, combine, comments, lincy as default, defaultPluginRenaming, disables, ensurePackages, formatters, getOverrides, ignores, imports, interopDefault, isInEditorEnv, isInGitHooksOrLintStaged, isPackageInScope, javascript, jsdoc, jsonc, jsx, lincy, markdown, node, parserPlain, perfectionist, react, regexp, renamePluginInConfigs, renameRules, resolveSubOptions, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };

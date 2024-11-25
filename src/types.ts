@@ -5,11 +5,13 @@ import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
 import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks'
 
 import type { VendoredPrettierOptions } from './prettier.types'
-import type { RuleOptions } from './typegen'
+import type { ConfigNames, RuleOptions } from './typegen'
 
 export type Awaitable<T> = T | Promise<T>
 
 export type Rules = RuleOptions
+
+export type { ConfigNames }
 
 export type TypedFlatConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'plugins'> & {
     // 放宽插件类型限制，因为大多数插件还没有正确的类型信息。
@@ -37,6 +39,8 @@ export interface OptionsVue {
      */
     sfcBlocks?: boolean | VueBlocksOptions
 }
+
+export type OptionsTypescript = (OptionsTypeScriptWithTypes & OptionsOverrides) | (OptionsTypeScriptParserOptions & OptionsOverrides)
 
 export interface OptionsFormatters {
     /**
@@ -140,6 +144,11 @@ export interface OptionsTypeScriptWithTypes {
      * @see https://typescript-eslint.io/linting/typed-linting/
      */
     tsconfigPath?: string
+
+    /**
+     * 覆盖类型感知规则
+     */
+    overridesTypeAware?: TypedFlatConfigItem['rules']
 }
 
 export interface OptionsHasTypeScript {
@@ -198,13 +207,6 @@ export interface OptionsIsInEditor {
     isInEditor?: boolean
 }
 
-export interface OptionsReact {
-    tsconfigPath?: string | string[]
-    jsx?: boolean
-    /** react 版本 */
-    version?: string
-}
-
 export interface OptionsUnoCSS {
     /**
      * 启用 attributify 支持.
@@ -228,6 +230,11 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
      * @default true
      */
     gitignore?: boolean | FlatGitignoreOptions
+
+    /**
+     * Core rules. Can't be disabled.
+     */
+    javascript?: boolean
 
     /**
      * 启用 TypeScript 支持.
@@ -269,57 +276,6 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
     vue?: boolean | OptionsFiles | OptionsVue
 
     /**
-     * 启用 React 支持.
-     *
-     * 需要安装:
-     * - `@eslint-react/eslint-plugin`
-     * - `eslint-plugin-react-hooks`
-     * - `eslint-plugin-react-refresh`
-     *
-     * @default 根据依赖关系自动检测
-     */
-    react?: boolean | OptionsReact | OptionsFiles
-
-    /**
-     * 启用 svelte 支持.
-     *
-     * 需要安装:
-     * - `eslint-plugin-svelte`
-     * - `svelte-eslint-parser`
-     *
-     * @default false
-     */
-    svelte?: boolean
-
-    /**
-     * 启用 unocss rules.
-     *
-     * 需要安装:
-     * - `@unocss/eslint-plugin`
-     *
-     * @default false
-     */
-    unocss?: boolean | OptionsUnoCSS
-
-    /**
-     * 使用外部格式化程序格式化文件.
-     *
-     * 需要安装:
-     * - `eslint-plugin-format`
-     *
-     * @default false
-     *
-     * 当设置为“true”时，默认值为
-     * {
-     *  css: false,
-     *  graphql: true,
-     *  html: true,
-     *  markdown: true,
-     * }
-     */
-    formatters?: boolean | OptionsFormatters
-
-    /**
      * 启用 JSONC 支持.
      *
      * @default true
@@ -355,12 +311,52 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
     stylistic?: boolean | StylisticConfig
 
     /**
-     * Enable regexp rules.
+     * 启用 regexp 规则.
      *
      * @see https://ota-meshi.github.io/eslint-plugin-regexp/
      * @default true
      */
-    regexp?: boolean | OptionsRegExp
+    regexp?: boolean | (OptionsRegExp & OptionsOverrides)
+
+    /**
+     * 启用 React 支持.
+     *
+     * 需要安装:
+     * - `@eslint-react/eslint-plugin`
+     * - `eslint-plugin-react-hooks`
+     * - `eslint-plugin-react-refresh`
+     *
+     * @default 根据依赖关系自动检测
+     */
+    react?: boolean | OptionsFiles
+
+    /**
+     * 启用 unocss rules.
+     *
+     * 需要安装:
+     * - `@unocss/eslint-plugin`
+     *
+     * @default false
+     */
+    unocss?: boolean | OptionsUnoCSS
+
+    /**
+     * 使用外部格式化程序格式化文件.
+     *
+     * 需要安装:
+     * - `eslint-plugin-format`
+     *
+     * @default false
+     *
+     * 当设置为“true”时，默认值为
+     * {
+     *  css: false,
+     *  graphql: true,
+     *  html: true,
+     *  markdown: true,
+     * }
+     */
+    formatters?: boolean | OptionsFormatters
 
     /**
      * 控制再编辑器中禁用某些规则.
@@ -369,7 +365,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
     isInEditor?: boolean
 
     /**
-     * Automatically rename plugins in the config.
+     * 在配置中自动重命名插件.
      *
      * @default true
      */

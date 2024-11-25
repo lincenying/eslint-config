@@ -1,8 +1,9 @@
-import type { Awaitable, OptionsConfig, TypedFlatConfigItem } from './types'
+import type { Linter } from 'eslint'
+import type { RuleOptions } from './typegen'
+import type { Awaitable, ConfigNames, OptionsConfig, TypedFlatConfigItem } from './types'
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils'
 import { isPackageExists } from 'local-pkg'
-
 import {
     comments,
     disables,
@@ -28,6 +29,7 @@ import {
     yaml,
 } from './configs'
 import { formatters } from './configs/formatters'
+
 import { regexp } from './configs/regexp'
 import { interopDefault, isInEditorEnv } from './utils'
 
@@ -53,6 +55,7 @@ export const defaultPluginRenaming = {
     '@eslint-react/dom': 'react-dom',
     '@eslint-react/hooks-extra': 'react-hooks-extra',
     '@eslint-react/naming-convention': 'react-naming-convention',
+
     '@stylistic': 'style',
     '@typescript-eslint': 'ts',
     'import-x': 'import',
@@ -61,18 +64,20 @@ export const defaultPluginRenaming = {
     'yml': 'yaml',
 }
 
-const ReactPackages = [
-    'react',
-    'next',
-]
-
 /**
- * 构造一个ESLint扁平化配置项数组。
+ * 构建 ESLint 平面配置项数组
+ *
+ * @param {OptionsConfig & TypedFlatConfigItem} options
+ *  生成 ESLint 配置的选项
+ * @param {Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]} userConfigs
+ *  要与生成的配置合并的用户配置
+ * @returns {Promise<TypedFlatConfigItem[]>}
+ *  合并的 ESLint 配置
  */
 export function lincy(
     options: OptionsConfig & Omit<TypedFlatConfigItem, 'files'> = {},
-    ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[]>[]
-): FlatConfigComposer<TypedFlatConfigItem> {
+    ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.Config[]>[]
+): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
     const {
         autoRenamePlugins = true,
         componentExts = [],
@@ -80,7 +85,7 @@ export function lincy(
         ignores: ignoresList = [],
         jsx: enableJsx = true,
         overrides = {},
-        react: enableReact = ReactPackages.some(i => isPackageExists(i)),
+        react: enableReact = false,
         regexp: enableRegexp = true,
         typescript: enableTypeScript = isPackageExists('typescript'),
         unicorn: enableUnicorn = true,
@@ -92,16 +97,14 @@ export function lincy(
     if (isInEditor == null) {
         isInEditor = isInEditorEnv()
         if (isInEditor)
+
             console.log('[@lincy/eslint-config] Detected running in editor, some rules are disabled.')
     }
 
-    const stylisticOptions = options.stylistic === false ? false : (typeof options.stylistic === 'object' ? options.stylistic : {})
+    const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === 'object' ? options.stylistic : {}
 
-    if (stylisticOptions) {
-        if (!('jsx' in stylisticOptions)) {
-            stylisticOptions.jsx = enableJsx
-        }
-    }
+    if (stylisticOptions && !('jsx' in stylisticOptions))
+        stylisticOptions.jsx = enableJsx
 
     const configs: Awaitable<TypedFlatConfigItem[]>[] = []
 
@@ -133,7 +136,7 @@ export function lincy(
         }),
         javascript({
             isInEditor,
-            overrides: overrides.javascript,
+            overrides: getOverrides(options, 'javascript'),
         }),
         comments({
             overrides: overrides.comments,
@@ -162,28 +165,27 @@ export function lincy(
         }))
     }
 
-    // In the future we may support more component extensions like Svelte or so
     if (enableVue) {
         componentExts.push('vue')
-    }
-
-    if (enableTypeScript) {
-        configs.push(typescript({
-            componentExts,
-            ...typescriptOptions,
-            overrides: overrides.typescript,
-            tsconfigPath,
-            type: options.type,
-        }))
     }
 
     if (enableJsx) {
         configs.push(jsx())
     }
 
+    if (enableTypeScript) {
+        configs.push(typescript({
+            ...typescriptOptions,
+            componentExts,
+            overrides: getOverrides(options, 'typescript'),
+            tsconfigPath,
+            type: options.type,
+        }))
+    }
+
     if (stylisticOptions) {
         configs.push(stylistic({
-            overrides: overrides.stylistic,
+            overrides: getOverrides(options, 'stylistic'),
             stylistic: stylisticOptions,
         }))
     }
@@ -191,7 +193,7 @@ export function lincy(
     if (enableRegexp) {
         configs.push(regexp({
             ...resolveSubOptions(options, 'regexp'),
-            overrides: overrides.regexp,
+            ...getOverrides(options, 'regexp'),
         }))
     }
 
@@ -199,14 +201,14 @@ export function lincy(
         configs.push(test({
             ...resolveSubOptions(options, 'test'),
             isInEditor,
-            overrides: overrides.test,
+            overrides: getOverrides(options, 'test'),
         }))
     }
 
     if (enableVue) {
         configs.push(vue({
             ...resolveSubOptions(options, 'vue'),
-            overrides: overrides.vue,
+            overrides: getOverrides(options, 'vue'),
             stylistic: stylisticOptions,
             typescript: !!enableTypeScript,
         }))
@@ -216,7 +218,7 @@ export function lincy(
         configs.push(react({
             ...typescriptOptions,
             ...resolveSubOptions(options, 'react'),
-            overrides: overrides.react,
+            overrides: getOverrides(options, 'react'),
             tsconfigPath,
         }))
     }
@@ -224,7 +226,7 @@ export function lincy(
     if (enableUnoCSS) {
         configs.push(unocss({
             ...resolveSubOptions(options, 'unocss'),
-            overrides: overrides.unocss,
+            overrides: getOverrides(options, 'unocss'),
         }))
     }
 
@@ -232,7 +234,7 @@ export function lincy(
         configs.push(
             jsonc({
                 ...resolveSubOptions(options, 'jsonc'),
-                overrides: overrides.jsonc,
+                overrides: getOverrides(options, 'jsonc'),
                 stylistic: stylisticOptions,
             }),
             sortPackageJson(),
@@ -243,24 +245,28 @@ export function lincy(
     if (options.yaml ?? true) {
         configs.push(yaml({
             ...resolveSubOptions(options, 'yaml'),
-            overrides: overrides.yaml,
+            overrides: getOverrides(options, 'yaml'),
             stylistic: stylisticOptions,
         }))
     }
 
-    if (options.toml) {
+    if (options.toml ?? true) {
         configs.push(toml({
-            overrides: overrides.toml,
+            overrides: getOverrides(options, 'toml'),
             stylistic: stylisticOptions,
         }))
     }
 
     if (options.markdown ?? true) {
-        configs.push(markdown({
-            ...resolveSubOptions(options, 'markdown'),
-            componentExts,
-            overrides: overrides.markdown,
-        }))
+        configs.push(
+            markdown(
+                {
+                    ...resolveSubOptions(options, 'markdown'),
+                    componentExts,
+                    overrides: getOverrides(options, 'markdown'),
+                },
+            ),
+        )
     }
 
     if (options.formatters) {
@@ -281,25 +287,24 @@ export function lincy(
     // User can optionally pass a flat config item to the first argument
     // We pick the known keys as ESLint would do schema validation
     const fusedConfig = flatConfigProps.reduce((acc, key) => {
-        if (key in options) {
+        if (key in options)
             acc[key] = options[key] as any
-        }
         return acc
     }, {} as TypedFlatConfigItem)
-
-    if (Object.keys(fusedConfig).length) {
+    if (Object.keys(fusedConfig).length)
         configs.push([fusedConfig])
-    }
 
-    let composer = new FlatConfigComposer<TypedFlatConfigItem>()
+    let composer = new FlatConfigComposer<TypedFlatConfigItem, ConfigNames>()
 
-    composer = composer.append(
-        ...configs,
-        ...userConfigs,
-    )
+    composer = composer
+        .append(
+            ...configs,
+            ...userConfigs as any,
+        )
 
     if (autoRenamePlugins) {
-        composer = composer.renamePlugins(defaultPluginRenaming)
+        composer = composer
+            .renamePlugins(defaultPluginRenaming)
     }
 
     return composer
@@ -314,4 +319,15 @@ export function resolveSubOptions<K extends keyof OptionsConfig>(
     key: K,
 ): ResolvedOptions<OptionsConfig[K]> {
     return typeof options[key] === 'boolean' ? {} as any : options[key] || {}
+}
+
+export function getOverrides<K extends keyof OptionsConfig>(
+    options: OptionsConfig,
+    key: K,
+): Partial<Linter.RulesRecord & RuleOptions> {
+    const sub = resolveSubOptions(options, key)
+    return {
+        ...(options.overrides as any)?.[key],
+        ...'overrides' in sub ? sub.overrides : {},
+    }
 }
