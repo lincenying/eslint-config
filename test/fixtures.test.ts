@@ -17,6 +17,11 @@ afterAll(async () => {
 runWithConfig('js', {
     typescript: false,
     vue: false,
+    overrides: {
+        ignores: [
+            '**/*.ts',
+        ],
+    },
 })
 runWithConfig('all', {
     typescript: true,
@@ -140,7 +145,8 @@ function runWithConfig(name: string, configs: OptionsConfig, ...items: TypedFlat
                 )
             `)
 
-        await execa('npx', ['eslint', '.', '--fix'], {
+        const pyload = ['eslint', '.', '--fix']
+        await execa('npx', pyload, {
             cwd: target,
             stdio: 'pipe',
         })

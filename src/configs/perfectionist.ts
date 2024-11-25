@@ -35,7 +35,7 @@ export async function perfectionist(
                         'object',
                         'unknown',
                     ],
-                    internalPattern: ['~/**', '@/**'],
+                    internalPattern: ['^~/.*', '^@/.*'],
                     newlinesBetween: 'ignore',
                     order: 'asc',
                     type: 'natural',

@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises'
 
-import { builtinRules } from 'eslint/use-at-your-own-risk'
 import { flatConfigsToRulesDTS } from 'eslint-typegen/core'
+import { builtinRules } from 'eslint/use-at-your-own-risk'
 
 import { combine, comments, formatters, imports, javascript, jsdoc, jsonc, markdown, node, perfectionist, react, regexp, sortPackageJson, stylistic, test, toml, typescript, unicorn, unocss, vue, yaml } from '../src'
 

@@ -20,8 +20,8 @@ const config = lincy(
                 'antfu/consistent-list-newline': 'off',
             },
             ignores: [
-                '**/assets',
-                '**/static',
+                '**/fixtures',
+                '**/_fixtures',
             ],
         },
         ignores: [

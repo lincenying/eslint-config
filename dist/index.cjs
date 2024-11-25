@@ -1183,7 +1183,7 @@ async function perfectionist(options = {}) {
             "object",
             "unknown"
           ],
-          internalPattern: ["~/**", "@/**"],
+          internalPattern: ["^~/.*", "^@/.*"],
           newlinesBetween: "ignore",
           order: "asc",
           type: "natural"
@@ -2127,7 +2127,6 @@ async function yaml(options = {}) {
     stylistic: stylistic2 = true
   } = options;
   const {
-    indent = 2,
     quotes = "single"
   } = typeof stylistic2 === "boolean" ? {} : stylistic2;
   const [
@@ -2166,7 +2165,7 @@ async function yaml(options = {}) {
           "yaml/flow-mapping-curly-spacing": "error",
           "yaml/flow-sequence-bracket-newline": "error",
           "yaml/flow-sequence-bracket-spacing": "error",
-          "yaml/indent": ["error", indent === "tab" ? 2 : indent],
+          "yaml/indent": ["error", 2],
           "yaml/key-spacing": "error",
           "yaml/no-tab-indent": "error",
           "yaml/quotes": ["error", { avoidEscape: true, prefer: quotes === "backtick" ? "single" : quotes }],
