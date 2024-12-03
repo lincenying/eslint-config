@@ -1120,7 +1120,6 @@ async function react(options = {}) {
     interopDefault(import("@eslint-react/eslint-plugin")),
     // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-react-hooks")),
-    // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-react-refresh"))
   ]);
   const _isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(

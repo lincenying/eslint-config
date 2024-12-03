@@ -29,7 +29,7 @@ Jane Roe|JFK|314
 + and [another one]
 
 
-  [another one]:  http://example.com 'Example title'
+[another one]:  http://example.com 'Example title'
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Curabitur consectetur maximus risus, sed maximus tellus tincidunt et.

@@ -4,15 +4,15 @@
 
 > Thanks to [sxzz/eslint-config](https://github.com/sxzz/eslint-config) and [antfu/eslint-config](https://github.com/antfu/eslint-config) for the inspiration and reference.
 
--   单引号，无结尾分号
--   自动格式化
--   专为与 TypeScript、Vue(2/3)、React 一起使用而设计，开箱即用
--   也适用于 json、yaml、markdown
--   import导入排序, 对象字⾯量项尾逗号
--   合理的默认值，最佳实践，只需一行配置
--   [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new)
--   使用 [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
--   **风格原则**: 读取最小，差异稳定
+- 单引号，无结尾分号
+- 自动格式化
+- 专为与 TypeScript、Vue(2/3)、React 一起使用而设计，开箱即用
+- 也适用于 json、yaml、markdown
+- import导入排序, 对象字⾯量项尾逗号
+- 合理的默认值，最佳实践，只需一行配置
+- [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new)
+- 使用 [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
+- **风格原则**: 读取最小，差异稳定
 
 ## Usage
 
@@ -44,7 +44,7 @@ export default lincy()
 }
 ```
 
-## VS Code support (保存时自动修复)
+### VS Code support (保存时自动修复)
 
 安装 [VS Code ESLint扩展](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
 
@@ -100,6 +100,16 @@ export default lincy()
   ]
 }
 ```
+
+### 使用.ts文件作为配置文件
+
+1. 将`eslint`更新至最新版本
+2. 在`package.json`中的`eslint .`后面添加参数`--flag unstable_ts_config`, 包括`scripts`、`lint-staged`中
+3. 在`.vscode/settings.json`文件添加`"eslint.options": {
+  "flags": [
+    "unstable_ts_config"
+  ]
+}`
 
 ## 定制化
 

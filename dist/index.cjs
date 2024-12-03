@@ -101,7 +101,7 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 
-// node_modules/.pnpm/tsup@8.3.5_jiti@2.3.3_postcss@8.4.47_tsx@4.19.2_typescript@5.6.3_yaml@2.6.0/node_modules/tsup/assets/cjs_shims.js
+// node_modules/.pnpm/tsup@8.3.5_jiti@2.4.0_postcss@8.4.49_tsx@4.19.2_typescript@5.7.2_yaml@2.6.1/node_modules/tsup/assets/cjs_shims.js
 var getImportMetaUrl = () => typeof document === "undefined" ? new URL(`file:${__filename}`).href : document.currentScript && document.currentScript.src || new URL("main.js", document.baseURI).href;
 var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
 
@@ -1227,7 +1227,6 @@ async function react(options = {}) {
     interopDefault(import("@eslint-react/eslint-plugin")),
     // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-react-hooks")),
-    // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-react-refresh"))
   ]);
   const _isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
