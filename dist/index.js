@@ -243,7 +243,7 @@ async function ensurePackages(packages) {
   const p = await import("@clack/prompts");
   const result = await p.confirm({
     // message: `${nonExistingPackages.length === 1 ? 'Package is' : 'Packages are'} required for this config: ${nonExistingPackages.join(', ')}. Do you want to install them?`,
-    message: `\u6B64\u914D\u7F6E\u9700\u8981\u8F6F\u4EF6\u5305: ${nonExistingPackages.join(", ")}. \u4F60\u60F3\u5B89\u88C5\u5B83\u4EEC\u5417?`
+    message: `此配置需要软件包: ${nonExistingPackages.join(", ")}. 你想安装它们吗?`
   });
   if (result)
     await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
@@ -2285,7 +2285,7 @@ function lincy(options = {}, ...userConfigs) {
     disables()
   );
   if ("files" in options) {
-    throw new Error("[@lincy/eslint-config] \u7B2C\u4E00\u4E2A\u53C2\u6570\u4E0D\u5E94\u5305\u542B\u201Cfiles\u201D\u5C5E\u6027\uFF0C\u56E0\u4E3A\u9009\u9879\u5E94\u8BE5\u662F\u5168\u5C40\u7684\u3002\u8BF7\u5C06\u5176\u653E\u5728\u7B2C\u4E8C\u4E2A\u6216\u66F4\u540E\u9762\u7684\u914D\u7F6E\u4E2D\u3002");
+    throw new Error("[@lincy/eslint-config] 第一个参数不应包含“files”属性，因为选项应该是全局的。请将其放在第二个或更后面的配置中。");
   }
   const fusedConfig = flatConfigProps.reduce((acc, key) => {
     if (key in options)
