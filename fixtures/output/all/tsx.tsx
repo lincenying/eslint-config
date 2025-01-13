@@ -1,5 +1,11 @@
-export function Component1() {
-    return <div />
+import * as React from 'react'
+
+interface CompProps {
+    children: React.ReactNode // 👈️ type children
+}
+
+export function Component1(props: CompProps) {
+    return <div>{props.children}</div>
 }
 
 export function jsx2() {

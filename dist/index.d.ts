@@ -203,7 +203,7 @@ interface RuleOptions {
    */
   'default-case'?: Linter.RuleEntry<DefaultCase>
   /**
-   * Enforce `default` clauses in switch statements to be last
+   * Enforce `default` clauses in `switch` statements to be last
    * @see https://eslint.org/docs/latest/rules/default-case-last
    */
   'default-case-last'?: Linter.RuleEntry<[]>
@@ -387,233 +387,233 @@ interface RuleOptions {
   'implicit-arrow-linebreak'?: Linter.RuleEntry<ImplicitArrowLinebreak>
   /**
    * Enforce or ban the use of inline type-only markers for named imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/consistent-type-specifier-style.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/consistent-type-specifier-style.md
    */
   'import/consistent-type-specifier-style'?: Linter.RuleEntry<ImportConsistentTypeSpecifierStyle>
   /**
    * Ensure a default export is present, given a default import.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/default.md
    */
   'import/default'?: Linter.RuleEntry<[]>
   /**
    * Enforce a leading comment with the webpackChunkName for dynamic imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/dynamic-import-chunkname.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/dynamic-import-chunkname.md
    */
   'import/dynamic-import-chunkname'?: Linter.RuleEntry<ImportDynamicImportChunkname>
   /**
    * Forbid any invalid exports, i.e. re-export of the same name.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/export.md
    */
   'import/export'?: Linter.RuleEntry<[]>
   /**
    * Ensure all exports appear after other statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/exports-last.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/exports-last.md
    */
   'import/exports-last'?: Linter.RuleEntry<[]>
   /**
    * Ensure consistent use of file extension within the import path.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/extensions.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/extensions.md
    */
   'import/extensions'?: Linter.RuleEntry<ImportExtensions>
   /**
    * Ensure all imports appear before other statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/first.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/first.md
    */
   'import/first'?: Linter.RuleEntry<ImportFirst>
   /**
    * Prefer named exports to be grouped together in a single export declaration.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/group-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/group-exports.md
    */
   'import/group-exports'?: Linter.RuleEntry<[]>
   /**
    * Replaced by `import-x/first`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/imports-first.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/imports-first.md
    * @deprecated
    */
   'import/imports-first'?: Linter.RuleEntry<ImportImportsFirst>
   /**
    * Enforce the maximum number of dependencies a module can have.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/max-dependencies.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/max-dependencies.md
    */
   'import/max-dependencies'?: Linter.RuleEntry<ImportMaxDependencies>
   /**
    * Ensure named imports correspond to a named export in the remote file.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/named.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/named.md
    */
   'import/named'?: Linter.RuleEntry<ImportNamed>
   /**
    * Ensure imported namespaces contain dereferenced properties as they are dereferenced.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/namespace.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/namespace.md
    */
   'import/namespace'?: Linter.RuleEntry<ImportNamespace>
   /**
    * Enforce a newline after import statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/newline-after-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/newline-after-import.md
    */
   'import/newline-after-import'?: Linter.RuleEntry<ImportNewlineAfterImport>
   /**
    * Forbid import of modules using absolute paths.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-absolute-path.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-absolute-path.md
    */
   'import/no-absolute-path'?: Linter.RuleEntry<ImportNoAbsolutePath>
   /**
    * Forbid AMD `require` and `define` calls.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-amd.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-amd.md
    */
   'import/no-amd'?: Linter.RuleEntry<[]>
   /**
    * Forbid anonymous values as default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-anonymous-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-anonymous-default-export.md
    */
   'import/no-anonymous-default-export'?: Linter.RuleEntry<ImportNoAnonymousDefaultExport>
   /**
    * Forbid CommonJS `require` calls and `module.exports` or `exports.*`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-commonjs.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-commonjs.md
    */
   'import/no-commonjs'?: Linter.RuleEntry<ImportNoCommonjs>
   /**
    * Forbid a module from importing a module with a dependency path back to itself.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-cycle.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-cycle.md
    */
   'import/no-cycle'?: Linter.RuleEntry<ImportNoCycle>
   /**
    * Forbid default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-default-export.md
    */
   'import/no-default-export'?: Linter.RuleEntry<[]>
   /**
    * Forbid imported names marked with `@deprecated` documentation tag.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-deprecated.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-deprecated.md
    */
   'import/no-deprecated'?: Linter.RuleEntry<[]>
   /**
    * Forbid repeated import of the same module in multiple places.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-duplicates.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-duplicates.md
    */
   'import/no-duplicates'?: Linter.RuleEntry<ImportNoDuplicates>
   /**
    * Forbid `require()` calls with expressions.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-dynamic-require.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-dynamic-require.md
    */
   'import/no-dynamic-require'?: Linter.RuleEntry<ImportNoDynamicRequire>
   /**
    * Forbid empty named import blocks.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-empty-named-blocks.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-empty-named-blocks.md
    */
   'import/no-empty-named-blocks'?: Linter.RuleEntry<[]>
   /**
    * Forbid the use of extraneous packages.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-extraneous-dependencies.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-extraneous-dependencies.md
    */
   'import/no-extraneous-dependencies'?: Linter.RuleEntry<ImportNoExtraneousDependencies>
   /**
    * Forbid import statements with CommonJS module.exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-import-module-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-import-module-exports.md
    */
   'import/no-import-module-exports'?: Linter.RuleEntry<ImportNoImportModuleExports>
   /**
    * Forbid importing the submodules of other modules.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-internal-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-internal-modules.md
    */
   'import/no-internal-modules'?: Linter.RuleEntry<ImportNoInternalModules>
   /**
    * Forbid the use of mutable exports with `var` or `let`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-mutable-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-mutable-exports.md
    */
   'import/no-mutable-exports'?: Linter.RuleEntry<[]>
   /**
    * Forbid use of exported name as identifier of default export.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-named-as-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-named-as-default.md
    */
   'import/no-named-as-default'?: Linter.RuleEntry<[]>
   /**
    * Forbid use of exported name as property of default export.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-named-as-default-member.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-named-as-default-member.md
    */
   'import/no-named-as-default-member'?: Linter.RuleEntry<[]>
   /**
    * Forbid named default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-named-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-named-default.md
    */
   'import/no-named-default'?: Linter.RuleEntry<[]>
   /**
    * Forbid named exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-named-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-named-export.md
    */
   'import/no-named-export'?: Linter.RuleEntry<[]>
   /**
    * Forbid namespace (a.k.a. "wildcard" `*`) imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-namespace.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-namespace.md
    */
   'import/no-namespace'?: Linter.RuleEntry<ImportNoNamespace>
   /**
    * Forbid Node.js builtin modules.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-nodejs-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-nodejs-modules.md
    */
   'import/no-nodejs-modules'?: Linter.RuleEntry<ImportNoNodejsModules>
   /**
    * Forbid importing packages through relative paths.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-relative-packages.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-relative-packages.md
    */
   'import/no-relative-packages'?: Linter.RuleEntry<ImportNoRelativePackages>
   /**
    * Forbid importing modules from parent directories.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-relative-parent-imports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-relative-parent-imports.md
    */
   'import/no-relative-parent-imports'?: Linter.RuleEntry<ImportNoRelativeParentImports>
   /**
    * Forbid importing a default export by a different name.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-rename-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-rename-default.md
    */
   'import/no-rename-default'?: Linter.RuleEntry<ImportNoRenameDefault>
   /**
    * Enforce which files can be imported in a given folder.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-restricted-paths.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-restricted-paths.md
    */
   'import/no-restricted-paths'?: Linter.RuleEntry<ImportNoRestrictedPaths>
   /**
    * Forbid a module from importing itself.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-self-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-self-import.md
    */
   'import/no-self-import'?: Linter.RuleEntry<[]>
   /**
    * Forbid unassigned imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-unassigned-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-unassigned-import.md
    */
   'import/no-unassigned-import'?: Linter.RuleEntry<ImportNoUnassignedImport>
   /**
    * Ensure imports point to a file/module that can be resolved.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-unresolved.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-unresolved.md
    */
   'import/no-unresolved'?: Linter.RuleEntry<ImportNoUnresolved>
   /**
    * Forbid modules without exports, or exports without matching import in another module.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-unused-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-unused-modules.md
    */
   'import/no-unused-modules'?: Linter.RuleEntry<ImportNoUnusedModules>
   /**
    * Forbid unnecessary path segments in import and require statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-useless-path-segments.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-useless-path-segments.md
    */
   'import/no-useless-path-segments'?: Linter.RuleEntry<ImportNoUselessPathSegments>
   /**
    * Forbid webpack loader syntax in imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/no-webpack-loader-syntax.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/no-webpack-loader-syntax.md
    */
   'import/no-webpack-loader-syntax'?: Linter.RuleEntry<[]>
   /**
    * Enforce a convention in module import order.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/order.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/order.md
    */
   'import/order'?: Linter.RuleEntry<ImportOrder>
   /**
    * Prefer a default export if module exports a single name or multiple names.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/prefer-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/prefer-default-export.md
    */
   'import/prefer-default-export'?: Linter.RuleEntry<ImportPreferDefaultExport>
   /**
    * Forbid potentially ambiguous parse goal (`script` vs. `module`).
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.5.0/docs/rules/unambiguous.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.6.1/docs/rules/unambiguous.md
    */
   'import/unambiguous'?: Linter.RuleEntry<[]>
   /**
@@ -2562,8 +2562,8 @@ interface RuleOptions {
    */
   'radix'?: Linter.RuleEntry<Radix>
   /**
-   * disallow passing 'children' to void DOM elements
-   * @see https://eslint-react.xyz/docs/rules/dom-no-children-in-void-dom-elements
+   * disallow void elements (AKA self-closing elements) from having children
+   * @see https://eslint-react.xyz/docs/rules/dom-no-void-elements-with-children
    */
   'react-dom/no-children-in-void-dom-elements'?: Linter.RuleEntry<[]>
   /**
@@ -2622,10 +2622,20 @@ interface RuleOptions {
    */
   'react-dom/no-unsafe-target-blank'?: Linter.RuleEntry<[]>
   /**
-   * enforce custom hooks to use at least one other hook inside
-   * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-redundant-custom-hook
+   * disallow void elements (AKA self-closing elements) from having children
+   * @see https://eslint-react.xyz/docs/rules/dom-no-void-elements-with-children
+   */
+  'react-dom/no-void-elements-with-children'?: Linter.RuleEntry<[]>
+  /**
+   * enforce custom Hooks to use at least one other hook inside
+   * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-useless-custom-hooks
    */
   'react-hooks-extra/ensure-custom-hooks-using-other-hooks'?: Linter.RuleEntry<[]>
+  /**
+   * disallow unnecessary usage of 'useCallback'
+   * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-unnecessary-use-callback
+   */
+  'react-hooks-extra/ensure-use-callback-has-non-empty-deps'?: Linter.RuleEntry<[]>
   /**
    * disallow unnecessary usage of 'useMemo'
    * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-unnecessary-use-memo
@@ -2642,8 +2652,8 @@ interface RuleOptions {
    */
   'react-hooks-extra/no-direct-set-state-in-use-layout-effect'?: Linter.RuleEntry<[]>
   /**
-   * enforce custom hooks to use at least one other hook inside
-   * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-redundant-custom-hook
+   * enforce custom Hooks to use at least one other hook inside
+   * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-useless-custom-hooks
    */
   'react-hooks-extra/no-redundant-custom-hook'?: Linter.RuleEntry<[]>
   /**
@@ -2656,6 +2666,11 @@ interface RuleOptions {
    * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-unnecessary-use-memo
    */
   'react-hooks-extra/no-unnecessary-use-memo'?: Linter.RuleEntry<[]>
+  /**
+   * enforce custom Hooks to use at least one other hook inside
+   * @see https://eslint-react.xyz/docs/rules/hooks-extra-no-useless-custom-hooks
+   */
+  'react-hooks-extra/no-useless-custom-hooks'?: Linter.RuleEntry<[]>
   /**
    * disallow function calls in 'useState' that aren't wrapped in an initializer function
    * @see https://eslint-react.xyz/docs/rules/hooks-extra-prefer-use-state-lazy-initialization
@@ -2693,6 +2708,26 @@ interface RuleOptions {
   'react-naming-convention/use-state'?: Linter.RuleEntry<[]>
   'react-refresh/only-export-components'?: Linter.RuleEntry<ReactRefreshOnlyExportComponents>
   /**
+   * enforce that every 'addEventListener' in a component or custom Hook has a corresponding 'removeEventListener'.
+   * @see https://eslint-react.xyz/docs/rules/web-api-no-leaked-event-listener
+   */
+  'react-web-api/no-leaked-event-listener'?: Linter.RuleEntry<[]>
+  /**
+   * enforce that every 'setInterval' in a component or custom Hook has a corresponding 'clearInterval'.
+   * @see https://eslint-react.xyz/docs/rules/web-api-no-leaked-interval
+   */
+  'react-web-api/no-leaked-interval'?: Linter.RuleEntry<[]>
+  /**
+   * enforce cleanup of 'ResizeObserver' instances in components and custom Hooks.
+   * @see https://eslint-react.xyz/docs/rules/web-api-no-leaked-resize-observer
+   */
+  'react-web-api/no-leaked-resize-observer'?: Linter.RuleEntry<[]>
+  /**
+   * enforce that every 'setTimeout' in a component or custom Hook has a corresponding 'clearTimeout'.
+   * @see https://eslint-react.xyz/docs/rules/web-api-no-leaked-timeout
+   */
+  'react-web-api/no-leaked-timeout'?: Linter.RuleEntry<[]>
+  /**
    * disallow using shorthand boolean attributes
    * @see https://eslint-react.xyz/docs/rules/avoid-shorthand-boolean
    */
@@ -2709,12 +2744,12 @@ interface RuleOptions {
   'react/ensure-forward-ref-using-ref'?: Linter.RuleEntry<[]>
   /**
    * disallow duplicate props
-   * @see https://eslint-react.xyz/docs/rules/jsx-no-duplicate-props
+   * @see https://eslint-react.xyz/docs/rules/no-duplicate-jsx-props
    */
   'react/jsx-no-duplicate-props'?: Linter.RuleEntry<[]>
   /**
-   * a helper rule to mark variables as used
-   * @see https://eslint-react.xyz/docs/rules/jsx-uses-vars
+   * helpes `eslint/no-unused-vars` to correctly mark JSX variables as used.
+   * @see https://eslint-react.xyz/docs/rules/use-jsx-vars
    */
   'react/jsx-uses-vars'?: Linter.RuleEntry<[]>
   /**
@@ -2817,6 +2852,11 @@ interface RuleOptions {
    * @see https://eslint-react.xyz/docs/rules/no-direct-mutation-state
    */
   'react/no-direct-mutation-state'?: Linter.RuleEntry<[]>
+  /**
+   * disallow duplicate props
+   * @see https://eslint-react.xyz/docs/rules/no-duplicate-jsx-props
+   */
+  'react/no-duplicate-jsx-props'?: Linter.RuleEntry<[]>
   /**
    * disallow duplicate keys when rendering list
    * @see https://eslint-react.xyz/docs/rules/no-duplicate-key
@@ -2947,6 +2987,11 @@ interface RuleOptions {
    * @see https://eslint-react.xyz/docs/rules/prefer-shorthand-fragment
    */
   'react/prefer-shorthand-fragment'?: Linter.RuleEntry<[]>
+  /**
+   * helpes `eslint/no-unused-vars` to correctly mark JSX variables as used.
+   * @see https://eslint-react.xyz/docs/rules/use-jsx-vars
+   */
+  'react/use-jsx-vars'?: Linter.RuleEntry<[]>
   /**
    * disallow confusing quantifiers
    * @see https://ota-meshi.github.io/eslint-plugin-regexp/rules/confusing-quantifier.html
@@ -3402,7 +3447,7 @@ interface RuleOptions {
    */
   'semi-style'?: Linter.RuleEntry<SemiStyle>
   /**
-   * Enforce sorted import declarations within modules
+   * Enforce sorted `import` declarations within modules
    * @see https://eslint.org/docs/latest/rules/sort-imports
    */
   'sort-imports'?: Linter.RuleEntry<SortImports>
@@ -4128,7 +4173,7 @@ interface RuleOptions {
    */
   'test/padding-around-expect-groups'?: Linter.RuleEntry<[]>
   /**
-   * Enforce padding around afterAll blocks
+   * Enforce padding around `test` blocks
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/padding-around-test-blocks.md
    */
   'test/padding-around-test-blocks'?: Linter.RuleEntry<[]>
@@ -4233,7 +4278,7 @@ interface RuleOptions {
    */
   'test/prefer-todo'?: Linter.RuleEntry<[]>
   /**
-   * Prefer `vi.mocked()` over `fn as Mock`
+   * require `vi.mocked()` over `fn as Mock`
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-vi-mocked.md
    */
   'test/prefer-vi-mocked'?: Linter.RuleEntry<[]>
@@ -4268,7 +4313,7 @@ interface RuleOptions {
    */
   'test/valid-expect'?: Linter.RuleEntry<TestValidExpect>
   /**
-   * Require promises that have expectations in their chain to be valid
+   * require promises that have expectations in their chain to be valid
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/valid-expect-in-promise.md
    */
   'test/valid-expect-in-promise'?: Linter.RuleEntry<[]>
@@ -4853,7 +4898,7 @@ interface RuleOptions {
    */
   'ts/no-wrapper-object-types'?: Linter.RuleEntry<[]>
   /**
-   * Enforce non-null assertions over explicit type casts
+   * Enforce non-null assertions over explicit type assertions
    * @see https://typescript-eslint.io/rules/non-nullable-type-assertion-style
    */
   'ts/non-nullable-type-assertion-style'?: Linter.RuleEntry<[]>
@@ -4938,7 +4983,7 @@ interface RuleOptions {
    */
   'ts/prefer-readonly-parameter-types'?: Linter.RuleEntry<TsPreferReadonlyParameterTypes>
   /**
-   * Enforce using type parameter when calling `Array#reduce` instead of casting
+   * Enforce using type parameter when calling `Array#reduce` instead of using a type assertion
    * @see https://typescript-eslint.io/rules/prefer-reduce-type-parameter
    */
   'ts/prefer-reduce-type-parameter'?: Linter.RuleEntry<[]>
@@ -9762,11 +9807,50 @@ type PaddingLineBetweenStatements = {
   next: _PaddingLineBetweenStatementsStatementType
 }[]
 // ----- perfectionist/sort-array-includes -----
-type PerfectionistSortArrayIncludes = []|[{
+type PerfectionistSortArrayIncludes = {
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   groupKind?: ("mixed" | "literals-first" | "spreads-first")
+  
+  customGroups?: ({
+    
+    groupName?: string
+    
+    type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
+    
+    order?: ("desc" | "asc")
+    
+    newlinesInside?: ("always" | "never")
+    anyOf?: {
+      
+      selector?: ("literal" | "spread")
+      
+      elementNamePattern?: string
+    }[]
+  } | {
+    
+    groupName?: string
+    
+    type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
+    
+    order?: ("desc" | "asc")
+    
+    newlinesInside?: ("always" | "never")
+    
+    selector?: ("literal" | "spread")
+    
+    elementNamePattern?: string
+  })[]
+  useConfigurationIf?: {
+    allNamesMatchPattern?: string
+  }
+  
+  type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted")
   
   partitionByNewLine?: boolean
   
@@ -9778,16 +9862,24 @@ type PerfectionistSortArrayIncludes = []|[{
   
   locales?: (string | string[])
   
-  order?: ("asc" | "desc")
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
   
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
-}]
+  order?: ("asc" | "desc")
+}[]
 // ----- perfectionist/sort-classes -----
 type PerfectionistSortClasses = []|[{
   
   ignoreCallbackDependenciesPatterns?: string[]
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   customGroups?: ({
     
@@ -9796,6 +9888,8 @@ type PerfectionistSortClasses = []|[{
     type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
     
     order?: ("desc" | "asc")
+    
+    newlinesInside?: ("always" | "never")
     anyOf?: {
       
       elementValuePattern?: string
@@ -9815,6 +9909,8 @@ type PerfectionistSortClasses = []|[{
     type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
     
     order?: ("desc" | "asc")
+    
+    newlinesInside?: ("always" | "never")
     
     elementValuePattern?: string
     
@@ -9837,18 +9933,26 @@ type PerfectionistSortClasses = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
-  groups?: (string | string[])[]
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- perfectionist/sort-decorators -----
 type PerfectionistSortDecorators = []|[{
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   sortOnParameters?: boolean
   
@@ -9870,18 +9974,26 @@ type PerfectionistSortDecorators = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
-  groups?: (string | string[])[]
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- perfectionist/sort-enums -----
 type PerfectionistSortEnums = []|[{
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   forceNumericSort?: boolean
   
@@ -9895,16 +10007,20 @@ type PerfectionistSortEnums = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- perfectionist/sort-exports -----
 type PerfectionistSortExports = []|[{
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   groupKind?: ("mixed" | "values-first" | "types-first")
   
@@ -9916,11 +10032,11 @@ type PerfectionistSortExports = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- perfectionist/sort-heritage-clauses -----
 type PerfectionistSortHeritageClauses = []|[{
@@ -9935,13 +10051,17 @@ type PerfectionistSortHeritageClauses = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
-  groups?: (string | string[])[]
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- perfectionist/sort-imports -----
 type PerfectionistSortImports = []|[_PerfectionistSortImportsSortImports]
@@ -9958,7 +10078,11 @@ type _PerfectionistSortImportsSortImports = (_PerfectionistSortImportsMaxLineLen
     }
   }
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   internalPattern?: string[]
   
@@ -9980,13 +10104,17 @@ type _PerfectionistSortImportsSortImports = (_PerfectionistSortImportsMaxLineLen
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
-  groups?: (string | string[])[]
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 })
 type _PerfectionistSortImportsMaxLineLengthRequiresLineLengthType = ({
   [k: string]: unknown | undefined
@@ -9996,11 +10124,19 @@ interface _PerfectionistSortImports_IsLineLength {
   [k: string]: unknown | undefined
 }
 // ----- perfectionist/sort-interfaces -----
-type PerfectionistSortInterfaces = []|[{
+type PerfectionistSortInterfaces = {
   
   ignorePattern?: string[]
+  useConfigurationIf?: {
+    allNamesMatchPattern?: string
+    declarationMatchesPattern?: string
+  }
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   customGroups?: ({
     [k: string]: (string | string[]) | undefined
   } | ({
@@ -10010,6 +10146,8 @@ type PerfectionistSortInterfaces = []|[{
     type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
     
     order?: ("desc" | "asc")
+    
+    newlinesInside?: ("always" | "never")
     anyOf?: {
       
       modifiers?: ("optional" | "required" | "multiline")[]
@@ -10026,6 +10164,8 @@ type PerfectionistSortInterfaces = []|[{
     
     order?: ("desc" | "asc")
     
+    newlinesInside?: ("always" | "never")
+    
     modifiers?: ("optional" | "required" | "multiline")[]
     
     selector?: ("index-signature" | "member" | "method" | "multiline" | "property")
@@ -10035,6 +10175,8 @@ type PerfectionistSortInterfaces = []|[{
   
   groupKind?: ("mixed" | "required-first" | "optional-first")
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted")
+  
   partitionByNewLine?: boolean
   
   specialCharacters?: ("remove" | "trim" | "keep")
@@ -10047,16 +10189,22 @@ type PerfectionistSortInterfaces = []|[{
   
   locales?: (string | string[])
   
-  groups?: (string | string[])[]
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
-}]
+}[]
 // ----- perfectionist/sort-intersection-types -----
 type PerfectionistSortIntersectionTypes = []|[{
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   partitionByNewLine?: boolean
   
@@ -10068,13 +10216,17 @@ type PerfectionistSortIntersectionTypes = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
-  groups?: (string | string[])[]
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- perfectionist/sort-jsx-props -----
 type PerfectionistSortJsxProps = []|[{
@@ -10091,18 +10243,26 @@ type PerfectionistSortJsxProps = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
-  groups?: (string | string[])[]
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- perfectionist/sort-maps -----
 type PerfectionistSortMaps = []|[{
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   partitionByNewLine?: boolean
   
@@ -10112,16 +10272,20 @@ type PerfectionistSortMaps = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- perfectionist/sort-modules -----
 type PerfectionistSortModules = []|[{
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   customGroups?: ({
     
@@ -10130,6 +10294,8 @@ type PerfectionistSortModules = []|[{
     type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
     
     order?: ("desc" | "asc")
+    
+    newlinesInside?: ("always" | "never")
     anyOf?: {
       
       decoratorNamePattern?: string
@@ -10147,6 +10313,8 @@ type PerfectionistSortModules = []|[{
     type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
     
     order?: ("desc" | "asc")
+    
+    newlinesInside?: ("always" | "never")
     
     decoratorNamePattern?: string
     
@@ -10167,18 +10335,26 @@ type PerfectionistSortModules = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
-  groups?: (string | string[])[]
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- perfectionist/sort-named-exports -----
 type PerfectionistSortNamedExports = []|[{
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   groupKind?: ("mixed" | "values-first" | "types-first")
   
@@ -10190,16 +10366,20 @@ type PerfectionistSortNamedExports = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- perfectionist/sort-named-imports -----
 type PerfectionistSortNamedImports = []|[{
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   groupKind?: ("mixed" | "values-first" | "types-first")
   
@@ -10213,18 +10393,26 @@ type PerfectionistSortNamedImports = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- perfectionist/sort-object-types -----
-type PerfectionistSortObjectTypes = []|[{
+type PerfectionistSortObjectTypes = {
   
   ignorePattern?: string[]
+  useConfigurationIf?: {
+    allNamesMatchPattern?: string
+    declarationMatchesPattern?: string
+  }
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   customGroups?: ({
     [k: string]: (string | string[]) | undefined
   } | ({
@@ -10234,6 +10422,8 @@ type PerfectionistSortObjectTypes = []|[{
     type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
     
     order?: ("desc" | "asc")
+    
+    newlinesInside?: ("always" | "never")
     anyOf?: {
       
       modifiers?: ("optional" | "required" | "multiline")[]
@@ -10250,6 +10440,8 @@ type PerfectionistSortObjectTypes = []|[{
     
     order?: ("desc" | "asc")
     
+    newlinesInside?: ("always" | "never")
+    
     modifiers?: ("optional" | "required" | "multiline")[]
     
     selector?: ("index-signature" | "member" | "method" | "multiline" | "property")
@@ -10258,6 +10450,8 @@ type PerfectionistSortObjectTypes = []|[{
   })[])
   
   groupKind?: ("mixed" | "required-first" | "optional-first")
+  
+  type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted")
   
   partitionByNewLine?: boolean
   
@@ -10271,12 +10465,14 @@ type PerfectionistSortObjectTypes = []|[{
   
   locales?: (string | string[])
   
-  groups?: (string | string[])[]
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
-}]
+}[]
 // ----- perfectionist/sort-objects -----
 type PerfectionistSortObjects = {
   
@@ -10286,8 +10482,16 @@ type PerfectionistSortObjects = {
   })
   
   ignorePattern?: string[]
+  useConfigurationIf?: {
+    allNamesMatchPattern?: string
+    callingFunctionNamePattern?: string
+  }
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   destructureOnly?: boolean
   
@@ -10295,10 +10499,9 @@ type PerfectionistSortObjects = {
   
   styledComponents?: boolean
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted")
+  
   partitionByNewLine?: boolean
-  useConfigurationIf?: {
-    allNamesMatchPattern?: string
-  }
   
   specialCharacters?: ("remove" | "trim" | "keep")
   
@@ -10314,18 +10517,59 @@ type PerfectionistSortObjects = {
   
   locales?: (string | string[])
   
-  groups?: (string | string[])[]
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }[]
 // ----- perfectionist/sort-sets -----
-type PerfectionistSortSets = []|[{
+type PerfectionistSortSets = {
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   groupKind?: ("mixed" | "literals-first" | "spreads-first")
+  
+  customGroups?: ({
+    
+    groupName?: string
+    
+    type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
+    
+    order?: ("desc" | "asc")
+    
+    newlinesInside?: ("always" | "never")
+    anyOf?: {
+      
+      selector?: ("literal" | "spread")
+      
+      elementNamePattern?: string
+    }[]
+  } | {
+    
+    groupName?: string
+    
+    type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
+    
+    order?: ("desc" | "asc")
+    
+    newlinesInside?: ("always" | "never")
+    
+    selector?: ("literal" | "spread")
+    
+    elementNamePattern?: string
+  })[]
+  useConfigurationIf?: {
+    allNamesMatchPattern?: string
+  }
+  
+  type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted")
   
   partitionByNewLine?: boolean
   
@@ -10337,10 +10581,14 @@ type PerfectionistSortSets = []|[{
   
   locales?: (string | string[])
   
-  order?: ("asc" | "desc")
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
   
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
-}]
+  order?: ("asc" | "desc")
+}[]
 // ----- perfectionist/sort-switch-case -----
 type PerfectionistSortSwitchCase = []|[{
   
@@ -10350,16 +10598,20 @@ type PerfectionistSortSwitchCase = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- perfectionist/sort-union-types -----
 type PerfectionistSortUnionTypes = []|[{
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   partitionByNewLine?: boolean
   
@@ -10371,18 +10623,26 @@ type PerfectionistSortUnionTypes = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
-  groups?: (string | string[])[]
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- perfectionist/sort-variable-declarations -----
 type PerfectionistSortVariableDeclarations = []|[{
   
-  partitionByComment?: (string[] | boolean | string)
+  partitionByComment?: (string[] | boolean | string | {
+    block?: (string[] | boolean | string)
+    line?: (string[] | boolean | string)
+    [k: string]: unknown | undefined
+  })
   
   partitionByNewLine?: boolean
   
@@ -10392,11 +10652,11 @@ type PerfectionistSortVariableDeclarations = []|[{
   
   alphabet?: string
   
+  type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
   locales?: (string | string[])
   
   order?: ("asc" | "desc")
-  
-  type?: ("alphabetical" | "natural" | "line-length" | "custom")
 }]
 // ----- prefer-arrow-callback -----
 type PreferArrowCallback = []|[{
@@ -10971,6 +11231,7 @@ type StyleIndent = []|[("tab" | number)]|[("tab" | number), {
   ImportDeclaration?: (number | ("first" | "off"))
   flatTernaryExpressions?: boolean
   offsetTernaryExpressions?: boolean
+  offsetTernaryExpressionsOffsetCallExpressions?: boolean
   ignoredNodes?: string[]
   ignoreComments?: boolean
   tabLength?: number
@@ -11114,6 +11375,7 @@ type StyleKeySpacing = []|[({
   mode?: ("strict" | "minimum")
   beforeColon?: boolean
   afterColon?: boolean
+  ignoredNodes?: ("ObjectExpression" | "ObjectPattern" | "ImportDeclaration" | "ExportNamedDeclaration" | "ExportAllDeclaration" | "TSTypeLiteral" | "TSInterfaceBody" | "ClassBody")[]
 } | {
   singleLine?: {
     mode?: ("strict" | "minimum")
@@ -11629,6 +11891,7 @@ type StyleNoExtraParens = ([]|["functions"] | []|["all"]|["all", {
   enforceForNewInMemberExpressions?: boolean
   enforceForFunctionPrototypeMethods?: boolean
   allowParensAfterCommentPattern?: string
+  nestedConditionalExpressions?: boolean
 }])
 // ----- style/no-mixed-operators -----
 type StyleNoMixedOperators = []|[{
@@ -11726,14 +11989,14 @@ type StyleOperatorLinebreak = []|[(("after" | "before" | "none") | null)]|[(("af
   }
 }]
 // ----- style/padded-blocks -----
-type StylePaddedBlocks = []|[(("always" | "never") | {
-  blocks?: ("always" | "never")
-  switches?: ("always" | "never")
-  classes?: ("always" | "never")
-})]|[(("always" | "never") | {
-  blocks?: ("always" | "never")
-  switches?: ("always" | "never")
-  classes?: ("always" | "never")
+type StylePaddedBlocks = []|[(("always" | "never" | "start" | "end") | {
+  blocks?: ("always" | "never" | "start" | "end")
+  switches?: ("always" | "never" | "start" | "end")
+  classes?: ("always" | "never" | "start" | "end")
+})]|[(("always" | "never" | "start" | "end") | {
+  blocks?: ("always" | "never" | "start" | "end")
+  switches?: ("always" | "never" | "start" | "end")
+  classes?: ("always" | "never" | "start" | "end")
 }), {
   allowSingleLineBlocks?: boolean
 }]
@@ -11915,8 +12178,7 @@ type TestNoRestrictedViMethods = []|[{
 }]
 // ----- test/no-standalone-expect -----
 type TestNoStandaloneExpect = []|[{
-  additionaltestblockfunctions?: string[]
-  [k: string]: unknown | undefined
+  additionalTestBlockFunctions?: string[]
 }]
 // ----- test/prefer-expect-assertions -----
 type TestPreferExpectAssertions = []|[{
@@ -12132,7 +12394,7 @@ type TsConsistentTypeAssertions = []|[({
   assertionStyle: "never"
 } | {
   
-  assertionStyle: ("as" | "angle-bracket")
+  assertionStyle?: ("as" | "angle-bracket")
   
   objectLiteralTypeAssertions?: ("allow" | "allow-as-parameter" | "never")
 })]
@@ -13166,6 +13428,8 @@ type TsSwitchExhaustivenessCheck = []|[{
   
   considerDefaultExhaustiveForUnions?: boolean
   
+  defaultCaseCommentPattern?: string
+  
   requireDefaultForNonUnion?: boolean
 }]
 // ----- ts/triple-slash-reference -----
@@ -13715,6 +13979,7 @@ type VueKeySpacing = []|[({
   mode?: ("strict" | "minimum")
   beforeColon?: boolean
   afterColon?: boolean
+  ignoredNodes?: ("ObjectExpression" | "ObjectPattern" | "ImportDeclaration" | "ExportNamedDeclaration" | "ExportAllDeclaration" | "TSTypeLiteral" | "TSInterfaceBody" | "ClassBody")[]
 } | {
   singleLine?: {
     mode?: ("strict" | "minimum")
@@ -14241,6 +14506,7 @@ type VueNoExtraParens = ([]|["functions"] | []|["all"]|["all", {
   enforceForNewInMemberExpressions?: boolean
   enforceForFunctionPrototypeMethods?: boolean
   allowParensAfterCommentPattern?: string
+  nestedConditionalExpressions?: boolean
 }])
 // ----- vue/no-irregular-whitespace -----
 type VueNoIrregularWhitespace = []|[{

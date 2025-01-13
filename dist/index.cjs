@@ -101,7 +101,7 @@ __export(src_exports, {
 });
 module.exports = __toCommonJS(src_exports);
 
-// node_modules/.pnpm/tsup@8.3.5_jiti@2.4.1_postcss@8.4.49_tsx@4.19.2_typescript@5.7.2_yaml@2.6.1/node_modules/tsup/assets/cjs_shims.js
+// node_modules/.pnpm/tsup@8.3.5_jiti@2.4.2_postcss@8.4.49_tsx@4.19.2_typescript@5.7.3_yaml@2.6.1/node_modules/tsup/assets/cjs_shims.js
 var getImportMetaUrl = () => typeof document === "undefined" ? new URL(`file:${__filename}`).href : document.currentScript && document.currentScript.src || new URL("main.js", document.baseURI).href;
 var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
 
@@ -1200,6 +1200,21 @@ var import_local_pkg2 = require("local-pkg");
 var ReactRefreshAllowConstantExportPackages = [
   "vite"
 ];
+var RemixPackages = [
+  "@remix-run/node",
+  "@remix-run/react",
+  "@remix-run/serve",
+  "@remix-run/dev"
+];
+var ReactRouterPackages = [
+  "@react-router/node",
+  "@react-router/react",
+  "@react-router/serve",
+  "@react-router/dev"
+];
+var NextJsPackages = [
+  "next"
+];
 async function react(options = {}) {
   const {
     files = [GLOB_SRC],
@@ -1210,15 +1225,15 @@ async function react(options = {}) {
     overrides = {},
     tsconfigPath
   } = options;
-  const isTypeAware = !!tsconfigPath;
-  const typeAwareRules = {
-    "react/no-leaked-conditional-rendering": "warn"
-  };
   await ensurePackages([
     "@eslint-react/eslint-plugin",
     "eslint-plugin-react-hooks",
     "eslint-plugin-react-refresh"
   ]);
+  const isTypeAware = !!tsconfigPath;
+  const typeAwareRules = {
+    "react/no-leaked-conditional-rendering": "warn"
+  };
   const [
     pluginReact,
     pluginReactHooks,
@@ -1229,9 +1244,12 @@ async function react(options = {}) {
     interopDefault(import("eslint-plugin-react-hooks")),
     interopDefault(import("eslint-plugin-react-refresh"))
   ]);
-  const _isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
+  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
     (i) => (0, import_local_pkg2.isPackageExists)(i)
   );
+  const isUsingRemix = RemixPackages.some((i) => (0, import_local_pkg2.isPackageExists)(i));
+  const isUsingReactRouter = ReactRouterPackages.some((i) => (0, import_local_pkg2.isPackageExists)(i));
+  const isUsingNext = NextJsPackages.some((i) => (0, import_local_pkg2.isPackageExists)(i));
   const plugins = pluginReact.configs.all.plugins;
   return [
     {
@@ -1242,7 +1260,8 @@ async function react(options = {}) {
         "react-hooks": pluginReactHooks,
         "react-hooks-extra": plugins["@eslint-react/hooks-extra"],
         "react-naming-convention": plugins["@eslint-react/naming-convention"],
-        "react-refresh": pluginReactRefresh
+        "react-refresh": pluginReactRefresh,
+        "react-web-api": plugins["@eslint-react/web-api"]
       }
     },
     {
@@ -1273,10 +1292,41 @@ async function react(options = {}) {
         "react-hooks/exhaustive-deps": "warn",
         "react-hooks/rules-of-hooks": "error",
         // react refresh
-        // 'react-refresh/only-export-components': [
-        //     'warn',
-        //     { allowConstantExport: isAllowConstantExport },
-        // ],
+        "react-refresh/only-export-components": [
+          "warn",
+          {
+            allowConstantExport: isAllowConstantExport,
+            allowExportNames: [
+              ...isUsingNext ? [
+                "dynamic",
+                "dynamicParams",
+                "revalidate",
+                "fetchCache",
+                "runtime",
+                "preferredRegion",
+                "maxDuration",
+                "config",
+                "generateStaticParams",
+                "metadata",
+                "generateMetadata",
+                "viewport",
+                "generateViewport"
+              ] : [],
+              ...isUsingRemix || isUsingReactRouter ? [
+                "meta",
+                "links",
+                "headers",
+                "loader",
+                "action"
+              ] : []
+            ]
+          }
+        ],
+        // recommended rules from @eslint-react/web-api
+        "react-web-api/no-leaked-event-listener": "warn",
+        "react-web-api/no-leaked-interval": "warn",
+        "react-web-api/no-leaked-resize-observer": "warn",
+        "react-web-api/no-leaked-timeout": "warn",
         // recommended rules from @eslint-react
         "react/ensure-forward-ref-using-ref": "warn",
         "react/no-access-state-in-setstate": "error",

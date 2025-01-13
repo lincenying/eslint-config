@@ -20,6 +20,7 @@ runWithConfig('js', {
     overrides: {
         ignores: [
             '**/*.ts',
+            '**/*.tsx',
         ],
     },
 })

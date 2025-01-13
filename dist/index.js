@@ -1093,6 +1093,21 @@ import { isPackageExists as isPackageExists2 } from "local-pkg";
 var ReactRefreshAllowConstantExportPackages = [
   "vite"
 ];
+var RemixPackages = [
+  "@remix-run/node",
+  "@remix-run/react",
+  "@remix-run/serve",
+  "@remix-run/dev"
+];
+var ReactRouterPackages = [
+  "@react-router/node",
+  "@react-router/react",
+  "@react-router/serve",
+  "@react-router/dev"
+];
+var NextJsPackages = [
+  "next"
+];
 async function react(options = {}) {
   const {
     files = [GLOB_SRC],
@@ -1103,15 +1118,15 @@ async function react(options = {}) {
     overrides = {},
     tsconfigPath
   } = options;
-  const isTypeAware = !!tsconfigPath;
-  const typeAwareRules = {
-    "react/no-leaked-conditional-rendering": "warn"
-  };
   await ensurePackages([
     "@eslint-react/eslint-plugin",
     "eslint-plugin-react-hooks",
     "eslint-plugin-react-refresh"
   ]);
+  const isTypeAware = !!tsconfigPath;
+  const typeAwareRules = {
+    "react/no-leaked-conditional-rendering": "warn"
+  };
   const [
     pluginReact,
     pluginReactHooks,
@@ -1122,9 +1137,12 @@ async function react(options = {}) {
     interopDefault(import("eslint-plugin-react-hooks")),
     interopDefault(import("eslint-plugin-react-refresh"))
   ]);
-  const _isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
+  const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
     (i) => isPackageExists2(i)
   );
+  const isUsingRemix = RemixPackages.some((i) => isPackageExists2(i));
+  const isUsingReactRouter = ReactRouterPackages.some((i) => isPackageExists2(i));
+  const isUsingNext = NextJsPackages.some((i) => isPackageExists2(i));
   const plugins = pluginReact.configs.all.plugins;
   return [
     {
@@ -1135,7 +1153,8 @@ async function react(options = {}) {
         "react-hooks": pluginReactHooks,
         "react-hooks-extra": plugins["@eslint-react/hooks-extra"],
         "react-naming-convention": plugins["@eslint-react/naming-convention"],
-        "react-refresh": pluginReactRefresh
+        "react-refresh": pluginReactRefresh,
+        "react-web-api": plugins["@eslint-react/web-api"]
       }
     },
     {
@@ -1166,10 +1185,41 @@ async function react(options = {}) {
         "react-hooks/exhaustive-deps": "warn",
         "react-hooks/rules-of-hooks": "error",
         // react refresh
-        // 'react-refresh/only-export-components': [
-        //     'warn',
-        //     { allowConstantExport: isAllowConstantExport },
-        // ],
+        "react-refresh/only-export-components": [
+          "warn",
+          {
+            allowConstantExport: isAllowConstantExport,
+            allowExportNames: [
+              ...isUsingNext ? [
+                "dynamic",
+                "dynamicParams",
+                "revalidate",
+                "fetchCache",
+                "runtime",
+                "preferredRegion",
+                "maxDuration",
+                "config",
+                "generateStaticParams",
+                "metadata",
+                "generateMetadata",
+                "viewport",
+                "generateViewport"
+              ] : [],
+              ...isUsingRemix || isUsingReactRouter ? [
+                "meta",
+                "links",
+                "headers",
+                "loader",
+                "action"
+              ] : []
+            ]
+          }
+        ],
+        // recommended rules from @eslint-react/web-api
+        "react-web-api/no-leaked-event-listener": "warn",
+        "react-web-api/no-leaked-interval": "warn",
+        "react-web-api/no-leaked-resize-observer": "warn",
+        "react-web-api/no-leaked-timeout": "warn",
         // recommended rules from @eslint-react
         "react/ensure-forward-ref-using-ref": "warn",
         "react/no-access-state-in-setstate": "error",

@@ -101,16 +101,6 @@ export default lincy()
 }
 ```
 
-### 使用.ts文件作为配置文件
-
-1. 将`eslint`更新至最新版本
-2. 在`package.json`中的`eslint .`后面添加参数`--flag unstable_ts_config`, 包括`scripts`、`lint-staged`中
-3. 在`.vscode/settings.json`文件添加`"eslint.options": {
-  "flags": [
-    "unstable_ts_config"
-  ]
-}`
-
 ## 定制化
 
 通常你只需要导入 `lincy` 预设：

@@ -1,8 +1,8 @@
 import * as React from 'react'
 
-type CompProps = {
+interface CompProps {
     children: React.ReactNode; // 👈️ type children
-  };
+  }
 
 export function Component1(props: CompProps) {
   return <div>{props.children}</div>;

@@ -6,11 +6,9 @@
   },
   "editor.formatOnSave": false,
   "eslint.options": {
-    "flags": [
-      "unstable_ts_config"
-    ]
+
   },
-  // Silent the stylistic rules in you IDE, but still auto fix them
+  // 在 vscode 中隐藏样式规则，但仍可自动修复它们
   "eslint.rules.customizations": [
     // { "rule": "style/*", "severity": "off", "fixable": true },
     // { "rule": "*-indent", "severity": "off", "fixable": true },
@@ -22,10 +20,9 @@
     // { "rule": "*quotes", "severity": "off", "fixable": true },
     // { "rule": "*semi", "severity": "off", "fixable": true }
   ],
-  // The following is optional.
-  // It's better to put under project setting `.vscode/settings.json`
-  // to avoid conflicts with working with different eslint configs
-  // that does not support all formats.
+  // 以下内容是可选的。
+  // 最好将其放在项目设置 `.vscode/settings.json` 下
+  // 以避免与不支持所有格式的不同 eslint 配置发生冲突。
   "eslint.validate": [
     "javascript",
     "javascriptreact",
@@ -51,6 +48,6 @@
     "pcss",
     "postcss"
   ],
-  // Disable the default formatter
+  // 禁用默认格式化程序
   "prettier.enable": false
 }
