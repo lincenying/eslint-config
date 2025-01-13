@@ -10,6 +10,22 @@ const ReactRefreshAllowConstantExportPackages = [
     'vite',
 ]
 
+const RemixPackages = [
+    '@remix-run/node',
+    '@remix-run/react',
+    '@remix-run/serve',
+    '@remix-run/dev',
+]
+const ReactRouterPackages = [
+    '@react-router/node',
+    '@react-router/react',
+    '@react-router/serve',
+    '@react-router/dev',
+]
+const NextJsPackages = [
+    'next',
+]
+
 export async function react(options: OptionsTypeScriptParserOptions & OptionsTypeScriptWithTypes & OptionsOverrides & OptionsFiles = {}): Promise<TypedFlatConfigItem[]> {
     const {
         files = [GLOB_SRC],
@@ -21,17 +37,17 @@ export async function react(options: OptionsTypeScriptParserOptions & OptionsTyp
         tsconfigPath,
     } = options
 
-    const isTypeAware = !!tsconfigPath
-
-    const typeAwareRules: TypedFlatConfigItem['rules'] = {
-        'react/no-leaked-conditional-rendering': 'warn',
-    }
-
     await ensurePackages([
         '@eslint-react/eslint-plugin',
         'eslint-plugin-react-hooks',
         'eslint-plugin-react-refresh',
     ])
+
+    const isTypeAware = !!tsconfigPath
+
+    const typeAwareRules: TypedFlatConfigItem['rules'] = {
+        'react/no-leaked-conditional-rendering': 'warn',
+    }
 
     const [
         pluginReact,
@@ -44,9 +60,12 @@ export async function react(options: OptionsTypeScriptParserOptions & OptionsTyp
         interopDefault(import('eslint-plugin-react-refresh')),
     ] as const)
 
-    const _isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
+    const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some(
         i => isPackageExists(i),
     )
+    const isUsingRemix = RemixPackages.some(i => isPackageExists(i))
+    const isUsingReactRouter = ReactRouterPackages.some(i => isPackageExists(i))
+    const isUsingNext = NextJsPackages.some(i => isPackageExists(i))
 
     const plugins = pluginReact.configs.all.plugins
 
@@ -60,6 +79,7 @@ export async function react(options: OptionsTypeScriptParserOptions & OptionsTyp
                 'react-hooks-extra': plugins['@eslint-react/hooks-extra'],
                 'react-naming-convention': plugins['@eslint-react/naming-convention'],
                 'react-refresh': pluginReactRefresh,
+                'react-web-api': plugins['@eslint-react/web-api'],
             },
         },
         {
@@ -92,10 +112,42 @@ export async function react(options: OptionsTypeScriptParserOptions & OptionsTyp
                 'react-hooks/rules-of-hooks': 'error',
 
                 // react refresh
-                // 'react-refresh/only-export-components': [
-                //     'warn',
-                //     { allowConstantExport: isAllowConstantExport },
-                // ],
+                'react-refresh/only-export-components': [
+                    'warn',
+                    {
+                        allowConstantExport: isAllowConstantExport,
+                        allowExportNames: [
+                            ...(isUsingNext ? [
+                                'dynamic',
+                                'dynamicParams',
+                                'revalidate',
+                                'fetchCache',
+                                'runtime',
+                                'preferredRegion',
+                                'maxDuration',
+                                'config',
+                                'generateStaticParams',
+                                'metadata',
+                                'generateMetadata',
+                                'viewport',
+                                'generateViewport',
+                            ] : []),
+                            ...(isUsingRemix || isUsingReactRouter ? [
+                                'meta',
+                                'links',
+                                'headers',
+                                'loader',
+                                'action',
+                            ] : []),
+                        ],
+                    },
+                ],
+
+                // recommended rules from @eslint-react/web-api
+                'react-web-api/no-leaked-event-listener': 'warn',
+                'react-web-api/no-leaked-interval': 'warn',
+                'react-web-api/no-leaked-resize-observer': 'warn',
+                'react-web-api/no-leaked-timeout': 'warn',
 
                 // recommended rules from @eslint-react
                 'react/ensure-forward-ref-using-ref': 'warn',
