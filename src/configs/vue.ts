@@ -161,7 +161,7 @@ export async function vue(
 
                 'vue/no-setup-props-reactivity-loss': 'off',
                 'vue/no-sparse-arrays': 'error',
-                'vue/no-unused-refs': 'error',
+                'vue/no-unused-refs': 'warn',
                 'vue/no-useless-v-bind': 'error',
                 'vue/no-v-html': 'off',
                 'vue/no-v-text-v-html-on-component': 'off',

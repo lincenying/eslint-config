@@ -260,7 +260,7 @@ async function disables() {
     },
     {
       files: [`**/*.config.${GLOB_SRC_EXT}`, `**/*.config.*.${GLOB_SRC_EXT}`],
-      name: "antfu/disables/config-files",
+      name: "eslint/disables/config-files",
       rules: {
         "antfu/no-top-level-await": "off",
         "no-console": "off",
@@ -839,7 +839,7 @@ async function javascript(options = {}) {
           allowTaggedTemplates: true,
           allowTernary: true
         }],
-        "no-unused-vars": ["error", {
+        "no-unused-vars": ["warn", {
           args: "none",
           caughtErrors: "none",
           ignoreRestSiblings: true,
@@ -872,7 +872,7 @@ async function javascript(options = {}) {
           }
         ],
         "prefer-const": [
-          "error",
+          isInEditor ? "warn" : "error",
           {
             destructuring: "all",
             ignoreReadBeforeAssign: true
@@ -886,7 +886,7 @@ async function javascript(options = {}) {
         "prefer-template": "error",
         "symbol-description": "error",
         "unicode-bom": ["error", "never"],
-        "unused-imports/no-unused-imports": isInEditor ? "off" : "error",
+        "unused-imports/no-unused-imports": isInEditor ? "warn" : "error",
         "unused-imports/no-unused-vars": [
           "error",
           {
@@ -1669,7 +1669,7 @@ async function test(options = {}) {
         "test/consistent-test-it": ["error", { fn: "it", withinDescribe: "it" }],
         "test/no-identical-title": "error",
         "test/no-import-node-test": "error",
-        "test/no-only-tests": isInEditor ? "off" : "error",
+        "test/no-only-tests": isInEditor ? "warn" : "error",
         "test/prefer-hooks-in-order": "error",
         "test/prefer-lowercase-title": "error",
         // Disables
@@ -1874,7 +1874,7 @@ async function typescript(options = {}) {
           allowTernary: true
         }],
         "ts/no-unused-vars": [
-          "error",
+          "warn",
           {
             args: "all",
             argsIgnorePattern: "^_",
@@ -2127,7 +2127,7 @@ async function vue(options = {}) {
         "vue/no-restricted-v-bind": ["error", "/^v-/"],
         "vue/no-setup-props-reactivity-loss": "off",
         "vue/no-sparse-arrays": "error",
-        "vue/no-unused-refs": "error",
+        "vue/no-unused-refs": "warn",
         "vue/no-useless-v-bind": "error",
         "vue/no-v-html": "off",
         "vue/no-v-text-v-html-on-component": "off",
@@ -2458,6 +2458,15 @@ function lincy(options = {}, ...userConfigs) {
   );
   if (autoRenamePlugins) {
     composer = composer.renamePlugins(defaultPluginRenaming);
+  }
+  if (isInEditor) {
+    composer = composer.disableRulesFix([
+      "unused-imports/no-unused-imports",
+      "test/no-only-tests",
+      "prefer-const"
+    ], {
+      builtinRules: () => import(["eslint", "use-at-your-own-risk"].join("/")).then((r) => r.builtinRules)
+    });
   }
   return composer;
 }

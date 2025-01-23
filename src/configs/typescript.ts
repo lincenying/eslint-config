@@ -146,7 +146,7 @@ export async function typescript(
                     allowTernary: true,
                 }],
                 'ts/no-unused-vars': [
-                    'error',
+                    'warn',
                     {
                         args: 'all',
                         argsIgnorePattern: '^_',
