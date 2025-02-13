@@ -10,6 +10,8 @@
 - 也适用于 json、yaml、markdown
 - import导入排序, 对象字⾯量项尾逗号
 - 合理的默认值，最佳实践，只需一行配置
+- .gitignore默认支持
+- 需要 ESLint v9.5.0+
 - [ESLint Flat config](https://eslint.org/docs/latest/use/configure/configuration-files-new)
 - 使用 [ESLint Stylistic](https://github.com/eslint-stylistic/eslint-stylistic)
 - **风格原则**: 读取最小，差异稳定
@@ -25,7 +27,7 @@ pnpm add -D eslint @lincy/eslint-config
 ### Create config file
 
 ```js
-// eslint.config.js
+// eslint.config.mjs
 import lincy from '@lincy/eslint-config'
 
 export default lincy()
@@ -110,7 +112,7 @@ export default lincy()
 如果 package.json 中开启了`"type": "module",`
 
 ```js
-// eslint.config.js
+// eslint.config.mjs
 import lincy from '@lincy/eslint-config'
 
 // or
