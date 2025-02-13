@@ -20,7 +20,7 @@ for (const person of people) {
 }
 
 // Define a generic function
-function identity< T >(arg: T): T {
+function identity<T>(arg: T): T {
     return arg
 }
 
@@ -79,3 +79,5 @@ function fn(): string {
 }
 
 log(car1, car2, favoriteFruit, numericValue, fn())
+
+export {}

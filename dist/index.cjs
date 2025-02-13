@@ -28,8 +28,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
 // src/index.ts
-var src_exports = {};
-__export(src_exports, {
+var index_exports = {};
+__export(index_exports, {
   GLOB_ALL_SRC: () => GLOB_ALL_SRC,
   GLOB_CSS: () => GLOB_CSS,
   GLOB_EXCLUDE: () => GLOB_EXCLUDE,
@@ -61,7 +61,7 @@ __export(src_exports, {
   StylisticConfigDefaults: () => StylisticConfigDefaults,
   combine: () => combine,
   comments: () => comments,
-  default: () => src_default,
+  default: () => index_default,
   defaultPluginRenaming: () => defaultPluginRenaming,
   disables: () => disables,
   ensurePackages: () => ensurePackages,
@@ -99,9 +99,9 @@ __export(src_exports, {
   vue: () => vue,
   yaml: () => yaml
 });
-module.exports = __toCommonJS(src_exports);
+module.exports = __toCommonJS(index_exports);
 
-// node_modules/.pnpm/tsup@8.3.5_jiti@2.4.2_postcss@8.4.49_tsx@4.19.2_typescript@5.7.3_yaml@2.6.1/node_modules/tsup/assets/cjs_shims.js
+// node_modules/.pnpm/tsup@8.3.6_jiti@2.4.2_postcss@8.4.49_tsx@4.19.2_typescript@5.7.3_yaml@2.7.0/node_modules/tsup/assets/cjs_shims.js
 var getImportMetaUrl = () => typeof document === "undefined" ? new URL(`file:${__filename}`).href : document.currentScript && document.currentScript.src || new URL("main.js", document.baseURI).href;
 var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
 
@@ -388,7 +388,6 @@ async function stylistic(options = {}) {
   } = typeof stylistic2 === "boolean" ? StylisticConfigDefaults : { ...StylisticConfigDefaults, ...stylistic2 };
   const pluginStylistic = await interopDefault(import("@stylistic/eslint-plugin"));
   const config = pluginStylistic.configs.customize({
-    flat: true,
     indent,
     jsx: jsx2,
     pluginName: "style",
@@ -685,6 +684,7 @@ async function imports(options = {}) {
         "antfu/import-dedupe": "error",
         "antfu/no-import-dist": "error",
         "antfu/no-import-node-modules-by-path": "error",
+        "import/consistent-type-specifier-style": ["error", "prefer-top-level"],
         "import/first": "error",
         "import/no-duplicates": "error",
         "import/no-mutable-exports": "error",
@@ -1852,6 +1852,7 @@ async function typescript(options = {}) {
         "ts/consistent-type-definitions": ["error", "interface"],
         "ts/consistent-type-imports": ["error", {
           disallowTypeAnnotations: false,
+          fixStyle: "separate-type-imports",
           prefer: "type-imports"
         }],
         "ts/method-signature-style": ["error", "property"],
@@ -2482,7 +2483,7 @@ function getOverrides(options, key) {
 }
 
 // src/index.ts
-var src_default = lincy;
+var index_default = lincy;
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   GLOB_ALL_SRC,

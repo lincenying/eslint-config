@@ -1192,31 +1192,31 @@ interface RuleOptions {
    */
   'logical-assignment-operators'?: Linter.RuleEntry<LogicalAssignmentOperators>
   /**
-   * Require languages for fenced code blocks.
+   * Require languages for fenced code blocks
    */
   'markdown/fenced-code-language'?: Linter.RuleEntry<MarkdownFencedCodeLanguage>
   /**
-   * Enforce heading levels increment by one.
+   * Enforce heading levels increment by one
    */
   'markdown/heading-increment'?: Linter.RuleEntry<[]>
   /**
-   * Disallow duplicate headings in the same document.
+   * Disallow duplicate headings in the same document
    */
   'markdown/no-duplicate-headings'?: Linter.RuleEntry<[]>
   /**
-   * Disallow empty links.
+   * Disallow empty links
    */
   'markdown/no-empty-links'?: Linter.RuleEntry<[]>
   /**
-   * Disallow HTML tags.
+   * Disallow HTML tags
    */
   'markdown/no-html'?: Linter.RuleEntry<MarkdownNoHtml>
   /**
-   * Disallow invalid label references.
+   * Disallow invalid label references
    */
   'markdown/no-invalid-label-refs'?: Linter.RuleEntry<[]>
   /**
-   * Disallow missing label references.
+   * Disallow missing label references
    */
   'markdown/no-missing-label-refs'?: Linter.RuleEntry<[]>
   /**
@@ -2958,6 +2958,11 @@ interface RuleOptions {
    */
   'react/no-unused-state'?: Linter.RuleEntry<[]>
   /**
+   * disallow the use of 'useContext'
+   * @see https://eslint-react.xyz/docs/rules/no-use-context
+   */
+  'react/no-use-context'?: Linter.RuleEntry<[]>
+  /**
    * disallow unnecessary fragments
    * @see https://eslint-react.xyz/docs/rules/no-useless-fragment
    */
@@ -4238,6 +4243,11 @@ interface RuleOptions {
    */
   'test/prefer-spy-on'?: Linter.RuleEntry<[]>
   /**
+   * enforce using `toBe(true)` and `toBe(false)` over matchers that coerce types to boolean
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-strict-boolean-matchers.md
+   */
+  'test/prefer-strict-boolean-matchers'?: Linter.RuleEntry<[]>
+  /**
    * enforce strict equal over equal
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-strict-equal.md
    */
@@ -4292,6 +4302,11 @@ interface RuleOptions {
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/require-local-test-context-for-concurrent-snapshots.md
    */
   'test/require-local-test-context-for-concurrent-snapshots'?: Linter.RuleEntry<[]>
+  /**
+   * enforce using type parameters with vitest mock functions
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/require-mock-type-parameters.md
+   */
+  'test/require-mock-type-parameters'?: Linter.RuleEntry<TestRequireMockTypeParameters>
   /**
    * require toThrow() to be called with an error message
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/require-to-throw-message.md
@@ -6051,7 +6066,7 @@ interface RuleOptions {
    */
   'vue/jsx-uses-vars'?: Linter.RuleEntry<[]>
   /**
-   * Enforce consistent spacing between property names and type annotations in types and interfaces in `<template>`
+   * Enforce consistent spacing between keys and values in object literal properties in `<template>`
    * @see https://eslint.vuejs.org/rules/key-spacing.html
    */
   'vue/key-spacing'?: Linter.RuleEntry<VueKeySpacing>
@@ -6744,7 +6759,7 @@ interface RuleOptions {
    */
   'vue/prop-name-casing'?: Linter.RuleEntry<VuePropNameCasing>
   /**
-   * Require quotes around object literal, type literal, interfaces and enums property names in `<template>`
+   * Require quotes around object literal property names in `<template>`
    * @see https://eslint.vuejs.org/rules/quote-props.html
    */
   'vue/quote-props'?: Linter.RuleEntry<VueQuoteProps>
@@ -10007,6 +10022,37 @@ type PerfectionistSortEnums = []|[{
   order?: ("asc" | "desc")
   
   forceNumericSort?: boolean
+  customGroups?: ({
+    [k: string]: (string | string[]) | undefined
+  } | ({
+    
+    groupName?: string
+    
+    type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
+    
+    order?: ("desc" | "asc")
+    
+    newlinesInside?: ("always" | "never")
+    anyOf?: {
+      
+      elementValuePattern?: string
+      
+      elementNamePattern?: string
+    }[]
+  } | {
+    
+    groupName?: string
+    
+    type?: ("alphabetical" | "line-length" | "natural" | "unsorted")
+    
+    order?: ("desc" | "asc")
+    
+    newlinesInside?: ("always" | "never")
+    
+    elementValuePattern?: string
+    
+    elementNamePattern?: string
+  })[])
   
   sortByValue?: boolean
   
@@ -10018,7 +10064,15 @@ type PerfectionistSortEnums = []|[{
   
   partitionByNewLine?: boolean
   
+  newlinesBetween?: ("ignore" | "always" | "never")
+  
   type?: ("alphabetical" | "natural" | "line-length" | "custom")
+  
+  groups?: (string | string[] | {
+    
+    newlinesBetween?: ("ignore" | "always" | "never")
+    [k: string]: unknown | undefined
+  })[]
 }]
 // ----- perfectionist/sort-exports -----
 type PerfectionistSortExports = []|[{
@@ -10409,6 +10463,8 @@ type PerfectionistSortNamedExports = []|[{
   order?: ("asc" | "desc")
   
   groupKind?: ("mixed" | "values-first" | "types-first")
+  
+  ignoreAlias?: boolean
   
   partitionByComment?: (string[] | boolean | string | {
     block?: (string[] | boolean | string)
@@ -12102,7 +12158,7 @@ type StyleQuoteProps = ([]|[("always" | "as-needed" | "consistent" | "consistent
 // ----- style/quotes -----
 type StyleQuotes = []|[("single" | "double" | "backtick")]|[("single" | "double" | "backtick"), ("avoid-escape" | {
   avoidEscape?: boolean
-  allowTemplateLiterals?: boolean
+  allowTemplateLiterals?: (boolean | ("never" | "avoidEscape" | "always"))
   ignoreStringLiterals?: boolean
 })]
 // ----- style/rest-spread-spacing -----
@@ -12283,6 +12339,10 @@ type TestPreferSnapshotHint = []|[("always" | "multi")]
 // ----- test/require-hook -----
 type TestRequireHook = []|[{
   allowedFunctionCalls?: string[]
+}]
+// ----- test/require-mock-type-parameters -----
+type TestRequireMockTypeParameters = []|[{
+  checkImportFunctions?: boolean
 }]
 // ----- test/require-top-level-describe -----
 type TestRequireTopLevelDescribe = []|[{
@@ -13225,11 +13285,13 @@ type TsNoUnnecessaryBooleanLiteralCompare = []|[{
   allowComparingNullableBooleansToFalse?: boolean
   
   allowComparingNullableBooleansToTrue?: boolean
+  
+  allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing?: boolean
 }]
 // ----- ts/no-unnecessary-condition -----
 type TsNoUnnecessaryCondition = []|[{
   
-  allowConstantLoopConditions?: boolean
+  allowConstantLoopConditions?: (boolean | ("always" | "never" | "only-allowed-literals"))
   
   allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing?: boolean
   
@@ -13866,7 +13928,6 @@ type VueArrayElementNewline = []|[(_VueArrayElementNewlineBasicConfig | {
   ArrayPattern?: _VueArrayElementNewlineBasicConfig
 })]
 type _VueArrayElementNewlineBasicConfig = (("always" | "never" | "consistent") | {
-  consistent?: boolean
   multiline?: boolean
   minItems?: (number | null)
 })
@@ -13935,14 +13996,9 @@ type VueCommaDangle = []|[(_VueCommaDangleValue | {
   imports?: _VueCommaDangleValueWithIgnore
   exports?: _VueCommaDangleValueWithIgnore
   functions?: _VueCommaDangleValueWithIgnore
-  importAttributes?: _VueCommaDangleValueWithIgnore
-  dynamicImports?: _VueCommaDangleValueWithIgnore
-  enums?: _VueCommaDangleValueWithIgnore
-  generics?: _VueCommaDangleValueWithIgnore
-  tuples?: _VueCommaDangleValueWithIgnore
 })]
 type _VueCommaDangleValue = ("always-multiline" | "always" | "never" | "only-multiline")
-type _VueCommaDangleValueWithIgnore = ("always-multiline" | "always" | "never" | "only-multiline" | "ignore")
+type _VueCommaDangleValueWithIgnore = ("always-multiline" | "always" | "ignore" | "never" | "only-multiline")
 // ----- vue/comma-spacing -----
 type VueCommaSpacing = []|[{
   before?: boolean
@@ -14013,10 +14069,6 @@ type VueFirstAttributeLinebreak = []|[{
 // ----- vue/func-call-spacing -----
 type VueFuncCallSpacing = ([]|["never"] | []|["always"]|["always", {
   allowNewlines?: boolean
-  optionalChain?: {
-    before?: boolean
-    after?: boolean
-  }
 }])
 // ----- vue/html-button-has-type -----
 type VueHtmlButtonHasType = []|[{
@@ -14098,7 +14150,6 @@ type VueKeySpacing = []|[({
   mode?: ("strict" | "minimum")
   beforeColon?: boolean
   afterColon?: boolean
-  ignoredNodes?: ("ObjectExpression" | "ObjectPattern" | "ImportDeclaration" | "ExportNamedDeclaration" | "ExportAllDeclaration" | "TSTypeLiteral" | "TSInterfaceBody" | "ClassBody")[]
 } | {
   singleLine?: {
     mode?: ("strict" | "minimum")
@@ -14335,10 +14386,6 @@ type VueKeywordSpacing = []|[{
       before?: boolean
       after?: boolean
     }
-    satisfies?: {
-      before?: boolean
-      after?: boolean
-    }
     set?: {
       before?: boolean
       after?: boolean
@@ -14412,10 +14459,6 @@ type VueKeywordSpacing = []|[{
       after?: boolean
     }
     yield?: {
-      before?: boolean
-      after?: boolean
-    }
-    type?: {
       before?: boolean
       after?: boolean
     }
@@ -14547,10 +14590,7 @@ type VueMultilineHtmlElementContentNewline = []|[{
   allowEmptyLines?: boolean
 }]
 // ----- vue/multiline-ternary -----
-type VueMultilineTernary = []|[("always" | "always-multiline" | "never")]|[("always" | "always-multiline" | "never"), {
-  ignoreJSX?: boolean
-  [k: string]: unknown | undefined
-}]
+type VueMultilineTernary = []|[("always" | "always-multiline" | "never")]
 // ----- vue/mustache-interpolation-spacing -----
 type VueMustacheInterpolationSpacing = []|[("always" | "never")]
 // ----- vue/new-line-between-multi-line-property -----
@@ -14625,7 +14665,6 @@ type VueNoExtraParens = ([]|["functions"] | []|["all"]|["all", {
   enforceForNewInMemberExpressions?: boolean
   enforceForFunctionPrototypeMethods?: boolean
   allowParensAfterCommentPattern?: string
-  nestedConditionalExpressions?: boolean
 }])
 // ----- vue/no-irregular-whitespace -----
 type VueNoIrregularWhitespace = []|[{
@@ -14868,16 +14907,6 @@ type VueObjectCurlyNewline = []|[((("always" | "never") | {
     minProperties?: number
     consistent?: boolean
   })
-  TSTypeLiteral?: (("always" | "never") | {
-    multiline?: boolean
-    minProperties?: number
-    consistent?: boolean
-  })
-  TSInterfaceBody?: (("always" | "never") | {
-    multiline?: boolean
-    minProperties?: number
-    consistent?: boolean
-  })
 })]
 // ----- vue/object-curly-spacing -----
 type VueObjectCurlySpacing = []|[("always" | "never")]|[("always" | "never"), {
@@ -14899,7 +14928,7 @@ type VueObjectShorthand = ([]|[("always" | "methods" | "properties" | "never" | 
   avoidExplicitReturnArrows?: boolean
 }])
 // ----- vue/operator-linebreak -----
-type VueOperatorLinebreak = []|[(("after" | "before" | "none") | null)]|[(("after" | "before" | "none") | null), {
+type VueOperatorLinebreak = []|[("after" | "before" | "none" | null)]|[("after" | "before" | "none" | null), {
   overrides?: {
     [k: string]: ("after" | "before" | "none" | "ignore") | undefined
   }

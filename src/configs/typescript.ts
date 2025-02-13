@@ -124,6 +124,7 @@ export async function typescript(
                 'ts/consistent-type-definitions': ['error', 'interface'],
                 'ts/consistent-type-imports': ['error', {
                     disallowTypeAnnotations: false,
+                    fixStyle: 'separate-type-imports',
                     prefer: 'type-imports',
                 }],
                 'ts/method-signature-style': ['error', 'property'],
