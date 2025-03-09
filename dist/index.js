@@ -307,7 +307,9 @@ async function stylistic(options = {}) {
         },
         // 覆盖`stylistic`默认规则
         "style/brace-style": ["error", "stroustrup"],
+        "style/generator-star-spacing": ["error", { after: true, before: false }],
         "style/multiline-ternary": ["error", "never"],
+        "style/yield-star-spacing": ["error", { after: true, before: false }],
         ...overrides
       }
     }
@@ -1088,6 +1090,30 @@ async function perfectionist(options = {}) {
   ];
 }
 
+// src/configs/pnpm.ts
+async function pnpm() {
+  return [
+    {
+      files: [
+        "package.json",
+        "**/package.json"
+      ],
+      languageOptions: {
+        parser: await interopDefault(import("jsonc-eslint-parser"))
+      },
+      name: "eslint/pnpm/rules",
+      plugins: {
+        pnpm: await interopDefault(import("eslint-plugin-pnpm"))
+      },
+      rules: {
+        "pnpm/enforce-catalog": "error",
+        "pnpm/prefer-workspace-settings": "error",
+        "pnpm/valid-catalog": "error"
+      }
+    }
+  ];
+}
+
 // src/configs/react.ts
 import { isPackageExists as isPackageExists2 } from "local-pkg";
 var ReactRefreshAllowConstantExportPackages = [
@@ -1133,7 +1159,6 @@ async function react(options = {}) {
     pluginReactRefresh
   ] = await Promise.all([
     interopDefault(import("@eslint-react/eslint-plugin")),
-    // @ts-expect-error missing types
     interopDefault(import("eslint-plugin-react-hooks")),
     interopDefault(import("eslint-plugin-react-refresh"))
   ]);
@@ -1954,13 +1979,13 @@ async function vue(options = {}) {
       rules: {
         ...pluginVue.configs.base.rules,
         ...vueVersion === "2" ? {
-          ...pluginVue.configs.essential.rules,
-          ...pluginVue.configs["strongly-recommended"].rules,
-          ...pluginVue.configs.recommended.rules
+          ...pluginVue.configs["vue2-essential"].rules,
+          ...pluginVue.configs["vue2-strongly-recommended"].rules,
+          ...pluginVue.configs["vue2-recommended"].rules
         } : {
-          ...pluginVue.configs["vue3-essential"].rules,
-          ...pluginVue.configs["vue3-strongly-recommended"].rules,
-          ...pluginVue.configs["vue3-recommended"].rules
+          ...pluginVue.configs["flat/essential"].map((c) => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}),
+          ...pluginVue.configs["flat/strongly-recommended"].map((c) => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}),
+          ...pluginVue.configs["flat/recommended"].map((c) => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {})
         },
         "antfu/no-top-level-await": "off",
         "node/prefer-global/process": "off",
@@ -2127,6 +2152,37 @@ async function yaml(options = {}) {
         } : {},
         ...overrides
       }
+    },
+    {
+      files: ["pnpm-workspace.yaml"],
+      name: "eslint/yaml/pnpm-workspace",
+      rules: {
+        "yaml/sort-keys": [
+          "error",
+          {
+            order: [
+              "packages",
+              "overrides",
+              "patchedDependencies",
+              "hoistPattern",
+              "catalog",
+              "catalogs",
+              "allowedDeprecatedVersions",
+              "allowNonAppliedPatches",
+              "configDependencies",
+              "ignoredBuiltDependencies",
+              "ignoredOptionalDependencies",
+              "neverBuiltDependencies",
+              "onlyBuiltDependencies",
+              "onlyBuiltDependenciesFile",
+              "packageExtensions",
+              "peerDependencyRules",
+              "supportedArchitectures"
+            ],
+            pathPattern: "^$"
+          }
+        ]
+      }
     }
   ];
 }
@@ -2167,6 +2223,7 @@ function lincy(options = {}, ...userConfigs) {
     ignores: ignoresList = [],
     jsx: enableJsx = true,
     overrides = {},
+    pnpm: enableCatalogs = false,
     react: enableReact = false,
     regexp: enableRegexp = true,
     typescript: enableTypeScript = isPackageExists3("typescript"),
@@ -2302,6 +2359,11 @@ function lincy(options = {}, ...userConfigs) {
       sortTsconfig()
     );
   }
+  if (enableCatalogs) {
+    configs2.push(
+      pnpm()
+    );
+  }
   if (options.yaml ?? true) {
     configs2.push(yaml({
       ...resolveSubOptions(options, "yaml"),
@@ -2430,6 +2492,7 @@ export {
   node,
   parserPlain,
   perfectionist,
+  pnpm,
   react,
   regexp,
   renamePluginInConfigs,

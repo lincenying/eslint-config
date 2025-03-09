@@ -16,6 +16,7 @@ import {
     markdown,
     node,
     perfectionist,
+    pnpm,
     react,
     sortPackageJson,
     sortTsconfig,
@@ -85,6 +86,7 @@ export function lincy(
         ignores: ignoresList = [],
         jsx: enableJsx = true,
         overrides = {},
+        pnpm: enableCatalogs = false,
         react: enableReact = false,
         regexp: enableRegexp = true,
         typescript: enableTypeScript = isPackageExists('typescript'),
@@ -242,6 +244,12 @@ export function lincy(
         )
     }
 
+    if (enableCatalogs) {
+        configs.push(
+            pnpm(),
+        )
+    }
+
     if (options.yaml ?? true) {
         configs.push(yaml({
             ...resolveSubOptions(options, 'yaml'),
@@ -329,7 +337,7 @@ export function resolveSubOptions<K extends keyof OptionsConfig>(
     options: OptionsConfig,
     key: K,
 ): ResolvedOptions<OptionsConfig[K]> {
-    return typeof options[key] === 'boolean' ? {} as any : options[key] || {}
+    return typeof options[key] === 'boolean' ? {} as any : options[key] || {} as any
 }
 
 export function getOverrides<K extends keyof OptionsConfig>(

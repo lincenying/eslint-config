@@ -55,7 +55,6 @@ export async function react(options: OptionsTypeScriptParserOptions & OptionsTyp
         pluginReactRefresh,
     ] = await Promise.all([
         interopDefault(import('@eslint-react/eslint-plugin')),
-        // @ts-expect-error missing types
         interopDefault(import('eslint-plugin-react-hooks')),
         interopDefault(import('eslint-plugin-react-refresh')),
     ] as const)

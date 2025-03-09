@@ -58,7 +58,10 @@ export async function stylistic(options: OptionsStylistic & OptionsOverrides = {
 
                 // 覆盖`stylistic`默认规则
                 'style/brace-style': ['error', 'stroustrup'],
+                'style/generator-star-spacing': ['error', { after: true, before: false }],
+
                 'style/multiline-ternary': ['error', 'never'],
+                'style/yield-star-spacing': ['error', { after: true, before: false }],
 
                 ...overrides,
             },

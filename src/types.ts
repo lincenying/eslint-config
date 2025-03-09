@@ -341,6 +341,18 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
     unocss?: boolean | OptionsUnoCSS
 
     /**
+     * 启用 pnpm（工作区/目录）支持.
+     *
+     * 目前它默认是禁用的，因为它仍处于实验阶段
+     * 将来会根据项目使用情况智能启用
+     *
+     * @see https://github.com/antfu/pnpm-workspace-utils
+     * @experimental
+     * @default false
+     */
+    pnpm?: boolean
+
+    /**
      * 使用外部格式化程序格式化文件.
      *
      * 需要安装:

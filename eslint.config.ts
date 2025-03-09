@@ -14,6 +14,7 @@ const config = lincy(
         formatters: {
             css: true,
         },
+        pnpm: false,
         overrides: {
             stylistic: {
                 'antfu/consistent-list-newline': 'off',

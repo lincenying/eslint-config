@@ -91,13 +91,13 @@ export async function vue(
                 ...pluginVue.configs.base.rules as any,
 
                 ...vueVersion === '2' ? {
-                    ...pluginVue.configs.essential.rules as any,
-                    ...pluginVue.configs['strongly-recommended'].rules as any,
-                    ...pluginVue.configs.recommended.rules as any,
+                    ...pluginVue.configs['vue2-essential'].rules as any,
+                    ...pluginVue.configs['vue2-strongly-recommended'].rules as any,
+                    ...pluginVue.configs['vue2-recommended'].rules as any,
                 } : {
-                    ...pluginVue.configs['vue3-essential'].rules as any,
-                    ...pluginVue.configs['vue3-strongly-recommended'].rules as any,
-                    ...pluginVue.configs['vue3-recommended'].rules as any,
+                    ...pluginVue.configs['flat/essential'].map(c => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}) as any,
+                    ...pluginVue.configs['flat/strongly-recommended'].map(c => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}) as any,
+                    ...pluginVue.configs['flat/recommended'].map(c => c.rules).reduce((acc, c) => ({ ...acc, ...c }), {}) as any,
                 },
 
                 'antfu/no-top-level-await': 'off',
