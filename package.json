@@ -108,7 +108,7 @@
     "@eslint-types/typescript-eslint": "catalog:dev",
     "@eslint-types/unicorn": "catalog:dev",
     "@eslint/config-inspector": "catalog:dev",
-    "@lincy/eslint-config": "workspace:*",
+    "@lincy/eslint-config": "catalog:dev",
     "@prettier/plugin-xml": "catalog:dev",
     "@stylistic/eslint-plugin-migrate": "catalog:dev",
     "@types/node": "catalog:dev",

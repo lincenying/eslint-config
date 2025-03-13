@@ -95,6 +95,10 @@ export async function yaml(
                         ],
                         pathPattern: '^$',
                     },
+                    {
+                        order: { type: 'asc' },
+                        pathPattern: '.*',
+                    },
                 ],
             },
         },
