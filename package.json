@@ -28,7 +28,7 @@
     "watch": "tsup --format esm,cjs --watch",
     "postpublish": "simple-open-url https://npmmirror.com/package/@lincy/eslint-config",
     "prepublishOnly": "nr build",
-    "release": "bumpp && npm publish -r --access public",
+    "release": "bumpp && pnpm publish -r --access public",
     "test": "vitest",
     "typegen": "tsx scripts/typegen.ts",
     "lint": "pnpm run stub && eslint .",
