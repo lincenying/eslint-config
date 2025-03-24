@@ -9,7 +9,7 @@ import type { ConfigNames, RuleOptions } from './typegen'
 
 export type Awaitable<T> = T | Promise<T>
 
-export type Rules = RuleOptions
+export interface Rules extends RuleOptions {}
 
 export type { ConfigNames }
 
