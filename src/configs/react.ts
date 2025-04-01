@@ -112,6 +112,7 @@ export async function react(options: OptionsTypeScriptParserOptions & OptionsTyp
                 // recommended rules from eslint-plugin-react-hooks-extra https://eslint-react.xyz/docs/rules/overview#hooks-extra-rules
                 'react-hooks-extra/no-direct-set-state-in-use-effect': 'warn',
                 'react-hooks-extra/no-unnecessary-use-prefix': 'warn',
+                'react-hooks-extra/prefer-use-state-lazy-initialization': 'warn',
                 // recommended rules eslint-plugin-react-hooks https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks/src/rules
                 'react-hooks/exhaustive-deps': 'warn',
                 'react-hooks/rules-of-hooks': 'error',
@@ -152,6 +153,8 @@ export async function react(options: OptionsTypeScriptParserOptions & OptionsTyp
                 'react-web-api/no-leaked-resize-observer': 'warn',
                 'react-web-api/no-leaked-timeout': 'warn',
                 // recommended rules from eslint-plugin-react-x https://eslint-react.xyz/docs/rules/overview#core-rules
+                'react/jsx-no-duplicate-props': 'warn',
+                'react/jsx-uses-vars': 'warn',
                 'react/no-access-state-in-setstate': 'error',
                 'react/no-array-index-key': 'warn',
                 'react/no-children-count': 'warn',
