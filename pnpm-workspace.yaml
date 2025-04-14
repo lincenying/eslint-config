@@ -1,31 +1,33 @@
 packages:
   - fixtures/*
+
 overrides:
-  '@eslint-community/eslint-utils': ^4.5.1
-  '@typescript-eslint/utils': ^8.29.0
-  eslint: ^9.23.0
+  '@eslint-community/eslint-utils': ^4.6.0
+  '@typescript-eslint/utils': ^8.29.1
+  eslint: ^9.24.0
   tsx: ^4.19.3
+
 catalogs:
   dev:
     '@antfu/ni': ^24.3.0
-    '@eslint-react/eslint-plugin': ^1.40.0
+    '@eslint-react/eslint-plugin': ^1.47.2
     '@eslint-types/jsdoc': 48.2.2
     '@eslint-types/typescript-eslint': ^7.5.0
     '@eslint-types/unicorn': ^52.0.0
     '@eslint/config-inspector': ^1.0.2
     '@prettier/plugin-xml': ^3.4.1
     '@stylistic/eslint-plugin-migrate': ^4.2.0
-    '@types/node': ^22.13.15
-    '@types/react': ^19.0.12
-    '@unocss/eslint-plugin': ^66.1.0-beta.8
+    '@types/node': ^22.14.1
+    '@types/react': ^19.1.1
+    '@unocss/eslint-plugin': ^66.1.0-beta.11
     bumpp: ^10.1.0
-    eslint: ^9.23.0
+    eslint: ^9.24.0
     eslint-plugin-format: ^1.0.1
     eslint-plugin-react-hooks: ^5.2.0
     eslint-plugin-react-refresh: ^0.4.19
     eslint-typegen: ^2.1.0
     esno: ^4.8.0
-    lint-staged: ^15.5.0
+    lint-staged: ^15.5.1
     prettier: ^3.5.3
     react: ^19.1.0
     simple-git-hooks: ^2.12.1
@@ -33,28 +35,28 @@ catalogs:
     sucrase: ^3.35.0
     tinyglobby: ^0.2.12
     tsup: ^8.4.0
-    typescript: ^5.8.2
+    typescript: ^5.8.3
     vue: ^3.5.13
   prod:
     '@antfu/install-pkg': ^1.0.0
-    '@clack/prompts': ^0.10.0
-    '@eslint-community/eslint-plugin-eslint-comments': ^4.4.1
+    '@clack/prompts': ^0.10.1
+    '@eslint-community/eslint-plugin-eslint-comments': ^4.5.0
     '@eslint/markdown': ^6.3.0
     '@stylistic/eslint-plugin': 4.0.0-beta.1
-    '@typescript-eslint/eslint-plugin': ^8.29.0
-    '@typescript-eslint/parser': ^8.29.0
-    '@vitest/eslint-plugin': ^1.1.38
+    '@typescript-eslint/eslint-plugin': ^8.29.1
+    '@typescript-eslint/parser': ^8.29.1
+    '@vitest/eslint-plugin': ^1.1.42
     eslint-config-flat-gitignore: ^2.1.0
     eslint-flat-config-utils: ^2.0.1
     eslint-merge-processors: ^2.0.0
     eslint-parser-plain: ^0.1.1
     eslint-plugin-antfu: ^3.1.1
-    eslint-plugin-import-x: ^4.10.0
+    eslint-plugin-import-x: ^4.10.3
     eslint-plugin-jsdoc: ^50.6.9
     eslint-plugin-jsonc: ^2.20.0
     eslint-plugin-n: ^17.17.0
     eslint-plugin-no-only-tests: ^3.3.0
-    eslint-plugin-perfectionist: ^4.10.1
+    eslint-plugin-perfectionist: ^4.11.0
     eslint-plugin-pnpm: ^0.3.1
     eslint-plugin-regexp: ^2.7.0
     eslint-plugin-toml: ^0.12.0
@@ -68,10 +70,13 @@ catalogs:
     local-pkg: ^1.1.1
     prompts: ^2.4.2
     toml-eslint-parser: ^0.10.0
-    vue-eslint-parser: ^10.1.1
+    vue-eslint-parser: ^10.1.3
     yaml-eslint-parser: ^1.3.0
   test:
     vitest: ^3.1.1
+
+onlyBuiltDependencies:
+  - simple-git-hooks
 peerDependencyRules:
   ignoreMissing:
     - prettier
