@@ -102,7 +102,7 @@ __export(index_exports, {
 });
 module.exports = __toCommonJS(index_exports);
 
-// node_modules/.pnpm/tsup@8.4.0_jiti@2.4.2_postcss@8.4.49_tsx@4.19.3_typescript@5.8.2_yaml@2.7.0/node_modules/tsup/assets/cjs_shims.js
+// node_modules/.pnpm/tsup@8.4.0_jiti@2.4.2_postcss@8.4.49_tsx@4.19.3_typescript@5.8.3_yaml@2.7.0/node_modules/tsup/assets/cjs_shims.js
 var getImportMetaUrl = () => typeof document === "undefined" ? new URL(`file:${__filename}`).href : document.currentScript && document.currentScript.src || new URL("main.js", document.baseURI).href;
 var importMetaUrl = /* @__PURE__ */ getImportMetaUrl();
 
@@ -1344,6 +1344,7 @@ async function react(options = {}) {
         // recommended rules from eslint-plugin-react-hooks-extra https://eslint-react.xyz/docs/rules/overview#hooks-extra-rules
         "react-hooks-extra/no-direct-set-state-in-use-effect": "warn",
         "react-hooks-extra/no-unnecessary-use-prefix": "warn",
+        "react-hooks-extra/prefer-use-state-lazy-initialization": "warn",
         // recommended rules eslint-plugin-react-hooks https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks/src/rules
         "react-hooks/exhaustive-deps": "warn",
         "react-hooks/rules-of-hooks": "error",
@@ -1384,6 +1385,8 @@ async function react(options = {}) {
         "react-web-api/no-leaked-resize-observer": "warn",
         "react-web-api/no-leaked-timeout": "warn",
         // recommended rules from eslint-plugin-react-x https://eslint-react.xyz/docs/rules/overview#core-rules
+        "react/jsx-no-duplicate-props": "warn",
+        "react/jsx-uses-vars": "warn",
         "react/no-access-state-in-setstate": "error",
         "react/no-array-index-key": "warn",
         "react/no-children-count": "warn",
