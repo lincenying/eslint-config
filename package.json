@@ -2,7 +2,7 @@
   "name": "@lincy/eslint-config",
   "type": "module",
   "version": "5.5.2",
-  "packageManager": "pnpm@10.9.0",
+  "packageManager": "pnpm@10.10.0",
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
   "license": "MIT",
@@ -23,9 +23,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "nr typegen && tsup --format esm,cjs --clean --dts",
-    "stub": "tsup src/index.ts --format esm",
-    "watch": "tsup --format esm,cjs --watch",
+    "build": "nr typegen && tsdown --format esm,cjs --clean --dts",
+    "stub": "tsdown src/index.ts --format esm",
+    "watch": "tsdown --format esm,cjs --watch",
     "postpublish": "simple-open-url https://npmmirror.com/package/@lincy/eslint-config",
     "prepublishOnly": "nr build",
     "release": "bumpp && pnpm publish -r --access public",
@@ -127,7 +127,7 @@
     "simple-open-url": "catalog:dev",
     "sucrase": "catalog:dev",
     "tinyglobby": "catalog:dev",
-    "tsup": "catalog:dev",
+    "tsdown": "catalog:dev",
     "typescript": "catalog:dev",
     "vitest": "catalog:test",
     "vue": "catalog:dev"

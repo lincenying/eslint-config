@@ -1,11 +1,11 @@
-import { defineConfig } from 'tsup'
+import { defineConfig } from 'tsdown'
 
 export default defineConfig({
     entry: [
         'src/index.ts',
     ],
     shims: true,
-    esbuildOptions(options) {
-        options.charset = 'utf8'
+    outputOptions: {
+        exports: 'named',
     },
 })
