@@ -186,6 +186,12 @@ export default lincy({
      */
     jsx: true,
     /**
+     * 是否启用 pnpm（工作区/目录）支持
+     * @default 默认值: false,
+     * @example 可选: true
+     */
+    pnpm: false,
+    /**
      * 是否启用 react 规则
      * @default 默认值: 检测是否安装react依赖,
      * @example 可选: false | true |
@@ -407,6 +413,7 @@ import {
     markdown,
     node,
     perfectionist,
+    pnpm,
     react,
     regexp,
     sortPackageJson,
@@ -435,6 +442,7 @@ export default combine(
     typescript(/* Options */),
     stylistic(/* Options */),
     vue(),
+    pnpm(),
     react(/* Options */),
     unocss(/* Options */),
     jsonc(),
