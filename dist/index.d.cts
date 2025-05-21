@@ -384,233 +384,233 @@ interface RuleOptions {
   'implicit-arrow-linebreak'?: Linter.RuleEntry<ImplicitArrowLinebreak>;
   /**
    * Enforce or ban the use of inline type-only markers for named imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/consistent-type-specifier-style.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/consistent-type-specifier-style.md
    */
   'import/consistent-type-specifier-style'?: Linter.RuleEntry<ImportConsistentTypeSpecifierStyle>;
   /**
    * Ensure a default export is present, given a default import.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/default.md
    */
   'import/default'?: Linter.RuleEntry<[]>;
   /**
    * Enforce a leading comment with the webpackChunkName for dynamic imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/dynamic-import-chunkname.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/dynamic-import-chunkname.md
    */
   'import/dynamic-import-chunkname'?: Linter.RuleEntry<ImportDynamicImportChunkname>;
   /**
    * Forbid any invalid exports, i.e. re-export of the same name.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/export.md
    */
   'import/export'?: Linter.RuleEntry<[]>;
   /**
    * Ensure all exports appear after other statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/exports-last.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/exports-last.md
    */
   'import/exports-last'?: Linter.RuleEntry<[]>;
   /**
    * Ensure consistent use of file extension within the import path.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/extensions.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/extensions.md
    */
   'import/extensions'?: Linter.RuleEntry<ImportExtensions>;
   /**
    * Ensure all imports appear before other statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/first.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/first.md
    */
   'import/first'?: Linter.RuleEntry<ImportFirst>;
   /**
    * Prefer named exports to be grouped together in a single export declaration.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/group-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/group-exports.md
    */
   'import/group-exports'?: Linter.RuleEntry<[]>;
   /**
    * Replaced by `import-x/first`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/imports-first.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/imports-first.md
    * @deprecated
    */
   'import/imports-first'?: Linter.RuleEntry<ImportImportsFirst>;
   /**
    * Enforce the maximum number of dependencies a module can have.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/max-dependencies.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/max-dependencies.md
    */
   'import/max-dependencies'?: Linter.RuleEntry<ImportMaxDependencies>;
   /**
    * Ensure named imports correspond to a named export in the remote file.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/named.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/named.md
    */
   'import/named'?: Linter.RuleEntry<ImportNamed>;
   /**
    * Ensure imported namespaces contain dereferenced properties as they are dereferenced.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/namespace.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/namespace.md
    */
   'import/namespace'?: Linter.RuleEntry<ImportNamespace>;
   /**
    * Enforce a newline after import statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/newline-after-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/newline-after-import.md
    */
   'import/newline-after-import'?: Linter.RuleEntry<ImportNewlineAfterImport>;
   /**
    * Forbid import of modules using absolute paths.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-absolute-path.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-absolute-path.md
    */
   'import/no-absolute-path'?: Linter.RuleEntry<ImportNoAbsolutePath>;
   /**
    * Forbid AMD `require` and `define` calls.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-amd.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-amd.md
    */
   'import/no-amd'?: Linter.RuleEntry<[]>;
   /**
    * Forbid anonymous values as default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-anonymous-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-anonymous-default-export.md
    */
   'import/no-anonymous-default-export'?: Linter.RuleEntry<ImportNoAnonymousDefaultExport>;
   /**
    * Forbid CommonJS `require` calls and `module.exports` or `exports.*`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-commonjs.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-commonjs.md
    */
   'import/no-commonjs'?: Linter.RuleEntry<ImportNoCommonjs>;
   /**
    * Forbid a module from importing a module with a dependency path back to itself.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-cycle.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-cycle.md
    */
   'import/no-cycle'?: Linter.RuleEntry<ImportNoCycle>;
   /**
    * Forbid default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-default-export.md
    */
   'import/no-default-export'?: Linter.RuleEntry<[]>;
   /**
    * Forbid imported names marked with `@deprecated` documentation tag.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-deprecated.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-deprecated.md
    */
   'import/no-deprecated'?: Linter.RuleEntry<[]>;
   /**
    * Forbid repeated import of the same module in multiple places.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-duplicates.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-duplicates.md
    */
   'import/no-duplicates'?: Linter.RuleEntry<ImportNoDuplicates>;
   /**
    * Forbid `require()` calls with expressions.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-dynamic-require.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-dynamic-require.md
    */
   'import/no-dynamic-require'?: Linter.RuleEntry<ImportNoDynamicRequire>;
   /**
    * Forbid empty named import blocks.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-empty-named-blocks.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-empty-named-blocks.md
    */
   'import/no-empty-named-blocks'?: Linter.RuleEntry<[]>;
   /**
    * Forbid the use of extraneous packages.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-extraneous-dependencies.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-extraneous-dependencies.md
    */
   'import/no-extraneous-dependencies'?: Linter.RuleEntry<ImportNoExtraneousDependencies>;
   /**
    * Forbid import statements with CommonJS module.exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-import-module-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-import-module-exports.md
    */
   'import/no-import-module-exports'?: Linter.RuleEntry<ImportNoImportModuleExports>;
   /**
    * Forbid importing the submodules of other modules.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-internal-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-internal-modules.md
    */
   'import/no-internal-modules'?: Linter.RuleEntry<ImportNoInternalModules>;
   /**
    * Forbid the use of mutable exports with `var` or `let`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-mutable-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-mutable-exports.md
    */
   'import/no-mutable-exports'?: Linter.RuleEntry<[]>;
   /**
    * Forbid use of exported name as identifier of default export.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-named-as-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-named-as-default.md
    */
   'import/no-named-as-default'?: Linter.RuleEntry<[]>;
   /**
    * Forbid use of exported name as property of default export.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-named-as-default-member.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-named-as-default-member.md
    */
   'import/no-named-as-default-member'?: Linter.RuleEntry<[]>;
   /**
    * Forbid named default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-named-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-named-default.md
    */
   'import/no-named-default'?: Linter.RuleEntry<[]>;
   /**
    * Forbid named exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-named-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-named-export.md
    */
   'import/no-named-export'?: Linter.RuleEntry<[]>;
   /**
    * Forbid namespace (a.k.a. "wildcard" `*`) imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-namespace.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-namespace.md
    */
   'import/no-namespace'?: Linter.RuleEntry<ImportNoNamespace>;
   /**
    * Forbid Node.js builtin modules.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-nodejs-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-nodejs-modules.md
    */
   'import/no-nodejs-modules'?: Linter.RuleEntry<ImportNoNodejsModules>;
   /**
    * Forbid importing packages through relative paths.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-relative-packages.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-relative-packages.md
    */
   'import/no-relative-packages'?: Linter.RuleEntry<ImportNoRelativePackages>;
   /**
    * Forbid importing modules from parent directories.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-relative-parent-imports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-relative-parent-imports.md
    */
   'import/no-relative-parent-imports'?: Linter.RuleEntry<ImportNoRelativeParentImports>;
   /**
    * Forbid importing a default export by a different name.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-rename-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-rename-default.md
    */
   'import/no-rename-default'?: Linter.RuleEntry<ImportNoRenameDefault>;
   /**
    * Enforce which files can be imported in a given folder.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-restricted-paths.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-restricted-paths.md
    */
   'import/no-restricted-paths'?: Linter.RuleEntry<ImportNoRestrictedPaths>;
   /**
    * Forbid a module from importing itself.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-self-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-self-import.md
    */
   'import/no-self-import'?: Linter.RuleEntry<[]>;
   /**
    * Forbid unassigned imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-unassigned-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-unassigned-import.md
    */
   'import/no-unassigned-import'?: Linter.RuleEntry<ImportNoUnassignedImport>;
   /**
    * Ensure imports point to a file/module that can be resolved.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-unresolved.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-unresolved.md
    */
   'import/no-unresolved'?: Linter.RuleEntry<ImportNoUnresolved>;
   /**
    * Forbid modules without exports, or exports without matching import in another module.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-unused-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-unused-modules.md
    */
   'import/no-unused-modules'?: Linter.RuleEntry<ImportNoUnusedModules>;
   /**
    * Forbid unnecessary path segments in import and require statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-useless-path-segments.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-useless-path-segments.md
    */
   'import/no-useless-path-segments'?: Linter.RuleEntry<ImportNoUselessPathSegments>;
   /**
    * Forbid webpack loader syntax in imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/no-webpack-loader-syntax.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-webpack-loader-syntax.md
    */
   'import/no-webpack-loader-syntax'?: Linter.RuleEntry<[]>;
   /**
    * Enforce a convention in module import order.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/order.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/order.md
    */
   'import/order'?: Linter.RuleEntry<ImportOrder>;
   /**
    * Prefer a default export if module exports a single name or multiple names.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/prefer-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/prefer-default-export.md
    */
   'import/prefer-default-export'?: Linter.RuleEntry<ImportPreferDefaultExport>;
   /**
    * Forbid potentially ambiguous parse goal (`script` vs. `module`).
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.11.0/docs/rules/unambiguous.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/unambiguous.md
    */
   'import/unambiguous'?: Linter.RuleEntry<[]>;
   /**
@@ -1084,7 +1084,7 @@ interface RuleOptions {
    * disallow unnecessary escape usage
    * @see https://ota-meshi.github.io/eslint-plugin-jsonc/rules/no-useless-escape.html
    */
-  'jsonc/no-useless-escape'?: Linter.RuleEntry<[]>;
+  'jsonc/no-useless-escape'?: Linter.RuleEntry<JsoncNoUselessEscape>;
   /**
    * enforce consistent line breaks inside braces
    * @see https://ota-meshi.github.io/eslint-plugin-jsonc/rules/object-curly-newline.html
@@ -1952,6 +1952,11 @@ interface RuleOptions {
    */
   'no-trailing-spaces'?: Linter.RuleEntry<NoTrailingSpaces>;
   /**
+   * Disallow `let` or `var` variables that are read but never assigned
+   * @see https://eslint.org/docs/latest/rules/no-unassigned-vars
+   */
+  'no-unassigned-vars'?: Linter.RuleEntry<[]>;
+  /**
    * Disallow the use of undeclared variables unless mentioned in `/*global *\/` comments
    * @see https://eslint.org/docs/latest/rules/no-undef
    */
@@ -2075,7 +2080,7 @@ interface RuleOptions {
    * Disallow unnecessary escape characters
    * @see https://eslint.org/docs/latest/rules/no-useless-escape
    */
-  'no-useless-escape'?: Linter.RuleEntry<[]>;
+  'no-useless-escape'?: Linter.RuleEntry<NoUselessEscape>;
   /**
    * Disallow renaming import, export, and destructured assignments to the same name
    * @see https://eslint.org/docs/latest/rules/no-useless-rename
@@ -7593,6 +7598,14 @@ type ImportExtensions = ([] | [("always" | "ignorePackages" | "never")] | [] | [
   };
   ignorePackages?: boolean;
   checkTypeImports?: boolean;
+  pathGroupOverrides?: {
+    pattern: string;
+    patternOptions?: {
+      [k: string]: unknown | undefined;
+    };
+    action: ("enforce" | "ignore");
+  }[];
+  fix?: boolean;
   [k: string]: unknown | undefined;
 }] | [] | [{
   pattern?: {
@@ -7600,6 +7613,14 @@ type ImportExtensions = ([] | [("always" | "ignorePackages" | "never")] | [] | [
   };
   ignorePackages?: boolean;
   checkTypeImports?: boolean;
+  pathGroupOverrides?: {
+    pattern: string;
+    patternOptions?: {
+      [k: string]: unknown | undefined;
+    };
+    action: ("enforce" | "ignore");
+  }[];
+  fix?: boolean;
   [k: string]: unknown | undefined;
 }] | [] | [("always" | "ignorePackages" | "never")] | [("always" | "ignorePackages" | "never"), {
   [k: string]: ("always" | "ignorePackages" | "never");
@@ -8458,6 +8479,10 @@ type JsoncNoIrregularWhitespace = [] | [{
   skipRegExps?: boolean;
   skipJSXText?: boolean;
 }];
+// ----- jsonc/no-useless-escape -----
+type JsoncNoUselessEscape = [] | [{
+  allowRegexCharacters?: string[];
+}];
 // ----- jsonc/object-curly-newline -----
 type JsoncObjectCurlyNewline = [] | [((("always" | "never") | {
   multiline?: boolean;
@@ -9082,6 +9107,7 @@ type MaxNestedCallbacks = [] | [(number | {
 type MaxParams = [] | [(number | {
   maximum?: number;
   max?: number;
+  countVoidThis?: boolean;
 })];
 // ----- max-statements -----
 type MaxStatements = [] | [(number | {
@@ -9464,6 +9490,10 @@ type NoUseBeforeDefine = [] | [("nofunc" | {
 type NoUselessComputedKey = [] | [{
   enforceForClassMembers?: boolean;
 }];
+// ----- no-useless-escape -----
+type NoUselessEscape = [] | [{
+  allowRegexCharacters?: string[];
+}];
 // ----- no-useless-rename -----
 type NoUselessRename = [] | [{
   ignoreDestructuring?: boolean;
@@ -9643,6 +9673,7 @@ type NodeNoUnpublishedImport = [] | [{
   resolverConfig?: {
     [k: string]: unknown | undefined;
   };
+  tryExtensions?: string[];
   ignoreTypeImport?: boolean;
   ignorePrivate?: boolean;
 }];
@@ -9681,7 +9712,7 @@ type NodeNoUnsupportedFeaturesEsSyntax = [] | [{
 type NodeNoUnsupportedFeaturesNodeBuiltins = [] | [{
   version?: string;
   allowExperimental?: boolean;
-  ignores?: ("__filename" | "__dirname" | "require" | "require.cache" | "require.extensions" | "require.main" | "require.resolve" | "require.resolve.paths" | "module" | "module.children" | "module.exports" | "module.filename" | "module.id" | "module.isPreloading" | "module.loaded" | "module.parent" | "module.path" | "module.paths" | "module.require" | "exports" | "AbortController" | "AbortSignal" | "AbortSignal.abort" | "AbortSignal.timeout" | "AbortSignal.any" | "DOMException" | "FormData" | "Headers" | "MessageEvent" | "Navigator" | "Request" | "Response" | "WebAssembly" | "WebSocket" | "fetch" | "global" | "queueMicrotask" | "navigator" | "navigator.hardwareConcurrency" | "navigator.language" | "navigator.languages" | "navigator.platform" | "navigator.userAgent" | "structuredClone" | "localStorage" | "sessionStorage" | "Storage" | "Blob" | "new Buffer()" | "Buffer" | "Buffer.alloc" | "Buffer.allocUnsafe" | "Buffer.allocUnsafeSlow" | "Buffer.byteLength" | "Buffer.compare" | "Buffer.concat" | "Buffer.copyBytesFrom" | "Buffer.from" | "Buffer.isBuffer" | "Buffer.isEncoding" | "File" | "atob" | "btoa" | "console" | "console.profile" | "console.profileEnd" | "console.timeStamp" | "console.Console" | "console.assert" | "console.clear" | "console.count" | "console.countReset" | "console.debug" | "console.dir" | "console.dirxml" | "console.error" | "console.group" | "console.groupCollapsed" | "console.groupEnd" | "console.info" | "console.log" | "console.table" | "console.time" | "console.timeEnd" | "console.timeLog" | "console.trace" | "console.warn" | "crypto" | "crypto.subtle" | "crypto.subtle.decrypt" | "crypto.subtle.deriveBits" | "crypto.subtle.deriveKey" | "crypto.subtle.digest" | "crypto.subtle.encrypt" | "crypto.subtle.exportKey" | "crypto.subtle.generateKey" | "crypto.subtle.importKey" | "crypto.subtle.sign" | "crypto.subtle.unwrapKey" | "crypto.subtle.verify" | "crypto.subtle.wrapKey" | "crypto.getRandomValues" | "crypto.randomUUID" | "Crypto" | "CryptoKey" | "SubtleCrypto" | "CloseEvent" | "CustomEvent" | "Event" | "EventSource" | "EventTarget" | "PerformanceEntry" | "PerformanceMark" | "PerformanceMeasure" | "PerformanceObserver" | "PerformanceObserverEntryList" | "PerformanceResourceTiming" | "performance" | "performance.clearMarks" | "performance.clearMeasures" | "performance.clearResourceTimings" | "performance.eventLoopUtilization" | "performance.getEntries" | "performance.getEntriesByName" | "performance.getEntriesByType" | "performance.mark" | "performance.markResourceTiming" | "performance.measure" | "performance.nodeTiming" | "performance.nodeTiming.bootstrapComplete" | "performance.nodeTiming.environment" | "performance.nodeTiming.idleTime" | "performance.nodeTiming.loopExit" | "performance.nodeTiming.loopStart" | "performance.nodeTiming.nodeStart" | "performance.nodeTiming.uvMetricsInfo" | "performance.nodeTiming.v8Start" | "performance.now" | "performance.onresourcetimingbufferfull" | "performance.setResourceTimingBufferSize" | "performance.timeOrigin" | "performance.timerify" | "performance.toJSON" | "process" | "process.allowedNodeEnvironmentFlags" | "process.availableMemory" | "process.arch" | "process.argv" | "process.argv0" | "process.channel" | "process.config" | "process.connected" | "process.debugPort" | "process.env" | "process.execArgv" | "process.execPath" | "process.exitCode" | "process.features.cached_builtins" | "process.features.debug" | "process.features.inspector" | "process.features.ipv6" | "process.features.require_module" | "process.features.tls" | "process.features.tls_alpn" | "process.features.tls_ocsp" | "process.features.tls_sni" | "process.features.typescript" | "process.features.uv" | "process.finalization.register" | "process.finalization.registerBeforeExit" | "process.finalization.unregister" | "process.getBuiltinModule" | "process.mainModule" | "process.noDeprecation" | "process.permission" | "process.pid" | "process.platform" | "process.ppid" | "process.release" | "process.report" | "process.report.excludeEnv" | "process.sourceMapsEnabled" | "process.stdin" | "process.stdin.isRaw" | "process.stdin.isTTY" | "process.stdin.setRawMode" | "process.stdout" | "process.stdout.clearLine" | "process.stdout.clearScreenDown" | "process.stdout.columns" | "process.stdout.cursorTo" | "process.stdout.getColorDepth" | "process.stdout.getWindowSize" | "process.stdout.hasColors" | "process.stdout.isTTY" | "process.stdout.moveCursor" | "process.stdout.rows" | "process.stderr" | "process.stderr.clearLine" | "process.stderr.clearScreenDown" | "process.stderr.columns" | "process.stderr.cursorTo" | "process.stderr.getColorDepth" | "process.stderr.getWindowSize" | "process.stderr.hasColors" | "process.stderr.isTTY" | "process.stderr.moveCursor" | "process.stderr.rows" | "process.throwDeprecation" | "process.title" | "process.traceDeprecation" | "process.version" | "process.versions" | "process.abort" | "process.chdir" | "process.constrainedMemory" | "process.cpuUsage" | "process.cwd" | "process.disconnect" | "process.dlopen" | "process.emitWarning" | "process.exit" | "process.getActiveResourcesInfo" | "process.getegid" | "process.geteuid" | "process.getgid" | "process.getgroups" | "process.getuid" | "process.hasUncaughtExceptionCaptureCallback" | "process.hrtime" | "process.hrtime.bigint" | "process.initgroups" | "process.kill" | "process.loadEnvFile" | "process.memoryUsage" | "process.rss" | "process.nextTick" | "process.resourceUsage" | "process.send" | "process.setegid" | "process.seteuid" | "process.setgid" | "process.setgroups" | "process.setuid" | "process.setSourceMapsEnabled" | "process.setUncaughtExceptionCaptureCallback" | "process.umask" | "process.uptime" | "ReadableStream" | "ReadableStream.from" | "ReadableStreamDefaultReader" | "ReadableStreamBYOBReader" | "ReadableStreamDefaultController" | "ReadableByteStreamController" | "ReadableStreamBYOBRequest" | "WritableStream" | "WritableStreamDefaultWriter" | "WritableStreamDefaultController" | "TransformStream" | "TransformStreamDefaultController" | "ByteLengthQueuingStrategy" | "CountQueuingStrategy" | "TextEncoderStream" | "TextDecoderStream" | "CompressionStream" | "DecompressionStream" | "setInterval" | "clearInterval" | "setTimeout" | "clearTimeout" | "setImmediate" | "clearImmediate" | "URL" | "URL.canParse" | "URL.createObjectURL" | "URL.revokeObjectURL" | "URLSearchParams" | "TextDecoder" | "TextEncoder" | "BroadcastChannel" | "MessageChannel" | "MessagePort" | "assert" | "assert.assert" | "assert.deepEqual" | "assert.deepStrictEqual" | "assert.doesNotMatch" | "assert.doesNotReject" | "assert.doesNotThrow" | "assert.equal" | "assert.fail" | "assert.ifError" | "assert.match" | "assert.notDeepEqual" | "assert.notDeepStrictEqual" | "assert.notEqual" | "assert.notStrictEqual" | "assert.ok" | "assert.rejects" | "assert.strictEqual" | "assert.throws" | "assert.CallTracker" | "assert.strict" | "assert.strict.assert" | "assert.strict.deepEqual" | "assert.strict.deepStrictEqual" | "assert.strict.doesNotMatch" | "assert.strict.doesNotReject" | "assert.strict.doesNotThrow" | "assert.strict.equal" | "assert.strict.fail" | "assert.strict.ifError" | "assert.strict.match" | "assert.strict.notDeepEqual" | "assert.strict.notDeepStrictEqual" | "assert.strict.notEqual" | "assert.strict.notStrictEqual" | "assert.strict.ok" | "assert.strict.rejects" | "assert.strict.strictEqual" | "assert.strict.throws" | "assert.strict.CallTracker" | "assert/strict" | "assert/strict.assert" | "assert/strict.deepEqual" | "assert/strict.deepStrictEqual" | "assert/strict.doesNotMatch" | "assert/strict.doesNotReject" | "assert/strict.doesNotThrow" | "assert/strict.equal" | "assert/strict.fail" | "assert/strict.ifError" | "assert/strict.match" | "assert/strict.notDeepEqual" | "assert/strict.notDeepStrictEqual" | "assert/strict.notEqual" | "assert/strict.notStrictEqual" | "assert/strict.ok" | "assert/strict.rejects" | "assert/strict.strictEqual" | "assert/strict.throws" | "assert/strict.CallTracker" | "async_hooks" | "async_hooks.createHook" | "async_hooks.executionAsyncResource" | "async_hooks.executionAsyncId" | "async_hooks.triggerAsyncId" | "async_hooks.AsyncLocalStorage" | "async_hooks.AsyncLocalStorage.bind" | "async_hooks.AsyncLocalStorage.snapshot" | "async_hooks.AsyncResource" | "async_hooks.AsyncResource.bind" | "buffer" | "buffer.constants" | "buffer.INSPECT_MAX_BYTES" | "buffer.kMaxLength" | "buffer.kStringMaxLength" | "buffer.atob" | "buffer.btoa" | "buffer.isAscii" | "buffer.isUtf8" | "buffer.resolveObjectURL" | "buffer.transcode" | "buffer.SlowBuffer" | "buffer.Blob" | "new buffer.Buffer()" | "buffer.Buffer" | "buffer.Buffer.alloc" | "buffer.Buffer.allocUnsafe" | "buffer.Buffer.allocUnsafeSlow" | "buffer.Buffer.byteLength" | "buffer.Buffer.compare" | "buffer.Buffer.concat" | "buffer.Buffer.copyBytesFrom" | "buffer.Buffer.from" | "buffer.Buffer.isBuffer" | "buffer.Buffer.isEncoding" | "buffer.File" | "child_process" | "child_process.exec" | "child_process.execFile" | "child_process.fork" | "child_process.spawn" | "child_process.execFileSync" | "child_process.execSync" | "child_process.spawnSync" | "child_process.ChildProcess" | "cluster" | "cluster.isMaster" | "cluster.isPrimary" | "cluster.isWorker" | "cluster.schedulingPolicy" | "cluster.settings" | "cluster.worker" | "cluster.workers" | "cluster.disconnect" | "cluster.fork" | "cluster.setupMaster" | "cluster.setupPrimary" | "cluster.Worker" | "crypto.constants" | "crypto.fips" | "crypto.webcrypto" | "crypto.webcrypto.subtle" | "crypto.webcrypto.subtle.decrypt" | "crypto.webcrypto.subtle.deriveBits" | "crypto.webcrypto.subtle.deriveKey" | "crypto.webcrypto.subtle.digest" | "crypto.webcrypto.subtle.encrypt" | "crypto.webcrypto.subtle.exportKey" | "crypto.webcrypto.subtle.generateKey" | "crypto.webcrypto.subtle.importKey" | "crypto.webcrypto.subtle.sign" | "crypto.webcrypto.subtle.unwrapKey" | "crypto.webcrypto.subtle.verify" | "crypto.webcrypto.subtle.wrapKey" | "crypto.webcrypto.getRandomValues" | "crypto.webcrypto.randomUUID" | "crypto.checkPrime" | "crypto.checkPrimeSync" | "crypto.createCipher" | "crypto.createCipheriv" | "crypto.createDecipher" | "crypto.createDecipheriv" | "crypto.createDiffieHellman" | "crypto.createDiffieHellmanGroup" | "crypto.createECDH" | "crypto.createHash" | "crypto.createHmac" | "crypto.createPrivateKey" | "crypto.createPublicKey" | "crypto.createSecretKey" | "crypto.createSign" | "crypto.createVerify" | "crypto.diffieHellman" | "crypto.generateKey" | "crypto.generateKeyPair" | "crypto.generateKeyPairSync" | "crypto.generateKeySync" | "crypto.generatePrime" | "crypto.generatePrimeSync" | "crypto.getCipherInfo" | "crypto.getCiphers" | "crypto.getCurves" | "crypto.getDiffieHellman" | "crypto.getFips" | "crypto.getHashes" | "crypto.hash" | "crypto.hkdf" | "crypto.hkdfSync" | "crypto.pbkdf2" | "crypto.pbkdf2Sync" | "crypto.privateDecrypt" | "crypto.privateEncrypt" | "crypto.publicDecrypt" | "crypto.publicEncrypt" | "crypto.randomBytes" | "crypto.randomFillSync" | "crypto.randomFill" | "crypto.randomInt" | "crypto.scrypt" | "crypto.scryptSync" | "crypto.secureHeapUsed" | "crypto.setEngine" | "crypto.setFips" | "crypto.sign" | "crypto.timingSafeEqual" | "crypto.verify" | "crypto.Certificate" | "crypto.Certificate.exportChallenge" | "crypto.Certificate.exportPublicKey" | "crypto.Certificate.verifySpkac" | "crypto.Cipher" | "crypto.Decipher" | "crypto.DiffieHellman" | "crypto.DiffieHellmanGroup" | "crypto.ECDH" | "crypto.ECDH.convertKey" | "crypto.Hash()" | "new crypto.Hash()" | "crypto.Hash" | "crypto.Hmac()" | "new crypto.Hmac()" | "crypto.Hmac" | "crypto.KeyObject" | "crypto.KeyObject.from" | "crypto.Sign" | "crypto.Verify" | "crypto.X509Certificate" | "dgram" | "dgram.createSocket" | "dgram.Socket" | "diagnostics_channel" | "diagnostics_channel.hasSubscribers" | "diagnostics_channel.channel" | "diagnostics_channel.subscribe" | "diagnostics_channel.unsubscribe" | "diagnostics_channel.tracingChannel" | "diagnostics_channel.Channel" | "diagnostics_channel.TracingChannel" | "dns" | "dns.Resolver" | "dns.getServers" | "dns.lookup" | "dns.lookupService" | "dns.resolve" | "dns.resolve4" | "dns.resolve6" | "dns.resolveAny" | "dns.resolveCname" | "dns.resolveCaa" | "dns.resolveMx" | "dns.resolveNaptr" | "dns.resolveNs" | "dns.resolvePtr" | "dns.resolveSoa" | "dns.resolveSrv" | "dns.resolveTxt" | "dns.reverse" | "dns.setDefaultResultOrder" | "dns.getDefaultResultOrder" | "dns.setServers" | "dns.promises" | "dns.promises.Resolver" | "dns.promises.cancel" | "dns.promises.getServers" | "dns.promises.lookup" | "dns.promises.lookupService" | "dns.promises.resolve" | "dns.promises.resolve4" | "dns.promises.resolve6" | "dns.promises.resolveAny" | "dns.promises.resolveCaa" | "dns.promises.resolveCname" | "dns.promises.resolveMx" | "dns.promises.resolveNaptr" | "dns.promises.resolveNs" | "dns.promises.resolvePtr" | "dns.promises.resolveSoa" | "dns.promises.resolveSrv" | "dns.promises.resolveTxt" | "dns.promises.reverse" | "dns.promises.setDefaultResultOrder" | "dns.promises.getDefaultResultOrder" | "dns.promises.setServers" | "dns/promises" | "dns/promises.Resolver" | "dns/promises.cancel" | "dns/promises.getServers" | "dns/promises.lookup" | "dns/promises.lookupService" | "dns/promises.resolve" | "dns/promises.resolve4" | "dns/promises.resolve6" | "dns/promises.resolveAny" | "dns/promises.resolveCaa" | "dns/promises.resolveCname" | "dns/promises.resolveMx" | "dns/promises.resolveNaptr" | "dns/promises.resolveNs" | "dns/promises.resolvePtr" | "dns/promises.resolveSoa" | "dns/promises.resolveSrv" | "dns/promises.resolveTxt" | "dns/promises.reverse" | "dns/promises.setDefaultResultOrder" | "dns/promises.getDefaultResultOrder" | "dns/promises.setServers" | "domain" | "domain.create" | "domain.Domain" | "events" | "events.Event" | "events.EventTarget" | "events.CustomEvent" | "events.NodeEventTarget" | "events.EventEmitter" | "events.EventEmitter.defaultMaxListeners" | "events.EventEmitter.errorMonitor" | "events.EventEmitter.captureRejections" | "events.EventEmitter.captureRejectionSymbol" | "events.EventEmitter.getEventListeners" | "events.EventEmitter.getMaxListeners" | "events.EventEmitter.once" | "events.EventEmitter.listenerCount" | "events.EventEmitter.on" | "events.EventEmitter.setMaxListeners" | "events.EventEmitter.addAbortListener" | "events.EventEmitterAsyncResource" | "events.EventEmitterAsyncResource.defaultMaxListeners" | "events.EventEmitterAsyncResource.errorMonitor" | "events.EventEmitterAsyncResource.captureRejections" | "events.EventEmitterAsyncResource.captureRejectionSymbol" | "events.EventEmitterAsyncResource.getEventListeners" | "events.EventEmitterAsyncResource.getMaxListeners" | "events.EventEmitterAsyncResource.once" | "events.EventEmitterAsyncResource.listenerCount" | "events.EventEmitterAsyncResource.on" | "events.EventEmitterAsyncResource.setMaxListeners" | "events.EventEmitterAsyncResource.addAbortListener" | "events.defaultMaxListeners" | "events.errorMonitor" | "events.captureRejections" | "events.captureRejectionSymbol" | "events.getEventListeners" | "events.getMaxListeners" | "events.once" | "events.listenerCount" | "events.on" | "events.setMaxListeners" | "events.addAbortListener" | "fs" | "fs.promises" | "fs.promises.FileHandle" | "fs.promises.access" | "fs.promises.appendFile" | "fs.promises.chmod" | "fs.promises.chown" | "fs.promises.constants" | "fs.promises.copyFile" | "fs.promises.cp" | "fs.promises.glob" | "fs.promises.lchmod" | "fs.promises.lchown" | "fs.promises.link" | "fs.promises.lstat" | "fs.promises.lutimes" | "fs.promises.mkdir" | "fs.promises.mkdtemp" | "fs.promises.open" | "fs.promises.opendir" | "fs.promises.readFile" | "fs.promises.readdir" | "fs.promises.readlink" | "fs.promises.realpath" | "fs.promises.rename" | "fs.promises.rm" | "fs.promises.rmdir" | "fs.promises.stat" | "fs.promises.statfs" | "fs.promises.symlink" | "fs.promises.truncate" | "fs.promises.unlink" | "fs.promises.utimes" | "fs.promises.watch" | "fs.promises.writeFile" | "fs.access" | "fs.appendFile" | "fs.chmod" | "fs.chown" | "fs.close" | "fs.copyFile" | "fs.cp" | "fs.createReadStream" | "fs.createWriteStream" | "fs.exists" | "fs.fchmod" | "fs.fchown" | "fs.fdatasync" | "fs.fstat" | "fs.fsync" | "fs.ftruncate" | "fs.futimes" | "fs.glob" | "fs.lchmod" | "fs.lchown" | "fs.link" | "fs.lstat" | "fs.lutimes" | "fs.mkdir" | "fs.mkdtemp" | "fs.native" | "fs.open" | "fs.openAsBlob" | "fs.opendir" | "fs.read" | "fs.readdir" | "fs.readFile" | "fs.readlink" | "fs.readv" | "fs.realpath" | "fs.realpath.native" | "fs.rename" | "fs.rm" | "fs.rmdir" | "fs.stat" | "fs.statfs" | "fs.symlink" | "fs.truncate" | "fs.unlink" | "fs.unwatchFile" | "fs.utimes" | "fs.watch" | "fs.watchFile" | "fs.write" | "fs.writeFile" | "fs.writev" | "fs.accessSync" | "fs.appendFileSync" | "fs.chmodSync" | "fs.chownSync" | "fs.closeSync" | "fs.copyFileSync" | "fs.cpSync" | "fs.existsSync" | "fs.fchmodSync" | "fs.fchownSync" | "fs.fdatasyncSync" | "fs.fstatSync" | "fs.fsyncSync" | "fs.ftruncateSync" | "fs.futimesSync" | "fs.globSync" | "fs.lchmodSync" | "fs.lchownSync" | "fs.linkSync" | "fs.lstatSync" | "fs.lutimesSync" | "fs.mkdirSync" | "fs.mkdtempSync" | "fs.opendirSync" | "fs.openSync" | "fs.readdirSync" | "fs.readFileSync" | "fs.readlinkSync" | "fs.readSync" | "fs.readvSync" | "fs.realpathSync" | "fs.realpathSync.native" | "fs.renameSync" | "fs.rmdirSync" | "fs.rmSync" | "fs.statfsSync" | "fs.statSync" | "fs.symlinkSync" | "fs.truncateSync" | "fs.unlinkSync" | "fs.utimesSync" | "fs.writeFileSync" | "fs.writeSync" | "fs.writevSync" | "fs.constants" | "fs.Dir" | "fs.Dirent" | "fs.FSWatcher" | "fs.StatWatcher" | "fs.ReadStream" | "fs.Stats()" | "new fs.Stats()" | "fs.Stats" | "fs.StatFs" | "fs.WriteStream" | "fs.common_objects" | "fs/promises" | "fs/promises.FileHandle" | "fs/promises.access" | "fs/promises.appendFile" | "fs/promises.chmod" | "fs/promises.chown" | "fs/promises.constants" | "fs/promises.copyFile" | "fs/promises.cp" | "fs/promises.glob" | "fs/promises.lchmod" | "fs/promises.lchown" | "fs/promises.link" | "fs/promises.lstat" | "fs/promises.lutimes" | "fs/promises.mkdir" | "fs/promises.mkdtemp" | "fs/promises.open" | "fs/promises.opendir" | "fs/promises.readFile" | "fs/promises.readdir" | "fs/promises.readlink" | "fs/promises.realpath" | "fs/promises.rename" | "fs/promises.rm" | "fs/promises.rmdir" | "fs/promises.stat" | "fs/promises.statfs" | "fs/promises.symlink" | "fs/promises.truncate" | "fs/promises.unlink" | "fs/promises.utimes" | "fs/promises.watch" | "fs/promises.writeFile" | "http2" | "http2.constants" | "http2.sensitiveHeaders" | "http2.createServer" | "http2.createSecureServer" | "http2.connect" | "http2.getDefaultSettings" | "http2.getPackedSettings" | "http2.getUnpackedSettings" | "http2.performServerHandshake" | "http2.Http2Session" | "http2.ServerHttp2Session" | "http2.ClientHttp2Session" | "http2.Http2Stream" | "http2.ClientHttp2Stream" | "http2.ServerHttp2Stream" | "http2.Http2Server" | "http2.Http2SecureServer" | "http2.Http2ServerRequest" | "http2.Http2ServerResponse" | "http" | "http.globalAgent" | "http.createServer" | "http.get" | "http.request" | "http.Agent" | "http.Server" | "inspector" | "inspector.Session" | "inspector.Network.loadingFailed" | "inspector.Network.loadingFinished" | "inspector.Network.requestWillBeSent" | "inspector.Network.responseReceived" | "inspector.console" | "inspector.close" | "inspector.open" | "inspector.url" | "inspector.waitForDebugger" | "inspector/promises" | "inspector/promises.Session" | "inspector/promises.Network.loadingFailed" | "inspector/promises.Network.loadingFinished" | "inspector/promises.Network.requestWillBeSent" | "inspector/promises.Network.responseReceived" | "inspector/promises.console" | "inspector/promises.close" | "inspector/promises.open" | "inspector/promises.url" | "inspector/promises.waitForDebugger" | "module.builtinModules" | "module.constants.compileCacheStatus" | "module.createRequire" | "module.createRequireFromPath" | "module.enableCompileCache" | "module.findPackageJSON" | "module.flushCompileCache" | "module.getCompileCacheDir" | "module.isBuiltin" | "module.register" | "module.stripTypeScriptTypes" | "module.syncBuiltinESMExports" | "module.findSourceMap" | "module.SourceMap" | "module.Module.builtinModules" | "module.Module.createRequire" | "module.Module.createRequireFromPath" | "module.Module.enableCompileCache" | "module.Module.findPackageJSON" | "module.Module.flushCompileCache" | "module.Module.getCompileCacheDir" | "module.Module.isBuiltin" | "module.Module.register" | "module.Module.stripTypeScriptTypes" | "module.Module.syncBuiltinESMExports" | "module.Module.findSourceMap" | "module.Module.SourceMap" | "net" | "net.connect" | "net.createConnection" | "net.createServer" | "net.getDefaultAutoSelectFamily" | "net.setDefaultAutoSelectFamily" | "net.getDefaultAutoSelectFamilyAttemptTimeout" | "net.setDefaultAutoSelectFamilyAttemptTimeout" | "net.isIP" | "net.isIPv4" | "net.isIPv6" | "net.BlockList" | "net.SocketAddress" | "net.Server" | "net.Socket" | "os" | "os.EOL" | "os.constants" | "os.constants.priority" | "os.devNull" | "os.availableParallelism" | "os.arch" | "os.cpus" | "os.endianness" | "os.freemem" | "os.getPriority" | "os.homedir" | "os.hostname" | "os.loadavg" | "os.machine" | "os.networkInterfaces" | "os.platform" | "os.release" | "os.setPriority" | "os.tmpdir" | "os.totalmem" | "os.type" | "os.uptime" | "os.userInfo" | "os.version" | "path" | "path.posix" | "path.posix.delimiter" | "path.posix.sep" | "path.posix.basename" | "path.posix.dirname" | "path.posix.extname" | "path.posix.format" | "path.posix.matchesGlob" | "path.posix.isAbsolute" | "path.posix.join" | "path.posix.normalize" | "path.posix.parse" | "path.posix.relative" | "path.posix.resolve" | "path.posix.toNamespacedPath" | "path.win32" | "path.win32.delimiter" | "path.win32.sep" | "path.win32.basename" | "path.win32.dirname" | "path.win32.extname" | "path.win32.format" | "path.win32.matchesGlob" | "path.win32.isAbsolute" | "path.win32.join" | "path.win32.normalize" | "path.win32.parse" | "path.win32.relative" | "path.win32.resolve" | "path.win32.toNamespacedPath" | "path.delimiter" | "path.sep" | "path.basename" | "path.dirname" | "path.extname" | "path.format" | "path.matchesGlob" | "path.isAbsolute" | "path.join" | "path.normalize" | "path.parse" | "path.relative" | "path.resolve" | "path.toNamespacedPath" | "path/posix" | "path/posix.delimiter" | "path/posix.sep" | "path/posix.basename" | "path/posix.dirname" | "path/posix.extname" | "path/posix.format" | "path/posix.matchesGlob" | "path/posix.isAbsolute" | "path/posix.join" | "path/posix.normalize" | "path/posix.parse" | "path/posix.relative" | "path/posix.resolve" | "path/posix.toNamespacedPath" | "path/win32" | "path/win32.delimiter" | "path/win32.sep" | "path/win32.basename" | "path/win32.dirname" | "path/win32.extname" | "path/win32.format" | "path/win32.matchesGlob" | "path/win32.isAbsolute" | "path/win32.join" | "path/win32.normalize" | "path/win32.parse" | "path/win32.relative" | "path/win32.resolve" | "path/win32.toNamespacedPath" | "perf_hooks" | "perf_hooks.performance" | "perf_hooks.performance.clearMarks" | "perf_hooks.performance.clearMeasures" | "perf_hooks.performance.clearResourceTimings" | "perf_hooks.performance.eventLoopUtilization" | "perf_hooks.performance.getEntries" | "perf_hooks.performance.getEntriesByName" | "perf_hooks.performance.getEntriesByType" | "perf_hooks.performance.mark" | "perf_hooks.performance.markResourceTiming" | "perf_hooks.performance.measure" | "perf_hooks.performance.nodeTiming" | "perf_hooks.performance.nodeTiming.bootstrapComplete" | "perf_hooks.performance.nodeTiming.environment" | "perf_hooks.performance.nodeTiming.idleTime" | "perf_hooks.performance.nodeTiming.loopExit" | "perf_hooks.performance.nodeTiming.loopStart" | "perf_hooks.performance.nodeTiming.nodeStart" | "perf_hooks.performance.nodeTiming.uvMetricsInfo" | "perf_hooks.performance.nodeTiming.v8Start" | "perf_hooks.performance.now" | "perf_hooks.performance.onresourcetimingbufferfull" | "perf_hooks.performance.setResourceTimingBufferSize" | "perf_hooks.performance.timeOrigin" | "perf_hooks.performance.timerify" | "perf_hooks.performance.toJSON" | "perf_hooks.createHistogram" | "perf_hooks.monitorEventLoopDelay" | "perf_hooks.PerformanceEntry" | "perf_hooks.PerformanceMark" | "perf_hooks.PerformanceMeasure" | "perf_hooks.PerformanceNodeEntry" | "perf_hooks.PerformanceNodeTiming" | "perf_hooks.PerformanceResourceTiming" | "perf_hooks.PerformanceObserver" | "perf_hooks.PerformanceObserverEntryList" | "perf_hooks.Histogram" | "perf_hooks.IntervalHistogram" | "perf_hooks.RecordableHistogram" | "punycode" | "punycode.ucs2" | "punycode.version" | "punycode.decode" | "punycode.encode" | "punycode.toASCII" | "punycode.toUnicode" | "querystring" | "querystring.decode" | "querystring.encode" | "querystring.escape" | "querystring.parse" | "querystring.stringify" | "querystring.unescape" | "readline" | "readline.promises" | "readline.promises.createInterface" | "readline.promises.Interface" | "readline.promises.Readline" | "readline.clearLine" | "readline.clearScreenDown" | "readline.createInterface" | "readline.cursorTo" | "readline.moveCursor" | "readline.Interface" | "readline.emitKeypressEvents" | "readline.InterfaceConstructor" | "readline/promises" | "readline/promises.createInterface" | "readline/promises.Interface" | "readline/promises.Readline" | "repl" | "repl.start" | "repl.writer" | "repl.REPLServer()" | "repl.REPLServer" | "repl.REPL_MODE_MAGIC" | "repl.REPL_MODE_SLOPPY" | "repl.REPL_MODE_STRICT" | "repl.Recoverable()" | "repl.Recoverable" | "repl.builtinModules" | "sea" | "sea.isSea" | "sea.getAsset" | "sea.getAssetAsBlob" | "sea.getRawAsset" | "sea.sea.isSea" | "sea.sea.getAsset" | "sea.sea.getAssetAsBlob" | "sea.sea.getRawAsset" | "stream" | "stream.promises" | "stream.promises.pipeline" | "stream.promises.finished" | "stream.finished" | "stream.pipeline" | "stream.compose" | "stream.duplexPair" | "stream.Readable" | "stream.Readable.from" | "stream.Readable.isDisturbed" | "stream.Readable.fromWeb" | "stream.Readable.toWeb" | "stream.Writable" | "stream.Writable.fromWeb" | "stream.Writable.toWeb" | "stream.Duplex" | "stream.Duplex.from" | "stream.Duplex.fromWeb" | "stream.Duplex.toWeb" | "stream.Transform" | "stream.isErrored" | "stream.isReadable" | "stream.addAbortSignal" | "stream.getDefaultHighWaterMark" | "stream.setDefaultHighWaterMark" | "stream/promises.pipeline" | "stream/promises.finished" | "stream/web" | "stream/web.ReadableStream" | "stream/web.ReadableStream.from" | "stream/web.ReadableStreamDefaultReader" | "stream/web.ReadableStreamBYOBReader" | "stream/web.ReadableStreamDefaultController" | "stream/web.ReadableByteStreamController" | "stream/web.ReadableStreamBYOBRequest" | "stream/web.WritableStream" | "stream/web.WritableStreamDefaultWriter" | "stream/web.WritableStreamDefaultController" | "stream/web.TransformStream" | "stream/web.TransformStreamDefaultController" | "stream/web.ByteLengthQueuingStrategy" | "stream/web.CountQueuingStrategy" | "stream/web.TextEncoderStream" | "stream/web.TextDecoderStream" | "stream/web.CompressionStream" | "stream/web.DecompressionStream" | "stream/consumers" | "stream/consumers.arrayBuffer" | "stream/consumers.blob" | "stream/consumers.buffer" | "stream/consumers.json" | "stream/consumers.text" | "string_decoder" | "string_decoder.StringDecoder" | "test" | "test.after" | "test.afterEach" | "test.before" | "test.beforeEach" | "test.describe" | "test.describe.only" | "test.describe.skip" | "test.describe.todo" | "test.it" | "test.it.only" | "test.it.skip" | "test.it.todo" | "test.mock" | "test.mock.fn" | "test.mock.getter" | "test.mock.method" | "test.mock.module" | "test.mock.reset" | "test.mock.restoreAll" | "test.mock.setter" | "test.mock.timers" | "test.mock.timers.enable" | "test.mock.timers.reset" | "test.mock.timers.tick" | "test.only" | "test.run" | "test.snapshot" | "test.snapshot.setDefaultSnapshotSerializers" | "test.snapshot.setResolveSnapshotPath" | "test.skip" | "test.suite" | "test.test" | "test.test.only" | "test.test.skip" | "test.test.todo" | "test.todo" | "timers" | "timers.Immediate" | "timers.Timeout" | "timers.setImmediate" | "timers.clearImmediate" | "timers.setInterval" | "timers.clearInterval" | "timers.setTimeout" | "timers.clearTimeout" | "timers.promises" | "timers.promises.setTimeout" | "timers.promises.setImmediate" | "timers.promises.setInterval" | "timers.promises.scheduler.wait" | "timers.promises.scheduler.yield" | "timers/promises" | "timers/promises.setTimeout" | "timers/promises.setImmediate" | "timers/promises.setInterval" | "timers/promises.scheduler.wait" | "timers/promises.scheduler.yield" | "tls" | "tls.rootCertificates" | "tls.DEFAULT_ECDH_CURVE" | "tls.DEFAULT_MAX_VERSION" | "tls.DEFAULT_MIN_VERSION" | "tls.DEFAULT_CIPHERS" | "tls.checkServerIdentity" | "tls.connect" | "tls.createSecureContext" | "tls.createSecurePair" | "tls.createServer" | "tls.getCiphers" | "tls.SecureContext" | "tls.CryptoStream" | "tls.SecurePair" | "tls.Server" | "tls.TLSSocket" | "trace_events" | "trace_events.createTracing" | "trace_events.getEnabledCategories" | "tty" | "tty.isatty" | "tty.ReadStream" | "tty.WriteStream" | "url" | "url.domainToASCII" | "url.domainToUnicode" | "url.fileURLToPath" | "url.format" | "url.pathToFileURL" | "url.urlToHttpOptions" | "url.URL" | "url.URL.canParse" | "url.URL.createObjectURL" | "url.URL.revokeObjectURL" | "url.URLSearchParams" | "url.Url" | "util.promisify" | "util.promisify.custom" | "util.callbackify" | "util.debuglog" | "util.debug" | "util.deprecate" | "util.format" | "util.formatWithOptions" | "util.getCallSite" | "util.getCallSites" | "util.getSystemErrorName" | "util.getSystemErrorMap" | "util.getSystemErrorMessage" | "util.inherits" | "util.inspect" | "util.inspect.custom" | "util.inspect.defaultOptions" | "util.inspect.replDefaults" | "util.isDeepStrictEqual" | "util.parseArgs" | "util.parseEnv" | "util.stripVTControlCharacters" | "util.styleText" | "util.toUSVString" | "util.transferableAbortController" | "util.transferableAbortSignal" | "util.aborted" | "util.MIMEType" | "util.MIMEParams" | "util.TextDecoder" | "util.TextEncoder" | "util.types" | "util.types.isExternal" | "util.types.isDate" | "util.types.isArgumentsObject" | "util.types.isBigIntObject" | "util.types.isBooleanObject" | "util.types.isNumberObject" | "util.types.isStringObject" | "util.types.isSymbolObject" | "util.types.isNativeError" | "util.types.isRegExp" | "util.types.isAsyncFunction" | "util.types.isGeneratorFunction" | "util.types.isGeneratorObject" | "util.types.isPromise" | "util.types.isMap" | "util.types.isSet" | "util.types.isMapIterator" | "util.types.isSetIterator" | "util.types.isWeakMap" | "util.types.isWeakSet" | "util.types.isArrayBuffer" | "util.types.isDataView" | "util.types.isSharedArrayBuffer" | "util.types.isProxy" | "util.types.isModuleNamespaceObject" | "util.types.isAnyArrayBuffer" | "util.types.isBoxedPrimitive" | "util.types.isArrayBufferView" | "util.types.isTypedArray" | "util.types.isUint8Array" | "util.types.isUint8ClampedArray" | "util.types.isUint16Array" | "util.types.isUint32Array" | "util.types.isInt8Array" | "util.types.isInt16Array" | "util.types.isInt32Array" | "util.types.isFloat32Array" | "util.types.isFloat64Array" | "util.types.isBigInt64Array" | "util.types.isBigUint64Array" | "util.types.isKeyObject" | "util.types.isCryptoKey" | "util.types.isWebAssemblyCompiledModule" | "util._extend" | "util.isArray" | "util.isBoolean" | "util.isBuffer" | "util.isDate" | "util.isError" | "util.isFunction" | "util.isNull" | "util.isNullOrUndefined" | "util.isNumber" | "util.isObject" | "util.isPrimitive" | "util.isRegExp" | "util.isString" | "util.isSymbol" | "util.isUndefined" | "util.log" | "util" | "util/types" | "util/types.isExternal" | "util/types.isDate" | "util/types.isArgumentsObject" | "util/types.isBigIntObject" | "util/types.isBooleanObject" | "util/types.isNumberObject" | "util/types.isStringObject" | "util/types.isSymbolObject" | "util/types.isNativeError" | "util/types.isRegExp" | "util/types.isAsyncFunction" | "util/types.isGeneratorFunction" | "util/types.isGeneratorObject" | "util/types.isPromise" | "util/types.isMap" | "util/types.isSet" | "util/types.isMapIterator" | "util/types.isSetIterator" | "util/types.isWeakMap" | "util/types.isWeakSet" | "util/types.isArrayBuffer" | "util/types.isDataView" | "util/types.isSharedArrayBuffer" | "util/types.isProxy" | "util/types.isModuleNamespaceObject" | "util/types.isAnyArrayBuffer" | "util/types.isBoxedPrimitive" | "util/types.isArrayBufferView" | "util/types.isTypedArray" | "util/types.isUint8Array" | "util/types.isUint8ClampedArray" | "util/types.isUint16Array" | "util/types.isUint32Array" | "util/types.isInt8Array" | "util/types.isInt16Array" | "util/types.isInt32Array" | "util/types.isFloat32Array" | "util/types.isFloat64Array" | "util/types.isBigInt64Array" | "util/types.isBigUint64Array" | "util/types.isKeyObject" | "util/types.isCryptoKey" | "util/types.isWebAssemblyCompiledModule" | "v8" | "v8.serialize" | "v8.deserialize" | "v8.Serializer" | "v8.Deserializer" | "v8.DefaultSerializer" | "v8.DefaultDeserializer" | "v8.promiseHooks" | "v8.promiseHooks.onInit" | "v8.promiseHooks.onSettled" | "v8.promiseHooks.onBefore" | "v8.promiseHooks.onAfter" | "v8.promiseHooks.createHook" | "v8.startupSnapshot" | "v8.startupSnapshot.addSerializeCallback" | "v8.startupSnapshot.addDeserializeCallback" | "v8.startupSnapshot.setDeserializeMainFunction" | "v8.startupSnapshot.isBuildingSnapshot" | "v8.cachedDataVersionTag" | "v8.getHeapCodeStatistics" | "v8.getHeapSnapshot" | "v8.getHeapSpaceStatistics" | "v8.getHeapStatistics" | "v8.queryObjects" | "v8.setFlagsFromString" | "v8.stopCoverage" | "v8.takeCoverage" | "v8.writeHeapSnapshot" | "v8.setHeapSnapshotNearHeapLimit" | "v8.GCProfiler" | "vm.constants" | "vm.compileFunction" | "vm.createContext" | "vm.isContext" | "vm.measureMemory" | "vm.runInContext" | "vm.runInNewContext" | "vm.runInThisContext" | "vm.Script" | "vm.Module" | "vm.SourceTextModule" | "vm.SyntheticModule" | "vm" | "wasi.WASI" | "wasi" | "worker_threads" | "worker_threads.isMainThread" | "worker_threads.parentPort" | "worker_threads.resourceLimits" | "worker_threads.SHARE_ENV" | "worker_threads.threadId" | "worker_threads.workerData" | "worker_threads.getEnvironmentData" | "worker_threads.markAsUncloneable" | "worker_threads.markAsUntransferable" | "worker_threads.isMarkedAsUntransferable" | "worker_threads.moveMessagePortToContext" | "worker_threads.postMessageToThread" | "worker_threads.receiveMessageOnPort" | "worker_threads.setEnvironmentData" | "worker_threads.BroadcastChannel" | "worker_threads.MessageChannel" | "worker_threads.MessagePort" | "worker_threads.Worker" | "zlib.constants" | "zlib.crc32" | "zlib.createBrotliCompress" | "zlib.createBrotliDecompress" | "zlib.createDeflate" | "zlib.createDeflateRaw" | "zlib.createGunzip" | "zlib.createGzip" | "zlib.createInflate" | "zlib.createInflateRaw" | "zlib.createUnzip" | "zlib.brotliCompress" | "zlib.brotliCompressSync" | "zlib.brotliDecompress" | "zlib.brotliDecompressSync" | "zlib.deflate" | "zlib.deflateSync" | "zlib.deflateRaw" | "zlib.deflateRawSync" | "zlib.gunzip" | "zlib.gunzipSync" | "zlib.gzip" | "zlib.gzipSync" | "zlib.inflate" | "zlib.inflateSync" | "zlib.inflateRaw" | "zlib.inflateRawSync" | "zlib.unzip" | "zlib.unzipSync" | "zlib.BrotliCompress()" | "zlib.BrotliCompress" | "zlib.BrotliDecompress()" | "zlib.BrotliDecompress" | "zlib.Deflate()" | "zlib.Deflate" | "zlib.DeflateRaw()" | "zlib.DeflateRaw" | "zlib.Gunzip()" | "zlib.Gunzip" | "zlib.Gzip()" | "zlib.Gzip" | "zlib.Inflate()" | "zlib.Inflate" | "zlib.InflateRaw()" | "zlib.InflateRaw" | "zlib.Unzip()" | "zlib.Unzip" | "zlib" | "import.meta.resolve" | "import.meta.dirname" | "import.meta.filename")[];
+  ignores?: ("__filename" | "__dirname" | "require" | "require.cache" | "require.extensions" | "require.main" | "require.resolve" | "require.resolve.paths" | "module" | "module.children" | "module.exports" | "module.filename" | "module.id" | "module.isPreloading" | "module.loaded" | "module.parent" | "module.path" | "module.paths" | "module.require" | "exports" | "AbortController" | "AbortSignal" | "AbortSignal.abort" | "AbortSignal.timeout" | "AbortSignal.any" | "DOMException" | "FormData" | "Headers" | "MessageEvent" | "Navigator" | "Request" | "Response" | "WebAssembly" | "WebSocket" | "fetch" | "global" | "queueMicrotask" | "navigator" | "navigator.hardwareConcurrency" | "navigator.language" | "navigator.languages" | "navigator.platform" | "navigator.userAgent" | "structuredClone" | "localStorage" | "sessionStorage" | "Storage" | "Blob" | "new Buffer()" | "Buffer" | "Buffer.alloc" | "Buffer.allocUnsafe" | "Buffer.allocUnsafeSlow" | "Buffer.byteLength" | "Buffer.compare" | "Buffer.concat" | "Buffer.copyBytesFrom" | "Buffer.from" | "Buffer.isBuffer" | "Buffer.isEncoding" | "File" | "atob" | "btoa" | "console" | "console.profile" | "console.profileEnd" | "console.timeStamp" | "console.Console" | "console.assert" | "console.clear" | "console.count" | "console.countReset" | "console.debug" | "console.dir" | "console.dirxml" | "console.error" | "console.group" | "console.groupCollapsed" | "console.groupEnd" | "console.info" | "console.log" | "console.table" | "console.time" | "console.timeEnd" | "console.timeLog" | "console.trace" | "console.warn" | "crypto" | "crypto.subtle" | "crypto.subtle.decrypt" | "crypto.subtle.deriveBits" | "crypto.subtle.deriveKey" | "crypto.subtle.digest" | "crypto.subtle.encrypt" | "crypto.subtle.exportKey" | "crypto.subtle.generateKey" | "crypto.subtle.importKey" | "crypto.subtle.sign" | "crypto.subtle.unwrapKey" | "crypto.subtle.verify" | "crypto.subtle.wrapKey" | "crypto.getRandomValues" | "crypto.randomUUID" | "Crypto" | "CryptoKey" | "SubtleCrypto" | "CloseEvent" | "CustomEvent" | "Event" | "EventSource" | "EventTarget" | "PerformanceEntry" | "PerformanceMark" | "PerformanceMeasure" | "PerformanceObserver" | "PerformanceObserverEntryList" | "PerformanceResourceTiming" | "performance" | "performance.clearMarks" | "performance.clearMeasures" | "performance.clearResourceTimings" | "performance.eventLoopUtilization" | "performance.getEntries" | "performance.getEntriesByName" | "performance.getEntriesByType" | "performance.mark" | "performance.markResourceTiming" | "performance.measure" | "performance.nodeTiming" | "performance.nodeTiming.bootstrapComplete" | "performance.nodeTiming.environment" | "performance.nodeTiming.idleTime" | "performance.nodeTiming.loopExit" | "performance.nodeTiming.loopStart" | "performance.nodeTiming.nodeStart" | "performance.nodeTiming.uvMetricsInfo" | "performance.nodeTiming.v8Start" | "performance.now" | "performance.onresourcetimingbufferfull" | "performance.setResourceTimingBufferSize" | "performance.timeOrigin" | "performance.timerify" | "performance.toJSON" | "process" | "process.allowedNodeEnvironmentFlags" | "process.availableMemory" | "process.arch" | "process.argv" | "process.argv0" | "process.channel" | "process.config" | "process.connected" | "process.debugPort" | "process.env" | "process.execArgv" | "process.execPath" | "process.exitCode" | "process.features.cached_builtins" | "process.features.debug" | "process.features.inspector" | "process.features.ipv6" | "process.features.require_module" | "process.features.tls" | "process.features.tls_alpn" | "process.features.tls_ocsp" | "process.features.tls_sni" | "process.features.typescript" | "process.features.uv" | "process.finalization.register" | "process.finalization.registerBeforeExit" | "process.finalization.unregister" | "process.getBuiltinModule" | "process.mainModule" | "process.noDeprecation" | "process.permission" | "process.pid" | "process.platform" | "process.ppid" | "process.release" | "process.report" | "process.report.excludeEnv" | "process.sourceMapsEnabled" | "process.stdin" | "process.stdin.isRaw" | "process.stdin.isTTY" | "process.stdin.setRawMode" | "process.stdout" | "process.stdout.clearLine" | "process.stdout.clearScreenDown" | "process.stdout.columns" | "process.stdout.cursorTo" | "process.stdout.getColorDepth" | "process.stdout.getWindowSize" | "process.stdout.hasColors" | "process.stdout.isTTY" | "process.stdout.moveCursor" | "process.stdout.rows" | "process.stderr" | "process.stderr.clearLine" | "process.stderr.clearScreenDown" | "process.stderr.columns" | "process.stderr.cursorTo" | "process.stderr.getColorDepth" | "process.stderr.getWindowSize" | "process.stderr.hasColors" | "process.stderr.isTTY" | "process.stderr.moveCursor" | "process.stderr.rows" | "process.throwDeprecation" | "process.title" | "process.traceDeprecation" | "process.version" | "process.versions" | "process.abort" | "process.chdir" | "process.constrainedMemory" | "process.cpuUsage" | "process.cwd" | "process.disconnect" | "process.dlopen" | "process.emitWarning" | "process.exit" | "process.getActiveResourcesInfo" | "process.getegid" | "process.geteuid" | "process.getgid" | "process.getgroups" | "process.getuid" | "process.hasUncaughtExceptionCaptureCallback" | "process.hrtime" | "process.hrtime.bigint" | "process.initgroups" | "process.kill" | "process.loadEnvFile" | "process.memoryUsage" | "process.rss" | "process.nextTick" | "process.resourceUsage" | "process.send" | "process.setegid" | "process.seteuid" | "process.setgid" | "process.setgroups" | "process.setuid" | "process.setSourceMapsEnabled" | "process.setUncaughtExceptionCaptureCallback" | "process.umask" | "process.uptime" | "ReadableStream" | "ReadableStream.from" | "ReadableStreamDefaultReader" | "ReadableStreamBYOBReader" | "ReadableStreamDefaultController" | "ReadableByteStreamController" | "ReadableStreamBYOBRequest" | "WritableStream" | "WritableStreamDefaultWriter" | "WritableStreamDefaultController" | "TransformStream" | "TransformStreamDefaultController" | "ByteLengthQueuingStrategy" | "CountQueuingStrategy" | "TextEncoderStream" | "TextDecoderStream" | "CompressionStream" | "DecompressionStream" | "setInterval" | "clearInterval" | "setTimeout" | "clearTimeout" | "setImmediate" | "clearImmediate" | "URL" | "URL.canParse" | "URL.createObjectURL" | "URL.revokeObjectURL" | "URLSearchParams" | "TextDecoder" | "TextEncoder" | "BroadcastChannel" | "MessageChannel" | "MessagePort" | "assert" | "assert.assert" | "assert.deepEqual" | "assert.deepStrictEqual" | "assert.doesNotMatch" | "assert.doesNotReject" | "assert.doesNotThrow" | "assert.equal" | "assert.fail" | "assert.ifError" | "assert.match" | "assert.notDeepEqual" | "assert.notDeepStrictEqual" | "assert.notEqual" | "assert.notStrictEqual" | "assert.ok" | "assert.rejects" | "assert.strictEqual" | "assert.throws" | "assert.CallTracker" | "assert.strict" | "assert.strict.assert" | "assert.strict.deepEqual" | "assert.strict.deepStrictEqual" | "assert.strict.doesNotMatch" | "assert.strict.doesNotReject" | "assert.strict.doesNotThrow" | "assert.strict.equal" | "assert.strict.fail" | "assert.strict.ifError" | "assert.strict.match" | "assert.strict.notDeepEqual" | "assert.strict.notDeepStrictEqual" | "assert.strict.notEqual" | "assert.strict.notStrictEqual" | "assert.strict.ok" | "assert.strict.rejects" | "assert.strict.strictEqual" | "assert.strict.throws" | "assert.strict.CallTracker" | "assert/strict" | "assert/strict.assert" | "assert/strict.deepEqual" | "assert/strict.deepStrictEqual" | "assert/strict.doesNotMatch" | "assert/strict.doesNotReject" | "assert/strict.doesNotThrow" | "assert/strict.equal" | "assert/strict.fail" | "assert/strict.ifError" | "assert/strict.match" | "assert/strict.notDeepEqual" | "assert/strict.notDeepStrictEqual" | "assert/strict.notEqual" | "assert/strict.notStrictEqual" | "assert/strict.ok" | "assert/strict.rejects" | "assert/strict.strictEqual" | "assert/strict.throws" | "assert/strict.CallTracker" | "async_hooks" | "async_hooks.createHook" | "async_hooks.executionAsyncResource" | "async_hooks.executionAsyncId" | "async_hooks.triggerAsyncId" | "async_hooks.AsyncLocalStorage" | "async_hooks.AsyncLocalStorage.bind" | "async_hooks.AsyncLocalStorage.snapshot" | "async_hooks.AsyncResource" | "async_hooks.AsyncResource.bind" | "buffer" | "buffer.constants" | "buffer.INSPECT_MAX_BYTES" | "buffer.kMaxLength" | "buffer.kStringMaxLength" | "buffer.atob" | "buffer.btoa" | "buffer.isAscii" | "buffer.isUtf8" | "buffer.resolveObjectURL" | "buffer.transcode" | "buffer.SlowBuffer" | "buffer.Blob" | "new buffer.Buffer()" | "buffer.Buffer" | "buffer.Buffer.alloc" | "buffer.Buffer.allocUnsafe" | "buffer.Buffer.allocUnsafeSlow" | "buffer.Buffer.byteLength" | "buffer.Buffer.compare" | "buffer.Buffer.concat" | "buffer.Buffer.copyBytesFrom" | "buffer.Buffer.from" | "buffer.Buffer.isBuffer" | "buffer.Buffer.isEncoding" | "buffer.File" | "child_process" | "child_process.exec" | "child_process.execFile" | "child_process.fork" | "child_process.spawn" | "child_process.execFileSync" | "child_process.execSync" | "child_process.spawnSync" | "child_process.ChildProcess" | "cluster" | "cluster.isMaster" | "cluster.isPrimary" | "cluster.isWorker" | "cluster.schedulingPolicy" | "cluster.settings" | "cluster.worker" | "cluster.workers" | "cluster.disconnect" | "cluster.fork" | "cluster.setupMaster" | "cluster.setupPrimary" | "cluster.Worker" | "crypto.constants" | "crypto.fips" | "crypto.webcrypto" | "crypto.webcrypto.subtle" | "crypto.webcrypto.subtle.decrypt" | "crypto.webcrypto.subtle.deriveBits" | "crypto.webcrypto.subtle.deriveKey" | "crypto.webcrypto.subtle.digest" | "crypto.webcrypto.subtle.encrypt" | "crypto.webcrypto.subtle.exportKey" | "crypto.webcrypto.subtle.generateKey" | "crypto.webcrypto.subtle.importKey" | "crypto.webcrypto.subtle.sign" | "crypto.webcrypto.subtle.unwrapKey" | "crypto.webcrypto.subtle.verify" | "crypto.webcrypto.subtle.wrapKey" | "crypto.webcrypto.getRandomValues" | "crypto.webcrypto.randomUUID" | "crypto.checkPrime" | "crypto.checkPrimeSync" | "crypto.createCipher" | "crypto.createCipheriv" | "crypto.createDecipher" | "crypto.createDecipheriv" | "crypto.createDiffieHellman" | "crypto.createDiffieHellmanGroup" | "crypto.createECDH" | "crypto.createHash" | "crypto.createHmac" | "crypto.createPrivateKey" | "crypto.createPublicKey" | "crypto.createSecretKey" | "crypto.createSign" | "crypto.createVerify" | "crypto.diffieHellman" | "crypto.generateKey" | "crypto.generateKeyPair" | "crypto.generateKeyPairSync" | "crypto.generateKeySync" | "crypto.generatePrime" | "crypto.generatePrimeSync" | "crypto.getCipherInfo" | "crypto.getCiphers" | "crypto.getCurves" | "crypto.getDiffieHellman" | "crypto.getFips" | "crypto.getHashes" | "crypto.hash" | "crypto.hkdf" | "crypto.hkdfSync" | "crypto.pbkdf2" | "crypto.pbkdf2Sync" | "crypto.privateDecrypt" | "crypto.privateEncrypt" | "crypto.publicDecrypt" | "crypto.publicEncrypt" | "crypto.randomBytes" | "crypto.randomFillSync" | "crypto.randomFill" | "crypto.randomInt" | "crypto.scrypt" | "crypto.scryptSync" | "crypto.secureHeapUsed" | "crypto.setEngine" | "crypto.setFips" | "crypto.sign" | "crypto.timingSafeEqual" | "crypto.verify" | "crypto.Certificate" | "crypto.Certificate.exportChallenge" | "crypto.Certificate.exportPublicKey" | "crypto.Certificate.verifySpkac" | "crypto.Cipher" | "crypto.Decipher" | "crypto.DiffieHellman" | "crypto.DiffieHellmanGroup" | "crypto.ECDH" | "crypto.ECDH.convertKey" | "crypto.Hash()" | "new crypto.Hash()" | "crypto.Hash" | "crypto.Hmac()" | "new crypto.Hmac()" | "crypto.Hmac" | "crypto.KeyObject" | "crypto.KeyObject.from" | "crypto.Sign" | "crypto.Verify" | "crypto.X509Certificate" | "dgram" | "dgram.createSocket" | "dgram.Socket" | "diagnostics_channel" | "diagnostics_channel.hasSubscribers" | "diagnostics_channel.channel" | "diagnostics_channel.subscribe" | "diagnostics_channel.unsubscribe" | "diagnostics_channel.tracingChannel" | "diagnostics_channel.Channel" | "diagnostics_channel.TracingChannel" | "dns" | "dns.Resolver" | "dns.getServers" | "dns.lookup" | "dns.lookupService" | "dns.resolve" | "dns.resolve4" | "dns.resolve6" | "dns.resolveAny" | "dns.resolveCname" | "dns.resolveCaa" | "dns.resolveMx" | "dns.resolveNaptr" | "dns.resolveNs" | "dns.resolvePtr" | "dns.resolveSoa" | "dns.resolveSrv" | "dns.resolveTxt" | "dns.reverse" | "dns.setDefaultResultOrder" | "dns.getDefaultResultOrder" | "dns.setServers" | "dns.promises" | "dns.promises.Resolver" | "dns.promises.cancel" | "dns.promises.getServers" | "dns.promises.lookup" | "dns.promises.lookupService" | "dns.promises.resolve" | "dns.promises.resolve4" | "dns.promises.resolve6" | "dns.promises.resolveAny" | "dns.promises.resolveCaa" | "dns.promises.resolveCname" | "dns.promises.resolveMx" | "dns.promises.resolveNaptr" | "dns.promises.resolveNs" | "dns.promises.resolvePtr" | "dns.promises.resolveSoa" | "dns.promises.resolveSrv" | "dns.promises.resolveTxt" | "dns.promises.reverse" | "dns.promises.setDefaultResultOrder" | "dns.promises.getDefaultResultOrder" | "dns.promises.setServers" | "dns/promises" | "dns/promises.Resolver" | "dns/promises.cancel" | "dns/promises.getServers" | "dns/promises.lookup" | "dns/promises.lookupService" | "dns/promises.resolve" | "dns/promises.resolve4" | "dns/promises.resolve6" | "dns/promises.resolveAny" | "dns/promises.resolveCaa" | "dns/promises.resolveCname" | "dns/promises.resolveMx" | "dns/promises.resolveNaptr" | "dns/promises.resolveNs" | "dns/promises.resolvePtr" | "dns/promises.resolveSoa" | "dns/promises.resolveSrv" | "dns/promises.resolveTxt" | "dns/promises.reverse" | "dns/promises.setDefaultResultOrder" | "dns/promises.getDefaultResultOrder" | "dns/promises.setServers" | "domain" | "domain.create" | "domain.Domain" | "events" | "events.Event" | "events.EventTarget" | "events.CustomEvent" | "events.NodeEventTarget" | "events.EventEmitter" | "events.EventEmitter.defaultMaxListeners" | "events.EventEmitter.errorMonitor" | "events.EventEmitter.captureRejections" | "events.EventEmitter.captureRejectionSymbol" | "events.EventEmitter.getEventListeners" | "events.EventEmitter.getMaxListeners" | "events.EventEmitter.once" | "events.EventEmitter.listenerCount" | "events.EventEmitter.on" | "events.EventEmitter.setMaxListeners" | "events.EventEmitter.addAbortListener" | "events.EventEmitterAsyncResource" | "events.EventEmitterAsyncResource.defaultMaxListeners" | "events.EventEmitterAsyncResource.errorMonitor" | "events.EventEmitterAsyncResource.captureRejections" | "events.EventEmitterAsyncResource.captureRejectionSymbol" | "events.EventEmitterAsyncResource.getEventListeners" | "events.EventEmitterAsyncResource.getMaxListeners" | "events.EventEmitterAsyncResource.once" | "events.EventEmitterAsyncResource.listenerCount" | "events.EventEmitterAsyncResource.on" | "events.EventEmitterAsyncResource.setMaxListeners" | "events.EventEmitterAsyncResource.addAbortListener" | "events.defaultMaxListeners" | "events.errorMonitor" | "events.captureRejections" | "events.captureRejectionSymbol" | "events.getEventListeners" | "events.getMaxListeners" | "events.once" | "events.listenerCount" | "events.on" | "events.setMaxListeners" | "events.addAbortListener" | "fs" | "fs.promises" | "fs.promises.FileHandle" | "fs.promises.access" | "fs.promises.appendFile" | "fs.promises.chmod" | "fs.promises.chown" | "fs.promises.constants" | "fs.promises.copyFile" | "fs.promises.cp" | "fs.promises.glob" | "fs.promises.lchmod" | "fs.promises.lchown" | "fs.promises.link" | "fs.promises.lstat" | "fs.promises.lutimes" | "fs.promises.mkdir" | "fs.promises.mkdtemp" | "fs.promises.open" | "fs.promises.opendir" | "fs.promises.readFile" | "fs.promises.readdir" | "fs.promises.readlink" | "fs.promises.realpath" | "fs.promises.rename" | "fs.promises.rm" | "fs.promises.rmdir" | "fs.promises.stat" | "fs.promises.statfs" | "fs.promises.symlink" | "fs.promises.truncate" | "fs.promises.unlink" | "fs.promises.utimes" | "fs.promises.watch" | "fs.promises.writeFile" | "fs.access" | "fs.appendFile" | "fs.chmod" | "fs.chown" | "fs.close" | "fs.copyFile" | "fs.cp" | "fs.createReadStream" | "fs.createWriteStream" | "fs.exists" | "fs.fchmod" | "fs.fchown" | "fs.fdatasync" | "fs.fstat" | "fs.fsync" | "fs.ftruncate" | "fs.futimes" | "fs.glob" | "fs.lchmod" | "fs.lchown" | "fs.link" | "fs.lstat" | "fs.lutimes" | "fs.mkdir" | "fs.mkdtemp" | "fs.native" | "fs.open" | "fs.openAsBlob" | "fs.opendir" | "fs.read" | "fs.readdir" | "fs.readFile" | "fs.readlink" | "fs.readv" | "fs.realpath" | "fs.realpath.native" | "fs.rename" | "fs.rm" | "fs.rmdir" | "fs.stat" | "fs.statfs" | "fs.symlink" | "fs.truncate" | "fs.unlink" | "fs.unwatchFile" | "fs.utimes" | "fs.watch" | "fs.watchFile" | "fs.write" | "fs.writeFile" | "fs.writev" | "fs.accessSync" | "fs.appendFileSync" | "fs.chmodSync" | "fs.chownSync" | "fs.closeSync" | "fs.copyFileSync" | "fs.cpSync" | "fs.existsSync" | "fs.fchmodSync" | "fs.fchownSync" | "fs.fdatasyncSync" | "fs.fstatSync" | "fs.fsyncSync" | "fs.ftruncateSync" | "fs.futimesSync" | "fs.globSync" | "fs.lchmodSync" | "fs.lchownSync" | "fs.linkSync" | "fs.lstatSync" | "fs.lutimesSync" | "fs.mkdirSync" | "fs.mkdtempSync" | "fs.opendirSync" | "fs.openSync" | "fs.readdirSync" | "fs.readFileSync" | "fs.readlinkSync" | "fs.readSync" | "fs.readvSync" | "fs.realpathSync" | "fs.realpathSync.native" | "fs.renameSync" | "fs.rmdirSync" | "fs.rmSync" | "fs.statfsSync" | "fs.statSync" | "fs.symlinkSync" | "fs.truncateSync" | "fs.unlinkSync" | "fs.utimesSync" | "fs.writeFileSync" | "fs.writeSync" | "fs.writevSync" | "fs.constants" | "fs.Dir" | "fs.Dirent" | "fs.FSWatcher" | "fs.StatWatcher" | "fs.ReadStream" | "fs.Stats()" | "new fs.Stats()" | "fs.Stats" | "fs.StatFs" | "fs.WriteStream" | "fs.common_objects" | "fs/promises" | "fs/promises.FileHandle" | "fs/promises.access" | "fs/promises.appendFile" | "fs/promises.chmod" | "fs/promises.chown" | "fs/promises.constants" | "fs/promises.copyFile" | "fs/promises.cp" | "fs/promises.glob" | "fs/promises.lchmod" | "fs/promises.lchown" | "fs/promises.link" | "fs/promises.lstat" | "fs/promises.lutimes" | "fs/promises.mkdir" | "fs/promises.mkdtemp" | "fs/promises.open" | "fs/promises.opendir" | "fs/promises.readFile" | "fs/promises.readdir" | "fs/promises.readlink" | "fs/promises.realpath" | "fs/promises.rename" | "fs/promises.rm" | "fs/promises.rmdir" | "fs/promises.stat" | "fs/promises.statfs" | "fs/promises.symlink" | "fs/promises.truncate" | "fs/promises.unlink" | "fs/promises.utimes" | "fs/promises.watch" | "fs/promises.writeFile" | "http2" | "http2.constants" | "http2.sensitiveHeaders" | "http2.createServer" | "http2.createSecureServer" | "http2.connect" | "http2.getDefaultSettings" | "http2.getPackedSettings" | "http2.getUnpackedSettings" | "http2.performServerHandshake" | "http2.Http2Session" | "http2.ServerHttp2Session" | "http2.ClientHttp2Session" | "http2.Http2Stream" | "http2.ClientHttp2Stream" | "http2.ServerHttp2Stream" | "http2.Http2Server" | "http2.Http2SecureServer" | "http2.Http2ServerRequest" | "http2.Http2ServerResponse" | "http" | "http.METHODS" | "http.STATUS_CODES" | "http.globalAgent" | "http.maxHeaderSize" | "http.createServer" | "http.get" | "http.request" | "http.validateHeaderName" | "http.validateHeaderValue" | "http.setMaxIdleHTTPParsers" | "http.Agent" | "http.ClientRequest" | "http.Server" | "http.ServerResponse" | "http.IncomingMessage" | "http.OutgoingMessage" | "http.WebSocket" | "https" | "https.globalAgent" | "https.createServer" | "https.get" | "https.request" | "https.Agent" | "https.Server" | "inspector" | "inspector.Session" | "inspector.Network.loadingFailed" | "inspector.Network.loadingFinished" | "inspector.Network.requestWillBeSent" | "inspector.Network.responseReceived" | "inspector.console" | "inspector.close" | "inspector.open" | "inspector.url" | "inspector.waitForDebugger" | "inspector/promises" | "inspector/promises.Session" | "inspector/promises.Network.loadingFailed" | "inspector/promises.Network.loadingFinished" | "inspector/promises.Network.requestWillBeSent" | "inspector/promises.Network.responseReceived" | "inspector/promises.console" | "inspector/promises.close" | "inspector/promises.open" | "inspector/promises.url" | "inspector/promises.waitForDebugger" | "module.builtinModules" | "module.constants.compileCacheStatus" | "module.createRequire" | "module.createRequireFromPath" | "module.enableCompileCache" | "module.findPackageJSON" | "module.flushCompileCache" | "module.getCompileCacheDir" | "module.isBuiltin" | "module.register" | "module.stripTypeScriptTypes" | "module.syncBuiltinESMExports" | "module.findSourceMap" | "module.SourceMap" | "module.Module.builtinModules" | "module.Module.createRequire" | "module.Module.createRequireFromPath" | "module.Module.enableCompileCache" | "module.Module.findPackageJSON" | "module.Module.flushCompileCache" | "module.Module.getCompileCacheDir" | "module.Module.isBuiltin" | "module.Module.register" | "module.Module.stripTypeScriptTypes" | "module.Module.syncBuiltinESMExports" | "module.Module.findSourceMap" | "module.Module.SourceMap" | "net" | "net.connect" | "net.createConnection" | "net.createServer" | "net.getDefaultAutoSelectFamily" | "net.setDefaultAutoSelectFamily" | "net.getDefaultAutoSelectFamilyAttemptTimeout" | "net.setDefaultAutoSelectFamilyAttemptTimeout" | "net.isIP" | "net.isIPv4" | "net.isIPv6" | "net.BlockList" | "net.SocketAddress" | "net.Server" | "net.Socket" | "os" | "os.EOL" | "os.constants" | "os.constants.priority" | "os.devNull" | "os.availableParallelism" | "os.arch" | "os.cpus" | "os.endianness" | "os.freemem" | "os.getPriority" | "os.homedir" | "os.hostname" | "os.loadavg" | "os.machine" | "os.networkInterfaces" | "os.platform" | "os.release" | "os.setPriority" | "os.tmpdir" | "os.totalmem" | "os.type" | "os.uptime" | "os.userInfo" | "os.version" | "path" | "path.posix" | "path.posix.delimiter" | "path.posix.sep" | "path.posix.basename" | "path.posix.dirname" | "path.posix.extname" | "path.posix.format" | "path.posix.matchesGlob" | "path.posix.isAbsolute" | "path.posix.join" | "path.posix.normalize" | "path.posix.parse" | "path.posix.relative" | "path.posix.resolve" | "path.posix.toNamespacedPath" | "path.win32" | "path.win32.delimiter" | "path.win32.sep" | "path.win32.basename" | "path.win32.dirname" | "path.win32.extname" | "path.win32.format" | "path.win32.matchesGlob" | "path.win32.isAbsolute" | "path.win32.join" | "path.win32.normalize" | "path.win32.parse" | "path.win32.relative" | "path.win32.resolve" | "path.win32.toNamespacedPath" | "path.delimiter" | "path.sep" | "path.basename" | "path.dirname" | "path.extname" | "path.format" | "path.matchesGlob" | "path.isAbsolute" | "path.join" | "path.normalize" | "path.parse" | "path.relative" | "path.resolve" | "path.toNamespacedPath" | "path/posix" | "path/posix.delimiter" | "path/posix.sep" | "path/posix.basename" | "path/posix.dirname" | "path/posix.extname" | "path/posix.format" | "path/posix.matchesGlob" | "path/posix.isAbsolute" | "path/posix.join" | "path/posix.normalize" | "path/posix.parse" | "path/posix.relative" | "path/posix.resolve" | "path/posix.toNamespacedPath" | "path/win32" | "path/win32.delimiter" | "path/win32.sep" | "path/win32.basename" | "path/win32.dirname" | "path/win32.extname" | "path/win32.format" | "path/win32.matchesGlob" | "path/win32.isAbsolute" | "path/win32.join" | "path/win32.normalize" | "path/win32.parse" | "path/win32.relative" | "path/win32.resolve" | "path/win32.toNamespacedPath" | "perf_hooks" | "perf_hooks.performance" | "perf_hooks.performance.clearMarks" | "perf_hooks.performance.clearMeasures" | "perf_hooks.performance.clearResourceTimings" | "perf_hooks.performance.eventLoopUtilization" | "perf_hooks.performance.getEntries" | "perf_hooks.performance.getEntriesByName" | "perf_hooks.performance.getEntriesByType" | "perf_hooks.performance.mark" | "perf_hooks.performance.markResourceTiming" | "perf_hooks.performance.measure" | "perf_hooks.performance.nodeTiming" | "perf_hooks.performance.nodeTiming.bootstrapComplete" | "perf_hooks.performance.nodeTiming.environment" | "perf_hooks.performance.nodeTiming.idleTime" | "perf_hooks.performance.nodeTiming.loopExit" | "perf_hooks.performance.nodeTiming.loopStart" | "perf_hooks.performance.nodeTiming.nodeStart" | "perf_hooks.performance.nodeTiming.uvMetricsInfo" | "perf_hooks.performance.nodeTiming.v8Start" | "perf_hooks.performance.now" | "perf_hooks.performance.onresourcetimingbufferfull" | "perf_hooks.performance.setResourceTimingBufferSize" | "perf_hooks.performance.timeOrigin" | "perf_hooks.performance.timerify" | "perf_hooks.performance.toJSON" | "perf_hooks.createHistogram" | "perf_hooks.monitorEventLoopDelay" | "perf_hooks.PerformanceEntry" | "perf_hooks.PerformanceMark" | "perf_hooks.PerformanceMeasure" | "perf_hooks.PerformanceNodeEntry" | "perf_hooks.PerformanceNodeTiming" | "perf_hooks.PerformanceResourceTiming" | "perf_hooks.PerformanceObserver" | "perf_hooks.PerformanceObserverEntryList" | "perf_hooks.Histogram" | "perf_hooks.IntervalHistogram" | "perf_hooks.RecordableHistogram" | "punycode" | "punycode.ucs2" | "punycode.version" | "punycode.decode" | "punycode.encode" | "punycode.toASCII" | "punycode.toUnicode" | "querystring" | "querystring.decode" | "querystring.encode" | "querystring.escape" | "querystring.parse" | "querystring.stringify" | "querystring.unescape" | "readline" | "readline.promises" | "readline.promises.createInterface" | "readline.promises.Interface" | "readline.promises.Readline" | "readline.clearLine" | "readline.clearScreenDown" | "readline.createInterface" | "readline.cursorTo" | "readline.moveCursor" | "readline.Interface" | "readline.emitKeypressEvents" | "readline.InterfaceConstructor" | "readline/promises" | "readline/promises.createInterface" | "readline/promises.Interface" | "readline/promises.Readline" | "repl" | "repl.start" | "repl.writer" | "repl.REPLServer()" | "repl.REPLServer" | "repl.REPL_MODE_MAGIC" | "repl.REPL_MODE_SLOPPY" | "repl.REPL_MODE_STRICT" | "repl.Recoverable()" | "repl.Recoverable" | "repl.builtinModules" | "sea" | "sea.isSea" | "sea.getAsset" | "sea.getAssetAsBlob" | "sea.getRawAsset" | "sea.sea.isSea" | "sea.sea.getAsset" | "sea.sea.getAssetAsBlob" | "sea.sea.getRawAsset" | "stream" | "stream.promises" | "stream.promises.pipeline" | "stream.promises.finished" | "stream.finished" | "stream.pipeline" | "stream.compose" | "stream.duplexPair" | "stream.Readable" | "stream.Readable.from" | "stream.Readable.isDisturbed" | "stream.Readable.fromWeb" | "stream.Readable.toWeb" | "stream.Writable" | "stream.Writable.fromWeb" | "stream.Writable.toWeb" | "stream.Duplex" | "stream.Duplex.from" | "stream.Duplex.fromWeb" | "stream.Duplex.toWeb" | "stream.Transform" | "stream.isErrored" | "stream.isReadable" | "stream.addAbortSignal" | "stream.getDefaultHighWaterMark" | "stream.setDefaultHighWaterMark" | "stream/promises.pipeline" | "stream/promises.finished" | "stream/web" | "stream/web.ReadableStream" | "stream/web.ReadableStream.from" | "stream/web.ReadableStreamDefaultReader" | "stream/web.ReadableStreamBYOBReader" | "stream/web.ReadableStreamDefaultController" | "stream/web.ReadableByteStreamController" | "stream/web.ReadableStreamBYOBRequest" | "stream/web.WritableStream" | "stream/web.WritableStreamDefaultWriter" | "stream/web.WritableStreamDefaultController" | "stream/web.TransformStream" | "stream/web.TransformStreamDefaultController" | "stream/web.ByteLengthQueuingStrategy" | "stream/web.CountQueuingStrategy" | "stream/web.TextEncoderStream" | "stream/web.TextDecoderStream" | "stream/web.CompressionStream" | "stream/web.DecompressionStream" | "stream/consumers" | "stream/consumers.arrayBuffer" | "stream/consumers.blob" | "stream/consumers.buffer" | "stream/consumers.json" | "stream/consumers.text" | "string_decoder" | "string_decoder.StringDecoder" | "sqlite" | "sqlite.DatabaseSync" | "sqlite.StatementSync" | "sqlite.SQLITE_CHANGESET_OMIT" | "sqlite.SQLITE_CHANGESET_REPLACE" | "sqlite.SQLITE_CHANGESET_ABORT" | "test" | "test.after" | "test.afterEach" | "test.before" | "test.beforeEach" | "test.describe" | "test.describe.only" | "test.describe.skip" | "test.describe.todo" | "test.it" | "test.it.only" | "test.it.skip" | "test.it.todo" | "test.mock" | "test.mock.fn" | "test.mock.getter" | "test.mock.method" | "test.mock.module" | "test.mock.reset" | "test.mock.restoreAll" | "test.mock.setter" | "test.mock.timers" | "test.mock.timers.enable" | "test.mock.timers.reset" | "test.mock.timers.tick" | "test.only" | "test.run" | "test.snapshot" | "test.snapshot.setDefaultSnapshotSerializers" | "test.snapshot.setResolveSnapshotPath" | "test.skip" | "test.suite" | "test.test" | "test.test.only" | "test.test.skip" | "test.test.todo" | "test.todo" | "timers" | "timers.Immediate" | "timers.Timeout" | "timers.setImmediate" | "timers.clearImmediate" | "timers.setInterval" | "timers.clearInterval" | "timers.setTimeout" | "timers.clearTimeout" | "timers.promises" | "timers.promises.setTimeout" | "timers.promises.setImmediate" | "timers.promises.setInterval" | "timers.promises.scheduler.wait" | "timers.promises.scheduler.yield" | "timers/promises" | "timers/promises.setTimeout" | "timers/promises.setImmediate" | "timers/promises.setInterval" | "timers/promises.scheduler.wait" | "timers/promises.scheduler.yield" | "tls" | "tls.rootCertificates" | "tls.DEFAULT_ECDH_CURVE" | "tls.DEFAULT_MAX_VERSION" | "tls.DEFAULT_MIN_VERSION" | "tls.DEFAULT_CIPHERS" | "tls.checkServerIdentity" | "tls.connect" | "tls.createSecureContext" | "tls.createSecurePair" | "tls.createServer" | "tls.getCiphers" | "tls.SecureContext" | "tls.CryptoStream" | "tls.SecurePair" | "tls.Server" | "tls.TLSSocket" | "trace_events" | "trace_events.createTracing" | "trace_events.getEnabledCategories" | "tty" | "tty.isatty" | "tty.ReadStream" | "tty.WriteStream" | "url" | "url.domainToASCII" | "url.domainToUnicode" | "url.fileURLToPath" | "url.format" | "url.pathToFileURL" | "url.urlToHttpOptions" | "url.URL" | "url.URL.canParse" | "url.URL.createObjectURL" | "url.URL.revokeObjectURL" | "url.URLSearchParams" | "url.Url" | "util.promisify" | "util.promisify.custom" | "util.callbackify" | "util.debuglog" | "util.debug" | "util.deprecate" | "util.format" | "util.formatWithOptions" | "util.getCallSite" | "util.getCallSites" | "util.getSystemErrorName" | "util.getSystemErrorMap" | "util.getSystemErrorMessage" | "util.inherits" | "util.inspect" | "util.inspect.custom" | "util.inspect.defaultOptions" | "util.inspect.replDefaults" | "util.isDeepStrictEqual" | "util.parseArgs" | "util.parseEnv" | "util.stripVTControlCharacters" | "util.styleText" | "util.toUSVString" | "util.transferableAbortController" | "util.transferableAbortSignal" | "util.aborted" | "util.MIMEType" | "util.MIMEParams" | "util.TextDecoder" | "util.TextEncoder" | "util.types" | "util.types.isExternal" | "util.types.isDate" | "util.types.isArgumentsObject" | "util.types.isBigIntObject" | "util.types.isBooleanObject" | "util.types.isNumberObject" | "util.types.isStringObject" | "util.types.isSymbolObject" | "util.types.isNativeError" | "util.types.isRegExp" | "util.types.isAsyncFunction" | "util.types.isGeneratorFunction" | "util.types.isGeneratorObject" | "util.types.isPromise" | "util.types.isMap" | "util.types.isSet" | "util.types.isMapIterator" | "util.types.isSetIterator" | "util.types.isWeakMap" | "util.types.isWeakSet" | "util.types.isArrayBuffer" | "util.types.isDataView" | "util.types.isSharedArrayBuffer" | "util.types.isProxy" | "util.types.isModuleNamespaceObject" | "util.types.isAnyArrayBuffer" | "util.types.isBoxedPrimitive" | "util.types.isArrayBufferView" | "util.types.isTypedArray" | "util.types.isUint8Array" | "util.types.isUint8ClampedArray" | "util.types.isUint16Array" | "util.types.isUint32Array" | "util.types.isInt8Array" | "util.types.isInt16Array" | "util.types.isInt32Array" | "util.types.isFloat32Array" | "util.types.isFloat64Array" | "util.types.isBigInt64Array" | "util.types.isBigUint64Array" | "util.types.isKeyObject" | "util.types.isCryptoKey" | "util.types.isWebAssemblyCompiledModule" | "util._extend" | "util.isArray" | "util.isBoolean" | "util.isBuffer" | "util.isDate" | "util.isError" | "util.isFunction" | "util.isNull" | "util.isNullOrUndefined" | "util.isNumber" | "util.isObject" | "util.isPrimitive" | "util.isRegExp" | "util.isString" | "util.isSymbol" | "util.isUndefined" | "util.log" | "util" | "util/types" | "util/types.isExternal" | "util/types.isDate" | "util/types.isArgumentsObject" | "util/types.isBigIntObject" | "util/types.isBooleanObject" | "util/types.isNumberObject" | "util/types.isStringObject" | "util/types.isSymbolObject" | "util/types.isNativeError" | "util/types.isRegExp" | "util/types.isAsyncFunction" | "util/types.isGeneratorFunction" | "util/types.isGeneratorObject" | "util/types.isPromise" | "util/types.isMap" | "util/types.isSet" | "util/types.isMapIterator" | "util/types.isSetIterator" | "util/types.isWeakMap" | "util/types.isWeakSet" | "util/types.isArrayBuffer" | "util/types.isDataView" | "util/types.isSharedArrayBuffer" | "util/types.isProxy" | "util/types.isModuleNamespaceObject" | "util/types.isAnyArrayBuffer" | "util/types.isBoxedPrimitive" | "util/types.isArrayBufferView" | "util/types.isTypedArray" | "util/types.isUint8Array" | "util/types.isUint8ClampedArray" | "util/types.isUint16Array" | "util/types.isUint32Array" | "util/types.isInt8Array" | "util/types.isInt16Array" | "util/types.isInt32Array" | "util/types.isFloat32Array" | "util/types.isFloat64Array" | "util/types.isBigInt64Array" | "util/types.isBigUint64Array" | "util/types.isKeyObject" | "util/types.isCryptoKey" | "util/types.isWebAssemblyCompiledModule" | "v8" | "v8.serialize" | "v8.deserialize" | "v8.Serializer" | "v8.Deserializer" | "v8.DefaultSerializer" | "v8.DefaultDeserializer" | "v8.promiseHooks" | "v8.promiseHooks.onInit" | "v8.promiseHooks.onSettled" | "v8.promiseHooks.onBefore" | "v8.promiseHooks.onAfter" | "v8.promiseHooks.createHook" | "v8.startupSnapshot" | "v8.startupSnapshot.addSerializeCallback" | "v8.startupSnapshot.addDeserializeCallback" | "v8.startupSnapshot.setDeserializeMainFunction" | "v8.startupSnapshot.isBuildingSnapshot" | "v8.cachedDataVersionTag" | "v8.getHeapCodeStatistics" | "v8.getHeapSnapshot" | "v8.getHeapSpaceStatistics" | "v8.getHeapStatistics" | "v8.queryObjects" | "v8.setFlagsFromString" | "v8.stopCoverage" | "v8.takeCoverage" | "v8.writeHeapSnapshot" | "v8.setHeapSnapshotNearHeapLimit" | "v8.GCProfiler" | "vm.constants" | "vm.compileFunction" | "vm.createContext" | "vm.isContext" | "vm.measureMemory" | "vm.runInContext" | "vm.runInNewContext" | "vm.runInThisContext" | "vm.Script" | "vm.Module" | "vm.SourceTextModule" | "vm.SyntheticModule" | "vm" | "wasi.WASI" | "wasi" | "worker_threads" | "worker_threads.isMainThread" | "worker_threads.parentPort" | "worker_threads.resourceLimits" | "worker_threads.SHARE_ENV" | "worker_threads.threadId" | "worker_threads.workerData" | "worker_threads.getEnvironmentData" | "worker_threads.markAsUncloneable" | "worker_threads.markAsUntransferable" | "worker_threads.isMarkedAsUntransferable" | "worker_threads.moveMessagePortToContext" | "worker_threads.postMessageToThread" | "worker_threads.receiveMessageOnPort" | "worker_threads.setEnvironmentData" | "worker_threads.BroadcastChannel" | "worker_threads.MessageChannel" | "worker_threads.MessagePort" | "worker_threads.Worker" | "zlib.constants" | "zlib.crc32" | "zlib.createBrotliCompress" | "zlib.createBrotliDecompress" | "zlib.createDeflate" | "zlib.createDeflateRaw" | "zlib.createGunzip" | "zlib.createGzip" | "zlib.createInflate" | "zlib.createInflateRaw" | "zlib.createUnzip" | "zlib.brotliCompress" | "zlib.brotliCompressSync" | "zlib.brotliDecompress" | "zlib.brotliDecompressSync" | "zlib.deflate" | "zlib.deflateSync" | "zlib.deflateRaw" | "zlib.deflateRawSync" | "zlib.gunzip" | "zlib.gunzipSync" | "zlib.gzip" | "zlib.gzipSync" | "zlib.inflate" | "zlib.inflateSync" | "zlib.inflateRaw" | "zlib.inflateRawSync" | "zlib.unzip" | "zlib.unzipSync" | "zlib.BrotliCompress()" | "zlib.BrotliCompress" | "zlib.BrotliDecompress()" | "zlib.BrotliDecompress" | "zlib.Deflate()" | "zlib.Deflate" | "zlib.DeflateRaw()" | "zlib.DeflateRaw" | "zlib.Gunzip()" | "zlib.Gunzip" | "zlib.Gzip()" | "zlib.Gzip" | "zlib.Inflate()" | "zlib.Inflate" | "zlib.InflateRaw()" | "zlib.InflateRaw" | "zlib.Unzip()" | "zlib.Unzip" | "zlib" | "import.meta.resolve" | "import.meta.dirname" | "import.meta.filename")[];
 }];
 // ----- node/prefer-global/buffer -----
 type NodePreferGlobalBuffer = [] | [("always" | "never")];
@@ -9821,7 +9852,6 @@ type PerfectionistSortArrayIncludes = {
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -9835,18 +9865,17 @@ type PerfectionistSortArrayIncludes = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     anyOf?: {
       selector?: ("literal" | "spread");
       elementNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
     }[];
@@ -9855,55 +9884,54 @@ type PerfectionistSortArrayIncludes = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     selector?: ("literal" | "spread");
     elementNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   })[];
   useConfigurationIf?: {
     allNamesMatchPattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   };
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }[];
 // ----- perfectionist/sort-classes -----
@@ -9911,7 +9939,6 @@ type PerfectionistSortClasses = [] | [{
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -9924,33 +9951,32 @@ type PerfectionistSortClasses = [] | [{
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     anyOf?: {
       modifiers?: ("async" | "protected" | "private" | "public" | "static" | "abstract" | "override" | "readonly" | "decorated" | "declare" | "optional")[];
       selector?: ("accessor-property" | "index-signature" | "constructor" | "static-block" | "get-method" | "set-method" | "function-property" | "property" | "method");
       decoratorNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
       elementValuePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
       elementNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
     }[];
@@ -9959,68 +9985,67 @@ type PerfectionistSortClasses = [] | [{
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     modifiers?: ("async" | "protected" | "private" | "public" | "static" | "abstract" | "override" | "readonly" | "decorated" | "declare" | "optional")[];
     selector?: ("accessor-property" | "index-signature" | "constructor" | "static-block" | "get-method" | "set-method" | "function-property" | "property" | "method");
     decoratorNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     elementValuePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     elementNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   })[];
   ignoreCallbackDependenciesPatterns?: (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string));
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }];
 // ----- perfectionist/sort-decorators -----
@@ -10028,7 +10053,6 @@ type PerfectionistSortDecorators = [] | [{
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -10042,24 +10066,24 @@ type PerfectionistSortDecorators = [] | [{
   sortOnMethods?: boolean;
   sortOnClasses?: boolean;
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
@@ -10067,7 +10091,7 @@ type PerfectionistSortDecorators = [] | [{
     [k: string]: (string | string[]) | undefined;
   };
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }];
 // ----- perfectionist/sort-enums -----
@@ -10075,7 +10099,6 @@ type PerfectionistSortEnums = [] | [{
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -10083,7 +10106,6 @@ type PerfectionistSortEnums = [] | [{
   locales?: (string | string[]);
   order?: ("asc" | "desc");
   type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-  forceNumericSort?: boolean;
   customGroups?: ({
     [k: string]: (string | string[]) | undefined;
   } | ({
@@ -10091,24 +10113,23 @@ type PerfectionistSortEnums = [] | [{
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     anyOf?: {
       elementValuePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
       elementNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
     }[];
@@ -10117,53 +10138,53 @@ type PerfectionistSortEnums = [] | [{
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     elementValuePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     elementNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   })[]);
+  forceNumericSort?: boolean;
   sortByValue?: boolean;
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }];
 // ----- perfectionist/sort-exports -----
@@ -10171,7 +10192,6 @@ type PerfectionistSortExports = {
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -10185,19 +10205,18 @@ type PerfectionistSortExports = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     anyOf?: {
       modifiers?: ("value" | "type")[];
       selector?: "export";
       elementNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
     }[];
@@ -10206,47 +10225,46 @@ type PerfectionistSortExports = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     modifiers?: ("value" | "type")[];
     selector?: "export";
     elementNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   })[];
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }[];
 // ----- perfectionist/sort-heritage-clauses -----
@@ -10254,7 +10272,6 @@ type PerfectionistSortHeritageClauses = [] | [{
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -10266,17 +10283,126 @@ type PerfectionistSortHeritageClauses = [] | [{
     [k: string]: (string | string[]) | undefined;
   };
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }];
 // ----- perfectionist/sort-imports -----
-
+type PerfectionistSortImports = {
+  fallbackSort?: {
+    order?: ("asc" | "desc");
+    type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+  };
+  specialCharacters?: ("remove" | "trim" | "keep");
+  ignoreCase?: boolean;
+  alphabet?: string;
+  locales?: (string | string[]);
+  order?: ("asc" | "desc");
+  type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+  customGroups?: ({
+    value?: {
+      [k: string]: (string | string[]) | undefined;
+    };
+    type?: {
+      [k: string]: (string | string[]) | undefined;
+    };
+  } | ({
+    newlinesInside?: ("always" | "never");
+    fallbackSort?: {
+      order?: ("asc" | "desc");
+      type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    };
+    groupName: string;
+    order?: ("asc" | "desc");
+    type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    anyOf?: {
+      modifiers?: ("default" | "named" | "require" | "side-effect" | "ts-equals" | "type" | "value" | "wildcard")[];
+      selector?: ("side-effect-style" | "tsconfig-path" | "side-effect" | "external" | "internal" | "builtin" | "sibling" | "subpath" | "import" | "parent" | "index" | "style" | "type");
+      elementValuePattern?: (({
+        pattern: string;
+        flags?: string;
+      } | string)[] | ({
+        pattern: string;
+        flags?: string;
+      } | string));
+      elementNamePattern?: (({
+        pattern: string;
+        flags?: string;
+      } | string)[] | ({
+        pattern: string;
+        flags?: string;
+      } | string));
+    }[];
+  } | {
+    newlinesInside?: ("always" | "never");
+    fallbackSort?: {
+      order?: ("asc" | "desc");
+      type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    };
+    groupName: string;
+    order?: ("asc" | "desc");
+    type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    modifiers?: ("default" | "named" | "require" | "side-effect" | "ts-equals" | "type" | "value" | "wildcard")[];
+    selector?: ("side-effect-style" | "tsconfig-path" | "side-effect" | "external" | "internal" | "builtin" | "sibling" | "subpath" | "import" | "parent" | "index" | "style" | "type");
+    elementValuePattern?: (({
+      pattern: string;
+      flags?: string;
+    } | string)[] | ({
+      pattern: string;
+      flags?: string;
+    } | string));
+    elementNamePattern?: (({
+      pattern: string;
+      flags?: string;
+    } | string)[] | ({
+      pattern: string;
+      flags?: string;
+    } | string));
+  })[]);
+  maxLineLength?: number;
+  sortSideEffects?: boolean;
+  environment?: ("node" | "bun");
+  tsconfigRootDir?: string;
+  partitionByComment?: (boolean | (({
+    pattern: string;
+    flags?: string;
+  } | string)[] | ({
+    pattern: string;
+    flags?: string;
+  } | string)) | {
+    block?: (boolean | (({
+      pattern: string;
+      flags?: string;
+    } | string)[] | ({
+      pattern: string;
+      flags?: string;
+    } | string)));
+    line?: (boolean | (({
+      pattern: string;
+      flags?: string;
+    } | string)[] | ({
+      pattern: string;
+      flags?: string;
+    } | string)));
+  });
+  partitionByNewLine?: boolean;
+  newlinesBetween?: ("ignore" | "always" | "never");
+  internalPattern?: (({
+    pattern: string;
+    flags?: string;
+  } | string)[] | ({
+    pattern: string;
+    flags?: string;
+  } | string));
+  groups?: (string | string[] | {
+    newlinesBetween: ("ignore" | "always" | "never");
+  })[];
+}[];
 // ----- perfectionist/sort-interfaces -----
 type PerfectionistSortInterfaces = {
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
+    sortBy?: ("name" | "value");
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -10292,26 +10418,25 @@ type PerfectionistSortInterfaces = {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
       sortBy?: ("name" | "value");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     anyOf?: {
       modifiers?: ("optional" | "required" | "multiline")[];
       selector?: ("index-signature" | "member" | "method" | "multiline" | "property");
       elementValuePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
       elementNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
       sortBy?: ("name" | "value");
@@ -10322,25 +10447,24 @@ type PerfectionistSortInterfaces = {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
       sortBy?: ("name" | "value");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     modifiers?: ("optional" | "required" | "multiline")[];
     selector?: ("index-signature" | "member" | "method" | "multiline" | "property");
     elementValuePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     elementNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     sortBy?: ("name" | "value");
@@ -10348,62 +10472,61 @@ type PerfectionistSortInterfaces = {
   groupKind?: ("mixed" | "required-first" | "optional-first");
   useConfigurationIf?: {
     allNamesMatchPattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     declarationMatchesPattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   };
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   ignorePattern?: (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string));
   sortBy?: ("name" | "value");
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }[];
 // ----- perfectionist/sort-intersection-types -----
-type PerfectionistSortIntersectionTypes = [] | [{
+type PerfectionistSortIntersectionTypes = {
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -10411,40 +10534,76 @@ type PerfectionistSortIntersectionTypes = [] | [{
   locales?: (string | string[]);
   order?: ("asc" | "desc");
   type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+  customGroups?: ({
+    newlinesInside?: ("always" | "never");
+    fallbackSort?: {
+      order?: ("asc" | "desc");
+      type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    };
+    groupName: string;
+    order?: ("asc" | "desc");
+    type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    anyOf?: {
+      selector?: ("intersection" | "conditional" | "function" | "operator" | "keyword" | "literal" | "nullish" | "import" | "object" | "named" | "tuple" | "union");
+      elementNamePattern?: (({
+        pattern: string;
+        flags?: string;
+      } | string)[] | ({
+        pattern: string;
+        flags?: string;
+      } | string));
+    }[];
+  } | {
+    newlinesInside?: ("always" | "never");
+    fallbackSort?: {
+      order?: ("asc" | "desc");
+      type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    };
+    groupName: string;
+    order?: ("asc" | "desc");
+    type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    selector?: ("intersection" | "conditional" | "function" | "operator" | "keyword" | "literal" | "nullish" | "import" | "object" | "named" | "tuple" | "union");
+    elementNamePattern?: (({
+      pattern: string;
+      flags?: string;
+    } | string)[] | ({
+      pattern: string;
+      flags?: string;
+    } | string));
+  })[];
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
-}];
+}[];
 // ----- perfectionist/sort-jsx-props -----
 type PerfectionistSortJsxProps = {
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -10459,26 +10618,25 @@ type PerfectionistSortJsxProps = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     anyOf?: {
       modifiers?: ("shorthand" | "multiline")[];
       selector?: ("multiline" | "prop" | "shorthand");
       elementValuePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
       elementNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
     }[];
@@ -10487,55 +10645,54 @@ type PerfectionistSortJsxProps = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     modifiers?: ("shorthand" | "multiline")[];
     selector?: ("multiline" | "prop" | "shorthand");
     elementValuePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     elementNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   })[]);
   useConfigurationIf?: {
     allNamesMatchPattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     tagMatchesPattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   };
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   ignorePattern?: (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string));
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }[];
 // ----- perfectionist/sort-maps -----
@@ -10543,7 +10700,6 @@ type PerfectionistSortMaps = {
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -10556,17 +10712,16 @@ type PerfectionistSortMaps = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     anyOf?: {
       elementNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
     }[];
@@ -10575,54 +10730,53 @@ type PerfectionistSortMaps = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     elementNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   })[];
   useConfigurationIf?: {
     allNamesMatchPattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   };
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }[];
 // ----- perfectionist/sort-modules -----
@@ -10630,7 +10784,6 @@ type PerfectionistSortModules = [] | [{
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -10643,26 +10796,25 @@ type PerfectionistSortModules = [] | [{
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     anyOf?: {
       modifiers?: ("async" | "declare" | "decorated" | "default" | "export")[];
       selector?: ("enum" | "function" | "interface" | "type" | "class");
       decoratorNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
       elementNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
     }[];
@@ -10671,54 +10823,53 @@ type PerfectionistSortModules = [] | [{
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     modifiers?: ("async" | "declare" | "decorated" | "default" | "export")[];
     selector?: ("enum" | "function" | "interface" | "type" | "class");
     decoratorNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     elementNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   })[];
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }];
 // ----- perfectionist/sort-named-exports -----
@@ -10726,7 +10877,6 @@ type PerfectionistSortNamedExports = {
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -10741,19 +10891,18 @@ type PerfectionistSortNamedExports = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     anyOf?: {
       modifiers?: ("value" | "type")[];
       selector?: "export";
       elementNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
     }[];
@@ -10762,47 +10911,46 @@ type PerfectionistSortNamedExports = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     modifiers?: ("value" | "type")[];
     selector?: "export";
     elementNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   })[];
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }[];
 // ----- perfectionist/sort-named-imports -----
@@ -10810,7 +10958,6 @@ type PerfectionistSortNamedImports = {
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -10825,19 +10972,18 @@ type PerfectionistSortNamedImports = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     anyOf?: {
       modifiers?: ("value" | "type")[];
       selector?: "import";
       elementNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
     }[];
@@ -10846,47 +10992,46 @@ type PerfectionistSortNamedImports = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     modifiers?: ("value" | "type")[];
     selector?: "import";
     elementNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   })[];
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }[];
 // ----- perfectionist/sort-object-types -----
@@ -10894,7 +11039,7 @@ type PerfectionistSortObjectTypes = {
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
+    sortBy?: ("name" | "value");
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -10910,26 +11055,25 @@ type PerfectionistSortObjectTypes = {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
       sortBy?: ("name" | "value");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     anyOf?: {
       modifiers?: ("optional" | "required" | "multiline")[];
       selector?: ("index-signature" | "member" | "method" | "multiline" | "property");
       elementValuePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
       elementNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
       sortBy?: ("name" | "value");
@@ -10940,25 +11084,24 @@ type PerfectionistSortObjectTypes = {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
       sortBy?: ("name" | "value");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     modifiers?: ("optional" | "required" | "multiline")[];
     selector?: ("index-signature" | "member" | "method" | "multiline" | "property");
     elementValuePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     elementNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     sortBy?: ("name" | "value");
@@ -10966,54 +11109,54 @@ type PerfectionistSortObjectTypes = {
   groupKind?: ("mixed" | "required-first" | "optional-first");
   useConfigurationIf?: {
     allNamesMatchPattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     declarationMatchesPattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   };
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   ignorePattern?: (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string));
   sortBy?: ("name" | "value");
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }[];
 // ----- perfectionist/sort-objects -----
@@ -11021,7 +11164,6 @@ type PerfectionistSortObjects = {
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -11039,26 +11181,25 @@ type PerfectionistSortObjects = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     anyOf?: {
       modifiers?: ("optional" | "required" | "multiline")[];
       selector?: ("member" | "method" | "multiline" | "property");
       elementValuePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
       elementNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
     }[];
@@ -11067,41 +11208,40 @@ type PerfectionistSortObjects = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     modifiers?: ("optional" | "required" | "multiline")[];
     selector?: ("member" | "method" | "multiline" | "property");
     elementValuePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     elementNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   })[]);
   useConfigurationIf?: {
     allNamesMatchPattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
     callingFunctionNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   };
@@ -11109,38 +11249,38 @@ type PerfectionistSortObjects = {
   objectDeclarations?: boolean;
   styledComponents?: boolean;
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   ignorePattern?: (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string));
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }[];
 // ----- perfectionist/sort-sets -----
@@ -11148,7 +11288,6 @@ type PerfectionistSortSets = {
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -11162,18 +11301,17 @@ type PerfectionistSortSets = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     anyOf?: {
       selector?: ("literal" | "spread");
       elementNamePattern?: (({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string)[] | ({
-        pattern?: string;
+        pattern: string;
         flags?: string;
       } | string));
     }[];
@@ -11182,55 +11320,54 @@ type PerfectionistSortSets = {
     fallbackSort?: {
       order?: ("asc" | "desc");
       type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-      [k: string]: unknown | undefined;
     };
-    groupName?: string;
+    groupName: string;
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
     selector?: ("literal" | "spread");
     elementNamePattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   })[];
   useConfigurationIf?: {
     allNamesMatchPattern?: (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string));
   };
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
 }[];
 // ----- perfectionist/sort-switch-case -----
@@ -11238,7 +11375,6 @@ type PerfectionistSortSwitchCase = [] | [{
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -11248,11 +11384,10 @@ type PerfectionistSortSwitchCase = [] | [{
   type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
 }];
 // ----- perfectionist/sort-union-types -----
-type PerfectionistSortUnionTypes = [] | [{
+type PerfectionistSortUnionTypes = {
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -11260,40 +11395,76 @@ type PerfectionistSortUnionTypes = [] | [{
   locales?: (string | string[]);
   order?: ("asc" | "desc");
   type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+  customGroups?: ({
+    newlinesInside?: ("always" | "never");
+    fallbackSort?: {
+      order?: ("asc" | "desc");
+      type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    };
+    groupName: string;
+    order?: ("asc" | "desc");
+    type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    anyOf?: {
+      selector?: ("intersection" | "conditional" | "function" | "operator" | "keyword" | "literal" | "nullish" | "import" | "object" | "named" | "tuple" | "union");
+      elementNamePattern?: (({
+        pattern: string;
+        flags?: string;
+      } | string)[] | ({
+        pattern: string;
+        flags?: string;
+      } | string));
+    }[];
+  } | {
+    newlinesInside?: ("always" | "never");
+    fallbackSort?: {
+      order?: ("asc" | "desc");
+      type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    };
+    groupName: string;
+    order?: ("asc" | "desc");
+    type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    selector?: ("intersection" | "conditional" | "function" | "operator" | "keyword" | "literal" | "nullish" | "import" | "object" | "named" | "tuple" | "union");
+    elementNamePattern?: (({
+      pattern: string;
+      flags?: string;
+    } | string)[] | ({
+      pattern: string;
+      flags?: string;
+    } | string));
+  })[];
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween?: ("ignore" | "always" | "never");
+    newlinesBetween: ("ignore" | "always" | "never");
   })[];
-}];
+}[];
 // ----- perfectionist/sort-variable-declarations -----
 type PerfectionistSortVariableDeclarations = [] | [{
   fallbackSort?: {
     order?: ("asc" | "desc");
     type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
-    [k: string]: unknown | undefined;
   };
   specialCharacters?: ("remove" | "trim" | "keep");
   ignoreCase?: boolean;
@@ -11301,29 +11472,70 @@ type PerfectionistSortVariableDeclarations = [] | [{
   locales?: (string | string[]);
   order?: ("asc" | "desc");
   type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+  customGroups?: ({
+    newlinesInside?: ("always" | "never");
+    fallbackSort?: {
+      order?: ("asc" | "desc");
+      type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    };
+    groupName: string;
+    order?: ("asc" | "desc");
+    type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    anyOf?: {
+      selector?: ("initialized" | "uninitialized");
+      elementNamePattern?: (({
+        pattern: string;
+        flags?: string;
+      } | string)[] | ({
+        pattern: string;
+        flags?: string;
+      } | string));
+    }[];
+  } | {
+    newlinesInside?: ("always" | "never");
+    fallbackSort?: {
+      order?: ("asc" | "desc");
+      type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    };
+    groupName: string;
+    order?: ("asc" | "desc");
+    type?: ("alphabetical" | "natural" | "line-length" | "custom" | "unsorted");
+    selector?: ("initialized" | "uninitialized");
+    elementNamePattern?: (({
+      pattern: string;
+      flags?: string;
+    } | string)[] | ({
+      pattern: string;
+      flags?: string;
+    } | string));
+  })[];
   partitionByComment?: (boolean | (({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)[] | ({
-    pattern?: string;
+    pattern: string;
     flags?: string;
   } | string)) | {
     block?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
     line?: (boolean | (({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)[] | ({
-      pattern?: string;
+      pattern: string;
       flags?: string;
     } | string)));
   });
   partitionByNewLine?: boolean;
+  newlinesBetween?: ("ignore" | "always" | "never");
+  groups?: (string | string[] | {
+    newlinesBetween: ("ignore" | "always" | "never");
+  })[];
 }];
 // ----- prefer-arrow-callback -----
 type PreferArrowCallback = [] | [{

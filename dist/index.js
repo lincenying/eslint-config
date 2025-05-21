@@ -1983,25 +1983,16 @@ function lincy(options = {}, ...userConfigs) {
 	})]));
 	const typescriptOptions = resolveSubOptions(options, "typescript");
 	const tsconfigPath = "tsconfigPath" in typescriptOptions ? typescriptOptions.tsconfigPath : void 0;
-	configs$1.push(
-		ignores({ ignores: [...overrides.ignores || [], ...ignoresList] }),
-		javascript({
-			isInEditor,
-			overrides: getOverrides(options, "javascript")
-		}),
-		comments({ overrides: overrides.comments }),
-		node({ overrides: overrides.node }),
-		jsdoc({
-			overrides: overrides.jsdoc,
-			stylistic: stylisticOptions
-		}),
-		imports({
-			overrides: overrides.imports,
-			stylistic: stylisticOptions
-		}),
-		// Optional plugins (installed but not enabled by default)
-		perfectionist({ overrides: overrides.perfectionist })
-);
+	configs$1.push(ignores({ ignores: [...overrides.ignores || [], ...ignoresList] }), javascript({
+		isInEditor,
+		overrides: getOverrides(options, "javascript")
+	}), comments({ overrides: overrides.comments }), node({ overrides: overrides.node }), jsdoc({
+		overrides: overrides.jsdoc,
+		stylistic: stylisticOptions
+	}), imports({
+		overrides: overrides.imports,
+		stylistic: stylisticOptions
+	}), perfectionist({ overrides: overrides.perfectionist }));
 	if (enableUnicorn) configs$1.push(unicorn({
 		...enableUnicorn === true ? {} : enableUnicorn,
 		overrides: overrides.unicorn

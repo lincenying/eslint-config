@@ -1,4 +1,3 @@
-"use strict";
 Object.defineProperty(exports, '__esModule', { value: true });
 //#region rolldown:runtime
 var __create = Object.create;
@@ -2008,25 +2007,16 @@ function lincy(options = {}, ...userConfigs) {
 	})]));
 	const typescriptOptions = resolveSubOptions(options, "typescript");
 	const tsconfigPath = "tsconfigPath" in typescriptOptions ? typescriptOptions.tsconfigPath : void 0;
-	configs$1.push(
-		ignores({ ignores: [...overrides.ignores || [], ...ignoresList] }),
-		javascript({
-			isInEditor,
-			overrides: getOverrides(options, "javascript")
-		}),
-		comments({ overrides: overrides.comments }),
-		node({ overrides: overrides.node }),
-		jsdoc({
-			overrides: overrides.jsdoc,
-			stylistic: stylisticOptions
-		}),
-		imports({
-			overrides: overrides.imports,
-			stylistic: stylisticOptions
-		}),
-		// Optional plugins (installed but not enabled by default)
-		perfectionist({ overrides: overrides.perfectionist })
-);
+	configs$1.push(ignores({ ignores: [...overrides.ignores || [], ...ignoresList] }), javascript({
+		isInEditor,
+		overrides: getOverrides(options, "javascript")
+	}), comments({ overrides: overrides.comments }), node({ overrides: overrides.node }), jsdoc({
+		overrides: overrides.jsdoc,
+		stylistic: stylisticOptions
+	}), imports({
+		overrides: overrides.imports,
+		stylistic: stylisticOptions
+	}), perfectionist({ overrides: overrides.perfectionist }));
 	if (enableUnicorn) configs$1.push(unicorn({
 		...enableUnicorn === true ? {} : enableUnicorn,
 		overrides: overrides.unicorn
@@ -2123,72 +2113,72 @@ function getOverrides(options, key) {
 var src_default = lincy;
 
 //#endregion
-exports.GLOB_ALL_SRC = GLOB_ALL_SRC
-exports.GLOB_CSS = GLOB_CSS
-exports.GLOB_EXCLUDE = GLOB_EXCLUDE
-exports.GLOB_GRAPHQL = GLOB_GRAPHQL
-exports.GLOB_HTML = GLOB_HTML
-exports.GLOB_JS = GLOB_JS
-exports.GLOB_JSON = GLOB_JSON
-exports.GLOB_JSON5 = GLOB_JSON5
-exports.GLOB_JSONC = GLOB_JSONC
-exports.GLOB_JSX = GLOB_JSX
-exports.GLOB_LESS = GLOB_LESS
-exports.GLOB_MARKDOWN = GLOB_MARKDOWN
-exports.GLOB_MARKDOWN_CODE = GLOB_MARKDOWN_CODE
-exports.GLOB_MARKDOWN_IN_MARKDOWN = GLOB_MARKDOWN_IN_MARKDOWN
-exports.GLOB_POSTCSS = GLOB_POSTCSS
-exports.GLOB_SCSS = GLOB_SCSS
-exports.GLOB_SRC = GLOB_SRC
-exports.GLOB_SRC_EXT = GLOB_SRC_EXT
-exports.GLOB_STYLE = GLOB_STYLE
-exports.GLOB_SVELTE = GLOB_SVELTE
-exports.GLOB_SVG = GLOB_SVG
-exports.GLOB_TESTS = GLOB_TESTS
-exports.GLOB_TOML = GLOB_TOML
-exports.GLOB_TS = GLOB_TS
-exports.GLOB_TSX = GLOB_TSX
-exports.GLOB_VUE = GLOB_VUE
-exports.GLOB_XML = GLOB_XML
-exports.GLOB_YAML = GLOB_YAML
-exports.StylisticConfigDefaults = StylisticConfigDefaults
-exports.combine = combine
-exports.comments = comments
-exports.default = src_default
-exports.defaultPluginRenaming = defaultPluginRenaming
-exports.disables = disables
-exports.ensurePackages = ensurePackages
-exports.formatters = formatters
-exports.getOverrides = getOverrides
-exports.ignores = ignores
-exports.imports = imports
-exports.interopDefault = interopDefault
-exports.isInEditorEnv = isInEditorEnv
-exports.isInGitHooksOrLintStaged = isInGitHooksOrLintStaged
-exports.isPackageInScope = isPackageInScope
-exports.javascript = javascript
-exports.jsdoc = jsdoc
-exports.jsonc = jsonc
-exports.jsx = jsx
-exports.lincy = lincy
-exports.markdown = markdown
-exports.node = node
-exports.parserPlain = parserPlain
-exports.perfectionist = perfectionist
-exports.pnpm = pnpm
-exports.react = react
-exports.regexp = regexp
-exports.renamePluginInConfigs = renamePluginInConfigs
-exports.renameRules = renameRules
-exports.resolveSubOptions = resolveSubOptions
-exports.sortPackageJson = sortPackageJson
-exports.sortTsconfig = sortTsconfig
-exports.stylistic = stylistic
-exports.test = test
-exports.toArray = toArray
-exports.toml = toml
-exports.typescript = typescript
-exports.unicorn = unicorn
-exports.unocss = unocss
-exports.vue = vue
-exports.yaml = yaml
+exports.GLOB_ALL_SRC = GLOB_ALL_SRC;
+exports.GLOB_CSS = GLOB_CSS;
+exports.GLOB_EXCLUDE = GLOB_EXCLUDE;
+exports.GLOB_GRAPHQL = GLOB_GRAPHQL;
+exports.GLOB_HTML = GLOB_HTML;
+exports.GLOB_JS = GLOB_JS;
+exports.GLOB_JSON = GLOB_JSON;
+exports.GLOB_JSON5 = GLOB_JSON5;
+exports.GLOB_JSONC = GLOB_JSONC;
+exports.GLOB_JSX = GLOB_JSX;
+exports.GLOB_LESS = GLOB_LESS;
+exports.GLOB_MARKDOWN = GLOB_MARKDOWN;
+exports.GLOB_MARKDOWN_CODE = GLOB_MARKDOWN_CODE;
+exports.GLOB_MARKDOWN_IN_MARKDOWN = GLOB_MARKDOWN_IN_MARKDOWN;
+exports.GLOB_POSTCSS = GLOB_POSTCSS;
+exports.GLOB_SCSS = GLOB_SCSS;
+exports.GLOB_SRC = GLOB_SRC;
+exports.GLOB_SRC_EXT = GLOB_SRC_EXT;
+exports.GLOB_STYLE = GLOB_STYLE;
+exports.GLOB_SVELTE = GLOB_SVELTE;
+exports.GLOB_SVG = GLOB_SVG;
+exports.GLOB_TESTS = GLOB_TESTS;
+exports.GLOB_TOML = GLOB_TOML;
+exports.GLOB_TS = GLOB_TS;
+exports.GLOB_TSX = GLOB_TSX;
+exports.GLOB_VUE = GLOB_VUE;
+exports.GLOB_XML = GLOB_XML;
+exports.GLOB_YAML = GLOB_YAML;
+exports.StylisticConfigDefaults = StylisticConfigDefaults;
+exports.combine = combine;
+exports.comments = comments;
+exports.default = src_default;
+exports.defaultPluginRenaming = defaultPluginRenaming;
+exports.disables = disables;
+exports.ensurePackages = ensurePackages;
+exports.formatters = formatters;
+exports.getOverrides = getOverrides;
+exports.ignores = ignores;
+exports.imports = imports;
+exports.interopDefault = interopDefault;
+exports.isInEditorEnv = isInEditorEnv;
+exports.isInGitHooksOrLintStaged = isInGitHooksOrLintStaged;
+exports.isPackageInScope = isPackageInScope;
+exports.javascript = javascript;
+exports.jsdoc = jsdoc;
+exports.jsonc = jsonc;
+exports.jsx = jsx;
+exports.lincy = lincy;
+exports.markdown = markdown;
+exports.node = node;
+exports.parserPlain = parserPlain;
+exports.perfectionist = perfectionist;
+exports.pnpm = pnpm;
+exports.react = react;
+exports.regexp = regexp;
+exports.renamePluginInConfigs = renamePluginInConfigs;
+exports.renameRules = renameRules;
+exports.resolveSubOptions = resolveSubOptions;
+exports.sortPackageJson = sortPackageJson;
+exports.sortTsconfig = sortTsconfig;
+exports.stylistic = stylistic;
+exports.test = test;
+exports.toArray = toArray;
+exports.toml = toml;
+exports.typescript = typescript;
+exports.unicorn = unicorn;
+exports.unocss = unocss;
+exports.vue = vue;
+exports.yaml = yaml;
