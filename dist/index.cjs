@@ -796,7 +796,7 @@ async function jsonc(options = {}) {
 					multiline: true
 				}],
 				"jsonc/object-curly-spacing": ["error", "always"],
-				"jsonc/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }],
+				"jsonc/object-property-newline": ["error", { allowAllPropertiesOnSameLine: true }],
 				"jsonc/quote-props": "error",
 				"jsonc/quotes": "error"
 			} : {},
@@ -1857,7 +1857,7 @@ async function vue(options = {}) {
 				}],
 				"vue/object-curly-newline": "off",
 				"vue/object-curly-spacing": ["error", "always"],
-				"vue/object-property-newline": ["error", { allowMultiplePropertiesPerLine: true }],
+				"vue/object-property-newline": ["error", { allowAllPropertiesOnSameLine: true }],
 				"vue/operator-linebreak": ["error", "before"],
 				"vue/padding-line-between-blocks": ["error", "always"],
 				"vue/quote-props": ["error", "consistent-as-needed"],

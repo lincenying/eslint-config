@@ -384,233 +384,233 @@ interface RuleOptions {
   'implicit-arrow-linebreak'?: Linter.RuleEntry<ImplicitArrowLinebreak>;
   /**
    * Enforce or ban the use of inline type-only markers for named imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/consistent-type-specifier-style.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/consistent-type-specifier-style.md
    */
   'import/consistent-type-specifier-style'?: Linter.RuleEntry<ImportConsistentTypeSpecifierStyle>;
   /**
    * Ensure a default export is present, given a default import.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/default.md
    */
   'import/default'?: Linter.RuleEntry<[]>;
   /**
    * Enforce a leading comment with the webpackChunkName for dynamic imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/dynamic-import-chunkname.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/dynamic-import-chunkname.md
    */
   'import/dynamic-import-chunkname'?: Linter.RuleEntry<ImportDynamicImportChunkname>;
   /**
    * Forbid any invalid exports, i.e. re-export of the same name.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/export.md
    */
   'import/export'?: Linter.RuleEntry<[]>;
   /**
    * Ensure all exports appear after other statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/exports-last.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/exports-last.md
    */
   'import/exports-last'?: Linter.RuleEntry<[]>;
   /**
    * Ensure consistent use of file extension within the import path.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/extensions.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/extensions.md
    */
   'import/extensions'?: Linter.RuleEntry<ImportExtensions>;
   /**
    * Ensure all imports appear before other statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/first.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/first.md
    */
   'import/first'?: Linter.RuleEntry<ImportFirst>;
   /**
    * Prefer named exports to be grouped together in a single export declaration.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/group-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/group-exports.md
    */
   'import/group-exports'?: Linter.RuleEntry<[]>;
   /**
    * Replaced by `import-x/first`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/imports-first.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/imports-first.md
    * @deprecated
    */
   'import/imports-first'?: Linter.RuleEntry<ImportImportsFirst>;
   /**
    * Enforce the maximum number of dependencies a module can have.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/max-dependencies.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/max-dependencies.md
    */
   'import/max-dependencies'?: Linter.RuleEntry<ImportMaxDependencies>;
   /**
    * Ensure named imports correspond to a named export in the remote file.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/named.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/named.md
    */
   'import/named'?: Linter.RuleEntry<ImportNamed>;
   /**
    * Ensure imported namespaces contain dereferenced properties as they are dereferenced.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/namespace.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/namespace.md
    */
   'import/namespace'?: Linter.RuleEntry<ImportNamespace>;
   /**
    * Enforce a newline after import statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/newline-after-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/newline-after-import.md
    */
   'import/newline-after-import'?: Linter.RuleEntry<ImportNewlineAfterImport>;
   /**
    * Forbid import of modules using absolute paths.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-absolute-path.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-absolute-path.md
    */
   'import/no-absolute-path'?: Linter.RuleEntry<ImportNoAbsolutePath>;
   /**
    * Forbid AMD `require` and `define` calls.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-amd.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-amd.md
    */
   'import/no-amd'?: Linter.RuleEntry<[]>;
   /**
    * Forbid anonymous values as default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-anonymous-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-anonymous-default-export.md
    */
   'import/no-anonymous-default-export'?: Linter.RuleEntry<ImportNoAnonymousDefaultExport>;
   /**
    * Forbid CommonJS `require` calls and `module.exports` or `exports.*`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-commonjs.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-commonjs.md
    */
   'import/no-commonjs'?: Linter.RuleEntry<ImportNoCommonjs>;
   /**
    * Forbid a module from importing a module with a dependency path back to itself.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-cycle.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-cycle.md
    */
   'import/no-cycle'?: Linter.RuleEntry<ImportNoCycle>;
   /**
    * Forbid default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-default-export.md
    */
   'import/no-default-export'?: Linter.RuleEntry<[]>;
   /**
    * Forbid imported names marked with `@deprecated` documentation tag.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-deprecated.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-deprecated.md
    */
   'import/no-deprecated'?: Linter.RuleEntry<[]>;
   /**
    * Forbid repeated import of the same module in multiple places.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-duplicates.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-duplicates.md
    */
   'import/no-duplicates'?: Linter.RuleEntry<ImportNoDuplicates>;
   /**
    * Forbid `require()` calls with expressions.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-dynamic-require.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-dynamic-require.md
    */
   'import/no-dynamic-require'?: Linter.RuleEntry<ImportNoDynamicRequire>;
   /**
    * Forbid empty named import blocks.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-empty-named-blocks.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-empty-named-blocks.md
    */
   'import/no-empty-named-blocks'?: Linter.RuleEntry<[]>;
   /**
    * Forbid the use of extraneous packages.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-extraneous-dependencies.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-extraneous-dependencies.md
    */
   'import/no-extraneous-dependencies'?: Linter.RuleEntry<ImportNoExtraneousDependencies>;
   /**
    * Forbid import statements with CommonJS module.exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-import-module-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-import-module-exports.md
    */
   'import/no-import-module-exports'?: Linter.RuleEntry<ImportNoImportModuleExports>;
   /**
    * Forbid importing the submodules of other modules.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-internal-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-internal-modules.md
    */
   'import/no-internal-modules'?: Linter.RuleEntry<ImportNoInternalModules>;
   /**
    * Forbid the use of mutable exports with `var` or `let`.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-mutable-exports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-mutable-exports.md
    */
   'import/no-mutable-exports'?: Linter.RuleEntry<[]>;
   /**
    * Forbid use of exported name as identifier of default export.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-named-as-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-named-as-default.md
    */
   'import/no-named-as-default'?: Linter.RuleEntry<[]>;
   /**
    * Forbid use of exported name as property of default export.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-named-as-default-member.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-named-as-default-member.md
    */
   'import/no-named-as-default-member'?: Linter.RuleEntry<[]>;
   /**
    * Forbid named default exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-named-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-named-default.md
    */
   'import/no-named-default'?: Linter.RuleEntry<[]>;
   /**
    * Forbid named exports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-named-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-named-export.md
    */
   'import/no-named-export'?: Linter.RuleEntry<[]>;
   /**
    * Forbid namespace (a.k.a. "wildcard" `*`) imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-namespace.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-namespace.md
    */
   'import/no-namespace'?: Linter.RuleEntry<ImportNoNamespace>;
   /**
    * Forbid Node.js builtin modules.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-nodejs-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-nodejs-modules.md
    */
   'import/no-nodejs-modules'?: Linter.RuleEntry<ImportNoNodejsModules>;
   /**
    * Forbid importing packages through relative paths.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-relative-packages.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-relative-packages.md
    */
   'import/no-relative-packages'?: Linter.RuleEntry<ImportNoRelativePackages>;
   /**
    * Forbid importing modules from parent directories.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-relative-parent-imports.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-relative-parent-imports.md
    */
   'import/no-relative-parent-imports'?: Linter.RuleEntry<ImportNoRelativeParentImports>;
   /**
    * Forbid importing a default export by a different name.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-rename-default.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-rename-default.md
    */
   'import/no-rename-default'?: Linter.RuleEntry<ImportNoRenameDefault>;
   /**
    * Enforce which files can be imported in a given folder.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-restricted-paths.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-restricted-paths.md
    */
   'import/no-restricted-paths'?: Linter.RuleEntry<ImportNoRestrictedPaths>;
   /**
    * Forbid a module from importing itself.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-self-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-self-import.md
    */
   'import/no-self-import'?: Linter.RuleEntry<[]>;
   /**
    * Forbid unassigned imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-unassigned-import.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-unassigned-import.md
    */
   'import/no-unassigned-import'?: Linter.RuleEntry<ImportNoUnassignedImport>;
   /**
    * Ensure imports point to a file/module that can be resolved.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-unresolved.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-unresolved.md
    */
   'import/no-unresolved'?: Linter.RuleEntry<ImportNoUnresolved>;
   /**
    * Forbid modules without exports, or exports without matching import in another module.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-unused-modules.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-unused-modules.md
    */
   'import/no-unused-modules'?: Linter.RuleEntry<ImportNoUnusedModules>;
   /**
    * Forbid unnecessary path segments in import and require statements.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-useless-path-segments.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-useless-path-segments.md
    */
   'import/no-useless-path-segments'?: Linter.RuleEntry<ImportNoUselessPathSegments>;
   /**
    * Forbid webpack loader syntax in imports.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/no-webpack-loader-syntax.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/no-webpack-loader-syntax.md
    */
   'import/no-webpack-loader-syntax'?: Linter.RuleEntry<[]>;
   /**
    * Enforce a convention in module import order.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/order.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/order.md
    */
   'import/order'?: Linter.RuleEntry<ImportOrder>;
   /**
    * Prefer a default export if module exports a single name or multiple names.
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/prefer-default-export.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/prefer-default-export.md
    */
   'import/prefer-default-export'?: Linter.RuleEntry<ImportPreferDefaultExport>;
   /**
    * Forbid potentially ambiguous parse goal (`script` vs. `module`).
-   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.12.2/docs/rules/unambiguous.md
+   * @see https://github.com/un-ts/eslint-plugin-import-x/blob/v4.15.1/docs/rules/unambiguous.md
    */
   'import/unambiguous'?: Linter.RuleEntry<[]>;
   /**
@@ -1199,10 +1199,25 @@ interface RuleOptions {
    */
   'markdown/heading-increment'?: Linter.RuleEntry<[]>;
   /**
+   * Disallow duplicate definitions
+   * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-duplicate-definitions.md
+   */
+  'markdown/no-duplicate-definitions'?: Linter.RuleEntry<MarkdownNoDuplicateDefinitions>;
+  /**
    * Disallow duplicate headings in the same document
    * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-duplicate-headings.md
    */
   'markdown/no-duplicate-headings'?: Linter.RuleEntry<[]>;
+  /**
+   * Disallow empty definitions
+   * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-empty-definitions.md
+   */
+  'markdown/no-empty-definitions'?: Linter.RuleEntry<[]>;
+  /**
+   * Disallow empty images
+   * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-empty-images.md
+   */
+  'markdown/no-empty-images'?: Linter.RuleEntry<[]>;
   /**
    * Disallow empty links
    * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-empty-links.md
@@ -1219,10 +1234,30 @@ interface RuleOptions {
    */
   'markdown/no-invalid-label-refs'?: Linter.RuleEntry<[]>;
   /**
+   * Disallow headings without a space after the hash characters
+   * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-missing-atx-heading-space.md
+   */
+  'markdown/no-missing-atx-heading-space'?: Linter.RuleEntry<[]>;
+  /**
    * Disallow missing label references
    * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-missing-label-refs.md
    */
   'markdown/no-missing-label-refs'?: Linter.RuleEntry<[]>;
+  /**
+   * Disallow multiple H1 headings in the same document
+   * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-multiple-h1.md
+   */
+  'markdown/no-multiple-h1'?: Linter.RuleEntry<MarkdownNoMultipleH1>;
+  /**
+   * Require alternative text for images
+   * @see https://github.com/eslint/markdown/blob/main/docs/rules/require-alt-text.md
+   */
+  'markdown/require-alt-text'?: Linter.RuleEntry<[]>;
+  /**
+   * Disallow data rows in a GitHub Flavored Markdown table from having more cells than the header row
+   * @see https://github.com/eslint/markdown/blob/main/docs/rules/table-column-count.md
+   */
+  'markdown/table-column-count'?: Linter.RuleEntry<[]>;
   /**
    * Enforce a maximum number of classes per file
    * @see https://eslint.org/docs/latest/rules/max-classes-per-file
@@ -2229,6 +2264,11 @@ interface RuleOptions {
    */
   'node/no-sync'?: Linter.RuleEntry<NodeNoSync>;
   /**
+   * disallow top-level `await` in published modules
+   * @see https://github.com/eslint-community/eslint-plugin-n/blob/HEAD/docs/rules/no-top-level-await.md
+   */
+  'node/no-top-level-await'?: Linter.RuleEntry<NodeNoTopLevelAwait>;
+  /**
    * disallow `bin` files that npm ignores
    * @see https://github.com/eslint-community/eslint-plugin-n/blob/HEAD/docs/rules/no-unpublished-bin.md
    */
@@ -2791,6 +2831,11 @@ interface RuleOptions {
    * @see https://eslint-react.xyz/docs/rules/jsx-no-duplicate-props
    */
   'react/jsx-no-duplicate-props'?: Linter.RuleEntry<[]>;
+  /**
+   * Disallows 'IIFE' in JSX elements.
+   * @see https://eslint-react.xyz/docs/rules/jsx-no-iife
+   */
+  'react/jsx-no-iife'?: Linter.RuleEntry<[]>;
   /**
    * Disallow undefined variables in JSX.
    * @see https://eslint-react.xyz/docs/rules/jsx-no-undef
@@ -3390,7 +3435,7 @@ interface RuleOptions {
    * enforce using quantifier
    * @see https://ota-meshi.github.io/eslint-plugin-regexp/rules/prefer-quantifier.html
    */
-  'regexp/prefer-quantifier'?: Linter.RuleEntry<[]>;
+  'regexp/prefer-quantifier'?: Linter.RuleEntry<RegexpPreferQuantifier>;
   /**
    * enforce using `?` quantifier
    * @see https://ota-meshi.github.io/eslint-plugin-regexp/rules/prefer-question-quantifier.html
@@ -5176,6 +5221,7 @@ interface RuleOptions {
   /**
    * Require type annotations in certain places
    * @see https://typescript-eslint.io/rules/typedef
+   * @deprecated
    */
   'ts/typedef'?: Linter.RuleEntry<TsTypedef>;
   /**
@@ -7526,6 +7572,7 @@ type _FuncNamesValue = ("always" | "as-needed" | "never");
 // ----- func-style -----
 type FuncStyle = [] | [("declaration" | "expression")] | [("declaration" | "expression"), {
   allowArrowFunctions?: boolean;
+  allowTypeAnnotation?: boolean;
   overrides?: {
     namedExports?: ("declaration" | "expression" | "ignore");
   };
@@ -7922,10 +7969,10 @@ type JsdocCheckLineAlignment = [] | [("always" | "never" | "any")] | [("always" 
     postTag?: number;
     postType?: number;
   };
+  disableWrapIndent?: boolean;
   preserveMainDescriptionPostDelimiter?: boolean;
   tags?: string[];
   wrapIndent?: string;
-  disableWrapIndent?: boolean;
 }];
 // ----- jsdoc/check-param-names -----
 type JsdocCheckParamNames = [] | [{
@@ -9003,9 +9050,18 @@ type LogicalAssignmentOperators = (([] | ["always"] | ["always", {
 type MarkdownFencedCodeLanguage = [] | [{
   required?: string[];
 }];
+// ----- markdown/no-duplicate-definitions -----
+type MarkdownNoDuplicateDefinitions = [] | [{
+  allowDefinitions?: string[];
+  allowFootnoteDefinitions?: string[];
+}];
 // ----- markdown/no-html -----
 type MarkdownNoHtml = [] | [{
   allowed?: string[];
+}];
+// ----- markdown/no-multiple-h1 -----
+type MarkdownNoMultipleH1 = [] | [{
+  frontmatterTitle?: string;
 }];
 // ----- max-classes-per-file -----
 type MaxClassesPerFile = [] | [(number | {
@@ -9273,6 +9329,10 @@ type NoMagicNumbers = [] | [{
   ignoreArrayIndexes?: boolean;
   ignoreDefaultValues?: boolean;
   ignoreClassFieldInitialValues?: boolean;
+  ignoreEnums?: boolean;
+  ignoreNumericLiteralTypes?: boolean;
+  ignoreReadonlyClassProperties?: boolean;
+  ignoreTypeIndexes?: boolean;
 }];
 // ----- no-misleading-character-class -----
 type NoMisleadingCharacterClass = [] | [{
@@ -9405,9 +9465,11 @@ type NoSequences = [] | [{
 // ----- no-shadow -----
 type NoShadow = [] | [{
   builtinGlobals?: boolean;
-  hoist?: ("all" | "functions" | "never");
+  hoist?: ("all" | "functions" | "never" | "types" | "functions-and-types");
   allow?: string[];
   ignoreOnInitialization?: boolean;
+  ignoreTypeValueShadow?: boolean;
+  ignoreFunctionTypeParameterNameValueShadow?: boolean;
 }];
 // ----- no-shadow-restricted-names -----
 type NoShadowRestrictedNames = [] | [{
@@ -9485,6 +9547,9 @@ type NoUseBeforeDefine = [] | [("nofunc" | {
   classes?: boolean;
   variables?: boolean;
   allowNamedExports?: boolean;
+  enums?: boolean;
+  typedefs?: boolean;
+  ignoreTypeReferences?: boolean;
 })];
 // ----- no-useless-computed-key -----
 type NoUselessComputedKey = [] | [{
@@ -9638,7 +9703,33 @@ type NodeNoRestrictedRequire = [] | [(string | {
 // ----- node/no-sync -----
 type NodeNoSync = [] | [{
   allowAtRootLevel?: boolean;
-  ignores?: string[];
+  ignores?: (string | {
+    from?: "file";
+    path?: string;
+    name?: string[];
+  } | {
+    from?: "lib";
+    name?: string[];
+  } | {
+    from?: "package";
+    package?: string;
+    name?: string[];
+  })[];
+}];
+// ----- node/no-top-level-await -----
+type NodeNoTopLevelAwait = [] | [{
+  ignoreBin?: boolean;
+  convertPath?: ({
+    [k: string]: [string, string];
+  } | [{
+    include: [string, ...(string)[]];
+    exclude?: string[];
+    replace: [string, string];
+  }, ...({
+    include: [string, ...(string)[]];
+    exclude?: string[];
+    replace: [string, string];
+  })[]]);
 }];
 // ----- node/no-unpublished-bin -----
 type NodeNoUnpublishedBin = [] | [{
@@ -9931,7 +10022,8 @@ type PerfectionistSortArrayIncludes = {
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }[];
 // ----- perfectionist/sort-classes -----
@@ -10045,7 +10137,8 @@ type PerfectionistSortClasses = [] | [{
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }];
 // ----- perfectionist/sort-decorators -----
@@ -10091,7 +10184,8 @@ type PerfectionistSortDecorators = [] | [{
     [k: string]: (string | string[]) | undefined;
   };
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }];
 // ----- perfectionist/sort-enums -----
@@ -10184,7 +10278,8 @@ type PerfectionistSortEnums = [] | [{
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }];
 // ----- perfectionist/sort-exports -----
@@ -10264,7 +10359,8 @@ type PerfectionistSortExports = {
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }[];
 // ----- perfectionist/sort-heritage-clauses -----
@@ -10283,7 +10379,8 @@ type PerfectionistSortHeritageClauses = [] | [{
     [k: string]: (string | string[]) | undefined;
   };
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }];
 // ----- perfectionist/sort-imports -----
@@ -10358,6 +10455,10 @@ type PerfectionistSortImports = {
       flags?: string;
     } | string));
   })[]);
+  tsconfig?: {
+    rootDir: string;
+    filename?: string;
+  };
   maxLineLength?: number;
   sortSideEffects?: boolean;
   environment?: ("node" | "bun");
@@ -10394,7 +10495,8 @@ type PerfectionistSortImports = {
     flags?: string;
   } | string));
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }[];
 // ----- perfectionist/sort-interfaces -----
@@ -10519,7 +10621,8 @@ type PerfectionistSortInterfaces = {
   } | string));
   sortBy?: ("name" | "value");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }[];
 // ----- perfectionist/sort-intersection-types -----
@@ -10596,7 +10699,8 @@ type PerfectionistSortIntersectionTypes = {
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }[];
 // ----- perfectionist/sort-jsx-props -----
@@ -10692,7 +10796,8 @@ type PerfectionistSortJsxProps = {
     flags?: string;
   } | string));
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }[];
 // ----- perfectionist/sort-maps -----
@@ -10776,7 +10881,8 @@ type PerfectionistSortMaps = {
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }[];
 // ----- perfectionist/sort-modules -----
@@ -10869,7 +10975,8 @@ type PerfectionistSortModules = [] | [{
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }];
 // ----- perfectionist/sort-named-exports -----
@@ -10950,7 +11057,8 @@ type PerfectionistSortNamedExports = {
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }[];
 // ----- perfectionist/sort-named-imports -----
@@ -11031,7 +11139,8 @@ type PerfectionistSortNamedImports = {
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }[];
 // ----- perfectionist/sort-object-types -----
@@ -11156,7 +11265,8 @@ type PerfectionistSortObjectTypes = {
   } | string));
   sortBy?: ("name" | "value");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }[];
 // ----- perfectionist/sort-objects -----
@@ -11280,7 +11390,8 @@ type PerfectionistSortObjects = {
     flags?: string;
   } | string));
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }[];
 // ----- perfectionist/sort-sets -----
@@ -11367,7 +11478,8 @@ type PerfectionistSortSets = {
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }[];
 // ----- perfectionist/sort-switch-case -----
@@ -11457,7 +11569,8 @@ type PerfectionistSortUnionTypes = {
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }[];
 // ----- perfectionist/sort-variable-declarations -----
@@ -11534,7 +11647,8 @@ type PerfectionistSortVariableDeclarations = [] | [{
   partitionByNewLine?: boolean;
   newlinesBetween?: ("ignore" | "always" | "never");
   groups?: (string | string[] | {
-    newlinesBetween: ("ignore" | "always" | "never");
+    newlinesBetween?: ("ignore" | "always" | "never");
+    commentAbove?: string;
   })[];
 }];
 // ----- prefer-arrow-callback -----
@@ -11733,6 +11847,10 @@ type RegexpPreferLookaround = [] | [{
 // ----- regexp/prefer-named-replacement -----
 type RegexpPreferNamedReplacement = [] | [{
   strictTypes?: boolean;
+}];
+// ----- regexp/prefer-quantifier -----
+type RegexpPreferQuantifier = [] | [{
+  allows?: string[];
 }];
 // ----- regexp/prefer-range -----
 type RegexpPreferRange = [] | [{
@@ -12220,6 +12338,7 @@ type StyleJsxSortProps = [] | [{
   ignoreCase?: boolean;
   noSortAlphabetically?: boolean;
   reservedFirst?: (unknown[] | boolean);
+  reservedLast?: unknown[];
   locale?: string;
 }];
 // ----- style/jsx-tag-spacing -----
@@ -12293,18 +12412,6 @@ type StyleKeywordSpacing = [] | [{
   after?: boolean;
   overrides?: {
     abstract?: {
-      before?: boolean;
-      after?: boolean;
-    };
-    as?: {
-      before?: boolean;
-      after?: boolean;
-    };
-    async?: {
-      before?: boolean;
-      after?: boolean;
-    };
-    await?: {
       before?: boolean;
       after?: boolean;
     };
@@ -12400,15 +12507,7 @@ type StyleKeywordSpacing = [] | [{
       before?: boolean;
       after?: boolean;
     };
-    from?: {
-      before?: boolean;
-      after?: boolean;
-    };
     function?: {
-      before?: boolean;
-      after?: boolean;
-    };
-    get?: {
       before?: boolean;
       after?: boolean;
     };
@@ -12444,10 +12543,6 @@ type StyleKeywordSpacing = [] | [{
       before?: boolean;
       after?: boolean;
     };
-    let?: {
-      before?: boolean;
-      after?: boolean;
-    };
     long?: {
       before?: boolean;
       after?: boolean;
@@ -12461,10 +12556,6 @@ type StyleKeywordSpacing = [] | [{
       after?: boolean;
     };
     null?: {
-      before?: boolean;
-      after?: boolean;
-    };
-    of?: {
       before?: boolean;
       after?: boolean;
     };
@@ -12485,14 +12576,6 @@ type StyleKeywordSpacing = [] | [{
       after?: boolean;
     };
     return?: {
-      before?: boolean;
-      after?: boolean;
-    };
-    satisfies?: {
-      before?: boolean;
-      after?: boolean;
-    };
-    set?: {
       before?: boolean;
       after?: boolean;
     };
@@ -12561,6 +12644,42 @@ type StyleKeywordSpacing = [] | [{
       after?: boolean;
     };
     with?: {
+      before?: boolean;
+      after?: boolean;
+    };
+    as?: {
+      before?: boolean;
+      after?: boolean;
+    };
+    async?: {
+      before?: boolean;
+      after?: boolean;
+    };
+    await?: {
+      before?: boolean;
+      after?: boolean;
+    };
+    from?: {
+      before?: boolean;
+      after?: boolean;
+    };
+    get?: {
+      before?: boolean;
+      after?: boolean;
+    };
+    let?: {
+      before?: boolean;
+      after?: boolean;
+    };
+    of?: {
+      before?: boolean;
+      after?: boolean;
+    };
+    satisfies?: {
+      before?: boolean;
+      after?: boolean;
+    };
+    set?: {
       before?: boolean;
       after?: boolean;
     };
@@ -15296,7 +15415,7 @@ type VueNoRestrictedCustomEvent = (string | {
 })[];
 // ----- vue/no-restricted-html-elements -----
 type VueNoRestrictedHtmlElements = (string | {
-  element: string;
+  element: (string | string[]);
   message?: string;
 })[];
 // ----- vue/no-restricted-props -----
@@ -15818,7 +15937,8 @@ type Yoda = [] | [("always" | "never")] | [("always" | "never"), {
   onlyEquality?: boolean;
 }];
 // Names of all the configs
-type ConfigNames = 'eslint/comments/rules' | 'eslint/formatter/setup' | 'eslint/formatter/html' | 'eslint/formatter/xml' | 'eslint/formatter/svg' | 'eslint/formatter/markdown' | 'eslint/formatter/graphql' | 'eslint/imports/rules' | 'eslint/javascript/setup' | 'eslint/javascript/rules' | 'eslint/jsdoc/rules' | 'eslint/jsonc/setup' | 'eslint/jsonc/rules' | 'eslint/markdown/setup' | 'eslint/markdown/processor' | 'eslint/markdown/parser' | 'eslint/markdown/disables' | 'eslint/node/rules' | 'eslint/perfectionist/setup' | 'eslint/react/setup' | 'eslint/react/rules' | 'eslint/regexp/rules' | 'eslint/sort/package-json' | 'eslint/stylistic/rules' | 'eslint/test/setup' | 'eslint/test/rules' | 'eslint/toml/setup' | 'eslint/toml/rules' | 'eslint/typescript/setup' | 'eslint/typescript/parser' | 'eslint/typescript/rules' | 'eslint/unicorn/rules' | 'eslint/unocss/rules' | 'eslint/vue/setup' | 'eslint/vue/rules' | 'eslint/yaml/setup' | 'eslint/yaml/rules' | 'eslint/yaml/pnpm-workspace'; //#endregion
+type ConfigNames = 'eslint/comments/rules' | 'eslint/formatter/setup' | 'eslint/formatter/html' | 'eslint/formatter/xml' | 'eslint/formatter/svg' | 'eslint/formatter/markdown' | 'eslint/formatter/graphql' | 'eslint/imports/rules' | 'eslint/javascript/setup' | 'eslint/javascript/rules' | 'eslint/jsdoc/rules' | 'eslint/jsonc/setup' | 'eslint/jsonc/rules' | 'eslint/markdown/setup' | 'eslint/markdown/processor' | 'eslint/markdown/parser' | 'eslint/markdown/disables' | 'eslint/node/rules' | 'eslint/perfectionist/setup' | 'eslint/react/setup' | 'eslint/react/rules' | 'eslint/regexp/rules' | 'eslint/sort/package-json' | 'eslint/stylistic/rules' | 'eslint/test/setup' | 'eslint/test/rules' | 'eslint/toml/setup' | 'eslint/toml/rules' | 'eslint/typescript/setup' | 'eslint/typescript/parser' | 'eslint/typescript/rules' | 'eslint/unicorn/rules' | 'eslint/unocss/rules' | 'eslint/vue/setup' | 'eslint/vue/rules' | 'eslint/yaml/setup' | 'eslint/yaml/rules' | 'eslint/yaml/pnpm-workspace';
+//#endregion
 //#region src/prettier.types.d.ts
 /**
  * 来自 Prettier 的供应商类型，因此不依赖依赖项
@@ -15938,7 +16058,6 @@ interface VendoredPrettierOptionsRequired {
    */
   xmlWhitespaceSensitivity: 'ignore' | 'strict' | 'preserve';
 }
-
 //#endregion
 //#region src/types.d.ts
 type Awaitable<T> = T | Promise<T>;
@@ -16291,7 +16410,6 @@ interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
     ignores?: string[];
   };
 }
-
 //#endregion
 //#region src/factory.d.ts
 declare const defaultPluginRenaming: {
@@ -16320,51 +16438,39 @@ declare function lincy(options?: OptionsConfig & Omit<TypedFlatConfigItem, 'file
 type ResolvedOptions<T> = T extends boolean ? never : NonNullable<T>;
 declare function resolveSubOptions<K extends keyof OptionsConfig>(options: OptionsConfig, key: K): ResolvedOptions<OptionsConfig[K]>;
 declare function getOverrides<K extends keyof OptionsConfig>(options: OptionsConfig, key: K): Partial<Linter.RulesRecord & RuleOptions>;
-
 //#endregion
 //#region src/configs/comments.d.ts
 declare function comments(options?: OptionsOverrides): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/disables.d.ts
 declare function disables(): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/formatters.d.ts
 declare function formatters(options?: OptionsFormatters | true, stylistic?: StylisticConfig): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/ignores.d.ts
 declare function ignores(options?: OptionsIgnores): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/imports.d.ts
 declare function imports(options?: OptionsStylistic & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/javascript.d.ts
 declare function javascript(options?: OptionsIsInEditor & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/jsdoc.d.ts
 declare function jsdoc(options?: OptionsStylistic & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/jsonc.d.ts
 declare function jsonc(options?: OptionsFiles & OptionsStylistic & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/jsx.d.ts
 declare function jsx(): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/markdown.d.ts
 declare function markdown(options?: OptionsFiles & OptionsComponentExts & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/node.d.ts
 declare function node(options?: OptionsOverrides): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/perfectionist.d.ts
 /**
@@ -16373,19 +16479,15 @@ declare function node(options?: OptionsOverrides): Promise<TypedFlatConfigItem[]
  * @see https://github.com/azat-io/eslint-plugin-perfectionist
  */
 declare function perfectionist(options?: OptionsOverrides): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/pnpm.d.ts
 declare function pnpm(): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/react.d.ts
 declare function react(options?: OptionsTypeScriptParserOptions & OptionsTypeScriptWithTypes & OptionsOverrides & OptionsFiles): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/regexp.d.ts
 declare function regexp(options?: OptionsRegExp & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/sort.d.ts
 /**
@@ -16400,40 +16502,31 @@ declare function sortPackageJson(): Promise<TypedFlatConfigItem[]>;
  * Requires `jsonc` config
  */
 declare function sortTsconfig(): TypedFlatConfigItem[];
-
 //#endregion
 //#region src/configs/stylistic.d.ts
 declare const StylisticConfigDefaults: StylisticConfig;
 declare function stylistic(options?: OptionsStylistic & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/test.d.ts
 declare function test(options?: OptionsFiles & OptionsIsInEditor & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/toml.d.ts
 declare function toml(options?: OptionsOverrides & OptionsStylistic & OptionsFiles): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/typescript.d.ts
 declare function typescript(options?: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions & OptionsProjectType): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/unicorn.d.ts
 declare function unicorn(options?: OptionsUnicorn & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/unocss.d.ts
 declare function unocss(options?: OptionsUnoCSS & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/vue.d.ts
 declare function vue(options?: OptionsHasTypeScript & OptionsOverrides & OptionsStylistic & OptionsFiles & OptionsVue): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/configs/yaml.d.ts
 declare function yaml(options?: OptionsOverrides & OptionsStylistic & OptionsFiles): Promise<TypedFlatConfigItem[]>;
-
 //#endregion
 //#region src/globs.d.ts
 declare const GLOB_SRC_EXT = "?([cm])[jt]s?(x)";
@@ -16464,7 +16557,6 @@ declare const GLOB_MARKDOWN_CODE = "**/*.md/**/*.?([cm])[jt]s?(x)";
 declare const GLOB_TESTS: string[];
 declare const GLOB_ALL_SRC: string[];
 declare const GLOB_EXCLUDE: string[];
-
 //#endregion
 //#region src/utils.d.ts
 declare const parserPlain: {
@@ -16508,6 +16600,5 @@ declare function isPackageInScope(name: string): boolean;
 declare function ensurePackages(packages: (string | undefined)[]): Promise<void>;
 declare function isInEditorEnv(): boolean;
 declare function isInGitHooksOrLintStaged(): boolean;
-
 //#endregion
 export { Awaitable, ConfigNames, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_GRAPHQL, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_SVG, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_XML, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsFiles, OptionsFormatters, OptionsHasTypeScript, OptionsIgnores, OptionsIsInEditor, OptionsOverrides, OptionsProjectType, OptionsRegExp, OptionsStylistic, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, OptionsTypescript, OptionsUnicorn, OptionsUnoCSS, OptionsVue, ResolvedOptions, Rules, StylisticConfig, StylisticConfigDefaults, TypedFlatConfigItem, combine, comments, lincy as default, defaultPluginRenaming, disables, ensurePackages, formatters, getOverrides, ignores, imports, interopDefault, isInEditorEnv, isInGitHooksOrLintStaged, isPackageInScope, javascript, jsdoc, jsonc, jsx, lincy, markdown, node, parserPlain, perfectionist, pnpm, react, regexp, renamePluginInConfigs, renameRules, resolveSubOptions, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };
