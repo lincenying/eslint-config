@@ -26,7 +26,7 @@ const eslint_flat_config_utils = __toESM(require("eslint-flat-config-utils"));
 const local_pkg = __toESM(require("local-pkg"));
 const __eslint_community_eslint_plugin_eslint_comments = __toESM(require("@eslint-community/eslint-plugin-eslint-comments"));
 const eslint_plugin_antfu = __toESM(require("eslint-plugin-antfu"));
-const eslint_plugin_import_x = __toESM(require("eslint-plugin-import-x"));
+const eslint_plugin_import_lite = __toESM(require("eslint-plugin-import-lite"));
 const eslint_plugin_n = __toESM(require("eslint-plugin-n"));
 const eslint_plugin_perfectionist = __toESM(require("eslint-plugin-perfectionist"));
 const eslint_plugin_unicorn = __toESM(require("eslint-plugin-unicorn"));
@@ -460,7 +460,7 @@ async function imports(options = {}) {
 		name: "eslint/imports/rules",
 		plugins: {
 			antfu: eslint_plugin_antfu.default,
-			import: eslint_plugin_import_x
+			import: eslint_plugin_import_lite.default
 		},
 		rules: {
 			"antfu/import-dedupe": "error",
@@ -471,12 +471,7 @@ async function imports(options = {}) {
 			"import/no-duplicates": "error",
 			"import/no-mutable-exports": "error",
 			"import/no-named-default": "error",
-			"import/no-self-import": "error",
-			"import/no-webpack-loader-syntax": "error",
-			...stylistic$1 ? { "import/newline-after-import": ["error", {
-				considerComments: true,
-				count: 1
-			}] } : {},
+			...stylistic$1 ? { "import/newline-after-import": ["error", { count: 1 }] } : {},
 			...overrides
 		}
 	}];
@@ -1972,7 +1967,7 @@ const defaultPluginRenaming = {
 	"@eslint-react/naming-convention": "react-naming-convention",
 	"@stylistic": "style",
 	"@typescript-eslint": "ts",
-	"import-x": "import",
+	"import-lite": "import",
 	"n": "node",
 	"vitest": "test",
 	"yml": "yaml"
@@ -1988,7 +1983,7 @@ const defaultPluginRenaming = {
 *  合并的 ESLint 配置
 */
 function lincy(options = {}, ...userConfigs) {
-	const { autoRenamePlugins = true, componentExts = [], gitignore: enableGitignore = true, ignores: ignoresList = [], jsx: enableJsx = true, overrides = {}, pnpm: enableCatalogs = false, react: enableReact = false, regexp: enableRegexp = true, typescript: enableTypeScript = (0, local_pkg.isPackageExists)("typescript"), unicorn: enableUnicorn = true, unocss: enableUnoCSS = false, vue: enableVue = VuePackages.some((i) => (0, local_pkg.isPackageExists)(i)) } = options;
+	const { autoRenamePlugins = true, componentExts = [], gitignore: enableGitignore = true, ignores: ignoresList = [], imports: enableImports = true, jsx: enableJsx = true, overrides = {}, pnpm: enableCatalogs = false, react: enableReact = false, regexp: enableRegexp = true, typescript: enableTypeScript = (0, local_pkg.isPackageExists)("typescript"), unicorn: enableUnicorn = true, unocss: enableUnoCSS = false, vue: enableVue = VuePackages.some((i) => (0, local_pkg.isPackageExists)(i)) } = options;
 	let isInEditor = options.isInEditor;
 	if (isInEditor == null) {
 		isInEditor = isInEditorEnv();
@@ -2020,6 +2015,10 @@ function lincy(options = {}, ...userConfigs) {
 	if (enableUnicorn) configs$1.push(unicorn({
 		...enableUnicorn === true ? {} : enableUnicorn,
 		overrides: overrides.unicorn
+	}));
+	if (enableImports) configs$1.push(imports({
+		overrides: overrides.imports,
+		stylistic: stylisticOptions
 	}));
 	if (enableVue) componentExts.push("vue");
 	if (enableJsx) configs$1.push(jsx());

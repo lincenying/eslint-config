@@ -59,7 +59,7 @@ export const defaultPluginRenaming = {
 
     '@stylistic': 'style',
     '@typescript-eslint': 'ts',
-    'import-x': 'import',
+    'import-lite': 'import',
     'n': 'node',
     'vitest': 'test',
     'yml': 'yaml',
@@ -84,6 +84,7 @@ export function lincy(
         componentExts = [],
         gitignore: enableGitignore = true,
         ignores: ignoresList = [],
+        imports: enableImports = true,
         jsx: enableJsx = true,
         overrides = {},
         pnpm: enableCatalogs = false,
@@ -165,6 +166,15 @@ export function lincy(
             ...(enableUnicorn === true ? {} : enableUnicorn),
             overrides: overrides.unicorn,
         }))
+    }
+
+    if (enableImports) {
+        configs.push(
+            imports({
+                overrides: overrides.imports,
+                stylistic: stylisticOptions,
+            }),
+        )
     }
 
     if (enableVue) {

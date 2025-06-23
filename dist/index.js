@@ -2,7 +2,7 @@ import { FlatConfigComposer } from "eslint-flat-config-utils";
 import { getPackageInfoSync, isPackageExists } from "local-pkg";
 import pluginComments from "@eslint-community/eslint-plugin-eslint-comments";
 import pluginAntfu from "eslint-plugin-antfu";
-import * as pluginImport from "eslint-plugin-import-x";
+import pluginImportLite from "eslint-plugin-import-lite";
 import pluginNode from "eslint-plugin-n";
 import pluginPerfectionist from "eslint-plugin-perfectionist";
 import pluginUnicorn from "eslint-plugin-unicorn";
@@ -436,7 +436,7 @@ async function imports(options = {}) {
 		name: "eslint/imports/rules",
 		plugins: {
 			antfu: pluginAntfu,
-			import: pluginImport
+			import: pluginImportLite
 		},
 		rules: {
 			"antfu/import-dedupe": "error",
@@ -447,12 +447,7 @@ async function imports(options = {}) {
 			"import/no-duplicates": "error",
 			"import/no-mutable-exports": "error",
 			"import/no-named-default": "error",
-			"import/no-self-import": "error",
-			"import/no-webpack-loader-syntax": "error",
-			...stylistic$1 ? { "import/newline-after-import": ["error", {
-				considerComments: true,
-				count: 1
-			}] } : {},
+			...stylistic$1 ? { "import/newline-after-import": ["error", { count: 1 }] } : {},
 			...overrides
 		}
 	}];
@@ -1948,7 +1943,7 @@ const defaultPluginRenaming = {
 	"@eslint-react/naming-convention": "react-naming-convention",
 	"@stylistic": "style",
 	"@typescript-eslint": "ts",
-	"import-x": "import",
+	"import-lite": "import",
 	"n": "node",
 	"vitest": "test",
 	"yml": "yaml"
@@ -1964,7 +1959,7 @@ const defaultPluginRenaming = {
 *  合并的 ESLint 配置
 */
 function lincy(options = {}, ...userConfigs) {
-	const { autoRenamePlugins = true, componentExts = [], gitignore: enableGitignore = true, ignores: ignoresList = [], jsx: enableJsx = true, overrides = {}, pnpm: enableCatalogs = false, react: enableReact = false, regexp: enableRegexp = true, typescript: enableTypeScript = isPackageExists("typescript"), unicorn: enableUnicorn = true, unocss: enableUnoCSS = false, vue: enableVue = VuePackages.some((i) => isPackageExists(i)) } = options;
+	const { autoRenamePlugins = true, componentExts = [], gitignore: enableGitignore = true, ignores: ignoresList = [], imports: enableImports = true, jsx: enableJsx = true, overrides = {}, pnpm: enableCatalogs = false, react: enableReact = false, regexp: enableRegexp = true, typescript: enableTypeScript = isPackageExists("typescript"), unicorn: enableUnicorn = true, unocss: enableUnoCSS = false, vue: enableVue = VuePackages.some((i) => isPackageExists(i)) } = options;
 	let isInEditor = options.isInEditor;
 	if (isInEditor == null) {
 		isInEditor = isInEditorEnv();
@@ -1996,6 +1991,10 @@ function lincy(options = {}, ...userConfigs) {
 	if (enableUnicorn) configs$1.push(unicorn({
 		...enableUnicorn === true ? {} : enableUnicorn,
 		overrides: overrides.unicorn
+	}));
+	if (enableImports) configs$1.push(imports({
+		overrides: overrides.imports,
+		stylistic: stylisticOptions
 	}));
 	if (enableVue) componentExts.push("vue");
 	if (enableJsx) configs$1.push(jsx());

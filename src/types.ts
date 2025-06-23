@@ -262,6 +262,12 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
     unicorn?: boolean | OptionsUnicorn
 
     /**
+     * eslint-plugin-import-lite 的选项.
+     * @default true
+     */
+    imports?: boolean
+
+    /**
      * 启用 test 支持.
      *
      * @default true
