@@ -1063,7 +1063,11 @@ async function react(options = {}) {
 						"links",
 						"headers",
 						"loader",
-						"action"
+						"action",
+						"clientLoader",
+						"clientAction",
+						"handle",
+						"shouldRevalidate"
 					] : []]
 				}],
 				"react-web-api/no-leaked-event-listener": "warn",

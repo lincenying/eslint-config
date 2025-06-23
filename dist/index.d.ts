@@ -1003,6 +1003,11 @@ interface RuleOptions {
    */
   'markdown/heading-increment'?: Linter.RuleEntry<[]>;
   /**
+   * Disallow bare URLs
+   * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-bare-urls.md
+   */
+  'markdown/no-bare-urls'?: Linter.RuleEntry<[]>;
+  /**
    * Disallow duplicate definitions
    * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-duplicate-definitions.md
    */
@@ -1011,7 +1016,7 @@ interface RuleOptions {
    * Disallow duplicate headings in the same document
    * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-duplicate-headings.md
    */
-  'markdown/no-duplicate-headings'?: Linter.RuleEntry<[]>;
+  'markdown/no-duplicate-headings'?: Linter.RuleEntry<MarkdownNoDuplicateHeadings>;
   /**
    * Disallow empty definitions
    * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-empty-definitions.md
@@ -1048,10 +1053,20 @@ interface RuleOptions {
    */
   'markdown/no-missing-label-refs'?: Linter.RuleEntry<[]>;
   /**
+   * Disallow link fragments that do not reference valid headings
+   * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-missing-link-fragments.md
+   */
+  'markdown/no-missing-link-fragments'?: Linter.RuleEntry<MarkdownNoMissingLinkFragments>;
+  /**
    * Disallow multiple H1 headings in the same document
    * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-multiple-h1.md
    */
   'markdown/no-multiple-h1'?: Linter.RuleEntry<MarkdownNoMultipleH1>;
+  /**
+   * Disallow reversed link and image syntax
+   * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-reversed-media-syntax.md
+   */
+  'markdown/no-reversed-media-syntax'?: Linter.RuleEntry<[]>;
   /**
    * Require alternative text for images
    * @see https://github.com/eslint/markdown/blob/main/docs/rules/require-alt-text.md
@@ -3437,483 +3452,478 @@ interface RuleOptions {
   'strict'?: Linter.RuleEntry<Strict>;
   /**
    * Enforce linebreaks after opening and before closing array brackets
-   * @see https://eslint.style/rules/js/array-bracket-newline
+   * @see https://eslint.style/rules/array-bracket-newline
    */
   'style/array-bracket-newline'?: Linter.RuleEntry<StyleArrayBracketNewline>;
   /**
    * Enforce consistent spacing inside array brackets
-   * @see https://eslint.style/rules/js/array-bracket-spacing
+   * @see https://eslint.style/rules/array-bracket-spacing
    */
   'style/array-bracket-spacing'?: Linter.RuleEntry<StyleArrayBracketSpacing>;
   /**
    * Enforce line breaks after each array element
-   * @see https://eslint.style/rules/js/array-element-newline
+   * @see https://eslint.style/rules/array-element-newline
    */
   'style/array-element-newline'?: Linter.RuleEntry<StyleArrayElementNewline>;
   /**
    * Require parentheses around arrow function arguments
-   * @see https://eslint.style/rules/js/arrow-parens
+   * @see https://eslint.style/rules/arrow-parens
    */
   'style/arrow-parens'?: Linter.RuleEntry<StyleArrowParens>;
   /**
    * Enforce consistent spacing before and after the arrow in arrow functions
-   * @see https://eslint.style/rules/js/arrow-spacing
+   * @see https://eslint.style/rules/arrow-spacing
    */
   'style/arrow-spacing'?: Linter.RuleEntry<StyleArrowSpacing>;
   /**
    * Disallow or enforce spaces inside of blocks after opening block and before closing block
-   * @see https://eslint.style/rules/ts/block-spacing
+   * @see https://eslint.style/rules/block-spacing
    */
   'style/block-spacing'?: Linter.RuleEntry<StyleBlockSpacing>;
   /**
    * Enforce consistent brace style for blocks
-   * @see https://eslint.style/rules/ts/brace-style
+   * @see https://eslint.style/rules/brace-style
    */
   'style/brace-style'?: Linter.RuleEntry<StyleBraceStyle>;
   /**
    * Require or disallow trailing commas
-   * @see https://eslint.style/rules/ts/comma-dangle
+   * @see https://eslint.style/rules/comma-dangle
    */
   'style/comma-dangle'?: Linter.RuleEntry<StyleCommaDangle>;
   /**
    * Enforce consistent spacing before and after commas
-   * @see https://eslint.style/rules/ts/comma-spacing
+   * @see https://eslint.style/rules/comma-spacing
    */
   'style/comma-spacing'?: Linter.RuleEntry<StyleCommaSpacing>;
   /**
    * Enforce consistent comma style
-   * @see https://eslint.style/rules/js/comma-style
+   * @see https://eslint.style/rules/comma-style
    */
   'style/comma-style'?: Linter.RuleEntry<StyleCommaStyle>;
   /**
    * Enforce consistent spacing inside computed property brackets
-   * @see https://eslint.style/rules/js/computed-property-spacing
+   * @see https://eslint.style/rules/computed-property-spacing
    */
   'style/computed-property-spacing'?: Linter.RuleEntry<StyleComputedPropertySpacing>;
   /**
    * Enforce consistent line breaks after opening and before closing braces
-   * @see https://eslint.style/rules/plus/curly-newline
+   * @see https://eslint.style/rules/curly-newline
    */
   'style/curly-newline'?: Linter.RuleEntry<StyleCurlyNewline>;
   /**
    * Enforce consistent newlines before and after dots
-   * @see https://eslint.style/rules/js/dot-location
+   * @see https://eslint.style/rules/dot-location
    */
   'style/dot-location'?: Linter.RuleEntry<StyleDotLocation>;
   /**
    * Require or disallow newline at the end of files
-   * @see https://eslint.style/rules/js/eol-last
+   * @see https://eslint.style/rules/eol-last
    */
   'style/eol-last'?: Linter.RuleEntry<StyleEolLast>;
   /**
-   * Require or disallow spacing between function identifiers and their invocations
-   * @see https://eslint.style/rules/ts/function-call-spacing
-   */
-  'style/func-call-spacing'?: Linter.RuleEntry<StyleFuncCallSpacing>;
-  /**
    * Enforce line breaks between arguments of a function call
-   * @see https://eslint.style/rules/js/function-call-argument-newline
+   * @see https://eslint.style/rules/function-call-argument-newline
    */
   'style/function-call-argument-newline'?: Linter.RuleEntry<StyleFunctionCallArgumentNewline>;
   /**
    * Require or disallow spacing between function identifiers and their invocations
-   * @see https://eslint.style/rules/ts/function-call-spacing
+   * @see https://eslint.style/rules/function-call-spacing
    */
   'style/function-call-spacing'?: Linter.RuleEntry<StyleFunctionCallSpacing>;
   /**
    * Enforce consistent line breaks inside function parentheses
-   * @see https://eslint.style/rules/js/function-paren-newline
+   * @see https://eslint.style/rules/function-paren-newline
    */
   'style/function-paren-newline'?: Linter.RuleEntry<StyleFunctionParenNewline>;
   /**
    * Enforce consistent spacing around `*` operators in generator functions
-   * @see https://eslint.style/rules/js/generator-star-spacing
+   * @see https://eslint.style/rules/generator-star-spacing
    */
   'style/generator-star-spacing'?: Linter.RuleEntry<StyleGeneratorStarSpacing>;
   /**
    * Enforce the location of arrow function bodies
-   * @see https://eslint.style/rules/js/implicit-arrow-linebreak
+   * @see https://eslint.style/rules/implicit-arrow-linebreak
    */
   'style/implicit-arrow-linebreak'?: Linter.RuleEntry<StyleImplicitArrowLinebreak>;
   /**
    * Enforce consistent indentation
-   * @see https://eslint.style/rules/ts/indent
+   * @see https://eslint.style/rules/indent
    */
   'style/indent'?: Linter.RuleEntry<StyleIndent>;
   /**
    * Indentation for binary operators
-   * @see https://eslint.style/rules/plus/indent-binary-ops
+   * @see https://eslint.style/rules/indent-binary-ops
    */
   'style/indent-binary-ops'?: Linter.RuleEntry<StyleIndentBinaryOps>;
   /**
    * Enforce or disallow spaces inside of curly braces in JSX attributes and expressions
-   * @see https://eslint.style/rules/jsx/jsx-child-element-spacing
+   * @see https://eslint.style/rules/jsx-child-element-spacing
    */
   'style/jsx-child-element-spacing'?: Linter.RuleEntry<[]>;
   /**
    * Enforce closing bracket location in JSX
-   * @see https://eslint.style/rules/jsx/jsx-closing-bracket-location
+   * @see https://eslint.style/rules/jsx-closing-bracket-location
    */
   'style/jsx-closing-bracket-location'?: Linter.RuleEntry<StyleJsxClosingBracketLocation>;
   /**
    * Enforce closing tag location for multiline JSX
-   * @see https://eslint.style/rules/jsx/jsx-closing-tag-location
+   * @see https://eslint.style/rules/jsx-closing-tag-location
    */
   'style/jsx-closing-tag-location'?: Linter.RuleEntry<StyleJsxClosingTagLocation>;
   /**
    * Disallow unnecessary JSX expressions when literals alone are sufficient or enforce JSX expressions on literals in JSX children or attributes
-   * @see https://eslint.style/rules/jsx/jsx-curly-brace-presence
+   * @see https://eslint.style/rules/jsx-curly-brace-presence
    */
   'style/jsx-curly-brace-presence'?: Linter.RuleEntry<StyleJsxCurlyBracePresence>;
   /**
    * Enforce consistent linebreaks in curly braces in JSX attributes and expressions
-   * @see https://eslint.style/rules/jsx/jsx-curly-newline
+   * @see https://eslint.style/rules/jsx-curly-newline
    */
   'style/jsx-curly-newline'?: Linter.RuleEntry<StyleJsxCurlyNewline>;
   /**
    * Enforce or disallow spaces inside of curly braces in JSX attributes and expressions
-   * @see https://eslint.style/rules/jsx/jsx-curly-spacing
+   * @see https://eslint.style/rules/jsx-curly-spacing
    */
   'style/jsx-curly-spacing'?: Linter.RuleEntry<StyleJsxCurlySpacing>;
   /**
    * Enforce or disallow spaces around equal signs in JSX attributes
-   * @see https://eslint.style/rules/jsx/jsx-equals-spacing
+   * @see https://eslint.style/rules/jsx-equals-spacing
    */
   'style/jsx-equals-spacing'?: Linter.RuleEntry<StyleJsxEqualsSpacing>;
   /**
    * Enforce proper position of the first property in JSX
-   * @see https://eslint.style/rules/jsx/jsx-first-prop-new-line
+   * @see https://eslint.style/rules/jsx-first-prop-new-line
    */
   'style/jsx-first-prop-new-line'?: Linter.RuleEntry<StyleJsxFirstPropNewLine>;
   /**
    * Enforce line breaks before and after JSX elements when they are used as arguments to a function.
-   * @see https://eslint.style/rules/jsx/jsx-function-call-newline
+   * @see https://eslint.style/rules/jsx-function-call-newline
    */
   'style/jsx-function-call-newline'?: Linter.RuleEntry<StyleJsxFunctionCallNewline>;
   /**
    * Enforce JSX indentation. Deprecated, use `indent` rule instead.
-   * @see https://eslint.style/rules/jsx/jsx-indent
+   * @see https://eslint.style/rules/jsx-indent
    * @deprecated
    */
   'style/jsx-indent'?: Linter.RuleEntry<StyleJsxIndent>;
   /**
    * Enforce props indentation in JSX
-   * @see https://eslint.style/rules/jsx/jsx-indent-props
+   * @see https://eslint.style/rules/jsx-indent-props
    */
   'style/jsx-indent-props'?: Linter.RuleEntry<StyleJsxIndentProps>;
   /**
    * Enforce maximum of props on a single line in JSX
-   * @see https://eslint.style/rules/jsx/jsx-max-props-per-line
+   * @see https://eslint.style/rules/jsx-max-props-per-line
    */
   'style/jsx-max-props-per-line'?: Linter.RuleEntry<StyleJsxMaxPropsPerLine>;
   /**
    * Require or prevent a new line after jsx elements and expressions.
-   * @see https://eslint.style/rules/jsx/jsx-newline
+   * @see https://eslint.style/rules/jsx-newline
    */
   'style/jsx-newline'?: Linter.RuleEntry<StyleJsxNewline>;
   /**
    * Require one JSX element per line
-   * @see https://eslint.style/rules/jsx/jsx-one-expression-per-line
+   * @see https://eslint.style/rules/jsx-one-expression-per-line
    */
   'style/jsx-one-expression-per-line'?: Linter.RuleEntry<StyleJsxOneExpressionPerLine>;
   /**
    * Enforce PascalCase for user-defined JSX components
-   * @see https://eslint.style/rules/jsx/jsx-pascal-case
+   * @see https://eslint.style/rules/jsx-pascal-case
    */
   'style/jsx-pascal-case'?: Linter.RuleEntry<StyleJsxPascalCase>;
   /**
    * Disallow multiple spaces between inline JSX props
-   * @see https://eslint.style/rules/jsx/jsx-props-no-multi-spaces
+   * @see https://eslint.style/rules/jsx-props-no-multi-spaces
    */
   'style/jsx-props-no-multi-spaces'?: Linter.RuleEntry<[]>;
   /**
    * Enforce the consistent use of either double or single quotes in JSX attributes
-   * @see https://eslint.style/rules/js/jsx-quotes
+   * @see https://eslint.style/rules/jsx-quotes
    */
   'style/jsx-quotes'?: Linter.RuleEntry<StyleJsxQuotes>;
   /**
    * Disallow extra closing tags for components without children
-   * @see https://eslint.style/rules/jsx/jsx-self-closing-comp
+   * @see https://eslint.style/rules/jsx-self-closing-comp
    */
   'style/jsx-self-closing-comp'?: Linter.RuleEntry<StyleJsxSelfClosingComp>;
   /**
    * Enforce props alphabetical sorting
-   * @see https://eslint.style/rules/jsx/jsx-sort-props
+   * @see https://eslint.style/rules/jsx-sort-props
    */
   'style/jsx-sort-props'?: Linter.RuleEntry<StyleJsxSortProps>;
   /**
    * Enforce whitespace in and around the JSX opening and closing brackets
-   * @see https://eslint.style/rules/jsx/jsx-tag-spacing
+   * @see https://eslint.style/rules/jsx-tag-spacing
    */
   'style/jsx-tag-spacing'?: Linter.RuleEntry<StyleJsxTagSpacing>;
   /**
    * Disallow missing parentheses around multiline JSX
-   * @see https://eslint.style/rules/jsx/jsx-wrap-multilines
+   * @see https://eslint.style/rules/jsx-wrap-multilines
    */
   'style/jsx-wrap-multilines'?: Linter.RuleEntry<StyleJsxWrapMultilines>;
   /**
    * Enforce consistent spacing between property names and type annotations in types and interfaces
-   * @see https://eslint.style/rules/ts/key-spacing
+   * @see https://eslint.style/rules/key-spacing
    */
   'style/key-spacing'?: Linter.RuleEntry<StyleKeySpacing>;
   /**
    * Enforce consistent spacing before and after keywords
-   * @see https://eslint.style/rules/ts/keyword-spacing
+   * @see https://eslint.style/rules/keyword-spacing
    */
   'style/keyword-spacing'?: Linter.RuleEntry<StyleKeywordSpacing>;
   /**
    * Enforce position of line comments
-   * @see https://eslint.style/rules/js/line-comment-position
+   * @see https://eslint.style/rules/line-comment-position
    */
   'style/line-comment-position'?: Linter.RuleEntry<StyleLineCommentPosition>;
   /**
    * Enforce consistent linebreak style
-   * @see https://eslint.style/rules/js/linebreak-style
+   * @see https://eslint.style/rules/linebreak-style
    */
   'style/linebreak-style'?: Linter.RuleEntry<StyleLinebreakStyle>;
   /**
    * Require empty lines around comments
-   * @see https://eslint.style/rules/ts/lines-around-comment
+   * @see https://eslint.style/rules/lines-around-comment
    */
   'style/lines-around-comment'?: Linter.RuleEntry<StyleLinesAroundComment>;
   /**
    * Require or disallow an empty line between class members
-   * @see https://eslint.style/rules/ts/lines-between-class-members
+   * @see https://eslint.style/rules/lines-between-class-members
    */
   'style/lines-between-class-members'?: Linter.RuleEntry<StyleLinesBetweenClassMembers>;
   /**
    * Enforce a maximum line length
-   * @see https://eslint.style/rules/js/max-len
+   * @see https://eslint.style/rules/max-len
    */
   'style/max-len'?: Linter.RuleEntry<StyleMaxLen>;
   /**
    * Enforce a maximum number of statements allowed per line
-   * @see https://eslint.style/rules/js/max-statements-per-line
+   * @see https://eslint.style/rules/max-statements-per-line
    */
   'style/max-statements-per-line'?: Linter.RuleEntry<StyleMaxStatementsPerLine>;
   /**
    * Require a specific member delimiter style for interfaces and type literals
-   * @see https://eslint.style/rules/ts/member-delimiter-style
+   * @see https://eslint.style/rules/member-delimiter-style
    */
   'style/member-delimiter-style'?: Linter.RuleEntry<StyleMemberDelimiterStyle>;
   /**
    * Enforce a particular style for multiline comments
-   * @see https://eslint.style/rules/js/multiline-comment-style
+   * @see https://eslint.style/rules/multiline-comment-style
    */
   'style/multiline-comment-style'?: Linter.RuleEntry<StyleMultilineCommentStyle>;
   /**
    * Enforce newlines between operands of ternary expressions
-   * @see https://eslint.style/rules/js/multiline-ternary
+   * @see https://eslint.style/rules/multiline-ternary
    */
   'style/multiline-ternary'?: Linter.RuleEntry<StyleMultilineTernary>;
   /**
    * Enforce or disallow parentheses when invoking a constructor with no arguments
-   * @see https://eslint.style/rules/js/new-parens
+   * @see https://eslint.style/rules/new-parens
    */
   'style/new-parens'?: Linter.RuleEntry<StyleNewParens>;
   /**
    * Require a newline after each call in a method chain
-   * @see https://eslint.style/rules/js/newline-per-chained-call
+   * @see https://eslint.style/rules/newline-per-chained-call
    */
   'style/newline-per-chained-call'?: Linter.RuleEntry<StyleNewlinePerChainedCall>;
   /**
    * Disallow arrow functions where they could be confused with comparisons
-   * @see https://eslint.style/rules/js/no-confusing-arrow
+   * @see https://eslint.style/rules/no-confusing-arrow
    */
   'style/no-confusing-arrow'?: Linter.RuleEntry<StyleNoConfusingArrow>;
   /**
    * Disallow unnecessary parentheses
-   * @see https://eslint.style/rules/ts/no-extra-parens
+   * @see https://eslint.style/rules/no-extra-parens
    */
   'style/no-extra-parens'?: Linter.RuleEntry<StyleNoExtraParens>;
   /**
    * Disallow unnecessary semicolons
-   * @see https://eslint.style/rules/ts/no-extra-semi
+   * @see https://eslint.style/rules/no-extra-semi
    */
   'style/no-extra-semi'?: Linter.RuleEntry<[]>;
   /**
    * Disallow leading or trailing decimal points in numeric literals
-   * @see https://eslint.style/rules/js/no-floating-decimal
+   * @see https://eslint.style/rules/no-floating-decimal
    */
   'style/no-floating-decimal'?: Linter.RuleEntry<[]>;
   /**
    * Disallow mixed binary operators
-   * @see https://eslint.style/rules/js/no-mixed-operators
+   * @see https://eslint.style/rules/no-mixed-operators
    */
   'style/no-mixed-operators'?: Linter.RuleEntry<StyleNoMixedOperators>;
   /**
    * Disallow mixed spaces and tabs for indentation
-   * @see https://eslint.style/rules/js/no-mixed-spaces-and-tabs
+   * @see https://eslint.style/rules/no-mixed-spaces-and-tabs
    */
   'style/no-mixed-spaces-and-tabs'?: Linter.RuleEntry<StyleNoMixedSpacesAndTabs>;
   /**
    * Disallow multiple spaces
-   * @see https://eslint.style/rules/js/no-multi-spaces
+   * @see https://eslint.style/rules/no-multi-spaces
    */
   'style/no-multi-spaces'?: Linter.RuleEntry<StyleNoMultiSpaces>;
   /**
    * Disallow multiple empty lines
-   * @see https://eslint.style/rules/js/no-multiple-empty-lines
+   * @see https://eslint.style/rules/no-multiple-empty-lines
    */
   'style/no-multiple-empty-lines'?: Linter.RuleEntry<StyleNoMultipleEmptyLines>;
   /**
    * Disallow all tabs
-   * @see https://eslint.style/rules/js/no-tabs
+   * @see https://eslint.style/rules/no-tabs
    */
   'style/no-tabs'?: Linter.RuleEntry<StyleNoTabs>;
   /**
    * Disallow trailing whitespace at the end of lines
-   * @see https://eslint.style/rules/js/no-trailing-spaces
+   * @see https://eslint.style/rules/no-trailing-spaces
    */
   'style/no-trailing-spaces'?: Linter.RuleEntry<StyleNoTrailingSpaces>;
   /**
    * Disallow whitespace before properties
-   * @see https://eslint.style/rules/js/no-whitespace-before-property
+   * @see https://eslint.style/rules/no-whitespace-before-property
    */
   'style/no-whitespace-before-property'?: Linter.RuleEntry<[]>;
   /**
    * Enforce the location of single-line statements
-   * @see https://eslint.style/rules/js/nonblock-statement-body-position
+   * @see https://eslint.style/rules/nonblock-statement-body-position
    */
   'style/nonblock-statement-body-position'?: Linter.RuleEntry<StyleNonblockStatementBodyPosition>;
   /**
    * Enforce consistent line breaks after opening and before closing braces
-   * @see https://eslint.style/rules/ts/object-curly-newline
+   * @see https://eslint.style/rules/object-curly-newline
    */
   'style/object-curly-newline'?: Linter.RuleEntry<StyleObjectCurlyNewline>;
   /**
    * Enforce consistent spacing inside braces
-   * @see https://eslint.style/rules/ts/object-curly-spacing
+   * @see https://eslint.style/rules/object-curly-spacing
    */
   'style/object-curly-spacing'?: Linter.RuleEntry<StyleObjectCurlySpacing>;
   /**
    * Enforce placing object properties on separate lines
-   * @see https://eslint.style/rules/ts/object-property-newline
+   * @see https://eslint.style/rules/object-property-newline
    */
   'style/object-property-newline'?: Linter.RuleEntry<StyleObjectPropertyNewline>;
   /**
    * Require or disallow newlines around variable declarations
-   * @see https://eslint.style/rules/js/one-var-declaration-per-line
+   * @see https://eslint.style/rules/one-var-declaration-per-line
    */
   'style/one-var-declaration-per-line'?: Linter.RuleEntry<StyleOneVarDeclarationPerLine>;
   /**
    * Enforce consistent linebreak style for operators
-   * @see https://eslint.style/rules/js/operator-linebreak
+   * @see https://eslint.style/rules/operator-linebreak
    */
   'style/operator-linebreak'?: Linter.RuleEntry<StyleOperatorLinebreak>;
   /**
    * Require or disallow padding within blocks
-   * @see https://eslint.style/rules/js/padded-blocks
+   * @see https://eslint.style/rules/padded-blocks
    */
   'style/padded-blocks'?: Linter.RuleEntry<StylePaddedBlocks>;
   /**
    * Require or disallow padding lines between statements
-   * @see https://eslint.style/rules/ts/padding-line-between-statements
+   * @see https://eslint.style/rules/padding-line-between-statements
    */
   'style/padding-line-between-statements'?: Linter.RuleEntry<StylePaddingLineBetweenStatements>;
   /**
    * Require quotes around object literal, type literal, interfaces and enums property names
-   * @see https://eslint.style/rules/ts/quote-props
+   * @see https://eslint.style/rules/quote-props
    */
   'style/quote-props'?: Linter.RuleEntry<StyleQuoteProps>;
   /**
    * Enforce the consistent use of either backticks, double, or single quotes
-   * @see https://eslint.style/rules/ts/quotes
+   * @see https://eslint.style/rules/quotes
    */
   'style/quotes'?: Linter.RuleEntry<StyleQuotes>;
   /**
    * Enforce spacing between rest and spread operators and their expressions
-   * @see https://eslint.style/rules/js/rest-spread-spacing
+   * @see https://eslint.style/rules/rest-spread-spacing
    */
   'style/rest-spread-spacing'?: Linter.RuleEntry<StyleRestSpreadSpacing>;
   /**
    * Require or disallow semicolons instead of ASI
-   * @see https://eslint.style/rules/ts/semi
+   * @see https://eslint.style/rules/semi
    */
   'style/semi'?: Linter.RuleEntry<StyleSemi>;
   /**
    * Enforce consistent spacing before and after semicolons
-   * @see https://eslint.style/rules/ts/semi-spacing
+   * @see https://eslint.style/rules/semi-spacing
    */
   'style/semi-spacing'?: Linter.RuleEntry<StyleSemiSpacing>;
   /**
    * Enforce location of semicolons
-   * @see https://eslint.style/rules/js/semi-style
+   * @see https://eslint.style/rules/semi-style
    */
   'style/semi-style'?: Linter.RuleEntry<StyleSemiStyle>;
   /**
    * Enforce consistent spacing before blocks
-   * @see https://eslint.style/rules/ts/space-before-blocks
+   * @see https://eslint.style/rules/space-before-blocks
    */
   'style/space-before-blocks'?: Linter.RuleEntry<StyleSpaceBeforeBlocks>;
   /**
    * Enforce consistent spacing before function parenthesis
-   * @see https://eslint.style/rules/ts/space-before-function-paren
+   * @see https://eslint.style/rules/space-before-function-paren
    */
   'style/space-before-function-paren'?: Linter.RuleEntry<StyleSpaceBeforeFunctionParen>;
   /**
    * Enforce consistent spacing inside parentheses
-   * @see https://eslint.style/rules/js/space-in-parens
+   * @see https://eslint.style/rules/space-in-parens
    */
   'style/space-in-parens'?: Linter.RuleEntry<StyleSpaceInParens>;
   /**
    * Require spacing around infix operators
-   * @see https://eslint.style/rules/ts/space-infix-ops
+   * @see https://eslint.style/rules/space-infix-ops
    */
   'style/space-infix-ops'?: Linter.RuleEntry<StyleSpaceInfixOps>;
   /**
    * Enforce consistent spacing before or after unary operators
-   * @see https://eslint.style/rules/js/space-unary-ops
+   * @see https://eslint.style/rules/space-unary-ops
    */
   'style/space-unary-ops'?: Linter.RuleEntry<StyleSpaceUnaryOps>;
   /**
    * Enforce consistent spacing after the `//` or `/*` in a comment
-   * @see https://eslint.style/rules/js/spaced-comment
+   * @see https://eslint.style/rules/spaced-comment
    */
   'style/spaced-comment'?: Linter.RuleEntry<StyleSpacedComment>;
   /**
    * Enforce spacing around colons of switch statements
-   * @see https://eslint.style/rules/js/switch-colon-spacing
+   * @see https://eslint.style/rules/switch-colon-spacing
    */
   'style/switch-colon-spacing'?: Linter.RuleEntry<StyleSwitchColonSpacing>;
   /**
    * Require or disallow spacing around embedded expressions of template strings
-   * @see https://eslint.style/rules/js/template-curly-spacing
+   * @see https://eslint.style/rules/template-curly-spacing
    */
   'style/template-curly-spacing'?: Linter.RuleEntry<StyleTemplateCurlySpacing>;
   /**
    * Require or disallow spacing between template tags and their literals
-   * @see https://eslint.style/rules/js/template-tag-spacing
+   * @see https://eslint.style/rules/template-tag-spacing
    */
   'style/template-tag-spacing'?: Linter.RuleEntry<StyleTemplateTagSpacing>;
   /**
    * Require consistent spacing around type annotations
-   * @see https://eslint.style/rules/ts/type-annotation-spacing
+   * @see https://eslint.style/rules/type-annotation-spacing
    */
   'style/type-annotation-spacing'?: Linter.RuleEntry<StyleTypeAnnotationSpacing>;
   /**
    * Enforces consistent spacing inside TypeScript type generics
-   * @see https://eslint.style/rules/plus/type-generic-spacing
+   * @see https://eslint.style/rules/type-generic-spacing
    */
   'style/type-generic-spacing'?: Linter.RuleEntry<[]>;
   /**
    * Expect space before the type declaration in the named tuple
-   * @see https://eslint.style/rules/plus/type-named-tuple-spacing
+   * @see https://eslint.style/rules/type-named-tuple-spacing
    */
   'style/type-named-tuple-spacing'?: Linter.RuleEntry<[]>;
   /**
    * Require parentheses around immediate `function` invocations
-   * @see https://eslint.style/rules/js/wrap-iife
+   * @see https://eslint.style/rules/wrap-iife
    */
   'style/wrap-iife'?: Linter.RuleEntry<StyleWrapIife>;
   /**
    * Require parenthesis around regex literals
-   * @see https://eslint.style/rules/js/wrap-regex
+   * @see https://eslint.style/rules/wrap-regex
    */
   'style/wrap-regex'?: Linter.RuleEntry<[]>;
   /**
    * Require or disallow spacing around the `*` in `yield*` expressions
-   * @see https://eslint.style/rules/js/yield-star-spacing
+   * @see https://eslint.style/rules/yield-star-spacing
    */
   'style/yield-star-spacing'?: Linter.RuleEntry<StyleYieldStarSpacing>;
   /**
@@ -7647,6 +7657,7 @@ type JsdocLinesBeforeBlock = [] | [{
   checkBlockStarts?: boolean;
   excludedTags?: string[];
   ignoreSameLine?: boolean;
+  ignoreSingleLines?: boolean;
   lines?: number;
 }];
 // ----- jsdoc/match-description -----
@@ -8647,9 +8658,18 @@ type MarkdownNoDuplicateDefinitions = [] | [{
   allowDefinitions?: string[];
   allowFootnoteDefinitions?: string[];
 }];
+// ----- markdown/no-duplicate-headings -----
+type MarkdownNoDuplicateHeadings = [] | [{
+  checkSiblingsOnly?: boolean;
+}];
 // ----- markdown/no-html -----
 type MarkdownNoHtml = [] | [{
   allowed?: string[];
+}];
+// ----- markdown/no-missing-link-fragments -----
+type MarkdownNoMissingLinkFragments = [] | [{
+  ignoreCase?: boolean;
+  allowPattern?: string;
 }];
 // ----- markdown/no-multiple-h1 -----
 type MarkdownNoMultipleH1 = [] | [{
@@ -11724,16 +11744,6 @@ type StyleCurlyNewline = [] | [(("always" | "never") | {
     minElements?: number;
     consistent?: boolean;
   });
-  TSEnumBody?: (("always" | "never") | {
-    multiline?: boolean;
-    minElements?: number;
-    consistent?: boolean;
-  });
-  TSInterfaceBody?: (("always" | "never") | {
-    multiline?: boolean;
-    minElements?: number;
-    consistent?: boolean;
-  });
   TSModuleBlock?: (("always" | "never") | {
     multiline?: boolean;
     minElements?: number;
@@ -11747,14 +11757,6 @@ type StyleCurlyNewline = [] | [(("always" | "never") | {
 type StyleDotLocation = [] | [("object" | "property")];
 // ----- style/eol-last -----
 type StyleEolLast = [] | [("always" | "never" | "unix" | "windows")];
-// ----- style/func-call-spacing -----
-type StyleFuncCallSpacing = ([] | ["never"] | [] | ["always"] | ["always", {
-  allowNewlines?: boolean;
-  optionalChain?: {
-    before?: boolean;
-    after?: boolean;
-  };
-}]);
 // ----- style/function-call-argument-newline -----
 type StyleFunctionCallArgumentNewline = [] | [("always" | "never" | "consistent")];
 // ----- style/function-call-spacing -----
@@ -11795,6 +11797,7 @@ type StyleIndent = [] | [("tab" | number)] | [("tab" | number), {
     var?: (number | ("first" | "off"));
     let?: (number | ("first" | "off"));
     const?: (number | ("first" | "off"));
+    using?: (number | ("first" | "off"));
   });
   outerIIFEBody?: (number | "off");
   MemberExpression?: (number | "off");
@@ -11929,8 +11932,8 @@ type StyleJsxSortProps = [] | [{
   multiline?: ("ignore" | "first" | "last");
   ignoreCase?: boolean;
   noSortAlphabetically?: boolean;
-  reservedFirst?: (unknown[] | boolean);
-  reservedLast?: unknown[];
+  reservedFirst?: (string[] | boolean);
+  reservedLast?: string[];
   locale?: string;
 }];
 // ----- style/jsx-tag-spacing -----
@@ -12275,6 +12278,10 @@ type StyleKeywordSpacing = [] | [{
       before?: boolean;
       after?: boolean;
     };
+    using?: {
+      before?: boolean;
+      after?: boolean;
+    };
     yield?: {
       before?: boolean;
       after?: boolean;
@@ -12477,6 +12484,11 @@ type StyleNoExtraParens = ([] | ["functions"] | [] | ["all"] | ["all", {
   enforceForFunctionPrototypeMethods?: boolean;
   allowParensAfterCommentPattern?: string;
   nestedConditionalExpressions?: boolean;
+  allowNodesInSpreadElement?: {
+    ConditionalExpression?: boolean;
+    LogicalExpression?: boolean;
+    AwaitExpression?: boolean;
+  };
 }]);
 // ----- style/no-mixed-operators -----
 type StyleNoMixedOperators = [] | [{
@@ -12554,6 +12566,11 @@ type StyleObjectCurlyNewline = [] | [((("always" | "never") | {
     minProperties?: number;
     consistent?: boolean;
   });
+  TSEnumBody?: (("always" | "never") | {
+    multiline?: boolean;
+    minProperties?: number;
+    consistent?: boolean;
+  });
 })];
 // ----- style/object-curly-spacing -----
 type StyleObjectCurlySpacing = [] | [("always" | "never")] | [("always" | "never"), {
@@ -12563,7 +12580,6 @@ type StyleObjectCurlySpacing = [] | [("always" | "never")] | [("always" | "never
 // ----- style/object-property-newline -----
 type StyleObjectPropertyNewline = [] | [{
   allowAllPropertiesOnSameLine?: boolean;
-  allowMultiplePropertiesPerLine?: boolean;
 }];
 // ----- style/one-var-declaration-per-line -----
 type StyleOneVarDeclarationPerLine = [] | [("always" | "initializations")];
@@ -12587,7 +12603,7 @@ type StylePaddedBlocks = [] | [(("always" | "never" | "start" | "end") | {
 }];
 // ----- style/padding-line-between-statements -----
 type _StylePaddingLineBetweenStatementsPaddingType = ("any" | "never" | "always");
-type _StylePaddingLineBetweenStatementsStatementType = (("*" | "block-like" | "exports" | "require" | "directive" | "expression" | "iife" | "multiline-block-like" | "multiline-expression" | "multiline-const" | "multiline-export" | "multiline-let" | "multiline-var" | "singleline-const" | "singleline-export" | "singleline-let" | "singleline-var" | "block" | "empty" | "function" | "ts-method" | "break" | "case" | "class" | "const" | "continue" | "debugger" | "default" | "do" | "export" | "for" | "if" | "import" | "let" | "return" | "switch" | "throw" | "try" | "var" | "while" | "with" | "cjs-export" | "cjs-import" | "enum" | "interface" | "type" | "function-overload") | [("*" | "block-like" | "exports" | "require" | "directive" | "expression" | "iife" | "multiline-block-like" | "multiline-expression" | "multiline-const" | "multiline-export" | "multiline-let" | "multiline-var" | "singleline-const" | "singleline-export" | "singleline-let" | "singleline-var" | "block" | "empty" | "function" | "ts-method" | "break" | "case" | "class" | "const" | "continue" | "debugger" | "default" | "do" | "export" | "for" | "if" | "import" | "let" | "return" | "switch" | "throw" | "try" | "var" | "while" | "with" | "cjs-export" | "cjs-import" | "enum" | "interface" | "type" | "function-overload"), ...(("*" | "block-like" | "exports" | "require" | "directive" | "expression" | "iife" | "multiline-block-like" | "multiline-expression" | "multiline-const" | "multiline-export" | "multiline-let" | "multiline-var" | "singleline-const" | "singleline-export" | "singleline-let" | "singleline-var" | "block" | "empty" | "function" | "ts-method" | "break" | "case" | "class" | "const" | "continue" | "debugger" | "default" | "do" | "export" | "for" | "if" | "import" | "let" | "return" | "switch" | "throw" | "try" | "var" | "while" | "with" | "cjs-export" | "cjs-import" | "enum" | "interface" | "type" | "function-overload"))[]]);
+type _StylePaddingLineBetweenStatementsStatementType = (("*" | "block-like" | "exports" | "require" | "directive" | "expression" | "iife" | "multiline-block-like" | "multiline-expression" | "multiline-const" | "multiline-export" | "multiline-let" | "multiline-using" | "multiline-var" | "singleline-const" | "singleline-export" | "singleline-let" | "singleline-using" | "singleline-var" | "block" | "empty" | "function" | "ts-method" | "break" | "case" | "class" | "const" | "continue" | "debugger" | "default" | "do" | "export" | "for" | "if" | "import" | "let" | "return" | "switch" | "throw" | "try" | "using" | "var" | "while" | "with" | "cjs-export" | "cjs-import" | "enum" | "interface" | "type" | "function-overload") | [("*" | "block-like" | "exports" | "require" | "directive" | "expression" | "iife" | "multiline-block-like" | "multiline-expression" | "multiline-const" | "multiline-export" | "multiline-let" | "multiline-using" | "multiline-var" | "singleline-const" | "singleline-export" | "singleline-let" | "singleline-using" | "singleline-var" | "block" | "empty" | "function" | "ts-method" | "break" | "case" | "class" | "const" | "continue" | "debugger" | "default" | "do" | "export" | "for" | "if" | "import" | "let" | "return" | "switch" | "throw" | "try" | "using" | "var" | "while" | "with" | "cjs-export" | "cjs-import" | "enum" | "interface" | "type" | "function-overload"), ...(("*" | "block-like" | "exports" | "require" | "directive" | "expression" | "iife" | "multiline-block-like" | "multiline-expression" | "multiline-const" | "multiline-export" | "multiline-let" | "multiline-using" | "multiline-var" | "singleline-const" | "singleline-export" | "singleline-let" | "singleline-using" | "singleline-var" | "block" | "empty" | "function" | "ts-method" | "break" | "case" | "class" | "const" | "continue" | "debugger" | "default" | "do" | "export" | "for" | "if" | "import" | "let" | "return" | "switch" | "throw" | "try" | "using" | "var" | "while" | "with" | "cjs-export" | "cjs-import" | "enum" | "interface" | "type" | "function-overload"))[]]);
 type StylePaddingLineBetweenStatements = {
   blankLine: _StylePaddingLineBetweenStatementsPaddingType;
   prev: _StylePaddingLineBetweenStatementsStatementType;
@@ -12626,12 +12642,14 @@ type StyleSpaceBeforeBlocks = [] | [(("always" | "never") | {
   keywords?: ("always" | "never" | "off");
   functions?: ("always" | "never" | "off");
   classes?: ("always" | "never" | "off");
+  modules?: ("always" | "never" | "off");
 })];
 // ----- style/space-before-function-paren -----
 type StyleSpaceBeforeFunctionParen = [] | [(("always" | "never") | {
   anonymous?: ("always" | "never" | "ignore");
   named?: ("always" | "never" | "ignore");
   asyncArrow?: ("always" | "never" | "ignore");
+  catch?: ("always" | "never" | "ignore");
 })];
 // ----- style/space-in-parens -----
 type StyleSpaceInParens = [] | [("always" | "never")] | [("always" | "never"), {

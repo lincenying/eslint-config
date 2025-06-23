@@ -19,7 +19,7 @@ catalogs:
     '@types/node': ^24.0.3
     '@types/react': ^19.1.8
     '@unocss/eslint-plugin': ^66.2.3
-    bumpp: ^10.1.1
+    bumpp: ^10.2.0
     eslint: ^9.29.0
     eslint-plugin-format: ^1.0.1
     eslint-plugin-react-hooks: ^5.2.0
@@ -41,8 +41,8 @@ catalogs:
     '@antfu/install-pkg': ^1.1.0
     '@clack/prompts': ^0.11.0
     '@eslint-community/eslint-plugin-eslint-comments': ^4.5.0
-    '@eslint/markdown': ^6.5.0
-    '@stylistic/eslint-plugin': ^4.4.1
+    '@eslint/markdown': ^6.6.0
+    '@stylistic/eslint-plugin': ^5.0.0
     '@typescript-eslint/eslint-plugin': ^8.34.1
     '@typescript-eslint/parser': ^8.34.1
     '@vitest/eslint-plugin': ^1.2.7
@@ -52,7 +52,7 @@ catalogs:
     eslint-parser-plain: ^0.1.1
     eslint-plugin-antfu: ^3.1.1
     eslint-plugin-import-lite: ^0.3.0
-    eslint-plugin-jsdoc: ^50.8.0
+    eslint-plugin-jsdoc: ^51.2.1
     eslint-plugin-jsonc: ^2.20.1
     eslint-plugin-n: ^17.20.0
     eslint-plugin-no-only-tests: ^3.3.0
