@@ -1017,7 +1017,7 @@ export interface RuleOptions {
    * Disallow empty definitions
    * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-empty-definitions.md
    */
-  'markdown/no-empty-definitions'?: Linter.RuleEntry<[]>
+  'markdown/no-empty-definitions'?: Linter.RuleEntry<MarkdownNoEmptyDefinitions>
   /**
    * Disallow empty images
    * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-empty-images.md
@@ -1063,6 +1063,11 @@ export interface RuleOptions {
    * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-reversed-media-syntax.md
    */
   'markdown/no-reversed-media-syntax'?: Linter.RuleEntry<[]>
+  /**
+   * Disallow unused definitions
+   * @see https://github.com/eslint/markdown/blob/main/docs/rules/no-unused-definitions.md
+   */
+  'markdown/no-unused-definitions'?: Linter.RuleEntry<MarkdownNoUnusedDefinitions>
   /**
    * Require alternative text for images
    * @see https://github.com/eslint/markdown/blob/main/docs/rules/require-alt-text.md
@@ -1235,7 +1240,7 @@ export interface RuleOptions {
    */
   'no-console'?: Linter.RuleEntry<NoConsole>
   /**
-   * Disallow reassigning `const` variables
+   * Disallow reassigning `const`, `using`, and `await using` variables
    * @see https://eslint.org/docs/latest/rules/no-const-assign
    */
   'no-const-assign'?: Linter.RuleEntry<[]>
@@ -4127,6 +4132,16 @@ export interface RuleOptions {
    */
   'test/padding-around-test-blocks'?: Linter.RuleEntry<[]>
   /**
+   * enforce using `toBeCalledOnce()` or `toHaveBeenCalledOnce()`
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-called-once.md
+   */
+  'test/prefer-called-once'?: Linter.RuleEntry<[]>
+  /**
+   * enforce using `toBeCalledTimes(1)` or `toHaveBeenCalledTimes(1)`
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-called-times.md
+   */
+  'test/prefer-called-times'?: Linter.RuleEntry<[]>
+  /**
    * enforce using `toBeCalledWith()` or `toHaveBeenCalledWith()`
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-called-with.md
    */
@@ -4291,6 +4306,11 @@ export interface RuleOptions {
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/valid-title.md
    */
   'test/valid-title'?: Linter.RuleEntry<TestValidTitle>
+  /**
+   * disallow `.todo` usage
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/warn-todo.md
+   */
+  'test/warn-todo'?: Linter.RuleEntry<[]>
   /**
    * enforce linebreaks after opening and before closing array brackets
    * @see https://ota-meshi.github.io/eslint-plugin-toml/rules/array-bracket-newline.html
@@ -6388,7 +6408,7 @@ export interface RuleOptions {
    */
   'vue/no-restricted-custom-event'?: Linter.RuleEntry<VueNoRestrictedCustomEvent>
   /**
-   * disallow specific HTML elements
+   * disallow specific elements
    * @see https://eslint.vuejs.org/rules/no-restricted-html-elements.html
    */
   'vue/no-restricted-html-elements'?: Linter.RuleEntry<VueNoRestrictedHtmlElements>
@@ -7699,6 +7719,7 @@ type JsdocMultilineBlocks = []|[{
   noMultilineBlocks?: boolean
   noSingleLineBlocks?: boolean
   noZeroLineText?: boolean
+  requireSingleLineUnderCount?: number
   singleLineTags?: string[]
 }]
 // ----- jsdoc/no-bad-blocks -----
@@ -8662,6 +8683,12 @@ type MarkdownNoDuplicateDefinitions = []|[{
 type MarkdownNoDuplicateHeadings = []|[{
   checkSiblingsOnly?: boolean
 }]
+// ----- markdown/no-empty-definitions -----
+type MarkdownNoEmptyDefinitions = []|[{
+  allowDefinitions?: string[]
+  allowFootnoteDefinitions?: string[]
+  checkFootnoteDefinitions?: boolean
+}]
 // ----- markdown/no-html -----
 type MarkdownNoHtml = []|[{
   allowed?: string[]
@@ -8674,6 +8701,11 @@ type MarkdownNoMissingLinkFragments = []|[{
 // ----- markdown/no-multiple-h1 -----
 type MarkdownNoMultipleH1 = []|[{
   frontmatterTitle?: string
+}]
+// ----- markdown/no-unused-definitions -----
+type MarkdownNoUnusedDefinitions = []|[{
+  allowDefinitions?: string[]
+  allowFootnoteDefinitions?: string[]
 }]
 // ----- max-classes-per-file -----
 type MaxClassesPerFile = []|[(number | {
@@ -8840,6 +8872,7 @@ type NoConstantCondition = []|[{
 // ----- no-duplicate-imports -----
 type NoDuplicateImports = []|[{
   includeExports?: boolean
+  allowSeparateTypeImports?: boolean
 }]
 // ----- no-else-return -----
 type NoElseReturn = []|[{
@@ -14640,6 +14673,8 @@ interface _TsNamingConvention_MatchRegexConfig {
 }
 // ----- ts/no-base-to-string -----
 type TsNoBaseToString = []|[{
+  
+  checkUnknown?: boolean
   
   ignoredTypeNames?: string[]
 }]

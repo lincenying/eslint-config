@@ -1255,7 +1255,7 @@ async function sortPackageJson() {
 */
 function sortTsconfig() {
 	return [{
-		files: ["**/tsconfig.json", "**/tsconfig.*.json"],
+		files: ["**/[jt]sconfig.json", "**/[jt]sconfig.*.json"],
 		name: "eslint/sort/tsconfig",
 		rules: { "jsonc/sort-keys": [
 			"error",
