@@ -14,6 +14,7 @@ import {
     jsonc,
     jsx,
     markdown,
+    nextjs,
     node,
     perfectionist,
     pnpm,
@@ -86,6 +87,7 @@ export function lincy(
         ignores: ignoresList = [],
         imports: enableImports = true,
         jsx: enableJsx = true,
+        nextjs: enableNextjs = false,
         overrides = {},
         pnpm: enableCatalogs = false,
         react: enableReact = false,
@@ -142,36 +144,32 @@ export function lincy(
             overrides: getOverrides(options, 'javascript'),
         }),
         comments({
-            overrides: overrides.comments,
+            overrides: getOverrides(options, 'comments'),
         }),
         node({
-            overrides: overrides.node,
+            overrides: getOverrides(options, 'node'),
         }),
         jsdoc({
-            overrides: overrides.jsdoc,
-            stylistic: stylisticOptions,
-        }),
-        imports({
-            overrides: overrides.imports,
+            overrides: getOverrides(options, 'jsdoc'),
             stylistic: stylisticOptions,
         }),
         // Optional plugins (installed but not enabled by default)
         perfectionist({
-            overrides: overrides.perfectionist,
+            overrides: getOverrides(options, 'perfectionist'),
         }),
     )
 
     if (enableUnicorn) {
         configs.push(unicorn({
             ...(enableUnicorn === true ? {} : enableUnicorn),
-            overrides: overrides.unicorn,
+            overrides: getOverrides(options, 'unicorn'),
         }))
     }
 
     if (enableImports) {
         configs.push(
             imports({
-                overrides: overrides.imports,
+                overrides: getOverrides(options, 'imports'),
                 stylistic: stylisticOptions,
             }),
         )
@@ -232,6 +230,12 @@ export function lincy(
             ...resolveSubOptions(options, 'react'),
             overrides: getOverrides(options, 'react'),
             tsconfigPath,
+        }))
+    }
+
+    if (enableNextjs) {
+        configs.push(nextjs({
+            overrides: getOverrides(options, 'nextjs'),
         }))
     }
 

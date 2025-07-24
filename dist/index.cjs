@@ -883,6 +883,33 @@ async function markdown(options = {}) {
 }
 
 //#endregion
+//#region src/configs/nextjs.ts
+function normalizeRules(rules) {
+	return Object.fromEntries(Object.entries(rules).map(([key, value]) => [key, typeof value === "string" ? [value] : value]));
+}
+async function nextjs(options = {}) {
+	const { files = [GLOB_SRC], overrides = {} } = options;
+	await ensurePackages(["@next/eslint-plugin-next"]);
+	const pluginNextJS = await interopDefault(import("@next/eslint-plugin-next"));
+	return [{
+		name: "antfu/nextjs/setup",
+		plugins: { "@next/next": pluginNextJS }
+	}, {
+		files,
+		languageOptions: {
+			parserOptions: { ecmaFeatures: { jsx: true } },
+			sourceType: "module"
+		},
+		rules: {
+			...normalizeRules(pluginNextJS.configs.recommended.rules),
+			...normalizeRules(pluginNextJS.configs["core-web-vitals"].rules),
+			...overrides
+		},
+		settings: { react: { version: "detect" } }
+	}];
+}
+
+//#endregion
 //#region src/configs/node.ts
 async function node(options = {}) {
 	const { overrides = {} } = options;
@@ -1987,7 +2014,7 @@ const defaultPluginRenaming = {
 *  合并的 ESLint 配置
 */
 function lincy(options = {}, ...userConfigs) {
-	const { autoRenamePlugins = true, componentExts = [], gitignore: enableGitignore = true, ignores: ignoresList = [], imports: enableImports = true, jsx: enableJsx = true, overrides = {}, pnpm: enableCatalogs = false, react: enableReact = false, regexp: enableRegexp = true, typescript: enableTypeScript = (0, local_pkg.isPackageExists)("typescript"), unicorn: enableUnicorn = true, unocss: enableUnoCSS = false, vue: enableVue = VuePackages.some((i) => (0, local_pkg.isPackageExists)(i)) } = options;
+	const { autoRenamePlugins = true, componentExts = [], gitignore: enableGitignore = true, ignores: ignoresList = [], imports: enableImports = true, jsx: enableJsx = true, nextjs: enableNextjs = false, overrides = {}, pnpm: enableCatalogs = false, react: enableReact = false, regexp: enableRegexp = true, typescript: enableTypeScript = (0, local_pkg.isPackageExists)("typescript"), unicorn: enableUnicorn = true, unocss: enableUnoCSS = false, vue: enableVue = VuePackages.some((i) => (0, local_pkg.isPackageExists)(i)) } = options;
 	let isInEditor = options.isInEditor;
 	if (isInEditor == null) {
 		isInEditor = isInEditorEnv();
@@ -2009,19 +2036,16 @@ function lincy(options = {}, ...userConfigs) {
 	configs$1.push(ignores({ ignores: [...overrides.ignores || [], ...ignoresList] }), javascript({
 		isInEditor,
 		overrides: getOverrides(options, "javascript")
-	}), comments({ overrides: overrides.comments }), node({ overrides: overrides.node }), jsdoc({
-		overrides: overrides.jsdoc,
+	}), comments({ overrides: getOverrides(options, "comments") }), node({ overrides: getOverrides(options, "node") }), jsdoc({
+		overrides: getOverrides(options, "jsdoc"),
 		stylistic: stylisticOptions
-	}), imports({
-		overrides: overrides.imports,
-		stylistic: stylisticOptions
-	}), perfectionist({ overrides: overrides.perfectionist }));
+	}), perfectionist({ overrides: getOverrides(options, "perfectionist") }));
 	if (enableUnicorn) configs$1.push(unicorn({
 		...enableUnicorn === true ? {} : enableUnicorn,
-		overrides: overrides.unicorn
+		overrides: getOverrides(options, "unicorn")
 	}));
 	if (enableImports) configs$1.push(imports({
-		overrides: overrides.imports,
+		overrides: getOverrides(options, "imports"),
 		stylistic: stylisticOptions
 	}));
 	if (enableVue) componentExts.push("vue");
@@ -2058,6 +2082,7 @@ function lincy(options = {}, ...userConfigs) {
 		overrides: getOverrides(options, "react"),
 		tsconfigPath
 	}));
+	if (enableNextjs) configs$1.push(nextjs({ overrides: getOverrides(options, "nextjs") }));
 	if (enableUnoCSS) configs$1.push(unocss({
 		...resolveSubOptions(options, "unocss"),
 		overrides: getOverrides(options, "unocss")
@@ -2165,6 +2190,7 @@ exports.jsonc = jsonc;
 exports.jsx = jsx;
 exports.lincy = lincy;
 exports.markdown = markdown;
+exports.nextjs = nextjs;
 exports.node = node;
 exports.parserPlain = parserPlain;
 exports.perfectionist = perfectionist;

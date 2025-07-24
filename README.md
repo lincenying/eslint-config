@@ -283,50 +283,29 @@ export default lincy({
      * 覆盖规则
      */
     overrides: {
+        comments: {
+            // comments 规则
+        },
         ignores: [
             // 忽略的路径/文件
         ],
+        imports: {
+            // imports 规则
+        },
         javascript: {
             // javascript 规则
         },
-        typescript: {
-            // typescript 规则
-        },
-        stylistic: {
-            // stylistic 规则
-        },
-        test: {
-            // test 规则
-        },
-        vue: {
-            // vue 规则
-        },
-        react: {
-            // react 规则
+        jsdoc: {
+            // jsdoc 规则
         },
         jsonc: {
             // jsonc 规则
         },
-        yaml: {
-            // yaml 规则
-        },
-        toml: {
-            // toml 规则
-        },
         markdown: {
             // markdown 规则
         },
-        unocss: {
-            // unocss 规则
-        },
-        comments: {
-            // comments 规则
-        },
-        imports: {
-            // imports 规则
-        },
-        jsdoc: {
-            // jsdoc 规则
+        nextjs: {
+            // nextjs 规则
         },
         node: {
             // node 规则
@@ -334,15 +313,36 @@ export default lincy({
         perfectionist: {
             // perfectionist 规则
         },
-        sort: {
-            // sort 规则
+        react: {
+            // react 规则
+        },
+        regexp: {
+            // regexp 规则
+        },
+        stylistic: {
+            // stylistic 规则
+        },
+        test: {
+            // test 规则
+        },
+        toml: {
+            // toml 规则
+        },
+        typescript: {
+            // typescript 规则
         },
         unicorn: {
             // unicorn 规则
         },
-        regexp: {
-            // regexp 规则
-        }
+        unocss: {
+            // unocss 规则
+        },
+        vue: {
+            // vue 规则
+        },
+        yaml: {
+            // yaml 规则
+        },
     },
 
     // 工厂函数第一个参数默认为各规则的开关, 但是也可以作为追加规则使用, 当包含以下键名将会自动整合到一个规则里
@@ -573,7 +573,7 @@ export default lincy({
 
 使用外部格式化程序来格式化 ESLint 无法处理的文件（.css、.html 等）。 由 [eslint-plugin-format](https://github.com/antfu/eslint-plugin-format) 提供支持
 
-```js
+```ts
 // eslint.config.js
 import lincy from '@lincy/eslint-config'
 
@@ -626,10 +626,38 @@ pnpm add eslint-plugin-format -D
 
 当检测到依赖安装了`react`, 则默认开启
 
+```ts
+// eslint.config.js
+import lincy from '@lincy/eslint-config'
+
+export default lincy({
+    react: true
+})
+```
+
 运行“npx eslint”会提示您安装所需的依赖项，当然，也可以手动安装它们：
 
 ```bash
 pnpm i -D @eslint-react/eslint-plugin eslint-plugin-react-hooks eslint-plugin-react-refresh
+```
+
+#### Next.js
+
+要启用 nextjs 支持，需要显式打开它
+
+```ts
+// eslint.config.js
+import lincy from '@lincy/eslint-config'
+
+export default lincy({
+    nextjs: true
+})
+```
+
+运行“npx eslint”会提示您安装所需的依赖项，当然，也可以手动安装它们：
+
+```bash
+pnpm i -D @next/eslint-plugin-next
 ```
 
 #### UnoCSS

@@ -13,7 +13,7 @@ export interface Rules extends RuleOptions {}
 
 export type { ConfigNames }
 
-export type TypedFlatConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'plugins'> & {
+export type TypedFlatConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'plugins' | 'rules'> & {
     // 放宽插件类型限制，因为大多数插件还没有正确的类型信息。
     /**
      * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
@@ -21,6 +21,10 @@ export type TypedFlatConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>
      * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
      */
     plugins?: Record<string, any>
+    /**
+     * Rules configuration. More flexible to allow plugin rules that may not be perfectly typed.
+     */
+    rules?: Record<string, Linter.RuleEntry<any> | undefined>
 }
 
 export interface OptionsFiles {
@@ -337,6 +341,16 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
     react?: boolean | OptionsFiles
 
     /**
+     * 启用 nextjs 支持.
+     *
+     * 需要安装:
+     * - `@next/eslint-plugin-next`
+     *
+     * @default false
+     */
+    nextjs?: boolean | OptionsOverrides
+
+    /**
      * 启用 unocss rules.
      *
      * 需要安装:
@@ -390,28 +404,37 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
     autoRenamePlugins?: boolean
 
     /**
+     * 没啥用的配置
+     */
+    comments?: boolean | OptionsOverrides
+    node?: boolean | OptionsOverrides
+    jsdoc?: boolean | OptionsOverrides
+    perfectionist?: boolean | OptionsOverrides
+    ignores?: boolean | OptionsOverrides
+
+    /**
      * 为每个集成提供规则覆盖
      */
     overrides?: {
+        comments?: TypedFlatConfigItem['rules']
+        ignores?: string[]
+        imports?: TypedFlatConfigItem['rules']
         javascript?: TypedFlatConfigItem['rules']
-        typescript?: TypedFlatConfigItem['rules']
-        stylistic?: TypedFlatConfigItem['rules']
-        test?: TypedFlatConfigItem['rules']
-        vue?: TypedFlatConfigItem['rules']
-        regexp?: TypedFlatConfigItem['rules']
-        react?: TypedFlatConfigItem['rules']
-        svelte?: TypedFlatConfigItem['rules']
+        jsdoc?: TypedFlatConfigItem['rules']
         jsonc?: TypedFlatConfigItem['rules']
         markdown?: TypedFlatConfigItem['rules']
-        yaml?: TypedFlatConfigItem['rules']
-        toml?: TypedFlatConfigItem['rules']
-        unocss?: TypedFlatConfigItem['rules']
-        perfectionist?: TypedFlatConfigItem['rules']
-        unicorn?: TypedFlatConfigItem['rules']
-        comments?: TypedFlatConfigItem['rules']
+        nuxtjs?: TypedFlatConfigItem['rules']
         node?: TypedFlatConfigItem['rules']
-        imports?: TypedFlatConfigItem['rules']
-        jsdoc?: TypedFlatConfigItem['rules']
-        ignores?: string[]
+        perfectionist?: TypedFlatConfigItem['rules']
+        react?: TypedFlatConfigItem['rules']
+        regexp?: TypedFlatConfigItem['rules']
+        stylistic?: TypedFlatConfigItem['rules']
+        test?: TypedFlatConfigItem['rules']
+        toml?: TypedFlatConfigItem['rules']
+        typescript?: TypedFlatConfigItem['rules']
+        unicorn?: TypedFlatConfigItem['rules']
+        unocss?: TypedFlatConfigItem['rules']
+        vue?: TypedFlatConfigItem['rules']
+        yaml?: TypedFlatConfigItem['rules']
     }
 }
