@@ -1,8 +1,13 @@
-import type { OptionsOverrides, OptionsUnicorn, TypedFlatConfigItem } from '../types'
+import type { OptionsOverrides, OptionsUnicorn, Rules, TypedFlatConfigItem } from '../types'
 
 import { pluginUnicorn } from '../plugins'
 
 export async function unicorn(options: OptionsUnicorn & OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
+    const {
+        allRecommended = false,
+        overrides = {},
+    } = options
+
     return [
         {
             name: 'eslint/unicorn/rules',
@@ -10,7 +15,7 @@ export async function unicorn(options: OptionsUnicorn & OptionsOverrides = {}): 
                 unicorn: pluginUnicorn,
             },
             rules: {
-                ...(options.allRecommended ? pluginUnicorn.configs['flat/recommended'].rules : {
+                ...(allRecommended ? pluginUnicorn.configs.recommended.rules as Rules : {
                     'unicorn/consistent-empty-array-spread': 'error',
                     'unicorn/error-message': 'error',
                     'unicorn/escape-case': 'error',
@@ -28,7 +33,7 @@ export async function unicorn(options: OptionsUnicorn & OptionsOverrides = {}): 
                     'unicorn/throw-new-error': 'error',
                 }),
 
-                ...options.overrides,
+                ...overrides,
             },
         },
     ]

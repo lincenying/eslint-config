@@ -33,7 +33,7 @@ export async function stylistic(options: OptionsStylistic & OptionsOverrides = {
         pluginName: 'style',
         quotes,
         semi,
-    })
+    }) as TypedFlatConfigItem
 
     return [
         {

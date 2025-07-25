@@ -868,14 +868,15 @@ async function nextjs(options = {}) {
 	await ensurePackages(["@next/eslint-plugin-next"]);
 	const pluginNextJS = await interopDefault(import("@next/eslint-plugin-next"));
 	return [{
-		name: "antfu/nextjs/setup",
-		plugins: { "@next/next": pluginNextJS }
+		name: "eslint/nextjs/setup",
+		plugins: { next: pluginNextJS }
 	}, {
 		files,
 		languageOptions: {
 			parserOptions: { ecmaFeatures: { jsx: true } },
 			sourceType: "module"
 		},
+		name: "eslint/nextjs/rules",
 		rules: {
 			...normalizeRules(pluginNextJS.configs.recommended.rules),
 			...normalizeRules(pluginNextJS.configs["core-web-vitals"].rules),
@@ -1616,11 +1617,12 @@ async function typescript(options = {}) {
 //#endregion
 //#region src/configs/unicorn.ts
 async function unicorn(options = {}) {
+	const { allRecommended = false, overrides = {} } = options;
 	return [{
 		name: "eslint/unicorn/rules",
 		plugins: { unicorn: pluginUnicorn },
 		rules: {
-			...options.allRecommended ? pluginUnicorn.configs["flat/recommended"].rules : {
+			...allRecommended ? pluginUnicorn.configs.recommended.rules : {
 				"unicorn/consistent-empty-array-spread": "error",
 				"unicorn/error-message": "error",
 				"unicorn/escape-case": "error",
@@ -1637,7 +1639,7 @@ async function unicorn(options = {}) {
 				"unicorn/prefer-type-error": "error",
 				"unicorn/throw-new-error": "error"
 			},
-			...options.overrides
+			...overrides
 		}
 	}];
 }
@@ -1972,6 +1974,7 @@ const defaultPluginRenaming = {
 	"@eslint-react/dom": "react-dom",
 	"@eslint-react/hooks-extra": "react-hooks-extra",
 	"@eslint-react/naming-convention": "react-naming-convention",
+	"@next/next": "next",
 	"@stylistic": "style",
 	"@typescript-eslint": "ts",
 	"import-lite": "import",

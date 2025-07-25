@@ -26,9 +26,9 @@ export async function nextjs(
 
     return [
         {
-            name: 'antfu/nextjs/setup',
+            name: 'eslint/nextjs/setup',
             plugins: {
-                '@next/next': pluginNextJS,
+                next: pluginNextJS,
             },
         },
         {
@@ -41,6 +41,7 @@ export async function nextjs(
                 },
                 sourceType: 'module',
             },
+            name: 'eslint/nextjs/rules',
             rules: {
                 ...normalizeRules(pluginNextJS.configs.recommended.rules),
                 ...normalizeRules(pluginNextJS.configs['core-web-vitals'].rules),

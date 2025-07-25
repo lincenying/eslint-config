@@ -15759,18 +15759,24 @@ interface VendoredPrettierOptionsRequired {
 //#endregion
 //#region src/types.d.ts
 type Awaitable<T> = T | Promise<T>;
-interface Rules extends RuleOptions {}
-type TypedFlatConfigItem = Omit<Linter.Config<Linter.RulesRecord & Rules>, 'plugins' | 'rules'> & {
+type Rules = Record<string, Linter.RuleEntry<any> | undefined> & RuleOptions;
+/**
+ * ESLint 的 `Linter.Config` 的更新版本，
+ * 为 `rules` 提供自动补全功能，并放宽了 `plugins` 和 `rules` 的类型限制，
+ * 因为许多插件仍然缺乏适当的类型定义。
+ */
+type TypedFlatConfigItem = Omit<Linter.Config, 'plugins' | 'rules'> & {
   /**
-   * An object containing a name-value mapping of plugin names to plugin objects. When `files` is specified, these plugins are only available to the matching files.
+   * 一个包含插件名称到插件对象的键值对映射的对象。
+   * 当指定 `files` 时，这些插件仅适用于匹配的文件。
    *
-   * @see [Using plugins in your configuration](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
+   * @see [在配置中使用插件](https://eslint.org/docs/latest/user-guide/configuring/configuration-files-new#using-plugins-in-your-configuration)
    */
   plugins?: Record<string, any>;
   /**
-   * Rules configuration. More flexible to allow plugin rules that may not be perfectly typed.
+   * 包含已配置规则的对象。当指定 `files` 或 `ignores` 时，这些规则配置仅适用于匹配的文件。
    */
-  rules?: Record<string, Linter.RuleEntry<any> | undefined>;
+  rules?: Rules;
 };
 interface OptionsFiles {
   /**
@@ -15912,7 +15918,7 @@ interface OptionsOverrides {
 }
 interface OptionsProjectType {
   /**
-   * Type of the project. `lib` will enable more strict rules for libraries.
+   * 项目类型。“lib”将为库启用更严格的规则。
    *
    * @default 'app'
    */
@@ -15946,14 +15952,14 @@ interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
   /**
    * 启用 gitignore 支持.
    *
-   * Passing an object to configure the options.
+   * 传递一个对象来配置选项
    *
    * @see https://github.com/antfu/eslint-config-flat-gitignore
    * @default true
    */
   gitignore?: boolean | FlatGitignoreOptions;
   /**
-   * Core rules. Can't be disabled.
+   * 核心规则。不能禁用。
    */
   javascript?: boolean;
   /**
@@ -16141,6 +16147,7 @@ declare const defaultPluginRenaming: {
   '@eslint-react/dom': string;
   '@eslint-react/hooks-extra': string;
   '@eslint-react/naming-convention': string;
+  '@next/next': string;
   '@stylistic': string;
   '@typescript-eslint': string;
   'import-lite': string;
