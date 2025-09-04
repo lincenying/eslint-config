@@ -2,7 +2,7 @@
   "name": "@lincy/eslint-config",
   "type": "module",
   "version": "5.8.1",
-  "packageManager": "pnpm@10.13.1",
+  "packageManager": "pnpm@10.15.1",
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
   "license": "MIT",
