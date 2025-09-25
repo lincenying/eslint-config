@@ -187,8 +187,7 @@ const parserPlain = {
 * Combine array and non-array configs into a single array.
 */
 async function combine(...configs$1) {
-	const resolved = await Promise.all(configs$1);
-	return resolved.flat();
+	return (await Promise.all(configs$1)).flat();
 }
 function renameRules(rules, map) {
 	return Object.fromEntries(Object.entries(rules).map(([key, value]) => {
@@ -221,9 +220,7 @@ async function ensurePackages(packages) {
 	if (process.env.CI || process.stdout.isTTY === false || isCwdInScope === false) return;
 	const nonExistingPackages = packages.filter((i) => i && !isPackageInScope(i));
 	if (nonExistingPackages.length === 0) return;
-	const p = await import("@clack/prompts");
-	const result = await p.confirm({ message: `此配置需要软件包: ${nonExistingPackages.join(", ")}. 你想安装它们吗?` });
-	if (result) await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
+	if (await (await import("@clack/prompts")).confirm({ message: `此配置需要软件包: ${nonExistingPackages.join(", ")}. 你想安装它们吗?` })) await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
 }
 function isInEditorEnv() {
 	if (process.env.CI) return false;
@@ -342,10 +339,9 @@ async function formatters(options = {}, stylistic$1 = {}) {
 		quoteStyle: quotes === "single" ? "preferSingle" : "preferDouble",
 		useTabs: indent === "tab"
 	}, options.dprintOptions || {});
-	const pluginFormat = await interopDefault(import("eslint-plugin-format"));
 	const configs$1 = [{
 		name: "eslint/formatter/setup",
-		plugins: { format: pluginFormat }
+		plugins: { format: await interopDefault(import("eslint-plugin-format")) }
 	}];
 	if (options.css) configs$1.push({
 		files: [GLOB_CSS, GLOB_POSTCSS],
@@ -459,7 +455,7 @@ async function javascript(options = {}) {
 	const { isInEditor = false, overrides = {} } = options;
 	return [{
 		languageOptions: {
-			ecmaVersion: 2022,
+			ecmaVersion: "latest",
 			globals: {
 				...globals.browser,
 				...globals.es2021,
@@ -470,7 +466,7 @@ async function javascript(options = {}) {
 			},
 			parserOptions: {
 				ecmaFeatures: { jsx: true },
-				ecmaVersion: 2022,
+				ecmaVersion: "latest",
 				sourceType: "module"
 			},
 			sourceType: "module"
@@ -1247,6 +1243,14 @@ async function sortPackageJson() {
 				{
 					order: { type: "asc" },
 					pathPattern: "^(?:resolutions|overrides|pnpm.overrides)$"
+				},
+				{
+					order: { type: "asc" },
+					pathPattern: "^workspaces\\.catalog$"
+				},
+				{
+					order: { type: "asc" },
+					pathPattern: "^workspaces\\.catalogs\\.[^.]+$"
 				},
 				{
 					order: [

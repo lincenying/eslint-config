@@ -22,21 +22,36 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 }) : target, mod));
 
 //#endregion
-const eslint_flat_config_utils = __toESM(require("eslint-flat-config-utils"));
-const local_pkg = __toESM(require("local-pkg"));
-const __eslint_community_eslint_plugin_eslint_comments = __toESM(require("@eslint-community/eslint-plugin-eslint-comments"));
-const eslint_plugin_antfu = __toESM(require("eslint-plugin-antfu"));
-const eslint_plugin_import_lite = __toESM(require("eslint-plugin-import-lite"));
-const eslint_plugin_n = __toESM(require("eslint-plugin-n"));
-const eslint_plugin_perfectionist = __toESM(require("eslint-plugin-perfectionist"));
-const eslint_plugin_unicorn = __toESM(require("eslint-plugin-unicorn"));
-const eslint_plugin_unused_imports = __toESM(require("eslint-plugin-unused-imports"));
-const node_process = __toESM(require("node:process"));
-const node_url = __toESM(require("node:url"));
-const globals = __toESM(require("globals"));
-const eslint_merge_processors = __toESM(require("eslint-merge-processors"));
-const eslint_parser_plain = __toESM(require("eslint-parser-plain"));
-const eslint_plugin_regexp = __toESM(require("eslint-plugin-regexp"));
+let eslint_flat_config_utils = require("eslint-flat-config-utils");
+eslint_flat_config_utils = __toESM(eslint_flat_config_utils);
+let local_pkg = require("local-pkg");
+local_pkg = __toESM(local_pkg);
+let __eslint_community_eslint_plugin_eslint_comments = require("@eslint-community/eslint-plugin-eslint-comments");
+__eslint_community_eslint_plugin_eslint_comments = __toESM(__eslint_community_eslint_plugin_eslint_comments);
+let eslint_plugin_antfu = require("eslint-plugin-antfu");
+eslint_plugin_antfu = __toESM(eslint_plugin_antfu);
+let eslint_plugin_import_lite = require("eslint-plugin-import-lite");
+eslint_plugin_import_lite = __toESM(eslint_plugin_import_lite);
+let eslint_plugin_n = require("eslint-plugin-n");
+eslint_plugin_n = __toESM(eslint_plugin_n);
+let eslint_plugin_perfectionist = require("eslint-plugin-perfectionist");
+eslint_plugin_perfectionist = __toESM(eslint_plugin_perfectionist);
+let eslint_plugin_unicorn = require("eslint-plugin-unicorn");
+eslint_plugin_unicorn = __toESM(eslint_plugin_unicorn);
+let eslint_plugin_unused_imports = require("eslint-plugin-unused-imports");
+eslint_plugin_unused_imports = __toESM(eslint_plugin_unused_imports);
+let node_process = require("node:process");
+node_process = __toESM(node_process);
+let node_url = require("node:url");
+node_url = __toESM(node_url);
+let globals = require("globals");
+globals = __toESM(globals);
+let eslint_merge_processors = require("eslint-merge-processors");
+eslint_merge_processors = __toESM(eslint_merge_processors);
+let eslint_parser_plain = require("eslint-parser-plain");
+eslint_parser_plain = __toESM(eslint_parser_plain);
+let eslint_plugin_regexp = require("eslint-plugin-regexp");
+eslint_plugin_regexp = __toESM(eslint_plugin_regexp);
 
 //#region src/configs/comments.ts
 async function comments(options = {}) {
@@ -211,8 +226,7 @@ const parserPlain = {
 * Combine array and non-array configs into a single array.
 */
 async function combine(...configs$1) {
-	const resolved = await Promise.all(configs$1);
-	return resolved.flat();
+	return (await Promise.all(configs$1)).flat();
 }
 function renameRules(rules, map) {
 	return Object.fromEntries(Object.entries(rules).map(([key, value]) => {
@@ -245,9 +259,7 @@ async function ensurePackages(packages) {
 	if (node_process.default.env.CI || node_process.default.stdout.isTTY === false || isCwdInScope === false) return;
 	const nonExistingPackages = packages.filter((i) => i && !isPackageInScope(i));
 	if (nonExistingPackages.length === 0) return;
-	const p = await import("@clack/prompts");
-	const result = await p.confirm({ message: `此配置需要软件包: ${nonExistingPackages.join(", ")}. 你想安装它们吗?` });
-	if (result) await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
+	if (await (await import("@clack/prompts")).confirm({ message: `此配置需要软件包: ${nonExistingPackages.join(", ")}. 你想安装它们吗?` })) await import("@antfu/install-pkg").then((i) => i.installPackage(nonExistingPackages, { dev: true }));
 }
 function isInEditorEnv() {
 	if (node_process.default.env.CI) return false;
@@ -366,10 +378,9 @@ async function formatters(options = {}, stylistic$1 = {}) {
 		quoteStyle: quotes === "single" ? "preferSingle" : "preferDouble",
 		useTabs: indent === "tab"
 	}, options.dprintOptions || {});
-	const pluginFormat = await interopDefault(import("eslint-plugin-format"));
 	const configs$1 = [{
 		name: "eslint/formatter/setup",
-		plugins: { format: pluginFormat }
+		plugins: { format: await interopDefault(import("eslint-plugin-format")) }
 	}];
 	if (options.css) configs$1.push({
 		files: [GLOB_CSS, GLOB_POSTCSS],
@@ -483,7 +494,7 @@ async function javascript(options = {}) {
 	const { isInEditor = false, overrides = {} } = options;
 	return [{
 		languageOptions: {
-			ecmaVersion: 2022,
+			ecmaVersion: "latest",
 			globals: {
 				...globals.default.browser,
 				...globals.default.es2021,
@@ -494,7 +505,7 @@ async function javascript(options = {}) {
 			},
 			parserOptions: {
 				ecmaFeatures: { jsx: true },
-				ecmaVersion: 2022,
+				ecmaVersion: "latest",
 				sourceType: "module"
 			},
 			sourceType: "module"
@@ -1271,6 +1282,14 @@ async function sortPackageJson() {
 				{
 					order: { type: "asc" },
 					pathPattern: "^(?:resolutions|overrides|pnpm.overrides)$"
+				},
+				{
+					order: { type: "asc" },
+					pathPattern: "^workspaces\\.catalog$"
+				},
+				{
+					order: { type: "asc" },
+					pathPattern: "^workspaces\\.catalogs\\.[^.]+$"
 				},
 				{
 					order: [
