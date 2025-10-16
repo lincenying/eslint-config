@@ -1,4 +1,5 @@
-import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, OptionsProjectType, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, TypedFlatConfigItem } from '../types'
+import type { Linter } from 'eslint'
+import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, OptionsProjectType, OptionsTypeScriptErasableOnly, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, TypedFlatConfigItem } from '../types'
 
 import process from 'node:process'
 
@@ -7,10 +8,11 @@ import { pluginAntfu } from '../plugins'
 import { interopDefault, renameRules } from '../utils'
 
 export async function typescript(
-    options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions & OptionsProjectType = {},
+    options: OptionsFiles & OptionsComponentExts & OptionsOverrides & OptionsTypeScriptWithTypes & OptionsTypeScriptParserOptions & OptionsProjectType & OptionsTypeScriptErasableOnly = {},
 ): Promise<TypedFlatConfigItem[]> {
     const {
         componentExts = [],
+        erasableOnly = false,
         overrides = {},
         parserOptions = {},
         type = 'app',
@@ -183,5 +185,19 @@ export async function typescript(
                 ...overrides,
             },
         }] : [],
+        ...erasableOnly ? [
+            {
+                name: 'eslint/typescript/erasable-syntax-only',
+                plugins: {
+                    'erasable-syntax-only': await interopDefault(import('eslint-plugin-erasable-syntax-only')),
+                },
+                rules: {
+                    'erasable-syntax-only/enums': 'error',
+                    'erasable-syntax-only/import-aliases': 'error',
+                    'erasable-syntax-only/namespaces': 'error',
+                    'erasable-syntax-only/parameter-properties': 'error',
+                } as Record<string, Linter.RuleEntry>,
+            },
+        ] : [],
     ]
 }

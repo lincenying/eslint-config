@@ -15,6 +15,9 @@ const config = lincy(
             css: true,
         },
         pnpm: true,
+        typescript: {
+            erasableOnly: true,
+        },
         overrides: {
             stylistic: {
                 'antfu/consistent-list-newline': 'off',

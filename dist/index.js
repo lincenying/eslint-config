@@ -1061,11 +1061,48 @@ async function react(options = {}) {
 				"react-dom/no-unsafe-target-blank": "warn",
 				"react-dom/no-use-form-state": "error",
 				"react-dom/no-void-elements-with-children": "error",
+				"react/jsx-no-comment-textnodes": "warn",
+				"react/jsx-no-duplicate-props": "warn",
+				"react/jsx-uses-vars": "warn",
+				"react/no-access-state-in-setstate": "error",
+				"react/no-array-index-key": "warn",
+				"react/no-children-count": "warn",
+				"react/no-children-for-each": "warn",
+				"react/no-children-map": "warn",
+				"react/no-children-only": "warn",
+				"react/no-children-to-array": "warn",
+				"react/no-clone-element": "warn",
+				"react/no-component-will-mount": "error",
+				"react/no-component-will-receive-props": "error",
+				"react/no-component-will-update": "error",
+				"react/no-context-provider": "warn",
+				"react/no-create-ref": "error",
+				"react/no-default-props": "error",
+				"react/no-direct-mutation-state": "error",
+				"react/no-duplicate-key": "warn",
+				"react/no-forward-ref": "warn",
+				"react/no-implicit-key": "warn",
+				"react/no-missing-key": "error",
+				"react/no-nested-component-definitions": "error",
+				"react/no-prop-types": "error",
+				"react/no-redundant-should-component-update": "error",
+				"react/no-set-state-in-component-did-mount": "warn",
+				"react/no-set-state-in-component-did-update": "warn",
+				"react/no-set-state-in-component-will-update": "warn",
+				"react/no-string-refs": "error",
+				"react/no-unnecessary-use-prefix": "warn",
+				"react/no-unsafe-component-will-mount": "warn",
+				"react/no-unsafe-component-will-receive-props": "warn",
+				"react/no-unsafe-component-will-update": "warn",
+				"react/no-unstable-context-value": "warn",
+				"react/no-unstable-default-props": "warn",
+				"react/no-unused-class-component-members": "warn",
+				"react/no-unused-state": "warn",
+				"react/no-use-context": "warn",
+				"react/no-useless-forward-ref": "warn",
+				"react/prefer-use-state-lazy-initialization": "warn",
+				...pluginReactHooks.configs.recommended.rules,
 				"react-hooks-extra/no-direct-set-state-in-use-effect": "warn",
-				"react-hooks-extra/no-unnecessary-use-prefix": "warn",
-				"react-hooks-extra/prefer-use-state-lazy-initialization": "warn",
-				"react-hooks/exhaustive-deps": "warn",
-				"react-hooks/rules-of-hooks": "error",
 				"react-refresh/only-export-components": ["warn", {
 					allowConstantExport: isAllowConstantExport,
 					allowExportNames: [...isUsingNext ? [
@@ -1098,46 +1135,6 @@ async function react(options = {}) {
 				"react-web-api/no-leaked-interval": "warn",
 				"react-web-api/no-leaked-resize-observer": "warn",
 				"react-web-api/no-leaked-timeout": "warn",
-				"react/jsx-no-duplicate-props": "warn",
-				"react/jsx-uses-vars": "warn",
-				"react/no-access-state-in-setstate": "error",
-				"react/no-array-index-key": "warn",
-				"react/no-children-count": "warn",
-				"react/no-children-for-each": "warn",
-				"react/no-children-map": "warn",
-				"react/no-children-only": "warn",
-				"react/no-children-to-array": "warn",
-				"react/no-clone-element": "warn",
-				"react/no-comment-textnodes": "warn",
-				"react/no-component-will-mount": "error",
-				"react/no-component-will-receive-props": "error",
-				"react/no-component-will-update": "error",
-				"react/no-context-provider": "warn",
-				"react/no-create-ref": "error",
-				"react/no-default-props": "error",
-				"react/no-direct-mutation-state": "error",
-				"react/no-duplicate-jsx-props": "warn",
-				"react/no-duplicate-key": "warn",
-				"react/no-forward-ref": "warn",
-				"react/no-implicit-key": "warn",
-				"react/no-missing-key": "error",
-				"react/no-nested-component-definitions": "error",
-				"react/no-prop-types": "error",
-				"react/no-redundant-should-component-update": "error",
-				"react/no-set-state-in-component-did-mount": "warn",
-				"react/no-set-state-in-component-did-update": "warn",
-				"react/no-set-state-in-component-will-update": "warn",
-				"react/no-string-refs": "error",
-				"react/no-unsafe-component-will-mount": "warn",
-				"react/no-unsafe-component-will-receive-props": "warn",
-				"react/no-unsafe-component-will-update": "warn",
-				"react/no-unstable-context-value": "warn",
-				"react/no-unstable-default-props": "warn",
-				"react/no-unused-class-component-members": "warn",
-				"react/no-unused-state": "warn",
-				"react/no-use-context": "warn",
-				"react/no-useless-forward-ref": "warn",
-				"react/use-jsx-vars": "warn",
 				...overrides
 			}
 		},
@@ -1481,7 +1478,7 @@ async function toml(options = {}) {
 //#endregion
 //#region src/configs/typescript.ts
 async function typescript(options = {}) {
-	const { componentExts = [], overrides = {}, parserOptions = {}, type = "app" } = options;
+	const { componentExts = [], erasableOnly = false, overrides = {}, parserOptions = {}, type = "app" } = options;
 	const files = options.files ?? [GLOB_SRC, ...componentExts.map((ext) => `**/*.${ext}`)];
 	const ignoresTypeAware = options.ignoresTypeAware ?? [`${GLOB_MARKDOWN}/**`];
 	const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
@@ -1613,6 +1610,16 @@ async function typescript(options = {}) {
 			rules: {
 				...typeAwareRules,
 				...overrides
+			}
+		}] : [],
+		...erasableOnly ? [{
+			name: "eslint/typescript/erasable-syntax-only",
+			plugins: { "erasable-syntax-only": await interopDefault(import("./lib-DMY_mkdT.js")) },
+			rules: {
+				"erasable-syntax-only/enums": "error",
+				"erasable-syntax-only/import-aliases": "error",
+				"erasable-syntax-only/namespaces": "error",
+				"erasable-syntax-only/parameter-properties": "error"
 			}
 		}] : []
 	];

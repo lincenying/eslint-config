@@ -50,7 +50,8 @@ export interface OptionsVue {
     sfcBlocks?: boolean | VueBlocksOptions
 }
 
-export type OptionsTypescript = (OptionsTypeScriptWithTypes & OptionsOverrides) | (OptionsTypeScriptParserOptions & OptionsOverrides)
+export type OptionsTypescript = (OptionsTypeScriptWithTypes & OptionsOverrides & OptionsTypeScriptErasableOnly)
+    | (OptionsTypeScriptParserOptions & OptionsOverrides & OptionsTypeScriptErasableOnly)
 
 export interface OptionsFormatters {
     /**
@@ -202,6 +203,16 @@ export interface OptionsProjectType {
     type?: 'app' | 'lib'
 }
 
+export interface OptionsTypeScriptErasableOnly {
+    /**
+     * 启用可擦除语法规则
+     *
+     * @see https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only
+     * @default false
+     */
+    erasableOnly?: boolean
+}
+
 export interface OptionsRegExp {
     /**
      * Override rulelevels
@@ -253,7 +264,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
      *
      * @default 根据依赖关系自动检测
      */
-    typescript?: boolean | OptionsTypeScriptWithTypes | OptionsTypeScriptParserOptions | OptionsFiles
+    typescript?: boolean | OptionsTypescript
 
     /**
      * 启用 JSX 相关规则.

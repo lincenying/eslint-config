@@ -1,57 +1,35 @@
 Object.defineProperty(exports, '__esModule', { value: true });
-//#region rolldown:runtime
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __copyProps = (to, from, except, desc) => {
-	if (from && typeof from === "object" || typeof from === "function") for (var keys = __getOwnPropNames(from), i = 0, n = keys.length, key; i < n; i++) {
-		key = keys[i];
-		if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-			get: ((k) => from[k]).bind(null, key),
-			enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-		});
-	}
-	return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
-	value: mod,
-	enumerable: true
-}) : target, mod));
-
-//#endregion
+const require_chunk = require('./chunk-DWy1uDak.cjs');
 let eslint_flat_config_utils = require("eslint-flat-config-utils");
-eslint_flat_config_utils = __toESM(eslint_flat_config_utils);
+eslint_flat_config_utils = require_chunk.__toESM(eslint_flat_config_utils);
 let local_pkg = require("local-pkg");
-local_pkg = __toESM(local_pkg);
+local_pkg = require_chunk.__toESM(local_pkg);
 let __eslint_community_eslint_plugin_eslint_comments = require("@eslint-community/eslint-plugin-eslint-comments");
-__eslint_community_eslint_plugin_eslint_comments = __toESM(__eslint_community_eslint_plugin_eslint_comments);
+__eslint_community_eslint_plugin_eslint_comments = require_chunk.__toESM(__eslint_community_eslint_plugin_eslint_comments);
 let eslint_plugin_antfu = require("eslint-plugin-antfu");
-eslint_plugin_antfu = __toESM(eslint_plugin_antfu);
+eslint_plugin_antfu = require_chunk.__toESM(eslint_plugin_antfu);
 let eslint_plugin_import_lite = require("eslint-plugin-import-lite");
-eslint_plugin_import_lite = __toESM(eslint_plugin_import_lite);
+eslint_plugin_import_lite = require_chunk.__toESM(eslint_plugin_import_lite);
 let eslint_plugin_n = require("eslint-plugin-n");
-eslint_plugin_n = __toESM(eslint_plugin_n);
+eslint_plugin_n = require_chunk.__toESM(eslint_plugin_n);
 let eslint_plugin_perfectionist = require("eslint-plugin-perfectionist");
-eslint_plugin_perfectionist = __toESM(eslint_plugin_perfectionist);
+eslint_plugin_perfectionist = require_chunk.__toESM(eslint_plugin_perfectionist);
 let eslint_plugin_unicorn = require("eslint-plugin-unicorn");
-eslint_plugin_unicorn = __toESM(eslint_plugin_unicorn);
+eslint_plugin_unicorn = require_chunk.__toESM(eslint_plugin_unicorn);
 let eslint_plugin_unused_imports = require("eslint-plugin-unused-imports");
-eslint_plugin_unused_imports = __toESM(eslint_plugin_unused_imports);
+eslint_plugin_unused_imports = require_chunk.__toESM(eslint_plugin_unused_imports);
 let node_process = require("node:process");
-node_process = __toESM(node_process);
+node_process = require_chunk.__toESM(node_process);
 let node_url = require("node:url");
-node_url = __toESM(node_url);
+node_url = require_chunk.__toESM(node_url);
 let globals = require("globals");
-globals = __toESM(globals);
+globals = require_chunk.__toESM(globals);
 let eslint_merge_processors = require("eslint-merge-processors");
-eslint_merge_processors = __toESM(eslint_merge_processors);
+eslint_merge_processors = require_chunk.__toESM(eslint_merge_processors);
 let eslint_parser_plain = require("eslint-parser-plain");
-eslint_parser_plain = __toESM(eslint_parser_plain);
+eslint_parser_plain = require_chunk.__toESM(eslint_parser_plain);
 let eslint_plugin_regexp = require("eslint-plugin-regexp");
-eslint_plugin_regexp = __toESM(eslint_plugin_regexp);
+eslint_plugin_regexp = require_chunk.__toESM(eslint_plugin_regexp);
 
 //#region src/configs/comments.ts
 async function comments(options = {}) {
@@ -1100,11 +1078,48 @@ async function react(options = {}) {
 				"react-dom/no-unsafe-target-blank": "warn",
 				"react-dom/no-use-form-state": "error",
 				"react-dom/no-void-elements-with-children": "error",
+				"react/jsx-no-comment-textnodes": "warn",
+				"react/jsx-no-duplicate-props": "warn",
+				"react/jsx-uses-vars": "warn",
+				"react/no-access-state-in-setstate": "error",
+				"react/no-array-index-key": "warn",
+				"react/no-children-count": "warn",
+				"react/no-children-for-each": "warn",
+				"react/no-children-map": "warn",
+				"react/no-children-only": "warn",
+				"react/no-children-to-array": "warn",
+				"react/no-clone-element": "warn",
+				"react/no-component-will-mount": "error",
+				"react/no-component-will-receive-props": "error",
+				"react/no-component-will-update": "error",
+				"react/no-context-provider": "warn",
+				"react/no-create-ref": "error",
+				"react/no-default-props": "error",
+				"react/no-direct-mutation-state": "error",
+				"react/no-duplicate-key": "warn",
+				"react/no-forward-ref": "warn",
+				"react/no-implicit-key": "warn",
+				"react/no-missing-key": "error",
+				"react/no-nested-component-definitions": "error",
+				"react/no-prop-types": "error",
+				"react/no-redundant-should-component-update": "error",
+				"react/no-set-state-in-component-did-mount": "warn",
+				"react/no-set-state-in-component-did-update": "warn",
+				"react/no-set-state-in-component-will-update": "warn",
+				"react/no-string-refs": "error",
+				"react/no-unnecessary-use-prefix": "warn",
+				"react/no-unsafe-component-will-mount": "warn",
+				"react/no-unsafe-component-will-receive-props": "warn",
+				"react/no-unsafe-component-will-update": "warn",
+				"react/no-unstable-context-value": "warn",
+				"react/no-unstable-default-props": "warn",
+				"react/no-unused-class-component-members": "warn",
+				"react/no-unused-state": "warn",
+				"react/no-use-context": "warn",
+				"react/no-useless-forward-ref": "warn",
+				"react/prefer-use-state-lazy-initialization": "warn",
+				...pluginReactHooks.configs.recommended.rules,
 				"react-hooks-extra/no-direct-set-state-in-use-effect": "warn",
-				"react-hooks-extra/no-unnecessary-use-prefix": "warn",
-				"react-hooks-extra/prefer-use-state-lazy-initialization": "warn",
-				"react-hooks/exhaustive-deps": "warn",
-				"react-hooks/rules-of-hooks": "error",
 				"react-refresh/only-export-components": ["warn", {
 					allowConstantExport: isAllowConstantExport,
 					allowExportNames: [...isUsingNext ? [
@@ -1137,46 +1152,6 @@ async function react(options = {}) {
 				"react-web-api/no-leaked-interval": "warn",
 				"react-web-api/no-leaked-resize-observer": "warn",
 				"react-web-api/no-leaked-timeout": "warn",
-				"react/jsx-no-duplicate-props": "warn",
-				"react/jsx-uses-vars": "warn",
-				"react/no-access-state-in-setstate": "error",
-				"react/no-array-index-key": "warn",
-				"react/no-children-count": "warn",
-				"react/no-children-for-each": "warn",
-				"react/no-children-map": "warn",
-				"react/no-children-only": "warn",
-				"react/no-children-to-array": "warn",
-				"react/no-clone-element": "warn",
-				"react/no-comment-textnodes": "warn",
-				"react/no-component-will-mount": "error",
-				"react/no-component-will-receive-props": "error",
-				"react/no-component-will-update": "error",
-				"react/no-context-provider": "warn",
-				"react/no-create-ref": "error",
-				"react/no-default-props": "error",
-				"react/no-direct-mutation-state": "error",
-				"react/no-duplicate-jsx-props": "warn",
-				"react/no-duplicate-key": "warn",
-				"react/no-forward-ref": "warn",
-				"react/no-implicit-key": "warn",
-				"react/no-missing-key": "error",
-				"react/no-nested-component-definitions": "error",
-				"react/no-prop-types": "error",
-				"react/no-redundant-should-component-update": "error",
-				"react/no-set-state-in-component-did-mount": "warn",
-				"react/no-set-state-in-component-did-update": "warn",
-				"react/no-set-state-in-component-will-update": "warn",
-				"react/no-string-refs": "error",
-				"react/no-unsafe-component-will-mount": "warn",
-				"react/no-unsafe-component-will-receive-props": "warn",
-				"react/no-unsafe-component-will-update": "warn",
-				"react/no-unstable-context-value": "warn",
-				"react/no-unstable-default-props": "warn",
-				"react/no-unused-class-component-members": "warn",
-				"react/no-unused-state": "warn",
-				"react/no-use-context": "warn",
-				"react/no-useless-forward-ref": "warn",
-				"react/use-jsx-vars": "warn",
 				...overrides
 			}
 		},
@@ -1520,7 +1495,7 @@ async function toml(options = {}) {
 //#endregion
 //#region src/configs/typescript.ts
 async function typescript(options = {}) {
-	const { componentExts = [], overrides = {}, parserOptions = {}, type = "app" } = options;
+	const { componentExts = [], erasableOnly = false, overrides = {}, parserOptions = {}, type = "app" } = options;
 	const files = options.files ?? [GLOB_SRC, ...componentExts.map((ext) => `**/*.${ext}`)];
 	const ignoresTypeAware = options.ignoresTypeAware ?? [`${GLOB_MARKDOWN}/**`];
 	const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
@@ -1652,6 +1627,16 @@ async function typescript(options = {}) {
 			rules: {
 				...typeAwareRules,
 				...overrides
+			}
+		}] : [],
+		...erasableOnly ? [{
+			name: "eslint/typescript/erasable-syntax-only",
+			plugins: { "erasable-syntax-only": await interopDefault(Promise.resolve().then(() => require("./lib-B2tdYoXA.cjs"))) },
+			rules: {
+				"erasable-syntax-only/enums": "error",
+				"erasable-syntax-only/import-aliases": "error",
+				"erasable-syntax-only/namespaces": "error",
+				"erasable-syntax-only/parameter-properties": "error"
 			}
 		}] : []
 	];
