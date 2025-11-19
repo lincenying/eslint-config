@@ -863,6 +863,11 @@ async function nextjs(options = {}) {
 	const { files = [GLOB_SRC], overrides = {} } = options;
 	await ensurePackages(["@next/eslint-plugin-next"]);
 	const pluginNextJS = await interopDefault(import("@next/eslint-plugin-next"));
+	function getRules(name) {
+		const rules = pluginNextJS.configs?.[name]?.rules;
+		if (!rules) throw new Error(`[@lincy/eslint-config] Failed to find config ${name} in @next/eslint-plugin-next`);
+		return normalizeRules(rules);
+	}
 	return [{
 		name: "eslint/nextjs/setup",
 		plugins: { next: pluginNextJS }
@@ -874,8 +879,8 @@ async function nextjs(options = {}) {
 		},
 		name: "eslint/nextjs/rules",
 		rules: {
-			...normalizeRules(pluginNextJS.configs.recommended.rules),
-			...normalizeRules(pluginNextJS.configs["core-web-vitals"].rules),
+			...getRules("recommended"),
+			...getRules("core-web-vitals"),
 			...overrides
 		},
 		settings: { react: { version: "detect" } }
@@ -1614,7 +1619,7 @@ async function typescript(options = {}) {
 		}] : [],
 		...erasableOnly ? [{
 			name: "eslint/typescript/erasable-syntax-only",
-			plugins: { "erasable-syntax-only": await interopDefault(import("./lib-DMY_mkdT.js")) },
+			plugins: { "erasable-syntax-only": await interopDefault(import("./lib-D3OsxTXr.mjs")) },
 			rules: {
 				"erasable-syntax-only/enums": "error",
 				"erasable-syntax-only/import-aliases": "error",

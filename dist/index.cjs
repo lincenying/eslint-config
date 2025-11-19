@@ -1,9 +1,7 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 const require_chunk = require('./chunk-DWy1uDak.cjs');
 let eslint_flat_config_utils = require("eslint-flat-config-utils");
-eslint_flat_config_utils = require_chunk.__toESM(eslint_flat_config_utils);
 let local_pkg = require("local-pkg");
-local_pkg = require_chunk.__toESM(local_pkg);
 let __eslint_community_eslint_plugin_eslint_comments = require("@eslint-community/eslint-plugin-eslint-comments");
 __eslint_community_eslint_plugin_eslint_comments = require_chunk.__toESM(__eslint_community_eslint_plugin_eslint_comments);
 let eslint_plugin_antfu = require("eslint-plugin-antfu");
@@ -21,15 +19,12 @@ eslint_plugin_unused_imports = require_chunk.__toESM(eslint_plugin_unused_import
 let node_process = require("node:process");
 node_process = require_chunk.__toESM(node_process);
 let node_url = require("node:url");
-node_url = require_chunk.__toESM(node_url);
 let globals = require("globals");
 globals = require_chunk.__toESM(globals);
 let eslint_merge_processors = require("eslint-merge-processors");
-eslint_merge_processors = require_chunk.__toESM(eslint_merge_processors);
 let eslint_parser_plain = require("eslint-parser-plain");
 eslint_parser_plain = require_chunk.__toESM(eslint_parser_plain);
 let eslint_plugin_regexp = require("eslint-plugin-regexp");
-eslint_plugin_regexp = require_chunk.__toESM(eslint_plugin_regexp);
 
 //#region src/configs/comments.ts
 async function comments(options = {}) {
@@ -880,6 +875,11 @@ async function nextjs(options = {}) {
 	const { files = [GLOB_SRC], overrides = {} } = options;
 	await ensurePackages(["@next/eslint-plugin-next"]);
 	const pluginNextJS = await interopDefault(import("@next/eslint-plugin-next"));
+	function getRules(name) {
+		const rules = pluginNextJS.configs?.[name]?.rules;
+		if (!rules) throw new Error(`[@lincy/eslint-config] Failed to find config ${name} in @next/eslint-plugin-next`);
+		return normalizeRules(rules);
+	}
 	return [{
 		name: "eslint/nextjs/setup",
 		plugins: { next: pluginNextJS }
@@ -891,8 +891,8 @@ async function nextjs(options = {}) {
 		},
 		name: "eslint/nextjs/rules",
 		rules: {
-			...normalizeRules(pluginNextJS.configs.recommended.rules),
-			...normalizeRules(pluginNextJS.configs["core-web-vitals"].rules),
+			...getRules("recommended"),
+			...getRules("core-web-vitals"),
 			...overrides
 		},
 		settings: { react: { version: "detect" } }
@@ -1631,7 +1631,7 @@ async function typescript(options = {}) {
 		}] : [],
 		...erasableOnly ? [{
 			name: "eslint/typescript/erasable-syntax-only",
-			plugins: { "erasable-syntax-only": await interopDefault(Promise.resolve().then(() => require("./lib-B2tdYoXA.cjs"))) },
+			plugins: { "erasable-syntax-only": await interopDefault(Promise.resolve().then(() => require("./lib-BJFVxmuP.cjs"))) },
 			rules: {
 				"erasable-syntax-only/enums": "error",
 				"erasable-syntax-only/import-aliases": "error",

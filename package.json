@@ -2,7 +2,7 @@
   "name": "@lincy/eslint-config",
   "type": "module",
   "version": "6.0.0",
-  "packageManager": "pnpm@10.19.0",
+  "packageManager": "pnpm@10.22.0",
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
   "license": "MIT",
@@ -12,13 +12,13 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "files": [
     "dist"
   ],
@@ -37,14 +37,14 @@
     "prepare[-del]": "npx simple-git-hooks"
   },
   "peerDependencies": {
-    "@eslint-react/eslint-plugin": "^1.15.0",
-    "@next/eslint-plugin-next": "^15.4.0-canary.115",
+    "@eslint-react/eslint-plugin": "^2.3.5",
+    "@next/eslint-plugin-next": ">=15.0.0",
     "@prettier/plugin-xml": "^3.4.1",
     "@unocss/eslint-plugin": ">=0.50.0",
-    "eslint": ">=9.5.0",
+    "eslint": "^9.10.0",
     "eslint-plugin-format": ">=0.1.0",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-react-refresh": "^0.4.13"
+    "eslint-plugin-react-hooks": "^7.0.0",
+    "eslint-plugin-react-refresh": "^0.4.19"
   },
   "peerDependenciesMeta": {
     "@eslint-react/eslint-plugin": {

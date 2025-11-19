@@ -1,29 +1,10 @@
 import Module, { createRequire } from "node:module";
 
 //#region rolldown:runtime
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __commonJS = (cb, mod) => function() {
 	return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
 };
-var __copyProps = (to, from, except, desc) => {
-	if (from && typeof from === "object" || typeof from === "function") for (var keys = __getOwnPropNames(from), i = 0, n = keys.length, key; i < n; i++) {
-		key = keys[i];
-		if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
-			get: ((k) => from[k]).bind(null, key),
-			enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-		});
-	}
-	return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
-	value: mod,
-	enumerable: true
-}) : target, mod));
 var __require = /* @__PURE__ */ createRequire(import.meta.url);
 
 //#endregion
@@ -230,8 +211,8 @@ var require_eslint_visitor_keys$1 = /* @__PURE__ */ __commonJS({ "node_modules/.
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@eslint-community+eslint-utils@4.9.0_eslint@9.37.0_jiti@2.5.1_/node_modules/@eslint-community/eslint-utils/index.js
-var require_eslint_utils$2 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@eslint-community+eslint-utils@4.9.0_eslint@9.37.0_jiti@2.5.1_/node_modules/@eslint-community/eslint-utils/index.js": ((exports) => {
+//#region node_modules/.pnpm/@eslint-community+eslint-utils@4.9.0_eslint@9.39.1_jiti@2.6.1_/node_modules/@eslint-community/eslint-utils/index.js
+var require_eslint_utils$2 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@eslint-community+eslint-utils@4.9.0_eslint@9.39.1_jiti@2.6.1_/node_modules/@eslint-community/eslint-utils/index.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	var eslintVisitorKeys$1 = require_eslint_visitor_keys$1();
 	/** @typedef {import("eslint").Scope.Scope} Scope */
@@ -1927,8 +1908,8 @@ var require_eslint_utils$2 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@e
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/astUtilities.js
-var require_astUtilities = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/astUtilities.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/astUtilities.js
+var require_astUtilities = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/astUtilities.js": ((exports) => {
 	var __createBinding$17 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -1971,6 +1952,7 @@ var require_astUtilities = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 		};
 	})();
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.isParenthesized = exports.hasSideEffect = exports.getStringIfConstant = exports.getStaticValue = exports.getPropertyName = exports.getFunctionNameWithKind = exports.getFunctionHeadLocation = void 0;
 	const eslintUtils$4 = __importStar$8(require_eslint_utils$2());
 	/**
 	* Get the proper location of a given function node to report.
@@ -2039,8 +2021,8 @@ var require_astUtilities = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/PatternMatcher.js
-var require_PatternMatcher = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/PatternMatcher.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/PatternMatcher.js
+var require_PatternMatcher = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/PatternMatcher.js": ((exports) => {
 	var __createBinding$16 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -2083,6 +2065,7 @@ var require_PatternMatcher = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 		};
 	})();
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.PatternMatcher = void 0;
 	const eslintUtils$3 = __importStar$7(require_eslint_utils$2());
 	/**
 	* The class to find a pattern in strings as handling escape sequences.
@@ -2094,8 +2077,8 @@ var require_PatternMatcher = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/predicates.js
-var require_predicates$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/predicates.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/predicates.js
+var require_predicates$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/predicates.js": ((exports) => {
 	var __createBinding$15 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -2138,6 +2121,7 @@ var require_predicates$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 		};
 	})();
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.isNotSemicolonToken = exports.isSemicolonToken = exports.isNotOpeningParenToken = exports.isOpeningParenToken = exports.isNotOpeningBracketToken = exports.isOpeningBracketToken = exports.isNotOpeningBraceToken = exports.isOpeningBraceToken = exports.isNotCommentToken = exports.isCommentToken = exports.isNotCommaToken = exports.isCommaToken = exports.isNotColonToken = exports.isColonToken = exports.isNotClosingParenToken = exports.isClosingParenToken = exports.isNotClosingBracketToken = exports.isClosingBracketToken = exports.isNotClosingBraceToken = exports.isClosingBraceToken = exports.isNotArrowToken = exports.isArrowToken = void 0;
 	const eslintUtils$2 = __importStar$6(require_eslint_utils$2());
 	exports.isArrowToken = eslintUtils$2.isArrowToken;
 	exports.isNotArrowToken = eslintUtils$2.isNotArrowToken;
@@ -2164,8 +2148,8 @@ var require_predicates$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/ReferenceTracker.js
-var require_ReferenceTracker = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/ReferenceTracker.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/ReferenceTracker.js
+var require_ReferenceTracker = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/ReferenceTracker.js": ((exports) => {
 	var __createBinding$14 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -2208,6 +2192,7 @@ var require_ReferenceTracker = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/
 		};
 	})();
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ReferenceTracker = void 0;
 	const eslintUtils$1 = __importStar$5(require_eslint_utils$2());
 	eslintUtils$1.ReferenceTracker.READ;
 	eslintUtils$1.ReferenceTracker.CALL;
@@ -2222,8 +2207,8 @@ var require_ReferenceTracker = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/scopeAnalysis.js
-var require_scopeAnalysis = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/scopeAnalysis.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/scopeAnalysis.js
+var require_scopeAnalysis = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/scopeAnalysis.js": ((exports) => {
 	var __createBinding$13 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -2266,6 +2251,7 @@ var require_scopeAnalysis = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 		};
 	})();
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.getInnermostScope = exports.findVariable = void 0;
 	const eslintUtils = __importStar$4(require_eslint_utils$2());
 	/**
 	* Get the variable of a given name.
@@ -2284,8 +2270,8 @@ var require_scopeAnalysis = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/index.js
-var require_eslint_utils$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/index.js
+var require_eslint_utils$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/eslint-utils/index.js": ((exports) => {
 	var __createBinding$12 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -2312,8 +2298,8 @@ var require_eslint_utils$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/helpers.js
-var require_helpers = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/helpers.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/helpers.js
+var require_helpers = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/helpers.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.isNotTokenOfTypeWithConditions = exports.isTokenOfTypeWithConditions = exports.isNodeOfTypeWithConditions = exports.isNodeOfTypes = exports.isNodeOfType = void 0;
 	const isNodeOfType = (nodeType) => (node) => node?.type === nodeType;
@@ -2335,9 +2321,10 @@ var require_helpers = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescri
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/misc.js
-var require_misc = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/misc.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/misc.js
+var require_misc = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/misc.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.LINEBREAK_MATCHER = void 0;
 	exports.isTokenOnSameLine = isTokenOnSameLine;
 	exports.LINEBREAK_MATCHER = /\r\n|[\r\n\u2028\u2029]/;
 	/**
@@ -2349,8 +2336,8 @@ var require_misc = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+types@8.46.1/node_modules/@typescript-eslint/types/dist/generated/ast-spec.js
-var require_ast_spec = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+types@8.46.1/node_modules/@typescript-eslint/types/dist/generated/ast-spec.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+types@8.47.0/node_modules/@typescript-eslint/types/dist/generated/ast-spec.js
+var require_ast_spec = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+types@8.47.0/node_modules/@typescript-eslint/types/dist/generated/ast-spec.js": ((exports) => {
 	/**********************************************
 	*      DO NOT MODIFY THIS FILE MANUALLY      *
 	*                                            *
@@ -2361,177 +2348,178 @@ var require_ast_spec = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescr
 	*                 yarn build                 *
 	**********************************************/
 	Object.defineProperty(exports, "__esModule", { value: true });
-	var AST_NODE_TYPES$2;
-	(function(AST_NODE_TYPES$3) {
-		AST_NODE_TYPES$3["AccessorProperty"] = "AccessorProperty";
-		AST_NODE_TYPES$3["ArrayExpression"] = "ArrayExpression";
-		AST_NODE_TYPES$3["ArrayPattern"] = "ArrayPattern";
-		AST_NODE_TYPES$3["ArrowFunctionExpression"] = "ArrowFunctionExpression";
-		AST_NODE_TYPES$3["AssignmentExpression"] = "AssignmentExpression";
-		AST_NODE_TYPES$3["AssignmentPattern"] = "AssignmentPattern";
-		AST_NODE_TYPES$3["AwaitExpression"] = "AwaitExpression";
-		AST_NODE_TYPES$3["BinaryExpression"] = "BinaryExpression";
-		AST_NODE_TYPES$3["BlockStatement"] = "BlockStatement";
-		AST_NODE_TYPES$3["BreakStatement"] = "BreakStatement";
-		AST_NODE_TYPES$3["CallExpression"] = "CallExpression";
-		AST_NODE_TYPES$3["CatchClause"] = "CatchClause";
-		AST_NODE_TYPES$3["ChainExpression"] = "ChainExpression";
-		AST_NODE_TYPES$3["ClassBody"] = "ClassBody";
-		AST_NODE_TYPES$3["ClassDeclaration"] = "ClassDeclaration";
-		AST_NODE_TYPES$3["ClassExpression"] = "ClassExpression";
-		AST_NODE_TYPES$3["ConditionalExpression"] = "ConditionalExpression";
-		AST_NODE_TYPES$3["ContinueStatement"] = "ContinueStatement";
-		AST_NODE_TYPES$3["DebuggerStatement"] = "DebuggerStatement";
-		AST_NODE_TYPES$3["Decorator"] = "Decorator";
-		AST_NODE_TYPES$3["DoWhileStatement"] = "DoWhileStatement";
-		AST_NODE_TYPES$3["EmptyStatement"] = "EmptyStatement";
-		AST_NODE_TYPES$3["ExportAllDeclaration"] = "ExportAllDeclaration";
-		AST_NODE_TYPES$3["ExportDefaultDeclaration"] = "ExportDefaultDeclaration";
-		AST_NODE_TYPES$3["ExportNamedDeclaration"] = "ExportNamedDeclaration";
-		AST_NODE_TYPES$3["ExportSpecifier"] = "ExportSpecifier";
-		AST_NODE_TYPES$3["ExpressionStatement"] = "ExpressionStatement";
-		AST_NODE_TYPES$3["ForInStatement"] = "ForInStatement";
-		AST_NODE_TYPES$3["ForOfStatement"] = "ForOfStatement";
-		AST_NODE_TYPES$3["ForStatement"] = "ForStatement";
-		AST_NODE_TYPES$3["FunctionDeclaration"] = "FunctionDeclaration";
-		AST_NODE_TYPES$3["FunctionExpression"] = "FunctionExpression";
-		AST_NODE_TYPES$3["Identifier"] = "Identifier";
-		AST_NODE_TYPES$3["IfStatement"] = "IfStatement";
-		AST_NODE_TYPES$3["ImportAttribute"] = "ImportAttribute";
-		AST_NODE_TYPES$3["ImportDeclaration"] = "ImportDeclaration";
-		AST_NODE_TYPES$3["ImportDefaultSpecifier"] = "ImportDefaultSpecifier";
-		AST_NODE_TYPES$3["ImportExpression"] = "ImportExpression";
-		AST_NODE_TYPES$3["ImportNamespaceSpecifier"] = "ImportNamespaceSpecifier";
-		AST_NODE_TYPES$3["ImportSpecifier"] = "ImportSpecifier";
-		AST_NODE_TYPES$3["JSXAttribute"] = "JSXAttribute";
-		AST_NODE_TYPES$3["JSXClosingElement"] = "JSXClosingElement";
-		AST_NODE_TYPES$3["JSXClosingFragment"] = "JSXClosingFragment";
-		AST_NODE_TYPES$3["JSXElement"] = "JSXElement";
-		AST_NODE_TYPES$3["JSXEmptyExpression"] = "JSXEmptyExpression";
-		AST_NODE_TYPES$3["JSXExpressionContainer"] = "JSXExpressionContainer";
-		AST_NODE_TYPES$3["JSXFragment"] = "JSXFragment";
-		AST_NODE_TYPES$3["JSXIdentifier"] = "JSXIdentifier";
-		AST_NODE_TYPES$3["JSXMemberExpression"] = "JSXMemberExpression";
-		AST_NODE_TYPES$3["JSXNamespacedName"] = "JSXNamespacedName";
-		AST_NODE_TYPES$3["JSXOpeningElement"] = "JSXOpeningElement";
-		AST_NODE_TYPES$3["JSXOpeningFragment"] = "JSXOpeningFragment";
-		AST_NODE_TYPES$3["JSXSpreadAttribute"] = "JSXSpreadAttribute";
-		AST_NODE_TYPES$3["JSXSpreadChild"] = "JSXSpreadChild";
-		AST_NODE_TYPES$3["JSXText"] = "JSXText";
-		AST_NODE_TYPES$3["LabeledStatement"] = "LabeledStatement";
-		AST_NODE_TYPES$3["Literal"] = "Literal";
-		AST_NODE_TYPES$3["LogicalExpression"] = "LogicalExpression";
-		AST_NODE_TYPES$3["MemberExpression"] = "MemberExpression";
-		AST_NODE_TYPES$3["MetaProperty"] = "MetaProperty";
-		AST_NODE_TYPES$3["MethodDefinition"] = "MethodDefinition";
-		AST_NODE_TYPES$3["NewExpression"] = "NewExpression";
-		AST_NODE_TYPES$3["ObjectExpression"] = "ObjectExpression";
-		AST_NODE_TYPES$3["ObjectPattern"] = "ObjectPattern";
-		AST_NODE_TYPES$3["PrivateIdentifier"] = "PrivateIdentifier";
-		AST_NODE_TYPES$3["Program"] = "Program";
-		AST_NODE_TYPES$3["Property"] = "Property";
-		AST_NODE_TYPES$3["PropertyDefinition"] = "PropertyDefinition";
-		AST_NODE_TYPES$3["RestElement"] = "RestElement";
-		AST_NODE_TYPES$3["ReturnStatement"] = "ReturnStatement";
-		AST_NODE_TYPES$3["SequenceExpression"] = "SequenceExpression";
-		AST_NODE_TYPES$3["SpreadElement"] = "SpreadElement";
-		AST_NODE_TYPES$3["StaticBlock"] = "StaticBlock";
-		AST_NODE_TYPES$3["Super"] = "Super";
-		AST_NODE_TYPES$3["SwitchCase"] = "SwitchCase";
-		AST_NODE_TYPES$3["SwitchStatement"] = "SwitchStatement";
-		AST_NODE_TYPES$3["TaggedTemplateExpression"] = "TaggedTemplateExpression";
-		AST_NODE_TYPES$3["TemplateElement"] = "TemplateElement";
-		AST_NODE_TYPES$3["TemplateLiteral"] = "TemplateLiteral";
-		AST_NODE_TYPES$3["ThisExpression"] = "ThisExpression";
-		AST_NODE_TYPES$3["ThrowStatement"] = "ThrowStatement";
-		AST_NODE_TYPES$3["TryStatement"] = "TryStatement";
-		AST_NODE_TYPES$3["UnaryExpression"] = "UnaryExpression";
-		AST_NODE_TYPES$3["UpdateExpression"] = "UpdateExpression";
-		AST_NODE_TYPES$3["VariableDeclaration"] = "VariableDeclaration";
-		AST_NODE_TYPES$3["VariableDeclarator"] = "VariableDeclarator";
-		AST_NODE_TYPES$3["WhileStatement"] = "WhileStatement";
-		AST_NODE_TYPES$3["WithStatement"] = "WithStatement";
-		AST_NODE_TYPES$3["YieldExpression"] = "YieldExpression";
-		AST_NODE_TYPES$3["TSAbstractAccessorProperty"] = "TSAbstractAccessorProperty";
-		AST_NODE_TYPES$3["TSAbstractKeyword"] = "TSAbstractKeyword";
-		AST_NODE_TYPES$3["TSAbstractMethodDefinition"] = "TSAbstractMethodDefinition";
-		AST_NODE_TYPES$3["TSAbstractPropertyDefinition"] = "TSAbstractPropertyDefinition";
-		AST_NODE_TYPES$3["TSAnyKeyword"] = "TSAnyKeyword";
-		AST_NODE_TYPES$3["TSArrayType"] = "TSArrayType";
-		AST_NODE_TYPES$3["TSAsExpression"] = "TSAsExpression";
-		AST_NODE_TYPES$3["TSAsyncKeyword"] = "TSAsyncKeyword";
-		AST_NODE_TYPES$3["TSBigIntKeyword"] = "TSBigIntKeyword";
-		AST_NODE_TYPES$3["TSBooleanKeyword"] = "TSBooleanKeyword";
-		AST_NODE_TYPES$3["TSCallSignatureDeclaration"] = "TSCallSignatureDeclaration";
-		AST_NODE_TYPES$3["TSClassImplements"] = "TSClassImplements";
-		AST_NODE_TYPES$3["TSConditionalType"] = "TSConditionalType";
-		AST_NODE_TYPES$3["TSConstructorType"] = "TSConstructorType";
-		AST_NODE_TYPES$3["TSConstructSignatureDeclaration"] = "TSConstructSignatureDeclaration";
-		AST_NODE_TYPES$3["TSDeclareFunction"] = "TSDeclareFunction";
-		AST_NODE_TYPES$3["TSDeclareKeyword"] = "TSDeclareKeyword";
-		AST_NODE_TYPES$3["TSEmptyBodyFunctionExpression"] = "TSEmptyBodyFunctionExpression";
-		AST_NODE_TYPES$3["TSEnumBody"] = "TSEnumBody";
-		AST_NODE_TYPES$3["TSEnumDeclaration"] = "TSEnumDeclaration";
-		AST_NODE_TYPES$3["TSEnumMember"] = "TSEnumMember";
-		AST_NODE_TYPES$3["TSExportAssignment"] = "TSExportAssignment";
-		AST_NODE_TYPES$3["TSExportKeyword"] = "TSExportKeyword";
-		AST_NODE_TYPES$3["TSExternalModuleReference"] = "TSExternalModuleReference";
-		AST_NODE_TYPES$3["TSFunctionType"] = "TSFunctionType";
-		AST_NODE_TYPES$3["TSImportEqualsDeclaration"] = "TSImportEqualsDeclaration";
-		AST_NODE_TYPES$3["TSImportType"] = "TSImportType";
-		AST_NODE_TYPES$3["TSIndexedAccessType"] = "TSIndexedAccessType";
-		AST_NODE_TYPES$3["TSIndexSignature"] = "TSIndexSignature";
-		AST_NODE_TYPES$3["TSInferType"] = "TSInferType";
-		AST_NODE_TYPES$3["TSInstantiationExpression"] = "TSInstantiationExpression";
-		AST_NODE_TYPES$3["TSInterfaceBody"] = "TSInterfaceBody";
-		AST_NODE_TYPES$3["TSInterfaceDeclaration"] = "TSInterfaceDeclaration";
-		AST_NODE_TYPES$3["TSInterfaceHeritage"] = "TSInterfaceHeritage";
-		AST_NODE_TYPES$3["TSIntersectionType"] = "TSIntersectionType";
-		AST_NODE_TYPES$3["TSIntrinsicKeyword"] = "TSIntrinsicKeyword";
-		AST_NODE_TYPES$3["TSLiteralType"] = "TSLiteralType";
-		AST_NODE_TYPES$3["TSMappedType"] = "TSMappedType";
-		AST_NODE_TYPES$3["TSMethodSignature"] = "TSMethodSignature";
-		AST_NODE_TYPES$3["TSModuleBlock"] = "TSModuleBlock";
-		AST_NODE_TYPES$3["TSModuleDeclaration"] = "TSModuleDeclaration";
-		AST_NODE_TYPES$3["TSNamedTupleMember"] = "TSNamedTupleMember";
-		AST_NODE_TYPES$3["TSNamespaceExportDeclaration"] = "TSNamespaceExportDeclaration";
-		AST_NODE_TYPES$3["TSNeverKeyword"] = "TSNeverKeyword";
-		AST_NODE_TYPES$3["TSNonNullExpression"] = "TSNonNullExpression";
-		AST_NODE_TYPES$3["TSNullKeyword"] = "TSNullKeyword";
-		AST_NODE_TYPES$3["TSNumberKeyword"] = "TSNumberKeyword";
-		AST_NODE_TYPES$3["TSObjectKeyword"] = "TSObjectKeyword";
-		AST_NODE_TYPES$3["TSOptionalType"] = "TSOptionalType";
-		AST_NODE_TYPES$3["TSParameterProperty"] = "TSParameterProperty";
-		AST_NODE_TYPES$3["TSPrivateKeyword"] = "TSPrivateKeyword";
-		AST_NODE_TYPES$3["TSPropertySignature"] = "TSPropertySignature";
-		AST_NODE_TYPES$3["TSProtectedKeyword"] = "TSProtectedKeyword";
-		AST_NODE_TYPES$3["TSPublicKeyword"] = "TSPublicKeyword";
-		AST_NODE_TYPES$3["TSQualifiedName"] = "TSQualifiedName";
-		AST_NODE_TYPES$3["TSReadonlyKeyword"] = "TSReadonlyKeyword";
-		AST_NODE_TYPES$3["TSRestType"] = "TSRestType";
-		AST_NODE_TYPES$3["TSSatisfiesExpression"] = "TSSatisfiesExpression";
-		AST_NODE_TYPES$3["TSStaticKeyword"] = "TSStaticKeyword";
-		AST_NODE_TYPES$3["TSStringKeyword"] = "TSStringKeyword";
-		AST_NODE_TYPES$3["TSSymbolKeyword"] = "TSSymbolKeyword";
-		AST_NODE_TYPES$3["TSTemplateLiteralType"] = "TSTemplateLiteralType";
-		AST_NODE_TYPES$3["TSThisType"] = "TSThisType";
-		AST_NODE_TYPES$3["TSTupleType"] = "TSTupleType";
-		AST_NODE_TYPES$3["TSTypeAliasDeclaration"] = "TSTypeAliasDeclaration";
-		AST_NODE_TYPES$3["TSTypeAnnotation"] = "TSTypeAnnotation";
-		AST_NODE_TYPES$3["TSTypeAssertion"] = "TSTypeAssertion";
-		AST_NODE_TYPES$3["TSTypeLiteral"] = "TSTypeLiteral";
-		AST_NODE_TYPES$3["TSTypeOperator"] = "TSTypeOperator";
-		AST_NODE_TYPES$3["TSTypeParameter"] = "TSTypeParameter";
-		AST_NODE_TYPES$3["TSTypeParameterDeclaration"] = "TSTypeParameterDeclaration";
-		AST_NODE_TYPES$3["TSTypeParameterInstantiation"] = "TSTypeParameterInstantiation";
-		AST_NODE_TYPES$3["TSTypePredicate"] = "TSTypePredicate";
-		AST_NODE_TYPES$3["TSTypeQuery"] = "TSTypeQuery";
-		AST_NODE_TYPES$3["TSTypeReference"] = "TSTypeReference";
-		AST_NODE_TYPES$3["TSUndefinedKeyword"] = "TSUndefinedKeyword";
-		AST_NODE_TYPES$3["TSUnionType"] = "TSUnionType";
-		AST_NODE_TYPES$3["TSUnknownKeyword"] = "TSUnknownKeyword";
-		AST_NODE_TYPES$3["TSVoidKeyword"] = "TSVoidKeyword";
-	})(AST_NODE_TYPES$2 || (exports.AST_NODE_TYPES = AST_NODE_TYPES$2 = {}));
+	exports.AST_TOKEN_TYPES = exports.AST_NODE_TYPES = void 0;
+	var AST_NODE_TYPES$3;
+	(function(AST_NODE_TYPES$4) {
+		AST_NODE_TYPES$4["AccessorProperty"] = "AccessorProperty";
+		AST_NODE_TYPES$4["ArrayExpression"] = "ArrayExpression";
+		AST_NODE_TYPES$4["ArrayPattern"] = "ArrayPattern";
+		AST_NODE_TYPES$4["ArrowFunctionExpression"] = "ArrowFunctionExpression";
+		AST_NODE_TYPES$4["AssignmentExpression"] = "AssignmentExpression";
+		AST_NODE_TYPES$4["AssignmentPattern"] = "AssignmentPattern";
+		AST_NODE_TYPES$4["AwaitExpression"] = "AwaitExpression";
+		AST_NODE_TYPES$4["BinaryExpression"] = "BinaryExpression";
+		AST_NODE_TYPES$4["BlockStatement"] = "BlockStatement";
+		AST_NODE_TYPES$4["BreakStatement"] = "BreakStatement";
+		AST_NODE_TYPES$4["CallExpression"] = "CallExpression";
+		AST_NODE_TYPES$4["CatchClause"] = "CatchClause";
+		AST_NODE_TYPES$4["ChainExpression"] = "ChainExpression";
+		AST_NODE_TYPES$4["ClassBody"] = "ClassBody";
+		AST_NODE_TYPES$4["ClassDeclaration"] = "ClassDeclaration";
+		AST_NODE_TYPES$4["ClassExpression"] = "ClassExpression";
+		AST_NODE_TYPES$4["ConditionalExpression"] = "ConditionalExpression";
+		AST_NODE_TYPES$4["ContinueStatement"] = "ContinueStatement";
+		AST_NODE_TYPES$4["DebuggerStatement"] = "DebuggerStatement";
+		AST_NODE_TYPES$4["Decorator"] = "Decorator";
+		AST_NODE_TYPES$4["DoWhileStatement"] = "DoWhileStatement";
+		AST_NODE_TYPES$4["EmptyStatement"] = "EmptyStatement";
+		AST_NODE_TYPES$4["ExportAllDeclaration"] = "ExportAllDeclaration";
+		AST_NODE_TYPES$4["ExportDefaultDeclaration"] = "ExportDefaultDeclaration";
+		AST_NODE_TYPES$4["ExportNamedDeclaration"] = "ExportNamedDeclaration";
+		AST_NODE_TYPES$4["ExportSpecifier"] = "ExportSpecifier";
+		AST_NODE_TYPES$4["ExpressionStatement"] = "ExpressionStatement";
+		AST_NODE_TYPES$4["ForInStatement"] = "ForInStatement";
+		AST_NODE_TYPES$4["ForOfStatement"] = "ForOfStatement";
+		AST_NODE_TYPES$4["ForStatement"] = "ForStatement";
+		AST_NODE_TYPES$4["FunctionDeclaration"] = "FunctionDeclaration";
+		AST_NODE_TYPES$4["FunctionExpression"] = "FunctionExpression";
+		AST_NODE_TYPES$4["Identifier"] = "Identifier";
+		AST_NODE_TYPES$4["IfStatement"] = "IfStatement";
+		AST_NODE_TYPES$4["ImportAttribute"] = "ImportAttribute";
+		AST_NODE_TYPES$4["ImportDeclaration"] = "ImportDeclaration";
+		AST_NODE_TYPES$4["ImportDefaultSpecifier"] = "ImportDefaultSpecifier";
+		AST_NODE_TYPES$4["ImportExpression"] = "ImportExpression";
+		AST_NODE_TYPES$4["ImportNamespaceSpecifier"] = "ImportNamespaceSpecifier";
+		AST_NODE_TYPES$4["ImportSpecifier"] = "ImportSpecifier";
+		AST_NODE_TYPES$4["JSXAttribute"] = "JSXAttribute";
+		AST_NODE_TYPES$4["JSXClosingElement"] = "JSXClosingElement";
+		AST_NODE_TYPES$4["JSXClosingFragment"] = "JSXClosingFragment";
+		AST_NODE_TYPES$4["JSXElement"] = "JSXElement";
+		AST_NODE_TYPES$4["JSXEmptyExpression"] = "JSXEmptyExpression";
+		AST_NODE_TYPES$4["JSXExpressionContainer"] = "JSXExpressionContainer";
+		AST_NODE_TYPES$4["JSXFragment"] = "JSXFragment";
+		AST_NODE_TYPES$4["JSXIdentifier"] = "JSXIdentifier";
+		AST_NODE_TYPES$4["JSXMemberExpression"] = "JSXMemberExpression";
+		AST_NODE_TYPES$4["JSXNamespacedName"] = "JSXNamespacedName";
+		AST_NODE_TYPES$4["JSXOpeningElement"] = "JSXOpeningElement";
+		AST_NODE_TYPES$4["JSXOpeningFragment"] = "JSXOpeningFragment";
+		AST_NODE_TYPES$4["JSXSpreadAttribute"] = "JSXSpreadAttribute";
+		AST_NODE_TYPES$4["JSXSpreadChild"] = "JSXSpreadChild";
+		AST_NODE_TYPES$4["JSXText"] = "JSXText";
+		AST_NODE_TYPES$4["LabeledStatement"] = "LabeledStatement";
+		AST_NODE_TYPES$4["Literal"] = "Literal";
+		AST_NODE_TYPES$4["LogicalExpression"] = "LogicalExpression";
+		AST_NODE_TYPES$4["MemberExpression"] = "MemberExpression";
+		AST_NODE_TYPES$4["MetaProperty"] = "MetaProperty";
+		AST_NODE_TYPES$4["MethodDefinition"] = "MethodDefinition";
+		AST_NODE_TYPES$4["NewExpression"] = "NewExpression";
+		AST_NODE_TYPES$4["ObjectExpression"] = "ObjectExpression";
+		AST_NODE_TYPES$4["ObjectPattern"] = "ObjectPattern";
+		AST_NODE_TYPES$4["PrivateIdentifier"] = "PrivateIdentifier";
+		AST_NODE_TYPES$4["Program"] = "Program";
+		AST_NODE_TYPES$4["Property"] = "Property";
+		AST_NODE_TYPES$4["PropertyDefinition"] = "PropertyDefinition";
+		AST_NODE_TYPES$4["RestElement"] = "RestElement";
+		AST_NODE_TYPES$4["ReturnStatement"] = "ReturnStatement";
+		AST_NODE_TYPES$4["SequenceExpression"] = "SequenceExpression";
+		AST_NODE_TYPES$4["SpreadElement"] = "SpreadElement";
+		AST_NODE_TYPES$4["StaticBlock"] = "StaticBlock";
+		AST_NODE_TYPES$4["Super"] = "Super";
+		AST_NODE_TYPES$4["SwitchCase"] = "SwitchCase";
+		AST_NODE_TYPES$4["SwitchStatement"] = "SwitchStatement";
+		AST_NODE_TYPES$4["TaggedTemplateExpression"] = "TaggedTemplateExpression";
+		AST_NODE_TYPES$4["TemplateElement"] = "TemplateElement";
+		AST_NODE_TYPES$4["TemplateLiteral"] = "TemplateLiteral";
+		AST_NODE_TYPES$4["ThisExpression"] = "ThisExpression";
+		AST_NODE_TYPES$4["ThrowStatement"] = "ThrowStatement";
+		AST_NODE_TYPES$4["TryStatement"] = "TryStatement";
+		AST_NODE_TYPES$4["UnaryExpression"] = "UnaryExpression";
+		AST_NODE_TYPES$4["UpdateExpression"] = "UpdateExpression";
+		AST_NODE_TYPES$4["VariableDeclaration"] = "VariableDeclaration";
+		AST_NODE_TYPES$4["VariableDeclarator"] = "VariableDeclarator";
+		AST_NODE_TYPES$4["WhileStatement"] = "WhileStatement";
+		AST_NODE_TYPES$4["WithStatement"] = "WithStatement";
+		AST_NODE_TYPES$4["YieldExpression"] = "YieldExpression";
+		AST_NODE_TYPES$4["TSAbstractAccessorProperty"] = "TSAbstractAccessorProperty";
+		AST_NODE_TYPES$4["TSAbstractKeyword"] = "TSAbstractKeyword";
+		AST_NODE_TYPES$4["TSAbstractMethodDefinition"] = "TSAbstractMethodDefinition";
+		AST_NODE_TYPES$4["TSAbstractPropertyDefinition"] = "TSAbstractPropertyDefinition";
+		AST_NODE_TYPES$4["TSAnyKeyword"] = "TSAnyKeyword";
+		AST_NODE_TYPES$4["TSArrayType"] = "TSArrayType";
+		AST_NODE_TYPES$4["TSAsExpression"] = "TSAsExpression";
+		AST_NODE_TYPES$4["TSAsyncKeyword"] = "TSAsyncKeyword";
+		AST_NODE_TYPES$4["TSBigIntKeyword"] = "TSBigIntKeyword";
+		AST_NODE_TYPES$4["TSBooleanKeyword"] = "TSBooleanKeyword";
+		AST_NODE_TYPES$4["TSCallSignatureDeclaration"] = "TSCallSignatureDeclaration";
+		AST_NODE_TYPES$4["TSClassImplements"] = "TSClassImplements";
+		AST_NODE_TYPES$4["TSConditionalType"] = "TSConditionalType";
+		AST_NODE_TYPES$4["TSConstructorType"] = "TSConstructorType";
+		AST_NODE_TYPES$4["TSConstructSignatureDeclaration"] = "TSConstructSignatureDeclaration";
+		AST_NODE_TYPES$4["TSDeclareFunction"] = "TSDeclareFunction";
+		AST_NODE_TYPES$4["TSDeclareKeyword"] = "TSDeclareKeyword";
+		AST_NODE_TYPES$4["TSEmptyBodyFunctionExpression"] = "TSEmptyBodyFunctionExpression";
+		AST_NODE_TYPES$4["TSEnumBody"] = "TSEnumBody";
+		AST_NODE_TYPES$4["TSEnumDeclaration"] = "TSEnumDeclaration";
+		AST_NODE_TYPES$4["TSEnumMember"] = "TSEnumMember";
+		AST_NODE_TYPES$4["TSExportAssignment"] = "TSExportAssignment";
+		AST_NODE_TYPES$4["TSExportKeyword"] = "TSExportKeyword";
+		AST_NODE_TYPES$4["TSExternalModuleReference"] = "TSExternalModuleReference";
+		AST_NODE_TYPES$4["TSFunctionType"] = "TSFunctionType";
+		AST_NODE_TYPES$4["TSImportEqualsDeclaration"] = "TSImportEqualsDeclaration";
+		AST_NODE_TYPES$4["TSImportType"] = "TSImportType";
+		AST_NODE_TYPES$4["TSIndexedAccessType"] = "TSIndexedAccessType";
+		AST_NODE_TYPES$4["TSIndexSignature"] = "TSIndexSignature";
+		AST_NODE_TYPES$4["TSInferType"] = "TSInferType";
+		AST_NODE_TYPES$4["TSInstantiationExpression"] = "TSInstantiationExpression";
+		AST_NODE_TYPES$4["TSInterfaceBody"] = "TSInterfaceBody";
+		AST_NODE_TYPES$4["TSInterfaceDeclaration"] = "TSInterfaceDeclaration";
+		AST_NODE_TYPES$4["TSInterfaceHeritage"] = "TSInterfaceHeritage";
+		AST_NODE_TYPES$4["TSIntersectionType"] = "TSIntersectionType";
+		AST_NODE_TYPES$4["TSIntrinsicKeyword"] = "TSIntrinsicKeyword";
+		AST_NODE_TYPES$4["TSLiteralType"] = "TSLiteralType";
+		AST_NODE_TYPES$4["TSMappedType"] = "TSMappedType";
+		AST_NODE_TYPES$4["TSMethodSignature"] = "TSMethodSignature";
+		AST_NODE_TYPES$4["TSModuleBlock"] = "TSModuleBlock";
+		AST_NODE_TYPES$4["TSModuleDeclaration"] = "TSModuleDeclaration";
+		AST_NODE_TYPES$4["TSNamedTupleMember"] = "TSNamedTupleMember";
+		AST_NODE_TYPES$4["TSNamespaceExportDeclaration"] = "TSNamespaceExportDeclaration";
+		AST_NODE_TYPES$4["TSNeverKeyword"] = "TSNeverKeyword";
+		AST_NODE_TYPES$4["TSNonNullExpression"] = "TSNonNullExpression";
+		AST_NODE_TYPES$4["TSNullKeyword"] = "TSNullKeyword";
+		AST_NODE_TYPES$4["TSNumberKeyword"] = "TSNumberKeyword";
+		AST_NODE_TYPES$4["TSObjectKeyword"] = "TSObjectKeyword";
+		AST_NODE_TYPES$4["TSOptionalType"] = "TSOptionalType";
+		AST_NODE_TYPES$4["TSParameterProperty"] = "TSParameterProperty";
+		AST_NODE_TYPES$4["TSPrivateKeyword"] = "TSPrivateKeyword";
+		AST_NODE_TYPES$4["TSPropertySignature"] = "TSPropertySignature";
+		AST_NODE_TYPES$4["TSProtectedKeyword"] = "TSProtectedKeyword";
+		AST_NODE_TYPES$4["TSPublicKeyword"] = "TSPublicKeyword";
+		AST_NODE_TYPES$4["TSQualifiedName"] = "TSQualifiedName";
+		AST_NODE_TYPES$4["TSReadonlyKeyword"] = "TSReadonlyKeyword";
+		AST_NODE_TYPES$4["TSRestType"] = "TSRestType";
+		AST_NODE_TYPES$4["TSSatisfiesExpression"] = "TSSatisfiesExpression";
+		AST_NODE_TYPES$4["TSStaticKeyword"] = "TSStaticKeyword";
+		AST_NODE_TYPES$4["TSStringKeyword"] = "TSStringKeyword";
+		AST_NODE_TYPES$4["TSSymbolKeyword"] = "TSSymbolKeyword";
+		AST_NODE_TYPES$4["TSTemplateLiteralType"] = "TSTemplateLiteralType";
+		AST_NODE_TYPES$4["TSThisType"] = "TSThisType";
+		AST_NODE_TYPES$4["TSTupleType"] = "TSTupleType";
+		AST_NODE_TYPES$4["TSTypeAliasDeclaration"] = "TSTypeAliasDeclaration";
+		AST_NODE_TYPES$4["TSTypeAnnotation"] = "TSTypeAnnotation";
+		AST_NODE_TYPES$4["TSTypeAssertion"] = "TSTypeAssertion";
+		AST_NODE_TYPES$4["TSTypeLiteral"] = "TSTypeLiteral";
+		AST_NODE_TYPES$4["TSTypeOperator"] = "TSTypeOperator";
+		AST_NODE_TYPES$4["TSTypeParameter"] = "TSTypeParameter";
+		AST_NODE_TYPES$4["TSTypeParameterDeclaration"] = "TSTypeParameterDeclaration";
+		AST_NODE_TYPES$4["TSTypeParameterInstantiation"] = "TSTypeParameterInstantiation";
+		AST_NODE_TYPES$4["TSTypePredicate"] = "TSTypePredicate";
+		AST_NODE_TYPES$4["TSTypeQuery"] = "TSTypeQuery";
+		AST_NODE_TYPES$4["TSTypeReference"] = "TSTypeReference";
+		AST_NODE_TYPES$4["TSUndefinedKeyword"] = "TSUndefinedKeyword";
+		AST_NODE_TYPES$4["TSUnionType"] = "TSUnionType";
+		AST_NODE_TYPES$4["TSUnknownKeyword"] = "TSUnknownKeyword";
+		AST_NODE_TYPES$4["TSVoidKeyword"] = "TSVoidKeyword";
+	})(AST_NODE_TYPES$3 || (exports.AST_NODE_TYPES = AST_NODE_TYPES$3 = {}));
 	var AST_TOKEN_TYPES;
 	(function(AST_TOKEN_TYPES$1) {
 		AST_TOKEN_TYPES$1["Boolean"] = "Boolean";
@@ -2552,20 +2540,20 @@ var require_ast_spec = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescr
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+types@8.46.1/node_modules/@typescript-eslint/types/dist/lib.js
-var require_lib$2 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+types@8.46.1/node_modules/@typescript-eslint/types/dist/lib.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+types@8.47.0/node_modules/@typescript-eslint/types/dist/lib.js
+var require_lib$2 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+types@8.47.0/node_modules/@typescript-eslint/types/dist/lib.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+types@8.46.1/node_modules/@typescript-eslint/types/dist/parser-options.js
-var require_parser_options = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+types@8.46.1/node_modules/@typescript-eslint/types/dist/parser-options.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+types@8.47.0/node_modules/@typescript-eslint/types/dist/parser-options.js
+var require_parser_options = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+types@8.47.0/node_modules/@typescript-eslint/types/dist/parser-options.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+types@8.46.1/node_modules/@typescript-eslint/types/dist/ts-estree.js
-var require_ts_estree$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+types@8.46.1/node_modules/@typescript-eslint/types/dist/ts-estree.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+types@8.47.0/node_modules/@typescript-eslint/types/dist/ts-estree.js
+var require_ts_estree$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+types@8.47.0/node_modules/@typescript-eslint/types/dist/ts-estree.js": ((exports) => {
 	var __createBinding$11 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -2608,12 +2596,13 @@ var require_ts_estree$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 		};
 	})();
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.TSESTree = void 0;
 	exports.TSESTree = __importStar$3(require_ast_spec());
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+types@8.46.1/node_modules/@typescript-eslint/types/dist/index.js
-var require_dist$3 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+types@8.46.1/node_modules/@typescript-eslint/types/dist/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+types@8.47.0/node_modules/@typescript-eslint/types/dist/index.js
+var require_dist$3 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+types@8.47.0/node_modules/@typescript-eslint/types/dist/index.js": ((exports) => {
 	var __createBinding$10 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -2652,8 +2641,8 @@ var require_dist$3 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-estree.js
-var require_ts_estree = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-estree.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-estree.js
+var require_ts_estree = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-estree.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.TSESTree = exports.AST_TOKEN_TYPES = exports.AST_NODE_TYPES = void 0;
 	var types_1$8 = require_dist$3();
@@ -2678,9 +2667,10 @@ var require_ts_estree = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typesc
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/predicates.js
-var require_predicates = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/predicates.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/predicates.js
+var require_predicates = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/predicates.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.isLoop = exports.isImportKeyword = exports.isTypeKeyword = exports.isAwaitKeyword = exports.isAwaitExpression = exports.isIdentifier = exports.isConstructor = exports.isClassOrTypeElement = exports.isTSConstructorType = exports.isTSFunctionType = exports.isFunctionOrFunctionType = exports.isFunctionType = exports.isFunction = exports.isVariableDeclarator = exports.isTypeAssertion = exports.isLogicalOrOperator = exports.isOptionalCallExpression = exports.isNotNonNullAssertionPunctuator = exports.isNonNullAssertionPunctuator = exports.isNotOptionalChainPunctuator = exports.isOptionalChainPunctuator = void 0;
 	exports.isSetter = isSetter;
 	const ts_estree_1 = require_ts_estree();
 	const helpers_1 = require_helpers();
@@ -2774,8 +2764,8 @@ var require_predicates = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@types
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/index.js
-var require_ast_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/index.js
+var require_ast_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ast-utils/index.js": ((exports) => {
 	var __createBinding$9 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -2801,8 +2791,8 @@ var require_ast_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typesc
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/deepMerge.js
-var require_deepMerge = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/deepMerge.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/deepMerge.js
+var require_deepMerge = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/deepMerge.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.isObjectNotArray = isObjectNotArray;
 	exports.deepMerge = deepMerge;
@@ -2838,8 +2828,8 @@ var require_deepMerge = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typesc
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/applyDefault.js
-var require_applyDefault = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/applyDefault.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/applyDefault.js
+var require_applyDefault = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/applyDefault.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.applyDefault = applyDefault;
 	const deepMerge_1 = require_deepMerge();
@@ -2865,8 +2855,8 @@ var require_applyDefault = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/parserSeemsToBeTSESLint.js
-var require_parserSeemsToBeTSESLint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/parserSeemsToBeTSESLint.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/parserSeemsToBeTSESLint.js
+var require_parserSeemsToBeTSESLint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/parserSeemsToBeTSESLint.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.parserSeemsToBeTSESLint = parserSeemsToBeTSESLint;
 	function parserSeemsToBeTSESLint(parser) {
@@ -2875,8 +2865,8 @@ var require_parserSeemsToBeTSESLint = /* @__PURE__ */ __commonJS({ "node_modules
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/getParserServices.js
-var require_getParserServices = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/getParserServices.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/getParserServices.js
+var require_getParserServices = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/getParserServices.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.getParserServices = getParserServices;
 	const parserSeemsToBeTSESLint_1 = require_parserSeemsToBeTSESLint();
@@ -2899,15 +2889,16 @@ var require_getParserServices = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/InferTypesFromRule.js
-var require_InferTypesFromRule = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/InferTypesFromRule.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/InferTypesFromRule.js
+var require_InferTypesFromRule = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/InferTypesFromRule.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/nullThrows.js
-var require_nullThrows = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/nullThrows.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/nullThrows.js
+var require_nullThrows = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/nullThrows.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.NullThrowsReasons = void 0;
 	exports.nullThrows = nullThrows;
 	/**
 	* A set of common reasons for calling nullThrows
@@ -2927,8 +2918,8 @@ var require_nullThrows = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@types
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/RuleCreator.js
-var require_RuleCreator = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/RuleCreator.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/RuleCreator.js
+var require_RuleCreator = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/RuleCreator.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.RuleCreator = RuleCreator;
 	const applyDefault_1 = require_applyDefault();
@@ -2939,7 +2930,7 @@ var require_RuleCreator = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 	* @returns Function to create a rule with the docs URL format.
 	*/
 	function RuleCreator(urlCreator) {
-		return function createNamedRule({ meta, name: name$1,...rule$4 }) {
+		return function createNamedRule({ meta, name: name$1, ...rule$4 }) {
 			return createRule$1({
 				meta: {
 					...meta,
@@ -2973,8 +2964,8 @@ var require_RuleCreator = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/index.js
-var require_eslint_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/index.js
+var require_eslint_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/eslint-utils/index.js": ((exports) => {
 	var __createBinding$8 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -3002,8 +2993,8 @@ var require_eslint_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/json-schema.js
-var require_json_schema = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/json-schema.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/json-schema.js
+var require_json_schema = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/json-schema.js": ((exports) => {
 	/**
 	* This is a fork of https://github.com/DefinitelyTyped/DefinitelyTyped/blob/13f63c2eb8d7479caf01ab8d72f9e3683368a8f5/types/json-schema/index.d.ts
 	* We intentionally fork this because:
@@ -3014,21 +3005,22 @@ var require_json_schema = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/AST.js
-var require_AST = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/AST.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/AST.js
+var require_AST = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/AST.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Config.js
-var require_Config = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Config.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Config.js
+var require_Config = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Config.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/eslint/FlatESLint.js
-var require_FlatESLint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/eslint/FlatESLint.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/eslint/FlatESLint.js
+var require_FlatESLint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/eslint/FlatESLint.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.FlatESLint = void 0;
 	const use_at_your_own_risk_1$1 = __require("eslint/use-at-your-own-risk");
 	/**
 	* The ESLint class is the primary class to use in Node.js applications.
@@ -3041,9 +3033,10 @@ var require_FlatESLint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@types
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/eslint/LegacyESLint.js
-var require_LegacyESLint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/eslint/LegacyESLint.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/eslint/LegacyESLint.js
+var require_LegacyESLint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/eslint/LegacyESLint.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.LegacyESLint = void 0;
 	const use_at_your_own_risk_1 = __require("eslint/use-at-your-own-risk");
 	/**
 	* The ESLint class is the primary class to use in Node.js applications.
@@ -3056,8 +3049,8 @@ var require_LegacyESLint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/ESLint.js
-var require_ESLint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/ESLint.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/ESLint.js
+var require_ESLint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/ESLint.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.LegacyESLint = exports.ESLint = exports.FlatESLint = void 0;
 	var FlatESLint_1 = require_FlatESLint();
@@ -3087,9 +3080,10 @@ var require_ESLint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Linter.js
-var require_Linter = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Linter.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Linter.js
+var require_Linter = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Linter.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.Linter = void 0;
 	const eslint_1$2 = __require("eslint");
 	/**
 	* The Linter object does the actual evaluation of the JavaScript code. It doesn't do any filesystem operations, it
@@ -3101,33 +3095,34 @@ var require_Linter = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Parser.js
-var require_Parser = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Parser.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Parser.js
+var require_Parser = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Parser.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/ParserOptions.js
-var require_ParserOptions = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/ParserOptions.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/ParserOptions.js
+var require_ParserOptions = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/ParserOptions.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Processor.js
-var require_Processor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Processor.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Processor.js
+var require_Processor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Processor.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Rule.js
-var require_Rule = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Rule.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Rule.js
+var require_Rule = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Rule.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/RuleTester.js
-var require_RuleTester = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/RuleTester.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/RuleTester.js
+var require_RuleTester = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/RuleTester.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.RuleTester = void 0;
 	const eslint_1$1 = __require("eslint");
 	/**
 	* @deprecated Use `@typescript-eslint/rule-tester` instead.
@@ -3349,16 +3344,17 @@ var require_eslint_visitor_keys = /* @__PURE__ */ __commonJS({ "node_modules/.pn
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+visitor-keys@8.46.1/node_modules/@typescript-eslint/visitor-keys/dist/get-keys.js
-var require_get_keys = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+visitor-keys@8.46.1/node_modules/@typescript-eslint/visitor-keys/dist/get-keys.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+visitor-keys@8.47.0/node_modules/@typescript-eslint/visitor-keys/dist/get-keys.js
+var require_get_keys = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+visitor-keys@8.47.0/node_modules/@typescript-eslint/visitor-keys/dist/get-keys.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.getKeys = void 0;
 	const eslint_visitor_keys_1 = require_eslint_visitor_keys();
 	exports.getKeys = eslint_visitor_keys_1.getKeys;
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+visitor-keys@8.46.1/node_modules/@typescript-eslint/visitor-keys/dist/visitor-keys.js
-var require_visitor_keys = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+visitor-keys@8.46.1/node_modules/@typescript-eslint/visitor-keys/dist/visitor-keys.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+visitor-keys@8.47.0/node_modules/@typescript-eslint/visitor-keys/dist/visitor-keys.js
+var require_visitor_keys = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+visitor-keys@8.47.0/node_modules/@typescript-eslint/visitor-keys/dist/visitor-keys.js": ((exports) => {
 	var __createBinding$7 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -3401,6 +3397,7 @@ var require_visitor_keys = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 		};
 	})();
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.visitorKeys = void 0;
 	const eslintVisitorKeys = __importStar$2(require_eslint_visitor_keys());
 	const SharedVisitorKeys = (() => {
 		const FunctionType = [
@@ -3631,8 +3628,8 @@ var require_visitor_keys = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+visitor-keys@8.46.1/node_modules/@typescript-eslint/visitor-keys/dist/index.js
-var require_dist$2 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+visitor-keys@8.46.1/node_modules/@typescript-eslint/visitor-keys/dist/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+visitor-keys@8.47.0/node_modules/@typescript-eslint/visitor-keys/dist/index.js
+var require_dist$2 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+visitor-keys@8.47.0/node_modules/@typescript-eslint/visitor-keys/dist/index.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.visitorKeys = exports.getKeys = void 0;
 	var get_keys_1 = require_get_keys();
@@ -3652,8 +3649,8 @@ var require_dist$2 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/assert.js
-var require_assert = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/assert.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/assert.js
+var require_assert = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/assert.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.assert = assert;
 	function assert(value, message) {
@@ -3662,8 +3659,8 @@ var require_assert = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/ID.js
-var require_ID = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/ID.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/ID.js
+var require_ID = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/ID.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.createIdGenerator = createIdGenerator;
 	exports.resetIds = resetIds;
@@ -3684,9 +3681,10 @@ var require_ID = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-es
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/DefinitionBase.js
-var require_DefinitionBase = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/DefinitionBase.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/DefinitionBase.js
+var require_DefinitionBase = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/DefinitionBase.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.DefinitionBase = void 0;
 	const generator$3 = (0, require_ID().createIdGenerator)();
 	var DefinitionBase = class {
 		/**
@@ -3720,9 +3718,10 @@ var require_DefinitionBase = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/DefinitionType.js
-var require_DefinitionType = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/DefinitionType.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/DefinitionType.js
+var require_DefinitionType = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/DefinitionType.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.DefinitionType = void 0;
 	var DefinitionType;
 	(function(DefinitionType$1) {
 		DefinitionType$1["CatchClause"] = "CatchClause";
@@ -3740,9 +3739,10 @@ var require_DefinitionType = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/CatchClauseDefinition.js
-var require_CatchClauseDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/CatchClauseDefinition.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/CatchClauseDefinition.js
+var require_CatchClauseDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/CatchClauseDefinition.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.CatchClauseDefinition = void 0;
 	const DefinitionBase_1$10 = require_DefinitionBase();
 	const DefinitionType_1$10 = require_DefinitionType();
 	var CatchClauseDefinition = class extends DefinitionBase_1$10.DefinitionBase {
@@ -3756,9 +3756,10 @@ var require_CatchClauseDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/ClassNameDefinition.js
-var require_ClassNameDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/ClassNameDefinition.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/ClassNameDefinition.js
+var require_ClassNameDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/ClassNameDefinition.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ClassNameDefinition = void 0;
 	const DefinitionBase_1$9 = require_DefinitionBase();
 	const DefinitionType_1$9 = require_DefinitionType();
 	var ClassNameDefinition = class extends DefinitionBase_1$9.DefinitionBase {
@@ -3772,15 +3773,16 @@ var require_ClassNameDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pn
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/Definition.js
-var require_Definition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/Definition.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/Definition.js
+var require_Definition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/Definition.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/FunctionNameDefinition.js
-var require_FunctionNameDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/FunctionNameDefinition.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/FunctionNameDefinition.js
+var require_FunctionNameDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/FunctionNameDefinition.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.FunctionNameDefinition = void 0;
 	const DefinitionBase_1$8 = require_DefinitionBase();
 	const DefinitionType_1$8 = require_DefinitionType();
 	var FunctionNameDefinition = class extends DefinitionBase_1$8.DefinitionBase {
@@ -3794,9 +3796,10 @@ var require_FunctionNameDefinition = /* @__PURE__ */ __commonJS({ "node_modules/
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/ImplicitGlobalVariableDefinition.js
-var require_ImplicitGlobalVariableDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/ImplicitGlobalVariableDefinition.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/ImplicitGlobalVariableDefinition.js
+var require_ImplicitGlobalVariableDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/ImplicitGlobalVariableDefinition.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ImplicitGlobalVariableDefinition = void 0;
 	const DefinitionBase_1$7 = require_DefinitionBase();
 	const DefinitionType_1$7 = require_DefinitionType();
 	var ImplicitGlobalVariableDefinition = class extends DefinitionBase_1$7.DefinitionBase {
@@ -3810,9 +3813,10 @@ var require_ImplicitGlobalVariableDefinition = /* @__PURE__ */ __commonJS({ "nod
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/ImportBindingDefinition.js
-var require_ImportBindingDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/ImportBindingDefinition.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/ImportBindingDefinition.js
+var require_ImportBindingDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/ImportBindingDefinition.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ImportBindingDefinition = void 0;
 	const DefinitionBase_1$6 = require_DefinitionBase();
 	const DefinitionType_1$6 = require_DefinitionType();
 	var ImportBindingDefinition = class extends DefinitionBase_1$6.DefinitionBase {
@@ -3826,9 +3830,10 @@ var require_ImportBindingDefinition = /* @__PURE__ */ __commonJS({ "node_modules
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/ParameterDefinition.js
-var require_ParameterDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/ParameterDefinition.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/ParameterDefinition.js
+var require_ParameterDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/ParameterDefinition.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ParameterDefinition = void 0;
 	const DefinitionBase_1$5 = require_DefinitionBase();
 	const DefinitionType_1$5 = require_DefinitionType();
 	var ParameterDefinition = class extends DefinitionBase_1$5.DefinitionBase {
@@ -3847,9 +3852,10 @@ var require_ParameterDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pn
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/TSEnumMemberDefinition.js
-var require_TSEnumMemberDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/TSEnumMemberDefinition.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/TSEnumMemberDefinition.js
+var require_TSEnumMemberDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/TSEnumMemberDefinition.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.TSEnumMemberDefinition = void 0;
 	const DefinitionBase_1$4 = require_DefinitionBase();
 	const DefinitionType_1$4 = require_DefinitionType();
 	var TSEnumMemberDefinition = class extends DefinitionBase_1$4.DefinitionBase {
@@ -3863,9 +3869,10 @@ var require_TSEnumMemberDefinition = /* @__PURE__ */ __commonJS({ "node_modules/
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/TSEnumNameDefinition.js
-var require_TSEnumNameDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/TSEnumNameDefinition.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/TSEnumNameDefinition.js
+var require_TSEnumNameDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/TSEnumNameDefinition.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.TSEnumNameDefinition = void 0;
 	const DefinitionBase_1$3 = require_DefinitionBase();
 	const DefinitionType_1$3 = require_DefinitionType();
 	var TSEnumNameDefinition = class extends DefinitionBase_1$3.DefinitionBase {
@@ -3879,9 +3886,10 @@ var require_TSEnumNameDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.p
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/TSModuleNameDefinition.js
-var require_TSModuleNameDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/TSModuleNameDefinition.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/TSModuleNameDefinition.js
+var require_TSModuleNameDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/TSModuleNameDefinition.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.TSModuleNameDefinition = void 0;
 	const DefinitionBase_1$2 = require_DefinitionBase();
 	const DefinitionType_1$2 = require_DefinitionType();
 	var TSModuleNameDefinition = class extends DefinitionBase_1$2.DefinitionBase {
@@ -3895,9 +3903,10 @@ var require_TSModuleNameDefinition = /* @__PURE__ */ __commonJS({ "node_modules/
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/TypeDefinition.js
-var require_TypeDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/TypeDefinition.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/TypeDefinition.js
+var require_TypeDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/TypeDefinition.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.TypeDefinition = void 0;
 	const DefinitionBase_1$1 = require_DefinitionBase();
 	const DefinitionType_1$1 = require_DefinitionType();
 	var TypeDefinition = class extends DefinitionBase_1$1.DefinitionBase {
@@ -3911,9 +3920,10 @@ var require_TypeDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/VariableDefinition.js
-var require_VariableDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/VariableDefinition.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/VariableDefinition.js
+var require_VariableDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/VariableDefinition.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.VariableDefinition = void 0;
 	const DefinitionBase_1 = require_DefinitionBase();
 	const DefinitionType_1 = require_DefinitionType();
 	var VariableDefinition = class extends DefinitionBase_1.DefinitionBase {
@@ -3927,8 +3937,8 @@ var require_VariableDefinition = /* @__PURE__ */ __commonJS({ "node_modules/.pnp
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/index.js
-var require_definition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/definition/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/index.js
+var require_definition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/definition/index.js": ((exports) => {
 	var __createBinding$6 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -3963,9 +3973,10 @@ var require_definition = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@types
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/base-config.js
-var require_base_config = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/base-config.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/base-config.js
+var require_base_config = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/base-config.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.TYPE_VALUE = exports.VALUE = exports.TYPE = void 0;
 	exports.TYPE = Object.freeze({
 		eslintImplicitGlobalSetting: "readonly",
 		isTypeVariable: true,
@@ -3984,9 +3995,10 @@ var require_base_config = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/decorators.js
-var require_decorators = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/decorators.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/decorators.js
+var require_decorators = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/decorators.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.decorators = void 0;
 	const base_config_1$82 = require_base_config();
 	exports.decorators = {
 		libs: [],
@@ -4008,9 +4020,10 @@ var require_decorators = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@types
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/decorators.legacy.js
-var require_decorators_legacy = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/decorators.legacy.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/decorators.legacy.js
+var require_decorators_legacy = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/decorators.legacy.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.decorators_legacy = void 0;
 	const base_config_1$81 = require_base_config();
 	exports.decorators_legacy = {
 		libs: [],
@@ -4024,9 +4037,10 @@ var require_decorators_legacy = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/dom.js
-var require_dom = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/dom.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/dom.js
+var require_dom = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/dom.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.dom = void 0;
 	const base_config_1$80 = require_base_config();
 	exports.dom = {
 		libs: [],
@@ -5579,9 +5593,10 @@ var require_dom = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-e
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/dom.asynciterable.js
-var require_dom_asynciterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/dom.asynciterable.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/dom.asynciterable.js
+var require_dom_asynciterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/dom.asynciterable.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.dom_asynciterable = void 0;
 	const base_config_1$79 = require_base_config();
 	exports.dom_asynciterable = {
 		libs: [],
@@ -5595,9 +5610,10 @@ var require_dom_asynciterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/dom.iterable.js
-var require_dom_iterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/dom.iterable.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/dom.iterable.js
+var require_dom_iterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/dom.iterable.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.dom_iterable = void 0;
 	const base_config_1$78 = require_base_config();
 	exports.dom_iterable = {
 		libs: [],
@@ -5682,9 +5698,10 @@ var require_dom_iterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es5.js
-var require_es5 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es5.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es5.js
+var require_es5 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es5.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es5 = void 0;
 	const base_config_1$77 = require_base_config();
 	const decorators_1$2 = require_decorators();
 	const decorators_legacy_1$1 = require_decorators_legacy();
@@ -5799,9 +5816,10 @@ var require_es5 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-e
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.collection.js
-var require_es2015_collection = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.collection.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.collection.js
+var require_es2015_collection = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.collection.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2015_collection = void 0;
 	const base_config_1$76 = require_base_config();
 	exports.es2015_collection = {
 		libs: [],
@@ -5821,9 +5839,10 @@ var require_es2015_collection = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.core.js
-var require_es2015_core = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.core.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.core.js
+var require_es2015_core = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.core.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2015_core = void 0;
 	const base_config_1$75 = require_base_config();
 	exports.es2015_core = {
 		libs: [],
@@ -5854,9 +5873,10 @@ var require_es2015_core = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.symbol.js
-var require_es2015_symbol = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.symbol.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.symbol.js
+var require_es2015_symbol = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.symbol.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2015_symbol = void 0;
 	const base_config_1$74 = require_base_config();
 	exports.es2015_symbol = {
 		libs: [],
@@ -5865,9 +5885,10 @@ var require_es2015_symbol = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.iterable.js
-var require_es2015_iterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.iterable.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.iterable.js
+var require_es2015_iterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.iterable.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2015_iterable = void 0;
 	const base_config_1$73 = require_base_config();
 	const es2015_symbol_1$11 = require_es2015_symbol();
 	exports.es2015_iterable = {
@@ -5926,9 +5947,10 @@ var require_es2015_iterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.generator.js
-var require_es2015_generator = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.generator.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.generator.js
+var require_es2015_generator = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.generator.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2015_generator = void 0;
 	const base_config_1$72 = require_base_config();
 	const es2015_iterable_1$11 = require_es2015_iterable();
 	exports.es2015_generator = {
@@ -5942,9 +5964,10 @@ var require_es2015_generator = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.promise.js
-var require_es2015_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.promise.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.promise.js
+var require_es2015_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.promise.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2015_promise = void 0;
 	const base_config_1$71 = require_base_config();
 	exports.es2015_promise = {
 		libs: [],
@@ -5953,9 +5976,10 @@ var require_es2015_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.proxy.js
-var require_es2015_proxy = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.proxy.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.proxy.js
+var require_es2015_proxy = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.proxy.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2015_proxy = void 0;
 	const base_config_1$70 = require_base_config();
 	exports.es2015_proxy = {
 		libs: [],
@@ -5964,9 +5988,10 @@ var require_es2015_proxy = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.reflect.js
-var require_es2015_reflect = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.reflect.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.reflect.js
+var require_es2015_reflect = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.reflect.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2015_reflect = void 0;
 	const base_config_1$69 = require_base_config();
 	exports.es2015_reflect = {
 		libs: [],
@@ -5975,9 +6000,10 @@ var require_es2015_reflect = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.symbol.wellknown.js
-var require_es2015_symbol_wellknown = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.symbol.wellknown.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.symbol.wellknown.js
+var require_es2015_symbol_wellknown = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.symbol.wellknown.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2015_symbol_wellknown = void 0;
 	const base_config_1$68 = require_base_config();
 	const es2015_symbol_1$10 = require_es2015_symbol();
 	exports.es2015_symbol_wellknown = {
@@ -6021,9 +6047,10 @@ var require_es2015_symbol_wellknown = /* @__PURE__ */ __commonJS({ "node_modules
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es6.js
-var require_es6 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es6.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es6.js
+var require_es6 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es6.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es6 = void 0;
 	const es5_1$3 = require_es5();
 	const es2015_collection_1$2 = require_es2015_collection();
 	const es2015_core_1$2 = require_es2015_core();
@@ -6052,9 +6079,10 @@ var require_es6 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-e
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.js
-var require_es2015 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.js
+var require_es2015 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2015.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2015 = void 0;
 	const es5_1$2 = require_es5();
 	const es2015_collection_1$1 = require_es2015_collection();
 	const es2015_core_1$1 = require_es2015_core();
@@ -6083,9 +6111,10 @@ var require_es2015 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.array.include.js
-var require_es2016_array_include = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.array.include.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.array.include.js
+var require_es2016_array_include = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.array.include.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2016_array_include = void 0;
 	const base_config_1$67 = require_base_config();
 	exports.es2016_array_include = {
 		libs: [],
@@ -6106,9 +6135,10 @@ var require_es2016_array_include = /* @__PURE__ */ __commonJS({ "node_modules/.p
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.intl.js
-var require_es2016_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.intl.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.intl.js
+var require_es2016_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.intl.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2016_intl = void 0;
 	const base_config_1$66 = require_base_config();
 	exports.es2016_intl = {
 		libs: [],
@@ -6117,9 +6147,10 @@ var require_es2016_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es7.js
-var require_es7 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es7.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es7.js
+var require_es7 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es7.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es7 = void 0;
 	const es2015_1$2 = require_es2015();
 	const es2016_array_include_1$2 = require_es2016_array_include();
 	const es2016_intl_1$2 = require_es2016_intl();
@@ -6134,9 +6165,10 @@ var require_es7 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-e
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.js
-var require_es2016 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.js
+var require_es2016 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2016 = void 0;
 	const es2015_1$1 = require_es2015();
 	const es2016_array_include_1$1 = require_es2016_array_include();
 	const es2016_intl_1$1 = require_es2016_intl();
@@ -6151,9 +6183,10 @@ var require_es2016 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/scripthost.js
-var require_scripthost = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/scripthost.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/scripthost.js
+var require_scripthost = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/scripthost.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.scripthost = void 0;
 	const base_config_1$65 = require_base_config();
 	exports.scripthost = {
 		libs: [],
@@ -6176,9 +6209,10 @@ var require_scripthost = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@types
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.importscripts.js
-var require_webworker_importscripts = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.importscripts.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.importscripts.js
+var require_webworker_importscripts = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.importscripts.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.webworker_importscripts = void 0;
 	exports.webworker_importscripts = {
 		libs: [],
 		variables: []
@@ -6186,9 +6220,10 @@ var require_webworker_importscripts = /* @__PURE__ */ __commonJS({ "node_modules
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.full.js
-var require_es2016_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.full.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.full.js
+var require_es2016_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2016.full.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2016_full = void 0;
 	const dom_1$11 = require_dom();
 	const dom_iterable_1$10 = require_dom_iterable();
 	const es2016_1$2 = require_es2016();
@@ -6207,9 +6242,10 @@ var require_es2016_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.arraybuffer.js
-var require_es2017_arraybuffer = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.arraybuffer.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.arraybuffer.js
+var require_es2017_arraybuffer = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.arraybuffer.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2017_arraybuffer = void 0;
 	const base_config_1$64 = require_base_config();
 	exports.es2017_arraybuffer = {
 		libs: [],
@@ -6218,9 +6254,10 @@ var require_es2017_arraybuffer = /* @__PURE__ */ __commonJS({ "node_modules/.pnp
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.date.js
-var require_es2017_date = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.date.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.date.js
+var require_es2017_date = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.date.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2017_date = void 0;
 	const base_config_1$63 = require_base_config();
 	exports.es2017_date = {
 		libs: [],
@@ -6229,9 +6266,10 @@ var require_es2017_date = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.intl.js
-var require_es2017_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.intl.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.intl.js
+var require_es2017_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.intl.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2017_intl = void 0;
 	const base_config_1$62 = require_base_config();
 	exports.es2017_intl = {
 		libs: [],
@@ -6240,9 +6278,10 @@ var require_es2017_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.object.js
-var require_es2017_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.object.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.object.js
+var require_es2017_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.object.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2017_object = void 0;
 	const base_config_1$61 = require_base_config();
 	exports.es2017_object = {
 		libs: [],
@@ -6251,9 +6290,10 @@ var require_es2017_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.sharedmemory.js
-var require_es2017_sharedmemory = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.sharedmemory.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.sharedmemory.js
+var require_es2017_sharedmemory = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.sharedmemory.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2017_sharedmemory = void 0;
 	const base_config_1$60 = require_base_config();
 	const es2015_symbol_1$7 = require_es2015_symbol();
 	const es2015_symbol_wellknown_1$3 = require_es2015_symbol_wellknown();
@@ -6269,9 +6309,10 @@ var require_es2017_sharedmemory = /* @__PURE__ */ __commonJS({ "node_modules/.pn
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.string.js
-var require_es2017_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.string.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.string.js
+var require_es2017_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.string.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2017_string = void 0;
 	const base_config_1$59 = require_base_config();
 	exports.es2017_string = {
 		libs: [],
@@ -6280,9 +6321,10 @@ var require_es2017_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.typedarrays.js
-var require_es2017_typedarrays = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.typedarrays.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.typedarrays.js
+var require_es2017_typedarrays = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.typedarrays.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2017_typedarrays = void 0;
 	const base_config_1$58 = require_base_config();
 	exports.es2017_typedarrays = {
 		libs: [],
@@ -6301,9 +6343,10 @@ var require_es2017_typedarrays = /* @__PURE__ */ __commonJS({ "node_modules/.pnp
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.js
-var require_es2017 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.js
+var require_es2017 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2017 = void 0;
 	const es2016_1$1 = require_es2016();
 	const es2017_arraybuffer_1$1 = require_es2017_arraybuffer();
 	const es2017_date_1$1 = require_es2017_date();
@@ -6328,9 +6371,10 @@ var require_es2017 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.full.js
-var require_es2017_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.full.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.full.js
+var require_es2017_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2017.full.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2017_full = void 0;
 	const dom_1$10 = require_dom();
 	const dom_iterable_1$9 = require_dom_iterable();
 	const es2017_1$2 = require_es2017();
@@ -6349,9 +6393,10 @@ var require_es2017_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.asynciterable.js
-var require_es2018_asynciterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.asynciterable.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.asynciterable.js
+var require_es2018_asynciterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.asynciterable.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2018_asynciterable = void 0;
 	const base_config_1$57 = require_base_config();
 	const es2015_iterable_1$8 = require_es2015_iterable();
 	const es2015_symbol_1$6 = require_es2015_symbol();
@@ -6368,9 +6413,10 @@ var require_es2018_asynciterable = /* @__PURE__ */ __commonJS({ "node_modules/.p
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.asyncgenerator.js
-var require_es2018_asyncgenerator = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.asyncgenerator.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.asyncgenerator.js
+var require_es2018_asyncgenerator = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.asyncgenerator.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2018_asyncgenerator = void 0;
 	const base_config_1$56 = require_base_config();
 	const es2018_asynciterable_1$3 = require_es2018_asynciterable();
 	exports.es2018_asyncgenerator = {
@@ -6384,9 +6430,10 @@ var require_es2018_asyncgenerator = /* @__PURE__ */ __commonJS({ "node_modules/.
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.intl.js
-var require_es2018_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.intl.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.intl.js
+var require_es2018_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.intl.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2018_intl = void 0;
 	const base_config_1$55 = require_base_config();
 	exports.es2018_intl = {
 		libs: [],
@@ -6395,9 +6442,10 @@ var require_es2018_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.promise.js
-var require_es2018_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.promise.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.promise.js
+var require_es2018_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.promise.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2018_promise = void 0;
 	const base_config_1$54 = require_base_config();
 	exports.es2018_promise = {
 		libs: [],
@@ -6406,9 +6454,10 @@ var require_es2018_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.regexp.js
-var require_es2018_regexp = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.regexp.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.regexp.js
+var require_es2018_regexp = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.regexp.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2018_regexp = void 0;
 	const base_config_1$53 = require_base_config();
 	exports.es2018_regexp = {
 		libs: [],
@@ -6421,9 +6470,10 @@ var require_es2018_regexp = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.js
-var require_es2018 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.js
+var require_es2018 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2018 = void 0;
 	const es2017_1$1 = require_es2017();
 	const es2018_asyncgenerator_1$1 = require_es2018_asyncgenerator();
 	const es2018_asynciterable_1$2 = require_es2018_asynciterable();
@@ -6444,9 +6494,10 @@ var require_es2018 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.full.js
-var require_es2018_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.full.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.full.js
+var require_es2018_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2018.full.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2018_full = void 0;
 	const dom_1$9 = require_dom();
 	const dom_asynciterable_1$8 = require_dom_asynciterable();
 	const dom_iterable_1$8 = require_dom_iterable();
@@ -6467,9 +6518,10 @@ var require_es2018_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.array.js
-var require_es2019_array = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.array.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.array.js
+var require_es2019_array = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.array.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2019_array = void 0;
 	const base_config_1$52 = require_base_config();
 	exports.es2019_array = {
 		libs: [],
@@ -6482,9 +6534,10 @@ var require_es2019_array = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.intl.js
-var require_es2019_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.intl.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.intl.js
+var require_es2019_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.intl.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2019_intl = void 0;
 	const base_config_1$51 = require_base_config();
 	exports.es2019_intl = {
 		libs: [],
@@ -6493,9 +6546,10 @@ var require_es2019_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.object.js
-var require_es2019_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.object.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.object.js
+var require_es2019_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.object.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2019_object = void 0;
 	const base_config_1$50 = require_base_config();
 	const es2015_iterable_1$7 = require_es2015_iterable();
 	exports.es2019_object = {
@@ -6505,9 +6559,10 @@ var require_es2019_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.string.js
-var require_es2019_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.string.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.string.js
+var require_es2019_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.string.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2019_string = void 0;
 	const base_config_1$49 = require_base_config();
 	exports.es2019_string = {
 		libs: [],
@@ -6516,9 +6571,10 @@ var require_es2019_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.symbol.js
-var require_es2019_symbol = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.symbol.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.symbol.js
+var require_es2019_symbol = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.symbol.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2019_symbol = void 0;
 	const base_config_1$48 = require_base_config();
 	exports.es2019_symbol = {
 		libs: [],
@@ -6527,9 +6583,10 @@ var require_es2019_symbol = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.js
-var require_es2019 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.js
+var require_es2019 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2019 = void 0;
 	const es2018_1$1 = require_es2018();
 	const es2019_array_1$1 = require_es2019_array();
 	const es2019_intl_1$1 = require_es2019_intl();
@@ -6550,9 +6607,10 @@ var require_es2019 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.full.js
-var require_es2019_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.full.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.full.js
+var require_es2019_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2019.full.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2019_full = void 0;
 	const dom_1$8 = require_dom();
 	const dom_asynciterable_1$7 = require_dom_asynciterable();
 	const dom_iterable_1$7 = require_dom_iterable();
@@ -6573,9 +6631,10 @@ var require_es2019_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.intl.js
-var require_es2020_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.intl.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.intl.js
+var require_es2020_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.intl.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2020_intl = void 0;
 	const base_config_1$47 = require_base_config();
 	const es2018_intl_1$1 = require_es2018_intl();
 	exports.es2020_intl = {
@@ -6585,9 +6644,10 @@ var require_es2020_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.bigint.js
-var require_es2020_bigint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.bigint.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.bigint.js
+var require_es2020_bigint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.bigint.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2020_bigint = void 0;
 	const base_config_1$46 = require_base_config();
 	const es2020_intl_1$6 = require_es2020_intl();
 	exports.es2020_bigint = {
@@ -6607,9 +6667,10 @@ var require_es2020_bigint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.date.js
-var require_es2020_date = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.date.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.date.js
+var require_es2020_date = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.date.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2020_date = void 0;
 	const base_config_1$45 = require_base_config();
 	const es2020_intl_1$5 = require_es2020_intl();
 	exports.es2020_date = {
@@ -6619,9 +6680,10 @@ var require_es2020_date = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.number.js
-var require_es2020_number = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.number.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.number.js
+var require_es2020_number = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.number.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2020_number = void 0;
 	const base_config_1$44 = require_base_config();
 	const es2020_intl_1$4 = require_es2020_intl();
 	exports.es2020_number = {
@@ -6631,9 +6693,10 @@ var require_es2020_number = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.promise.js
-var require_es2020_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.promise.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.promise.js
+var require_es2020_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.promise.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2020_promise = void 0;
 	const base_config_1$43 = require_base_config();
 	exports.es2020_promise = {
 		libs: [],
@@ -6647,9 +6710,10 @@ var require_es2020_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.sharedmemory.js
-var require_es2020_sharedmemory = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.sharedmemory.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.sharedmemory.js
+var require_es2020_sharedmemory = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.sharedmemory.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2020_sharedmemory = void 0;
 	const base_config_1$42 = require_base_config();
 	const es2020_bigint_1$3 = require_es2020_bigint();
 	exports.es2020_sharedmemory = {
@@ -6659,9 +6723,10 @@ var require_es2020_sharedmemory = /* @__PURE__ */ __commonJS({ "node_modules/.pn
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.symbol.wellknown.js
-var require_es2020_symbol_wellknown = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.symbol.wellknown.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.symbol.wellknown.js
+var require_es2020_symbol_wellknown = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.symbol.wellknown.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2020_symbol_wellknown = void 0;
 	const base_config_1$41 = require_base_config();
 	const es2015_iterable_1$6 = require_es2015_iterable();
 	const es2015_symbol_1$5 = require_es2015_symbol();
@@ -6676,9 +6741,10 @@ var require_es2020_symbol_wellknown = /* @__PURE__ */ __commonJS({ "node_modules
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.string.js
-var require_es2020_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.string.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.string.js
+var require_es2020_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.string.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2020_string = void 0;
 	const base_config_1$40 = require_base_config();
 	const es2015_iterable_1$5 = require_es2015_iterable();
 	const es2020_intl_1$3 = require_es2020_intl();
@@ -6694,9 +6760,10 @@ var require_es2020_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.js
-var require_es2020 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.js
+var require_es2020 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2020 = void 0;
 	const es2019_1$1 = require_es2019();
 	const es2020_bigint_1$2 = require_es2020_bigint();
 	const es2020_date_1$1 = require_es2020_date();
@@ -6723,9 +6790,10 @@ var require_es2020 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.full.js
-var require_es2020_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.full.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.full.js
+var require_es2020_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2020.full.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2020_full = void 0;
 	const dom_1$7 = require_dom();
 	const dom_asynciterable_1$6 = require_dom_asynciterable();
 	const dom_iterable_1$6 = require_dom_iterable();
@@ -6746,9 +6814,10 @@ var require_es2020_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.intl.js
-var require_es2021_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.intl.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.intl.js
+var require_es2021_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.intl.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2021_intl = void 0;
 	const base_config_1$39 = require_base_config();
 	exports.es2021_intl = {
 		libs: [],
@@ -6757,9 +6826,10 @@ var require_es2021_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.promise.js
-var require_es2021_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.promise.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.promise.js
+var require_es2021_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.promise.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2021_promise = void 0;
 	const base_config_1$38 = require_base_config();
 	exports.es2021_promise = {
 		libs: [],
@@ -6772,9 +6842,10 @@ var require_es2021_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.string.js
-var require_es2021_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.string.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.string.js
+var require_es2021_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.string.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2021_string = void 0;
 	const base_config_1$37 = require_base_config();
 	exports.es2021_string = {
 		libs: [],
@@ -6783,9 +6854,10 @@ var require_es2021_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.weakref.js
-var require_es2021_weakref = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.weakref.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.weakref.js
+var require_es2021_weakref = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.weakref.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2021_weakref = void 0;
 	const base_config_1$36 = require_base_config();
 	const es2015_symbol_wellknown_1$2 = require_es2015_symbol_wellknown();
 	exports.es2021_weakref = {
@@ -6800,9 +6872,10 @@ var require_es2021_weakref = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.js
-var require_es2021 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.js
+var require_es2021 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2021 = void 0;
 	const es2020_1$1 = require_es2020();
 	const es2021_intl_1$1 = require_es2021_intl();
 	const es2021_promise_1$2 = require_es2021_promise();
@@ -6821,9 +6894,10 @@ var require_es2021 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.full.js
-var require_es2021_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.full.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.full.js
+var require_es2021_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2021.full.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2021_full = void 0;
 	const dom_1$6 = require_dom();
 	const dom_asynciterable_1$5 = require_dom_asynciterable();
 	const dom_iterable_1$5 = require_dom_iterable();
@@ -6844,9 +6918,10 @@ var require_es2021_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.array.js
-var require_es2022_array = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.array.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.array.js
+var require_es2022_array = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.array.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2022_array = void 0;
 	const base_config_1$35 = require_base_config();
 	exports.es2022_array = {
 		libs: [],
@@ -6869,9 +6944,10 @@ var require_es2022_array = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.error.js
-var require_es2022_error = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.error.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.error.js
+var require_es2022_error = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.error.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2022_error = void 0;
 	const base_config_1$34 = require_base_config();
 	const es2021_promise_1$1 = require_es2021_promise();
 	exports.es2022_error = {
@@ -6892,9 +6968,10 @@ var require_es2022_error = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.intl.js
-var require_es2022_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.intl.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.intl.js
+var require_es2022_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.intl.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2022_intl = void 0;
 	const base_config_1$33 = require_base_config();
 	exports.es2022_intl = {
 		libs: [],
@@ -6903,9 +6980,10 @@ var require_es2022_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.object.js
-var require_es2022_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.object.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.object.js
+var require_es2022_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.object.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2022_object = void 0;
 	const base_config_1$32 = require_base_config();
 	exports.es2022_object = {
 		libs: [],
@@ -6914,9 +6992,10 @@ var require_es2022_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.regexp.js
-var require_es2022_regexp = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.regexp.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.regexp.js
+var require_es2022_regexp = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.regexp.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2022_regexp = void 0;
 	const base_config_1$31 = require_base_config();
 	exports.es2022_regexp = {
 		libs: [],
@@ -6930,9 +7009,10 @@ var require_es2022_regexp = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.string.js
-var require_es2022_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.string.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.string.js
+var require_es2022_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.string.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2022_string = void 0;
 	const base_config_1$30 = require_base_config();
 	exports.es2022_string = {
 		libs: [],
@@ -6941,9 +7021,10 @@ var require_es2022_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.js
-var require_es2022 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.js
+var require_es2022 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2022 = void 0;
 	const es2021_1$1 = require_es2021();
 	const es2022_array_1$1 = require_es2022_array();
 	const es2022_error_1$1 = require_es2022_error();
@@ -6966,9 +7047,10 @@ var require_es2022 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.full.js
-var require_es2022_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.full.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.full.js
+var require_es2022_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2022.full.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2022_full = void 0;
 	const dom_1$5 = require_dom();
 	const dom_asynciterable_1$4 = require_dom_asynciterable();
 	const dom_iterable_1$4 = require_dom_iterable();
@@ -6989,9 +7071,10 @@ var require_es2022_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.array.js
-var require_es2023_array = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.array.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.array.js
+var require_es2023_array = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.array.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2023_array = void 0;
 	const base_config_1$29 = require_base_config();
 	exports.es2023_array = {
 		libs: [],
@@ -7014,9 +7097,10 @@ var require_es2023_array = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.collection.js
-var require_es2023_collection = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.collection.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.collection.js
+var require_es2023_collection = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.collection.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2023_collection = void 0;
 	const base_config_1$28 = require_base_config();
 	exports.es2023_collection = {
 		libs: [],
@@ -7025,9 +7109,10 @@ var require_es2023_collection = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.intl.js
-var require_es2023_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.intl.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.intl.js
+var require_es2023_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.intl.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2023_intl = void 0;
 	const base_config_1$27 = require_base_config();
 	exports.es2023_intl = {
 		libs: [],
@@ -7036,9 +7121,10 @@ var require_es2023_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.js
-var require_es2023 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.js
+var require_es2023 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2023 = void 0;
 	const es2022_1$1 = require_es2022();
 	const es2023_array_1$1 = require_es2023_array();
 	const es2023_collection_1$1 = require_es2023_collection();
@@ -7055,9 +7141,10 @@ var require_es2023 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.full.js
-var require_es2023_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.full.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.full.js
+var require_es2023_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2023.full.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2023_full = void 0;
 	const dom_1$4 = require_dom();
 	const dom_asynciterable_1$3 = require_dom_asynciterable();
 	const dom_iterable_1$3 = require_dom_iterable();
@@ -7078,9 +7165,10 @@ var require_es2023_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.arraybuffer.js
-var require_es2024_arraybuffer = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.arraybuffer.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.arraybuffer.js
+var require_es2024_arraybuffer = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.arraybuffer.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2024_arraybuffer = void 0;
 	const base_config_1$26 = require_base_config();
 	exports.es2024_arraybuffer = {
 		libs: [],
@@ -7089,9 +7177,10 @@ var require_es2024_arraybuffer = /* @__PURE__ */ __commonJS({ "node_modules/.pnp
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.collection.js
-var require_es2024_collection = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.collection.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.collection.js
+var require_es2024_collection = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.collection.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2024_collection = void 0;
 	const base_config_1$25 = require_base_config();
 	exports.es2024_collection = {
 		libs: [],
@@ -7100,9 +7189,10 @@ var require_es2024_collection = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.object.js
-var require_es2024_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.object.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.object.js
+var require_es2024_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.object.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2024_object = void 0;
 	const base_config_1$24 = require_base_config();
 	exports.es2024_object = {
 		libs: [],
@@ -7111,9 +7201,10 @@ var require_es2024_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.promise.js
-var require_es2024_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.promise.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.promise.js
+var require_es2024_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.promise.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2024_promise = void 0;
 	const base_config_1$23 = require_base_config();
 	exports.es2024_promise = {
 		libs: [],
@@ -7122,9 +7213,10 @@ var require_es2024_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.regexp.js
-var require_es2024_regexp = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.regexp.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.regexp.js
+var require_es2024_regexp = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.regexp.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2024_regexp = void 0;
 	const base_config_1$22 = require_base_config();
 	exports.es2024_regexp = {
 		libs: [],
@@ -7133,9 +7225,10 @@ var require_es2024_regexp = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.sharedmemory.js
-var require_es2024_sharedmemory = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.sharedmemory.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.sharedmemory.js
+var require_es2024_sharedmemory = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.sharedmemory.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2024_sharedmemory = void 0;
 	const base_config_1$21 = require_base_config();
 	const es2020_bigint_1$1 = require_es2020_bigint();
 	exports.es2024_sharedmemory = {
@@ -7149,9 +7242,10 @@ var require_es2024_sharedmemory = /* @__PURE__ */ __commonJS({ "node_modules/.pn
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.string.js
-var require_es2024_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.string.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.string.js
+var require_es2024_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.string.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2024_string = void 0;
 	const base_config_1$20 = require_base_config();
 	exports.es2024_string = {
 		libs: [],
@@ -7160,9 +7254,10 @@ var require_es2024_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.js
-var require_es2024 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.js
+var require_es2024 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2024 = void 0;
 	const es2023_1$1 = require_es2023();
 	const es2024_arraybuffer_1$1 = require_es2024_arraybuffer();
 	const es2024_collection_1$2 = require_es2024_collection();
@@ -7187,9 +7282,10 @@ var require_es2024 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.full.js
-var require_es2024_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.full.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.full.js
+var require_es2024_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/es2024.full.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.es2024_full = void 0;
 	const dom_1$3 = require_dom();
 	const dom_asynciterable_1$2 = require_dom_asynciterable();
 	const dom_iterable_1$2 = require_dom_iterable();
@@ -7210,9 +7306,10 @@ var require_es2024_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.array.js
-var require_esnext_array = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.array.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.array.js
+var require_esnext_array = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.array.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_array = void 0;
 	const base_config_1$19 = require_base_config();
 	exports.esnext_array = {
 		libs: [],
@@ -7221,9 +7318,10 @@ var require_esnext_array = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.collection.js
-var require_esnext_collection = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.collection.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.collection.js
+var require_esnext_collection = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.collection.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_collection = void 0;
 	const base_config_1$18 = require_base_config();
 	const es2024_collection_1$1 = require_es2024_collection();
 	exports.esnext_collection = {
@@ -7237,9 +7335,10 @@ var require_esnext_collection = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.decorators.js
-var require_esnext_decorators = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.decorators.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.decorators.js
+var require_esnext_decorators = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.decorators.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_decorators = void 0;
 	const base_config_1$17 = require_base_config();
 	const decorators_1$1 = require_decorators();
 	const es2015_symbol_1$4 = require_es2015_symbol();
@@ -7250,9 +7349,10 @@ var require_esnext_decorators = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.disposable.js
-var require_esnext_disposable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.disposable.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.disposable.js
+var require_esnext_disposable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.disposable.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_disposable = void 0;
 	const base_config_1$16 = require_base_config();
 	const es2015_iterable_1$4 = require_es2015_iterable();
 	const es2015_symbol_1$3 = require_es2015_symbol();
@@ -7280,9 +7380,10 @@ var require_esnext_disposable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.error.js
-var require_esnext_error = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.error.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.error.js
+var require_esnext_error = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.error.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_error = void 0;
 	const base_config_1$15 = require_base_config();
 	exports.esnext_error = {
 		libs: [],
@@ -7291,9 +7392,10 @@ var require_esnext_error = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.float16.js
-var require_esnext_float16 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.float16.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.float16.js
+var require_esnext_float16 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.float16.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_float16 = void 0;
 	const base_config_1$14 = require_base_config();
 	const es2015_iterable_1$3 = require_es2015_iterable();
 	const es2015_symbol_1$2 = require_es2015_symbol();
@@ -7309,9 +7411,10 @@ var require_esnext_float16 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.intl.js
-var require_esnext_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.intl.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.intl.js
+var require_esnext_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.intl.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_intl = void 0;
 	const base_config_1$13 = require_base_config();
 	exports.esnext_intl = {
 		libs: [],
@@ -7320,9 +7423,10 @@ var require_esnext_intl = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.iterator.js
-var require_esnext_iterator = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.iterator.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.iterator.js
+var require_esnext_iterator = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.iterator.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_iterator = void 0;
 	const base_config_1$12 = require_base_config();
 	const es2015_iterable_1$2 = require_es2015_iterable();
 	exports.esnext_iterator = {
@@ -7332,9 +7436,10 @@ var require_esnext_iterator = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.promise.js
-var require_esnext_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.promise.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.promise.js
+var require_esnext_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.promise.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_promise = void 0;
 	const base_config_1$11 = require_base_config();
 	exports.esnext_promise = {
 		libs: [],
@@ -7343,9 +7448,10 @@ var require_esnext_promise = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.sharedmemory.js
-var require_esnext_sharedmemory = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.sharedmemory.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.sharedmemory.js
+var require_esnext_sharedmemory = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.sharedmemory.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_sharedmemory = void 0;
 	const base_config_1$10 = require_base_config();
 	exports.esnext_sharedmemory = {
 		libs: [],
@@ -7354,9 +7460,10 @@ var require_esnext_sharedmemory = /* @__PURE__ */ __commonJS({ "node_modules/.pn
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.js
-var require_esnext = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.js
+var require_esnext = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext = void 0;
 	const es2024_1$1 = require_es2024();
 	const esnext_array_1$1 = require_esnext_array();
 	const esnext_collection_1$1 = require_esnext_collection();
@@ -7387,9 +7494,10 @@ var require_esnext = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.asynciterable.js
-var require_esnext_asynciterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.asynciterable.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.asynciterable.js
+var require_esnext_asynciterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.asynciterable.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_asynciterable = void 0;
 	const base_config_1$9 = require_base_config();
 	const es2015_iterable_1$1 = require_es2015_iterable();
 	const es2015_symbol_1$1 = require_es2015_symbol();
@@ -7406,9 +7514,10 @@ var require_esnext_asynciterable = /* @__PURE__ */ __commonJS({ "node_modules/.p
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.bigint.js
-var require_esnext_bigint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.bigint.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.bigint.js
+var require_esnext_bigint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.bigint.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_bigint = void 0;
 	const base_config_1$8 = require_base_config();
 	const es2020_intl_1$1 = require_es2020_intl();
 	exports.esnext_bigint = {
@@ -7428,9 +7537,10 @@ var require_esnext_bigint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.full.js
-var require_esnext_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.full.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.full.js
+var require_esnext_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.full.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_full = void 0;
 	const dom_1$2 = require_dom();
 	const dom_asynciterable_1$1 = require_dom_asynciterable();
 	const dom_iterable_1$1 = require_dom_iterable();
@@ -7451,9 +7561,10 @@ var require_esnext_full = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.object.js
-var require_esnext_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.object.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.object.js
+var require_esnext_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.object.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_object = void 0;
 	const base_config_1$7 = require_base_config();
 	exports.esnext_object = {
 		libs: [],
@@ -7462,9 +7573,10 @@ var require_esnext_object = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.regexp.js
-var require_esnext_regexp = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.regexp.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.regexp.js
+var require_esnext_regexp = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.regexp.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_regexp = void 0;
 	const base_config_1$6 = require_base_config();
 	exports.esnext_regexp = {
 		libs: [],
@@ -7473,9 +7585,10 @@ var require_esnext_regexp = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.string.js
-var require_esnext_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.string.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.string.js
+var require_esnext_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.string.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_string = void 0;
 	const base_config_1$5 = require_base_config();
 	exports.esnext_string = {
 		libs: [],
@@ -7484,9 +7597,10 @@ var require_esnext_string = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.symbol.js
-var require_esnext_symbol = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.symbol.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.symbol.js
+var require_esnext_symbol = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.symbol.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_symbol = void 0;
 	const base_config_1$4 = require_base_config();
 	exports.esnext_symbol = {
 		libs: [],
@@ -7495,9 +7609,10 @@ var require_esnext_symbol = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.weakref.js
-var require_esnext_weakref = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.weakref.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.weakref.js
+var require_esnext_weakref = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/esnext.weakref.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.esnext_weakref = void 0;
 	const base_config_1$3 = require_base_config();
 	const es2015_symbol_wellknown_1$1 = require_es2015_symbol_wellknown();
 	exports.esnext_weakref = {
@@ -7512,9 +7627,10 @@ var require_esnext_weakref = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/lib.js
-var require_lib$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/lib.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/lib.js
+var require_lib$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/lib.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.lib = void 0;
 	const dom_1$1 = require_dom();
 	const es5_1$1 = require_es5();
 	const scripthost_1$1 = require_scripthost();
@@ -7531,9 +7647,10 @@ var require_lib$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.js
-var require_webworker = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.js
+var require_webworker = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.webworker = void 0;
 	const base_config_1$2 = require_base_config();
 	exports.webworker = {
 		libs: [],
@@ -8180,9 +8297,10 @@ var require_webworker = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typesc
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.asynciterable.js
-var require_webworker_asynciterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.asynciterable.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.asynciterable.js
+var require_webworker_asynciterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.asynciterable.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.webworker_asynciterable = void 0;
 	const base_config_1$1 = require_base_config();
 	exports.webworker_asynciterable = {
 		libs: [],
@@ -8196,9 +8314,10 @@ var require_webworker_asynciterable = /* @__PURE__ */ __commonJS({ "node_modules
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.iterable.js
-var require_webworker_iterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.iterable.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.iterable.js
+var require_webworker_iterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/webworker.iterable.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.webworker_iterable = void 0;
 	const base_config_1 = require_base_config();
 	exports.webworker_iterable = {
 		libs: [],
@@ -8237,9 +8356,10 @@ var require_webworker_iterable = /* @__PURE__ */ __commonJS({ "node_modules/.pnp
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/index.js
-var require_lib = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/lib/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/index.js
+var require_lib = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/lib/index.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.lib = void 0;
 	const decorators_1 = require_decorators();
 	const decorators_legacy_1 = require_decorators_legacy();
 	const dom_1 = require_dom();
@@ -8461,9 +8581,10 @@ var require_lib = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-e
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/Reference.js
-var require_Reference = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/Reference.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/Reference.js
+var require_Reference = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/Reference.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.Reference = exports.ReferenceTypeFlag = exports.ReferenceFlag = void 0;
 	const ID_1$1 = require_ID();
 	var ReferenceFlag;
 	(function(ReferenceFlag$1) {
@@ -8583,9 +8704,10 @@ var require_Reference = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typesc
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/variable/VariableBase.js
-var require_VariableBase = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/variable/VariableBase.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/variable/VariableBase.js
+var require_VariableBase = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/variable/VariableBase.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.VariableBase = void 0;
 	const generator$1 = (0, require_ID().createIdGenerator)();
 	var VariableBase = class {
 		/**
@@ -8632,9 +8754,10 @@ var require_VariableBase = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/variable/ESLintScopeVariable.js
-var require_ESLintScopeVariable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/variable/ESLintScopeVariable.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/variable/ESLintScopeVariable.js
+var require_ESLintScopeVariable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/variable/ESLintScopeVariable.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ESLintScopeVariable = void 0;
 	const VariableBase_1$1 = require_VariableBase();
 	/**
 	* ESLint defines global variables using the eslint-scope Variable class
@@ -8670,9 +8793,10 @@ var require_ESLintScopeVariable = /* @__PURE__ */ __commonJS({ "node_modules/.pn
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/variable/ImplicitLibVariable.js
-var require_ImplicitLibVariable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/variable/ImplicitLibVariable.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/variable/ImplicitLibVariable.js
+var require_ImplicitLibVariable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/variable/ImplicitLibVariable.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ImplicitLibVariable = void 0;
 	const ESLintScopeVariable_1$1 = require_ESLintScopeVariable();
 	/**
 	* An variable implicitly defined by the TS Lib
@@ -8698,9 +8822,10 @@ var require_ImplicitLibVariable = /* @__PURE__ */ __commonJS({ "node_modules/.pn
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/variable/Variable.js
-var require_Variable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/variable/Variable.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/variable/Variable.js
+var require_Variable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/variable/Variable.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.Variable = void 0;
 	const VariableBase_1 = require_VariableBase();
 	/**
 	* A Variable represents a locally scoped identifier. These include arguments to functions.
@@ -8727,8 +8852,8 @@ var require_Variable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescr
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/variable/index.js
-var require_variable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/variable/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/variable/index.js
+var require_variable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/variable/index.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.Variable = exports.ImplicitLibVariable = exports.ESLintScopeVariable = void 0;
 	var ESLintScopeVariable_1 = require_ESLintScopeVariable();
@@ -8755,9 +8880,10 @@ var require_variable = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescr
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ScopeType.js
-var require_ScopeType = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ScopeType.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ScopeType.js
+var require_ScopeType = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ScopeType.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ScopeType = void 0;
 	var ScopeType;
 	(function(ScopeType$1) {
 		ScopeType$1["block"] = "block";
@@ -8782,9 +8908,10 @@ var require_ScopeType = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typesc
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ScopeBase.js
-var require_ScopeBase = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ScopeBase.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ScopeBase.js
+var require_ScopeBase = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ScopeBase.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ScopeBase = void 0;
 	const types_1$7 = require_dist$3();
 	const assert_1$4 = require_assert();
 	const definition_1$5 = require_definition();
@@ -9051,9 +9178,10 @@ var require_ScopeBase = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typesc
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/BlockScope.js
-var require_BlockScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/BlockScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/BlockScope.js
+var require_BlockScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/BlockScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.BlockScope = void 0;
 	const ScopeBase_1$17 = require_ScopeBase();
 	const ScopeType_1$17 = require_ScopeType();
 	var BlockScope = class extends ScopeBase_1$17.ScopeBase {
@@ -9065,9 +9193,10 @@ var require_BlockScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@types
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/CatchScope.js
-var require_CatchScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/CatchScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/CatchScope.js
+var require_CatchScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/CatchScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.CatchScope = void 0;
 	const ScopeBase_1$16 = require_ScopeBase();
 	const ScopeType_1$16 = require_ScopeType();
 	var CatchScope = class extends ScopeBase_1$16.ScopeBase {
@@ -9079,9 +9208,10 @@ var require_CatchScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@types
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ClassFieldInitializerScope.js
-var require_ClassFieldInitializerScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ClassFieldInitializerScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ClassFieldInitializerScope.js
+var require_ClassFieldInitializerScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ClassFieldInitializerScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ClassFieldInitializerScope = void 0;
 	const ScopeBase_1$15 = require_ScopeBase();
 	const ScopeType_1$15 = require_ScopeType();
 	var ClassFieldInitializerScope = class extends ScopeBase_1$15.ScopeBase {
@@ -9093,9 +9223,10 @@ var require_ClassFieldInitializerScope = /* @__PURE__ */ __commonJS({ "node_modu
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ClassScope.js
-var require_ClassScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ClassScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ClassScope.js
+var require_ClassScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ClassScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ClassScope = void 0;
 	const ScopeBase_1$14 = require_ScopeBase();
 	const ScopeType_1$14 = require_ScopeType();
 	var ClassScope = class extends ScopeBase_1$14.ScopeBase {
@@ -9107,9 +9238,10 @@ var require_ClassScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@types
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ConditionalTypeScope.js
-var require_ConditionalTypeScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ConditionalTypeScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ConditionalTypeScope.js
+var require_ConditionalTypeScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ConditionalTypeScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ConditionalTypeScope = void 0;
 	const ScopeBase_1$13 = require_ScopeBase();
 	const ScopeType_1$13 = require_ScopeType();
 	var ConditionalTypeScope = class extends ScopeBase_1$13.ScopeBase {
@@ -9121,9 +9253,10 @@ var require_ConditionalTypeScope = /* @__PURE__ */ __commonJS({ "node_modules/.p
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ForScope.js
-var require_ForScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ForScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ForScope.js
+var require_ForScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ForScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ForScope = void 0;
 	const ScopeBase_1$12 = require_ScopeBase();
 	const ScopeType_1$12 = require_ScopeType();
 	var ForScope = class extends ScopeBase_1$12.ScopeBase {
@@ -9135,9 +9268,10 @@ var require_ForScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescr
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/FunctionExpressionNameScope.js
-var require_FunctionExpressionNameScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/FunctionExpressionNameScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/FunctionExpressionNameScope.js
+var require_FunctionExpressionNameScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/FunctionExpressionNameScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.FunctionExpressionNameScope = void 0;
 	const definition_1$4 = require_definition();
 	const ScopeBase_1$11 = require_ScopeBase();
 	const ScopeType_1$11 = require_ScopeType();
@@ -9153,9 +9287,10 @@ var require_FunctionExpressionNameScope = /* @__PURE__ */ __commonJS({ "node_mod
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/FunctionScope.js
-var require_FunctionScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/FunctionScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/FunctionScope.js
+var require_FunctionScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/FunctionScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.FunctionScope = void 0;
 	const types_1$6 = require_dist$3();
 	const ScopeBase_1$10 = require_ScopeBase();
 	const ScopeType_1$10 = require_ScopeType();
@@ -9174,9 +9309,10 @@ var require_FunctionScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/FunctionTypeScope.js
-var require_FunctionTypeScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/FunctionTypeScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/FunctionTypeScope.js
+var require_FunctionTypeScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/FunctionTypeScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.FunctionTypeScope = void 0;
 	const ScopeBase_1$9 = require_ScopeBase();
 	const ScopeType_1$9 = require_ScopeType();
 	var FunctionTypeScope = class extends ScopeBase_1$9.ScopeBase {
@@ -9188,9 +9324,10 @@ var require_FunctionTypeScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/GlobalScope.js
-var require_GlobalScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/GlobalScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/GlobalScope.js
+var require_GlobalScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/GlobalScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.GlobalScope = void 0;
 	const types_1$5 = require_dist$3();
 	const assert_1$3 = require_assert();
 	const ImplicitGlobalVariableDefinition_1 = require_ImplicitGlobalVariableDefinition();
@@ -9225,9 +9362,10 @@ var require_GlobalScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/MappedTypeScope.js
-var require_MappedTypeScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/MappedTypeScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/MappedTypeScope.js
+var require_MappedTypeScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/MappedTypeScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.MappedTypeScope = void 0;
 	const ScopeBase_1$7 = require_ScopeBase();
 	const ScopeType_1$7 = require_ScopeType();
 	var MappedTypeScope = class extends ScopeBase_1$7.ScopeBase {
@@ -9239,9 +9377,10 @@ var require_MappedTypeScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ModuleScope.js
-var require_ModuleScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ModuleScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ModuleScope.js
+var require_ModuleScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ModuleScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ModuleScope = void 0;
 	const ScopeBase_1$6 = require_ScopeBase();
 	const ScopeType_1$6 = require_ScopeType();
 	var ModuleScope = class extends ScopeBase_1$6.ScopeBase {
@@ -9253,15 +9392,16 @@ var require_ModuleScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/Scope.js
-var require_Scope$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/Scope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/Scope.js
+var require_Scope$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/Scope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/SwitchScope.js
-var require_SwitchScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/SwitchScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/SwitchScope.js
+var require_SwitchScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/SwitchScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.SwitchScope = void 0;
 	const ScopeBase_1$5 = require_ScopeBase();
 	const ScopeType_1$5 = require_ScopeType();
 	var SwitchScope = class extends ScopeBase_1$5.ScopeBase {
@@ -9273,9 +9413,10 @@ var require_SwitchScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/TSEnumScope.js
-var require_TSEnumScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/TSEnumScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/TSEnumScope.js
+var require_TSEnumScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/TSEnumScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.TSEnumScope = void 0;
 	const ScopeBase_1$4 = require_ScopeBase();
 	const ScopeType_1$4 = require_ScopeType();
 	var TSEnumScope = class extends ScopeBase_1$4.ScopeBase {
@@ -9287,9 +9428,10 @@ var require_TSEnumScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/TSModuleScope.js
-var require_TSModuleScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/TSModuleScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/TSModuleScope.js
+var require_TSModuleScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/TSModuleScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.TSModuleScope = void 0;
 	const ScopeBase_1$3 = require_ScopeBase();
 	const ScopeType_1$3 = require_ScopeType();
 	var TSModuleScope = class extends ScopeBase_1$3.ScopeBase {
@@ -9301,9 +9443,10 @@ var require_TSModuleScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/TypeScope.js
-var require_TypeScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/TypeScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/TypeScope.js
+var require_TypeScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/TypeScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.TypeScope = void 0;
 	const ScopeBase_1$2 = require_ScopeBase();
 	const ScopeType_1$2 = require_ScopeType();
 	var TypeScope = class extends ScopeBase_1$2.ScopeBase {
@@ -9315,9 +9458,10 @@ var require_TypeScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typesc
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/WithScope.js
-var require_WithScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/WithScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/WithScope.js
+var require_WithScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/WithScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.WithScope = void 0;
 	const assert_1$2 = require_assert();
 	const ScopeBase_1$1 = require_ScopeBase();
 	const ScopeType_1$1 = require_ScopeType();
@@ -9337,8 +9481,8 @@ var require_WithScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typesc
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/index.js
-var require_scope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/index.js
+var require_scope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/index.js": ((exports) => {
 	var __createBinding$5 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -9379,9 +9523,10 @@ var require_scope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/VisitorBase.js
-var require_VisitorBase = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/VisitorBase.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/VisitorBase.js
+var require_VisitorBase = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/VisitorBase.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.VisitorBase = void 0;
 	const visitor_keys_1$1 = require_dist$2();
 	function isObject(obj) {
 		return typeof obj === "object" && obj != null;
@@ -9431,9 +9576,10 @@ var require_VisitorBase = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/PatternVisitor.js
-var require_PatternVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/PatternVisitor.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/PatternVisitor.js
+var require_PatternVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/PatternVisitor.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.PatternVisitor = void 0;
 	const types_1$4 = require_dist$3();
 	const VisitorBase_1$1 = require_VisitorBase();
 	var PatternVisitor = class extends VisitorBase_1$1.VisitorBase {
@@ -9506,8 +9652,8 @@ var require_PatternVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@t
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/Visitor.js
-var require_Visitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/Visitor.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/Visitor.js
+var require_Visitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/Visitor.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.VisitorBase = exports.Visitor = void 0;
 	const PatternVisitor_1$2 = require_PatternVisitor();
@@ -9535,9 +9681,10 @@ var require_Visitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescri
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/TypeVisitor.js
-var require_TypeVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/TypeVisitor.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/TypeVisitor.js
+var require_TypeVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/TypeVisitor.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.TypeVisitor = void 0;
 	const types_1$3 = require_dist$3();
 	const definition_1$3 = require_definition();
 	const scope_1$1 = require_scope();
@@ -9694,9 +9841,10 @@ var require_TypeVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@type
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/ClassVisitor.js
-var require_ClassVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/ClassVisitor.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/ClassVisitor.js
+var require_ClassVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/ClassVisitor.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ClassVisitor = void 0;
 	const types_1$2 = require_dist$3();
 	const definition_1$2 = require_definition();
 	const TypeVisitor_1$1 = require_TypeVisitor();
@@ -9822,9 +9970,10 @@ var require_ClassVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/ExportVisitor.js
-var require_ExportVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/ExportVisitor.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/ExportVisitor.js
+var require_ExportVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/ExportVisitor.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ExportVisitor = void 0;
 	const types_1$1 = require_dist$3();
 	const Visitor_1$3 = require_Visitor();
 	var ExportVisitor = class ExportVisitor extends Visitor_1$3.Visitor {
@@ -9858,9 +10007,10 @@ var require_ExportVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/ImportVisitor.js
-var require_ImportVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/ImportVisitor.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/ImportVisitor.js
+var require_ImportVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/ImportVisitor.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ImportVisitor = void 0;
 	const definition_1$1 = require_definition();
 	const Visitor_1$2 = require_Visitor();
 	var ImportVisitor = class ImportVisitor extends Visitor_1$2.Visitor {
@@ -9894,9 +10044,10 @@ var require_ImportVisitor = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@ty
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/Referencer.js
-var require_Referencer = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/Referencer.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/Referencer.js
+var require_Referencer = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/Referencer.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.Referencer = void 0;
 	const types_1 = require_dist$3();
 	const assert_1$1 = require_assert();
 	const definition_1 = require_definition();
@@ -10284,8 +10435,8 @@ var require_Referencer = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@types
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/index.js
-var require_referencer = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/referencer/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/index.js
+var require_referencer = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/referencer/index.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.Referencer = void 0;
 	var Referencer_1 = require_Referencer();
@@ -10298,9 +10449,10 @@ var require_referencer = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@types
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ClassStaticBlockScope.js
-var require_ClassStaticBlockScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/scope/ClassStaticBlockScope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ClassStaticBlockScope.js
+var require_ClassStaticBlockScope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/scope/ClassStaticBlockScope.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ClassStaticBlockScope = void 0;
 	const ScopeBase_1 = require_ScopeBase();
 	const ScopeType_1 = require_ScopeType();
 	var ClassStaticBlockScope = class extends ScopeBase_1.ScopeBase {
@@ -10312,9 +10464,10 @@ var require_ClassStaticBlockScope = /* @__PURE__ */ __commonJS({ "node_modules/.
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/ScopeManager.js
-var require_ScopeManager = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/ScopeManager.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/ScopeManager.js
+var require_ScopeManager = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/ScopeManager.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.ScopeManager = void 0;
 	const assert_1 = require_assert();
 	const scope_1 = require_scope();
 	const ClassFieldInitializerScope_1 = require_ClassFieldInitializerScope();
@@ -10485,8 +10638,8 @@ var require_ScopeManager = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typ
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/analyze.js
-var require_analyze = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/analyze.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/analyze.js
+var require_analyze = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/analyze.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.analyze = analyze;
 	const visitor_keys_1 = require_dist$2();
@@ -10524,8 +10677,8 @@ var require_analyze = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescri
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/index.js
-var require_dist$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.46.1/node_modules/@typescript-eslint/scope-manager/dist/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/index.js
+var require_dist$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+scope-manager@8.47.0/node_modules/@typescript-eslint/scope-manager/dist/index.js": ((exports) => {
 	var __createBinding$4 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -10586,8 +10739,8 @@ var require_dist$1 = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescrip
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Scope.js
-var require_Scope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Scope.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Scope.js
+var require_Scope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/Scope.js": ((exports) => {
 	var __createBinding$3 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -10630,6 +10783,7 @@ var require_Scope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript
 		};
 	})();
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.Scope = void 0;
 	const scopeManager = __importStar$1(require_dist$1());
 	var Scope;
 	(function(Scope$1) {
@@ -10639,17 +10793,18 @@ var require_Scope = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/SourceCode.js
-var require_SourceCode = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/SourceCode.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/SourceCode.js
+var require_SourceCode = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/SourceCode.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
+	exports.SourceCode = void 0;
 	const eslint_1 = __require("eslint");
 	var SourceCode = class extends eslint_1.SourceCode {};
 	exports.SourceCode = SourceCode;
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/index.js
-var require_ts_eslint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/index.js
+var require_ts_eslint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-eslint/index.js": ((exports) => {
 	var __createBinding$2 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -10682,8 +10837,8 @@ var require_ts_eslint = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typesc
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-utils/isArray.js
-var require_isArray = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-utils/isArray.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-utils/isArray.js
+var require_isArray = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-utils/isArray.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 	exports.isArray = isArray;
 	function isArray(arg) {
@@ -10692,14 +10847,14 @@ var require_isArray = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescri
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-utils/NoInfer.js
-var require_NoInfer = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-utils/NoInfer.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-utils/NoInfer.js
+var require_NoInfer = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-utils/NoInfer.js": ((exports) => {
 	Object.defineProperty(exports, "__esModule", { value: true });
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-utils/index.js
-var require_ts_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-utils/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-utils/index.js
+var require_ts_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/ts-utils/index.js": ((exports) => {
 	var __createBinding$1 = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -10723,8 +10878,8 @@ var require_ts_utils = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescr
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/index.js
-var require_dist = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.46.1_eslint@9.37.0_jiti@2.5.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/index.js": ((exports) => {
+//#region node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/index.js
+var require_dist = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-eslint+utils@8.47.0_eslint@9.39.1_jiti@2.6.1__typescript@5.9.3/node_modules/@typescript-eslint/utils/dist/index.js": ((exports) => {
 	var __createBinding = exports && exports.__createBinding || (Object.create ? (function(o, m, k, k2) {
 		if (k2 === void 0) k2 = k;
 		var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -10780,25 +10935,66 @@ var require_dist = /* @__PURE__ */ __commonJS({ "node_modules/.pnpm/@typescript-
 }) });
 
 //#endregion
-//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.3.1_@typescript-eslint+parser@8.46.1_eslint@9.37.0_17ae5c77dc46e7c9a6aa40debfa8b9c7/node_modules/eslint-plugin-erasable-syntax-only/lib/utils.js
-var import_dist$2 = /* @__PURE__ */ __toESM(require_dist(), 1);
-const createRule = import_dist$2.ESLintUtils.RuleCreator((name$1) => `https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/blob/main/docs/rules/${name$1}.md`);
+//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.4.0_@typescript-eslint+parser@8.47.0_eslint@9.39.1_28626c8f2c2e43edc7bb9ede92245427/node_modules/eslint-plugin-erasable-syntax-only/lib/utils.js
+var import_dist$3 = require_dist();
+const createRule = import_dist$3.ESLintUtils.RuleCreator((name$1) => `https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/blob/main/docs/rules/${name$1}.md`);
 
 //#endregion
-//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.3.1_@typescript-eslint+parser@8.46.1_eslint@9.37.0_17ae5c77dc46e7c9a6aa40debfa8b9c7/node_modules/eslint-plugin-erasable-syntax-only/lib/rules/enums.js
+//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.4.0_@typescript-eslint+parser@8.47.0_eslint@9.39.1_28626c8f2c2e43edc7bb9ede92245427/node_modules/eslint-plugin-erasable-syntax-only/lib/rules/enums.js
+var import_dist$2 = require_dist();
 const rule = createRule({
 	create(context) {
 		return { TSEnumDeclaration(node) {
+			const name$1 = node.id.name;
+			const isExported = node.parent.type === import_dist$2.AST_NODE_TYPES.ExportNamedDeclaration;
+			let canSuggestion = true;
+			const body = [];
+			let previousMemberNumericValue = -1;
+			for (const enumMember of node.body.members) {
+				if (enumMember.id.type !== import_dist$2.AST_NODE_TYPES.Identifier && (enumMember.id.type !== import_dist$2.AST_NODE_TYPES.Literal || typeof enumMember.id.value !== "string")) {
+					canSuggestion = false;
+					break;
+				}
+				const propertyName = enumMember.id.type === import_dist$2.AST_NODE_TYPES.Identifier ? enumMember.id.name : enumMember.id.value;
+				const value = enumMember.initializer?.type === import_dist$2.AST_NODE_TYPES.Literal ? enumMember.initializer.value : previousMemberNumericValue + 1;
+				if (value === null) {
+					canSuggestion = false;
+					break;
+				}
+				body.push({
+					content: `${propertyName}: ${typeof value === "string" ? `'${value}'` : value.toString()}`,
+					range: enumMember.range
+				});
+				if (typeof value === "number") previousMemberNumericValue = value;
+			}
 			context.report({
 				messageId: "enum",
-				node
+				node,
+				suggest: canSuggestion ? [{
+					fix(fixer) {
+						return [
+							fixer.replaceTextRange([node.range[0], node.range[0] + 4], "const"),
+							fixer.insertTextBefore(node.body, "= "),
+							...body.map(({ content, range }) => fixer.replaceTextRange(range, content)),
+							fixer.insertTextAfter(node.body, " as const"),
+							fixer.insertTextAfter(node.parent.parent ?? node.parent, `
+
+${isExported ? "export " : ""}type ${name$1} = typeof ${name$1}[keyof typeof ${name$1}]`)
+						];
+					},
+					messageId: "enumFix"
+				}] : null
 			});
 		} };
 	},
 	defaultOptions: [],
 	meta: {
 		docs: { description: "Avoid using TypeScript's enums." },
-		messages: { enum: "This enum will not be allowed under TypeScript's --erasableSyntaxOnly." },
+		hasSuggestions: true,
+		messages: {
+			enum: "This enum will not be allowed under TypeScript's --erasableSyntaxOnly.",
+			enumFix: "Replace enum with an equivalent object literal."
+		},
 		schema: [],
 		type: "problem"
 	},
@@ -10806,8 +11002,8 @@ const rule = createRule({
 });
 
 //#endregion
-//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.3.1_@typescript-eslint+parser@8.46.1_eslint@9.37.0_17ae5c77dc46e7c9a6aa40debfa8b9c7/node_modules/eslint-plugin-erasable-syntax-only/lib/rules/import-aliases.js
-var import_dist$1 = /* @__PURE__ */ __toESM(require_dist(), 1);
+//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.4.0_@typescript-eslint+parser@8.47.0_eslint@9.39.1_28626c8f2c2e43edc7bb9ede92245427/node_modules/eslint-plugin-erasable-syntax-only/lib/rules/import-aliases.js
+var import_dist$1 = require_dist();
 const rule$1 = createRule({
 	create(context) {
 		return { TSImportEqualsDeclaration(node) {
@@ -10871,8 +11067,8 @@ var CachedFactory = class {
 };
 
 //#endregion
-//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.3.1_@typescript-eslint+parser@8.46.1_eslint@9.37.0_17ae5c77dc46e7c9a6aa40debfa8b9c7/node_modules/eslint-plugin-erasable-syntax-only/lib/rules/namespaces.js
-var import_dist = /* @__PURE__ */ __toESM(require_dist(), 1);
+//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.4.0_@typescript-eslint+parser@8.47.0_eslint@9.39.1_28626c8f2c2e43edc7bb9ede92245427/node_modules/eslint-plugin-erasable-syntax-only/lib/rules/namespaces.js
+var import_dist = require_dist();
 function skipExportParent(node) {
 	return node.parent.type == import_dist.AST_NODE_TYPES.ExportNamedDeclaration ? node.parent : node;
 }
@@ -10909,7 +11105,7 @@ const rule$2 = createRule({
 });
 
 //#endregion
-//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.3.1_@typescript-eslint+parser@8.46.1_eslint@9.37.0_17ae5c77dc46e7c9a6aa40debfa8b9c7/node_modules/eslint-plugin-erasable-syntax-only/lib/rules/parameter-properties.js
+//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.4.0_@typescript-eslint+parser@8.47.0_eslint@9.39.1_28626c8f2c2e43edc7bb9ede92245427/node_modules/eslint-plugin-erasable-syntax-only/lib/rules/parameter-properties.js
 const rule$3 = createRule({
 	create(context) {
 		return { TSParameterProperty(node) {
@@ -10930,7 +11126,7 @@ const rule$3 = createRule({
 });
 
 //#endregion
-//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.3.1_@typescript-eslint+parser@8.46.1_eslint@9.37.0_17ae5c77dc46e7c9a6aa40debfa8b9c7/node_modules/eslint-plugin-erasable-syntax-only/lib/rules/index.js
+//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.4.0_@typescript-eslint+parser@8.47.0_eslint@9.39.1_28626c8f2c2e43edc7bb9ede92245427/node_modules/eslint-plugin-erasable-syntax-only/lib/rules/index.js
 const rules = {
 	enums: rule,
 	"import-aliases": rule$1,
@@ -10939,7 +11135,7 @@ const rules = {
 };
 
 //#endregion
-//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.3.1_@typescript-eslint+parser@8.46.1_eslint@9.37.0_17ae5c77dc46e7c9a6aa40debfa8b9c7/node_modules/eslint-plugin-erasable-syntax-only/lib/index.js
+//#region node_modules/.pnpm/eslint-plugin-erasable-syntax-only@0.4.0_@typescript-eslint+parser@8.47.0_eslint@9.39.1_28626c8f2c2e43edc7bb9ede92245427/node_modules/eslint-plugin-erasable-syntax-only/lib/index.js
 const { name, version } = Module.createRequire(import.meta.url)("../package.json");
 const plugin = {
 	configs: { get recommended() {
