@@ -690,6 +690,11 @@ interface RuleOptions {
    */
   'jsdoc/require-property-type'?: Linter.RuleEntry<[]>;
   /**
+   * Requires that Promise rejections are documented with `@rejects` tags.
+   * @see https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/require-rejects.md#repos-sticky-header
+   */
+  'jsdoc/require-rejects'?: Linter.RuleEntry<JsdocRequireRejects>;
+  /**
    * Requires that returns are documented with `@returns`.
    * @see https://github.com/gajus/eslint-plugin-jsdoc/blob/main/docs/rules/require-returns.md#repos-sticky-header
    */
@@ -4125,6 +4130,11 @@ interface RuleOptions {
    */
   'template-tag-spacing'?: Linter.RuleEntry<TemplateTagSpacing>;
   /**
+   * enforce using `.each` or `.for` consistently
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/consistent-each-for.md
+   */
+  'test/consistent-each-for'?: Linter.RuleEntry<TestConsistentEachFor>;
+  /**
    * require test file pattern
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/consistent-test-filename.md
    */
@@ -4346,7 +4356,7 @@ interface RuleOptions {
    */
   'test/prefer-each'?: Linter.RuleEntry<[]>;
   /**
-   * enforce using the built-in quality matchers
+   * enforce using the built-in equality matchers
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/prefer-equality-matcher.md
    */
   'test/prefer-equality-matcher'?: Linter.RuleEntry<[]>;
@@ -4465,6 +4475,11 @@ interface RuleOptions {
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/require-hook.md
    */
   'test/require-hook'?: Linter.RuleEntry<TestRequireHook>;
+  /**
+   * require usage of import in vi.mock()
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/require-import-vi-mock.md
+   */
+  'test/require-import-vi-mock'?: Linter.RuleEntry<[]>;
   /**
    * require local Test Context for concurrent snapshot tests
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/require-local-test-context-for-concurrent-snapshots.md
@@ -6517,6 +6532,11 @@ interface RuleOptions {
    */
   'vue/no-duplicate-attributes'?: Linter.RuleEntry<VueNoDuplicateAttributes>;
   /**
+   * disallow duplication of class names in class attributes
+   * @see https://eslint.vuejs.org/rules/no-duplicate-class-names.html
+   */
+  'vue/no-duplicate-class-names'?: Linter.RuleEntry<[]>;
+  /**
    * disallow the `<template>` `<script>` `<style>` block to be empty
    * @see https://eslint.vuejs.org/rules/no-empty-component-block.html
    */
@@ -7851,6 +7871,7 @@ type JsdocCheckExamples = [] | [{
 }];
 // ----- jsdoc/check-indentation -----
 type JsdocCheckIndentation = [] | [{
+  allowIndentedSections?: boolean;
   excludeTags?: string[];
 }];
 // ----- jsdoc/check-line-alignment -----
@@ -8196,6 +8217,14 @@ type JsdocRequireParamType = [] | [{
   })[];
   defaultDestructuredRootType?: string;
   setDefaultDestructuredRootType?: boolean;
+}];
+// ----- jsdoc/require-rejects -----
+type JsdocRequireRejects = [] | [{
+  contexts?: (string | {
+    comment?: string;
+    context?: string;
+  })[];
+  exemptedBy?: string[];
 }];
 // ----- jsdoc/require-returns -----
 type JsdocRequireReturns = [] | [{
@@ -11907,6 +11936,7 @@ type ReactNoUnstableDefaultProps = [] | [{
 }];
 // ----- react/no-useless-fragment -----
 type ReactNoUselessFragment = [] | [{
+  allowEmptyFragment?: boolean;
   allowExpressions?: boolean;
 }];
 // ----- regexp/hexadecimal-escape -----
@@ -13369,6 +13399,13 @@ type SwitchColonSpacing = [] | [{
 type TemplateCurlySpacing = [] | [("always" | "never")];
 // ----- template-tag-spacing -----
 type TemplateTagSpacing = [] | [("always" | "never")];
+// ----- test/consistent-each-for -----
+type TestConsistentEachFor = [] | [{
+  test?: ("each" | "for");
+  it?: ("each" | "for");
+  describe?: ("each" | "for");
+  suite?: ("each" | "for");
+}];
 // ----- test/consistent-test-filename -----
 type TestConsistentTestFilename = [] | [{
   pattern?: string;
@@ -16816,7 +16853,7 @@ declare function node(options?: OptionsOverrides): Promise<TypedFlatConfigItem[]
 declare function perfectionist(options?: OptionsOverrides): Promise<TypedFlatConfigItem[]>;
 //#endregion
 //#region src/configs/pnpm.d.ts
-declare function pnpm(): Promise<TypedFlatConfigItem[]>;
+declare function pnpm(options?: OptionsIsInEditor): Promise<TypedFlatConfigItem[]>;
 //#endregion
 //#region src/configs/react.d.ts
 declare function react(options?: OptionsTypeScriptParserOptions & OptionsTypeScriptWithTypes & OptionsOverrides & OptionsFiles): Promise<TypedFlatConfigItem[]>;

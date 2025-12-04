@@ -1,4 +1,8 @@
 import { FlatConfigComposer } from "eslint-flat-config-utils";
+import process from "node:process";
+import { fileURLToPath } from "node:url";
+import fs from "node:fs";
+import path from "node:path";
 import { getPackageInfoSync, isPackageExists } from "local-pkg";
 import pluginComments from "@eslint-community/eslint-plugin-eslint-comments";
 import pluginAntfu from "eslint-plugin-antfu";
@@ -7,13 +11,30 @@ import pluginNode from "eslint-plugin-n";
 import pluginPerfectionist from "eslint-plugin-perfectionist";
 import pluginUnicorn from "eslint-plugin-unicorn";
 import pluginUnusedImports from "eslint-plugin-unused-imports";
-import process from "node:process";
-import { fileURLToPath } from "node:url";
 import globals from "globals";
 import { mergeProcessors, processorPassThrough } from "eslint-merge-processors";
 import * as parserPlain$1 from "eslint-parser-plain";
 import { configs } from "eslint-plugin-regexp";
 
+//#region node_modules/.pnpm/find-up-simple@1.0.1/node_modules/find-up-simple/index.js
+const toPath = (urlOrPath) => urlOrPath instanceof URL ? fileURLToPath(urlOrPath) : urlOrPath;
+function findUpSync(name, { cwd = process.cwd(), type = "file", stopAt } = {}) {
+	let directory = path.resolve(toPath(cwd) ?? "");
+	const { root } = path.parse(directory);
+	stopAt = path.resolve(directory, toPath(stopAt) ?? root);
+	const isAbsoluteName = path.isAbsolute(name);
+	while (directory) {
+		const filePath = isAbsoluteName ? name : path.join(directory, name);
+		try {
+			const stats = fs.statSync(filePath, { throwIfNoEntry: false });
+			if (type === "file" && stats?.isFile() || type === "directory" && stats?.isDirectory()) return filePath;
+		} catch {}
+		if (directory === stopAt || directory === root) break;
+		directory = path.dirname(directory);
+	}
+}
+
+//#endregion
 //#region src/configs/comments.ts
 async function comments(options = {}) {
 	const { overrides = {} } = options;
@@ -967,7 +988,7 @@ async function perfectionist(options = {}) {
 
 //#endregion
 //#region src/configs/pnpm.ts
-async function pnpm() {
+async function pnpm(options = {}) {
 	const [pluginPnpm, yamlParser, jsoncParser] = await Promise.all([
 		interopDefault(import("eslint-plugin-pnpm")),
 		interopDefault(import("yaml-eslint-parser")),
@@ -979,9 +1000,9 @@ async function pnpm() {
 		name: "eslint/pnpm/package-json",
 		plugins: { pnpm: pluginPnpm },
 		rules: {
-			"pnpm/json-enforce-catalog": "error",
-			"pnpm/json-prefer-workspace-settings": "error",
-			"pnpm/json-valid-catalog": "error"
+			"pnpm/json-enforce-catalog": ["error", { autofix: !options.isInEditor }],
+			"pnpm/json-prefer-workspace-settings": ["error", { autofix: !options.isInEditor }],
+			"pnpm/json-valid-catalog": ["error", { autofix: !options.isInEditor }]
 		}
 	}, {
 		files: ["pnpm-workspace.yaml"],
@@ -989,6 +1010,11 @@ async function pnpm() {
 		name: "eslint/pnpm/pnpm-workspace-yaml",
 		plugins: { pnpm: pluginPnpm },
 		rules: {
+			"pnpm/yaml-enforce-settings": ["error", { settings: {
+				catalogMode: "prefer",
+				cleanupUnusedCatalogs: true,
+				shellEmulator: true
+			} }],
 			"pnpm/yaml-no-duplicate-catalog-item": "error",
 			"pnpm/yaml-no-unused-catalog-item": "error"
 		}
@@ -1619,7 +1645,7 @@ async function typescript(options = {}) {
 		}] : [],
 		...erasableOnly ? [{
 			name: "eslint/typescript/erasable-syntax-only",
-			plugins: { "erasable-syntax-only": await interopDefault(import("./lib-D3OsxTXr.mjs")) },
+			plugins: { "erasable-syntax-only": await interopDefault(import("./lib-CEKTiw7V.js")) },
 			rules: {
 				"erasable-syntax-only/enums": "error",
 				"erasable-syntax-only/import-aliases": "error",
@@ -1939,23 +1965,66 @@ async function yaml(options = {}) {
 				"error",
 				{
 					order: [
+						...[
+							"cacheDir",
+							"catalogMode",
+							"cleanupUnusedCatalogs",
+							"dedupeDirectDeps",
+							"deployAllFiles",
+							"enablePrePostScripts",
+							"engineStrict",
+							"extendNodePath",
+							"hoist",
+							"hoistPattern",
+							"hoistWorkspacePackages",
+							"ignoreCompatibilityDb",
+							"ignoreDepScripts",
+							"ignoreScripts",
+							"ignoreWorkspaceRootCheck",
+							"managePackageManagerVersions",
+							"minimumReleaseAge",
+							"minimumReleaseAgeExclude",
+							"modulesDir",
+							"nodeLinker",
+							"nodeVersion",
+							"optimisticRepeatInstall",
+							"packageManagerStrict",
+							"packageManagerStrictVersion",
+							"preferSymlinkedExecutables",
+							"preferWorkspacePackages",
+							"publicHoistPattern",
+							"registrySupportsTimeField",
+							"requiredScrpts",
+							"resolutionMode",
+							"savePrefix",
+							"scriptShell",
+							"shamefullyHoist",
+							"shellEmulator",
+							"stateDir",
+							"supportedArchitectures",
+							"symlink",
+							"tag",
+							"trustPolicy",
+							"trustPolicyExclude",
+							"updateNotifier"
+						],
 						"packages",
 						"overrides",
 						"patchedDependencies",
-						"hoistPattern",
 						"catalog",
 						"catalogs",
-						"allowedDeprecatedVersions",
-						"allowNonAppliedPatches",
-						"configDependencies",
-						"ignoredBuiltDependencies",
-						"ignoredOptionalDependencies",
-						"neverBuiltDependencies",
-						"onlyBuiltDependencies",
-						"onlyBuiltDependenciesFile",
-						"packageExtensions",
-						"peerDependencyRules",
-						"supportedArchitectures"
+						...[
+							"allowedDeprecatedVersions",
+							"allowNonAppliedPatches",
+							"configDependencies",
+							"ignoredBuiltDependencies",
+							"ignoredOptionalDependencies",
+							"neverBuiltDependencies",
+							"onlyBuiltDependencies",
+							"onlyBuiltDependenciesFile",
+							"packageExtensions",
+							"peerDependencyRules"
+						]
 					],
 					pathPattern: "^$"
 				},
@@ -2009,7 +2078,7 @@ const defaultPluginRenaming = {
 *  合并的 ESLint 配置
 */
 function lincy(options = {}, ...userConfigs) {
-	const { autoRenamePlugins = true, componentExts = [], gitignore: enableGitignore = true, ignores: ignoresList = [], imports: enableImports = true, jsx: enableJsx = true, nextjs: enableNextjs = false, overrides = {}, pnpm: enableCatalogs = false, react: enableReact = false, regexp: enableRegexp = true, typescript: enableTypeScript = isPackageExists("typescript"), unicorn: enableUnicorn = true, unocss: enableUnoCSS = false, vue: enableVue = VuePackages.some((i) => isPackageExists(i)) } = options;
+	const { autoRenamePlugins = true, componentExts = [], gitignore: enableGitignore = true, ignores: ignoresList = [], imports: enableImports = true, jsx: enableJsx = true, nextjs: enableNextjs = false, overrides = {}, pnpm: enableCatalogs = !!findUpSync("pnpm-workspace.yaml"), react: enableReact = false, regexp: enableRegexp = true, typescript: enableTypeScript = isPackageExists("typescript"), unicorn: enableUnicorn = true, unocss: enableUnoCSS = false, vue: enableVue = VuePackages.some((i) => isPackageExists(i)) } = options;
 	let isInEditor = options.isInEditor;
 	if (isInEditor == null) {
 		isInEditor = isInEditorEnv();
@@ -2087,7 +2156,7 @@ function lincy(options = {}, ...userConfigs) {
 		overrides: getOverrides(options, "jsonc"),
 		stylistic: stylisticOptions
 	}), sortPackageJson(), sortTsconfig());
-	if (enableCatalogs) configs$1.push(pnpm());
+	if (enableCatalogs) configs$1.push(pnpm({ isInEditor }));
 	if (options.yaml ?? true) configs$1.push(yaml({
 		...resolveSubOptions(options, "yaml"),
 		overrides: getOverrides(options, "yaml"),

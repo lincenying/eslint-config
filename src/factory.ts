@@ -3,6 +3,7 @@ import type { RuleOptions } from './typegen'
 import type { Awaitable, ConfigNames, OptionsConfig, TypedFlatConfigItem } from './types'
 
 import { FlatConfigComposer } from 'eslint-flat-config-utils'
+import { findUpSync } from 'find-up-simple'
 import { isPackageExists } from 'local-pkg'
 import {
     comments,
@@ -89,7 +90,7 @@ export function lincy(
         jsx: enableJsx = true,
         nextjs: enableNextjs = false,
         overrides = {},
-        pnpm: enableCatalogs = false,
+        pnpm: enableCatalogs = !!findUpSync('pnpm-workspace.yaml'),
         react: enableReact = false,
         regexp: enableRegexp = true,
         typescript: enableTypeScript = isPackageExists('typescript'),
@@ -260,7 +261,9 @@ export function lincy(
 
     if (enableCatalogs) {
         configs.push(
-            pnpm(),
+            pnpm({
+                isInEditor,
+            }),
         )
     }
 

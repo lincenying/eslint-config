@@ -2,7 +2,7 @@
   "name": "@lincy/eslint-config",
   "type": "module",
   "version": "6.0.1",
-  "packageManager": "pnpm@10.22.0",
+  "packageManager": "pnpm@10.24.0",
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
   "license": "MIT",
@@ -12,13 +12,13 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
+      "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     }
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -77,7 +77,7 @@
     "@stylistic/eslint-plugin": "catalog:prod",
     "@typescript-eslint/eslint-plugin": "catalog:prod",
     "@typescript-eslint/parser": "catalog:prod",
-    "@vitest/eslint-plugin": "catalog:prod",
+    "@vitest/eslint-plugin": "catalog:test",
     "eslint-config-flat-gitignore": "catalog:prod",
     "eslint-flat-config-utils": "catalog:prod",
     "eslint-merge-processors": "catalog:prod",
@@ -100,7 +100,6 @@
     "globals": "catalog:prod",
     "jsonc-eslint-parser": "catalog:prod",
     "local-pkg": "catalog:prod",
-    "prompts": "catalog:prod",
     "toml-eslint-parser": "catalog:prod",
     "vue-eslint-parser": "catalog:prod",
     "yaml-eslint-parser": "catalog:prod"
@@ -108,8 +107,6 @@
   "devDependencies": {
     "@antfu/ni": "catalog:dev",
     "@eslint-react/eslint-plugin": "catalog:peer",
-    "@eslint-types/typescript-eslint": "catalog:dev",
-    "@eslint-types/unicorn": "catalog:dev",
     "@eslint/config-inspector": "catalog:dev",
     "@lincy/eslint-config": "workspace:*",
     "@next/eslint-plugin-next": "catalog:peer",
@@ -126,14 +123,13 @@
     "eslint-plugin-react-refresh": "catalog:peer",
     "eslint-typegen": "catalog:dev",
     "esno": "catalog:dev",
-    "execa": "catalog:dev",
+    "execa": "catalog:test",
+    "find-up-simple": "catalog:inline",
     "lint-staged": "catalog:dev",
     "prettier": "catalog:dev",
     "react": "catalog:dev",
-    "simple-git-hooks": "catalog:dev",
     "simple-open-url": "catalog:dev",
-    "sucrase": "catalog:dev",
-    "tinyglobby": "catalog:dev",
+    "tinyglobby": "catalog:test",
     "tsdown": "catalog:dev",
     "typescript": "catalog:dev",
     "vitest": "catalog:test",

@@ -1,7 +1,17 @@
 Object.defineProperty(exports, '__esModule', { value: true });
 const require_chunk = require('./chunk-DWy1uDak.cjs');
 let eslint_flat_config_utils = require("eslint-flat-config-utils");
+eslint_flat_config_utils = require_chunk.__toESM(eslint_flat_config_utils);
+let node_process = require("node:process");
+node_process = require_chunk.__toESM(node_process);
+let node_url = require("node:url");
+node_url = require_chunk.__toESM(node_url);
+let node_fs = require("node:fs");
+node_fs = require_chunk.__toESM(node_fs);
+let node_path = require("node:path");
+node_path = require_chunk.__toESM(node_path);
 let local_pkg = require("local-pkg");
+local_pkg = require_chunk.__toESM(local_pkg);
 let __eslint_community_eslint_plugin_eslint_comments = require("@eslint-community/eslint-plugin-eslint-comments");
 __eslint_community_eslint_plugin_eslint_comments = require_chunk.__toESM(__eslint_community_eslint_plugin_eslint_comments);
 let eslint_plugin_antfu = require("eslint-plugin-antfu");
@@ -16,16 +26,34 @@ let eslint_plugin_unicorn = require("eslint-plugin-unicorn");
 eslint_plugin_unicorn = require_chunk.__toESM(eslint_plugin_unicorn);
 let eslint_plugin_unused_imports = require("eslint-plugin-unused-imports");
 eslint_plugin_unused_imports = require_chunk.__toESM(eslint_plugin_unused_imports);
-let node_process = require("node:process");
-node_process = require_chunk.__toESM(node_process);
-let node_url = require("node:url");
 let globals = require("globals");
 globals = require_chunk.__toESM(globals);
 let eslint_merge_processors = require("eslint-merge-processors");
+eslint_merge_processors = require_chunk.__toESM(eslint_merge_processors);
 let eslint_parser_plain = require("eslint-parser-plain");
 eslint_parser_plain = require_chunk.__toESM(eslint_parser_plain);
 let eslint_plugin_regexp = require("eslint-plugin-regexp");
+eslint_plugin_regexp = require_chunk.__toESM(eslint_plugin_regexp);
 
+//#region node_modules/.pnpm/find-up-simple@1.0.1/node_modules/find-up-simple/index.js
+const toPath = (urlOrPath) => urlOrPath instanceof URL ? (0, node_url.fileURLToPath)(urlOrPath) : urlOrPath;
+function findUpSync(name, { cwd = node_process.default.cwd(), type = "file", stopAt } = {}) {
+	let directory = node_path.default.resolve(toPath(cwd) ?? "");
+	const { root } = node_path.default.parse(directory);
+	stopAt = node_path.default.resolve(directory, toPath(stopAt) ?? root);
+	const isAbsoluteName = node_path.default.isAbsolute(name);
+	while (directory) {
+		const filePath = isAbsoluteName ? name : node_path.default.join(directory, name);
+		try {
+			const stats = node_fs.default.statSync(filePath, { throwIfNoEntry: false });
+			if (type === "file" && stats?.isFile() || type === "directory" && stats?.isDirectory()) return filePath;
+		} catch {}
+		if (directory === stopAt || directory === root) break;
+		directory = node_path.default.dirname(directory);
+	}
+}
+
+//#endregion
 //#region src/configs/comments.ts
 async function comments(options = {}) {
 	const { overrides = {} } = options;
@@ -979,7 +1007,7 @@ async function perfectionist(options = {}) {
 
 //#endregion
 //#region src/configs/pnpm.ts
-async function pnpm() {
+async function pnpm(options = {}) {
 	const [pluginPnpm, yamlParser, jsoncParser] = await Promise.all([
 		interopDefault(import("eslint-plugin-pnpm")),
 		interopDefault(import("yaml-eslint-parser")),
@@ -991,9 +1019,9 @@ async function pnpm() {
 		name: "eslint/pnpm/package-json",
 		plugins: { pnpm: pluginPnpm },
 		rules: {
-			"pnpm/json-enforce-catalog": "error",
-			"pnpm/json-prefer-workspace-settings": "error",
-			"pnpm/json-valid-catalog": "error"
+			"pnpm/json-enforce-catalog": ["error", { autofix: !options.isInEditor }],
+			"pnpm/json-prefer-workspace-settings": ["error", { autofix: !options.isInEditor }],
+			"pnpm/json-valid-catalog": ["error", { autofix: !options.isInEditor }]
 		}
 	}, {
 		files: ["pnpm-workspace.yaml"],
@@ -1001,6 +1029,11 @@ async function pnpm() {
 		name: "eslint/pnpm/pnpm-workspace-yaml",
 		plugins: { pnpm: pluginPnpm },
 		rules: {
+			"pnpm/yaml-enforce-settings": ["error", { settings: {
+				catalogMode: "prefer",
+				cleanupUnusedCatalogs: true,
+				shellEmulator: true
+			} }],
 			"pnpm/yaml-no-duplicate-catalog-item": "error",
 			"pnpm/yaml-no-unused-catalog-item": "error"
 		}
@@ -1631,7 +1664,7 @@ async function typescript(options = {}) {
 		}] : [],
 		...erasableOnly ? [{
 			name: "eslint/typescript/erasable-syntax-only",
-			plugins: { "erasable-syntax-only": await interopDefault(Promise.resolve().then(() => require("./lib-BJFVxmuP.cjs"))) },
+			plugins: { "erasable-syntax-only": await interopDefault(Promise.resolve().then(() => require("./lib-DS4wQk2J.cjs"))) },
 			rules: {
 				"erasable-syntax-only/enums": "error",
 				"erasable-syntax-only/import-aliases": "error",
@@ -1951,23 +1984,66 @@ async function yaml(options = {}) {
 				"error",
 				{
 					order: [
+						...[
+							"cacheDir",
+							"catalogMode",
+							"cleanupUnusedCatalogs",
+							"dedupeDirectDeps",
+							"deployAllFiles",
+							"enablePrePostScripts",
+							"engineStrict",
+							"extendNodePath",
+							"hoist",
+							"hoistPattern",
+							"hoistWorkspacePackages",
+							"ignoreCompatibilityDb",
+							"ignoreDepScripts",
+							"ignoreScripts",
+							"ignoreWorkspaceRootCheck",
+							"managePackageManagerVersions",
+							"minimumReleaseAge",
+							"minimumReleaseAgeExclude",
+							"modulesDir",
+							"nodeLinker",
+							"nodeVersion",
+							"optimisticRepeatInstall",
+							"packageManagerStrict",
+							"packageManagerStrictVersion",
+							"preferSymlinkedExecutables",
+							"preferWorkspacePackages",
+							"publicHoistPattern",
+							"registrySupportsTimeField",
+							"requiredScrpts",
+							"resolutionMode",
+							"savePrefix",
+							"scriptShell",
+							"shamefullyHoist",
+							"shellEmulator",
+							"stateDir",
+							"supportedArchitectures",
+							"symlink",
+							"tag",
+							"trustPolicy",
+							"trustPolicyExclude",
+							"updateNotifier"
+						],
 						"packages",
 						"overrides",
 						"patchedDependencies",
-						"hoistPattern",
 						"catalog",
 						"catalogs",
-						"allowedDeprecatedVersions",
-						"allowNonAppliedPatches",
-						"configDependencies",
-						"ignoredBuiltDependencies",
-						"ignoredOptionalDependencies",
-						"neverBuiltDependencies",
-						"onlyBuiltDependencies",
-						"onlyBuiltDependenciesFile",
-						"packageExtensions",
-						"peerDependencyRules",
-						"supportedArchitectures"
+						...[
+							"allowedDeprecatedVersions",
+							"allowNonAppliedPatches",
+							"configDependencies",
+							"ignoredBuiltDependencies",
+							"ignoredOptionalDependencies",
+							"neverBuiltDependencies",
+							"onlyBuiltDependencies",
+							"onlyBuiltDependenciesFile",
+							"packageExtensions",
+							"peerDependencyRules"
+						]
 					],
 					pathPattern: "^$"
 				},
@@ -2021,7 +2097,7 @@ const defaultPluginRenaming = {
 *  合并的 ESLint 配置
 */
 function lincy(options = {}, ...userConfigs) {
-	const { autoRenamePlugins = true, componentExts = [], gitignore: enableGitignore = true, ignores: ignoresList = [], imports: enableImports = true, jsx: enableJsx = true, nextjs: enableNextjs = false, overrides = {}, pnpm: enableCatalogs = false, react: enableReact = false, regexp: enableRegexp = true, typescript: enableTypeScript = (0, local_pkg.isPackageExists)("typescript"), unicorn: enableUnicorn = true, unocss: enableUnoCSS = false, vue: enableVue = VuePackages.some((i) => (0, local_pkg.isPackageExists)(i)) } = options;
+	const { autoRenamePlugins = true, componentExts = [], gitignore: enableGitignore = true, ignores: ignoresList = [], imports: enableImports = true, jsx: enableJsx = true, nextjs: enableNextjs = false, overrides = {}, pnpm: enableCatalogs = !!findUpSync("pnpm-workspace.yaml"), react: enableReact = false, regexp: enableRegexp = true, typescript: enableTypeScript = (0, local_pkg.isPackageExists)("typescript"), unicorn: enableUnicorn = true, unocss: enableUnoCSS = false, vue: enableVue = VuePackages.some((i) => (0, local_pkg.isPackageExists)(i)) } = options;
 	let isInEditor = options.isInEditor;
 	if (isInEditor == null) {
 		isInEditor = isInEditorEnv();
@@ -2099,7 +2175,7 @@ function lincy(options = {}, ...userConfigs) {
 		overrides: getOverrides(options, "jsonc"),
 		stylistic: stylisticOptions
 	}), sortPackageJson(), sortTsconfig());
-	if (enableCatalogs) configs$1.push(pnpm());
+	if (enableCatalogs) configs$1.push(pnpm({ isInEditor }));
 	if (options.yaml ?? true) configs$1.push(yaml({
 		...resolveSubOptions(options, "yaml"),
 		overrides: getOverrides(options, "yaml"),
