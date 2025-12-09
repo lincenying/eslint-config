@@ -50,6 +50,10 @@ export interface OptionsVue {
     sfcBlocks?: boolean | VueBlocksOptions
 }
 
+export interface OptionsReact extends OptionsFiles {
+    reactCompiler?: boolean
+}
+
 export type OptionsTypescript = (OptionsTypeScriptWithTypes & OptionsOverrides & OptionsTypeScriptErasableOnly)
     | (OptionsTypeScriptParserOptions & OptionsOverrides & OptionsTypeScriptErasableOnly)
 
@@ -355,7 +359,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
      *
      * @default 根据依赖关系自动检测
      */
-    react?: boolean | OptionsFiles
+    react?: boolean | OptionsReact
 
     /**
      * 启用 nextjs 支持.

@@ -16264,7 +16264,7 @@ type Yoda = [] | [("always" | "never")] | [("always" | "never"), {
   onlyEquality?: boolean;
 }];
 // Names of all the configs
-type ConfigNames = 'eslint/comments/rules' | 'eslint/formatter/setup' | 'eslint/formatter/html' | 'eslint/formatter/xml' | 'eslint/formatter/svg' | 'eslint/formatter/markdown' | 'eslint/formatter/graphql' | 'eslint/imports/rules' | 'eslint/javascript/setup' | 'eslint/javascript/rules' | 'eslint/jsdoc/rules' | 'eslint/jsonc/setup' | 'eslint/jsonc/rules' | 'eslint/markdown/setup' | 'eslint/markdown/processor' | 'eslint/markdown/parser' | 'eslint/markdown/disables' | 'eslint/node/rules' | 'eslint/perfectionist/setup' | 'eslint/react/setup' | 'eslint/react/rules' | 'eslint/regexp/rules' | 'eslint/sort/package-json' | 'eslint/stylistic/rules' | 'eslint/test/setup' | 'eslint/test/rules' | 'eslint/toml/setup' | 'eslint/toml/rules' | 'eslint/typescript/setup' | 'eslint/typescript/parser' | 'eslint/typescript/rules' | 'eslint/unicorn/rules' | 'eslint/unocss/rules' | 'eslint/vue/setup' | 'eslint/vue/rules' | 'eslint/yaml/setup' | 'eslint/yaml/rules' | 'eslint/yaml/pnpm-workspace';
+type ConfigNames = 'eslint/comments/rules' | 'eslint/formatter/setup' | 'eslint/formatter/html' | 'eslint/formatter/xml' | 'eslint/formatter/svg' | 'eslint/formatter/markdown' | 'eslint/formatter/graphql' | 'eslint/imports/rules' | 'eslint/javascript/setup' | 'eslint/javascript/rules' | 'eslint/jsdoc/rules' | 'eslint/jsonc/setup' | 'eslint/jsonc/rules' | 'eslint/markdown/setup' | 'eslint/markdown/processor' | 'eslint/markdown/parser' | 'eslint/markdown/disables' | 'eslint/node/rules' | 'eslint/perfectionist/setup' | 'eslint/react/setup' | 'eslint/react/rules' | 'eslint/regexp/rules' | 'eslint/sort/package-json' | 'eslint/stylistic/rules' | 'eslint/test/setup' | 'eslint/test/rules' | 'eslint/toml/setup' | 'eslint/toml/rules' | 'eslint/typescript/setup' | 'eslint/typescript/parser' | 'eslint/typescript/rules' | 'eslint/unicorn/rules' | 'eslint/unocss/rules' | 'eslint/vue/setup' | 'eslint/vue/rules' | 'eslint/yaml/setup' | 'eslint/yaml/rules';
 //#endregion
 //#region src/prettier.types.d.ts
 /**
@@ -16421,6 +16421,9 @@ interface OptionsVue {
    * @default true
    */
   sfcBlocks?: boolean | Options;
+}
+interface OptionsReact extends OptionsFiles {
+  reactCompiler?: boolean;
 }
 type OptionsTypescript = (OptionsTypeScriptWithTypes & OptionsOverrides & OptionsTypeScriptErasableOnly) | (OptionsTypeScriptParserOptions & OptionsOverrides & OptionsTypeScriptErasableOnly);
 interface OptionsFormatters {
@@ -16686,7 +16689,7 @@ interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
    *
    * @default 根据依赖关系自动检测
    */
-  react?: boolean | OptionsFiles;
+  react?: boolean | OptionsReact;
   /**
    * 启用 nextjs 支持.
    *
@@ -16856,7 +16859,7 @@ declare function perfectionist(options?: OptionsOverrides): Promise<TypedFlatCon
 declare function pnpm(options?: OptionsIsInEditor): Promise<TypedFlatConfigItem[]>;
 //#endregion
 //#region src/configs/react.d.ts
-declare function react(options?: OptionsTypeScriptParserOptions & OptionsTypeScriptWithTypes & OptionsOverrides & OptionsFiles): Promise<TypedFlatConfigItem[]>;
+declare function react(options?: OptionsTypeScriptParserOptions & OptionsTypeScriptWithTypes & OptionsOverrides & OptionsReact): Promise<TypedFlatConfigItem[]>;
 //#endregion
 //#region src/configs/regexp.d.ts
 declare function regexp(options?: OptionsRegExp & OptionsOverrides): Promise<TypedFlatConfigItem[]>;
@@ -16973,4 +16976,4 @@ declare function ensurePackages(packages: (string | undefined)[]): Promise<void>
 declare function isInEditorEnv(): boolean;
 declare function isInGitHooksOrLintStaged(): boolean;
 //#endregion
-export { Awaitable, type ConfigNames, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_GRAPHQL, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_SVG, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_XML, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsFiles, OptionsFormatters, OptionsHasTypeScript, OptionsIgnores, OptionsIsInEditor, OptionsOverrides, OptionsProjectType, OptionsRegExp, OptionsStylistic, OptionsTypeScriptErasableOnly, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, OptionsTypescript, OptionsUnicorn, OptionsUnoCSS, OptionsVue, ResolvedOptions, Rules, StylisticConfig, StylisticConfigDefaults, TypedFlatConfigItem, combine, comments, lincy as default, lincy, defaultPluginRenaming, disables, ensurePackages, formatters, getOverrides, ignores, imports, interopDefault, isInEditorEnv, isInGitHooksOrLintStaged, isPackageInScope, javascript, jsdoc, jsonc, jsx, markdown, nextjs, node, parserPlain, perfectionist, pnpm, react, regexp, renamePluginInConfigs, renameRules, resolveSubOptions, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };
+export { Awaitable, type ConfigNames, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_GRAPHQL, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_SVG, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_XML, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsFiles, OptionsFormatters, OptionsHasTypeScript, OptionsIgnores, OptionsIsInEditor, OptionsOverrides, OptionsProjectType, OptionsReact, OptionsRegExp, OptionsStylistic, OptionsTypeScriptErasableOnly, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, OptionsTypescript, OptionsUnicorn, OptionsUnoCSS, OptionsVue, ResolvedOptions, Rules, StylisticConfig, StylisticConfigDefaults, TypedFlatConfigItem, combine, comments, lincy as default, lincy, defaultPluginRenaming, disables, ensurePackages, formatters, getOverrides, ignores, imports, interopDefault, isInEditorEnv, isInGitHooksOrLintStaged, isPackageInScope, javascript, jsdoc, jsonc, jsx, markdown, nextjs, node, parserPlain, perfectionist, pnpm, react, regexp, renamePluginInConfigs, renameRules, resolveSubOptions, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };

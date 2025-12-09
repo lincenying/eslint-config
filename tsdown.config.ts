@@ -8,4 +8,5 @@ export default defineConfig({
     outputOptions: {
         exports: 'named',
     },
+    exports: true,
 })

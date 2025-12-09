@@ -1,39 +1,60 @@
 Object.defineProperty(exports, '__esModule', { value: true });
-const require_chunk = require('./chunk-DWy1uDak.cjs');
+//#region rolldown:runtime
+var __create = Object.create;
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __copyProps = (to, from, except, desc) => {
+	if (from && typeof from === "object" || typeof from === "function") {
+		for (var keys = __getOwnPropNames(from), i = 0, n = keys.length, key; i < n; i++) {
+			key = keys[i];
+			if (!__hasOwnProp.call(to, key) && key !== except) {
+				__defProp(to, key, {
+					get: ((k) => from[k]).bind(null, key),
+					enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+				});
+			}
+		}
+	}
+	return to;
+};
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", {
+	value: mod,
+	enumerable: true
+}) : target, mod));
+
+//#endregion
 let eslint_flat_config_utils = require("eslint-flat-config-utils");
-eslint_flat_config_utils = require_chunk.__toESM(eslint_flat_config_utils);
 let node_process = require("node:process");
-node_process = require_chunk.__toESM(node_process);
+node_process = __toESM(node_process);
 let node_url = require("node:url");
-node_url = require_chunk.__toESM(node_url);
 let node_fs = require("node:fs");
-node_fs = require_chunk.__toESM(node_fs);
+node_fs = __toESM(node_fs);
 let node_path = require("node:path");
-node_path = require_chunk.__toESM(node_path);
+node_path = __toESM(node_path);
 let local_pkg = require("local-pkg");
-local_pkg = require_chunk.__toESM(local_pkg);
 let __eslint_community_eslint_plugin_eslint_comments = require("@eslint-community/eslint-plugin-eslint-comments");
-__eslint_community_eslint_plugin_eslint_comments = require_chunk.__toESM(__eslint_community_eslint_plugin_eslint_comments);
+__eslint_community_eslint_plugin_eslint_comments = __toESM(__eslint_community_eslint_plugin_eslint_comments);
 let eslint_plugin_antfu = require("eslint-plugin-antfu");
-eslint_plugin_antfu = require_chunk.__toESM(eslint_plugin_antfu);
+eslint_plugin_antfu = __toESM(eslint_plugin_antfu);
 let eslint_plugin_import_lite = require("eslint-plugin-import-lite");
-eslint_plugin_import_lite = require_chunk.__toESM(eslint_plugin_import_lite);
+eslint_plugin_import_lite = __toESM(eslint_plugin_import_lite);
 let eslint_plugin_n = require("eslint-plugin-n");
-eslint_plugin_n = require_chunk.__toESM(eslint_plugin_n);
+eslint_plugin_n = __toESM(eslint_plugin_n);
 let eslint_plugin_perfectionist = require("eslint-plugin-perfectionist");
-eslint_plugin_perfectionist = require_chunk.__toESM(eslint_plugin_perfectionist);
+eslint_plugin_perfectionist = __toESM(eslint_plugin_perfectionist);
 let eslint_plugin_unicorn = require("eslint-plugin-unicorn");
-eslint_plugin_unicorn = require_chunk.__toESM(eslint_plugin_unicorn);
+eslint_plugin_unicorn = __toESM(eslint_plugin_unicorn);
 let eslint_plugin_unused_imports = require("eslint-plugin-unused-imports");
-eslint_plugin_unused_imports = require_chunk.__toESM(eslint_plugin_unused_imports);
+eslint_plugin_unused_imports = __toESM(eslint_plugin_unused_imports);
 let globals = require("globals");
-globals = require_chunk.__toESM(globals);
+globals = __toESM(globals);
 let eslint_merge_processors = require("eslint-merge-processors");
-eslint_merge_processors = require_chunk.__toESM(eslint_merge_processors);
 let eslint_parser_plain = require("eslint-parser-plain");
-eslint_parser_plain = require_chunk.__toESM(eslint_parser_plain);
+eslint_parser_plain = __toESM(eslint_parser_plain);
 let eslint_plugin_regexp = require("eslint-plugin-regexp");
-eslint_plugin_regexp = require_chunk.__toESM(eslint_plugin_regexp);
 
 //#region node_modules/.pnpm/find-up-simple@1.0.1/node_modules/find-up-simple/index.js
 const toPath = (urlOrPath) => urlOrPath instanceof URL ? (0, node_url.fileURLToPath)(urlOrPath) : urlOrPath;
@@ -1013,31 +1034,109 @@ async function pnpm(options = {}) {
 		interopDefault(import("yaml-eslint-parser")),
 		interopDefault(import("jsonc-eslint-parser"))
 	]);
-	return [{
-		files: ["package.json", "**/package.json"],
-		languageOptions: { parser: jsoncParser },
-		name: "eslint/pnpm/package-json",
-		plugins: { pnpm: pluginPnpm },
-		rules: {
-			"pnpm/json-enforce-catalog": ["error", { autofix: !options.isInEditor }],
-			"pnpm/json-prefer-workspace-settings": ["error", { autofix: !options.isInEditor }],
-			"pnpm/json-valid-catalog": ["error", { autofix: !options.isInEditor }]
+	return [
+		{
+			files: ["package.json", "**/package.json"],
+			languageOptions: { parser: jsoncParser },
+			name: "eslint/pnpm/package-json",
+			plugins: { pnpm: pluginPnpm },
+			rules: {
+				"pnpm/json-enforce-catalog": ["error", { autofix: !options.isInEditor }],
+				"pnpm/json-prefer-workspace-settings": ["error", { autofix: !options.isInEditor }],
+				"pnpm/json-valid-catalog": ["error", { autofix: !options.isInEditor }]
+			}
+		},
+		{
+			files: ["pnpm-workspace.yaml"],
+			languageOptions: { parser: yamlParser },
+			name: "eslint/pnpm/pnpm-workspace-yaml",
+			plugins: { pnpm: pluginPnpm },
+			rules: {
+				"pnpm/yaml-enforce-settings": ["error", { settings: {
+					catalogMode: "prefer",
+					shellEmulator: true
+				} }],
+				"pnpm/yaml-no-duplicate-catalog-item": "error",
+				"pnpm/yaml-no-unused-catalog-item": "error"
+			}
+		},
+		{
+			files: ["pnpm-workspace.yaml"],
+			name: "eslint/yaml/pnpm-workspace",
+			rules: { "yaml/sort-keys": [
+				"error",
+				{
+					order: [
+						...[
+							"cacheDir",
+							"catalogMode",
+							"cleanupUnusedCatalogs",
+							"dedupeDirectDeps",
+							"deployAllFiles",
+							"enablePrePostScripts",
+							"engineStrict",
+							"extendNodePath",
+							"hoist",
+							"hoistPattern",
+							"hoistWorkspacePackages",
+							"ignoreCompatibilityDb",
+							"ignoreDepScripts",
+							"ignoreScripts",
+							"ignoreWorkspaceRootCheck",
+							"managePackageManagerVersions",
+							"minimumReleaseAge",
+							"minimumReleaseAgeExclude",
+							"modulesDir",
+							"nodeLinker",
+							"nodeVersion",
+							"optimisticRepeatInstall",
+							"packageManagerStrict",
+							"packageManagerStrictVersion",
+							"preferSymlinkedExecutables",
+							"preferWorkspacePackages",
+							"publicHoistPattern",
+							"registrySupportsTimeField",
+							"requiredScripts",
+							"resolutionMode",
+							"savePrefix",
+							"scriptShell",
+							"shamefullyHoist",
+							"shellEmulator",
+							"stateDir",
+							"supportedArchitectures",
+							"symlink",
+							"tag",
+							"trustPolicy",
+							"trustPolicyExclude",
+							"updateNotifier"
+						],
+						"packages",
+						"overrides",
+						"patchedDependencies",
+						"catalog",
+						"catalogs",
+						...[
+							"allowedDeprecatedVersions",
+							"allowNonAppliedPatches",
+							"configDependencies",
+							"ignoredBuiltDependencies",
+							"ignoredOptionalDependencies",
+							"neverBuiltDependencies",
+							"onlyBuiltDependencies",
+							"onlyBuiltDependenciesFile",
+							"packageExtensions",
+							"peerDependencyRules"
+						]
+					],
+					pathPattern: "^$"
+				},
+				{
+					order: { type: "asc" },
+					pathPattern: ".*"
+				}
+			] }
 		}
-	}, {
-		files: ["pnpm-workspace.yaml"],
-		languageOptions: { parser: yamlParser },
-		name: "eslint/pnpm/pnpm-workspace-yaml",
-		plugins: { pnpm: pluginPnpm },
-		rules: {
-			"pnpm/yaml-enforce-settings": ["error", { settings: {
-				catalogMode: "prefer",
-				cleanupUnusedCatalogs: true,
-				shellEmulator: true
-			} }],
-			"pnpm/yaml-no-duplicate-catalog-item": "error",
-			"pnpm/yaml-no-unused-catalog-item": "error"
-		}
-	}];
+	];
 }
 
 //#endregion
@@ -1056,8 +1155,9 @@ const ReactRouterPackages = [
 	"@react-router/dev"
 ];
 const NextJsPackages = ["next"];
+const ReactCompilerPackages = ["babel-plugin-react-compiler"];
 async function react(options = {}) {
-	const { files = [GLOB_SRC], filesTypeAware = [GLOB_TS, GLOB_TSX], ignoresTypeAware = [`${GLOB_MARKDOWN}/**`], overrides = {}, tsconfigPath } = options;
+	const { files = [GLOB_SRC], filesTypeAware = [GLOB_TS, GLOB_TSX], ignoresTypeAware = [`${GLOB_MARKDOWN}/**`], overrides = {}, reactCompiler = ReactCompilerPackages.some((i) => (0, local_pkg.isPackageExists)(i)), tsconfigPath } = options;
 	await ensurePackages([
 		"@eslint-react/eslint-plugin",
 		"eslint-plugin-react-hooks",
@@ -1111,6 +1211,8 @@ async function react(options = {}) {
 				"react-dom/no-unsafe-target-blank": "warn",
 				"react-dom/no-use-form-state": "error",
 				"react-dom/no-void-elements-with-children": "error",
+				"react-hooks/exhaustive-deps": "warn",
+				"react-hooks/rules-of-hooks": "error",
 				"react/jsx-no-comment-textnodes": "warn",
 				"react/jsx-no-duplicate-props": "warn",
 				"react/jsx-uses-vars": "warn",
@@ -1151,7 +1253,23 @@ async function react(options = {}) {
 				"react/no-use-context": "warn",
 				"react/no-useless-forward-ref": "warn",
 				"react/prefer-use-state-lazy-initialization": "warn",
-				...pluginReactHooks.configs.recommended.rules,
+				...reactCompiler ? {
+					"react-hooks/component-hook-factories": "error",
+					"react-hooks/config": "error",
+					"react-hooks/error-boundaries": "error",
+					"react-hooks/gating": "error",
+					"react-hooks/globals": "error",
+					"react-hooks/immutability": "error",
+					"react-hooks/incompatible-library": "warn",
+					"react-hooks/preserve-manual-memoization": "error",
+					"react-hooks/purity": "error",
+					"react-hooks/refs": "error",
+					"react-hooks/set-state-in-effect": "error",
+					"react-hooks/set-state-in-render": "error",
+					"react-hooks/static-components": "error",
+					"react-hooks/unsupported-syntax": "warn",
+					"react-hooks/use-memo": "error"
+				} : {},
 				"react-hooks-extra/no-direct-set-state-in-use-effect": "warn",
 				"react-refresh/only-export-components": ["warn", {
 					allowConstantExport: isAllowConstantExport,
@@ -1664,7 +1782,7 @@ async function typescript(options = {}) {
 		}] : [],
 		...erasableOnly ? [{
 			name: "eslint/typescript/erasable-syntax-only",
-			plugins: { "erasable-syntax-only": await interopDefault(Promise.resolve().then(() => require("./lib-DS4wQk2J.cjs"))) },
+			plugins: { "erasable-syntax-only": await interopDefault(import("eslint-plugin-erasable-syntax-only")) },
 			rules: {
 				"erasable-syntax-only/enums": "error",
 				"erasable-syntax-only/import-aliases": "error",
@@ -1940,120 +2058,41 @@ async function yaml(options = {}) {
 	const { files = [GLOB_YAML], overrides = {}, stylistic: stylistic$1 = true } = options;
 	const { quotes = "single" } = typeof stylistic$1 === "boolean" ? {} : stylistic$1;
 	const [pluginYaml, parserYaml] = await Promise.all([interopDefault(import("eslint-plugin-yml")), interopDefault(import("yaml-eslint-parser"))]);
-	return [
-		{
-			name: "eslint/yaml/setup",
-			plugins: { yaml: pluginYaml }
-		},
-		{
-			files,
-			languageOptions: { parser: parserYaml },
-			name: "eslint/yaml/rules",
-			rules: {
-				"style/spaced-comment": "off",
-				"yaml/block-mapping": "error",
-				"yaml/block-sequence": "error",
-				"yaml/no-empty-key": "error",
-				"yaml/no-empty-sequence-entry": "error",
-				"yaml/no-irregular-whitespace": "error",
-				"yaml/plain-scalar": "error",
-				"yaml/vue-custom-block/no-parsing-error": "error",
-				...stylistic$1 ? {
-					"yaml/block-mapping-question-indicator-newline": "error",
-					"yaml/block-sequence-hyphen-indicator-newline": "error",
-					"yaml/flow-mapping-curly-newline": "error",
-					"yaml/flow-mapping-curly-spacing": "error",
-					"yaml/flow-sequence-bracket-newline": "error",
-					"yaml/flow-sequence-bracket-spacing": "error",
-					"yaml/indent": ["error", 2],
-					"yaml/key-spacing": "error",
-					"yaml/no-tab-indent": "error",
-					"yaml/quotes": ["error", {
-						avoidEscape: true,
-						prefer: quotes === "backtick" ? "single" : quotes
-					}],
-					"yaml/spaced-comment": "error"
-				} : {},
-				...overrides
-			}
-		},
-		{
-			files: ["pnpm-workspace.yaml"],
-			name: "eslint/yaml/pnpm-workspace",
-			rules: { "yaml/sort-keys": [
-				"error",
-				{
-					order: [
-						...[
-							"cacheDir",
-							"catalogMode",
-							"cleanupUnusedCatalogs",
-							"dedupeDirectDeps",
-							"deployAllFiles",
-							"enablePrePostScripts",
-							"engineStrict",
-							"extendNodePath",
-							"hoist",
-							"hoistPattern",
-							"hoistWorkspacePackages",
-							"ignoreCompatibilityDb",
-							"ignoreDepScripts",
-							"ignoreScripts",
-							"ignoreWorkspaceRootCheck",
-							"managePackageManagerVersions",
-							"minimumReleaseAge",
-							"minimumReleaseAgeExclude",
-							"modulesDir",
-							"nodeLinker",
-							"nodeVersion",
-							"optimisticRepeatInstall",
-							"packageManagerStrict",
-							"packageManagerStrictVersion",
-							"preferSymlinkedExecutables",
-							"preferWorkspacePackages",
-							"publicHoistPattern",
-							"registrySupportsTimeField",
-							"requiredScrpts",
-							"resolutionMode",
-							"savePrefix",
-							"scriptShell",
-							"shamefullyHoist",
-							"shellEmulator",
-							"stateDir",
-							"supportedArchitectures",
-							"symlink",
-							"tag",
-							"trustPolicy",
-							"trustPolicyExclude",
-							"updateNotifier"
-						],
-						"packages",
-						"overrides",
-						"patchedDependencies",
-						"catalog",
-						"catalogs",
-						...[
-							"allowedDeprecatedVersions",
-							"allowNonAppliedPatches",
-							"configDependencies",
-							"ignoredBuiltDependencies",
-							"ignoredOptionalDependencies",
-							"neverBuiltDependencies",
-							"onlyBuiltDependencies",
-							"onlyBuiltDependenciesFile",
-							"packageExtensions",
-							"peerDependencyRules"
-						]
-					],
-					pathPattern: "^$"
-				},
-				{
-					order: { type: "asc" },
-					pathPattern: ".*"
-				}
-			] }
+	return [{
+		name: "eslint/yaml/setup",
+		plugins: { yaml: pluginYaml }
+	}, {
+		files,
+		languageOptions: { parser: parserYaml },
+		name: "eslint/yaml/rules",
+		rules: {
+			"style/spaced-comment": "off",
+			"yaml/block-mapping": "error",
+			"yaml/block-sequence": "error",
+			"yaml/no-empty-key": "error",
+			"yaml/no-empty-sequence-entry": "error",
+			"yaml/no-irregular-whitespace": "error",
+			"yaml/plain-scalar": "error",
+			"yaml/vue-custom-block/no-parsing-error": "error",
+			...stylistic$1 ? {
+				"yaml/block-mapping-question-indicator-newline": "error",
+				"yaml/block-sequence-hyphen-indicator-newline": "error",
+				"yaml/flow-mapping-curly-newline": "error",
+				"yaml/flow-mapping-curly-spacing": "error",
+				"yaml/flow-sequence-bracket-newline": "error",
+				"yaml/flow-sequence-bracket-spacing": "error",
+				"yaml/indent": ["error", 2],
+				"yaml/key-spacing": "error",
+				"yaml/no-tab-indent": "error",
+				"yaml/quotes": ["error", {
+					avoidEscape: true,
+					prefer: quotes === "backtick" ? "single" : quotes
+				}],
+				"yaml/spaced-comment": "error"
+			} : {},
+			...overrides
 		}
-	];
+	}];
 }
 
 //#endregion

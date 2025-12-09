@@ -1,4 +1,4 @@
-import type { OptionsFiles, OptionsOverrides, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, TypedFlatConfigItem } from '../types'
+import type { OptionsOverrides, OptionsReact, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, TypedFlatConfigItem } from '../types'
 
 import { isPackageExists } from 'local-pkg'
 
@@ -26,9 +26,12 @@ const ReactRouterPackages = [
 const NextJsPackages = [
     'next',
 ]
+const ReactCompilerPackages = [
+    'babel-plugin-react-compiler',
+]
 
 export async function react(
-    options: OptionsTypeScriptParserOptions & OptionsTypeScriptWithTypes & OptionsOverrides & OptionsFiles = {},
+    options: OptionsTypeScriptParserOptions & OptionsTypeScriptWithTypes & OptionsOverrides & OptionsReact = {},
 ): Promise<TypedFlatConfigItem[]> {
     const {
         files = [GLOB_SRC],
@@ -37,6 +40,7 @@ export async function react(
             `${GLOB_MARKDOWN}/**`,
         ],
         overrides = {},
+        reactCompiler = ReactCompilerPackages.some(i => isPackageExists(i)),
         tsconfigPath,
     } = options
 
@@ -110,6 +114,10 @@ export async function react(
                 'react-dom/no-unsafe-target-blank': 'warn',
                 'react-dom/no-use-form-state': 'error',
                 'react-dom/no-void-elements-with-children': 'error',
+                'react-hooks/exhaustive-deps': 'warn',
+                // recommended rules eslint-plugin-react-hooks https://github.com/facebook/react/blob/main/packages/eslint-plugin-react-hooks/README.md
+                // Core hooks rules
+                'react-hooks/rules-of-hooks': 'error',
                 // recommended rules from eslint-plugin-react-x https://eslint-react.xyz/docs/rules/overview#core-rules
                 'react/jsx-no-comment-textnodes': 'warn',
                 'react/jsx-no-duplicate-props': 'warn',
@@ -134,9 +142,9 @@ export async function react(
                 'react/no-implicit-key': 'warn',
                 'react/no-missing-key': 'error',
                 'react/no-nested-component-definitions': 'error',
+
                 'react/no-prop-types': 'error',
                 'react/no-redundant-should-component-update': 'error',
-
                 'react/no-set-state-in-component-did-mount': 'warn',
                 'react/no-set-state-in-component-did-update': 'warn',
                 'react/no-set-state-in-component-will-update': 'warn',
@@ -150,11 +158,28 @@ export async function react(
                 'react/no-unused-class-component-members': 'warn',
                 'react/no-unused-state': 'warn',
                 'react/no-use-context': 'warn',
+
                 'react/no-useless-forward-ref': 'warn',
                 'react/prefer-use-state-lazy-initialization': 'warn',
 
-                // recommended rules eslint-plugin-react-hooks https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks/src/rules
-                ...pluginReactHooks.configs.recommended.rules,
+                // React Compiler rules
+                ...(reactCompiler ? {
+                    'react-hooks/component-hook-factories': 'error',
+                    'react-hooks/config': 'error',
+                    'react-hooks/error-boundaries': 'error',
+                    'react-hooks/gating': 'error',
+                    'react-hooks/globals': 'error',
+                    'react-hooks/immutability': 'error',
+                    'react-hooks/incompatible-library': 'warn',
+                    'react-hooks/preserve-manual-memoization': 'error',
+                    'react-hooks/purity': 'error',
+                    'react-hooks/refs': 'error',
+                    'react-hooks/set-state-in-effect': 'error',
+                    'react-hooks/set-state-in-render': 'error',
+                    'react-hooks/static-components': 'error',
+                    'react-hooks/unsupported-syntax': 'warn',
+                    'react-hooks/use-memo': 'error',
+                } : {}),
 
                 // recommended rules from eslint-plugin-react-hooks-extra https://eslint-react.xyz/docs/rules/overview#hooks-extra-rules
                 'react-hooks-extra/no-direct-set-state-in-use-effect': 'warn',

@@ -54,13 +54,98 @@ export async function pnpm(options: OptionsIsInEditor = {}): Promise<TypedFlatCo
                 'pnpm/yaml-enforce-settings': ['error', {
                     settings: {
                         catalogMode: 'prefer',
-                        cleanupUnusedCatalogs: true,
                         shellEmulator: true,
                     },
                 }],
                 'pnpm/yaml-no-duplicate-catalog-item': 'error',
                 'pnpm/yaml-no-unused-catalog-item': 'error',
 
+            },
+        },
+        {
+            files: ['pnpm-workspace.yaml'],
+            name: 'eslint/yaml/pnpm-workspace',
+            rules: {
+                'yaml/sort-keys': [
+                    'error',
+                    {
+                        order: [
+                            // Settings
+                            // @keep-sorted
+                            ...[
+                                'cacheDir',
+                                'catalogMode',
+                                'cleanupUnusedCatalogs',
+                                'dedupeDirectDeps',
+                                'deployAllFiles',
+                                'enablePrePostScripts',
+                                'engineStrict',
+                                'extendNodePath',
+                                'hoist',
+                                'hoistPattern',
+                                'hoistWorkspacePackages',
+                                'ignoreCompatibilityDb',
+                                'ignoreDepScripts',
+                                'ignoreScripts',
+                                'ignoreWorkspaceRootCheck',
+                                'managePackageManagerVersions',
+                                'minimumReleaseAge',
+                                'minimumReleaseAgeExclude',
+                                'modulesDir',
+                                'nodeLinker',
+                                'nodeVersion',
+                                'optimisticRepeatInstall',
+                                'packageManagerStrict',
+                                'packageManagerStrictVersion',
+                                'preferSymlinkedExecutables',
+                                'preferWorkspacePackages',
+                                'publicHoistPattern',
+                                'registrySupportsTimeField',
+                                'requiredScripts',
+                                'resolutionMode',
+                                'savePrefix',
+                                'scriptShell',
+                                'shamefullyHoist',
+                                'shellEmulator',
+                                'stateDir',
+                                'supportedArchitectures',
+                                'symlink',
+                                'tag',
+                                'trustPolicy',
+                                'trustPolicyExclude',
+                                'updateNotifier',
+                            ],
+
+                            // Packages and dependencies
+                            'packages',
+                            'overrides',
+                            'patchedDependencies',
+
+                            'catalog',
+                            'catalogs',
+
+                            // Other
+                            // @keep-sorted
+                            ...[
+                                'allowedDeprecatedVersions',
+                                'allowNonAppliedPatches',
+                                'configDependencies',
+                                'ignoredBuiltDependencies',
+                                'ignoredOptionalDependencies',
+                                'neverBuiltDependencies',
+                                'onlyBuiltDependencies',
+                                'onlyBuiltDependenciesFile',
+                                'packageExtensions',
+                                'peerDependencyRules',
+                            ],
+                        ],
+                        pathPattern: '^$',
+                    },
+                    {
+                        order: { type: 'asc' },
+                        pathPattern: '.*',
+                    },
+                ],
             },
         },
     ]

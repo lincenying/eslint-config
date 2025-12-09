@@ -2,7 +2,7 @@
   "name": "@lincy/eslint-config",
   "type": "module",
   "version": "6.1.0",
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@10.25.0",
   "description": "LinCenYing's ESLint config",
   "author": "LinCenYing <lincenying@gmail.com> (https://github.com/lincenying/)",
   "license": "MIT",
@@ -12,13 +12,14 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
-    }
+    },
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.cts",
   "files": [
     "dist"
   ],
@@ -77,12 +78,13 @@
     "@stylistic/eslint-plugin": "catalog:prod",
     "@typescript-eslint/eslint-plugin": "catalog:prod",
     "@typescript-eslint/parser": "catalog:prod",
-    "@vitest/eslint-plugin": "catalog:test",
+    "@vitest/eslint-plugin": "catalog:prod",
     "eslint-config-flat-gitignore": "catalog:prod",
     "eslint-flat-config-utils": "catalog:prod",
     "eslint-merge-processors": "catalog:prod",
     "eslint-parser-plain": "catalog:prod",
     "eslint-plugin-antfu": "catalog:prod",
+    "eslint-plugin-erasable-syntax-only": "catalog:prod",
     "eslint-plugin-import-lite": "catalog:prod",
     "eslint-plugin-jsdoc": "catalog:prod",
     "eslint-plugin-jsonc": "catalog:prod",
@@ -117,7 +119,6 @@
     "@unocss/eslint-plugin": "catalog:peer",
     "bumpp": "catalog:dev",
     "eslint": "catalog:peer",
-    "eslint-plugin-erasable-syntax-only": "catalog:peer",
     "eslint-plugin-format": "catalog:peer",
     "eslint-plugin-react-hooks": "catalog:peer",
     "eslint-plugin-react-refresh": "catalog:peer",
@@ -134,6 +135,12 @@
     "typescript": "catalog:dev",
     "vitest": "catalog:test",
     "vue": "catalog:peer"
+  },
+  "resolutions": {
+    "@eslint-community/eslint-utils": "catalog:peer",
+    "@typescript-eslint/utils": "catalog:peer",
+    "eslint": "catalog:peer",
+    "tsx": "catalog:peer"
   },
   "simple-git-hooks[-del]": {
     "pre-commit": "npx lint-staged"

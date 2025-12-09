@@ -994,31 +994,109 @@ async function pnpm(options = {}) {
 		interopDefault(import("yaml-eslint-parser")),
 		interopDefault(import("jsonc-eslint-parser"))
 	]);
-	return [{
-		files: ["package.json", "**/package.json"],
-		languageOptions: { parser: jsoncParser },
-		name: "eslint/pnpm/package-json",
-		plugins: { pnpm: pluginPnpm },
-		rules: {
-			"pnpm/json-enforce-catalog": ["error", { autofix: !options.isInEditor }],
-			"pnpm/json-prefer-workspace-settings": ["error", { autofix: !options.isInEditor }],
-			"pnpm/json-valid-catalog": ["error", { autofix: !options.isInEditor }]
+	return [
+		{
+			files: ["package.json", "**/package.json"],
+			languageOptions: { parser: jsoncParser },
+			name: "eslint/pnpm/package-json",
+			plugins: { pnpm: pluginPnpm },
+			rules: {
+				"pnpm/json-enforce-catalog": ["error", { autofix: !options.isInEditor }],
+				"pnpm/json-prefer-workspace-settings": ["error", { autofix: !options.isInEditor }],
+				"pnpm/json-valid-catalog": ["error", { autofix: !options.isInEditor }]
+			}
+		},
+		{
+			files: ["pnpm-workspace.yaml"],
+			languageOptions: { parser: yamlParser },
+			name: "eslint/pnpm/pnpm-workspace-yaml",
+			plugins: { pnpm: pluginPnpm },
+			rules: {
+				"pnpm/yaml-enforce-settings": ["error", { settings: {
+					catalogMode: "prefer",
+					shellEmulator: true
+				} }],
+				"pnpm/yaml-no-duplicate-catalog-item": "error",
+				"pnpm/yaml-no-unused-catalog-item": "error"
+			}
+		},
+		{
+			files: ["pnpm-workspace.yaml"],
+			name: "eslint/yaml/pnpm-workspace",
+			rules: { "yaml/sort-keys": [
+				"error",
+				{
+					order: [
+						...[
+							"cacheDir",
+							"catalogMode",
+							"cleanupUnusedCatalogs",
+							"dedupeDirectDeps",
+							"deployAllFiles",
+							"enablePrePostScripts",
+							"engineStrict",
+							"extendNodePath",
+							"hoist",
+							"hoistPattern",
+							"hoistWorkspacePackages",
+							"ignoreCompatibilityDb",
+							"ignoreDepScripts",
+							"ignoreScripts",
+							"ignoreWorkspaceRootCheck",
+							"managePackageManagerVersions",
+							"minimumReleaseAge",
+							"minimumReleaseAgeExclude",
+							"modulesDir",
+							"nodeLinker",
+							"nodeVersion",
+							"optimisticRepeatInstall",
+							"packageManagerStrict",
+							"packageManagerStrictVersion",
+							"preferSymlinkedExecutables",
+							"preferWorkspacePackages",
+							"publicHoistPattern",
+							"registrySupportsTimeField",
+							"requiredScripts",
+							"resolutionMode",
+							"savePrefix",
+							"scriptShell",
+							"shamefullyHoist",
+							"shellEmulator",
+							"stateDir",
+							"supportedArchitectures",
+							"symlink",
+							"tag",
+							"trustPolicy",
+							"trustPolicyExclude",
+							"updateNotifier"
+						],
+						"packages",
+						"overrides",
+						"patchedDependencies",
+						"catalog",
+						"catalogs",
+						...[
+							"allowedDeprecatedVersions",
+							"allowNonAppliedPatches",
+							"configDependencies",
+							"ignoredBuiltDependencies",
+							"ignoredOptionalDependencies",
+							"neverBuiltDependencies",
+							"onlyBuiltDependencies",
+							"onlyBuiltDependenciesFile",
+							"packageExtensions",
+							"peerDependencyRules"
+						]
+					],
+					pathPattern: "^$"
+				},
+				{
+					order: { type: "asc" },
+					pathPattern: ".*"
+				}
+			] }
 		}
-	}, {
-		files: ["pnpm-workspace.yaml"],
-		languageOptions: { parser: yamlParser },
-		name: "eslint/pnpm/pnpm-workspace-yaml",
-		plugins: { pnpm: pluginPnpm },
-		rules: {
-			"pnpm/yaml-enforce-settings": ["error", { settings: {
-				catalogMode: "prefer",
-				cleanupUnusedCatalogs: true,
-				shellEmulator: true
-			} }],
-			"pnpm/yaml-no-duplicate-catalog-item": "error",
-			"pnpm/yaml-no-unused-catalog-item": "error"
-		}
-	}];
+	];
 }
 
 //#endregion
@@ -1037,8 +1115,9 @@ const ReactRouterPackages = [
 	"@react-router/dev"
 ];
 const NextJsPackages = ["next"];
+const ReactCompilerPackages = ["babel-plugin-react-compiler"];
 async function react(options = {}) {
-	const { files = [GLOB_SRC], filesTypeAware = [GLOB_TS, GLOB_TSX], ignoresTypeAware = [`${GLOB_MARKDOWN}/**`], overrides = {}, tsconfigPath } = options;
+	const { files = [GLOB_SRC], filesTypeAware = [GLOB_TS, GLOB_TSX], ignoresTypeAware = [`${GLOB_MARKDOWN}/**`], overrides = {}, reactCompiler = ReactCompilerPackages.some((i) => isPackageExists(i)), tsconfigPath } = options;
 	await ensurePackages([
 		"@eslint-react/eslint-plugin",
 		"eslint-plugin-react-hooks",
@@ -1092,6 +1171,8 @@ async function react(options = {}) {
 				"react-dom/no-unsafe-target-blank": "warn",
 				"react-dom/no-use-form-state": "error",
 				"react-dom/no-void-elements-with-children": "error",
+				"react-hooks/exhaustive-deps": "warn",
+				"react-hooks/rules-of-hooks": "error",
 				"react/jsx-no-comment-textnodes": "warn",
 				"react/jsx-no-duplicate-props": "warn",
 				"react/jsx-uses-vars": "warn",
@@ -1132,7 +1213,23 @@ async function react(options = {}) {
 				"react/no-use-context": "warn",
 				"react/no-useless-forward-ref": "warn",
 				"react/prefer-use-state-lazy-initialization": "warn",
-				...pluginReactHooks.configs.recommended.rules,
+				...reactCompiler ? {
+					"react-hooks/component-hook-factories": "error",
+					"react-hooks/config": "error",
+					"react-hooks/error-boundaries": "error",
+					"react-hooks/gating": "error",
+					"react-hooks/globals": "error",
+					"react-hooks/immutability": "error",
+					"react-hooks/incompatible-library": "warn",
+					"react-hooks/preserve-manual-memoization": "error",
+					"react-hooks/purity": "error",
+					"react-hooks/refs": "error",
+					"react-hooks/set-state-in-effect": "error",
+					"react-hooks/set-state-in-render": "error",
+					"react-hooks/static-components": "error",
+					"react-hooks/unsupported-syntax": "warn",
+					"react-hooks/use-memo": "error"
+				} : {},
 				"react-hooks-extra/no-direct-set-state-in-use-effect": "warn",
 				"react-refresh/only-export-components": ["warn", {
 					allowConstantExport: isAllowConstantExport,
@@ -1645,7 +1742,7 @@ async function typescript(options = {}) {
 		}] : [],
 		...erasableOnly ? [{
 			name: "eslint/typescript/erasable-syntax-only",
-			plugins: { "erasable-syntax-only": await interopDefault(import("./lib-CEKTiw7V.js")) },
+			plugins: { "erasable-syntax-only": await interopDefault(import("eslint-plugin-erasable-syntax-only")) },
 			rules: {
 				"erasable-syntax-only/enums": "error",
 				"erasable-syntax-only/import-aliases": "error",
@@ -1921,120 +2018,41 @@ async function yaml(options = {}) {
 	const { files = [GLOB_YAML], overrides = {}, stylistic: stylistic$1 = true } = options;
 	const { quotes = "single" } = typeof stylistic$1 === "boolean" ? {} : stylistic$1;
 	const [pluginYaml, parserYaml] = await Promise.all([interopDefault(import("eslint-plugin-yml")), interopDefault(import("yaml-eslint-parser"))]);
-	return [
-		{
-			name: "eslint/yaml/setup",
-			plugins: { yaml: pluginYaml }
-		},
-		{
-			files,
-			languageOptions: { parser: parserYaml },
-			name: "eslint/yaml/rules",
-			rules: {
-				"style/spaced-comment": "off",
-				"yaml/block-mapping": "error",
-				"yaml/block-sequence": "error",
-				"yaml/no-empty-key": "error",
-				"yaml/no-empty-sequence-entry": "error",
-				"yaml/no-irregular-whitespace": "error",
-				"yaml/plain-scalar": "error",
-				"yaml/vue-custom-block/no-parsing-error": "error",
-				...stylistic$1 ? {
-					"yaml/block-mapping-question-indicator-newline": "error",
-					"yaml/block-sequence-hyphen-indicator-newline": "error",
-					"yaml/flow-mapping-curly-newline": "error",
-					"yaml/flow-mapping-curly-spacing": "error",
-					"yaml/flow-sequence-bracket-newline": "error",
-					"yaml/flow-sequence-bracket-spacing": "error",
-					"yaml/indent": ["error", 2],
-					"yaml/key-spacing": "error",
-					"yaml/no-tab-indent": "error",
-					"yaml/quotes": ["error", {
-						avoidEscape: true,
-						prefer: quotes === "backtick" ? "single" : quotes
-					}],
-					"yaml/spaced-comment": "error"
-				} : {},
-				...overrides
-			}
-		},
-		{
-			files: ["pnpm-workspace.yaml"],
-			name: "eslint/yaml/pnpm-workspace",
-			rules: { "yaml/sort-keys": [
-				"error",
-				{
-					order: [
-						...[
-							"cacheDir",
-							"catalogMode",
-							"cleanupUnusedCatalogs",
-							"dedupeDirectDeps",
-							"deployAllFiles",
-							"enablePrePostScripts",
-							"engineStrict",
-							"extendNodePath",
-							"hoist",
-							"hoistPattern",
-							"hoistWorkspacePackages",
-							"ignoreCompatibilityDb",
-							"ignoreDepScripts",
-							"ignoreScripts",
-							"ignoreWorkspaceRootCheck",
-							"managePackageManagerVersions",
-							"minimumReleaseAge",
-							"minimumReleaseAgeExclude",
-							"modulesDir",
-							"nodeLinker",
-							"nodeVersion",
-							"optimisticRepeatInstall",
-							"packageManagerStrict",
-							"packageManagerStrictVersion",
-							"preferSymlinkedExecutables",
-							"preferWorkspacePackages",
-							"publicHoistPattern",
-							"registrySupportsTimeField",
-							"requiredScrpts",
-							"resolutionMode",
-							"savePrefix",
-							"scriptShell",
-							"shamefullyHoist",
-							"shellEmulator",
-							"stateDir",
-							"supportedArchitectures",
-							"symlink",
-							"tag",
-							"trustPolicy",
-							"trustPolicyExclude",
-							"updateNotifier"
-						],
-						"packages",
-						"overrides",
-						"patchedDependencies",
-						"catalog",
-						"catalogs",
-						...[
-							"allowedDeprecatedVersions",
-							"allowNonAppliedPatches",
-							"configDependencies",
-							"ignoredBuiltDependencies",
-							"ignoredOptionalDependencies",
-							"neverBuiltDependencies",
-							"onlyBuiltDependencies",
-							"onlyBuiltDependenciesFile",
-							"packageExtensions",
-							"peerDependencyRules"
-						]
-					],
-					pathPattern: "^$"
-				},
-				{
-					order: { type: "asc" },
-					pathPattern: ".*"
-				}
-			] }
+	return [{
+		name: "eslint/yaml/setup",
+		plugins: { yaml: pluginYaml }
+	}, {
+		files,
+		languageOptions: { parser: parserYaml },
+		name: "eslint/yaml/rules",
+		rules: {
+			"style/spaced-comment": "off",
+			"yaml/block-mapping": "error",
+			"yaml/block-sequence": "error",
+			"yaml/no-empty-key": "error",
+			"yaml/no-empty-sequence-entry": "error",
+			"yaml/no-irregular-whitespace": "error",
+			"yaml/plain-scalar": "error",
+			"yaml/vue-custom-block/no-parsing-error": "error",
+			...stylistic$1 ? {
+				"yaml/block-mapping-question-indicator-newline": "error",
+				"yaml/block-sequence-hyphen-indicator-newline": "error",
+				"yaml/flow-mapping-curly-newline": "error",
+				"yaml/flow-mapping-curly-spacing": "error",
+				"yaml/flow-sequence-bracket-newline": "error",
+				"yaml/flow-sequence-bracket-spacing": "error",
+				"yaml/indent": ["error", 2],
+				"yaml/key-spacing": "error",
+				"yaml/no-tab-indent": "error",
+				"yaml/quotes": ["error", {
+					avoidEscape: true,
+					prefer: quotes === "backtick" ? "single" : quotes
+				}],
+				"yaml/spaced-comment": "error"
+			} : {},
+			...overrides
 		}
-	];
+	}];
 }
 
 //#endregion
