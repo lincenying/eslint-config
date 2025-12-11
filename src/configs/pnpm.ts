@@ -1,8 +1,24 @@
-import type { OptionsIsInEditor, TypedFlatConfigItem } from '../types'
+import type { OptionsPnpm, TypedFlatConfigItem } from '../types'
+import fs from 'node:fs/promises'
+import { findUp } from 'find-up-simple'
 
 import { interopDefault } from '../utils'
 
-export async function pnpm(options: OptionsIsInEditor = {}): Promise<TypedFlatConfigItem[]> {
+async function detectCatalogUsage(): Promise<boolean> {
+    const workspaceFile = await findUp('pnpm-workspace.yaml')
+    if (!workspaceFile)
+        return false
+
+    const yaml = await fs.readFile(workspaceFile, 'utf-8')
+    return yaml.includes('catalog:') || yaml.includes('catalogs:')
+}
+
+export async function pnpm(options: OptionsPnpm = {}): Promise<TypedFlatConfigItem[]> {
+    const {
+        catalogs = await detectCatalogUsage(),
+        isInEditor = false,
+    } = options
+
     const [
         pluginPnpm,
         yamlParser,
@@ -27,17 +43,19 @@ export async function pnpm(options: OptionsIsInEditor = {}): Promise<TypedFlatCo
                 pnpm: pluginPnpm,
             },
             rules: {
-                'pnpm/json-enforce-catalog': [
-                    'error',
-                    { autofix: !options.isInEditor },
-                ],
+                ...(catalogs ? {
+                    'pnpm/json-enforce-catalog': [
+                        'error',
+                        { autofix: !isInEditor },
+                    ],
+                } : {}),
                 'pnpm/json-prefer-workspace-settings': [
                     'error',
-                    { autofix: !options.isInEditor },
+                    { autofix: isInEditor },
                 ],
                 'pnpm/json-valid-catalog': [
                     'error',
-                    { autofix: !options.isInEditor },
+                    { autofix: isInEditor },
                 ],
             },
         },

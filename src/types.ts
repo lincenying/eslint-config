@@ -232,6 +232,13 @@ export interface OptionsIsInEditor {
     isInEditor?: boolean
 }
 
+export interface OptionsPnpm extends OptionsIsInEditor {
+    /**
+     * 需要使用目录支持?
+     */
+    catalogs?: boolean
+}
+
 export interface OptionsUnoCSS {
     /**
      * 启用 attributify 支持.
