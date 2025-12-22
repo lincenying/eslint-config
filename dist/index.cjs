@@ -29,6 +29,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 let eslint_flat_config_utils = require("eslint-flat-config-utils");
 let node_process = require("node:process");
 node_process = __toESM(node_process);
+let node_fs_promises = require("node:fs/promises");
+node_fs_promises = __toESM(node_fs_promises);
 let node_url = require("node:url");
 let node_fs = require("node:fs");
 node_fs = __toESM(node_fs);
@@ -58,6 +60,21 @@ let eslint_plugin_regexp = require("eslint-plugin-regexp");
 
 //#region node_modules/.pnpm/find-up-simple@1.0.1/node_modules/find-up-simple/index.js
 const toPath = (urlOrPath) => urlOrPath instanceof URL ? (0, node_url.fileURLToPath)(urlOrPath) : urlOrPath;
+async function findUp(name, { cwd = node_process.default.cwd(), type = "file", stopAt } = {}) {
+	let directory = node_path.default.resolve(toPath(cwd) ?? "");
+	const { root } = node_path.default.parse(directory);
+	stopAt = node_path.default.resolve(directory, toPath(stopAt ?? root));
+	const isAbsoluteName = node_path.default.isAbsolute(name);
+	while (directory) {
+		const filePath = isAbsoluteName ? name : node_path.default.join(directory, name);
+		try {
+			const stats = await node_fs_promises.default.stat(filePath);
+			if (type === "file" && stats.isFile() || type === "directory" && stats.isDirectory()) return filePath;
+		} catch {}
+		if (directory === stopAt || directory === root) break;
+		directory = node_path.default.dirname(directory);
+	}
+}
 function findUpSync(name, { cwd = node_process.default.cwd(), type = "file", stopAt } = {}) {
 	let directory = node_path.default.resolve(toPath(cwd) ?? "");
 	const { root } = node_path.default.parse(directory);
@@ -1028,7 +1045,14 @@ async function perfectionist(options = {}) {
 
 //#endregion
 //#region src/configs/pnpm.ts
+async function detectCatalogUsage() {
+	const workspaceFile = await findUp("pnpm-workspace.yaml");
+	if (!workspaceFile) return false;
+	const yaml$1 = await node_fs_promises.default.readFile(workspaceFile, "utf-8");
+	return yaml$1.includes("catalog:") || yaml$1.includes("catalogs:");
+}
 async function pnpm(options = {}) {
+	const { catalogs = await detectCatalogUsage(), isInEditor = false } = options;
 	const [pluginPnpm, yamlParser, jsoncParser] = await Promise.all([
 		interopDefault(import("eslint-plugin-pnpm")),
 		interopDefault(import("yaml-eslint-parser")),
@@ -1041,9 +1065,12 @@ async function pnpm(options = {}) {
 			name: "eslint/pnpm/package-json",
 			plugins: { pnpm: pluginPnpm },
 			rules: {
-				"pnpm/json-enforce-catalog": ["error", { autofix: !options.isInEditor }],
-				"pnpm/json-prefer-workspace-settings": ["error", { autofix: !options.isInEditor }],
-				"pnpm/json-valid-catalog": ["error", { autofix: !options.isInEditor }]
+				...catalogs ? { "pnpm/json-enforce-catalog": ["error", {
+					autofix: !isInEditor,
+					ignores: ["@types/vscode"]
+				}] } : {},
+				"pnpm/json-prefer-workspace-settings": ["error", { autofix: isInEditor }],
+				"pnpm/json-valid-catalog": ["error", { autofix: isInEditor }]
 			}
 		},
 		{
@@ -1201,20 +1228,19 @@ async function react(options = {}) {
 				"react-dom/no-find-dom-node": "error",
 				"react-dom/no-flush-sync": "error",
 				"react-dom/no-hydrate": "error",
-				"react-dom/no-missing-button-type": "warn",
-				"react-dom/no-missing-iframe-sandbox": "warn",
 				"react-dom/no-namespace": "error",
 				"react-dom/no-render": "error",
 				"react-dom/no-render-return-value": "error",
 				"react-dom/no-script-url": "warn",
 				"react-dom/no-unsafe-iframe-sandbox": "warn",
-				"react-dom/no-unsafe-target-blank": "warn",
 				"react-dom/no-use-form-state": "error",
 				"react-dom/no-void-elements-with-children": "error",
 				"react-hooks/exhaustive-deps": "warn",
 				"react-hooks/rules-of-hooks": "error",
+				"react/jsx-key-before-spread": "warn",
 				"react/jsx-no-comment-textnodes": "warn",
 				"react/jsx-no-duplicate-props": "warn",
+				"react/jsx-uses-react": "warn",
 				"react/jsx-uses-vars": "warn",
 				"react/no-access-state-in-setstate": "error",
 				"react/no-array-index-key": "warn",
@@ -1231,11 +1257,12 @@ async function react(options = {}) {
 				"react/no-create-ref": "error",
 				"react/no-default-props": "error",
 				"react/no-direct-mutation-state": "error",
-				"react/no-duplicate-key": "warn",
+				"react/no-duplicate-key": "error",
 				"react/no-forward-ref": "warn",
 				"react/no-implicit-key": "warn",
 				"react/no-missing-key": "error",
 				"react/no-nested-component-definitions": "error",
+				"react/no-nested-lazy-component-declarations": "error",
 				"react/no-prop-types": "error",
 				"react/no-redundant-should-component-update": "error",
 				"react/no-set-state-in-component-did-mount": "warn",
@@ -1246,10 +1273,6 @@ async function react(options = {}) {
 				"react/no-unsafe-component-will-mount": "warn",
 				"react/no-unsafe-component-will-receive-props": "warn",
 				"react/no-unsafe-component-will-update": "warn",
-				"react/no-unstable-context-value": "warn",
-				"react/no-unstable-default-props": "warn",
-				"react/no-unused-class-component-members": "warn",
-				"react/no-unused-state": "warn",
 				"react/no-use-context": "warn",
 				"react/no-useless-forward-ref": "warn",
 				"react/prefer-use-state-lazy-initialization": "warn",

@@ -46,7 +46,10 @@ export async function pnpm(options: OptionsPnpm = {}): Promise<TypedFlatConfigIt
                 ...(catalogs ? {
                     'pnpm/json-enforce-catalog': [
                         'error',
-                        { autofix: !isInEditor },
+                        {
+                            autofix: !isInEditor,
+                            ignores: ['@types/vscode'],
+                        },
                     ],
                 } : {}),
                 'pnpm/json-prefer-workspace-settings': [

@@ -384,6 +384,11 @@ export interface RuleOptions {
    */
   'import/consistent-type-specifier-style'?: Linter.RuleEntry<ImportConsistentTypeSpecifierStyle>
   /**
+   * Ensure all exports appear after other statements.
+   * @see https://github.com/9romise/eslint-plugin-import-lite/blob/main/src/rules/exports-last/README.md
+   */
+  'import/exports-last'?: Linter.RuleEntry<[]>
+  /**
    * Ensure all imports appear before other statements.
    * @see https://github.com/9romise/eslint-plugin-import-lite/blob/main/src/rules/first/README.md
    */
@@ -4277,6 +4282,11 @@ export interface RuleOptions {
    */
   'test/no-test-return-statement'?: Linter.RuleEntry<[]>
   /**
+   * Disallow unnecessary async function wrapper for expected promises
+   * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/no-unneeded-async-expect-function.md
+   */
+  'test/no-unneeded-async-expect-function'?: Linter.RuleEntry<[]>
+  /**
    * Enforce padding around `afterAll` blocks
    * @see https://github.com/vitest-dev/eslint-plugin-vitest/blob/main/docs/rules/padding-around-after-all-blocks.md
    */
@@ -5095,6 +5105,11 @@ export interface RuleOptions {
    * @see https://typescript-eslint.io/rules/no-useless-constructor
    */
   'ts/no-useless-constructor'?: Linter.RuleEntry<[]>
+  /**
+   * Disallow default values that will never be used
+   * @see https://typescript-eslint.io/rules/no-useless-default-assignment
+   */
+  'ts/no-useless-default-assignment'?: Linter.RuleEntry<[]>
   /**
    * Disallow empty exports that don't change anything in a module file
    * @see https://typescript-eslint.io/rules/no-useless-empty-export
