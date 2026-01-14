@@ -159,6 +159,7 @@ export async function react(
                 'react/no-use-context': 'warn',
 
                 'react/no-useless-forward-ref': 'warn',
+                'react/prefer-namespace-import': 'error',
                 'react/prefer-use-state-lazy-initialization': 'warn',
 
                 // React Compiler rules

@@ -1005,28 +1005,27 @@ async function perfectionist(options = {}) {
 			}],
 			"perfectionist/sort-imports": ["error", {
 				groups: [
-					"type",
-					"builtin-type",
+					"type-import",
 					[
-						"index-type",
-						"parent-type",
-						"sibling-type",
-						"internal-type"
+						"type-parent",
+						"type-sibling",
+						"type-index",
+						"type-internal"
 					],
-					"builtin",
-					"external",
-					"internal",
+					"value-builtin",
+					"value-external",
+					"value-internal",
 					[
-						"index",
-						"parent",
-						"sibling"
+						"value-parent",
+						"value-sibling",
+						"value-index"
 					],
 					"side-effect",
-					"object",
+					"ts-equals-import",
 					"unknown"
 				],
-				internalPattern: ["^~/.*", "^@/.*"],
 				newlinesBetween: "ignore",
+				newlinesInside: "ignore",
 				order: "asc",
 				type: "natural"
 			}],
@@ -1275,6 +1274,7 @@ async function react(options = {}) {
 				"react/no-unsafe-component-will-update": "warn",
 				"react/no-use-context": "warn",
 				"react/no-useless-forward-ref": "warn",
+				"react/prefer-namespace-import": "error",
 				"react/prefer-use-state-lazy-initialization": "warn",
 				...reactCompiler ? {
 					"react-hooks/component-hook-factories": "error",
