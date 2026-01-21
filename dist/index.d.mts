@@ -2959,7 +2959,7 @@ interface RuleOptions {
    */
   'react/no-direct-mutation-state'?: Linter.RuleEntry<[]>;
   /**
-   * Disallows duplicate 'key' on elements in the same array or a list of 'children'.
+   * Prevents duplicate 'key' props on sibling elements when rendering lists.
    * @see https://eslint-react.xyz/docs/rules/no-duplicate-key
    */
   'react/no-duplicate-key'?: Linter.RuleEntry<[]>;
@@ -6638,6 +6638,11 @@ interface RuleOptions {
    */
   'vue/no-lifecycle-after-await'?: Linter.RuleEntry<[]>;
   /**
+   * disallow object, array, and function literals in template
+   * @see https://eslint.vuejs.org/rules/no-literals-in-template.html
+   */
+  'vue/no-literals-in-template'?: Linter.RuleEntry<[]>;
+  /**
    * disallow unnecessary `<template>`
    * @see https://eslint.vuejs.org/rules/no-lone-template.html
    */
@@ -6847,6 +6852,11 @@ interface RuleOptions {
    * @see https://eslint.vuejs.org/rules/no-undef-components.html
    */
   'vue/no-undef-components'?: Linter.RuleEntry<VueNoUndefComponents>;
+  /**
+   * disallow use of undefined custom directives
+   * @see https://eslint.vuejs.org/rules/no-undef-directives.html
+   */
+  'vue/no-undef-directives'?: Linter.RuleEntry<VueNoUndefDirectives>;
   /**
    * disallow undefined properties
    * @see https://eslint.vuejs.org/rules/no-undef-properties.html
@@ -8439,6 +8449,7 @@ type JsdocTypeFormatting = [] | [{
   objectFieldSeparator?: ("comma" | "comma-and-linebreak" | "linebreak" | "semicolon" | "semicolon-and-linebreak");
   objectFieldSeparatorOptionalLinebreak?: boolean;
   objectFieldSeparatorTrailingPunctuation?: boolean;
+  objectTypeBracketSpacing?: string;
   parameterDefaultValueSpacing?: string;
   postMethodNameSpacing?: string;
   postNewSpacing?: string;
@@ -16407,6 +16418,7 @@ type VueNoLoneTemplate = [] | [{
 // ----- vue/no-multi-spaces -----
 type VueNoMultiSpaces = [] | [{
   ignoreProperties?: boolean;
+  ignoreEOLComments?: boolean;
 }];
 // ----- vue/no-multiple-template-root -----
 type VueNoMultipleTemplateRoot = [] | [{
@@ -16563,6 +16575,10 @@ type VueNoTemplateTargetBlank = [] | [{
 // ----- vue/no-undef-components -----
 type VueNoUndefComponents = [] | [{
   ignorePatterns?: unknown[];
+}];
+// ----- vue/no-undef-directives -----
+type VueNoUndefDirectives = [] | [{
+  ignore?: string[];
 }];
 // ----- vue/no-undef-properties -----
 type VueNoUndefProperties = [] | [{

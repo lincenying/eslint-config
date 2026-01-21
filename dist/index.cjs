@@ -37,8 +37,8 @@ node_fs = __toESM(node_fs);
 let node_path = require("node:path");
 node_path = __toESM(node_path);
 let local_pkg = require("local-pkg");
-let __eslint_community_eslint_plugin_eslint_comments = require("@eslint-community/eslint-plugin-eslint-comments");
-__eslint_community_eslint_plugin_eslint_comments = __toESM(__eslint_community_eslint_plugin_eslint_comments);
+let _eslint_community_eslint_plugin_eslint_comments = require("@eslint-community/eslint-plugin-eslint-comments");
+_eslint_community_eslint_plugin_eslint_comments = __toESM(_eslint_community_eslint_plugin_eslint_comments);
 let eslint_plugin_antfu = require("eslint-plugin-antfu");
 eslint_plugin_antfu = __toESM(eslint_plugin_antfu);
 let eslint_plugin_import_lite = require("eslint-plugin-import-lite");
@@ -97,7 +97,7 @@ async function comments(options = {}) {
 	const { overrides = {} } = options;
 	return [{
 		name: "eslint/comments/rules",
-		plugins: { "eslint-comments": __eslint_community_eslint_plugin_eslint_comments.default },
+		plugins: { "eslint-comments": _eslint_community_eslint_plugin_eslint_comments.default },
 		rules: {
 			"eslint-comments/no-aggregating-enable": "error",
 			"eslint-comments/no-duplicate-disable": "error",
@@ -1294,7 +1294,7 @@ async function react(options = {}) {
 					"react-hooks/use-memo": "error"
 				} : {},
 				"react-hooks-extra/no-direct-set-state-in-use-effect": "warn",
-				"react-refresh/only-export-components": ["warn", {
+				"react-refresh/only-export-components": ["error", {
 					allowConstantExport: isAllowConstantExport,
 					allowExportNames: [...isUsingNext ? [
 						"dynamic",
@@ -1304,12 +1304,12 @@ async function react(options = {}) {
 						"runtime",
 						"preferredRegion",
 						"maxDuration",
-						"config",
 						"generateStaticParams",
 						"metadata",
 						"generateMetadata",
 						"viewport",
-						"generateViewport"
+						"generateViewport",
+						"generateImageMetadata"
 					] : [], ...isUsingRemix || isUsingReactRouter ? [
 						"meta",
 						"links",
@@ -1652,7 +1652,7 @@ async function toml(options = {}) {
 				"toml/array-bracket-newline": "error",
 				"toml/array-bracket-spacing": "error",
 				"toml/array-element-newline": "error",
-				"toml/indent": ["error", indent === "tab" ? 4 : indent],
+				"toml/indent": ["error", typeof indent === "number" ? indent : indent === "tab" ? "tab" : 4],
 				"toml/inline-table-curly-spacing": "error",
 				"toml/key-spacing": "error",
 				"toml/padding-line-between-pairs": "error",

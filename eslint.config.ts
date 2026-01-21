@@ -23,7 +23,7 @@ const config = lincy(
                 'antfu/consistent-list-newline': 'off',
             },
             ignores: [
-                '**/fixtures',
+                '**/fixtures/input',
                 '**/_fixtures',
             ],
         },

@@ -7,6 +7,9 @@ import { glob } from 'tinyglobby'
 
 import { afterAll, beforeAll, it } from 'vitest'
 
+const isWindows = process.platform === 'win32'
+const timeout = isWindows ? 300_000 : 60_000
+
 beforeAll(async () => {
     await fs.rm('_fixtures', { recursive: true, force: true })
 })
@@ -45,6 +48,7 @@ runWithConfig(
     {
         typescript: true,
         vue: true,
+        toml: true,
         stylistic: {
             indent: 'tab',
             quotes: 'double',
@@ -57,6 +61,7 @@ runWithConfig(
     },
 )
 
+// https://github.com/antfu/eslint-config/issues/255
 runWithConfig(
     'ts-override',
     {
@@ -69,6 +74,7 @@ runWithConfig(
     },
 )
 
+// https://github.com/antfu/eslint-config/issues/255
 runWithConfig(
     'ts-strict',
     {
@@ -83,6 +89,7 @@ runWithConfig(
     },
 )
 
+// https://github.com/antfu/eslint-config/issues/618
 runWithConfig(
     'ts-strict-with-react',
     {
@@ -151,8 +158,7 @@ function runWithConfig(name: string, configs: OptionsConfig, ...items: TypedFlat
                 )
             `)
 
-        const pyload = ['eslint', '.', '--fix']
-        await execa('npx', pyload, {
+        await execa('npx', ['eslint', '.', '--fix'], {
             cwd: target,
             stdio: 'pipe',
         })
@@ -175,5 +181,5 @@ function runWithConfig(name: string, configs: OptionsConfig, ...items: TypedFlat
             }
             await expect.soft(content).toMatchFileSnapshot(join(output, file))
         }))
-    }, 30_000)
+    }, timeout)
 }

@@ -1,14 +1,14 @@
 import * as React from 'react'
 
-type CompProps = {
-    children: React.ReactNode; // 👈️ type children
-  };
+type ListItemProps = {
+  children: React.ReactNode; // 👈️ type children
+};
 
-export function Component1(props: CompProps) {
-  return <div>{props.children}</div>;
+export function Component1(props: ListItemProps) {
+  return <div/>;
 }
 
-export function jsx2() {
+export function Component2() {
   const props = {a:1,
   b:2}
   return < a  foo= 'bar' bar={`foo` } >

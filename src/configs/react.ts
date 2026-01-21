@@ -186,11 +186,12 @@ export async function react(
 
                 // preconfigured rules from eslint-plugin-react-refresh https://github.com/ArnaudBarre/eslint-plugin-react-refresh/tree/main/src
                 'react-refresh/only-export-components': [
-                    'warn',
+                    'error',
                     {
                         allowConstantExport: isAllowConstantExport,
                         allowExportNames: [
                             ...(isUsingNext ? [
+                                // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
                                 'dynamic',
                                 'dynamicParams',
                                 'revalidate',
@@ -198,12 +199,18 @@ export async function react(
                                 'runtime',
                                 'preferredRegion',
                                 'maxDuration',
-                                'config',
+                                // https://nextjs.org/docs/app/api-reference/functions/generate-static-params
                                 'generateStaticParams',
+                                // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
                                 'metadata',
                                 'generateMetadata',
+                                // https://nextjs.org/docs/app/api-reference/functions/generate-viewport
                                 'viewport',
                                 'generateViewport',
+                                // https://nextjs.org/docs/app/api-reference/functions/generate-image-metadata
+                                'generateImageMetadata',
+                                // https://nextjs.org/docs/app/api-reference/functions/generate-sitemaps
+
                             ] : []),
                             ...(isUsingRemix || isUsingReactRouter ? [
                                 'meta',

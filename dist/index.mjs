@@ -1253,7 +1253,7 @@ async function react(options = {}) {
 					"react-hooks/use-memo": "error"
 				} : {},
 				"react-hooks-extra/no-direct-set-state-in-use-effect": "warn",
-				"react-refresh/only-export-components": ["warn", {
+				"react-refresh/only-export-components": ["error", {
 					allowConstantExport: isAllowConstantExport,
 					allowExportNames: [...isUsingNext ? [
 						"dynamic",
@@ -1263,12 +1263,12 @@ async function react(options = {}) {
 						"runtime",
 						"preferredRegion",
 						"maxDuration",
-						"config",
 						"generateStaticParams",
 						"metadata",
 						"generateMetadata",
 						"viewport",
-						"generateViewport"
+						"generateViewport",
+						"generateImageMetadata"
 					] : [], ...isUsingRemix || isUsingReactRouter ? [
 						"meta",
 						"links",
@@ -1611,7 +1611,7 @@ async function toml(options = {}) {
 				"toml/array-bracket-newline": "error",
 				"toml/array-bracket-spacing": "error",
 				"toml/array-element-newline": "error",
-				"toml/indent": ["error", indent === "tab" ? 4 : indent],
+				"toml/indent": ["error", typeof indent === "number" ? indent : indent === "tab" ? "tab" : 4],
 				"toml/inline-table-curly-spacing": "error",
 				"toml/key-spacing": "error",
 				"toml/padding-line-between-pairs": "error",
