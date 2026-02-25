@@ -1,5 +1,7 @@
 import type { OptionsOverrides, OptionsStylistic, TypedFlatConfigItem } from '../types'
 
+import { GLOB_SRC } from '../globs'
+
 import { interopDefault } from '../utils'
 
 export async function jsdoc(options: OptionsStylistic & OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
@@ -10,10 +12,15 @@ export async function jsdoc(options: OptionsStylistic & OptionsOverrides = {}): 
 
     return [
         {
-            name: 'eslint/jsdoc/rules',
+            name: 'eslint/jsdoc/setup',
+
             plugins: {
                 jsdoc: await interopDefault(import('eslint-plugin-jsdoc')),
             },
+        },
+        {
+            files: [GLOB_SRC],
+            name: 'eslint/jsdoc/rules',
             rules: {
                 'jsdoc/check-access': 'warn',
                 'jsdoc/check-param-names': 'warn',

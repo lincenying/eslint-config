@@ -12,13 +12,7 @@ export async function jsonc(
         stylistic = true,
     } = options
 
-    const [
-        pluginJsonc,
-        parserJsonc,
-    ] = await Promise.all([
-        interopDefault(import('eslint-plugin-jsonc')),
-        interopDefault(import('jsonc-eslint-parser')),
-    ] as const)
+    const pluginJsonc = await interopDefault(import('eslint-plugin-jsonc'))
 
     return [
         {
@@ -29,9 +23,7 @@ export async function jsonc(
         },
         {
             files,
-            languageOptions: {
-                parser: parserJsonc,
-            },
+            language: 'jsonc/x',
             name: 'eslint/jsonc/rules',
             rules: {
                 'jsonc/no-bigint-literals': 'error',

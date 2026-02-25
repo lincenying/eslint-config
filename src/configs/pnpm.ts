@@ -13,56 +13,66 @@ async function detectCatalogUsage(): Promise<boolean> {
     return yaml.includes('catalog:') || yaml.includes('catalogs:')
 }
 
-export async function pnpm(options: OptionsPnpm = {}): Promise<TypedFlatConfigItem[]> {
+export async function pnpm(
+    options: OptionsPnpm,
+): Promise<TypedFlatConfigItem[]> {
+    const [
+        pluginPnpm,
+        pluginYaml,
+        yamlParser,
+    ] = await Promise.all([
+        interopDefault(import('eslint-plugin-pnpm')),
+        interopDefault(import('eslint-plugin-yml')),
+        interopDefault(import('yaml-eslint-parser')),
+    ])
+
     const {
         catalogs = await detectCatalogUsage(),
         isInEditor = false,
+        json = true,
+        sort = true,
+        yaml = true,
     } = options
 
-    const [
-        pluginPnpm,
-        yamlParser,
-        jsoncParser,
-    ] = await Promise.all([
-        interopDefault(import('eslint-plugin-pnpm')),
-        interopDefault(import('yaml-eslint-parser')),
-        interopDefault(import('jsonc-eslint-parser')),
-    ])
+    const configs: TypedFlatConfigItem[] = []
 
-    return [
-        {
-            files: [
-                'package.json',
-                '**/package.json',
-            ],
-            languageOptions: {
-                parser: jsoncParser,
-            },
-            name: 'eslint/pnpm/package-json',
-            plugins: {
-                pnpm: pluginPnpm,
-            },
-            rules: {
-                ...(catalogs ? {
-                    'pnpm/json-enforce-catalog': [
+    if (json) {
+        configs.push(
+            {
+                files: [
+                    'package.json',
+                    '**/package.json',
+                ],
+                language: 'jsonc/x',
+                name: 'eslint/pnpm/package-json',
+                plugins: {
+                    pnpm: pluginPnpm,
+                },
+                rules: {
+                    ...(catalogs ? {
+                        'pnpm/json-enforce-catalog': [
+                            'error',
+                            {
+                                autofix: !isInEditor,
+                                ignores: ['@types/vscode'],
+                            },
+                        ],
+                    } : {}),
+                    'pnpm/json-prefer-workspace-settings': [
                         'error',
-                        {
-                            autofix: !isInEditor,
-                            ignores: ['@types/vscode'],
-                        },
+                        { autofix: !isInEditor },
                     ],
-                } : {}),
-                'pnpm/json-prefer-workspace-settings': [
-                    'error',
-                    { autofix: isInEditor },
-                ],
-                'pnpm/json-valid-catalog': [
-                    'error',
-                    { autofix: isInEditor },
-                ],
+                    'pnpm/json-valid-catalog': [
+                        'error',
+                        { autofix: !isInEditor },
+                    ],
+                },
             },
-        },
-        {
+        )
+    }
+
+    if (yaml) {
+        configs.push({
             files: ['pnpm-workspace.yaml'],
             languageOptions: {
                 parser: yamlParser,
@@ -74,100 +84,109 @@ export async function pnpm(options: OptionsPnpm = {}): Promise<TypedFlatConfigIt
             rules: {
                 'pnpm/yaml-enforce-settings': ['error', {
                     settings: {
-                        catalogMode: 'prefer',
                         shellEmulator: true,
+                        trustPolicy: 'no-downgrade',
                     },
                 }],
                 'pnpm/yaml-no-duplicate-catalog-item': 'error',
                 'pnpm/yaml-no-unused-catalog-item': 'error',
-
             },
-        },
-        {
-            files: ['pnpm-workspace.yaml'],
-            name: 'eslint/yaml/pnpm-workspace',
-            rules: {
-                'yaml/sort-keys': [
-                    'error',
-                    {
-                        order: [
-                            // Settings
-                            // @keep-sorted
-                            ...[
-                                'cacheDir',
-                                'catalogMode',
-                                'cleanupUnusedCatalogs',
-                                'dedupeDirectDeps',
-                                'deployAllFiles',
-                                'enablePrePostScripts',
-                                'engineStrict',
-                                'extendNodePath',
-                                'hoist',
-                                'hoistPattern',
-                                'hoistWorkspacePackages',
-                                'ignoreCompatibilityDb',
-                                'ignoreDepScripts',
-                                'ignoreScripts',
-                                'ignoreWorkspaceRootCheck',
-                                'managePackageManagerVersions',
-                                'minimumReleaseAge',
-                                'minimumReleaseAgeExclude',
-                                'modulesDir',
-                                'nodeLinker',
-                                'nodeVersion',
-                                'optimisticRepeatInstall',
-                                'packageManagerStrict',
-                                'packageManagerStrictVersion',
-                                'preferSymlinkedExecutables',
-                                'preferWorkspacePackages',
-                                'publicHoistPattern',
-                                'registrySupportsTimeField',
-                                'requiredScripts',
-                                'resolutionMode',
-                                'savePrefix',
-                                'scriptShell',
-                                'shamefullyHoist',
-                                'shellEmulator',
-                                'stateDir',
-                                'supportedArchitectures',
-                                'symlink',
-                                'tag',
-                                'trustPolicy',
-                                'trustPolicyExclude',
-                                'updateNotifier',
+        })
+
+        if (sort) {
+            configs.push({
+                files: ['pnpm-workspace.yaml'],
+                languageOptions: {
+                    parser: yamlParser,
+                },
+                name: 'eslint/pnpm/pnpm-workspace-yaml-sort',
+                plugins: {
+                    yaml: pluginYaml,
+                },
+                rules: {
+                    'yaml/sort-keys': [
+                        'error',
+                        {
+                            order: [
+                                // Settings
+                                // @keep-sorted
+                                ...[
+                                    'cacheDir',
+                                    'catalogMode',
+                                    'cleanupUnusedCatalogs',
+                                    'dedupeDirectDeps',
+                                    'deployAllFiles',
+                                    'enablePrePostScripts',
+                                    'engineStrict',
+                                    'extendNodePath',
+                                    'hoist',
+                                    'hoistPattern',
+                                    'hoistWorkspacePackages',
+                                    'ignoreCompatibilityDb',
+                                    'ignoreDepScripts',
+                                    'ignoreScripts',
+                                    'ignoreWorkspaceRootCheck',
+                                    'managePackageManagerVersions',
+                                    'minimumReleaseAge',
+                                    'minimumReleaseAgeExclude',
+                                    'modulesDir',
+                                    'nodeLinker',
+                                    'nodeVersion',
+                                    'optimisticRepeatInstall',
+                                    'packageManagerStrict',
+                                    'packageManagerStrictVersion',
+                                    'preferSymlinkedExecutables',
+                                    'preferWorkspacePackages',
+                                    'publicHoistPattern',
+                                    'registrySupportsTimeField',
+                                    'requiredScripts',
+                                    'resolutionMode',
+                                    'savePrefix',
+                                    'scriptShell',
+                                    'shamefullyHoist',
+                                    'shellEmulator',
+                                    'stateDir',
+                                    'supportedArchitectures',
+                                    'symlink',
+                                    'tag',
+                                    'trustPolicy',
+                                    'trustPolicyExclude',
+                                    'updateNotifier',
+                                ],
+
+                                // Packages and dependencies
+                                'packages',
+                                'overrides',
+                                'patchedDependencies',
+                                'catalog',
+                                'catalogs',
+
+                                // Other
+                                // @keep-sorted
+                                ...[
+                                    'allowedDeprecatedVersions',
+                                    'allowNonAppliedPatches',
+                                    'configDependencies',
+                                    'ignoredBuiltDependencies',
+                                    'ignoredOptionalDependencies',
+                                    'neverBuiltDependencies',
+                                    'onlyBuiltDependencies',
+                                    'onlyBuiltDependenciesFile',
+                                    'packageExtensions',
+                                    'peerDependencyRules',
+                                ],
                             ],
+                            pathPattern: '^$',
+                        },
+                        {
+                            order: { type: 'asc' },
+                            pathPattern: '.*',
+                        },
+                    ],
+                },
+            })
+        }
+    }
 
-                            // Packages and dependencies
-                            'packages',
-                            'overrides',
-                            'patchedDependencies',
-
-                            'catalog',
-                            'catalogs',
-
-                            // Other
-                            // @keep-sorted
-                            ...[
-                                'allowedDeprecatedVersions',
-                                'allowNonAppliedPatches',
-                                'configDependencies',
-                                'ignoredBuiltDependencies',
-                                'ignoredOptionalDependencies',
-                                'neverBuiltDependencies',
-                                'onlyBuiltDependencies',
-                                'onlyBuiltDependenciesFile',
-                                'packageExtensions',
-                                'peerDependencyRules',
-                            ],
-                        ],
-                        pathPattern: '^$',
-                    },
-                    {
-                        order: { type: 'asc' },
-                        pathPattern: '.*',
-                    },
-                ],
-            },
-        },
-    ]
+    return configs
 }

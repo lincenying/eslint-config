@@ -2,6 +2,7 @@ import type { StylisticCustomizeOptions } from '@stylistic/eslint-plugin'
 import type { ParserOptions } from '@typescript-eslint/parser'
 import type { Linter } from 'eslint'
 import type { FlatGitignoreOptions } from 'eslint-config-flat-gitignore'
+import type { ConfigWithExtends } from 'eslint-flat-config-utils'
 import type { Options as VueBlocksOptions } from 'eslint-processor-vue-blocks'
 
 import type { VendoredPrettierOptions } from './prettier.types'
@@ -11,14 +12,14 @@ export type Awaitable<T> = T | Promise<T>
 
 export type Rules = Record<string, Linter.RuleEntry<any> | undefined> & RuleOptions
 
-export type { ConfigNames }
+export type { ConfigNames, RuleOptions }
 
 /**
  * ESLint 的 `Linter.Config` 的更新版本，
  * 为 `rules` 提供自动补全功能，并放宽了 `plugins` 和 `rules` 的类型限制，
  * 因为许多插件仍然缺乏适当的类型定义。
  */
-export type TypedFlatConfigItem = Omit<Linter.Config, 'plugins' | 'rules'> & {
+export type TypedFlatConfigItem = Omit<ConfigWithExtends, 'plugins' | 'rules'> & {
     /**
      * 一个包含插件名称到插件对象的键值对映射的对象。
      * 当指定 `files` 时，这些插件仅适用于匹配的文件。
@@ -182,9 +183,9 @@ export interface OptionsStylistic {
 
 export interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent' | 'quotes' | 'jsx' | 'semi'> {
     /**
-     * Disable some opinionated rules to Anthony's preference.
+     * 禁用了一些带有主观色彩的规则。
      *
-     * Including:
+     * 包括:
      * - `antfu/top-level-function`
      * - `antfu/if-newline`
      * - `antfu/curly`
@@ -195,7 +196,24 @@ export interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent
 }
 
 export interface OptionsOverrides {
+    /**
+     * 覆盖规则
+     */
     overrides?: TypedFlatConfigItem['rules']
+}
+
+export interface OptionsMarkdown extends OptionsOverrides {
+    /**
+     * 启用 GFM（GitHub Flavored Markdown）支持
+     *
+     * @default true
+     */
+    gfm?: boolean
+
+    /**
+     * 覆盖 Markdown 本身的规则
+     */
+    overridesMarkdown?: TypedFlatConfigItem['rules']
 }
 
 export interface OptionsProjectType {
@@ -219,7 +237,7 @@ export interface OptionsTypeScriptErasableOnly {
 
 export interface OptionsRegExp {
     /**
-     * Override rulelevels
+     * 覆盖规则级别
      */
     level?: 'error' | 'warn'
 }
@@ -237,6 +255,27 @@ export interface OptionsPnpm extends OptionsIsInEditor {
      * 需要使用目录支持?
      */
     catalogs?: boolean
+
+    /**
+     * 启用 package.json 的 lint 功能，将会安装 jsonc 解析器。
+     *
+     * @default true
+     */
+    json?: boolean
+
+    /**
+     * 启用 pnpm-workspace.yaml 的 lint 功能，将会安装 yaml 解析器。
+     *
+     * @default true
+     */
+    yaml?: boolean
+
+    /**
+     * 对 pnpm-workspace.yaml 中的条目进行排序
+     *
+     * @default false
+     */
+    sort?: boolean
 }
 
 export interface OptionsUnoCSS {

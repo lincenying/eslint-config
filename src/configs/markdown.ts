@@ -1,18 +1,19 @@
-import type { OptionsComponentExts, OptionsFiles, OptionsOverrides, TypedFlatConfigItem } from '../types'
+import type { OptionsComponentExts, OptionsFiles, OptionsMarkdown, TypedFlatConfigItem } from '../types'
 
 import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors'
-import * as parserPlain from 'eslint-parser-plain'
 
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from '../globs'
 import { interopDefault } from '../utils'
 
 export async function markdown(
-    options: OptionsFiles & OptionsComponentExts & OptionsOverrides = {},
+    options: OptionsFiles & OptionsComponentExts & OptionsMarkdown = {},
 ): Promise<TypedFlatConfigItem[]> {
     const {
         componentExts = [],
         files = [GLOB_MARKDOWN],
+        gfm = true,
         overrides = {},
+        overridesMarkdown = {},
     } = options
 
     const markdown = await interopDefault(import('@eslint/markdown'))
@@ -35,10 +36,34 @@ export async function markdown(
         },
         {
             files,
-            languageOptions: {
-                parser: parserPlain,
-            },
+            language: gfm ? 'markdown/gfm' : 'markdown/commonmark',
             name: 'eslint/markdown/parser',
+        },
+        {
+            files,
+            name: 'eslint/markdown/rules',
+            rules: {
+                ...markdown.configs.recommended.at(0)?.rules,
+                // https://github.com/eslint/markdown/issues/294
+                'markdown/no-missing-label-refs': 'off',
+                ...overridesMarkdown,
+            },
+        },
+        {
+            files,
+            name: 'eslint/markdown/disables/markdown',
+            rules: {
+                // Disable rules do not work with markdown sourcecode.
+                'command/command': 'off',
+                'no-irregular-whitespace': 'off',
+                'perfectionist/sort-exports': 'off',
+                'perfectionist/sort-imports': 'off',
+                'regexp/no-legacy-features': 'off',
+                'regexp/no-missing-g-flag': 'off',
+                'regexp/no-useless-dollar-replacements': 'off',
+                'regexp/no-useless-flag': 'off',
+                'style/indent': 'off',
+            },
         },
         {
             files: [
@@ -52,7 +77,7 @@ export async function markdown(
                     },
                 },
             },
-            name: 'eslint/markdown/disables',
+            name: 'eslint/markdown/disables/code',
             rules: {
                 'antfu/no-top-level-await': 'off',
                 'import/newline-after-import': 'off',
