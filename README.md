@@ -107,7 +107,7 @@ export default lincy()
 
 通常你只需要导入 `lincy` 预设：
 
-#### esm
+### esm
 
 如果 package.json 中开启了`"type": "module",`
 
@@ -121,7 +121,7 @@ import lincy from '@lincy/eslint-config'
 export default lincy()
 ```
 
-#### cjs
+### cjs
 
 如果 package.json 中没有开启`"type": "module",`
 
