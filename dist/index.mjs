@@ -14,7 +14,6 @@ import pluginUnicorn from "eslint-plugin-unicorn";
 import pluginUnusedImports from "eslint-plugin-unused-imports";
 import globals from "globals";
 import { mergeProcessors, processorPassThrough } from "eslint-merge-processors";
-import * as parserPlain$1 from "eslint-parser-plain";
 import { configs } from "eslint-plugin-regexp";
 
 //#region node_modules/.pnpm/find-up-simple@1.0.1/node_modules/find-up-simple/index.js
@@ -323,7 +322,7 @@ async function stylistic(options = {}) {
 
 //#endregion
 //#region src/configs/formatters.ts
-function mergePrettierOptions(options, overrides = {}) {
+function mergePrettierOptions(options, overrides) {
 	return {
 		...options,
 		...overrides,
@@ -716,8 +715,11 @@ async function javascript(options = {}) {
 async function jsdoc(options = {}) {
 	const { overrides = {}, stylistic: stylistic$1 = true } = options;
 	return [{
+		name: "eslint/jsdoc/setup",
+		plugins: { jsdoc: await interopDefault(import("eslint-plugin-jsdoc")) }
+	}, {
+		files: [GLOB_SRC],
 		name: "eslint/jsdoc/rules",
-		plugins: { jsdoc: await interopDefault(import("eslint-plugin-jsdoc")) },
 		rules: {
 			"jsdoc/check-access": "warn",
 			"jsdoc/check-param-names": "warn",
@@ -751,13 +753,12 @@ async function jsonc(options = {}) {
 		GLOB_JSON5,
 		GLOB_JSONC
 	], overrides = {}, stylistic: stylistic$1 = true } = options;
-	const [pluginJsonc, parserJsonc] = await Promise.all([interopDefault(import("eslint-plugin-jsonc")), interopDefault(import("jsonc-eslint-parser"))]);
 	return [{
 		name: "eslint/jsonc/setup",
-		plugins: { jsonc: pluginJsonc }
+		plugins: { jsonc: await interopDefault(import("eslint-plugin-jsonc")) }
 	}, {
 		files,
-		languageOptions: { parser: parserJsonc },
+		language: "jsonc/x",
 		name: "eslint/jsonc/rules",
 		rules: {
 			"jsonc/no-bigint-literals": "error",
@@ -822,7 +823,7 @@ async function jsx() {
 //#endregion
 //#region src/configs/markdown.ts
 async function markdown(options = {}) {
-	const { componentExts = [], files = [GLOB_MARKDOWN], overrides = {} } = options;
+	const { componentExts = [], files = [GLOB_MARKDOWN], gfm = true, overrides = {}, overridesMarkdown = {} } = options;
 	const markdown$1 = await interopDefault(import("@eslint/markdown"));
 	return [
 		{
@@ -837,13 +838,37 @@ async function markdown(options = {}) {
 		},
 		{
 			files,
-			languageOptions: { parser: parserPlain$1 },
+			language: gfm ? "markdown/gfm" : "markdown/commonmark",
 			name: "eslint/markdown/parser"
+		},
+		{
+			files,
+			name: "eslint/markdown/rules",
+			rules: {
+				...markdown$1.configs.recommended.at(0)?.rules,
+				"markdown/no-missing-label-refs": "off",
+				...overridesMarkdown
+			}
+		},
+		{
+			files,
+			name: "eslint/markdown/disables/markdown",
+			rules: {
+				"command/command": "off",
+				"no-irregular-whitespace": "off",
+				"perfectionist/sort-exports": "off",
+				"perfectionist/sort-imports": "off",
+				"regexp/no-legacy-features": "off",
+				"regexp/no-missing-g-flag": "off",
+				"regexp/no-useless-dollar-replacements": "off",
+				"regexp/no-useless-flag": "off",
+				"style/indent": "off"
+			}
 		},
 		{
 			files: [GLOB_MARKDOWN_CODE, ...componentExts.map((ext) => `${GLOB_MARKDOWN}/**/*.${ext}`)],
 			languageOptions: { parserOptions: { ecmaFeatures: { impliedStrict: true } } },
-			name: "eslint/markdown/disables",
+			name: "eslint/markdown/disables/code",
 			rules: {
 				"antfu/no-top-level-await": "off",
 				"import/newline-after-import": "off",
@@ -1009,45 +1034,48 @@ async function detectCatalogUsage() {
 	const yaml$1 = await fs.readFile(workspaceFile, "utf-8");
 	return yaml$1.includes("catalog:") || yaml$1.includes("catalogs:");
 }
-async function pnpm(options = {}) {
-	const { catalogs = await detectCatalogUsage(), isInEditor = false } = options;
-	const [pluginPnpm, yamlParser, jsoncParser] = await Promise.all([
+async function pnpm(options) {
+	const [pluginPnpm, pluginYaml, yamlParser] = await Promise.all([
 		interopDefault(import("eslint-plugin-pnpm")),
-		interopDefault(import("yaml-eslint-parser")),
-		interopDefault(import("jsonc-eslint-parser"))
+		interopDefault(import("eslint-plugin-yml")),
+		interopDefault(import("yaml-eslint-parser"))
 	]);
-	return [
-		{
-			files: ["package.json", "**/package.json"],
-			languageOptions: { parser: jsoncParser },
-			name: "eslint/pnpm/package-json",
-			plugins: { pnpm: pluginPnpm },
-			rules: {
-				...catalogs ? { "pnpm/json-enforce-catalog": ["error", {
-					autofix: !isInEditor,
-					ignores: ["@types/vscode"]
-				}] } : {},
-				"pnpm/json-prefer-workspace-settings": ["error", { autofix: isInEditor }],
-				"pnpm/json-valid-catalog": ["error", { autofix: isInEditor }]
-			}
-		},
-		{
+	const { catalogs = await detectCatalogUsage(), isInEditor = false, json = true, sort = true, yaml: yaml$1 = true } = options;
+	const configs$1 = [];
+	if (json) configs$1.push({
+		files: ["package.json", "**/package.json"],
+		language: "jsonc/x",
+		name: "eslint/pnpm/package-json",
+		plugins: { pnpm: pluginPnpm },
+		rules: {
+			...catalogs ? { "pnpm/json-enforce-catalog": ["error", {
+				autofix: !isInEditor,
+				ignores: ["@types/vscode"]
+			}] } : {},
+			"pnpm/json-prefer-workspace-settings": ["error", { autofix: !isInEditor }],
+			"pnpm/json-valid-catalog": ["error", { autofix: !isInEditor }]
+		}
+	});
+	if (yaml$1) {
+		configs$1.push({
 			files: ["pnpm-workspace.yaml"],
 			languageOptions: { parser: yamlParser },
 			name: "eslint/pnpm/pnpm-workspace-yaml",
 			plugins: { pnpm: pluginPnpm },
 			rules: {
 				"pnpm/yaml-enforce-settings": ["error", { settings: {
-					catalogMode: "prefer",
-					shellEmulator: true
+					shellEmulator: true,
+					trustPolicy: "no-downgrade"
 				} }],
 				"pnpm/yaml-no-duplicate-catalog-item": "error",
 				"pnpm/yaml-no-unused-catalog-item": "error"
 			}
-		},
-		{
+		});
+		if (sort) configs$1.push({
 			files: ["pnpm-workspace.yaml"],
-			name: "eslint/yaml/pnpm-workspace",
+			languageOptions: { parser: yamlParser },
+			name: "eslint/pnpm/pnpm-workspace-yaml-sort",
+			plugins: { yaml: pluginYaml },
 			rules: { "yaml/sort-keys": [
 				"error",
 				{
@@ -1120,8 +1148,9 @@ async function pnpm(options = {}) {
 					pathPattern: ".*"
 				}
 			] }
-		}
-	];
+		});
+	}
+	return configs$1;
 }
 
 //#endregion
@@ -1149,7 +1178,10 @@ async function react(options = {}) {
 		"eslint-plugin-react-refresh"
 	]);
 	const isTypeAware = !!tsconfigPath;
-	const typeAwareRules = { "react/no-leaked-conditional-rendering": "warn" };
+	const typeAwareRules = {
+		"react/no-implicit-key": "error",
+		"react/no-leaked-conditional-rendering": "warn"
+	};
 	const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all([
 		interopDefault(import("@eslint-react/eslint-plugin")),
 		interopDefault(import("eslint-plugin-react-hooks")),
@@ -1170,6 +1202,7 @@ async function react(options = {}) {
 				"react-hooks-extra": plugins["@eslint-react/hooks-extra"],
 				"react-naming-convention": plugins["@eslint-react/naming-convention"],
 				"react-refresh": pluginReactRefresh,
+				"react-rsc": plugins["@eslint-react/rsc"],
 				"react-web-api": plugins["@eslint-react/web-api"]
 			}
 		},
@@ -1193,8 +1226,17 @@ async function react(options = {}) {
 				"react-dom/no-unsafe-iframe-sandbox": "warn",
 				"react-dom/no-use-form-state": "error",
 				"react-dom/no-void-elements-with-children": "error",
+				"react-hooks-extra/no-direct-set-state-in-use-effect": "warn",
 				"react-hooks/exhaustive-deps": "warn",
 				"react-hooks/rules-of-hooks": "error",
+				"react-naming-convention/context-name": "warn",
+				"react-naming-convention/ref-name": "warn",
+				"react-naming-convention/use-state": "warn",
+				"react-rsc/function-definition": "error",
+				"react-web-api/no-leaked-event-listener": "warn",
+				"react-web-api/no-leaked-interval": "warn",
+				"react-web-api/no-leaked-resize-observer": "warn",
+				"react-web-api/no-leaked-timeout": "warn",
 				"react/jsx-key-before-spread": "warn",
 				"react/jsx-no-comment-textnodes": "warn",
 				"react/jsx-no-duplicate-props": "warn",
@@ -1215,9 +1257,7 @@ async function react(options = {}) {
 				"react/no-create-ref": "error",
 				"react/no-default-props": "error",
 				"react/no-direct-mutation-state": "error",
-				"react/no-duplicate-key": "error",
 				"react/no-forward-ref": "warn",
-				"react/no-implicit-key": "warn",
 				"react/no-missing-key": "error",
 				"react/no-nested-component-definitions": "error",
 				"react/no-nested-lazy-component-declarations": "error",
@@ -1231,6 +1271,7 @@ async function react(options = {}) {
 				"react/no-unsafe-component-will-mount": "warn",
 				"react/no-unsafe-component-will-receive-props": "warn",
 				"react/no-unsafe-component-will-update": "warn",
+				"react/no-unused-class-component-members": "warn",
 				"react/no-use-context": "warn",
 				"react/no-useless-forward-ref": "warn",
 				"react/prefer-namespace-import": "error",
@@ -1252,7 +1293,6 @@ async function react(options = {}) {
 					"react-hooks/unsupported-syntax": "warn",
 					"react-hooks/use-memo": "error"
 				} : {},
-				"react-hooks-extra/no-direct-set-state-in-use-effect": "warn",
 				"react-refresh/only-export-components": ["error", {
 					allowConstantExport: isAllowConstantExport,
 					allowExportNames: [...isUsingNext ? [
@@ -1268,7 +1308,8 @@ async function react(options = {}) {
 						"generateMetadata",
 						"viewport",
 						"generateViewport",
-						"generateImageMetadata"
+						"generateImageMetadata",
+						"generateSitemaps"
 					] : [], ...isUsingRemix || isUsingReactRouter ? [
 						"meta",
 						"links",
@@ -1281,11 +1322,19 @@ async function react(options = {}) {
 						"shouldRevalidate"
 					] : []]
 				}],
-				"react-web-api/no-leaked-event-listener": "warn",
-				"react-web-api/no-leaked-interval": "warn",
-				"react-web-api/no-leaked-resize-observer": "warn",
-				"react-web-api/no-leaked-timeout": "warn",
 				...overrides
+			}
+		},
+		{
+			files: filesTypeAware,
+			name: "eslint/react/typescript",
+			rules: {
+				"react-dom/no-string-style-prop": "off",
+				"react-dom/no-unknown-property": "off",
+				"react/jsx-no-duplicate-props": "off",
+				"react/jsx-no-undef": "off",
+				"react/jsx-uses-react": "off",
+				"react/jsx-uses-vars": "off"
 			}
 		},
 		...isTypeAware ? [{
