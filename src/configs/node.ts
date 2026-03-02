@@ -1,6 +1,7 @@
 import type { OptionsOverrides, TypedFlatConfigItem } from '../types'
 
 import { pluginNode } from '../plugins'
+import { GLOB_SRC } from '@/globs'
 
 export async function node(options: OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
     const {
@@ -9,10 +10,15 @@ export async function node(options: OptionsOverrides = {}): Promise<TypedFlatCon
 
     return [
         {
-            name: 'eslint/node/rules',
+            name: 'eslint/node/setup',
+
             plugins: {
                 node: pluginNode,
             },
+        },
+        {
+            files: [GLOB_SRC],
+            name: 'eslint/node/rules',
             rules: {
                 'node/handle-callback-err': ['error', '^(err|error)$'],
                 'node/no-deprecated-api': 'error',
