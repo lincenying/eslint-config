@@ -1,7 +1,7 @@
 import type { OptionsOverrides, TypedFlatConfigItem } from '../types'
 
+import { GLOB_SRC } from '../globs'
 import { pluginNode } from '../plugins'
-import { GLOB_SRC } from '@/globs'
 
 export async function node(options: OptionsOverrides = {}): Promise<TypedFlatConfigItem[]> {
     const {
