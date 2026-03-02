@@ -14,7 +14,11 @@ const config = lincy(
         formatters: {
             css: true,
         },
-        pnpm: true,
+        pnpm: {
+            sort: true,
+            yaml: true,
+            json: true,
+        },
         typescript: {
             erasableOnly: true,
         },

@@ -17170,7 +17170,7 @@ type Yoda = [] | [("always" | "never")] | [("always" | "never"), {
   onlyEquality?: boolean;
 }];
 // Names of all the configs
-type ConfigNames = 'eslint/comments/rules' | 'eslint/formatter/setup' | 'eslint/formatter/html' | 'eslint/formatter/xml' | 'eslint/formatter/svg' | 'eslint/formatter/markdown' | 'eslint/formatter/graphql' | 'eslint/imports/rules' | 'eslint/javascript/setup' | 'eslint/javascript/rules' | 'eslint/jsdoc/setup' | 'eslint/jsdoc/rules' | 'eslint/jsonc/setup' | 'eslint/jsonc/rules' | 'eslint/markdown/setup' | 'eslint/markdown/processor' | 'eslint/markdown/parser' | 'eslint/markdown/rules' | 'eslint/markdown/disables/markdown' | 'eslint/markdown/disables/code' | 'eslint/node/rules' | 'eslint/perfectionist/setup' | 'eslint/react/setup' | 'eslint/react/rules' | 'eslint/react/typescript' | 'eslint/regexp/rules' | 'eslint/sort/package-json' | 'eslint/stylistic/rules' | 'eslint/test/setup' | 'eslint/test/rules' | 'eslint/toml/setup' | 'eslint/toml/rules' | 'eslint/typescript/setup' | 'eslint/typescript/parser' | 'eslint/typescript/rules' | 'eslint/unicorn/rules' | 'eslint/unocss/rules' | 'eslint/vue/setup' | 'eslint/vue/rules' | 'eslint/yaml/setup' | 'eslint/yaml/rules';
+type ConfigNames = 'eslint/comments/rules' | 'eslint/formatter/setup' | 'eslint/formatter/html' | 'eslint/formatter/xml' | 'eslint/formatter/svg' | 'eslint/formatter/markdown' | 'eslint/formatter/graphql' | 'eslint/imports/rules' | 'eslint/javascript/setup' | 'eslint/javascript/rules' | 'eslint/jsdoc/setup' | 'eslint/jsdoc/rules' | 'eslint/jsonc/setup' | 'eslint/jsonc/rules' | 'eslint/markdown/setup' | 'eslint/markdown/processor' | 'eslint/markdown/parser' | 'eslint/markdown/rules' | 'eslint/markdown/disables/markdown' | 'eslint/markdown/disables/code' | 'eslint/node/setup' | 'eslint/node/rules' | 'eslint/perfectionist/setup' | 'eslint/react/setup' | 'eslint/react/rules' | 'eslint/react/typescript' | 'eslint/regexp/rules' | 'eslint/sort/package-json' | 'eslint/stylistic/rules' | 'eslint/test/setup' | 'eslint/test/rules' | 'eslint/toml/setup' | 'eslint/toml/rules' | 'eslint/typescript/setup' | 'eslint/typescript/parser' | 'eslint/typescript/rules' | 'eslint/unicorn/rules' | 'eslint/unocss/rules' | 'eslint/vue/setup' | 'eslint/vue/rules' | 'eslint/yaml/setup' | 'eslint/yaml/rules';
 //#endregion
 //#region src/prettier.types.d.ts
 /**
@@ -17518,7 +17518,7 @@ interface OptionsPnpm extends OptionsIsInEditor {
   /**
    * 对 pnpm-workspace.yaml 中的条目进行排序
    *
-   * @default false
+   * @default true
    */
   sort?: boolean;
 }
@@ -17663,7 +17663,7 @@ interface OptionsConfig extends OptionsComponentExts, OptionsProjectType {
    * @experimental
    * @default false
    */
-  pnpm?: boolean;
+  pnpm?: boolean | OptionsPnpm;
   /**
    * 使用外部格式化程序格式化文件.
    *

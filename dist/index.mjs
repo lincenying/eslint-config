@@ -954,8 +954,11 @@ async function nextjs(options = {}) {
 async function node(options = {}) {
 	const { overrides = {} } = options;
 	return [{
+		name: "eslint/node/setup",
+		plugins: { node: pluginNode }
+	}, {
+		files: [GLOB_SRC],
 		name: "eslint/node/rules",
-		plugins: { node: pluginNode },
 		rules: {
 			"node/handle-callback-err": ["error", "^(err|error)$"],
 			"node/no-deprecated-api": "error",
@@ -2245,7 +2248,10 @@ function lincy(options = {}, ...userConfigs) {
 		overrides: getOverrides(options, "jsonc"),
 		stylistic: stylisticOptions
 	}), sortPackageJson(), sortTsconfig());
-	if (enableCatalogs) configs$1.push(pnpm({ isInEditor }));
+	if (enableCatalogs) configs$1.push(pnpm({
+		isInEditor,
+		...resolveSubOptions(options, "pnpm")
+	}));
 	if (options.yaml ?? true) configs$1.push(yaml({
 		...resolveSubOptions(options, "yaml"),
 		overrides: getOverrides(options, "yaml"),
