@@ -273,7 +273,7 @@ export interface OptionsPnpm extends OptionsIsInEditor {
     /**
      * 对 pnpm-workspace.yaml 中的条目进行排序
      *
-     * @default false
+     * @default true
      */
     sort?: boolean
 }
@@ -437,7 +437,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
      * @experimental
      * @default false
      */
-    pnpm?: boolean
+    pnpm?: boolean | OptionsPnpm
 
     /**
      * 使用外部格式化程序格式化文件.

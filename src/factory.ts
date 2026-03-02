@@ -263,6 +263,7 @@ export function lincy(
         configs.push(
             pnpm({
                 isInEditor,
+                ...resolveSubOptions(options, 'pnpm'),
             }),
         )
     }
