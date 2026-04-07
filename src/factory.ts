@@ -8,6 +8,7 @@ import { isPackageExists } from 'local-pkg'
 import {
     comments,
     disables,
+    e18e,
     ignores,
     imports,
     javascript,
@@ -56,8 +57,9 @@ const VuePackages = [
 export const defaultPluginRenaming = {
     '@eslint-react': 'react',
     '@eslint-react/dom': 'react-dom',
-    '@eslint-react/hooks-extra': 'react-hooks-extra',
     '@eslint-react/naming-convention': 'react-naming-convention',
+    '@eslint-react/rsc': 'react-rsc',
+    '@eslint-react/web-api': 'react-web-api',
     '@next/next': 'next',
     '@stylistic': 'style',
     '@typescript-eslint': 'ts',
@@ -84,8 +86,9 @@ export function lincy(
     const {
         autoRenamePlugins = true,
         componentExts = [],
+        e18e: enableE18e = true,
         gitignore: enableGitignore = true,
-        ignores: ignoresList = [],
+        ignores: userIgnores = [],
         imports: enableImports = true,
         jsx: enableJsx = true,
         nextjs: enableNextjs = false,
@@ -93,7 +96,8 @@ export function lincy(
         pnpm: enableCatalogs = !!findUpSync('pnpm-workspace.yaml'),
         react: enableReact = false,
         regexp: enableRegexp = true,
-        typescript: enableTypeScript = isPackageExists('typescript'),
+        type: appType = 'app',
+        typescript: enableTypeScript = isPackageExists('typescript') || isPackageExists('@typescript/native-preview'),
         unicorn: enableUnicorn = true,
         unocss: enableUnoCSS = false,
         vue: enableVue = VuePackages.some(i => isPackageExists(i)),
@@ -134,12 +138,10 @@ export function lincy(
 
     // Base configs
     configs.push(
-        ignores({
-            ignores: [
-                ...(overrides.ignores || []),
-                ...ignoresList,
-            ],
-        }),
+        ignores([
+            ...(overrides.ignores || []),
+            ...userIgnores,
+        ], !enableTypeScript),
         javascript({
             isInEditor,
             overrides: getOverrides(options, 'javascript'),
@@ -159,6 +161,15 @@ export function lincy(
             overrides: getOverrides(options, 'perfectionist'),
         }),
     )
+
+    if (enableE18e) {
+        configs.push(
+            e18e({
+                isInEditor,
+                ...enableE18e === true ? {} : enableE18e,
+            }),
+        )
+    }
 
     if (enableUnicorn) {
         configs.push(unicorn({
@@ -190,7 +201,7 @@ export function lincy(
             componentExts,
             overrides: getOverrides(options, 'typescript'),
             tsconfigPath,
-            type: options.type,
+            type: appType,
         }))
     }
 
@@ -329,8 +340,7 @@ export function lincy(
         )
 
     if (autoRenamePlugins) {
-        composer = composer
-            .renamePlugins(defaultPluginRenaming)
+        composer = composer.renamePlugins(defaultPluginRenaming)
     }
 
     if (isInEditor) {
