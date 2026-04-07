@@ -83,14 +83,12 @@ export async function formatters(
         xmlWhitespaceSensitivity: 'ignore',
     }
 
-    const dprintOptions = Object.assign(
-        {
-            indentWidth: typeof indent === 'number' ? indent : defaultIndent,
-            quoteStyle: quotes === 'single' ? 'preferSingle' : 'preferDouble',
-            useTabs: indent === 'tab',
-        },
-        options.dprintOptions || {},
-    )
+    const dprintOptions = {
+        indentWidth: typeof indent === 'number' ? indent : defaultIndent,
+        quoteStyle: quotes === 'single' ? 'preferSingle' : 'preferDouble',
+        useTabs: indent === 'tab',
+        ...(typeof options.dprintOptions === 'boolean' ? {} : options.dprintOptions || {}),
+    }
 
     const pluginFormat = await interopDefault(import('eslint-plugin-format'))
 
