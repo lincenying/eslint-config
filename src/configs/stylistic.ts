@@ -7,6 +7,7 @@ export const StylisticConfigDefaults: StylisticConfig = {
     indent: 4,
     jsx: true,
     lessOpinionated: false,
+    other_indent: 2,
     quotes: 'single',
     semi: false,
 }
