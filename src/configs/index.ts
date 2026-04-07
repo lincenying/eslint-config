@@ -1,5 +1,6 @@
 export * from './comments'
 export * from './disables'
+export * from './e18e'
 export * from './formatters'
 export * from './ignores'
 export * from './imports'

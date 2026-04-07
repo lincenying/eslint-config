@@ -52,7 +52,7 @@ export interface OptionsVue {
 }
 
 export interface OptionsReact extends OptionsFiles {
-    reactCompiler?: boolean
+
 }
 
 export type OptionsTypescript = (OptionsTypeScriptWithTypes & OptionsOverrides & OptionsTypeScriptErasableOnly)
@@ -126,6 +126,30 @@ export interface OptionsComponentExts {
     componentExts?: string[]
 }
 
+export interface OptionsE18e extends OptionsOverrides {
+    /**
+     * 包含现代化规则
+     *
+     * @see https://github.com/e18e/eslint-plugin#modernization
+     * @default true
+     */
+    modernization?: boolean
+    /**
+     * 包含模块替换规则
+     *
+     * @see https://github.com/e18e/eslint-plugin#module-replacements
+     * @default type === 'lib' && isInEditor
+     */
+    moduleReplacements?: boolean
+    /**
+     * 包含性能改进规则
+     *
+     * @see https://github.com/e18e/eslint-plugin#performance-improvements
+     * @default true
+     */
+    performanceImprovements?: boolean
+}
+
 export interface OptionsUnicorn {
     /**
      * 是否包括“eslint-plugin-unicorn”推荐的所有规则.
@@ -193,6 +217,10 @@ export interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent
      * @default false
      */
     lessOpinionated?: boolean
+    /**
+     * json/yaml/toml 文件的缩进
+     */
+    other_indent?: number
 }
 
 export interface OptionsOverrides {
@@ -326,6 +354,13 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
     jsx?: boolean
 
     /**
+     * Options for [@e18e/eslint-plugin](https://github.com/e18e/eslint-plugin)
+     *
+     * @default true
+     */
+    e18e?: boolean | OptionsE18e
+
+    /**
      * eslint-plugin-unicorn 的选项.
      *
      * @default true
@@ -378,7 +413,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
      *
      * @default true
      */
-    markdown?: boolean | OptionsFiles
+    markdown?: boolean | OptionsMarkdown
 
     /**
      * 启用 stylistic 规则.
@@ -400,7 +435,6 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
      *
      * 需要安装:
      * - `@eslint-react/eslint-plugin`
-     * - `eslint-plugin-react-hooks`
      * - `eslint-plugin-react-refresh`
      *
      * @default 根据依赖关系自动检测
@@ -477,7 +511,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
     node?: boolean | OptionsOverrides
     jsdoc?: boolean | OptionsOverrides
     perfectionist?: boolean | OptionsOverrides
-    ignores?: boolean | OptionsOverrides
+    ignores?: string[]
 
     /**
      * 为每个集成提供规则覆盖
