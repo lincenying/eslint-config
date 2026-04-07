@@ -13,7 +13,7 @@ export async function toml(
     } = options
 
     const {
-        indent = 4,
+        other_indent = 2,
     } = typeof stylistic === 'boolean' ? {} : stylistic
 
     const [
@@ -54,7 +54,7 @@ export async function toml(
                     'toml/array-bracket-newline': 'error',
                     'toml/array-bracket-spacing': 'error',
                     'toml/array-element-newline': 'error',
-                    'toml/indent': ['error', typeof indent === 'number' ? indent : indent === 'tab' ? 'tab' : 4],
+                    'toml/indent': ['error', typeof other_indent === 'number' ? other_indent : other_indent === 'tab' ? 'tab' : 4],
                     'toml/inline-table-curly-spacing': 'error',
                     'toml/key-spacing': 'error',
                     'toml/padding-line-between-pairs': 'error',

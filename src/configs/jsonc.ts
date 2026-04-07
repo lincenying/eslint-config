@@ -12,6 +12,10 @@ export async function jsonc(
         stylistic = true,
     } = options
 
+    const {
+        other_indent = 2,
+    } = typeof stylistic === 'boolean' ? {} : stylistic
+
     const pluginJsonc = await interopDefault(import('eslint-plugin-jsonc'))
 
     return [
@@ -57,7 +61,7 @@ export async function jsonc(
                     'jsonc/array-bracket-spacing': ['error', 'never'],
                     'jsonc/comma-dangle': ['error', 'never'],
                     'jsonc/comma-style': ['error', 'last'],
-                    'jsonc/indent': ['error', 2],
+                    'jsonc/indent': ['error', typeof other_indent === 'number' ? other_indent : 2],
                     'jsonc/key-spacing': ['error', { afterColon: true, beforeColon: false }],
                     'jsonc/object-curly-newline': ['error', { consistent: true, multiline: true }],
                     'jsonc/object-curly-spacing': ['error', 'always'],
