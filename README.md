@@ -145,6 +145,7 @@ export default lincy({
      * @example 可选: false |
      * {
      *   indent?: number | 'tab';
+     *   other_indent?: number | 'tab';
      *   quotes?: 'single' | 'double';
      *   jsx?: boolean;
      *   semi?: boolean;

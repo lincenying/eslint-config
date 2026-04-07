@@ -8,6 +8,7 @@ const config = lincy(
         toml: true,
         stylistic: {
             indent: 4,
+            other_indent: 2,
             quotes: 'single',
         },
         unocss: true,
