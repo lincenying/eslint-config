@@ -2,11 +2,10 @@
   "compilerOptions": {
     "target": "ESNext",
     "jsx": "react",
-    "baseUrl": ".",
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     },
     "strict": true,
     "esModuleInterop": true,
