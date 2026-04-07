@@ -1,5 +1,8 @@
-Object.defineProperty(exports, '__esModule', { value: true });
-//#region rolldown:runtime
+Object.defineProperties(exports, {
+	__esModule: { value: true },
+	[Symbol.toStringTag]: { value: "Module" }
+});
+//#region \0rolldown/runtime.js
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -7,16 +10,12 @@ var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __copyProps = (to, from, except, desc) => {
-	if (from && typeof from === "object" || typeof from === "function") {
-		for (var keys = __getOwnPropNames(from), i = 0, n = keys.length, key; i < n; i++) {
-			key = keys[i];
-			if (!__hasOwnProp.call(to, key) && key !== except) {
-				__defProp(to, key, {
-					get: ((k) => from[k]).bind(null, key),
-					enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
-				});
-			}
-		}
+	if (from && typeof from === "object" || typeof from === "function") for (var keys = __getOwnPropNames(from), i = 0, n = keys.length, key; i < n; i++) {
+		key = keys[i];
+		if (!__hasOwnProp.call(to, key) && key !== except) __defProp(to, key, {
+			get: ((k) => from[k]).bind(null, key),
+			enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable
+		});
 	}
 	return to;
 };
@@ -24,7 +23,6 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 	value: mod,
 	enumerable: true
 }) : target, mod));
-
 //#endregion
 let eslint_flat_config_utils = require("eslint-flat-config-utils");
 let node_process = require("node:process");
@@ -37,6 +35,8 @@ node_fs = __toESM(node_fs);
 let node_path = require("node:path");
 node_path = __toESM(node_path);
 let local_pkg = require("local-pkg");
+let _e18e_eslint_plugin = require("@e18e/eslint-plugin");
+_e18e_eslint_plugin = __toESM(_e18e_eslint_plugin);
 let _eslint_community_eslint_plugin_eslint_comments = require("@eslint-community/eslint-plugin-eslint-comments");
 _eslint_community_eslint_plugin_eslint_comments = __toESM(_eslint_community_eslint_plugin_eslint_comments);
 let eslint_plugin_antfu = require("eslint-plugin-antfu");
@@ -55,7 +55,6 @@ let globals = require("globals");
 globals = __toESM(globals);
 let eslint_merge_processors = require("eslint-merge-processors");
 let eslint_plugin_regexp = require("eslint-plugin-regexp");
-
 //#region node_modules/.pnpm/find-up-simple@1.0.1/node_modules/find-up-simple/index.js
 const toPath = (urlOrPath) => urlOrPath instanceof URL ? (0, node_url.fileURLToPath)(urlOrPath) : urlOrPath;
 async function findUp(name, { cwd = node_process.default.cwd(), type = "file", stopAt } = {}) {
@@ -88,7 +87,6 @@ function findUpSync(name, { cwd = node_process.default.cwd(), type = "file", sto
 		directory = node_path.default.dirname(directory);
 	}
 }
-
 //#endregion
 //#region src/configs/comments.ts
 async function comments(options = {}) {
@@ -105,7 +103,6 @@ async function comments(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/globs.ts
 const GLOB_SRC_EXT = "?([cm])[jt]s?(x)";
@@ -179,7 +176,6 @@ const GLOB_EXCLUDE = [
 	"**/auto-import?(s).d.ts",
 	"**/components.d.ts"
 ];
-
 //#endregion
 //#region src/configs/disables.ts
 async function disables() {
@@ -235,7 +231,26 @@ async function disables() {
 		}
 	];
 }
-
+//#endregion
+//#region src/configs/e18e.ts
+async function e18e(options = {}) {
+	const { isInEditor = false, modernization = true, type = "app", moduleReplacements = type === "lib" && isInEditor, overrides = {}, performanceImprovements = true } = options;
+	const configs = _e18e_eslint_plugin.default.configs;
+	return [{
+		name: "eslint/e18e/rules",
+		plugins: { e18e: _e18e_eslint_plugin.default },
+		rules: {
+			...modernization ? { ...configs.modernization.rules } : {},
+			...moduleReplacements ? { ...configs.moduleReplacements.rules } : {},
+			...performanceImprovements ? { ...configs.performanceImprovements.rules } : {},
+			"e18e/prefer-array-to-reversed": "off",
+			"e18e/prefer-array-to-sorted": "off",
+			"e18e/prefer-array-to-spliced": "off",
+			"e18e/prefer-spread-syntax": "off",
+			...overrides
+		}
+	}];
+}
 //#endregion
 //#region src/utils.ts
 const scopeUrl = (0, node_url.fileURLToPath)(new URL(".", require("url").pathToFileURL(__filename).href));
@@ -262,8 +277,8 @@ const parserPlain = {
 /**
 * Combine array and non-array configs into a single array.
 */
-async function combine(...configs$1) {
-	return (await Promise.all(configs$1)).flat();
+async function combine(...configs) {
+	return (await Promise.all(configs)).flat();
 }
 function renameRules(rules, map) {
 	return Object.fromEntries(Object.entries(rules).map(([key, value]) => {
@@ -271,8 +286,8 @@ function renameRules(rules, map) {
 		return [key, value];
 	}));
 }
-function renamePluginInConfigs(configs$1, map) {
-	return configs$1.map((i) => {
+function renamePluginInConfigs(configs, map) {
+	return configs.map((i) => {
 		const clone = { ...i };
 		if (clone.rules) clone.rules = renameRules(clone.rules, map);
 		if (clone.plugins) clone.plugins = Object.fromEntries(Object.entries(clone.plugins).map(([key, value]) => {
@@ -306,26 +321,26 @@ function isInEditorEnv() {
 function isInGitHooksOrLintStaged() {
 	return !!(node_process.default.env.GIT_PARAMS || node_process.default.env.VSCODE_GIT_COMMAND || node_process.default.env.npm_lifecycle_script?.startsWith("lint-staged"));
 }
-
 //#endregion
 //#region src/configs/stylistic.ts
 const StylisticConfigDefaults = {
 	indent: 4,
 	jsx: true,
 	lessOpinionated: false,
+	other_indent: 2,
 	quotes: "single",
 	semi: false
 };
 async function stylistic(options = {}) {
-	const { overrides = {}, stylistic: stylistic$1 = StylisticConfigDefaults } = options;
-	const { indent, jsx: jsx$1, lessOpinionated, quotes, semi } = typeof stylistic$1 === "boolean" ? StylisticConfigDefaults : {
+	const { overrides = {}, stylistic = StylisticConfigDefaults } = options;
+	const { indent, jsx, lessOpinionated, quotes, semi } = typeof stylistic === "boolean" ? StylisticConfigDefaults : {
 		...StylisticConfigDefaults,
-		...stylistic$1
+		...stylistic
 	};
 	const pluginStylistic = await interopDefault(import("@stylistic/eslint-plugin"));
 	const config = pluginStylistic.configs.customize({
 		indent,
-		jsx: jsx$1,
+		jsx,
 		pluginName: "style",
 		quotes,
 		semi
@@ -359,7 +374,6 @@ async function stylistic(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/configs/formatters.ts
 function mergePrettierOptions(options, overrides) {
@@ -369,18 +383,18 @@ function mergePrettierOptions(options, overrides) {
 		plugins: [...overrides.plugins || [], ...options.plugins || []]
 	};
 }
-async function formatters(options = {}, stylistic$1 = {}) {
+async function formatters(options = {}, stylistic = {}) {
 	const defaultIndent = 4;
 	const isPrettierPluginXmlInScope = isPackageInScope("@prettier/plugin-xml");
 	if (options === true) {
-		const isPrettierPluginXmlInScope$1 = isPackageInScope("@prettier/plugin-xml");
+		const isPrettierPluginXmlInScope = isPackageInScope("@prettier/plugin-xml");
 		options = {
 			css: false,
 			graphql: true,
 			html: true,
 			markdown: true,
-			svg: isPrettierPluginXmlInScope$1,
-			xml: isPrettierPluginXmlInScope$1
+			svg: isPrettierPluginXmlInScope,
+			xml: isPrettierPluginXmlInScope
 		};
 	} else options = {
 		css: options.css ?? false,
@@ -393,7 +407,7 @@ async function formatters(options = {}, stylistic$1 = {}) {
 	await ensurePackages(["eslint-plugin-format", options.xml || options.svg ? "@prettier/plugin-xml" : void 0]);
 	const { indent, quotes, semi } = {
 		...StylisticConfigDefaults,
-		...stylistic$1
+		...stylistic
 	};
 	const prettierOptions = Object.assign({
 		endOfLine: "lf",
@@ -410,16 +424,17 @@ async function formatters(options = {}, stylistic$1 = {}) {
 		xmlSortAttributesByKey: false,
 		xmlWhitespaceSensitivity: "ignore"
 	};
-	const dprintOptions = Object.assign({
+	const dprintOptions = {
 		indentWidth: typeof indent === "number" ? indent : defaultIndent,
 		quoteStyle: quotes === "single" ? "preferSingle" : "preferDouble",
-		useTabs: indent === "tab"
-	}, options.dprintOptions || {});
-	const configs$1 = [{
+		useTabs: indent === "tab",
+		...typeof options.dprintOptions === "boolean" ? {} : options.dprintOptions || {}
+	};
+	const configs = [{
 		name: "eslint/formatter/setup",
 		plugins: { format: await interopDefault(import("eslint-plugin-format")) }
 	}];
-	if (options.css) configs$1.push({
+	if (options.css) configs.push({
 		files: [GLOB_CSS, GLOB_POSTCSS],
 		languageOptions: { parser: parserPlain },
 		name: "eslint/formatter/css",
@@ -435,13 +450,13 @@ async function formatters(options = {}, stylistic$1 = {}) {
 		name: "eslint/formatter/less",
 		rules: { "format/prettier": ["error", mergePrettierOptions(prettierOptions, { parser: "less" })] }
 	});
-	if (options.html) configs$1.push({
+	if (options.html) configs.push({
 		files: [GLOB_HTML],
 		languageOptions: { parser: parserPlain },
 		name: "eslint/formatter/html",
 		rules: { "format/prettier": ["error", mergePrettierOptions(prettierOptions, { parser: "html" })] }
 	});
-	if (options.xml) configs$1.push({
+	if (options.xml) configs.push({
 		files: [GLOB_XML],
 		languageOptions: { parser: parserPlain },
 		name: "eslint/formatter/xml",
@@ -453,7 +468,7 @@ async function formatters(options = {}, stylistic$1 = {}) {
 			plugins: ["@prettier/plugin-xml"]
 		})] }
 	});
-	if (options.svg) configs$1.push({
+	if (options.svg) configs.push({
 		files: [GLOB_SVG],
 		languageOptions: { parser: parserPlain },
 		name: "eslint/formatter/svg",
@@ -467,7 +482,7 @@ async function formatters(options = {}, stylistic$1 = {}) {
 	});
 	if (options.markdown) {
 		const formater = options.markdown === true ? "prettier" : options.markdown;
-		configs$1.push({
+		configs.push({
 			files: [GLOB_MARKDOWN],
 			ignores: [],
 			languageOptions: { parser: parserPlain },
@@ -481,29 +496,30 @@ async function formatters(options = {}, stylistic$1 = {}) {
 			}] }
 		});
 	}
-	if (options.graphql) configs$1.push({
+	if (options.graphql) configs.push({
 		files: [GLOB_GRAPHQL],
 		languageOptions: { parser: parserPlain },
 		name: "eslint/formatter/graphql",
 		rules: { "format/prettier": ["error", mergePrettierOptions(prettierOptions, { parser: "graphql" })] }
 	});
-	return configs$1;
+	return configs;
 }
-
 //#endregion
 //#region src/configs/ignores.ts
-async function ignores(options = {}) {
-	const { ignores: ignores$1 = [] } = options;
+async function ignores(userIgnores = [], ignoreTypeScript = false) {
+	let ignores = [...GLOB_EXCLUDE];
+	if (ignoreTypeScript) ignores.push(GLOB_TS, GLOB_TSX);
+	if (typeof userIgnores === "function") ignores = userIgnores(ignores);
+	else ignores = [...ignores, ...userIgnores];
 	return [{
-		ignores: [...GLOB_EXCLUDE, ...ignores$1],
+		ignores,
 		name: "eslint/ignores"
 	}];
 }
-
 //#endregion
 //#region src/configs/imports.ts
 async function imports(options = {}) {
-	const { overrides = {}, stylistic: stylistic$1 = true } = options;
+	const { overrides = {}, stylistic = true } = options;
 	return [{
 		name: "eslint/imports/rules",
 		plugins: {
@@ -519,12 +535,11 @@ async function imports(options = {}) {
 			"import/no-duplicates": "error",
 			"import/no-mutable-exports": "error",
 			"import/no-named-default": "error",
-			...stylistic$1 ? { "import/newline-after-import": ["error", { count: 1 }] } : {},
+			...stylistic ? { "import/newline-after-import": ["error", { count: 1 }] } : {},
 			...overrides
 		}
 	}];
 }
-
 //#endregion
 //#region src/configs/javascript.ts
 async function javascript(options = {}) {
@@ -749,11 +764,10 @@ async function javascript(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/configs/jsdoc.ts
 async function jsdoc(options = {}) {
-	const { overrides = {}, stylistic: stylistic$1 = true } = options;
+	const { overrides = {}, stylistic = true } = options;
 	return [{
 		name: "eslint/jsdoc/setup",
 		plugins: { jsdoc: await interopDefault(import("eslint-plugin-jsdoc")) }
@@ -776,7 +790,7 @@ async function jsdoc(options = {}) {
 			"jsdoc/require-returns-check": "warn",
 			"jsdoc/require-returns-description": "warn",
 			"jsdoc/require-yields-check": "warn",
-			...stylistic$1 ? {
+			...stylistic ? {
 				"jsdoc/check-alignment": "warn",
 				"jsdoc/multiline-blocks": "warn"
 			} : {},
@@ -784,7 +798,6 @@ async function jsdoc(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/configs/jsonc.ts
 async function jsonc(options = {}) {
@@ -792,7 +805,8 @@ async function jsonc(options = {}) {
 		GLOB_JSON,
 		GLOB_JSON5,
 		GLOB_JSONC
-	], overrides = {}, stylistic: stylistic$1 = true } = options;
+	], overrides = {}, stylistic = true } = options;
+	const { other_indent = 2 } = typeof stylistic === "boolean" ? {} : stylistic;
 	return [{
 		name: "eslint/jsonc/setup",
 		plugins: { jsonc: await interopDefault(import("eslint-plugin-jsonc")) }
@@ -827,11 +841,11 @@ async function jsonc(options = {}) {
 			"jsonc/space-unary-ops": "error",
 			"jsonc/valid-json-number": "error",
 			"jsonc/vue-custom-block/no-parsing-error": "error",
-			...stylistic$1 ? {
+			...stylistic ? {
 				"jsonc/array-bracket-spacing": ["error", "never"],
 				"jsonc/comma-dangle": ["error", "never"],
 				"jsonc/comma-style": ["error", "last"],
-				"jsonc/indent": ["error", 2],
+				"jsonc/indent": ["error", typeof other_indent === "number" ? other_indent : 2],
 				"jsonc/key-spacing": ["error", {
 					afterColon: true,
 					beforeColon: false
@@ -849,7 +863,6 @@ async function jsonc(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/configs/jsx.ts
 async function jsx() {
@@ -859,22 +872,21 @@ async function jsx() {
 		name: "eslint/jsx/setup"
 	}];
 }
-
 //#endregion
 //#region src/configs/markdown.ts
 async function markdown(options = {}) {
 	const { componentExts = [], files = [GLOB_MARKDOWN], gfm = true, overrides = {}, overridesMarkdown = {} } = options;
-	const markdown$1 = await interopDefault(import("@eslint/markdown"));
+	const markdown = await interopDefault(import("@eslint/markdown"));
 	return [
 		{
 			name: "eslint/markdown/setup",
-			plugins: { markdown: markdown$1 }
+			plugins: { markdown }
 		},
 		{
 			files,
 			ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
 			name: "eslint/markdown/processor",
-			processor: (0, eslint_merge_processors.mergeProcessors)([markdown$1.processors.markdown, eslint_merge_processors.processorPassThrough])
+			processor: (0, eslint_merge_processors.mergeProcessors)([markdown.processors.markdown, eslint_merge_processors.processorPassThrough])
 		},
 		{
 			files,
@@ -885,7 +897,8 @@ async function markdown(options = {}) {
 			files,
 			name: "eslint/markdown/rules",
 			rules: {
-				...markdown$1.configs.recommended.at(0)?.rules,
+				...markdown.configs.recommended.at(0)?.rules,
+				"markdown/fenced-code-language": "off",
 				"markdown/no-missing-label-refs": "off",
 				...overridesMarkdown
 			}
@@ -911,7 +924,7 @@ async function markdown(options = {}) {
 			name: "eslint/markdown/disables/code",
 			rules: {
 				"antfu/no-top-level-await": "off",
-				"import/newline-after-import": "off",
+				"e18e/prefer-static-regex": "off",
 				"no-alert": "off",
 				"no-console": "off",
 				"no-labels": "off",
@@ -924,6 +937,7 @@ async function markdown(options = {}) {
 				"node/prefer-global/process": "off",
 				"style/comma-dangle": "off",
 				"style/eol-last": "off",
+				"style/padding-line-between-statements": "off",
 				"ts/consistent-type-imports": "off",
 				"ts/explicit-function-return-type": "off",
 				"ts/no-namespace": "off",
@@ -935,27 +949,11 @@ async function markdown(options = {}) {
 				"unicode-bom": "off",
 				"unused-imports/no-unused-imports": "off",
 				"unused-imports/no-unused-vars": "off",
-				"ts/await-thenable": "off",
-				"ts/dot-notation": "off",
-				"ts/no-floating-promises": "off",
-				"ts/no-for-in-array": "off",
-				"ts/no-implied-eval": "off",
-				"ts/no-misused-promises": "off",
-				"ts/no-unnecessary-type-assertion": "off",
-				"ts/no-unsafe-argument": "off",
-				"ts/no-unsafe-assignment": "off",
-				"ts/no-unsafe-call": "off",
-				"ts/no-unsafe-member-access": "off",
-				"ts/no-unsafe-return": "off",
-				"ts/restrict-plus-operands": "off",
-				"ts/restrict-template-expressions": "off",
-				"ts/unbound-method": "off",
 				...overrides
 			}
 		}
 	];
 }
-
 //#endregion
 //#region src/configs/nextjs.ts
 function normalizeRules(rules) {
@@ -988,7 +986,6 @@ async function nextjs(options = {}) {
 		settings: { react: { version: "detect" } }
 	}];
 }
-
 //#endregion
 //#region src/configs/node.ts
 async function node(options = {}) {
@@ -1012,7 +1009,6 @@ async function node(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/configs/perfectionist.ts
 /**
@@ -1068,14 +1064,13 @@ async function perfectionist(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/configs/pnpm.ts
 async function detectCatalogUsage() {
 	const workspaceFile = await findUp("pnpm-workspace.yaml");
 	if (!workspaceFile) return false;
-	const yaml$1 = await node_fs_promises.default.readFile(workspaceFile, "utf-8");
-	return yaml$1.includes("catalog:") || yaml$1.includes("catalogs:");
+	const yaml = await node_fs_promises.default.readFile(workspaceFile, "utf-8");
+	return yaml.includes("catalog:") || yaml.includes("catalogs:");
 }
 async function pnpm(options) {
 	const [pluginPnpm, pluginYaml, yamlParser] = await Promise.all([
@@ -1083,9 +1078,9 @@ async function pnpm(options) {
 		interopDefault(import("eslint-plugin-yml")),
 		interopDefault(import("yaml-eslint-parser"))
 	]);
-	const { catalogs = await detectCatalogUsage(), isInEditor = false, json = true, sort = true, yaml: yaml$1 = true } = options;
-	const configs$1 = [];
-	if (json) configs$1.push({
+	const { catalogs = await detectCatalogUsage(), isInEditor = false, json = true, sort = true, yaml = true } = options;
+	const configs = [];
+	if (json) configs.push({
 		files: ["package.json", "**/package.json"],
 		language: "jsonc/x",
 		name: "eslint/pnpm/package-json",
@@ -1099,8 +1094,8 @@ async function pnpm(options) {
 			"pnpm/json-valid-catalog": ["error", { autofix: !isInEditor }]
 		}
 	});
-	if (yaml$1) {
-		configs$1.push({
+	if (yaml) {
+		configs.push({
 			files: ["pnpm-workspace.yaml"],
 			languageOptions: { parser: yamlParser },
 			name: "eslint/pnpm/pnpm-workspace-yaml",
@@ -1114,7 +1109,7 @@ async function pnpm(options) {
 				"pnpm/yaml-no-unused-catalog-item": "error"
 			}
 		});
-		if (sort) configs$1.push({
+		if (sort) configs.push({
 			files: ["pnpm-workspace.yaml"],
 			languageOptions: { parser: yamlParser },
 			name: "eslint/pnpm/pnpm-workspace-yaml-sort",
@@ -1193,9 +1188,8 @@ async function pnpm(options) {
 			] }
 		});
 	}
-	return configs$1;
+	return configs;
 }
-
 //#endregion
 //#region src/configs/react.ts
 const ReactRefreshAllowConstantExportPackages = ["vite"];
@@ -1212,24 +1206,12 @@ const ReactRouterPackages = [
 	"@react-router/dev"
 ];
 const NextJsPackages = ["next"];
-const ReactCompilerPackages = ["babel-plugin-react-compiler"];
 async function react(options = {}) {
-	const { files = [GLOB_SRC], filesTypeAware = [GLOB_TS, GLOB_TSX], ignoresTypeAware = [`${GLOB_MARKDOWN}/**`], overrides = {}, reactCompiler = ReactCompilerPackages.some((i) => (0, local_pkg.isPackageExists)(i)), tsconfigPath } = options;
-	await ensurePackages([
-		"@eslint-react/eslint-plugin",
-		"eslint-plugin-react-hooks",
-		"eslint-plugin-react-refresh"
-	]);
+	const { files = [GLOB_SRC], filesTypeAware = [GLOB_TS, GLOB_TSX], ignoresTypeAware = [`${GLOB_MARKDOWN}/**`], overrides = {}, tsconfigPath } = options;
+	await ensurePackages(["@eslint-react/eslint-plugin", "eslint-plugin-react-refresh"]);
 	const isTypeAware = !!tsconfigPath;
-	const typeAwareRules = {
-		"react/no-implicit-key": "error",
-		"react/no-leaked-conditional-rendering": "warn"
-	};
-	const [pluginReact, pluginReactHooks, pluginReactRefresh] = await Promise.all([
-		interopDefault(import("@eslint-react/eslint-plugin")),
-		interopDefault(import("eslint-plugin-react-hooks")),
-		interopDefault(import("eslint-plugin-react-refresh"))
-	]);
+	const typeAwareRules = { "react/no-leaked-conditional-rendering": "error" };
+	const [pluginReact, pluginReactRefresh] = await Promise.all([interopDefault(import("@eslint-react/eslint-plugin")), interopDefault(import("eslint-plugin-react-refresh"))]);
 	const isAllowConstantExport = ReactRefreshAllowConstantExportPackages.some((i) => (0, local_pkg.isPackageExists)(i));
 	const isUsingRemix = RemixPackages.some((i) => (0, local_pkg.isPackageExists)(i));
 	const isUsingReactRouter = ReactRouterPackages.some((i) => (0, local_pkg.isPackageExists)(i));
@@ -1241,8 +1223,6 @@ async function react(options = {}) {
 			plugins: {
 				"react": plugins["@eslint-react"],
 				"react-dom": plugins["@eslint-react/dom"],
-				"react-hooks": pluginReactHooks,
-				"react-hooks-extra": plugins["@eslint-react/hooks-extra"],
 				"react-naming-convention": plugins["@eslint-react/naming-convention"],
 				"react-refresh": pluginReactRefresh,
 				"react-rsc": plugins["@eslint-react/rsc"],
@@ -1257,85 +1237,7 @@ async function react(options = {}) {
 			},
 			name: "eslint/react/rules",
 			rules: {
-				"react-dom/no-dangerously-set-innerhtml": "warn",
-				"react-dom/no-dangerously-set-innerhtml-with-children": "error",
-				"react-dom/no-find-dom-node": "error",
-				"react-dom/no-flush-sync": "error",
-				"react-dom/no-hydrate": "error",
-				"react-dom/no-namespace": "error",
-				"react-dom/no-render": "error",
-				"react-dom/no-render-return-value": "error",
-				"react-dom/no-script-url": "warn",
-				"react-dom/no-unsafe-iframe-sandbox": "warn",
-				"react-dom/no-use-form-state": "error",
-				"react-dom/no-void-elements-with-children": "error",
-				"react-hooks-extra/no-direct-set-state-in-use-effect": "warn",
-				"react-hooks/exhaustive-deps": "warn",
-				"react-hooks/rules-of-hooks": "error",
-				"react-naming-convention/context-name": "warn",
-				"react-naming-convention/ref-name": "warn",
-				"react-naming-convention/use-state": "warn",
-				"react-rsc/function-definition": "error",
-				"react-web-api/no-leaked-event-listener": "warn",
-				"react-web-api/no-leaked-interval": "warn",
-				"react-web-api/no-leaked-resize-observer": "warn",
-				"react-web-api/no-leaked-timeout": "warn",
-				"react/jsx-key-before-spread": "warn",
-				"react/jsx-no-comment-textnodes": "warn",
-				"react/jsx-no-duplicate-props": "warn",
-				"react/jsx-uses-react": "warn",
-				"react/jsx-uses-vars": "warn",
-				"react/no-access-state-in-setstate": "error",
-				"react/no-array-index-key": "warn",
-				"react/no-children-count": "warn",
-				"react/no-children-for-each": "warn",
-				"react/no-children-map": "warn",
-				"react/no-children-only": "warn",
-				"react/no-children-to-array": "warn",
-				"react/no-clone-element": "warn",
-				"react/no-component-will-mount": "error",
-				"react/no-component-will-receive-props": "error",
-				"react/no-component-will-update": "error",
-				"react/no-context-provider": "warn",
-				"react/no-create-ref": "error",
-				"react/no-default-props": "error",
-				"react/no-direct-mutation-state": "error",
-				"react/no-forward-ref": "warn",
-				"react/no-missing-key": "error",
-				"react/no-nested-component-definitions": "error",
-				"react/no-nested-lazy-component-declarations": "error",
-				"react/no-prop-types": "error",
-				"react/no-redundant-should-component-update": "error",
-				"react/no-set-state-in-component-did-mount": "warn",
-				"react/no-set-state-in-component-did-update": "warn",
-				"react/no-set-state-in-component-will-update": "warn",
-				"react/no-string-refs": "error",
-				"react/no-unnecessary-use-prefix": "warn",
-				"react/no-unsafe-component-will-mount": "warn",
-				"react/no-unsafe-component-will-receive-props": "warn",
-				"react/no-unsafe-component-will-update": "warn",
-				"react/no-unused-class-component-members": "warn",
-				"react/no-use-context": "warn",
-				"react/no-useless-forward-ref": "warn",
-				"react/prefer-namespace-import": "error",
-				"react/prefer-use-state-lazy-initialization": "warn",
-				...reactCompiler ? {
-					"react-hooks/component-hook-factories": "error",
-					"react-hooks/config": "error",
-					"react-hooks/error-boundaries": "error",
-					"react-hooks/gating": "error",
-					"react-hooks/globals": "error",
-					"react-hooks/immutability": "error",
-					"react-hooks/incompatible-library": "warn",
-					"react-hooks/preserve-manual-memoization": "error",
-					"react-hooks/purity": "error",
-					"react-hooks/refs": "error",
-					"react-hooks/set-state-in-effect": "error",
-					"react-hooks/set-state-in-render": "error",
-					"react-hooks/static-components": "error",
-					"react-hooks/unsupported-syntax": "warn",
-					"react-hooks/use-memo": "error"
-				} : {},
+				...pluginReact.configs.recommended.rules,
 				"react-refresh/only-export-components": ["error", {
 					allowConstantExport: isAllowConstantExport,
 					allowExportNames: [...isUsingNext ? [
@@ -1365,6 +1267,7 @@ async function react(options = {}) {
 						"shouldRevalidate"
 					] : []]
 				}],
+				"react/prefer-namespace-import": "error",
 				...overrides
 			}
 		},
@@ -1373,11 +1276,7 @@ async function react(options = {}) {
 			name: "eslint/react/typescript",
 			rules: {
 				"react-dom/no-string-style-prop": "off",
-				"react-dom/no-unknown-property": "off",
-				"react/jsx-no-duplicate-props": "off",
-				"react/jsx-no-undef": "off",
-				"react/jsx-uses-react": "off",
-				"react/jsx-uses-vars": "off"
+				"react-dom/no-unknown-property": "off"
 			}
 		},
 		...isTypeAware ? [{
@@ -1388,7 +1287,6 @@ async function react(options = {}) {
 		}] : []
 	];
 }
-
 //#endregion
 //#region src/configs/regexp.ts
 async function regexp(options = {}) {
@@ -1406,7 +1304,6 @@ async function regexp(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/configs/sort.ts
 /**
@@ -1639,7 +1536,6 @@ function sortTsconfig() {
 		] }
 	}];
 }
-
 //#endregion
 //#region src/configs/test.ts
 async function test(options = {}) {
@@ -1668,6 +1564,7 @@ async function test(options = {}) {
 			"test/prefer-hooks-in-order": "error",
 			"test/prefer-lowercase-title": "error",
 			"antfu/no-top-level-await": "off",
+			"e18e/prefer-static-regex": "off",
 			"no-unused-expressions": "off",
 			"node/prefer-global/process": "off",
 			"ts/explicit-function-return-type": "off",
@@ -1675,12 +1572,11 @@ async function test(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/configs/toml.ts
 async function toml(options = {}) {
-	const { files = [GLOB_TOML], overrides = {}, stylistic: stylistic$1 = true } = options;
-	const { indent = 4 } = typeof stylistic$1 === "boolean" ? {} : stylistic$1;
+	const { files = [GLOB_TOML], overrides = {}, stylistic = true } = options;
+	const { other_indent = 2 } = typeof stylistic === "boolean" ? {} : stylistic;
 	const [pluginToml, parserToml] = await Promise.all([interopDefault(import("eslint-plugin-toml")), interopDefault(import("toml-eslint-parser"))]);
 	return [{
 		name: "eslint/toml/setup",
@@ -1699,11 +1595,11 @@ async function toml(options = {}) {
 			"toml/precision-of-integer": "error",
 			"toml/tables-order": "error",
 			"toml/vue-custom-block/no-parsing-error": "error",
-			...stylistic$1 ? {
+			...stylistic ? {
 				"toml/array-bracket-newline": "error",
 				"toml/array-bracket-spacing": "error",
 				"toml/array-element-newline": "error",
-				"toml/indent": ["error", typeof indent === "number" ? indent : indent === "tab" ? "tab" : 4],
+				"toml/indent": ["error", typeof other_indent === "number" ? other_indent : other_indent === "tab" ? "tab" : 4],
 				"toml/inline-table-curly-spacing": "error",
 				"toml/key-spacing": "error",
 				"toml/padding-line-between-pairs": "error",
@@ -1716,14 +1612,13 @@ async function toml(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/configs/typescript.ts
 async function typescript(options = {}) {
 	const { componentExts = [], erasableOnly = false, overrides = {}, parserOptions = {}, type = "app" } = options;
-	const files = options.files ?? [GLOB_SRC, ...componentExts.map((ext) => `**/*.${ext}`)];
-	const ignoresTypeAware = options.ignoresTypeAware ?? [`${GLOB_MARKDOWN}/**`];
-	const filesTypeAware = options.filesTypeAware ?? [GLOB_TS, GLOB_TSX];
+	const files = options.files ?? ["**/*.?([cm])[jt]s?(x)", ...componentExts.map((ext) => `**/*.${ext}`)];
+	const ignoresTypeAware = options.ignoresTypeAware ?? [`**/*.md/**`];
+	const filesTypeAware = options.filesTypeAware ?? ["**/*.?([cm])ts", "**/*.?([cm])tsx"];
 	const tsconfigPath = options?.tsconfigPath ? options.tsconfigPath : void 0;
 	const isTypeAware = !!tsconfigPath;
 	const typeAwareRules = {
@@ -1753,10 +1648,10 @@ async function typescript(options = {}) {
 		"ts/unbound-method": "error"
 	};
 	const [pluginTs, parserTs] = await Promise.all([interopDefault(import("@typescript-eslint/eslint-plugin")), interopDefault(import("@typescript-eslint/parser"))]);
-	function makeParser(typeAware, files$1, ignores$1) {
+	function makeParser(typeAware, files, ignores) {
 		return {
-			files: files$1,
-			...ignores$1 ? { ignores: ignores$1 } : {},
+			files,
+			...ignores ? { ignores } : {},
 			languageOptions: {
 				parser: parserTs,
 				parserOptions: {
@@ -1866,7 +1761,6 @@ async function typescript(options = {}) {
 		}] : []
 	];
 }
-
 //#endregion
 //#region src/configs/unicorn.ts
 async function unicorn(options = {}) {
@@ -1896,7 +1790,6 @@ async function unicorn(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/configs/unocss.ts
 async function unocss(options = {}) {
@@ -1914,7 +1807,6 @@ async function unocss(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/configs/vue.ts
 const pkg = (0, local_pkg.getPackageInfoSync)("vue");
@@ -1922,9 +1814,9 @@ let vueVersion = pkg && pkg.version;
 vueVersion = vueVersion && vueVersion[0];
 vueVersion = Number.isNaN(vueVersion) ? "3" : vueVersion;
 async function vue(options = {}) {
-	const { files = [GLOB_VUE], overrides = {}, stylistic: stylistic$1 = true } = options;
+	const { files = [GLOB_VUE], overrides = {}, stylistic = true } = options;
 	const sfcBlocks = options.sfcBlocks === true ? {} : options.sfcBlocks ?? {};
-	const { indent = 4 } = typeof stylistic$1 === "boolean" ? {} : stylistic$1;
+	const { indent = 4 } = typeof stylistic === "boolean" ? {} : stylistic;
 	const [pluginVue, parserVue, processorVueBlocks] = await Promise.all([
 		interopDefault(import("eslint-plugin-vue")),
 		interopDefault(import("vue-eslint-parser")),
@@ -2077,7 +1969,7 @@ async function vue(options = {}) {
 				nonwords: false,
 				words: true
 			}],
-			...stylistic$1 ? {
+			...stylistic ? {
 				"vue/array-bracket-spacing": ["error", "never"],
 				"vue/arrow-spacing": ["error", {
 					after: true,
@@ -2125,12 +2017,11 @@ async function vue(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/configs/yaml.ts
 async function yaml(options = {}) {
-	const { files = [GLOB_YAML], overrides = {}, stylistic: stylistic$1 = true } = options;
-	const { quotes = "single" } = typeof stylistic$1 === "boolean" ? {} : stylistic$1;
+	const { files = [GLOB_YAML], overrides = {}, stylistic = true } = options;
+	const { other_indent = 2, quotes = "single" } = typeof stylistic === "boolean" ? {} : stylistic;
 	const [pluginYaml, parserYaml] = await Promise.all([interopDefault(import("eslint-plugin-yml")), interopDefault(import("yaml-eslint-parser"))]);
 	return [{
 		name: "eslint/yaml/setup",
@@ -2148,14 +2039,14 @@ async function yaml(options = {}) {
 			"yaml/no-irregular-whitespace": "error",
 			"yaml/plain-scalar": "error",
 			"yaml/vue-custom-block/no-parsing-error": "error",
-			...stylistic$1 ? {
+			...stylistic ? {
 				"yaml/block-mapping-question-indicator-newline": "error",
 				"yaml/block-sequence-hyphen-indicator-newline": "error",
 				"yaml/flow-mapping-curly-newline": "error",
 				"yaml/flow-mapping-curly-spacing": "error",
 				"yaml/flow-sequence-bracket-newline": "error",
 				"yaml/flow-sequence-bracket-spacing": "error",
-				"yaml/indent": ["error", 2],
+				"yaml/indent": ["error", typeof other_indent === "number" ? other_indent : 2],
 				"yaml/key-spacing": "error",
 				"yaml/no-tab-indent": "error",
 				"yaml/quotes": ["error", {
@@ -2168,7 +2059,6 @@ async function yaml(options = {}) {
 		}
 	}];
 }
-
 //#endregion
 //#region src/factory.ts
 const flatConfigProps = [
@@ -2189,8 +2079,9 @@ const VuePackages = [
 const defaultPluginRenaming = {
 	"@eslint-react": "react",
 	"@eslint-react/dom": "react-dom",
-	"@eslint-react/hooks-extra": "react-hooks-extra",
 	"@eslint-react/naming-convention": "react-naming-convention",
+	"@eslint-react/rsc": "react-rsc",
+	"@eslint-react/web-api": "react-web-api",
 	"@next/next": "next",
 	"@stylistic": "style",
 	"@typescript-eslint": "ts",
@@ -2210,7 +2101,7 @@ const defaultPluginRenaming = {
 *  合并的 ESLint 配置
 */
 function lincy(options = {}, ...userConfigs) {
-	const { autoRenamePlugins = true, componentExts = [], gitignore: enableGitignore = true, ignores: ignoresList = [], imports: enableImports = true, jsx: enableJsx = true, nextjs: enableNextjs = false, overrides = {}, pnpm: enableCatalogs = !!findUpSync("pnpm-workspace.yaml"), react: enableReact = false, regexp: enableRegexp = true, typescript: enableTypeScript = (0, local_pkg.isPackageExists)("typescript"), unicorn: enableUnicorn = true, unocss: enableUnoCSS = false, vue: enableVue = VuePackages.some((i) => (0, local_pkg.isPackageExists)(i)) } = options;
+	const { autoRenamePlugins = true, componentExts = [], e18e: enableE18e = true, gitignore: enableGitignore = true, ignores: userIgnores = [], imports: enableImports = true, jsx: enableJsx = true, nextjs: enableNextjs = false, overrides = {}, pnpm: enableCatalogs = !!findUpSync("pnpm-workspace.yaml"), react: enableReact = false, regexp: enableRegexp = true, type: appType = "app", typescript: enableTypeScript = (0, local_pkg.isPackageExists)("typescript") || (0, local_pkg.isPackageExists)("@typescript/native-preview"), unicorn: enableUnicorn = true, unocss: enableUnoCSS = false, vue: enableVue = VuePackages.some((i) => (0, local_pkg.isPackageExists)(i)) } = options;
 	let isInEditor = options.isInEditor;
 	if (isInEditor == null) {
 		isInEditor = isInEditorEnv();
@@ -2218,104 +2109,108 @@ function lincy(options = {}, ...userConfigs) {
 	}
 	const stylisticOptions = options.stylistic === false ? false : typeof options.stylistic === "object" ? options.stylistic : {};
 	if (stylisticOptions && !("jsx" in stylisticOptions)) stylisticOptions.jsx = enableJsx;
-	const configs$1 = [];
-	if (enableGitignore) if (typeof enableGitignore !== "boolean") configs$1.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r({
+	const configs = [];
+	if (enableGitignore) if (typeof enableGitignore !== "boolean") configs.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r({
 		name: "eslint/gitignore",
 		...enableGitignore
 	})]));
-	else configs$1.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r({
+	else configs.push(interopDefault(import("eslint-config-flat-gitignore")).then((r) => [r({
 		name: "eslint/gitignore",
 		strict: false
 	})]));
 	const typescriptOptions = resolveSubOptions(options, "typescript");
 	const tsconfigPath = "tsconfigPath" in typescriptOptions ? typescriptOptions.tsconfigPath : void 0;
-	configs$1.push(ignores({ ignores: [...overrides.ignores || [], ...ignoresList] }), javascript({
+	configs.push(ignores([...overrides.ignores || [], ...userIgnores], !enableTypeScript), javascript({
 		isInEditor,
 		overrides: getOverrides(options, "javascript")
 	}), comments({ overrides: getOverrides(options, "comments") }), node({ overrides: getOverrides(options, "node") }), jsdoc({
 		overrides: getOverrides(options, "jsdoc"),
 		stylistic: stylisticOptions
 	}), perfectionist({ overrides: getOverrides(options, "perfectionist") }));
-	if (enableUnicorn) configs$1.push(unicorn({
+	if (enableE18e) configs.push(e18e({
+		isInEditor,
+		...enableE18e === true ? {} : enableE18e
+	}));
+	if (enableUnicorn) configs.push(unicorn({
 		...enableUnicorn === true ? {} : enableUnicorn,
 		overrides: getOverrides(options, "unicorn")
 	}));
-	if (enableImports) configs$1.push(imports({
+	if (enableImports) configs.push(imports({
 		overrides: getOverrides(options, "imports"),
 		stylistic: stylisticOptions
 	}));
 	if (enableVue) componentExts.push("vue");
-	if (enableJsx) configs$1.push(jsx());
-	if (enableTypeScript) configs$1.push(typescript({
+	if (enableJsx) configs.push(jsx());
+	if (enableTypeScript) configs.push(typescript({
 		...typescriptOptions,
 		componentExts,
 		overrides: getOverrides(options, "typescript"),
 		tsconfigPath,
-		type: options.type
+		type: appType
 	}));
-	if (stylisticOptions) configs$1.push(stylistic({
+	if (stylisticOptions) configs.push(stylistic({
 		overrides: getOverrides(options, "stylistic"),
 		stylistic: stylisticOptions
 	}));
-	if (enableRegexp) configs$1.push(regexp({
+	if (enableRegexp) configs.push(regexp({
 		...resolveSubOptions(options, "regexp"),
 		...getOverrides(options, "regexp")
 	}));
-	if (options.test ?? true) configs$1.push(test({
+	if (options.test ?? true) configs.push(test({
 		...resolveSubOptions(options, "test"),
 		isInEditor,
 		overrides: getOverrides(options, "test")
 	}));
-	if (enableVue) configs$1.push(vue({
+	if (enableVue) configs.push(vue({
 		...resolveSubOptions(options, "vue"),
 		overrides: getOverrides(options, "vue"),
 		stylistic: stylisticOptions,
 		typescript: !!enableTypeScript
 	}));
-	if (enableReact) configs$1.push(react({
+	if (enableReact) configs.push(react({
 		...typescriptOptions,
 		...resolveSubOptions(options, "react"),
 		overrides: getOverrides(options, "react"),
 		tsconfigPath
 	}));
-	if (enableNextjs) configs$1.push(nextjs({ overrides: getOverrides(options, "nextjs") }));
-	if (enableUnoCSS) configs$1.push(unocss({
+	if (enableNextjs) configs.push(nextjs({ overrides: getOverrides(options, "nextjs") }));
+	if (enableUnoCSS) configs.push(unocss({
 		...resolveSubOptions(options, "unocss"),
 		overrides: getOverrides(options, "unocss")
 	}));
-	if (options.jsonc ?? true) configs$1.push(jsonc({
+	if (options.jsonc ?? true) configs.push(jsonc({
 		...resolveSubOptions(options, "jsonc"),
 		overrides: getOverrides(options, "jsonc"),
 		stylistic: stylisticOptions
 	}), sortPackageJson(), sortTsconfig());
-	if (enableCatalogs) configs$1.push(pnpm({
+	if (enableCatalogs) configs.push(pnpm({
 		isInEditor,
 		...resolveSubOptions(options, "pnpm")
 	}));
-	if (options.yaml ?? true) configs$1.push(yaml({
+	if (options.yaml ?? true) configs.push(yaml({
 		...resolveSubOptions(options, "yaml"),
 		overrides: getOverrides(options, "yaml"),
 		stylistic: stylisticOptions
 	}));
-	if (options.toml ?? true) configs$1.push(toml({
+	if (options.toml ?? true) configs.push(toml({
 		overrides: getOverrides(options, "toml"),
 		stylistic: stylisticOptions
 	}));
-	if (options.markdown ?? true) configs$1.push(markdown({
+	if (options.markdown ?? true) configs.push(markdown({
 		...resolveSubOptions(options, "markdown"),
 		componentExts,
 		overrides: getOverrides(options, "markdown")
 	}));
-	if (options.formatters) configs$1.push(formatters(options.formatters, typeof stylisticOptions === "boolean" ? {} : stylisticOptions));
-	configs$1.push(disables());
+	if (options.formatters) configs.push(formatters(options.formatters, typeof stylisticOptions === "boolean" ? {} : stylisticOptions));
+	configs.push(disables());
 	if ("files" in options) throw new Error("[@lincy/eslint-config] 第一个参数不应包含“files”属性，因为选项应该是全局的。请将其放在第二个或更后面的配置中。");
 	const fusedConfig = flatConfigProps.reduce((acc, key) => {
 		if (key in options) acc[key] = options[key];
 		return acc;
 	}, {});
-	if (Object.keys(fusedConfig).length) configs$1.push([fusedConfig]);
+	if (Object.keys(fusedConfig).length) configs.push([fusedConfig]);
 	let composer = new eslint_flat_config_utils.FlatConfigComposer();
-	composer = composer.append(...configs$1, ...userConfigs);
+	composer = composer.append(...configs, ...userConfigs);
 	if (autoRenamePlugins) composer = composer.renamePlugins(defaultPluginRenaming);
 	if (isInEditor) composer = composer.disableRulesFix([
 		"unused-imports/no-unused-imports",
@@ -2334,11 +2229,9 @@ function getOverrides(options, key) {
 		..."overrides" in sub ? sub.overrides : {}
 	};
 }
-
 //#endregion
 //#region src/index.ts
 var src_default = lincy;
-
 //#endregion
 exports.GLOB_ALL_SRC = GLOB_ALL_SRC;
 exports.GLOB_CSS = GLOB_CSS;
@@ -2374,6 +2267,7 @@ exports.comments = comments;
 exports.default = src_default;
 exports.defaultPluginRenaming = defaultPluginRenaming;
 exports.disables = disables;
+exports.e18e = e18e;
 exports.ensurePackages = ensurePackages;
 exports.formatters = formatters;
 exports.getOverrides = getOverrides;
