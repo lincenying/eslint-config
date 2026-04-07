@@ -1,8 +1,8 @@
 import type { OptionsComponentExts, OptionsFiles, OptionsMarkdown, TypedFlatConfigItem } from '../types'
 
 import { mergeProcessors, processorPassThrough } from 'eslint-merge-processors'
-
 import { GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN } from '../globs'
+
 import { interopDefault } from '../utils'
 
 export async function markdown(
@@ -29,6 +29,9 @@ export async function markdown(
             files,
             ignores: [GLOB_MARKDOWN_IN_MARKDOWN],
             name: 'eslint/markdown/processor',
+            // `eslint-plugin-markdown` only creates virtual files for code blocks,
+            // but not the markdown file itself. We use `eslint-merge-processors` to
+            // add a pass-through processor for the markdown file itself.
             processor: mergeProcessors([
                 markdown.processors!.markdown,
                 processorPassThrough,
@@ -44,6 +47,7 @@ export async function markdown(
             name: 'eslint/markdown/rules',
             rules: {
                 ...markdown.configs.recommended.at(0)?.rules,
+                'markdown/fenced-code-language': 'off',
                 // https://github.com/eslint/markdown/issues/294
                 'markdown/no-missing-label-refs': 'off',
                 ...overridesMarkdown,
@@ -80,8 +84,7 @@ export async function markdown(
             name: 'eslint/markdown/disables/code',
             rules: {
                 'antfu/no-top-level-await': 'off',
-                'import/newline-after-import': 'off',
-
+                'e18e/prefer-static-regex': 'off',
                 'no-alert': 'off',
                 'no-console': 'off',
                 'no-labels': 'off',
@@ -90,12 +93,15 @@ export async function markdown(
                 'no-undef': 'off',
                 'no-unused-expressions': 'off',
                 'no-unused-labels': 'off',
+
                 'no-unused-vars': 'off',
 
                 'node/prefer-global/process': 'off',
-                'style/comma-dangle': 'off',
 
+                'style/comma-dangle': 'off',
                 'style/eol-last': 'off',
+                'style/padding-line-between-statements': 'off',
+
                 'ts/consistent-type-imports': 'off',
                 'ts/explicit-function-return-type': 'off',
                 'ts/no-namespace': 'off',
@@ -108,25 +114,6 @@ export async function markdown(
                 'unicode-bom': 'off',
                 'unused-imports/no-unused-imports': 'off',
                 'unused-imports/no-unused-vars': 'off',
-
-                // Type aware rules
-                ...{
-                    'ts/await-thenable': 'off',
-                    'ts/dot-notation': 'off',
-                    'ts/no-floating-promises': 'off',
-                    'ts/no-for-in-array': 'off',
-                    'ts/no-implied-eval': 'off',
-                    'ts/no-misused-promises': 'off',
-                    'ts/no-unnecessary-type-assertion': 'off',
-                    'ts/no-unsafe-argument': 'off',
-                    'ts/no-unsafe-assignment': 'off',
-                    'ts/no-unsafe-call': 'off',
-                    'ts/no-unsafe-member-access': 'off',
-                    'ts/no-unsafe-return': 'off',
-                    'ts/restrict-plus-operands': 'off',
-                    'ts/restrict-template-expressions': 'off',
-                    'ts/unbound-method': 'off',
-                },
 
                 ...overrides,
             },
