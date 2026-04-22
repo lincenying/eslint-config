@@ -38,7 +38,7 @@
     "prepare[-del]": "npx simple-git-hooks"
   },
   "peerDependencies": {
-    "@eslint-react/eslint-plugin": "^2.3.5",
+    "@eslint-react/eslint-plugin": "^3.0.0",
     "@next/eslint-plugin-next": ">=15.0.0",
     "@prettier/plugin-xml": "^3.4.1",
     "@unocss/eslint-plugin": ">=0.50.0",

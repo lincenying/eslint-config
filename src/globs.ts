@@ -19,7 +19,6 @@ export const GLOB_JSONC = '**/*.jsonc'
 
 export const GLOB_MARKDOWN = '**/*.md'
 export const GLOB_MARKDOWN_IN_MARKDOWN = '**/*.md/*.md'
-export const GLOB_SVELTE = '**/*.svelte'
 export const GLOB_VUE = '**/*.vue'
 export const GLOB_YAML = '**/*.y?(a)ml'
 export const GLOB_TOML = '**/*.toml'
@@ -34,6 +33,8 @@ export const GLOB_TESTS = [
     `**/__tests__/**/*.${GLOB_SRC_EXT}`,
     `**/*.spec.${GLOB_SRC_EXT}`,
     `**/*.test.${GLOB_SRC_EXT}`,
+    `**/*.bench.${GLOB_SRC_EXT}`,
+    `**/*.benchmark.${GLOB_SRC_EXT}`,
 ]
 
 export const GLOB_ALL_SRC = [
@@ -42,9 +43,9 @@ export const GLOB_ALL_SRC = [
     GLOB_JSON,
     GLOB_JSON5,
     GLOB_MARKDOWN,
-    GLOB_SVELTE,
     GLOB_VUE,
     GLOB_YAML,
+    GLOB_XML,
     GLOB_HTML,
 ]
 
@@ -54,13 +55,14 @@ export const GLOB_EXCLUDE = [
     '**/package-lock.json',
     '**/yarn.lock',
     '**/pnpm-lock.yaml',
+    '**/bun.lockb',
 
     '**/output',
     '**/coverage',
-    '**/tmp',
     '**/temp',
-    '**/.tmp',
     '**/.temp',
+    '**/tmp',
+    '**/.tmp',
     '**/.history',
     '**/.vitepress/cache',
     '**/.nuxt',
@@ -68,15 +70,24 @@ export const GLOB_EXCLUDE = [
     '**/.vercel',
     '**/.changeset',
     '**/.idea',
+    '**/.cache',
     '**/.output',
     '**/.vite-inspect',
     '**/.yarn',
-    '**/vite.config.*.timestamp-*',
 
     '**/CHANGELOG*.md',
-    '**/*.min.*',
     '**/LICENSE*',
+    '**/*.min.*',
     '**/__snapshots__',
+
+    // Tools temp files
+    '**/vite.config.*.timestamp-*',
     '**/auto-import?(s).d.ts',
     '**/components.d.ts',
+
+    // AI related
+    '**/.context',
+    '**/.claude',
+    '**/.agents',
+    '**/.*/skills',
 ]
