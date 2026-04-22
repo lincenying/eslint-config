@@ -26,33 +26,33 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 //#endregion
 let eslint_flat_config_utils = require("eslint-flat-config-utils");
 let node_process = require("node:process");
-node_process = __toESM(node_process);
+node_process = __toESM(node_process, 1);
 let node_fs_promises = require("node:fs/promises");
-node_fs_promises = __toESM(node_fs_promises);
+node_fs_promises = __toESM(node_fs_promises, 1);
 let node_url = require("node:url");
 let node_fs = require("node:fs");
-node_fs = __toESM(node_fs);
+node_fs = __toESM(node_fs, 1);
 let node_path = require("node:path");
-node_path = __toESM(node_path);
+node_path = __toESM(node_path, 1);
 let local_pkg = require("local-pkg");
 let _e18e_eslint_plugin = require("@e18e/eslint-plugin");
-_e18e_eslint_plugin = __toESM(_e18e_eslint_plugin);
+_e18e_eslint_plugin = __toESM(_e18e_eslint_plugin, 1);
 let _eslint_community_eslint_plugin_eslint_comments = require("@eslint-community/eslint-plugin-eslint-comments");
-_eslint_community_eslint_plugin_eslint_comments = __toESM(_eslint_community_eslint_plugin_eslint_comments);
+_eslint_community_eslint_plugin_eslint_comments = __toESM(_eslint_community_eslint_plugin_eslint_comments, 1);
 let eslint_plugin_antfu = require("eslint-plugin-antfu");
-eslint_plugin_antfu = __toESM(eslint_plugin_antfu);
+eslint_plugin_antfu = __toESM(eslint_plugin_antfu, 1);
 let eslint_plugin_import_lite = require("eslint-plugin-import-lite");
-eslint_plugin_import_lite = __toESM(eslint_plugin_import_lite);
+eslint_plugin_import_lite = __toESM(eslint_plugin_import_lite, 1);
 let eslint_plugin_n = require("eslint-plugin-n");
-eslint_plugin_n = __toESM(eslint_plugin_n);
+eslint_plugin_n = __toESM(eslint_plugin_n, 1);
 let eslint_plugin_perfectionist = require("eslint-plugin-perfectionist");
-eslint_plugin_perfectionist = __toESM(eslint_plugin_perfectionist);
+eslint_plugin_perfectionist = __toESM(eslint_plugin_perfectionist, 1);
 let eslint_plugin_unicorn = require("eslint-plugin-unicorn");
-eslint_plugin_unicorn = __toESM(eslint_plugin_unicorn);
+eslint_plugin_unicorn = __toESM(eslint_plugin_unicorn, 1);
 let eslint_plugin_unused_imports = require("eslint-plugin-unused-imports");
-eslint_plugin_unused_imports = __toESM(eslint_plugin_unused_imports);
+eslint_plugin_unused_imports = __toESM(eslint_plugin_unused_imports, 1);
 let globals = require("globals");
-globals = __toESM(globals);
+globals = __toESM(globals, 1);
 let eslint_merge_processors = require("eslint-merge-processors");
 let eslint_plugin_regexp = require("eslint-plugin-regexp");
 //#region node_modules/.pnpm/find-up-simple@1.0.1/node_modules/find-up-simple/index.js
@@ -121,7 +121,6 @@ const GLOB_JSON5 = "**/*.json5";
 const GLOB_JSONC = "**/*.jsonc";
 const GLOB_MARKDOWN = "**/*.md";
 const GLOB_MARKDOWN_IN_MARKDOWN = "**/*.md/*.md";
-const GLOB_SVELTE = "**/*.svelte";
 const GLOB_VUE = "**/*.vue";
 const GLOB_YAML = "**/*.y?(a)ml";
 const GLOB_TOML = "**/*.toml";
@@ -133,7 +132,9 @@ const GLOB_MARKDOWN_CODE = `${GLOB_MARKDOWN}/${GLOB_SRC}`;
 const GLOB_TESTS = [
 	`**/__tests__/**/*.${GLOB_SRC_EXT}`,
 	`**/*.spec.${GLOB_SRC_EXT}`,
-	`**/*.test.${GLOB_SRC_EXT}`
+	`**/*.test.${GLOB_SRC_EXT}`,
+	`**/*.bench.${GLOB_SRC_EXT}`,
+	`**/*.benchmark.${GLOB_SRC_EXT}`
 ];
 const GLOB_ALL_SRC = [
 	GLOB_SRC,
@@ -141,9 +142,9 @@ const GLOB_ALL_SRC = [
 	GLOB_JSON,
 	GLOB_JSON5,
 	GLOB_MARKDOWN,
-	GLOB_SVELTE,
 	GLOB_VUE,
 	GLOB_YAML,
+	GLOB_XML,
 	GLOB_HTML
 ];
 const GLOB_EXCLUDE = [
@@ -152,12 +153,13 @@ const GLOB_EXCLUDE = [
 	"**/package-lock.json",
 	"**/yarn.lock",
 	"**/pnpm-lock.yaml",
+	"**/bun.lockb",
 	"**/output",
 	"**/coverage",
-	"**/tmp",
 	"**/temp",
-	"**/.tmp",
 	"**/.temp",
+	"**/tmp",
+	"**/.tmp",
 	"**/.history",
 	"**/.vitepress/cache",
 	"**/.nuxt",
@@ -165,16 +167,21 @@ const GLOB_EXCLUDE = [
 	"**/.vercel",
 	"**/.changeset",
 	"**/.idea",
+	"**/.cache",
 	"**/.output",
 	"**/.vite-inspect",
 	"**/.yarn",
-	"**/vite.config.*.timestamp-*",
 	"**/CHANGELOG*.md",
-	"**/*.min.*",
 	"**/LICENSE*",
+	"**/*.min.*",
 	"**/__snapshots__",
+	"**/vite.config.*.timestamp-*",
 	"**/auto-import?(s).d.ts",
-	"**/components.d.ts"
+	"**/components.d.ts",
+	"**/.context",
+	"**/.claude",
+	"**/.agents",
+	"**/.*/skills"
 ];
 //#endregion
 //#region src/configs/disables.ts
@@ -243,6 +250,9 @@ async function e18e(options = {}) {
 			...modernization ? { ...configs.modernization.rules } : {},
 			...moduleReplacements ? { ...configs.moduleReplacements.rules } : {},
 			...performanceImprovements ? { ...configs.performanceImprovements.rules } : {},
+			...type === "lib" ? {} : { "e18e/prefer-static-regex": "off" },
+			"e18e/prefer-array-at": "off",
+			"e18e/prefer-array-from-map": "off",
 			"e18e/prefer-array-to-reversed": "off",
 			"e18e/prefer-array-to-sorted": "off",
 			"e18e/prefer-array-to-spliced": "off",
@@ -2252,7 +2262,6 @@ exports.GLOB_SCSS = GLOB_SCSS;
 exports.GLOB_SRC = GLOB_SRC;
 exports.GLOB_SRC_EXT = GLOB_SRC_EXT;
 exports.GLOB_STYLE = GLOB_STYLE;
-exports.GLOB_SVELTE = GLOB_SVELTE;
 exports.GLOB_SVG = GLOB_SVG;
 exports.GLOB_TESTS = GLOB_TESTS;
 exports.GLOB_TOML = GLOB_TOML;

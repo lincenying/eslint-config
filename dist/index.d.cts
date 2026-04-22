@@ -6827,7 +6827,7 @@ interface RuleOptions {
    * disallow object, array, and function literals in template
    * @see https://eslint.vuejs.org/rules/no-literals-in-template.html
    */
-  'vue/no-literals-in-template'?: Linter.RuleEntry<[]>;
+  'vue/no-literals-in-template'?: Linter.RuleEntry<VueNoLiteralsInTemplate>;
   /**
    * disallow unnecessary `<template>`
    * @see https://eslint.vuejs.org/rules/no-lone-template.html
@@ -7221,6 +7221,11 @@ interface RuleOptions {
    */
   'vue/prefer-separate-static-class'?: Linter.RuleEntry<[]>;
   /**
+   * enforce passing a single argument to custom event emissions
+   * @see https://eslint.vuejs.org/rules/prefer-single-event-payload.html
+   */
+  'vue/prefer-single-event-payload'?: Linter.RuleEntry<[]>;
+  /**
    * Require template literals instead of string concatenation in `<template>`
    * @see https://eslint.vuejs.org/rules/prefer-template.html
    */
@@ -7235,6 +7240,11 @@ interface RuleOptions {
    * @see https://eslint.vuejs.org/rules/prefer-use-template-ref.html
    */
   'vue/prefer-use-template-ref'?: Linter.RuleEntry<[]>;
+  /**
+   * enforce using `v-model` instead of `:prop`/`@update:prop` pair
+   * @see https://eslint.vuejs.org/rules/prefer-v-model.html
+   */
+  'vue/prefer-v-model'?: Linter.RuleEntry<[]>;
   /**
    * enforce specific casing for the Prop name in Vue components
    * @see https://eslint.vuejs.org/rules/prop-name-casing.html
@@ -10328,6 +10338,7 @@ type PerfectionistSortClasses = {
     matchesAstSelector?: string;
   };
   useExperimentalDependencyDetection?: boolean;
+  newlinesBetweenOverloadSignatures?: ("ignore" | number);
   ignoreCallbackDependenciesPatterns?: (({
     pattern: string;
     flags?: string;
@@ -11691,6 +11702,7 @@ type PerfectionistSortModules = [] | [{
   })[];
   newlinesBetween?: ("ignore" | number);
   useExperimentalDependencyDetection?: boolean;
+  newlinesBetweenOverloadSignatures?: ("ignore" | number);
   partitionByComment?: (boolean | (({
     pattern: string;
     flags?: string;
@@ -16115,6 +16127,9 @@ type VueNoIrregularWhitespace = [] | [{
   skipRegExps?: boolean;
   skipHTMLAttributeValues?: boolean;
   skipHTMLTextContents?: boolean;
+}]; // ----- vue/no-literals-in-template -----
+type VueNoLiteralsInTemplate = [] | [{
+  ignores?: string[];
 }]; // ----- vue/no-lone-template -----
 type VueNoLoneTemplate = [] | [{
   ignoreAccessible?: boolean;
@@ -16269,7 +16284,7 @@ type VueNoUnusedComponents = [] | [{
   ignoreWhenBindingPresent?: boolean;
 }]; // ----- vue/no-unused-properties -----
 type VueNoUnusedProperties = [] | [{
-  groups?: ("props" | "data" | "asyncData" | "computed" | "methods" | "setup")[];
+  groups?: ("props" | "data" | "asyncData" | "computed" | "methods" | "setup" | "inject")[];
   deepData?: boolean;
   ignorePublicMembers?: boolean;
   unreferencedOptions?: ("unknownMemberAsUnreferenced" | "returnAsUnreferenced")[];
@@ -17395,7 +17410,6 @@ declare const GLOB_JSON5 = "**/*.json5";
 declare const GLOB_JSONC = "**/*.jsonc";
 declare const GLOB_MARKDOWN = "**/*.md";
 declare const GLOB_MARKDOWN_IN_MARKDOWN = "**/*.md/*.md";
-declare const GLOB_SVELTE = "**/*.svelte";
 declare const GLOB_VUE = "**/*.vue";
 declare const GLOB_YAML = "**/*.y?(a)ml";
 declare const GLOB_TOML = "**/*.toml";
@@ -17451,4 +17465,4 @@ declare function ensurePackages(packages: (string | undefined)[]): Promise<void>
 declare function isInEditorEnv(): boolean;
 declare function isInGitHooksOrLintStaged(): boolean;
 //#endregion
-export { Awaitable, type ConfigNames, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_GRAPHQL, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_SVG, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_XML, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsE18e, OptionsFiles, OptionsFormatters, OptionsHasTypeScript, OptionsIgnores, OptionsIsInEditor, OptionsMarkdown, OptionsOverrides, OptionsPnpm, OptionsProjectType, OptionsReact, OptionsRegExp, OptionsStylistic, OptionsTypeScriptErasableOnly, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, OptionsTypescript, OptionsUnicorn, OptionsUnoCSS, OptionsVue, ResolvedOptions, type RuleOptions, Rules, StylisticConfig, StylisticConfigDefaults, TypedFlatConfigItem, combine, comments, lincy as default, lincy, defaultPluginRenaming, disables, e18e, ensurePackages, formatters, getOverrides, ignores, imports, interopDefault, isInEditorEnv, isInGitHooksOrLintStaged, isPackageInScope, javascript, jsdoc, jsonc, jsx, markdown, nextjs, node, parserPlain, perfectionist, pnpm, react, regexp, renamePluginInConfigs, renameRules, resolveSubOptions, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };
+export { Awaitable, type ConfigNames, GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_GRAPHQL, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVG, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_XML, GLOB_YAML, OptionsComponentExts, OptionsConfig, OptionsE18e, OptionsFiles, OptionsFormatters, OptionsHasTypeScript, OptionsIgnores, OptionsIsInEditor, OptionsMarkdown, OptionsOverrides, OptionsPnpm, OptionsProjectType, OptionsReact, OptionsRegExp, OptionsStylistic, OptionsTypeScriptErasableOnly, OptionsTypeScriptParserOptions, OptionsTypeScriptWithTypes, OptionsTypescript, OptionsUnicorn, OptionsUnoCSS, OptionsVue, ResolvedOptions, type RuleOptions, Rules, StylisticConfig, StylisticConfigDefaults, TypedFlatConfigItem, combine, comments, lincy as default, lincy, defaultPluginRenaming, disables, e18e, ensurePackages, formatters, getOverrides, ignores, imports, interopDefault, isInEditorEnv, isInGitHooksOrLintStaged, isPackageInScope, javascript, jsdoc, jsonc, jsx, markdown, nextjs, node, parserPlain, perfectionist, pnpm, react, regexp, renamePluginInConfigs, renameRules, resolveSubOptions, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };

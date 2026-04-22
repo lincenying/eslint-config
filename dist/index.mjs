@@ -82,7 +82,6 @@ const GLOB_JSON5 = "**/*.json5";
 const GLOB_JSONC = "**/*.jsonc";
 const GLOB_MARKDOWN = "**/*.md";
 const GLOB_MARKDOWN_IN_MARKDOWN = "**/*.md/*.md";
-const GLOB_SVELTE = "**/*.svelte";
 const GLOB_VUE = "**/*.vue";
 const GLOB_YAML = "**/*.y?(a)ml";
 const GLOB_TOML = "**/*.toml";
@@ -94,7 +93,9 @@ const GLOB_MARKDOWN_CODE = `${GLOB_MARKDOWN}/${GLOB_SRC}`;
 const GLOB_TESTS = [
 	`**/__tests__/**/*.${GLOB_SRC_EXT}`,
 	`**/*.spec.${GLOB_SRC_EXT}`,
-	`**/*.test.${GLOB_SRC_EXT}`
+	`**/*.test.${GLOB_SRC_EXT}`,
+	`**/*.bench.${GLOB_SRC_EXT}`,
+	`**/*.benchmark.${GLOB_SRC_EXT}`
 ];
 const GLOB_ALL_SRC = [
 	GLOB_SRC,
@@ -102,9 +103,9 @@ const GLOB_ALL_SRC = [
 	GLOB_JSON,
 	GLOB_JSON5,
 	GLOB_MARKDOWN,
-	GLOB_SVELTE,
 	GLOB_VUE,
 	GLOB_YAML,
+	GLOB_XML,
 	GLOB_HTML
 ];
 const GLOB_EXCLUDE = [
@@ -113,12 +114,13 @@ const GLOB_EXCLUDE = [
 	"**/package-lock.json",
 	"**/yarn.lock",
 	"**/pnpm-lock.yaml",
+	"**/bun.lockb",
 	"**/output",
 	"**/coverage",
-	"**/tmp",
 	"**/temp",
-	"**/.tmp",
 	"**/.temp",
+	"**/tmp",
+	"**/.tmp",
 	"**/.history",
 	"**/.vitepress/cache",
 	"**/.nuxt",
@@ -126,16 +128,21 @@ const GLOB_EXCLUDE = [
 	"**/.vercel",
 	"**/.changeset",
 	"**/.idea",
+	"**/.cache",
 	"**/.output",
 	"**/.vite-inspect",
 	"**/.yarn",
-	"**/vite.config.*.timestamp-*",
 	"**/CHANGELOG*.md",
-	"**/*.min.*",
 	"**/LICENSE*",
+	"**/*.min.*",
 	"**/__snapshots__",
+	"**/vite.config.*.timestamp-*",
 	"**/auto-import?(s).d.ts",
-	"**/components.d.ts"
+	"**/components.d.ts",
+	"**/.context",
+	"**/.claude",
+	"**/.agents",
+	"**/.*/skills"
 ];
 //#endregion
 //#region src/configs/disables.ts
@@ -204,6 +211,9 @@ async function e18e(options = {}) {
 			...modernization ? { ...configs.modernization.rules } : {},
 			...moduleReplacements ? { ...configs.moduleReplacements.rules } : {},
 			...performanceImprovements ? { ...configs.performanceImprovements.rules } : {},
+			...type === "lib" ? {} : { "e18e/prefer-static-regex": "off" },
+			"e18e/prefer-array-at": "off",
+			"e18e/prefer-array-from-map": "off",
 			"e18e/prefer-array-to-reversed": "off",
 			"e18e/prefer-array-to-sorted": "off",
 			"e18e/prefer-array-to-spliced": "off",
@@ -2194,4 +2204,4 @@ function getOverrides(options, key) {
 //#region src/index.ts
 var src_default = lincy;
 //#endregion
-export { GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_GRAPHQL, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVELTE, GLOB_SVG, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_XML, GLOB_YAML, StylisticConfigDefaults, combine, comments, src_default as default, defaultPluginRenaming, disables, e18e, ensurePackages, formatters, getOverrides, ignores, imports, interopDefault, isInEditorEnv, isInGitHooksOrLintStaged, isPackageInScope, javascript, jsdoc, jsonc, jsx, lincy, markdown, nextjs, node, parserPlain, perfectionist, pnpm, react, regexp, renamePluginInConfigs, renameRules, resolveSubOptions, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };
+export { GLOB_ALL_SRC, GLOB_CSS, GLOB_EXCLUDE, GLOB_GRAPHQL, GLOB_HTML, GLOB_JS, GLOB_JSON, GLOB_JSON5, GLOB_JSONC, GLOB_JSX, GLOB_LESS, GLOB_MARKDOWN, GLOB_MARKDOWN_CODE, GLOB_MARKDOWN_IN_MARKDOWN, GLOB_POSTCSS, GLOB_SCSS, GLOB_SRC, GLOB_SRC_EXT, GLOB_STYLE, GLOB_SVG, GLOB_TESTS, GLOB_TOML, GLOB_TS, GLOB_TSX, GLOB_VUE, GLOB_XML, GLOB_YAML, StylisticConfigDefaults, combine, comments, src_default as default, defaultPluginRenaming, disables, e18e, ensurePackages, formatters, getOverrides, ignores, imports, interopDefault, isInEditorEnv, isInGitHooksOrLintStaged, isPackageInScope, javascript, jsdoc, jsonc, jsx, lincy, markdown, nextjs, node, parserPlain, perfectionist, pnpm, react, regexp, renamePluginInConfigs, renameRules, resolveSubOptions, sortPackageJson, sortTsconfig, stylistic, test, toArray, toml, typescript, unicorn, unocss, vue, yaml };
