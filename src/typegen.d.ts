@@ -4424,7 +4424,7 @@ export interface RuleOptions {
    */
   'test/no-mocks-import'?: Linter.RuleEntry<[]>
   /**
-   * disallow .only blocks in tests
+   * disallow focused/only tests
    * @see https://github.com/levibuzolic/eslint-plugin-no-only-tests
    */
   'test/no-only-tests'?: Linter.RuleEntry<TestNoOnlyTests>
