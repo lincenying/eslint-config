@@ -205,7 +205,7 @@ export interface OptionsStylistic {
     stylistic?: boolean | StylisticConfig
 }
 
-export interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'indent' | 'quotes' | 'jsx' | 'semi'> {
+export interface StylisticConfig extends Pick<StylisticCustomizeOptions, 'braceStyle' | 'indent' | 'quotes' | 'jsx' | 'semi'> {
     /**
      * 禁用了一些带有主观色彩的规则。
      *

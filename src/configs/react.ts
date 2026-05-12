@@ -71,11 +71,7 @@ export async function react(
             name: 'eslint/react/setup',
             plugins: {
                 'react': plugins['@eslint-react'],
-                'react-dom': plugins['@eslint-react/dom'],
-                'react-naming-convention': plugins['@eslint-react/naming-convention'],
                 'react-refresh': pluginReactRefresh,
-                'react-rsc': plugins['@eslint-react/rsc'],
-                'react-web-api': plugins['@eslint-react/web-api'],
             },
         },
         {
@@ -91,50 +87,53 @@ export async function react(
             name: 'eslint/react/rules',
             rules: {
                 ...pluginReact.configs.recommended.rules,
+
                 // preconfigured rules from eslint-plugin-react-refresh https://github.com/ArnaudBarre/eslint-plugin-react-refresh/tree/main/src
                 'react-refresh/only-export-components': [
                     'error',
                     {
                         allowConstantExport: isAllowConstantExport,
                         allowExportNames: [
-                            ...(isUsingNext ? [
-                                // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
-                                'dynamic',
-                                'dynamicParams',
-                                'revalidate',
-                                'fetchCache',
-                                'runtime',
-                                'preferredRegion',
-                                'maxDuration',
-                                // https://nextjs.org/docs/app/api-reference/functions/generate-static-params
-                                'generateStaticParams',
-                                // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
-                                'metadata',
-                                'generateMetadata',
-                                // https://nextjs.org/docs/app/api-reference/functions/generate-viewport
-                                'viewport',
-                                'generateViewport',
-                                // https://nextjs.org/docs/app/api-reference/functions/generate-image-metadata
-                                'generateImageMetadata',
-                                // https://nextjs.org/docs/app/api-reference/functions/generate-sitemaps
-                                'generateSitemaps',
-                            ] : []),
-                            ...(isUsingRemix || isUsingReactRouter ? [
-                                'meta',
-                                'links',
-                                'headers',
-                                'loader',
-                                'action',
-                                'clientLoader',
-                                'clientAction',
-                                'handle',
-                                'shouldRevalidate',
-                            ] : []),
+                            ...(
+                                isUsingNext ? [
+                                    // https://nextjs.org/docs/app/api-reference/file-conventions/route-segment-config
+                                    'dynamic',
+                                    'dynamicParams',
+                                    'revalidate',
+                                    'fetchCache',
+                                    'runtime',
+                                    'preferredRegion',
+                                    'maxDuration',
+                                    // https://nextjs.org/docs/app/api-reference/functions/generate-static-params
+                                    'generateStaticParams',
+                                    // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
+                                    'metadata',
+                                    'generateMetadata',
+                                    // https://nextjs.org/docs/app/api-reference/functions/generate-viewport
+                                    'viewport',
+                                    'generateViewport',
+                                    // https://nextjs.org/docs/app/api-reference/functions/generate-image-metadata
+                                    'generateImageMetadata',
+                                    // https://nextjs.org/docs/app/api-reference/functions/generate-sitemaps
+                                    'generateSitemaps',
+                                ] : []
+                            ),
+                            ...(
+                                isUsingRemix || isUsingReactRouter ? [
+                                    'meta',
+                                    'links',
+                                    'headers',
+                                    'loader',
+                                    'action',
+                                    'clientLoader',
+                                    'clientAction',
+                                    'handle',
+                                    'shouldRevalidate',
+                                ] : []
+                            ),
                         ],
                     },
                 ],
-
-                'react/prefer-namespace-import': 'error',
 
                 // overrides
                 ...overrides,
@@ -145,8 +144,8 @@ export async function react(
             name: 'eslint/react/typescript',
             rules: {
                 // Disables rules that are already handled by TypeScript
-                'react-dom/no-string-style-prop': 'off',
-                'react-dom/no-unknown-property': 'off',
+                'react/dom-no-string-style-prop': 'off',
+                'react/dom-no-unknown-property': 'off',
             },
         },
         ...isTypeAware ? [{

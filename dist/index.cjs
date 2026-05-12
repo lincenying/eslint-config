@@ -334,6 +334,7 @@ function isInGitHooksOrLintStaged() {
 //#endregion
 //#region src/configs/stylistic.ts
 const StylisticConfigDefaults = {
+	braceStyle: "stroustrup",
 	indent: 4,
 	jsx: true,
 	lessOpinionated: false,
@@ -343,12 +344,13 @@ const StylisticConfigDefaults = {
 };
 async function stylistic(options = {}) {
 	const { overrides = {}, stylistic = StylisticConfigDefaults } = options;
-	const { indent, jsx, lessOpinionated, quotes, semi } = typeof stylistic === "boolean" ? StylisticConfigDefaults : {
+	const { braceStyle, indent, jsx, lessOpinionated, quotes, semi } = typeof stylistic === "boolean" ? StylisticConfigDefaults : {
 		...StylisticConfigDefaults,
 		...stylistic
 	};
 	const pluginStylistic = await interopDefault(import("@stylistic/eslint-plugin"));
 	const config = pluginStylistic.configs.customize({
+		braceStyle,
 		indent,
 		jsx,
 		pluginName: "style",
@@ -1226,17 +1228,12 @@ async function react(options = {}) {
 	const isUsingRemix = RemixPackages.some((i) => (0, local_pkg.isPackageExists)(i));
 	const isUsingReactRouter = ReactRouterPackages.some((i) => (0, local_pkg.isPackageExists)(i));
 	const isUsingNext = NextJsPackages.some((i) => (0, local_pkg.isPackageExists)(i));
-	const plugins = pluginReact.configs.all.plugins;
 	return [
 		{
 			name: "eslint/react/setup",
 			plugins: {
-				"react": plugins["@eslint-react"],
-				"react-dom": plugins["@eslint-react/dom"],
-				"react-naming-convention": plugins["@eslint-react/naming-convention"],
-				"react-refresh": pluginReactRefresh,
-				"react-rsc": plugins["@eslint-react/rsc"],
-				"react-web-api": plugins["@eslint-react/web-api"]
+				"react": pluginReact.configs.all.plugins["@eslint-react"],
+				"react-refresh": pluginReactRefresh
 			}
 		},
 		{
@@ -1277,7 +1274,6 @@ async function react(options = {}) {
 						"shouldRevalidate"
 					] : []]
 				}],
-				"react/prefer-namespace-import": "error",
 				...overrides
 			}
 		},
@@ -1285,8 +1281,8 @@ async function react(options = {}) {
 			files: filesTypeAware,
 			name: "eslint/react/typescript",
 			rules: {
-				"react-dom/no-string-style-prop": "off",
-				"react-dom/no-unknown-property": "off"
+				"react/dom-no-string-style-prop": "off",
+				"react/dom-no-unknown-property": "off"
 			}
 		},
 		...isTypeAware ? [{
@@ -1826,7 +1822,7 @@ vueVersion = Number.isNaN(vueVersion) ? "3" : vueVersion;
 async function vue(options = {}) {
 	const { files = [GLOB_VUE], overrides = {}, stylistic = true } = options;
 	const sfcBlocks = options.sfcBlocks === true ? {} : options.sfcBlocks ?? {};
-	const { indent = 4 } = typeof stylistic === "boolean" ? {} : stylistic;
+	const { braceStyle = "stroustrup", indent = 4 } = typeof stylistic === "boolean" ? {} : stylistic;
 	const [pluginVue, parserVue, processorVueBlocks] = await Promise.all([
 		interopDefault(import("eslint-plugin-vue")),
 		interopDefault(import("vue-eslint-parser")),
@@ -1992,7 +1988,7 @@ async function vue(options = {}) {
 				}],
 				"vue/brace-style": [
 					"error",
-					"stroustrup",
+					braceStyle,
 					{ allowSingleLine: false }
 				],
 				"vue/comma-dangle": ["error", "always-multiline"],
@@ -2088,10 +2084,6 @@ const VuePackages = [
 ];
 const defaultPluginRenaming = {
 	"@eslint-react": "react",
-	"@eslint-react/dom": "react-dom",
-	"@eslint-react/naming-convention": "react-naming-convention",
-	"@eslint-react/rsc": "react-rsc",
-	"@eslint-react/web-api": "react-web-api",
 	"@next/next": "next",
 	"@stylistic": "style",
 	"@typescript-eslint": "ts",
